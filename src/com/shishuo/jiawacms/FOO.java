@@ -16,6 +16,7 @@
  *	See the License for the specific language governing permissions and
  *	limitations under the License.
  */
+
 package com.shishuo.jiawacms;
 
 public class FOO
@@ -23,6 +24,7 @@ public class FOO
 
 	public static void main(String[] args)
 	{
+		
 
 	}
 }
