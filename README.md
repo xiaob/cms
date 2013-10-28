@@ -1,5 +1,5 @@
-#JiawaCMS
-基于Java语言开发的CMS（内容管理系统）
+#介绍
+JiawaCMS是一款基于Java语言开发的内容管理系统（CMS）。
 
 #感谢以下产品
 1.http://java.com <br />
