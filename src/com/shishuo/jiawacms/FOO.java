@@ -3,7 +3,7 @@
  *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
  *	长沙市师说网络科技有限公司 版权所有
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
+ *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
  *	You may obtain a copy of the License at
  *	 
@@ -19,6 +19,12 @@
 
 package com.shishuo.jiawacms;
 
+/**
+ * 
+ * 
+ * @author Herbert
+ *
+ */
 public class FOO {
 
 	public static void main(String[] args) {
