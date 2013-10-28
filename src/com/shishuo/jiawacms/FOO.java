@@ -19,13 +19,9 @@
 
 package com.shishuo.jiawacms;
 
-public class FOO
-{
+public class FOO {
 
-	public static void main(String[] args)
-	{
-		
+	public static void main(String[] args) {
 
-		
 	}
 }
