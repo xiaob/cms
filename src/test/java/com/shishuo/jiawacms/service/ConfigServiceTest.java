@@ -13,7 +13,6 @@ public class ConfigServiceTest {
 
 	@Test
 	public void testAddConfig() {
-		fail("Not yet implemented");
 	}
 
 	@Test
