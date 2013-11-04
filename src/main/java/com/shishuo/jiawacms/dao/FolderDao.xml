@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shishuo.jiawacms.dao.FolderDao">
+
+	<select id="getFolderById" 
+		resultType="com.shishuo.jiawacms.entity.Folder">
+		select * from folder where folderId=#{folderId}
+	</select>
+	
+	<select id="getFolderListByFatherId" 
+		resultType="com.shishuo.jiawacms.entity.Folder">
+		select * from folder where fatherId=#{fatherId}
+	</select>
+	
+	<insert id="addFolder" parameterType="com.shishuo.jiawacms.entity.Folder">
+		insert into
+		folder(fatherId,name,count,status,type,login,template,createTime)
+		value(#{fatherId},#{name},#{count},#{status},#{type},#{login},#{template},#{createTime})
+		<selectKey resultType="long" keyProperty="folderId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteFolder" parameterType="com.shishuo.jiawacms.entity.Folder">
+		delete from folder where folderId=#{folderId}
+	</delete>
+	
+	<update id="updateFolder" parameterType="com.shishuo.jiawacms.entity.Folder">
+		update folder set fatherId=#{fatherId},name=#{name},count=#{count},status=#{status},
+			type=#{type},login=#{login},template=#{template}
+			where folderId=#{folderId}
+	</update>
+</mapper>  

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shishuo.jiawacms.dao.ConfigDao">
+	
+	<select id="allConfig" 
+		resultType="com.shishuo.jiawacms.ent ity.Config">
+		select * from config limit #{offset},#{rows}
+	</select>
+	
+	<select id="allConfigCount" 
+		resultType="long">
+		select count(*) from config
+	</select>
+	
+	<insert id="addConfig" parameterType="com.shishuo.jiawacms.entity.Config">
+		insert into
+		config(key,value,createTime)
+		value(#{key},#{value},#{createTime})
+		<selectKey resultType="long" keyProperty="configId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteConfig" parameterType="com.shishuo.jiawacms.entity.Config">
+		delete from config where key=#{key} and value=#{value}
+	</delete>
+	
+	<update id="updateConfig" parameterType="com.shishuo.jiawacms.entity.Config">
+		update config set value=#{value}
+		where key=#{key}
+	</update>
+	
+	<select id="getConfigByKey"
+		resultType="com.shishuo.jiawacms.entity.Config">
+		select * from config where key=#{key}
+	</select>
+</mapper>  
