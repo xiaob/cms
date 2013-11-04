@@ -16,38 +16,44 @@
  *	See the License for the specific language governing permissions and
  *	limitations under the License.
  */
-package com.shishuo.jiawacms.entity;
+package com.shishuo.jiawacms.dao;
 
-import java.util.Date;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+import com.shishuo.jiawacms.entity.Log;
+import com.shishuo.jiawacms.entity.vo.PageVo;
 
 /**
- * 日志实体
- * 
- * @author zsy
- * 
+ * 日志服务
+ * @author Herbert
+ *
  */
 
-public class Log {
+@Repository
+public interface LogDao {
 
-	private long logId;//日志Id;
-	private String description;//描述
-	private Date createTime;//时间
-	public long getLogId() {
-		return logId;
-	}
-	public void setLogId(long logId) {
-		this.logId = logId;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public Date getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+	/**
+	 * 全部日志
+	 * 
+	 * @return
+	 */
+	public List<Log> getLogList(@Param("offset") long offset,
+			@Param("rows") long rows);
+	
+	/**
+	 * 全部日志的数量
+	 * 
+	 * @return
+	 */
+	public int getLogListCount();
+	
+	/**
+	 * 增加日志
+	 * @param description
+	 */
+	public int addLog(Log log);
+	
 }
