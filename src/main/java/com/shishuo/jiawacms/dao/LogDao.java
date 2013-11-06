@@ -52,7 +52,7 @@ public interface LogDao {
 	
 	/**
 	 * 增加日志
-	 * @param description
+	 * @param Log
 	 */
 	public int addLog(Log log);
 	

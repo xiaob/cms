@@ -42,10 +42,9 @@ public class LogService {
 	/**
 	 * 日志分页
 	 * 
-	 * @param logId
 	 * @return pageVo
 	 */
-	public PageVo<Log> getLogPage(long logId,int pageNum) {
+	public PageVo<Log> getLogPage(int pageNum) {
 		PageVo<Log> pageVo = new PageVo<Log>(pageNum);
 		pageVo.setUrl("");
 		List<Log> list = this.getLogList(pageVo.getOffset(), pageVo.getRows());

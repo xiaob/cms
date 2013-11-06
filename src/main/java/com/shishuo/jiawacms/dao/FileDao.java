@@ -59,7 +59,7 @@ public interface FileDao {
 	 * @param foderId
 	 * @return Integer
 	 */
-	public long getFileListByFoderIdCount(@Param("folderId") long folderId);
+	public int getFileListByFoderIdCount(@Param("folderId") long folderId);
 	
 	/**
 	 * 增加文件

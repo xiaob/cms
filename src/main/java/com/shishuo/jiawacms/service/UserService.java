@@ -44,8 +44,9 @@ public class UserService {
 	 * @param openId,type,name
 	 * @return
 	 */
-	public User addUser(long openId,int type,String name) {
+	public User addUser(long userId,long openId,int type,String name) {
 		User user = new User();
+		user.setUserId(userId);
 		user.setOpenId(openId);
 		user.setType(type);
 		user.setName(name);
@@ -83,9 +84,9 @@ public class UserService {
 	 * 
 	 * @param userId
 	 */
-	public void deleteUserById(long userId) {
+	public int deleteUserById(long userId) {
 		User user = this.getUserById(userId);
-		userDao.deleteUserById(user);
+		return userDao.deleteUserById(user);
 	}
 
 	/**

@@ -60,10 +60,9 @@ public interface ConfigDao {
 	/**
 	 * 查看所有配置的数量
 	 * 
-	 * @param offset
-	 * @param rows
+	 * return Integer
 	 */
-	public long allConfigCount();
+	public int allConfigCount();
 	
 	/**
 	 * 更新配置

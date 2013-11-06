@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,9 +71,13 @@ public class FolderService {
 		List<Folder> list = this.getFolderListByFatherId(fatherId);
 		List<FolderVo> allList = new ArrayList<FolderVo>();
 		for(Folder folder:list){
-			allList.addAll(this.getFolderVoListByFatherId(folder.getFolderId()));
+			List<Folder>  folderList = this.getFolderListByFatherId(folder.getFolderId());
+			for(Folder f :folderList){
+				FolderVo foderVo = new FolderVo();
+				BeanUtils.copyProperties(f, foderVo);;
+				allList.add(foderVo);
+			}
 		}
-
 		return allList;
 	}
 

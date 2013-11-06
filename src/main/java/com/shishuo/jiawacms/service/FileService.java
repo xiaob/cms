@@ -79,12 +79,10 @@ public class FileService {
 	
 	/**
 	 * 得到目录的所有文件的数量
-	 * 
-	 * @param foderId
-	 * @return
+	 * @return Integer
 	 */
 	public int getFileListByFoderIdCount(long folderId){
-		return (int)fileDao.getFileListByFoderIdCount(folderId);
+		return fileDao.getFileListByFoderIdCount(folderId);
 	}
 	/**
 	 * 增加文件

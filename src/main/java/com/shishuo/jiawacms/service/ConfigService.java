@@ -110,7 +110,7 @@ public class ConfigService {
 	 * @return Integer
 	 */
 	public int allConfigCount(){
-		return (int)configDao.allConfigCount();
+		return configDao.allConfigCount();
 
 	}
 }
