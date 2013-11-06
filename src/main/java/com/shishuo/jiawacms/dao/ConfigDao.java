@@ -63,14 +63,14 @@ public interface ConfigDao {
 	 * @param offset
 	 * @param rows
 	 */
-	public int allConfigCount();
+	public long allConfigCount();
 	
 	/**
 	 * 更新配置
 	 * 
-	 * @return Config
+	 * @return Integer
 	 */
-	public Config updateConfig(Config config);
+	public int updateConfig(Config config);
 	
 	/**
 	 * 查看配置

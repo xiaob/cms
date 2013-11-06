@@ -70,8 +70,9 @@ public class FolderService {
 		List<Folder> list = this.getFolderListByFatherId(fatherId);
 		List<FolderVo> allList = new ArrayList<FolderVo>();
 		for(Folder folder:list){
-			allList.addAll(this.getFolderVoListByFatherId(folder.getFolderId()));
+			list.addAll(this.getFolderListByFatherId(folder.getFolderId()));
 		}
+
 		return allList;
 	}
 

@@ -69,7 +69,7 @@ public interface FolderDao {
 	 * 更新目录
 	 * 
 	 * @param folderId
-	 * @return
+	 * @return Integer
 	 */
-	public Folder updateFolder(Folder folder);
+	public int updateFolder(Folder folder);
 }

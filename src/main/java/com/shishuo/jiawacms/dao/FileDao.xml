@@ -4,32 +4,32 @@
 
 	<select id="getFileById" parameterType="long"
 		resultType="com.shishuo.jiawacms.entity.File">
-		select * from file where fileId=#{fileId}
+		select * from jiawacms.file where fileId=#{fileId}
 	</select>
 	
 	<insert id="addFile" parameterType="com.shishuo.jiawacms.entity.File">
-		insert into file(name,url,images,description,type,createTime)
-		value(#{name},#{url},#{images},#{description},#{type},#{createTime})
+		insert into jiawacms.file(folderId,name,url,images,description,type,createTime)
+		value(#{folderId},#{name},#{url},#{images},#{description},#{type},#{createTime})
 		<selectKey resultType="long" keyProperty="fileId">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
 	
 	<delete id="deleteFile" parameterType="com.shishuo.jiawacms.entity.File">
-		delete from file where fileId=#{fileId}
+		delete from jiawacms.file where fileId=#{fileId}
 	</delete>
 	<select id="getFileListByFoderId" 
 		resultType="com.shishuo.jiawacms.entity.File">
-		select * from file where folderId=#{folderId}
+		select * from jiawacms.file where folderId=#{folderId} limit #{offset},#{rows}
 	</select>
 	
 	<select id="getFileListByFoderIdCount" 
-		resultType="Integer">
-		select count(*) from file where folderId=#{folderId}
+		resultType="long">
+		select count(*) from jiawacms.file where folderId=#{folderId}
 	</select>
 	
 	<update id="updateFile" parameterType="com.shishuo.jiawacms.entity.File">
-		update file set name=#{name},url=#{url},
+		update jiawacms.file set folderId=#{folderId},name=#{name},url=#{url},
 		images=#{images},description=#{description},type=#{type}
 		where fileId=#{fileId}
 	</update>

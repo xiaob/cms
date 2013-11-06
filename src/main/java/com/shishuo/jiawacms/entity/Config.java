@@ -27,11 +27,25 @@ import java.util.Date;
  * 
  */
 
+
 public class Config {
 
-	private String key;//key
-	private String value;//值
-	private Date createTime;//时间
+
+	/**
+	 * key
+	 */
+	private String key;
+
+	
+	/**
+	 * 值
+	 */
+	private String value;
+	
+	/**
+	 * 时间
+	 */
+	private Date createTime;
 	public String getKey() {
 		return key;
 	}

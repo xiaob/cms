@@ -29,15 +29,50 @@ import java.util.Date;
 
 public class Folder {
 
-	private long folderId;//目录Id
-	private long fatherId;//父亲Id
-	private String name;//目录名称
-	private int count;//文件数
-	private int status;//状态
-	private int type;//类型
-	private int login;//登录
-	private String template;//模板
-	private Date createTime;//时间
+	/**
+	 * 目录Id
+	 */
+	private long folderId;
+	
+	/**
+	 * 父亲Id
+	 */
+	private long fatherId;
+	
+	/**
+	 * 目录名称
+	 */
+	private String name;
+	
+	/**
+	 * 文件数
+	 */
+	private int count;
+	
+	/**
+	 * 状态
+	 */
+	private int status;
+	
+	/**
+	 * 类型
+	 */
+	private int type;
+	
+	/**
+	 * 登录
+	 */
+	private int login;
+	
+	/**
+	 * 模板
+	 */
+	private String template;
+	
+	/**
+	 * 时间
+	 */
+	private Date createTime;
 	
 	public long getFolderId() {
 		return folderId;

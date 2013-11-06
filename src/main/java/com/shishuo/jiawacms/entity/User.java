@@ -29,11 +29,30 @@ import java.util.Date;
 
 public class User {
 
-	private long userId;//用户ID
-	private long openId;//公共用户ID
-	private int type;//帐号类型 
-	private String name;//用户名
-	private Date createTime;//时间
+	/**
+	 * 用户ID
+	 */
+	private long userId;
+	
+	/**
+	 * 公共用户ID
+	 */
+	private long openId;
+	
+	/**
+	 * 帐号类型
+	 */
+	private int type;
+	
+	/**
+	 * 用户名
+	 */
+	private String name;
+	
+	/**
+	 * 时间
+	 */
+	private Date createTime;
 	public long getUserId() {
 		return userId;
 	}

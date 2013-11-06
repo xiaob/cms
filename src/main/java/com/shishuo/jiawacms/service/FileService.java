@@ -54,13 +54,13 @@ public class FileService {
 	/**
 	 * 得到目录的所有文件分页
 	 * 
-	 * @param foderId
-	 * @return
+	 * @param folderId
+	 * @return pageVo
 	 */
 	public PageVo<File> getFilePageByFoderId(long folderId,int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setUrl("");
-		List<File> list = this.getFileListByFoderId(folderId);
+		List<File> list = this.getFileListByFoderId(folderId,pageVo.getOffset(),pageVo.getRows());
 		pageVo.setList(list);
 		pageVo.setPageCount(this.getFileListByFoderIdCount(folderId));	
 		return pageVo;
@@ -72,8 +72,8 @@ public class FileService {
 	 * @param foderId
 	 * @return
 	 */
-	public List<File> getFileListByFoderId(long folderId){
-		return fileDao.getFileListByFoderId(folderId);
+	public List<File> getFileListByFoderId(long folderId,long offset , long rows){
+		return fileDao.getFileListByFoderId(folderId,offset,rows);
 	}
 	
 	/**
@@ -83,14 +83,14 @@ public class FileService {
 	 * @return
 	 */
 	public int getFileListByFoderIdCount(long folderId){
-		return fileDao.getFileListByFoderIdCount(folderId);
+		return (int)fileDao.getFileListByFoderIdCount(folderId);
 	}
 	/**
 	 * 增加文件
 	 * 
-	 * @return
+	 * @return Integer
 	 */
-	public File addFile(long folderId,String name, String url, String images,
+	public int addFile(long folderId,String name, String url, String images,
 			String description,int type) {
 		File file = new File();
 		file.setFolderId(folderId);
@@ -100,8 +100,7 @@ public class FileService {
 		file.setDescription(description);
 		file.setType(type);
 		file.setCreateTime(new Date());
-		fileDao.addFile(file);
-		return file;
+		return fileDao.addFile(file);
 	}
 
 	/**
