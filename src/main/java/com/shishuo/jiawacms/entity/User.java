@@ -53,6 +53,7 @@ public class User {
 	 * 时间
 	 */
 	private Date createTime;
+
 	public long getUserId() {
 		return userId;
 	}

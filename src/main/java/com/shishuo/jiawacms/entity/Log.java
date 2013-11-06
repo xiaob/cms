@@ -43,6 +43,7 @@ public class Log {
 	 * 时间
 	 */
 	private Date createTime;
+
 	public long getLogId() {
 		return logId;
 	}

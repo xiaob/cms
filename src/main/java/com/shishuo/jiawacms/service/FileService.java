@@ -53,10 +53,10 @@ public class FileService {
 
 	/**
 	 * 得到目录的所有文件分页
-	 * 
 	 * @param folderId
 	 * @return pageVo
 	 */
+
 	public PageVo<File> getFilePageByFoderId(long folderId,int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setUrl("");
@@ -72,6 +72,7 @@ public class FileService {
 	 * @param foderId
 	 * @return
 	 */
+
 	public List<File> getFileListByFoderId(long folderId,long offset , long rows){
 		return fileDao.getFileListByFoderId(folderId,offset,rows);
 	}
@@ -90,7 +91,8 @@ public class FileService {
 	 * 
 	 * @return Integer
 	 */
-	public int addFile(long folderId,String name, String url, String images,
+
+	public File addFile(long folderId,String name, String url, String images,
 			String description,int type) {
 		File file = new File();
 		file.setFolderId(folderId);
@@ -100,7 +102,8 @@ public class FileService {
 		file.setDescription(description);
 		file.setType(type);
 		file.setCreateTime(new Date());
-		return fileDao.addFile(file);
+		fileDao.addFile(file);
+		return file;
 	}
 
 	/**

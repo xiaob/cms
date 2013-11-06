@@ -6,11 +6,7 @@
 		resultType="com.shishuo.jiawacms.entity.Config">
 		select * from jiawacms.config limit #{offset},#{rows}
 	</select>
-	
-	<select id="allConfigCount" 
-		resultType="long">
-		select count(*) from jiawacms.config
-	</select>
+
 	
 	<insert id="addConfig" parameterType="com.shishuo.jiawacms.entity.Config">
 		insert into

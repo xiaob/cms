@@ -27,9 +27,7 @@ import java.util.Date;
  * 
  */
 
-
 public class Config {
-
 
 	/**
 	 * key
@@ -46,6 +44,7 @@ public class Config {
 	 * 时间
 	 */
 	private Date createTime;
+
 	public String getKey() {
 		return key;
 	}

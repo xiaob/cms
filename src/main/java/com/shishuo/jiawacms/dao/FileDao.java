@@ -82,5 +82,4 @@ public interface FileDao {
 	 * @return Integer
 	 */
 	public int updateFile(File file);
-	
 }

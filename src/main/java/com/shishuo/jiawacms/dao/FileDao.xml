@@ -30,7 +30,5 @@
 	
 	<update id="updateFile" parameterType="com.shishuo.jiawacms.entity.File">
 		update jiawacms.file set folderId=#{folderId},name=#{name},url=#{url},
-		images=#{images},description=#{description},type=#{type}
-		where fileId=#{fileId}
 	</update>
 </mapper>  

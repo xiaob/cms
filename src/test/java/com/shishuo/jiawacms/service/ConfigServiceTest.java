@@ -23,7 +23,7 @@ public class ConfigServiceTest{
 	
 	@Test
 	public void testAddConfig() {
-		assertEquals(1,configService.addConfig("g", "ew"));
+		assertEquals("g",configService.addConfig("g", "ew").getKey());
 	}
 	
 	@Test
@@ -42,9 +42,5 @@ public class ConfigServiceTest{
 		assertEquals("a", configService.updagteConfigByKey("a", "ad").getKey());
 	}
 	
-
-
-	
-
 
 }

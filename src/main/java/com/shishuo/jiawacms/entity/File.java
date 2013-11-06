@@ -29,6 +29,7 @@ import java.util.Date;
 
 public class File {
 
+
 	/**
 	 * 文件Id
 	 */
@@ -68,6 +69,7 @@ public class File {
 	 * 时间
 	 */
 	private Date createTime;
+
 	public long getFileId() {
 		return fileId;
 	}

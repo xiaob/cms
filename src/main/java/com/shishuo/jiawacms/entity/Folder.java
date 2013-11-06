@@ -28,7 +28,6 @@ import java.util.Date;
  */
 
 public class Folder {
-
 	/**
 	 * 目录Id
 	 */
@@ -128,5 +127,5 @@ public class Folder {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	
+
 }

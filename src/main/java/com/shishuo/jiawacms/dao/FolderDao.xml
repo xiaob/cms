@@ -27,7 +27,5 @@
 	
 	<update id="updateFolder" parameterType="com.shishuo.jiawacms.entity.Folder">
 		update jiawacms.folder set fatherId=#{fatherId},name=#{name},count=#{count},status=#{status},
-			type=#{type},login=#{login},template=#{template}
-			where folderId=#{folderId}
 	</update>
 </mapper>  

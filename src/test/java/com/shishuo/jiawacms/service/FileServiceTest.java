@@ -16,7 +16,7 @@ public class FileServiceTest{
 
 	@Test
 	public void testAddFile() { 
-		assertEquals(1, fileService.addFile(2,"bb","sef","","yhdwe",0));
+		assertEquals(2, fileService.addFile(2,"bb","sef","","yhdwe",0).getFolderId());
 	}
 	
 	@Test

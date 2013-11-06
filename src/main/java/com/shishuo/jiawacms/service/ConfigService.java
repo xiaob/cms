@@ -45,14 +45,15 @@ public class ConfigService {
 	 * 
 	 * @param key
 	 * @param value
-	 * @return Integer
+	 * @return config
 	 */
-	public int addConfig(String key,String value) {
+	public Config addConfig(String key,String value) {
 		Config config = new Config();
 		config.setKey(key);
 		config.setValue(value);
 		config.setCreateTime(new Date());
-		return configDao.addConfig(config);
+		configDao.addConfig(config);
+		return config;
 	}
 
 	/**
@@ -61,6 +62,7 @@ public class ConfigService {
 	 * @param key
 	 * @return Integer
 	 */
+
 	public int deleteConfigByKey(String key) {
 		return configDao.deleteConfig(key);
 	}
@@ -109,5 +111,6 @@ public class ConfigService {
 	 */
 	public int allConfigCount(){
 		return (int)configDao.allConfigCount();
+
 	}
 }
