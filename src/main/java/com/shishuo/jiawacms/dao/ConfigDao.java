@@ -73,6 +73,7 @@ public interface ConfigDao {
 	 * @return Integer
 	 */
 	public int updateConfig(Config config);
+
 	/**
 	 * 查看配置
 	 * 

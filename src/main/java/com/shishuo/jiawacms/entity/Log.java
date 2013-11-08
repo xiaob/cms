@@ -33,12 +33,12 @@ public class Log {
 	 * 日志Id
 	 */
 	private long logId;
-	
+
 	/**
 	 * 描述
 	 */
 	private String description;
-	
+
 	/**
 	 * 时间
 	 */
@@ -47,18 +47,23 @@ public class Log {
 	public long getLogId() {
 		return logId;
 	}
+
 	public void setLogId(long logId) {
 		this.logId = logId;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Date getCreateTime() {
 		return createTime;
 	}
+
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}

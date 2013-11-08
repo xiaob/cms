@@ -26,15 +26,14 @@ import org.springframework.stereotype.Repository;
 import com.shishuo.jiawacms.entity.Log;
 
 /**
- * 日志服务
-<<<<<<< HEAD
+ * 日志服务 <<<<<<< HEAD
  * 
  * @author Harbored
  * 
-=======
+ *         =======
  * @author Harbored
- *
->>>>>>> refs/remotes/origin/master
+ * 
+ *         >>>>>>> refs/remotes/origin/master
  */
 
 @Repository
@@ -56,11 +55,10 @@ public interface LogDao {
 	public int getLogListCount();
 
 	/**
-	 * 增加日志
-<<<<<<< HEAD
+	 * 增加日志 <<<<<<< HEAD
 	 * 
-=======
->>>>>>> refs/remotes/origin/master
+	 * ======= >>>>>>> refs/remotes/origin/master
+	 * 
 	 * @param Log
 	 * @return Integer
 	 */

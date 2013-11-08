@@ -1,4 +1,3 @@
-
 /*
  * 
  *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
@@ -32,15 +31,16 @@ import com.shishuo.jiawacms.entity.vo.FolderVo;
 
 /**
  * 目录服务
+ * 
  * @author Zhangjiale
- *
+ * 
  */
 @Service
 public class FolderService {
-	
+
 	@Autowired
 	private FolderDao folderDao;
-	
+
 	/**
 	 * 得到目录
 	 * 
@@ -70,11 +70,13 @@ public class FolderService {
 	public List<FolderVo> getFolderVoListByFatherId(long fatherId) {
 		List<Folder> list = this.getFolderListByFatherId(fatherId);
 		List<FolderVo> allList = new ArrayList<FolderVo>();
-		for(Folder folder:list){
-			List<Folder>  folderList = this.getFolderListByFatherId(folder.getFolderId());
-			for(Folder f :folderList){
+		for (Folder folder : list) {
+			List<Folder> folderList = this.getFolderListByFatherId(folder
+					.getFolderId());
+			for (Folder f : folderList) {
 				FolderVo foderVo = new FolderVo();
-				BeanUtils.copyProperties(f, foderVo);;
+				BeanUtils.copyProperties(f, foderVo);
+				;
 				allList.add(foderVo);
 			}
 		}
@@ -93,8 +95,8 @@ public class FolderService {
 	 * @param template
 	 * @return folder
 	 */
-	public Folder addFolder(long fatherId,String name,int count,int status,
-			int type,int login,String template) {
+	public Folder addFolder(long fatherId, String name, int count, int status,
+			int type, int login, String template) {
 		Folder folder = new Folder();
 		folder.setFatherId(fatherId);
 		folder.setName(name);
@@ -132,8 +134,8 @@ public class FolderService {
 	 * @param template
 	 * @return folder
 	 */
-	public Folder updateFolderById(long folderId,long fatherId,String name,int count,
-			int status,int type,int login,String template) {
+	public Folder updateFolderById(long folderId, long fatherId, String name,
+			int count, int status, int type, int login, String template) {
 		Folder folder = this.getFolderById(folderId);
 		folder.setFatherId(fatherId);
 		folder.setName(name);

@@ -36,11 +36,10 @@ import com.shishuo.jiawacms.entity.User;
 public interface UserDao {
 
 	/**
-	 * 增加用户
-<<<<<<< HEAD
+	 * 增加用户 <<<<<<< HEAD
 	 * 
-=======
->>>>>>> refs/remotes/origin/master
+	 * ======= >>>>>>> refs/remotes/origin/master
+	 * 
 	 * @param User
 	 * @return Integer
 	 */
