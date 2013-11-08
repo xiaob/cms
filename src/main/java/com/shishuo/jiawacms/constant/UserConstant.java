@@ -20,6 +20,6 @@ package com.shishuo.jiawacms.constant;
 
 public class UserConstant {
 
-	//帐号类型
-	public static String[] TYPE = {"本站","师说","QQ","微博"};
+	// 帐号类型
+	public static String[] TYPE = { "本站", "师说", "QQ", "微博" };
 }

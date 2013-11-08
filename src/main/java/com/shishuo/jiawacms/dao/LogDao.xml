@@ -4,12 +4,12 @@
 	
 	<select id="getLogList"
 		resultType="com.shishuo.jiawacms.entity.Log">
-		select * from log limit #{offset}, #{rows}
+		select * from jiawacms.log limit #{offset}, #{rows}
 	</select>
 	
 	<insert id="addLog" parameterType="com.shishuo.jiawacms.entity.Log">
 		insert into
-		log(description.createTime)
+		jiawacms.log(description,createTime)
 		value(#{description},#{createTime})
 		<selectKey resultType="long" keyProperty="logId">
 			SELECT LAST_INSERT_ID()
@@ -18,6 +18,6 @@
 	
 	<select id="getLogListCount"
 		resultType="Integer">
-		select count(*) from log
+		select count(*) from jiawacms.log
 	</select>
 </mapper>  

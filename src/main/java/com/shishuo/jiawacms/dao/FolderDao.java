@@ -24,12 +24,12 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.jiawacms.entity.Folder;
-import com.shishuo.jiawacms.entity.vo.FolderVo;
 
 /**
  * 目录服务
- * @author Herbert
- *
+ * 
+ * @author Harbored
+ * 
  */
 @Repository
 public interface FolderDao {
@@ -38,38 +38,38 @@ public interface FolderDao {
 	 * 得到目录
 	 * 
 	 * @param folderId
-	 * @return
+	 * @return Folder
 	 */
 	public Folder getFolderById(@Param("folderId") long folderId);
-	
+
 	/**
 	 * 得到所有子目录
 	 * 
 	 * @param fatherId
-	 * @return
+	 * @return List<Folder>
 	 */
 	public List<Folder> getFolderListByFatherId(@Param("fatherId") long fatherId);
-	
+
 	/**
 	 * 增加目录
 	 * 
-	 * @return
+	 * @return Integer
 	 */
 	public int addFolder(Folder folder);
-	
+
 	/**
 	 * 删除目录
 	 * 
-	 * @param folderId
-	 * @return
+	 * @param folder
+	 * @return boolean
 	 */
 	public boolean deleteFolder(Folder folder);
-	
+
 	/**
 	 * 更新目录
 	 * 
-	 * @param folderId
-	 * @return
+	 * @param folder
+	 * @return Integer
 	 */
-	public Folder updateFolder(Folder folder);
+	public int updateFolder(Folder folder);
 }

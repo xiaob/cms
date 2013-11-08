@@ -3,35 +3,28 @@
 <mapper namespace="com.shishuo.jiawacms.dao.ConfigDao">
 	
 	<select id="allConfig" 
-		resultType="com.shishuo.jiawacms.ent ity.Config">
-		select * from config limit #{offset},#{rows}
+		resultType="com.shishuo.jiawacms.entity.Config">
+		select * from jiawacms.config limit #{offset},#{rows}
 	</select>
-	
-	<select id="allConfigCount" 
-		resultType="long">
-		select count(*) from config
-	</select>
+
 	
 	<insert id="addConfig" parameterType="com.shishuo.jiawacms.entity.Config">
 		insert into
-		config(key,value,createTime)
+		jiawacms.config(`key`,`value`,createTime)
 		value(#{key},#{value},#{createTime})
-		<selectKey resultType="long" keyProperty="configId">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
 	</insert>
 	
 	<delete id="deleteConfig" parameterType="com.shishuo.jiawacms.entity.Config">
-		delete from config where key=#{key} and value=#{value}
+		delete from jiawacms.config where `key`=#{key}
 	</delete>
 	
 	<update id="updateConfig" parameterType="com.shishuo.jiawacms.entity.Config">
-		update config set value=#{value}
-		where key=#{key}
+		update jiawacms.config set value=#{value}
+		where `key`=#{key}
 	</update>
 	
 	<select id="getConfigByKey"
 		resultType="com.shishuo.jiawacms.entity.Config">
-		select * from config where key=#{key}
+		select * from jiawacms.config where `key`=#{key}
 	</select>
 </mapper>  

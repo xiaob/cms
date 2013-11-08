@@ -29,24 +29,41 @@ import java.util.Date;
 
 public class Log {
 
-	private long logId;//日志Id;
-	private String description;//描述
-	private Date createTime;//时间
+	/**
+	 * 日志Id
+	 */
+	private long logId;
+
+	/**
+	 * 描述
+	 */
+	private String description;
+
+	/**
+	 * 时间
+	 */
+	private Date createTime;
+
 	public long getLogId() {
 		return logId;
 	}
+
 	public void setLogId(long logId) {
 		this.logId = logId;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Date getCreateTime() {
 		return createTime;
 	}
+
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}

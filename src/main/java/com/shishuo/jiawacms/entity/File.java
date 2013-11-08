@@ -29,62 +29,108 @@ import java.util.Date;
 
 public class File {
 
-	private long fileId;//文件Id
-	private long folderId;//所属目录Id
-	private String name;//文件名称
-	private String url;//文件外部URL
-	private String images;//文件描述图片
-	private String description;//文件描述
-	private int type;//文件类型
-	private Date createTime;//时间
+	/**
+	 * 文件Id
+	 */
+	private long fileId;
+
+	/**
+	 * 所属目录Id
+	 */
+	private long folderId;
+
+	/**
+	 * 文件名称
+	 */
+	private String name;
+
+	/**
+	 * 文件外部URL
+	 */
+	private String url;
+
+	/**
+	 * 文件描述图片
+	 */
+	private String images;
+
+	/**
+	 * 文件描述
+	 */
+	private String description;
+
+	/**
+	 * 文件类型
+	 */
+	private int type;
+
+	/**
+	 * 时间
+	 */
+	private Date createTime;
+
 	public long getFileId() {
 		return fileId;
 	}
+
 	public void setFileId(long fileId) {
 		this.fileId = fileId;
 	}
-	
+
 	public long getFolderId() {
 		return folderId;
 	}
+
 	public void setFolderId(long folderId) {
 		this.folderId = folderId;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getUrl() {
 		return url;
 	}
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
 	public String getImages() {
 		return images;
 	}
+
 	public void setImages(String images) {
 		this.images = images;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public int getType() {
 		return type;
 	}
+
 	public void setType(int type) {
 		this.type = type;
 	}
+
 	public Date getCreateTime() {
 		return createTime;
 	}
+
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	
+
 }

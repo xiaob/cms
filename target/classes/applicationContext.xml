@@ -16,40 +16,34 @@
 	         http://www.springframework.org/schema/task 
 	         http://www.springframework.org/schema/task/spring-task-3.2.xsd"
 	default-lazy-init="true">
-	<context:annotation-config />
-	<context:component-scan base-package="com.shishuo.jiawacms" />
+	<!-- 自动扫描的包名 -->  
+    <context:component-scan base-package="com.shishuo.jiawacms" ></context:component-scan>
+	
+ 	<!-- 默认的注解映射的支持 -->  
+    <!--  <mvc:annotation-driven /> -->
 	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="stringHttpMessageConverter" />
-				<ref bean="jsonHttpMessageConverter" />
-			</list>
-		</property>
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 	</bean>
-	<bean id="stringHttpMessageConverter"
-		class="org.springframework.http.converter.StringHttpMessageConverter" />
-	<bean id="jsonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	<bean id="propertyConfigurer" class="com.shishuo.jiawacms.util.PropertyUtils"> 
+    	<property name="locations"> 
+        	<list> 
+           		<value>/WEB-INF/jiawacms.properties</value> 
+        	</list> 
+    	</property> 
 	</bean>
-	<mvc:annotation-driven />
 	<tx:annotation-driven />
 	<task:annotation-driven />
-	<mvc:interceptors>
-		<bean class="com.shishuo.interceptor.GuestInterceptor"></bean>
-	</mvc:interceptors>
-
-	<bean id="propertyConfigurer" class="com.shishuo.util.PropertyUtils">
-		<property name="locations">
-			<list>
-				<value>/shishuo.jiawacms.properties</value>
-			</list>
-		</property>
-	</bean>
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
 		<property name="defaultEncoding" value="UTF-8" />
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="cms_folder" value-ref="folderDirective"/>
+			</map>
+		</property>
 		<property name="freemarkerSettings">
 			<props>
 				<prop key="template_update_delay">10</prop>
@@ -62,10 +56,11 @@
 				<prop key="date_format">yyyy-MM-dd</prop>
 				<prop key="number_format">#.##</prop>
 				<prop key="whitespace_stripping">true</prop>
-				<prop key="classic_compatible">true</prop>
 			</props>
 		</property>
 	</bean>
+	<bean id="folderDirective" class="com.shishuo.jiawacms.tag.FolderDirective"></bean>
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="viewClass"
@@ -79,6 +74,7 @@
 		<property name="exposeSpringMacroHelpers" value="true" />
 	</bean>
 	<!-- c3p0 connection pool configuration -->
+	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">		<!-- 数据库驱动 -->
 		<property name="driverClass" value="${jdbc.driverClass}" />		<!-- 连接URL串 -->
@@ -92,78 +88,26 @@
 		<property name="maxStatements" value="100" />		<!-- 连接有效时间，连接超过3600秒未使用，则该连接丢弃 -->
 		<property name="maxIdleTime" value="3600" />		<!-- 连接用完时，一次产生的新连接步进值为2 -->
 		<property name="acquireIncrement" value="2" />		<!-- 获取连接失败后再尝试10次，再失败则返回DAOException异常 -->
-		<property name="acquireRetryAttempts" value="10" />		<!-- 获取下一次连接时最短间隔600毫秒，有助于提高性能 -->
+		<property name="acquireRetryAttempts" value="5" />		<!-- 获取下一次连接时最短间隔600毫秒，有助于提高性能 -->
 		<property name="acquireRetryDelay" value="600" />		<!-- 检查连接的有效性，此处小弟不是很懂什么意思 -->
 		<property name="testConnectionOnCheckin" value="true" />		<!-- 每个1200秒检查连接对象状态 -->
 		<property name="idleConnectionTestPeriod" value="1200" />		<!-- 获取新连接的超时时间为10000毫秒 -->
 		<property name="checkoutTimeout" value="10000" />
 	</bean>
-
+	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
+	
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
+	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 		<property name="basePackage" value="com.shishuo.jiawacms.dao" />
+		
 	</bean>
 
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 4M -->
-		<property name="maxUploadSize" value="4194304" />
-	</bean>
-
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="${email.host}" />
-		<property name="username" value="${email.username}" />
-		<property name="password" value="${email.password}" />
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.smtp.auth">${email.smtp.auth}</prop>
-				<prop key="mail.smtp.timeout">25000</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
-		<property name="config">
-			<bean class="com.google.code.kaptcha.util.Config">
-				<!--通过构造函数注入属性值 -->
-				<constructor-arg type="java.util.Properties">
-					<props>
-						<!-- 验证码宽度 -->
-						<prop key="kaptcha.image.width">150</prop>
-						<!-- 验证码高度 -->
-						<prop key="kaptcha.image.height">60</prop>
-						<!-- 生成验证码内容范围 -->
-						<prop key="kaptcha.textproducer.char.string">abcdefghijklmnopqrstuvwxyz</prop>
-						<!-- 验证码个数 -->
-						<prop key="kaptcha.textproducer.char.length">5</prop>
-						<!-- 是否有边框 -->
-						<prop key="kaptcha.border">no</prop>
-						<!-- 验证码字体颜色 -->
-						<prop key="kaptcha.textproducer.font.color">red</prop>
-						<!-- 验证码字体大小 -->
-						<prop key="kaptcha.textproducer.font.size">35</prop>
-						<!-- 验证码所属字体样式 -->
-						<prop key="kaptcha.textproducer.font.names">Arial, Courier</prop>
-						<prop key="kaptcha.background.clear.from">white</prop>
-						<prop key="kaptcha.background.clear.to">white</prop>
-						<prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
-						<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
-						<!-- 干扰线颜色 -->
-						<prop key="kaptcha.noise.color">red</prop>
-						<!-- 验证码文本字符间距 -->
-						<prop key="kaptcha.textproducer.char.space">4</prop>
-					</props>
-				</constructor-arg>
-			</bean>
-		</property>
-	</bean>
 </beans>

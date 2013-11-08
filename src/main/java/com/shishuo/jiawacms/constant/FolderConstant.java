@@ -20,9 +20,9 @@ package com.shishuo.jiawacms.constant;
 
 public class FolderConstant {
 
-	//目录类型
-	public static String[] TYPE = {"文章","下载","商品"};
-	
-	//登陆
-	public static String[] LOGIN = {"不需要登录","需要登录"};
+	// 目录类型
+	public static String[] TYPE = { "文章", "下载", "商品" };
+
+	// 登陆
+	public static String[] LOGIN = { "不需要登录", "需要登录" };
 }

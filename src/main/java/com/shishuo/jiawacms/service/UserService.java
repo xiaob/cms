@@ -31,7 +31,7 @@ import com.shishuo.jiawacms.entity.vo.PageVo;
 /**
  * 用户服务
  * 
- * @author Herbert
+ * @author Zhangjiale
  * 
  */
 @Service
@@ -39,13 +39,17 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
+
 	/**
 	 * 增加用户
-	 * @param openId,type,name
+	 * 
+	 * @param openId
+	 *            ,type,name
 	 * @return
 	 */
-	public User addUser(long openId,int type,String name) {
+	public User addUser(long userId, long openId, int type, String name) {
 		User user = new User();
+		user.setUserId(userId);
 		user.setOpenId(openId);
 		user.setType(type);
 		user.setName(name);
@@ -66,13 +70,15 @@ public class UserService {
 
 	/**
 	 * 得到用户数据分页
+	 * 
 	 * @param pageNum
 	 * @return pageVo
 	 */
 	public PageVo<User> getUserPage(int pageNum) {
 		PageVo<User> pageVo = new PageVo<User>(pageNum);
 		pageVo.setUrl("");
-		List<User> list = this.getUserList(pageVo.getOffset(), pageVo.getRows());
+		List<User> list = this
+				.getUserList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
 		pageVo.setCount(this.getUserListCount());
 		return pageVo;
@@ -83,9 +89,9 @@ public class UserService {
 	 * 
 	 * @param userId
 	 */
-	public void deleteUserById(long userId) {
+	public int deleteUserById(long userId) {
 		User user = this.getUserById(userId);
-		userDao.deleteUserById(user);
+		return userDao.deleteUserById(user);
 	}
 
 	/**
@@ -94,7 +100,7 @@ public class UserService {
 	 * @param userId
 	 * @return user
 	 */
-	public User updateUser(long userId,long openId, int type,String name) {
+	public User updateUser(long userId, long openId, int type, String name) {
 		User user = this.getUserById(userId);
 		user.setOpenId(openId);
 		user.setType(type);
@@ -102,23 +108,24 @@ public class UserService {
 		userDao.updateUser(user);
 		return user;
 	}
-	
+
 	/**
 	 * 得到所有用户数据
 	 * 
-	 * @param offset,rows
+	 * @param offset
+	 *            ,rows
 	 * @return List<User>
 	 */
-	public List<User> getUserList(long offset , long rows){
+	public List<User> getUserList(long offset, long rows) {
 		return userDao.getUserList(offset, rows);
 	}
-	
+
 	/**
 	 * 所有用户数据的数量
 	 * 
 	 * @return Integer
 	 */
-	public int getUserListCount(){
+	public int getUserListCount() {
 		return userDao.getUserListCount();
 	}
 }

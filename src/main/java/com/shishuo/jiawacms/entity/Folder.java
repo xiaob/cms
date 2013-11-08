@@ -28,70 +28,121 @@ import java.util.Date;
  */
 
 public class Folder {
+	/**
+	 * 目录Id
+	 */
+	private long folderId;
 
-	private long folderId;//目录Id
-	private long fatherId;//父亲Id
-	private String name;//目录名称
-	private int count;//文件数
-	private int status;//状态
-	private int type;//类型
-	private int login;//登录
-	private String template;//模板
-	private Date createTime;//时间
-	
+	/**
+	 * 父亲Id
+	 */
+	private long fatherId;
+
+	/**
+	 * 目录名称
+	 */
+	private String name;
+
+	/**
+	 * 文件数
+	 */
+	private int count;
+
+	/**
+	 * 状态
+	 */
+	private int status;
+
+	/**
+	 * 类型
+	 */
+	private int type;
+
+	/**
+	 * 登录
+	 */
+	private int login;
+
+	/**
+	 * 模板
+	 */
+	private String template;
+
+	/**
+	 * 时间
+	 */
+	private Date createTime;
+
 	public long getFolderId() {
 		return folderId;
 	}
+
 	public void setFolderId(long folderId) {
 		this.folderId = folderId;
 	}
+
 	public long getFatherId() {
 		return fatherId;
 	}
+
 	public void setFatherId(long fatherId) {
 		this.fatherId = fatherId;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public int getCount() {
 		return count;
 	}
+
 	public void setCount(int count) {
 		this.count = count;
 	}
+
 	public int getStatus() {
 		return status;
 	}
+
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
 	public int getType() {
 		return type;
 	}
+
 	public void setType(int type) {
 		this.type = type;
 	}
+
 	public int getLogin() {
 		return login;
 	}
+
 	public void setLogin(int login) {
 		this.login = login;
 	}
+
 	public String getTemplate() {
 		return template;
 	}
+
 	public void setTemplate(String template) {
 		this.template = template;
 	}
+
 	public Date getCreateTime() {
 		return createTime;
 	}
+
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	
+
 }

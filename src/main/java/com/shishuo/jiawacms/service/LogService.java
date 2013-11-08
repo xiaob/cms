@@ -30,22 +30,22 @@ import com.shishuo.jiawacms.entity.vo.PageVo;
 
 /**
  * 日志服务
- * @author Herbert
- *
+ * 
+ * @author Zhangjiale
+ * 
  */
 @Service
 public class LogService {
-	
+
 	@Autowired
 	private LogDao logDao;
-	
+
 	/**
 	 * 日志分页
 	 * 
-	 * @param logId
 	 * @return pageVo
 	 */
-	public PageVo<Log> getLogPage(long logId,int pageNum) {
+	public PageVo<Log> getLogPage(int pageNum) {
 		PageVo<Log> pageVo = new PageVo<Log>(pageNum);
 		pageVo.setUrl("");
 		List<Log> list = this.getLogList(pageVo.getOffset(), pageVo.getRows());
@@ -53,34 +53,38 @@ public class LogService {
 		pageVo.setCount(this.getLogListCount());
 		return pageVo;
 	}
-	
+
 	/**
 	 * 增加日志
+	 * 
 	 * @param description
 	 * @return log
 	 */
-	public Log addLog(String description){
+	public Log addLog(String description) {
 		Log log = new Log();
 		log.setDescription(description);
 		log.setCreateTime(new Date());
 		logDao.addLog(log);
 		return log;
 	}
-	
+
 	/**
 	 * 所有日志
-	 * @param offset, rows
+	 * 
+	 * @param offset
+	 *            , rows
 	 * @return list<Log>
 	 */
-	public List<Log> getLogList(long offset, long rows){
+	public List<Log> getLogList(long offset, long rows) {
 		return logDao.getLogList(offset, rows);
 	}
-	
+
 	/**
 	 * 所有日志
+	 * 
 	 * @return Integer
 	 */
-	public int getLogListCount(){
+	public int getLogListCount() {
 		return logDao.getLogListCount();
 	}
 }

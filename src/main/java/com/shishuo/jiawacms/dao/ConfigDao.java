@@ -24,10 +24,11 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.jiawacms.entity.Config;
+
 /**
  * 网站配置
  * 
- * @author Herbert
+ * @author Zhangjiale
  * 
  */
 
@@ -37,41 +38,42 @@ public interface ConfigDao {
 	/**
 	 * 增加配置
 	 * 
-	 * @return
+	 * @return Integer
 	 */
 	public int addConfig(Config config);
-	
-	
+
 	/**
 	 * 删除配置
 	 * 
-	 * return 
+	 * return Integer
 	 */
 	public int deleteConfig(@Param("key") String key);
-	
+
 	/**
 	 * 查看所有配置
 	 * 
 	 * @param offset
 	 * @param rows
+	 * 
+	 * @return List<Config>
 	 */
-	public List<Config> allConfig(@Param("offset") long offset, @Param("rows") long rows);
-	
+	public List<Config> allConfig(@Param("offset") long offset,
+			@Param("rows") long rows);
+
 	/**
 	 * 查看所有配置的数量
 	 * 
-	 * @param offset
-	 * @param rows
+	 * return Integer
 	 */
 	public int allConfigCount();
-	
+
 	/**
 	 * 更新配置
 	 * 
-	 * @return Config
+	 * @return Integer
 	 */
-	public Config updateConfig(Config config);
-	
+	public int updateConfig(Config config);
+
 	/**
 	 * 查看配置
 	 * 

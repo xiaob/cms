@@ -31,23 +31,23 @@ import com.shishuo.jiawacms.entity.vo.PageVo;
 /**
  * 网站配置
  * 
- * @author Herbert
+ * @author Zhangjiale
  * 
  */
 @Service
 public class ConfigService {
-	
+
 	@Autowired
 	private ConfigDao configDao;
-	
+
 	/**
 	 * 增加配置
 	 * 
 	 * @param key
 	 * @param value
-	 * @return config
+	 * @return Config
 	 */
-	public Config addConfig(String key,String value) {
+	public Config addConfig(String key, String value) {
 		Config config = new Config();
 		config.setKey(key);
 		config.setValue(value);
@@ -60,9 +60,11 @@ public class ConfigService {
 	 * 删除配置
 	 * 
 	 * @param key
+	 * @return Integer
 	 */
-	public void deleteConfigByKey(String key) {
-		configDao.deleteConfig(key);
+
+	public int deleteConfigByKey(String key) {
+		return configDao.deleteConfig(key);
 	}
 
 	/**
@@ -70,7 +72,7 @@ public class ConfigService {
 	 * 
 	 * @param key
 	 * @param value
-	 * @return config
+	 * @return Config
 	 */
 	public Config updagteConfigByKey(String key, String value) {
 		Config config = configDao.getConfigByKey(key);
@@ -81,33 +83,37 @@ public class ConfigService {
 
 	/**
 	 * 配置项目分页
-	 * @param pageNum
-	 * @return pageVo
+	 * 
+	 * @param int
+	 * @return PageVo
 	 */
 	public PageVo<Config> getConfigPage(int pageNum) {
 		PageVo<Config> pageVo = new PageVo<Config>(pageNum);
 		pageVo.setUrl("");
-		List<Config> list = this.allConfig(pageVo.getOffset(), pageVo.getRows());
+		List<Config> list = this
+				.allConfig(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
 		pageVo.setPageCount(this.allConfigCount());
 		return pageVo;
 	}
-	
+
 	/**
 	 * 所有配置
 	 * 
+	 * @param long,long
 	 * @return List<Config>
 	 */
-	public List<Config> allConfig(long offset, long rows){
+	public List<Config> allConfig(long offset, long rows) {
 		return configDao.allConfig(offset, rows);
 	}
-	
+
 	/**
 	 * 所有配置的数量
 	 * 
 	 * @return Integer
 	 */
-	public int allConfigCount(){
+	public int allConfigCount() {
 		return configDao.allConfigCount();
+
 	}
 }

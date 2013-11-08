@@ -20,7 +20,7 @@ package com.shishuo.jiawacms.constant;
 
 public class FileConstant {
 
-	//文件类型
-	public static String[] TYPE = {"文章","下载","商品"};
-	
+	// 文件类型
+	public static String[] TYPE = { "文章", "下载", "商品" };
+
 }
