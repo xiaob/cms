@@ -30,9 +30,14 @@ import com.shishuo.jiawacms.entity.vo.PageVo;
 
 /**
  * 日志服务
+<<<<<<< HEAD
  * 
  * @author Zhangjiale
  * 
+=======
+ * @author Zhangjiale
+ *
+>>>>>>> refs/remotes/origin/master
  */
 @Service
 public class LogService {

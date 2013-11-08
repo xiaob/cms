@@ -42,16 +42,16 @@ public interface FileDao {
 	 * @return File
 	 */
 	public File getFileById(@Param("fileId") long fileId);
-
+	
 	/**
 	 * 得到目录的所有文件
 	 * 
 	 * @param foderId
 	 * @return List<File>
 	 */
-	public List<File> getFileListByFoderId(@Param("folderId") long folderId,
-			@Param("offset") long offset, @Param("rows") long rows);
-
+	public List<File> getFileListByFoderId(@Param("folderId") long folderId,@Param("offset") long offset
+			,@Param("rows") long rows);
+	
 	/**
 	 * 得到目录的所有文件的数量
 	 * 
@@ -59,21 +59,21 @@ public interface FileDao {
 	 * @return Integer
 	 */
 	public int getFileListByFoderIdCount(@Param("folderId") long folderId);
-
+	
 	/**
 	 * 增加文件
 	 * 
 	 * @return Integer
 	 */
 	public int addFile(File file);
-
+	
 	/**
 	 * 删除文件
 	 * 
 	 * @return boolean
 	 */
 	public boolean deleteFile(File file);
-
+	
 	/**
 	 * 修改文件
 	 * 

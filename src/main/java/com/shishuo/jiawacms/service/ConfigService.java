@@ -83,7 +83,10 @@ public class ConfigService {
 
 	/**
 	 * 配置项目分页
+<<<<<<< HEAD
 	 * 
+=======
+>>>>>>> refs/remotes/origin/master
 	 * @param int
 	 * @return PageVo
 	 */
@@ -99,7 +102,10 @@ public class ConfigService {
 
 	/**
 	 * 所有配置
+<<<<<<< HEAD
 	 * 
+=======
+>>>>>>> refs/remotes/origin/master
 	 * @param long,long
 	 * @return List<Config>
 	 */

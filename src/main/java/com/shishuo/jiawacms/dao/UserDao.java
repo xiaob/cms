@@ -37,7 +37,10 @@ public interface UserDao {
 
 	/**
 	 * 增加用户
+<<<<<<< HEAD
 	 * 
+=======
+>>>>>>> refs/remotes/origin/master
 	 * @param User
 	 * @return Integer
 	 */

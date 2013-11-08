@@ -1,3 +1,4 @@
+
 /*
  * 
  *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
@@ -17,6 +18,7 @@
  *	limitations under the License.
  */package com.shishuo.jiawacms.service;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -30,9 +32,8 @@ import com.shishuo.jiawacms.entity.vo.PageVo;
 /**
  * 
  * 文件服务
- * 
  * @author Zhangjiale
- * 
+ *
  */
 @Service
 public class FileService {
@@ -45,28 +46,26 @@ public class FileService {
 	 */
 	@Autowired
 	private FileDao fileDao;
-
+	
 	public File getFileById(long fileId) {
 		return fileDao.getFileById(fileId);
 	}
 
 	/**
 	 * 得到目录的所有文件分页
-	 * 
 	 * @param folderId
 	 * @return pageVo
 	 */
 
-	public PageVo<File> getFilePageByFoderId(long folderId, int pageNum) {
+	public PageVo<File> getFilePageByFoderId(long folderId,int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setUrl("");
-		List<File> list = this.getFileListByFoderId(folderId,
-				pageVo.getOffset(), pageVo.getRows());
+		List<File> list = this.getFileListByFoderId(folderId,pageVo.getOffset(),pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setPageCount(this.getFileListByFoderIdCount(folderId));
+		pageVo.setPageCount(this.getFileListByFoderIdCount(folderId));	
 		return pageVo;
 	}
-
+	
 	/**
 	 * 得到目录的所有文件
 	 * 
@@ -74,27 +73,25 @@ public class FileService {
 	 * @return
 	 */
 
-	public List<File> getFileListByFoderId(long folderId, long offset, long rows) {
-		return fileDao.getFileListByFoderId(folderId, offset, rows);
+	public List<File> getFileListByFoderId(long folderId,long offset , long rows){
+		return fileDao.getFileListByFoderId(folderId,offset,rows);
 	}
-
+	
 	/**
 	 * 得到目录的所有文件的数量
-	 * 
 	 * @return Integer
 	 */
-	public int getFileListByFoderIdCount(long folderId) {
+	public int getFileListByFoderIdCount(long folderId){
 		return fileDao.getFileListByFoderIdCount(folderId);
 	}
-
 	/**
 	 * 增加文件
 	 * 
 	 * @return Integer
 	 */
 
-	public File addFile(long folderId, String name, String url, String images,
-			String description, int type) {
+	public File addFile(long folderId,String name, String url, String images,
+			String description,int type) {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setName(name);
@@ -124,8 +121,8 @@ public class FileService {
 	 * @param fileId
 	 * @return file
 	 */
-	public File updateFileById(long fileId, long folderId, String name,
-			String url, String images, String description, int type) {
+	public File updateFileById(long fileId,long folderId,String name, String url,
+			String images,String description,int type) {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
 		file.setName(name);

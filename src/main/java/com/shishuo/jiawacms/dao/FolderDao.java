@@ -27,9 +27,14 @@ import com.shishuo.jiawacms.entity.Folder;
 
 /**
  * 目录服务
+<<<<<<< HEAD
  * 
  * @author Harbored
  * 
+=======
+ * @author Harbored
+ *
+>>>>>>> refs/remotes/origin/master
  */
 @Repository
 public interface FolderDao {

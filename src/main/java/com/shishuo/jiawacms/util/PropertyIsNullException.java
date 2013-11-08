@@ -5,3 +5,4 @@ public class PropertyIsNullException extends Exception {
 		super(msg);
 	}
 }
+
