@@ -32,7 +32,7 @@ import com.shishuo.jiawacms.entity.vo.FolderVo;
 
 /**
  * 目录服务
- * @author Herbert
+ * @author Zhangjiale
  *
  */
 @Service

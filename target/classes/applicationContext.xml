@@ -17,14 +17,10 @@
 	         http://www.springframework.org/schema/task/spring-task-3.2.xsd"
 	default-lazy-init="true">
 	<!-- 自动扫描的包名 -->  
-    <context:component-scan base-package="com.shishuo.jiawacms" >
-    </context:component-scan>  
+    <context:component-scan base-package="com.shishuo.jiawacms" ></context:component-scan>
 	
-    <!-- 默认的注解映射的支持 -->  
-    <mvc:annotation-driven />
-    <tx:annotation-driven />
-	<task:annotation-driven />
-	
+ 	<!-- 默认的注解映射的支持 -->  
+    <!--  <mvc:annotation-driven /> -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<bean
@@ -33,10 +29,37 @@
 	<bean id="propertyConfigurer" class="com.shishuo.jiawacms.util.PropertyUtils"> 
     	<property name="locations"> 
         	<list> 
-           		<value>/shishuo.jiawacms.properties</value> 
+           		<value>/WEB-INF/jiawacms.properties</value> 
         	</list> 
     	</property> 
 	</bean>
+	<tx:annotation-driven />
+	<task:annotation-driven />
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="cms_folder" value-ref="folderDirective"/>
+			</map>
+		</property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">10</prop>
+				<prop key="defaultEncoding">UTF-8</prop>
+				<prop key="url_escaping_charset">UTF-8</prop>
+				<prop key="locale">zh_CN</prop>
+				<prop key="boolean_format">true,false</prop>
+				<prop key="time_format">HH:mm:ss</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="number_format">#.##</prop>
+				<prop key="whitespace_stripping">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="folderDirective" class="com.shishuo.jiawacms.tag.FolderDirective"></bean>
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">

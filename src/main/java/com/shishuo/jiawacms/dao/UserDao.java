@@ -24,12 +24,11 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.jiawacms.entity.User;
-import com.shishuo.jiawacms.entity.vo.PageVo;
 
 /**
  * 用户服务
  * 
- * @author Herbert
+ * @author Harbored
  * 
  */
 
@@ -38,8 +37,8 @@ public interface UserDao {
 
 	/**
 	 * 增加用户
-	 * 
-	 * @return
+	 * @param User
+	 * @return Integer
 	 */
 	public int addUser(User user);
 	
@@ -47,14 +46,16 @@ public interface UserDao {
 	 * 根据Id得到用户信息
 	 * 
 	 * @param userId
-	 * @return
+	 * @return User
 	 */
 	public User getUserById(@Param("userId") long userId);
 	
 	/**
 	 * 得到所有用户数据
 	 * 
-	 * @return
+	 * @param long,long
+	 * 
+	 * @return List<User>
 	 */
 	public List<User> getUserList(@Param("offset") long offset,@Param("rows") long rows);
 	
@@ -62,13 +63,15 @@ public interface UserDao {
 	 * 得到用户数量
 	 * 
 	 * @param userId
+	 * @return Integer
 	 */
 	public int getUserListCount();
 	
 	/**
 	 * 删除用户
 	 * 
-	 * @param userId
+	 * @param User
+	 * @return Integer
 	 */
 	public int deleteUserById(User user);
 	
@@ -76,6 +79,7 @@ public interface UserDao {
 	 * 更新用户数据
 	 * 
 	 * @param userId
+	 * @return Integer
 	 */
 	public int updateUser(User user);
 	

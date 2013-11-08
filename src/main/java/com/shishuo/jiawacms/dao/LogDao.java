@@ -24,11 +24,10 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.jiawacms.entity.Log;
-import com.shishuo.jiawacms.entity.vo.PageVo;
 
 /**
  * 日志服务
- * @author Herbert
+ * @author Harbored
  *
  */
 
@@ -38,7 +37,7 @@ public interface LogDao {
 	/**
 	 * 全部日志
 	 * 
-	 * @return
+	 * @return List<Log>
 	 */
 	public List<Log> getLogList(@Param("offset") long offset,
 			@Param("rows") long rows);
@@ -46,13 +45,14 @@ public interface LogDao {
 	/**
 	 * 全部日志的数量
 	 * 
-	 * @return
+	 * @return Integer
 	 */
 	public int getLogListCount();
 	
 	/**
 	 * 增加日志
 	 * @param Log
+	 * @return Integer
 	 */
 	public int addLog(Log log);
 	

@@ -31,7 +31,7 @@ import com.shishuo.jiawacms.entity.vo.PageVo;
 /**
  * 网站配置
  * 
- * @author Herbert
+ * @author Zhangjiale
  * 
  */
 @Service
@@ -45,7 +45,7 @@ public class ConfigService {
 	 * 
 	 * @param key
 	 * @param value
-	 * @return config
+	 * @return Config
 	 */
 	public Config addConfig(String key,String value) {
 		Config config = new Config();
@@ -72,7 +72,7 @@ public class ConfigService {
 	 * 
 	 * @param key
 	 * @param value
-	 * @return config
+	 * @return Config
 	 */
 	public Config updagteConfigByKey(String key, String value) {
 		Config config = configDao.getConfigByKey(key);
@@ -83,8 +83,8 @@ public class ConfigService {
 
 	/**
 	 * 配置项目分页
-	 * @param pageNum
-	 * @return pageVo
+	 * @param int
+	 * @return PageVo
 	 */
 	public PageVo<Config> getConfigPage(int pageNum) {
 		PageVo<Config> pageVo = new PageVo<Config>(pageNum);
@@ -97,7 +97,7 @@ public class ConfigService {
 	
 	/**
 	 * 所有配置
-	 * 
+	 * @param long,long
 	 * @return List<Config>
 	 */
 	public List<Config> allConfig(long offset, long rows){

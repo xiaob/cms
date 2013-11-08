@@ -33,6 +33,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>3.2.4.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>3.2.4.RELEASE</version>
 		</dependency>
@@ -72,29 +77,69 @@
 			<version>1.0</version>
 		</dependency>
 		<dependency>
-    		<groupId>log4j</groupId>
-    		<artifactId>log4j</artifactId>
-    		<version>1.2.14</version>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.25</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>3.2.4.RELEASE</version>
+		</dependency>
+		<dependency>
+    		<groupId>commons-dbcp</groupId>
+    		<artifactId>commons-dbcp</artifactId>
+    		<version>1.2.1</version>
     	</dependency>
     	<dependency>
-    		<groupId>c3p0</groupId>
-    		<artifactId>c3p0</artifactId>
-    		<version>0.9.1</version>
+    		<groupId>commons-pool</groupId>
+    		<artifactId>commons-pool</artifactId>
+    		<version>1.5.3</version>
     	</dependency>
     	<dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.1</version>
+    		<groupId>commons-collections</groupId>
+    		<artifactId>commons-collections</artifactId>
+    		<version>3.1</version>
     	</dependency>
     	<dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.25</version>
-        </dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-core</artifactId>
+    		<version>3.2.4.RELEASE</version>
+    	</dependency>
     	<dependency>
-    		<groupId>javax.servlet</groupId>
-    		<artifactId>javax.servlet-api</artifactId>
-    		<version>3.1.0</version>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-expression</artifactId>
+    		<version>3.2.4.RELEASE</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>dom4j</groupId>
+    		<artifactId>dom4j</artifactId>
+    		<version>1.6.1</version>
     	</dependency>
 	</dependencies>
 	<build>

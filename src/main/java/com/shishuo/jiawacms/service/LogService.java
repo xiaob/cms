@@ -30,7 +30,7 @@ import com.shishuo.jiawacms.entity.vo.PageVo;
 
 /**
  * 日志服务
- * @author Herbert
+ * @author Zhangjiale
  *
  */
 @Service

@@ -27,7 +27,7 @@ import com.shishuo.jiawacms.entity.Config;
 /**
  * 网站配置
  * 
- * @author Herbert
+ * @author Zhangjiale
  * 
  */
 
@@ -37,7 +37,7 @@ public interface ConfigDao {
 	/**
 	 * 增加配置
 	 * 
-	 * @return
+	 * @return Integer
 	 */
 	public int addConfig(Config config);
 	
@@ -45,7 +45,7 @@ public interface ConfigDao {
 	/**
 	 * 删除配置
 	 * 
-	 * return 
+	 * return Integer
 	 */
 	public int deleteConfig(@Param("key") String key);
 	
@@ -54,6 +54,8 @@ public interface ConfigDao {
 	 * 
 	 * @param offset
 	 * @param rows
+	 * 
+	 * @return List<Config>
 	 */
 	public List<Config> allConfig(@Param("offset") long offset, @Param("rows") long rows);
 	

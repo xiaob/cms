@@ -24,12 +24,11 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.jiawacms.entity.File;
-import com.shishuo.jiawacms.entity.vo.PageVo;
 
 /**
  * 文件服务
  * 
- * @author Herbert
+ * @author Harbored
  * 
  */
 
