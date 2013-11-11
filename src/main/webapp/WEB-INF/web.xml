@@ -48,7 +48,7 @@
 
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>shishuo.jiawacms.app.root</param-value>
+		<param-value>jiawacms.app.root</param-value>
 	</context-param>
 	
 	<listener>

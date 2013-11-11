@@ -1,6 +1,0 @@
-*.DS_Store
-*.class
-*.war
-*.ear
-/target
-/.settings
