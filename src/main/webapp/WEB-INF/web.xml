@@ -22,7 +22,7 @@
  
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
 	<filter>
@@ -43,7 +43,7 @@
 	</listener>
 
 	<welcome-file-list>
-		<welcome-file>/</welcome-file>
+		<welcome-file>/default.do</welcome-file>
 	</welcome-file-list>
 
 	<context-param>
