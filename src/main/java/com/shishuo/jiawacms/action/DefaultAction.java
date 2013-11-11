@@ -16,12 +16,12 @@ import com.shishuo.jiawacms.constant.ConfigConstant;
  * 
  */
 @Controller
-public class HomeAction {
+public class DefaultAction {
 
 	@RequestMapping(value = "default.do", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, ModelMap modelMap) {
 		try {
-			return ConfigConstant.getTemplatePath() + "/home";
+			return ConfigConstant.getTemplatePath() + "/default";
 		} catch (Exception e) {
 			return ConfigConstant.getTemplatePath() + "/500";
 		}

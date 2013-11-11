@@ -1,38 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
-
-    <title>Justified Nav Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-
+<#include "head.ftl">
     <div class="container">
 
       <div class="masthead">
       	<div>
-      		<img src="images/jiawacms.png" style="width: 164px; height: 44px;margin-bottom: 10px;margin-left: 10px;"/>
+      		<img src="images/jiawacms.png" style=" height: 60px;margin-bottom: 10px;margin-left: 10px;"/>
       	</div>
         <ul class="nav nav-justified">
           <li class="active"><a href="#">首页</a></li>
@@ -40,13 +11,14 @@
           <li><a href="#">文档</a></li>
           <li><a href="#">教程</a></li>
           <li><a href="#">帮助</a></li>
+          <li><a href="#">案例</a></li>
           <li><a href="#">关于</a></li>
         </ul>
       </div>
 
       <!-- Jumbotron -->
       <div class="jumbotron">
-        <h1>使用Java开发的CMS!</h1>
+        <h1>使用Java开发的CMS</h1>
         <p class="lead">完全免费，Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
         <p><a class="btn btn-lg btn-success" href="#" role="button">现在就下载</a></p>
       </div>
@@ -70,16 +42,5 @@
         </div>
       </div>
 
-      <!-- Site footer -->
-      <div class="footer">
-        <p>&copy; Company 2013</p>
-      </div>
-
     </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-  </body>
-</html>
+<#include "foot.ftl">    
