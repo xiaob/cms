@@ -20,7 +20,7 @@
 	<context:component-scan base-package="com.shishuo.jiawacms"></context:component-scan>
 
 	<!-- 默认的注解映射的支持 -->
-	<!-- <mvc:annotation-driven /> -->
+	<mvc:annotation-driven />
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<bean
@@ -110,5 +110,5 @@
 		<property name="basePackage" value="com.shishuo.jiawacms.dao" />
 
 	</bean>
-
+	<mvc:default-servlet-handler />
 </beans>

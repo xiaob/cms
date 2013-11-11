@@ -18,7 +18,7 @@ import com.shishuo.jiawacms.constant.ConfigConstant;
 @Controller
 public class DefaultAction {
 
-	@RequestMapping(value = "default.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, ModelMap modelMap) {
 		try {
 			return ConfigConstant.getTemplatePath() + "/default";

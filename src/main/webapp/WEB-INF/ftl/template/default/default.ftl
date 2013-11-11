@@ -1,21 +1,5 @@
 <#include "head.ftl">
     <div class="container">
-
-      <div class="masthead">
-      	<div>
-      		<img src="images/jiawacms.png" style=" height: 60px;margin-bottom: 10px;margin-left: 10px;"/>
-      	</div>
-        <ul class="nav nav-justified">
-          <li class="active"><a href="#">首页</a></li>
-          <li><a href="#">模板</a></li>
-          <li><a href="#">文档</a></li>
-          <li><a href="#">教程</a></li>
-          <li><a href="#">帮助</a></li>
-          <li><a href="#">案例</a></li>
-          <li><a href="#">关于</a></li>
-        </ul>
-      </div>
-
       <!-- Jumbotron -->
       <div class="jumbotron">
         <h1>使用Java开发的CMS</h1>
