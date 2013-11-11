@@ -16,22 +16,22 @@
 	         http://www.springframework.org/schema/task 
 	         http://www.springframework.org/schema/task/spring-task-3.2.xsd"
 	default-lazy-init="true">
-	<!-- 自动扫描的包名 -->  
-    <context:component-scan base-package="com.shishuo.jiawacms" ></context:component-scan>
-	
- 	<!-- 默认的注解映射的支持 -->  
-    <!--  <mvc:annotation-driven /> -->
+	<!-- 自动扫描的包名 -->
+	<context:component-scan base-package="com.shishuo.jiawacms"></context:component-scan>
+
+	<!-- 默认的注解映射的支持 -->
+	<!-- <mvc:annotation-driven /> -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 	</bean>
-	<bean id="propertyConfigurer" class="com.shishuo.jiawacms.util.PropertyUtils"> 
-    	<property name="locations"> 
-        	<list> 
-           		<value>/WEB-INF/jiawacms.properties</value> 
-        	</list> 
-    	</property> 
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/jiawacms.properties</value>
+			</list>
+		</property>
 	</bean>
 	<tx:annotation-driven />
 	<task:annotation-driven />
@@ -41,7 +41,7 @@
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="freemarkerVariables">
 			<map>
-				<entry key="cms_folder" value-ref="folderDirective"/>
+				<entry key="cms_folder" value-ref="folderDirective" />
 			</map>
 		</property>
 		<property name="freemarkerSettings">
@@ -60,7 +60,7 @@
 		</property>
 	</bean>
 	<bean id="folderDirective" class="com.shishuo.jiawacms.tag.FolderDirective"></bean>
-	
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="viewClass"
@@ -74,7 +74,7 @@
 		<property name="exposeSpringMacroHelpers" value="true" />
 	</bean>
 	<!-- c3p0 connection pool configuration -->
-	
+
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">		<!-- 数据库驱动 -->
 		<property name="driverClass" value="${jdbc.driverClass}" />		<!-- 连接URL串 -->
@@ -94,20 +94,20 @@
 		<property name="idleConnectionTestPeriod" value="1200" />		<!-- 获取新连接的超时时间为10000毫秒 -->
 		<property name="checkoutTimeout" value="10000" />
 	</bean>
-	
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 		<property name="basePackage" value="com.shishuo.jiawacms.dao" />
-		
+
 	</bean>
 
 </beans>
