@@ -21,4 +21,5 @@ public class FolderAction {
 			return ConfigConstant.getTemplatePath() + "/500";
 		}
 	}
+//	@RequestMapping(value = "default.do", method = RequestMethod.GET)
 }
