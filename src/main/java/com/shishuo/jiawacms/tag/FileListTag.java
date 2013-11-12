@@ -10,8 +10,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.jiawacms.entity.Folder;
-import com.shishuo.jiawacms.service.FolderService;
+import com.shishuo.jiawacms.entity.File;
+import com.shishuo.jiawacms.service.FileService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
@@ -21,31 +21,27 @@ import freemarker.template.TemplateModel;
 
 /**
  * @author Administrator
- * 
- *         folder标签
- * 
+ * 	fileList标签
+ *
  */
 @Service
-public class FolderDirective implements TemplateDirectiveModel {
+public class FileListTag implements TemplateDirectiveModel{
 
 	@Autowired
-	private FolderService folderService;
+	private FileService fileService;
 
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
-		List<Folder> list = folderService.getFolderListByFatherId(1);
+		List<String> list = new ArrayList<String>();
+		list.add("a");
+		list.add("b");
+		list.add("c");
+		list.add("4");
+		list.add("5");
+		list.add("6");
 		env.setVariable("list", DEFAULT_WRAPPER.wrap(list));
-
-//		List<String> list = new ArrayList<String>();
-//		list.add("1");
-//		list.add("2");
-//		list.add("3");
-//		list.add("4");
-//		list.add("5");
-//		list.add("6");
-//		list.add("7");
-//		env.setVariable("list", DEFAULT_WRAPPER.wrap(list));
-		body.render(env.getOut());
-
+		body.render(env.getOut());	
 	}
+	
+	
 }
