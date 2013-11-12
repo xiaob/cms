@@ -20,13 +20,14 @@ package com.shishuo.jiawacms.entity;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Service;
+
 /**
  * 目录实体
  * 
  * @author zsy
  * 
  */
-
 public class Folder {
 	/**
 	 * 目录Id

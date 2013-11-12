@@ -43,6 +43,7 @@
 		<property name="freemarkerVariables">
 			<map>
 				<entry key="cms_folder" value-ref="folderDirective" />
+				<entry key="cms_folder_list" value-ref="folderTag" />
 			</map>
 		</property>
 		<property name="freemarkerSettings">
@@ -60,8 +61,6 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="folderDirective" class="com.shishuo.jiawacms.tag.FolderDirective"></bean>
-
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="viewClass"

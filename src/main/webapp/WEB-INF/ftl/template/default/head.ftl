@@ -37,12 +37,12 @@
       	</div>
         <ul class="nav nav-justified">
           <li class="active"><a href="#">首页</a></li>
-          <li><a href="#">模板</a></li>
+          <li><a href="template.do">模板</a></li>
           <li><a href="#">文档</a></li>
           <li><a href="#">教程</a></li>
           <li><a href="#">帮助</a></li>
           <li><a href="#">案例</a></li>
-          <li><a href="#">关于</a></li>
+          <li><a href="about.do">关于</a></li>
         </ul>
       </div>
       

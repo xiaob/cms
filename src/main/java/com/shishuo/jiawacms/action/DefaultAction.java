@@ -1,5 +1,6 @@
 package com.shishuo.jiawacms.action;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -26,4 +27,16 @@ public class DefaultAction {
 			return ConfigConstant.getTemplatePath() + "/500";
 		}
 	}
+	
+	@RequestMapping(value = "template.do", method = RequestMethod.GET)
+	public String template(){
+		return "template/default/template";
+	}
+	
+	@RequestMapping(value = "about.do", method = RequestMethod.GET)
+	public String about(){
+		return "template/default/about";
+	}
+	
+	
 }
