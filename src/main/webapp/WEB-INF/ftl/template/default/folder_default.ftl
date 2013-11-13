@@ -11,9 +11,9 @@
 	<div class="row">
 		<div class="col-md-3">
 			<div class="list-group">
-				<@cms_folder_list fatherId="${currentFolder.fatherId}">
+				<@cms_folder_list fatherId="${currentFolder.folderId}">
 					<#list folderList as folder>
-						<a href="${folder.ename}" class="list-group-item <#if folder.folderId== currentFolder.folderId>active</#if>">${folder.name}</a>
+						<a href="${folder.ename}" class="list-group-item ">${folder.name}</a>
 					</#list>
 				</@cms_folder_list>
 			</div>
@@ -21,11 +21,7 @@
 		<div class="col-md-9">
 			<div class="panel panel-default">
 			  <div class="panel-body">   
-				<@cms_file_page folderId="${currentFolder.folderId}" pageNum="${pageNum}">
-					<#list pageVo.list as page>
-			    	<a href="#">12</a><br>
-			    	</#list>
-			    </@cms_file_page>
+
 			  </div>
 			</div>		
 		</div>

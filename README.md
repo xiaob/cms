@@ -1,3 +1,5 @@
+![JiawaCMS](/src/main/webapp/images/jiawacms.png "JiawaCMS")
+
 #介绍
 JiawaCMS是一款基于Java语言开发的内容管理系统（CMS），其中Jiawa为Java的音译。<br />
 本产品致力于帮助刚接触Java的同学通过部署的工程和研读源代码，从而能够迅速的踏入Java的殿堂，减少学习的成本。<br />

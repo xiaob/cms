@@ -52,7 +52,7 @@
 	</listener>
 
 	<welcome-file-list>
-		<welcome-file>/default.do</welcome-file>
+		<welcome-file>/</welcome-file>
 	</welcome-file-list>
 
 	<context-param>

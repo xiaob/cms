@@ -76,7 +76,6 @@ public class FolderService {
 			for (Folder f : folderList) {
 				FolderVo foderVo = new FolderVo();
 				BeanUtils.copyProperties(f, foderVo);
-				;
 				allList.add(foderVo);
 			}
 		}
@@ -91,20 +90,22 @@ public class FolderService {
 	 * @param count
 	 * @param status
 	 * @param type
-	 * @param login
 	 * @param template
-	 * @return folder
+	 * @param sort
+	 * @param rank
+	 * @return
 	 */
 	public Folder addFolder(long fatherId, String name, int count, int status,
-			int type, int login, String template) {
+			int type, String template, int sort, int rank) {
 		Folder folder = new Folder();
 		folder.setFatherId(fatherId);
 		folder.setName(name);
 		folder.setCount(count);
 		folder.setStatus(status);
 		folder.setType(type);
-		folder.setLogin(login);
 		folder.setTemplate(template);
+		folder.setSort(sort);
+		folder.setRank(rank);
 		folder.setCreateTime(new Date());
 		folderDao.addFolder(folder);
 		return folder;
@@ -135,16 +136,22 @@ public class FolderService {
 	 * @return folder
 	 */
 	public Folder updateFolderById(long folderId, long fatherId, String name,
-			int count, int status, int type, int login, String template) {
+			int count, int status, int type, String template, int sort, int rank) {
 		Folder folder = this.getFolderById(folderId);
 		folder.setFatherId(fatherId);
 		folder.setName(name);
 		folder.setCount(count);
 		folder.setStatus(status);
 		folder.setType(type);
-		folder.setLogin(login);
 		folder.setTemplate(template);
+		folder.setSort(sort);
+		folder.setRank(rank);
 		folderDao.updateFolder(folder);
+		return folder;
+	}
+
+	public Folder getFolderByEname(String ename) {
+		Folder folder = folderDao.getFolderByEname(ename);
 		return folder;
 	}
 }

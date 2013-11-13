@@ -4,17 +4,22 @@
 
 	<select id="getFolderById" 
 		resultType="com.shishuo.jiawacms.entity.Folder">
-		select * from jiawacms.folder where folderId=#{folderId}
+		select * from folder where folderId=#{folderId}
+	</select>
+	
+	<select id="getFolderByEname" 
+		resultType="com.shishuo.jiawacms.entity.Folder">
+		select * from folder where ename=#{ename}
 	</select>
 	
 	<select id="getFolderListByFatherId" 
 		resultType="com.shishuo.jiawacms.entity.Folder">
-		select * from jiawacms.folder where fatherId=#{fatherId}
+		select * from folder where fatherId=#{fatherId}
 	</select>
 	
 	<insert id="addFolder" parameterType="com.shishuo.jiawacms.entity.Folder">
 		insert into
-		jiawacms.folder(fatherId,name,count,status,type,login,template,createTime)
+		folder(fatherId,name,count,status,type,login,template,createTime)
 		value(#{fatherId},#{name},#{count},#{status},#{type},#{login},#{template},#{createTime})
 		<selectKey resultType="long" keyProperty="folderId">
 			SELECT LAST_INSERT_ID()
@@ -22,10 +27,10 @@
 	</insert>
 	
 	<delete id="deleteFolder" parameterType="com.shishuo.jiawacms.entity.Folder">
-		delete from jiawacms.folder where folderId=#{folderId}
+		delete from folder where folderId=#{folderId}
 	</delete>
 	
 	<update id="updateFolder" parameterType="com.shishuo.jiawacms.entity.Folder">
-		update jiawacms.folder set fatherId=#{fatherId},name=#{name},count=#{count},status=#{status},
+		update folder set fatherId=#{fatherId},name=#{name},count=#{count},status=#{status},
 	</update>
 </mapper>  

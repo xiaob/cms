@@ -12,16 +12,16 @@ import com.shishuo.jiawacms.constant.ConfigConstant;
 import com.shishuo.jiawacms.service.FolderService;
 
 @Controller
-@RequestMapping("/folder")
-public class FolderAction {
+@RequestMapping("/file")
+public class FileAction {
 
 	@Autowired
 	private FolderService folderService;
 
-	@RequestMapping(value = "{folderId}", method = RequestMethod.GET)
+	@RequestMapping(value = "{fileId}", method = RequestMethod.GET)
 	public String folder(@PathVariable long folderId,
 			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
-		return ConfigConstant.getTemplatePath() + "/folder";
+		return ConfigConstant.getTemplatePath() + "/file";
 	}
 }

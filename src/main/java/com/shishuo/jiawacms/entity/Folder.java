@@ -35,10 +35,19 @@ public class Folder {
 	private long folderId;
 
 	/**
+	 * 顶栏Id
+	 */
+	private long topId;
+
+	/**
 	 * 父亲Id
 	 */
 	private long fatherId;
 
+	/**
+	 * 英文名称
+	 */
+	private String ename;
 	/**
 	 * 目录名称
 	 */
@@ -60,14 +69,19 @@ public class Folder {
 	private int type;
 
 	/**
-	 * 登录
-	 */
-	private int login;
-
-	/**
 	 * 模板
 	 */
 	private String template;
+
+	/**
+	 * 排序
+	 */
+	private int sort;
+
+	/**
+	 * 等级
+	 */
+	private int rank;
 
 	/**
 	 * 时间
@@ -82,6 +96,14 @@ public class Folder {
 		this.folderId = folderId;
 	}
 
+	public long getTopId() {
+		return topId;
+	}
+
+	public void setTopId(long topId) {
+		this.topId = topId;
+	}
+
 	public long getFatherId() {
 		return fatherId;
 	}
@@ -92,6 +114,14 @@ public class Folder {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
 
 	public void setName(String name) {
@@ -122,20 +152,28 @@ public class Folder {
 		this.type = type;
 	}
 
-	public int getLogin() {
-		return login;
-	}
-
-	public void setLogin(int login) {
-		this.login = login;
-	}
-
 	public String getTemplate() {
 		return template;
 	}
 
 	public void setTemplate(String template) {
 		this.template = template;
+	}
+
+	public int getSort() {
+		return sort;
+	}
+
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 
 	public Date getCreateTime() {

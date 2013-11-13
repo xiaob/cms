@@ -28,18 +28,14 @@ public class FolderListTag implements TemplateDirectiveModel {
 
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
+		
+		System.out.println("#########"+params.get("fatherId"));
 		// 获取页面的参数
 		Integer fatherId = Integer.parseInt(params.get("fatherId").toString());
 
 		// 获得目录列表
 		List<Folder> list = folderService.getFolderListByFatherId(fatherId);
-		if (list == null) {
-			fatherId = Integer.parseInt(params.get("fatherId").toString());
-			List<Folder> li = folderService.getFolderListByFatherId(fatherId);
-			env.setVariable("folderList", DEFAULT_WRAPPER.wrap(li));
-		} else {
-			env.setVariable("folderList", DEFAULT_WRAPPER.wrap(list));
-		}
+		env.setVariable("folderList", DEFAULT_WRAPPER.wrap(list));
 		body.render(env.getOut());
 	}
 

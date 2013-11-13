@@ -72,4 +72,10 @@ public interface FolderDao {
 	 * @return Integer
 	 */
 	public int updateFolder(Folder folder);
+
+	/**
+	 * @param ename
+	 * @return
+	 */
+	public Folder getFolderByEname(String ename);
 }
