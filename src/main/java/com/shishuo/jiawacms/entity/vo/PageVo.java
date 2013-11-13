@@ -26,7 +26,7 @@ public class PageVo<T> {
 	private int pageNum;
 	private int count;
 	private int offset;
-	private int rows = 20;
+	private int rows = 5;
 	private List<T> list;
 	private String url;
 	private String pageNumHtml;

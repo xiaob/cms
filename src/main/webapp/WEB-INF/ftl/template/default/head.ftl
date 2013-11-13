@@ -36,13 +36,13 @@
       		<img src="images/jiawacms.png" style=" height: 60px;margin-bottom: 10px;margin-left: 10px;"/>
       	</div>
         <ul class="nav nav-justified">
-          <li class="active"><a href="#">首页</a></li>
-          		<@cms_folder_list>
-					<#list folderList as l>
-						<li class="active"><a href="folder.do?folderId=${l.folderId}">${l.name}</a></li>
-					</#list>
+          	<@cms_folder_list folderId="0">
+          		<li <#if folderId == 0>class="active" </#if>><a href="#">首页</a></li>
+          		<#list folderList as folder>
+          			<li <#if folderId !=0 && folder.folderId == folderId || folder.folderId== fatherId>class="active"</#if> ><a href="folder.do?folderId=${folder.folderId}">${folder.name}</a></li>
+          		</#list>
 				</@cms_folder_list>
-          <li><a href="about.do">关于</a></li>
+          <li><a href="#">关于</a></li>
           <li><a href="#">招聘</a></li>
         </ul>
       </div>

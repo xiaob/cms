@@ -136,8 +136,8 @@ public class FileService {
 		fileDao.updateFile(file);
 		return file;
 	}
-	
-	public File getFolderId(long folderId){
+
+	public File getFolderId(long folderId) {
 		return fileDao.getFolderId(folderId);
 	}
 }

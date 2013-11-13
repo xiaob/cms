@@ -26,7 +26,7 @@ import org.springframework.stereotype.Repository;
 import com.shishuo.jiawacms.entity.Folder;
 
 /**
- * 目录服务 
+ * 目录服务
  * 
  * @author Harbored
  * 

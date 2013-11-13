@@ -35,7 +35,7 @@ public class FileServiceTest {
 
 	@Test
 	public void testGetFilePageByFoderId() {
-		assertEquals(2, fileService.getFilePageByFoderId(2, 1).getList().size());
+		assertEquals(2, fileService.getFilePageByFoderId(1, 1).getPageCount());
 	}
 
 	@Test

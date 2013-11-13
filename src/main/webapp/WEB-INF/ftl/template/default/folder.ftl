@@ -11,31 +11,21 @@
 	<div class="row">
 		<div class="col-md-3">
 			<div class="list-group">
-				<@cms_folder_fatherId_list>
-					<#list folderList as l>
-						<a href="#" class="list-group-item active">${l.name}</a>
+				<@cms_folder_list folderId="${folderId}" fatherId="${fatherId}">
+					<#list folderList as folder>
+						<a href="#" class="list-group-item <#if folderId==folder.folderId>active</#if>">${folder.name}</a>
 					</#list>
-				</@cms_folder_fatherId_list>
+				</@cms_folder_list>
 			</div>
 		</div>
 		<div class="col-md-9">
 			<div class="panel panel-default">
 			  <div class="panel-body">   
-			    <table>
-			    	<@cms_file>
-            		<tfoot>
-            		</tfoot>
-            		<tbody>         
-			    			<tr>
-			    				<td>
-			    					<div class="list-group-item file">
-			    						<a href="#">${file.name}</a>
-			    					</div>
-			    				</td>
-			    			</tr>
-            		</tbody>
-            		</@cms_file>
-          		</table>
+				<@cms_file folderId="${folderId}">
+					${file.images}<br>
+			    	<a href="#">${file.name}</a><br>
+			    	${file.createTime?string("yyyy-MM-dd HH:mm:ss")}
+			    </@cms_file>
 			  </div>
 			</div>		
 		</div>

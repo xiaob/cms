@@ -18,28 +18,19 @@ import freemarker.template.TemplateModel;
 import static freemarker.template.ObjectWrapper.BEANS_WRAPPER;
 
 /**
- * @author Administrator
- *	file标签
+ * @author Administrator file标签
  */
 @Service
-public class FileTag implements TemplateDirectiveModel{
-
-	private static long folderId;
-	
-	
-	public static long getFolderId() {
-		return folderId;
-	}
-
-	public static void setFolderId(long folderId) {
-		FileTag.folderId = folderId;
-	}
+public class FileTag implements TemplateDirectiveModel {
 
 	@Autowired
 	private FileService fileService;
 
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
+		// 获取页面的参数
+		Integer folderId = Integer.parseInt(params.get("folderId").toString());
+		// 获取指定的文件
 		File file = fileService.getFolderId(folderId);
 		env.setVariable("file", BEANS_WRAPPER.wrap(file));
 		body.render(env.getOut());

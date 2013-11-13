@@ -1,6 +1,7 @@
 package com.shishuo.jiawacms.tag;
 
 import static freemarker.template.ObjectWrapper.*;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -18,42 +19,25 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 
 /**
- * @author Administrator
- * 	fileList标签
- *
+ * @author Administrator fileList标签
+ * 
  */
 @Service
-public class FileListTag implements TemplateDirectiveModel{
-
-	private static long folderId;
-	
-	private static int pageNum = 1;
-	
-	
-	public static int getPageNum() {
-		return pageNum;
-	}
-
-	public static void setPageNum(int pageNum) {
-		FileListTag.pageNum = pageNum;
-	}
-
-	public static long getFolderId() {
-		return folderId;
-	}
-
-	public static void setFolderId(long folderId) {
-		FileListTag.folderId = folderId;
-	}
+public class FilePageTag implements TemplateDirectiveModel {
 
 	@Autowired
 	private FileService fileService;
-	
+
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
-		PageVo<File> pageVo = fileService.getFilePageByFoderId(folderId, 1);
+		// 获取页面的参数
+		Integer folderId = Integer.parseInt(params.get("folderId").toString());
+		Integer pageNum = Integer.parseInt(params.get("pageNum").toString());
+		// 获取文件的分页
+		PageVo<File> pageVo = fileService.getFilePageByFoderId(folderId,
+				pageNum);
 		env.setVariable("pageVo", BEANS_WRAPPER.wrap(pageVo));
-		body.render(env.getOut());	
+		body.render(env.getOut());
 	}
-	
+
 }
