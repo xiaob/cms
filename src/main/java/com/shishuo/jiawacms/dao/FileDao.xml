@@ -24,11 +24,16 @@
 	</select>
 	
 	<select id="getFileListByFoderIdCount" 
-		resultType="long">
+		resultType="Integer">
 		select count(*) from jiawacms.file where folderId=#{folderId}
 	</select>
 	
 	<update id="updateFile" parameterType="com.shishuo.jiawacms.entity.File">
 		update jiawacms.file set folderId=#{folderId},name=#{name},url=#{url},
 	</update>
+	
+	<select id="getFolderId" 
+		resultType="com.shishuo.jiawacms.entity.File">
+		select * from jiawacms.file where folderId=#{folderId}
+	</select>
 </mapper>  

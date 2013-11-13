@@ -2,9 +2,7 @@ package com.shishuo.jiawacms.constant;
 
 /**
  * 系统配置常量
- * 
  * @author Herbert
- * 
  */
 public class ConfigConstant {
 
@@ -15,7 +13,6 @@ public class ConfigConstant {
 
 	/**
 	 * 得到当前模板路径
-	 * 
 	 * @return
 	 */
 	public static String getTemplatePath() {

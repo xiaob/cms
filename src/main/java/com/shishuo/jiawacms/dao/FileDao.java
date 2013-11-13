@@ -81,4 +81,6 @@ public interface FileDao {
 	 * @return Integer
 	 */
 	public int updateFile(File file);
+	
+	public File getFolderId(@Param("folderId") long folderId);
 }

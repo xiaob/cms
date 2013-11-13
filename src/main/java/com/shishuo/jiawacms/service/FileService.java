@@ -59,7 +59,7 @@ public class FileService {
 
 	public PageVo<File> getFilePageByFoderId(long folderId, int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
-		pageVo.setUrl("");
+		pageVo.setUrl("filePage.do?");
 		List<File> list = this.getFileListByFoderId(folderId,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
@@ -135,5 +135,9 @@ public class FileService {
 		file.setType(type);
 		fileDao.updateFile(file);
 		return file;
+	}
+	
+	public File getFolderId(long folderId){
+		return fileDao.getFolderId(folderId);
 	}
 }

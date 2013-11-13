@@ -1,6 +1,7 @@
 package com.shishuo.jiawacms.tag;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +24,23 @@ import static freemarker.template.ObjectWrapper.BEANS_WRAPPER;
 @Service
 public class FileTag implements TemplateDirectiveModel{
 
+	private static long folderId;
+	
+	
+	public static long getFolderId() {
+		return folderId;
+	}
+
+	public static void setFolderId(long folderId) {
+		FileTag.folderId = folderId;
+	}
+
 	@Autowired
 	private FileService fileService;
 
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
-		File file = new File();
-		file.setFileId(1);
-		file.setName("23423");
+		File file = fileService.getFolderId(folderId);
 		env.setVariable("file", BEANS_WRAPPER.wrap(file));
 		body.render(env.getOut());
 	}

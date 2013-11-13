@@ -37,12 +37,13 @@
       	</div>
         <ul class="nav nav-justified">
           <li class="active"><a href="#">首页</a></li>
-          <li><a href="template.do">模板</a></li>
-          <li><a href="#">文档</a></li>
-          <li><a href="#">教程</a></li>
-          <li><a href="#">帮助</a></li>
-          <li><a href="#">案例</a></li>
+          		<@cms_folder_list>
+					<#list folderList as l>
+						<li class="active"><a href="folder.do?folderId=${l.folderId}">${l.name}</a></li>
+					</#list>
+				</@cms_folder_list>
           <li><a href="about.do">关于</a></li>
+          <li><a href="#">招聘</a></li>
         </ul>
       </div>
       
