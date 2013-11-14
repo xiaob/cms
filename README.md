@@ -1,4 +1,4 @@
-![师说CMS](/src/main/webapp/images/shishuo_cms.png "师说CMS")
+![师说CMS](/src/main/webapp/default/images/logo.png "师说CMS")
 
 #介绍
 JiawaCMS是一款基于Java语言开发的内容管理系统（CMS），其中Jiawa为Java的音译。<br />
