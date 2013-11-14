@@ -40,7 +40,7 @@
 
 	<filter>
 		<filter-name>basePath</filter-name>
-		<filter-class>com.shishuo.jiawacms.filter.BasePathFilter</filter-class>
+		<filter-class>com.shishuo.cms.filter.BasePathFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -57,7 +57,7 @@
 
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>jiawacms.app.root</param-value>
+		<param-value>cms.app.root</param-value>
 	</context-param>
 
 	<listener>

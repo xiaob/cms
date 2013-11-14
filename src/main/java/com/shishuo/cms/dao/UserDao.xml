@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shishuo.jiawacms.dao.UserDao">
+<mapper namespace="com.shishuo.cms.dao.UserDao">
 
-	<insert id="addUser" parameterType="com.shishuo.jiawacms.entity.User">
+	<insert id="addUser" parameterType="com.shishuo.cms.entity.User">
 		insert into
-		jiawacms.user(userId,openId,type,name,createTime)
+		user(userId,openId,type,name,createTime)
 		value(#{userId},#{openId},#{type},#{name},#{createTime})
 	</insert>
 	
 	<select id="getUserById" 
-		resultType="com.shishuo.jiawacms.entity.User">
-		select * from jiawacms.user where userId=#{userId}
+		resultType="com.shishuo.cms.entity.User">
+		select * from user where userId=#{userId}
 	</select>
 	
 	<select id="getUserList"
-		resultType="com.shishuo.jiawacms.entity.User">
-		select * from jiawacms.user limit #{offset}, #{rows}
+		resultType="com.shishuo.cms.entity.User">
+		select * from user limit #{offset}, #{rows}
 	</select>
 	
 	<select id="getUserListCount"
 		resultType="Integer">
-		select count(*) from jiawacms.user
+		select count(*) from user
 	</select>
 	
-	<delete id="deleteUserById" parameterType="com.shishuo.jiawacms.entity.User">
-		delete from jiawacms.user where userId=#{userId}
+	<delete id="deleteUserById" parameterType="com.shishuo.cms.entity.User">
+		delete from user where userId=#{userId}
 	</delete>
 	
-	<update id="updateUser" parameterType="com.shishuo.jiawacms.entity.User">
-		update jiawacms.user set openId=#{openId},type=#{type},name=#{name},createTime=#{createTime}
+	<update id="updateUser" parameterType="com.shishuo.cms.entity.User">
+		update user set openId=#{openId},type=#{type},name=#{name},createTime=#{createTime}
 	</update>
 </mapper>  

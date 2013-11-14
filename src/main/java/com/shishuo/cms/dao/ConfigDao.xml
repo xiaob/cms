@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shishuo.jiawacms.dao.ConfigDao">
+<mapper namespace="com.shishuo.cms.dao.ConfigDao">
 	
 	<select id="allConfig" 
-		resultType="com.shishuo.jiawacms.entity.Config">
-		select * from cms.config limit #{offset},#{rows}
+		resultType="com.shishuo.cms.entity.Config">
+		select * from config limit #{offset},#{rows}
 	</select>
 	
 	<select id="getAllConfig" 
-		resultType="com.shishuo.jiawacms.entity.Config">
-		select * from cms.config
+		resultType="com.shishuo.cms.entity.Config">
+		select * from config
 	</select>
 
 	
-	<insert id="addConfig" parameterType="com.shishuo.jiawacms.entity.Config">
+	<insert id="addConfig" parameterType="com.shishuo.cms.entity.Config">
 		insert into
-		cms.config(`key`,`value`,createTime)
+		config(`key`,`value`,createTime)
 		value(#{key},#{value},#{createTime})
 	</insert>
 	
-	<delete id="deleteConfig" parameterType="com.shishuo.jiawacms.entity.Config">
-		delete from cms.config where `key`=#{key}
+	<delete id="deleteConfig" parameterType="com.shishuo.cms.entity.Config">
+		delete from config where `key`=#{key}
 	</delete>
 	
-	<update id="updateConfig" parameterType="com.shishuo.jiawacms.entity.Config">
-		update cms.config set value=#{value}
+	<update id="updateConfig" parameterType="com.shishuo.cms.entity.Config">
+		update config set value=#{value}
 		where `key`=#{key}
 	</update>
 	
 	<select id="getConfigByKey"
-		resultType="com.shishuo.jiawacms.entity.Config">
-		select * from cms.config where `key`=#{key}
+		resultType="com.shishuo.cms.entity.Config">
+		select * from config where `key`=#{key}
 	</select>
 </mapper>  

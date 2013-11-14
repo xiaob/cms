@@ -20,7 +20,6 @@
 
 package com.shishuo.cms.action.admin;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,14 +30,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 
 @Controller
+@RequestMapping("/admin")
 public class AdminAction {
 
-	@RequestMapping(value = "/admin/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(){
 		return "admin/login";
 	}
 	
-	@RequestMapping(value = "/admin/access", method = RequestMethod.GET)
+	@RequestMapping(value = "/access", method = RequestMethod.GET)
 	public String access(){
 		return "admin/left";
 	}

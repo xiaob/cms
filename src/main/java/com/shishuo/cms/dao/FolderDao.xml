@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shishuo.jiawacms.dao.FolderDao">
+<mapper namespace="com.shishuo.cms.dao.FolderDao">
 
 	<select id="getFolderById" 
-		resultType="com.shishuo.jiawacms.entity.Folder">
+		resultType="com.shishuo.cms.entity.Folder">
 		select * from folder where folderId=#{folderId}
 	</select>
 	
 	<select id="getFolderByEname" 
-		resultType="com.shishuo.jiawacms.entity.Folder">
+		resultType="com.shishuo.cms.entity.Folder">
 		select * from folder where ename=#{ename}
 	</select>
 	
 	<select id="getFolderListByFatherId" 
-		resultType="com.shishuo.jiawacms.entity.Folder">
+		resultType="com.shishuo.cms.entity.Folder">
 		select * from folder where fatherId=#{fatherId}
 	</select>
 	
-	<insert id="addFolder" parameterType="com.shishuo.jiawacms.entity.Folder">
+	<insert id="addFolder" parameterType="com.shishuo.cms.entity.Folder">
 		insert into
 		folder(fatherId,name,count,status,type,login,template,createTime)
 		value(#{fatherId},#{name},#{count},#{status},#{type},#{login},#{template},#{createTime})
@@ -26,11 +26,11 @@
 		</selectKey>
 	</insert>
 	
-	<delete id="deleteFolder" parameterType="com.shishuo.jiawacms.entity.Folder">
+	<delete id="deleteFolder" parameterType="com.shishuo.cms.entity.Folder">
 		delete from folder where folderId=#{folderId}
 	</delete>
 	
-	<update id="updateFolder" parameterType="com.shishuo.jiawacms.entity.Folder">
+	<update id="updateFolder" parameterType="com.shishuo.cms.entity.Folder">
 		update folder set fatherId=#{fatherId},name=#{name},count=#{count},status=#{status},
 	</update>
 </mapper>  

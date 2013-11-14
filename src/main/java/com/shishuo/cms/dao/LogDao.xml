@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shishuo.jiawacms.dao.LogDao">
+<mapper namespace="com.shishuo.cms.dao.LogDao">
 	
 	<select id="getLogList"
-		resultType="com.shishuo.jiawacms.entity.Log">
-		select * from jiawacms.log limit #{offset}, #{rows}
+		resultType="com.shishuo.cms.entity.Log">
+		select * from log limit #{offset}, #{rows}
 	</select>
 	
-	<insert id="addLog" parameterType="com.shishuo.jiawacms.entity.Log">
+	<insert id="addLog" parameterType="com.shishuo.cms.entity.Log">
 		insert into
-		jiawacms.log(description,createTime)
+		log(description,createTime)
 		value(#{description},#{createTime})
 		<selectKey resultType="long" keyProperty="logId">
 			SELECT LAST_INSERT_ID()
@@ -18,6 +18,6 @@
 	
 	<select id="getLogListCount"
 		resultType="Integer">
-		select count(*) from jiawacms.log
+		select count(*) from log
 	</select>
 </mapper>  
