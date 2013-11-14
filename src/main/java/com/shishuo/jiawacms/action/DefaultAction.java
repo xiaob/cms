@@ -28,6 +28,8 @@ public class DefaultAction {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, ModelMap modelMap) {
 		try {
+			Folder currentFolder = folderService.getFolderById(1);
+			modelMap.addAttribute("currentFolder", currentFolder);
 			return ConfigConstant.getTemplatePath() + "/default";
 		} catch (Exception e) {
 			return ConfigConstant.getTemplatePath() + "/500";

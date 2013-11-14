@@ -22,7 +22,7 @@ public class FolderServiceTest {
 
 	@Test
 	public void testAddFolder() {
-		assertEquals(1, folderService.addFolder(2, "werg", 32, 1, 2, 3, "segs")
+		assertEquals(1, folderService.addFolder(2, "werg", 32, 1, 2, "segs",2,3)
 				.getFolderId());
 	}
 
@@ -35,8 +35,8 @@ public class FolderServiceTest {
 	public void testUpdateFolderById() {
 		assertEquals(
 				1,
-				folderService.updateFolderById(1, 1, "uyt", 3, 43, 12, 43,
-						"dtghfg").getFatherId());
+				folderService.updateFolderById(1, 1, "uyt", 3, 43, 12,
+						"dtghfg",2,1).getFatherId());
 	}
 
 	@Test
