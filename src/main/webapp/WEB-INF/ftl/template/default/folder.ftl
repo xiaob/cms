@@ -23,7 +23,7 @@
 			  <div class="panel-body">   
 				<@cms_file_page folderId="${currentFolder.folderId}" pageNum="${pageNum}">
 					<#list pageVo.list as page>
-			    	<a href="#">12</a><br>
+			    		<a href="#">${page.name}</a><br>
 			    	</#list>
 			    </@cms_file_page>
 			  </div>

@@ -13,7 +13,7 @@
 			<div class="list-group">
 				<@cms_folder_list fatherId="${currentFolder.folderId}">
 					<#list folderList as folder>
-						<a href="${folder.ename}" class="list-group-item ">${folder.name}</a>
+						<a href="${folder.ename}" class="list-group-item <#if folder.folderId== currentFolder.folderId>active</#if>">${folder.name}</a>
 					</#list>
 				</@cms_folder_list>
 			</div>
@@ -21,7 +21,7 @@
 		<div class="col-md-9">
 			<div class="panel panel-default">
 			  <div class="panel-body">   
-
+				
 			  </div>
 			</div>		
 		</div>
