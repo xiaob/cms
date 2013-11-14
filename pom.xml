@@ -14,10 +14,10 @@
 	</organization>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.shishuo</groupId>
-	<artifactId>JiawaCMS</artifactId>
+	<artifactId>CMS</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>JiawaCMS Maven Webapp</name>
+	<name>SHISHUO CMS Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
