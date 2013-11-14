@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shishuo.jiawacms.dao.FileDao">
+
+	<select id="getFileById" parameterType="long"
+		resultType="com.shishuo.jiawacms.entity.File">
+		select * from cms.file where fileId=#{fileId}
+	</select>
+	
+	<insert id="addFile" parameterType="com.shishuo.jiawacms.entity.File">
+		insert into cms.file(folderId,name,url,images,description,type,createTime)
+		value(#{folderId},#{name},#{url},#{images},#{description},#{type},#{createTime})
+		<selectKey resultType="long" keyProperty="fileId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteFile" parameterType="com.shishuo.jiawacms.entity.File">
+		delete from cms.file where fileId=#{fileId}
+	</delete>
+	<select id="getFileListByFoderId" 
+		resultType="com.shishuo.jiawacms.entity.File">
+		select * from cms.file where folderId=#{folderId} limit #{offset},#{rows}
+	</select>
+	
+	<select id="getFileListByFoderIdCount" 
+		resultType="Integer">
+		select count(*) from cms.file where folderId=#{folderId}
+	</select>
+	
+	<update id="updateFile" parameterType="com.shishuo.jiawacms.entity.File">
+		update cms.file set folderId=#{folderId},name=#{name},url=#{url},
+	</update>
+	
+	<select id="getFolderId" 
+		resultType="com.shishuo.jiawacms.entity.File">
+		select * from cms.file where folderId=#{folderId}
+	</select>
+</mapper>  
