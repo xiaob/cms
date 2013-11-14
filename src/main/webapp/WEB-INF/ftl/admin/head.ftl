@@ -35,8 +35,9 @@
 		<!--header start-->
 		<header class="header white-bg">
 			<!--logo start-->
-			<a href="#" class="logo"><img
-				src="${basePath}/default/images/logo.png" style="height: 38px;" /></a>
+			<a href="${basePath}" class="logo" title="访问前台页面">
+				<img src="${basePath}/default/images/logo.png" style="height: 38px;" />
+			</a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">
 				<!--  notification goes here -->
@@ -70,11 +71,11 @@
 			<div id="sidebar" class="nav-collapse ">
 				<!-- sidebar menu goes here-->
 				<ul class="sidebar-menu" id="nav-accordion">
-					<li class="">
-						<a href="index.html"> <i class="icon-home"></i> <span>首页</span></a>
+					<li>
+						<a  class="active" href="${basePath}/admin"> <i class="icon-home"></i> <span>首页</span></a>
 					</li>
 					<li class="">
-						<a href="index.html"> <i class="icon-th"></i> <span>目录管理</span></a>
+						<a href="${basePath}/admin/folder"> <i class="icon-th"></i> <span>目录管理</span></a>
 					</li>
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-book"></i> <span>文档管理</span></a>
@@ -106,7 +107,52 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<!-- page start-->
-				Page content goes here
+				<div class="row state-overview">
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol terques">
+                              <i class="icon-user"></i>
+                          </div>
+                          <div class="value">
+                              <h1>22</h1>
+                              <p>New Users</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol red">
+                              <i class="icon-tags"></i>
+                          </div>
+                          <div class="value">
+                              <h1>140</h1>
+                              <p>Sales</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol yellow">
+                              <i class="icon-shopping-cart"></i>
+                          </div>
+                          <div class="value">
+                              <h1>345</h1>
+                              <p>New Order</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol blue">
+                              <i class="icon-bar-chart"></i>
+                          </div>
+                          <div class="value">
+                              <h1>34,500</h1>
+                              <p>Total Profit</p>
+                          </div>
+                      </section>
+                  </div>
+              </div>
 				<!-- page end-->
 			</section>
 		</section>
