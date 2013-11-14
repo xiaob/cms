@@ -38,7 +38,7 @@
         <ul class="nav nav-justified">
           <@cms_folder_list fatherId="0">
 	          <#list folderList as folder>
-	          <li <#if folder.folderId== currentFolder.topId>class="active"</#if> ><a href="${basePath}${folder.ename}">${folder.name}</a></li>
+	          <li <#if folder.folderId == currentFolder.topId>class="active"</#if> ><a href="${basePath}${folder.ename}">${folder.name}</a></li>
 	          </#list>
 		  </@cms_folder_list>
         </ul>
