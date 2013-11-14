@@ -1,72 +1,131 @@
-    <!DOCTYPE html>
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0
-Version: 1.5.3
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
--->
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
-<!-- BEGIN HEAD -->
-<html lang="zh_CN">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<base href="${basePath}">
-	<meta charset="utf-8" />
-	<title>Metronic | Admin Dashboard Template</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
-	<meta name="MobileOptimized" content="320">
-	<!-- BEGIN GLOBAL MANDATORY STYLES -->          
-	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/uniform.default.css" rel="stylesheet" type="text/css"/>
-	<!-- END GLOBAL MANDATORY STYLES -->
-	<!-- BEGIN PAGE LEVEL STYLES --> 
-	<link rel="stylesheet" type="text/css" href="css/select2_metro.css" />
-	<!-- END PAGE LEVEL SCRIPTS -->
-	<!-- BEGIN THEME STYLES --> 
-	<link href="css/style-metronic.css" rel="stylesheet" type="text/css"/>
-	<link href="css/style.css" rel="stylesheet" type="text/css"/>
-	<link href="css/style-responsive.css" rel="stylesheet" type="text/css"/>
-	<link href="css/plugins.css" rel="stylesheet" type="text/css"/>
-	<link href="css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="css/login.css" rel="stylesheet" type="text/css"/>
-	<link href="css/custom.css" rel="stylesheet" type="text/css"/>
-	<!-- END THEME STYLES -->
-	<link rel="shortcut icon" href="favicon.ico" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Mosaddek">
+<meta name="keyword"
+	content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+<link rel="shortcut icon" href="img/favicon.png">
+<title>FlatLab - Flat & Responsive Bootstrap Admin Template</title>
+<!-- Bootstrap core CSS -->
+<link href="${basePath}/default/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}/default/css/bootstrap-reset.css"
+	rel="stylesheet">
+<!--external css-->
+<link
+	href="${basePath}/default/assets/font-awesome/css/font-awesome.css"
+	rel="stylesheet" />
+<!-- Custom styles for this template -->
+<link href="${basePath}/default/css/style.css" rel="stylesheet">
+<link href="${basePath}/default/css/style-responsive.css"
+	rel="stylesheet" />
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+<!--[if lt IE 9]>
+      <script src="${basePath}/default/js/html5shiv.js"></script>
+      <script src="${basePath}/default/js/respond.min.js"></script>
+    <![endif]-->
 </head>
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/uniform.default.css" rel="stylesheet" type="text/css"/>
-	<link href="css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
-	<link href="css/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-	<link href="css/fullcalendar.css" rel="stylesheet" type="text/css"/>
-	<link href="css/jqvmap.css" rel="stylesheet" type="text/css"/>
-	<link href="css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css"/>
-	<!-- END PAGE LEVEL PLUGIN STYLES -->
-	<!-- BEGIN THEME STYLES --> 
-	<link href="css/style-metronic.css" rel="stylesheet" type="text/css"/>
-	<link href="css/style.css" rel="stylesheet" type="text/css"/>
-	<link href="css/style-responsive.css" rel="stylesheet" type="text/css"/>
-	<link href="css/plugins.css" rel="stylesheet" type="text/css"/>
-	<link href="css/tasks.css" rel="stylesheet" type="text/css"/>
-	<link href="css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="css/custom.css" rel="stylesheet" type="text/css"/>
-    
-    <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
-	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="js/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
-	<script src="js/jquery.slimscroll.min.js" type="text/javascript"></script>
-	<script src="js/jquery.blockui.min.js" type="text/javascript"></script>  
-	<script src="js/jquery.cookie.min.js" type="text/javascript"></script>
-	<script src="js/jquery.uniform.min.js" type="text/javascript" ></script>
-	<script src="js/jquery.validate.min.js" type="text/javascript"></script>
-	<script src="js/jquery.backstretch.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/select2.min.js"></script>
-	<script src="js/app.js" type="text/javascript"></script>
-	<script src="js/login-soft.js" type="text/javascript"></script>    
+
+<body>
+
+	<section id="container" class="">
+		<!--header start-->
+		<header class="header white-bg">
+			<!--logo start-->
+			<a href="#" class="logo"><img
+				src="${basePath}/default/images/logo.png" style="height: 38px;" /></a>
+			<!--logo end-->
+			<div class="nav notify-row" id="top_menu">
+				<!--  notification goes here -->
+			</div>
+			<div class="top-nav ">
+
+              <ul class="nav pull-right top-menu">
+                  <!-- user login dropdown start-->
+                  <li class="dropdown">
+                      <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                          <img alt="" src="${basePath}/default/img/avatar1_small.jpg">
+                          <span class="username">Jhon Doue</span>
+                          <b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu extended logout">
+                          <div class="log-arrow-up"></div>
+                          <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+                          <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+                          <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
+                          <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+                      </ul>
+                  </li>
+                  <!-- user login dropdown end -->
+              </ul>
+          
+			</div>
+		</header>
+		<!--header end-->
+		<!--sidebar start-->
+		<aside>
+			<div id="sidebar" class="nav-collapse ">
+				<!-- sidebar menu goes here-->
+				<ul class="sidebar-menu" id="nav-accordion">
+					<li class="">
+						<a href="index.html"> <i class="icon-home"></i> <span>首页</span></a>
+					</li>
+					<li class="">
+						<a href="index.html"> <i class="icon-th"></i> <span>目录管理</span></a>
+					</li>
+					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-book"></i> <span>文档管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">General</a></li>
+							<li><a href="buttons.html">Buttons</a></li>
+							<li><a href="widget.html">Widget</a></li>
+							<li><a href="slider.html">Slider</a></li>
+							<li><a href="nestable.html">Nestable</a></li>
+							<li><a href="font_awesome.html">Font Awesome</a></li>
+						</ul>
+					</li>
+					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-book"></i> <span>系统管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">General</a></li>
+							<li><a href="buttons.html">Buttons</a></li>
+							<li><a href="widget.html">Widget</a></li>
+							<li><a href="slider.html">Slider</a></li>
+							<li><a href="nestable.html">Nestable</a></li>
+							<li><a href="font_awesome.html">Font Awesome</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</aside>
+		<!--sidebar end-->
+		<!--main content start-->
+		<section id="main-content">
+			<section class="wrapper">
+				<!-- page start-->
+				Page content goes here
+				<!-- page end-->
+			</section>
+		</section>
+		<!--main content end-->
+	</section>
+
+	<!-- js placed at the end of the document so the pages load faster -->
+	<script src="${basePath}/default/js/jquery.js"></script>
+	<script src="${basePath}/default/js/bootstrap.min.js"></script>
+	<script class="include" type="text/javascript"
+		src="${basePath}/default/js/jquery.dcjqaccordion.2.7.js"></script>
+	<script src="${basePath}/default/js/jquery.scrollTo.min.js"></script>
+	<script src="${basePath}/default/js/jquery.nicescroll.js"
+		type="text/javascript"></script>
+	<script src="${basePath}/default/js/respond.min.js"></script>
+
+	<!--common script for all pages-->
+	<script src="${basePath}/default/js/common-scripts.js"></script>
+
+
+</body>
+</html>

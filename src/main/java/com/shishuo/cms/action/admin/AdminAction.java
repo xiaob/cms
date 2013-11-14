@@ -33,14 +33,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/admin")
 public class AdminAction {
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String login(){
-		return "admin/login";
-	}
-	
-	@RequestMapping(value = "/access", method = RequestMethod.GET)
-	public String access(){
-		return "admin/left";
-	}
-	
+		return "admin/head";
+	}	
 }

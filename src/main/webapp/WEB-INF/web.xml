@@ -47,6 +47,18 @@
 		<filter-name>basePath</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<filter>
+		<filter-name>admin</filter-name>
+		<filter-class>com.shishuo.cms.filter.AdminFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>admin</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+	
+	
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>

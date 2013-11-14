@@ -27,7 +27,7 @@ public class BasePathFilter implements Filter {
 		HttpSession session = request.getSession();
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName()
-				+ ":" + request.getServerPort() + path + "/";
+				+ ":" + request.getServerPort() + path;
 		session.setAttribute("basePath", basePath);
 		chain.doFilter(request, response);
 	}

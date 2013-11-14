@@ -82,9 +82,8 @@ public class ConfigService {
 	}
 
 	/**
-	 * 配置项目分页 <<<<<<< HEAD
+	 * 配置项目分页
 	 * 
-	 * ======= >>>>>>> refs/remotes/origin/master
 	 * 
 	 * @param int
 	 * @return PageVo

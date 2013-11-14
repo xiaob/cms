@@ -40,6 +40,11 @@ public class DefaultAction {
 			return ConfigConstant.getTemplatePath() + "/500";
 		}
 	}
+	
+	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
+	public String admin(HttpServletRequest request, ModelMap modelMap) {
+		return "admin/login";
+	}
 
 	@RequestMapping(value = "/{ename}", method = RequestMethod.GET)
 	public String folder(@PathVariable String ename,
