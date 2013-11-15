@@ -1,23 +1,54 @@
 ![师说CMS](/src/main/webapp/default/images/logo.png "师说CMS")
 
-#介绍
-JiawaCMS是一款基于Java语言开发的内容管理系统（CMS），其中Jiawa为Java的音译。<br />
-本产品致力于帮助刚接触Java的同学通过部署的工程和研读源代码，从而能够迅速的踏入Java的殿堂，减少学习的成本。<br />
-本产品采用Apache协议，在保留源代码的版权的情况下，可以用于商业用途，且不收取任何费用。<br />
-在此需要特别感谢[长沙市师说网络科技有限公司](http://www.shishuo.com)的支持，正由于公司的前瞻性和对开源社区的重视，才使得此项目得到了开源的支持。<br />
+# 欢迎使用 “师说CMS”
 
-#需要的知识
+> 一款使用Java语言开发的CMS，提供文章列表，图片展示，文件下载和电子商务
 
 
-#感谢以下产品
-1. http://java.com <br />
-2. http://getbootstrap.com <br />
-3. http://jquery.com <br />
-4. http://fontawesome.io <br />
-5. http://eclipse.org <br />
-6. http://spring.io <br />
-7. http://freemarker.org <br />
-8. http://code.google.com/p/mybatis/ <br />
-9. http://www.oschina.net/ <br />
-10. http://www.apache.org <br />
-11. ...
+## 前言
+
+师说CMS是由长沙师说网络科技有限公司开源的一款CMS产品，其公司推出的“师说"（http://www.shishuo.com），是一个专业人才交流平台，致力于解决人才与企业和人才与人才之间交流的平台。
+
+## 目标
+
+ - 为致力于学习Java语言的初学者提供学习和参考的Demo 
+ - 帮助企业以更低的成本打造自己的网站
+ - 让广大Web前端开发者和设计者，专注前台页面设计和制作
+ - 填补各种优秀的开源CMS系统中，使用Java语言开发的空白
+
+## 需求
+
+ - 文章列表模块
+ - 图片展示模块
+ - 文件下载模块
+ - 电子商务模块
+ - 用户注册登录模块
+ - 后台管理模块
+
+## 开发
+
+[长沙市师说网络科技有限公司][1]
+
+## 版权
+
+
+    Copyright 2013 Changsha Shishuo Network Technology Co., Ltd. 
+    All rights reserved.
+    长沙市师说网络科技有限公司
+    版权所有
+    http://www.shishuo.com
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+    http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+
+  [1]: http://www.shishuo.com
