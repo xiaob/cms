@@ -35,6 +35,6 @@ public class AdminAction {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String login(){
-		return "admin/head";
+		return "admin/default";
 	}	
 }
