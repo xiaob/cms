@@ -7,7 +7,7 @@
 
 ## 前言
 
-师说CMS是由长沙师说网络科技有限公司开源的一款CMS产品，其公司推出的“师说"（http://www.shishuo.com），是一个专业人才交流平台，致力于解决人才与企业和人才与人才之间交流的平台。
+师说CMS是由长沙师说网络科技有限公司开源的一款CMS产品，其公司推出的“师说" http://www.shishuo.com ，是一个专业人才交流平台，致力于解决人才与企业和人才与人才之间交流的平台。
 
 ## 目标
 
@@ -31,24 +31,23 @@
 
 ## 版权
 
+Copyright 2013 Changsha Shishuo Network Technology Co., Ltd. 
+All rights reserved.
+长沙市师说网络科技有限公司
+版权所有
+http://www.shishuo.com
 
-    Copyright 2013 Changsha Shishuo Network Technology Co., Ltd. 
-    All rights reserved.
-    长沙市师说网络科技有限公司
-    版权所有
-    http://www.shishuo.com
-    
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-    
-    http://www.apache.org/licenses/LICENSE-2.0
-    
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
   [1]: http://www.shishuo.com
