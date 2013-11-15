@@ -122,6 +122,14 @@
 						</ul>
 					</li>					
 					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-shopping-cart"></i> <span>订单管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">增加商品</a></li>
+							<li><a href="buttons.html">商品列表</a></li>
+							<li><a href="widget.html">回收站</a></li>
+						</ul>
+					</li>					
+					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-group"></i> <span>用户管理</span></a>
 						<ul class="sub">
 							<li><a href="general.html">General</a></li>
