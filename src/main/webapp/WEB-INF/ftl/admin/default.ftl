@@ -2,7 +2,7 @@
 		<!--main content start-->
 		<section id="main-content">
 			<section class="wrapper">
-				<!-- page start-->
+				<!--state overview start-->
 				<div class="row state-overview">
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
@@ -49,7 +49,8 @@
                       </section>
                   </div>
               </div>
-				<!-- page end-->
+			  <!--state overview end-->
+			<!-- page end-->
 			</section>
 		</section>
 		<!--main content end-->
