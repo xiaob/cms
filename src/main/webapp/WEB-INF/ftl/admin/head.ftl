@@ -74,53 +74,53 @@
 					<li class="">
 						<a  class="active" href="${basePath}/admin"> <i class="icon-home"></i> <span>首页</span></a>
 					</li>
-					<li class="">
-						<a href="${basePath}/admin/folder"> <i class="icon-th"></i> <span>目录管理</span></a>
+					<li class="sub-menu">
+						<a href="javascript:;"> <i class="icon-folder-open"></i> <span>目录管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">增加目录</a></li>
+							<li><a href="buttons.html">目录列表</a></li>
+						</ul>						
 					</li>
 					<li class="sub-menu">
 						<a href="javascript:;"> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">General</a></li>
-							<li><a href="buttons.html">Buttons</a></li>
-							<li><a href="widget.html">Widget</a></li>
-							<li><a href="slider.html">Slider</a></li>
-							<li><a href="nestable.html">Nestable</a></li>
-							<li><a href="font_awesome.html">Font Awesome</a></li>
+							<li><a href="general.html">增加文章</a></li>
+							<li><a href="buttons.html">文章列表</a></li>
+							<li><a href="widget.html">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-camera-retro"></i> <span>图片管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">General</a></li>
-							<li><a href="buttons.html">Buttons</a></li>
-							<li><a href="widget.html">Widget</a></li>
-							<li><a href="slider.html">Slider</a></li>
-							<li><a href="nestable.html">Nestable</a></li>
-							<li><a href="font_awesome.html">Font Awesome</a></li>
+							<li><a href="general.html">上传图片</a></li>
+							<li><a href="buttons.html">图片列表</a></li>
+							<li><a href="widget.html">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-upload-alt"></i> <span>下载管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">General</a></li>
-							<li><a href="buttons.html">Buttons</a></li>
-							<li><a href="widget.html">Widget</a></li>
-							<li><a href="slider.html">Slider</a></li>
-							<li><a href="nestable.html">Nestable</a></li>
-							<li><a href="font_awesome.html">Font Awesome</a></li>
+							<li><a href="general.html">上传文件</a></li>
+							<li><a href="buttons.html">文件列表</a></li>
+							<li><a href="widget.html">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-shopping-cart"></i> <span>商品管理</span></a>
+						<a href="javascript:;"> <i class="icon-gift"></i> <span>商品管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">General</a></li>
-							<li><a href="buttons.html">Buttons</a></li>
-							<li><a href="widget.html">Widget</a></li>
-							<li><a href="slider.html">Slider</a></li>
-							<li><a href="nestable.html">Nestable</a></li>
-							<li><a href="font_awesome.html">Font Awesome</a></li>
+							<li><a href="general.html">增加商品</a></li>
+							<li><a href="buttons.html">商品列表</a></li>
+							<li><a href="widget.html">回收站</a></li>
 						</ul>
 					</li>
+					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-shopping-cart"></i> <span>订单管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">增加商品</a></li>
+							<li><a href="buttons.html">商品列表</a></li>
+							<li><a href="widget.html">回收站</a></li>
+						</ul>
+					</li>					
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-group"></i> <span>用户管理</span></a>
 						<ul class="sub">
