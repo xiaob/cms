@@ -71,14 +71,14 @@
 			<div id="sidebar" class="nav-collapse ">
 				<!-- sidebar menu goes here-->
 				<ul class="sidebar-menu" id="nav-accordion">
-					<li>
+					<li class="">
 						<a  class="active" href="${basePath}/admin"> <i class="icon-home"></i> <span>首页</span></a>
 					</li>
 					<li class="">
 						<a href="${basePath}/admin/folder"> <i class="icon-th"></i> <span>目录管理</span></a>
 					</li>
-					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-book"></i> <span>文档管理</span></a>
+					<li class="sub-menu">
+						<a href="javascript:;"> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
 							<li><a href="general.html">General</a></li>
 							<li><a href="buttons.html">Buttons</a></li>
@@ -89,7 +89,51 @@
 						</ul>
 					</li>
 					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-book"></i> <span>系统管理</span></a>
+						<a href="javascript:;"> <i class="icon-camera-retro"></i> <span>图片管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">General</a></li>
+							<li><a href="buttons.html">Buttons</a></li>
+							<li><a href="widget.html">Widget</a></li>
+							<li><a href="slider.html">Slider</a></li>
+							<li><a href="nestable.html">Nestable</a></li>
+							<li><a href="font_awesome.html">Font Awesome</a></li>
+						</ul>
+					</li>
+					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-upload-alt"></i> <span>下载管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">General</a></li>
+							<li><a href="buttons.html">Buttons</a></li>
+							<li><a href="widget.html">Widget</a></li>
+							<li><a href="slider.html">Slider</a></li>
+							<li><a href="nestable.html">Nestable</a></li>
+							<li><a href="font_awesome.html">Font Awesome</a></li>
+						</ul>
+					</li>
+					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-shopping-cart"></i> <span>商品管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">General</a></li>
+							<li><a href="buttons.html">Buttons</a></li>
+							<li><a href="widget.html">Widget</a></li>
+							<li><a href="slider.html">Slider</a></li>
+							<li><a href="nestable.html">Nestable</a></li>
+							<li><a href="font_awesome.html">Font Awesome</a></li>
+						</ul>
+					</li>
+					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-group"></i> <span>用户管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">General</a></li>
+							<li><a href="buttons.html">Buttons</a></li>
+							<li><a href="widget.html">Widget</a></li>
+							<li><a href="slider.html">Slider</a></li>
+							<li><a href="nestable.html">Nestable</a></li>
+							<li><a href="font_awesome.html">Font Awesome</a></li>
+						</ul>
+					</li>													
+					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-cogs"></i> <span>系统管理</span></a>
 						<ul class="sub">
 							<li><a href="general.html">General</a></li>
 							<li><a href="buttons.html">Buttons</a></li>
