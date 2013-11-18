@@ -85,9 +85,9 @@
 					<li class="sub-menu">
 						<a href="javascript:;"> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">增加文章</a></li>
+							<li><a href="/CMS/admin/file/addArticle.do">增加文章</a></li>
 							<li><a href="/CMS/admin/file/articleList.do">文章列表</a></li>
-							<li><a href="widget.html">回收站</a></li>
+							<li><a href="/CMS/admin/file/recycleList.do">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">
