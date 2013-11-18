@@ -18,10 +18,14 @@
  */
 package com.shishuo.cms.constant;
 
+/**
+ * @author 目录属性常量
+ *
+ */
 public class FolderConstant {
 
 	// 目录类型
-	public static String[] TYPE = { "文章", "下载", "商品" };
+	public static String[] TYPE = { "文章", "下载", "商品","图片" };
 
 	// 登陆
 	public static String[] LOGIN = { "不需要登录", "需要登录" };

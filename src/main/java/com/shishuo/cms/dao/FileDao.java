@@ -31,7 +31,6 @@ import com.shishuo.cms.entity.File;
  * @author Harbored
  * 
  */
-
 @Repository
 public interface FileDao {
 
@@ -82,16 +81,54 @@ public interface FileDao {
 	 */
 	public int updateFile(File file);
 
+	/**
+	 * 通过folderId获得文件
+	 * @param Long
+	 * @return Folder
+	 */
 	public File getFolderId(@Param("folderId") long folderId);
 	
+	/**
+	 * 所有文件的分页
+	 * @param Long
+	 * @param Long
+	 * @return List<Folder>
+	 *
+	 */
 	public List<File> getAllList(@Param("offset") long offset, @Param("rows") long rows);
 	
+	/**
+	 * 所有文件的数量
+	 * @return Long
+	 *
+	 */
 	public long getAllListCount();
 	
+	/**
+	 * 获取不同类型的文件
+	 * @param Integer
+	 * @param Integer
+	 * @param Long
+	 * @param Long
+	 * @return List<File>
+	 *
+	 */
 	public List<File> getFileListByType(@Param("type") int type,@Param("status") int status,
 			@Param("offset") long offset, @Param("rows") long rows);
 	
+	/**
+	 * 获取不同类型的文件的数量
+	 * @param Integer
+	 * @param Integer
+	 * @return Long
+	 *
+	 */
 	public long getFileListByTypeCount(@Param("type") int type,@Param("status") int status);
 
+	/**
+	 * 放进回收站或者还原
+	 * @param File
+	 * @return Integer
+	 */
 	public int getRecycle(File file);
 }

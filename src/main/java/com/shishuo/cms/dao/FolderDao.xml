@@ -49,9 +49,5 @@
 		resultType="long">
 		select count(*) from folder
 	</select>
-	
-	<select id="getTypeCount"
-		resultType="long">
-		select count(*) from folder where type=#{type}
-	</select>
+
 </mapper>  
