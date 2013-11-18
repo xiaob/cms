@@ -79,8 +79,7 @@
 	</bean>
 	<!-- c3p0 connection pool configuration -->
 	<bean id="configConstant" class="com.shishuo.cms.constant.ConfigConstant"/>
-	<bean id="configConstant" class="com.shishuo.cms.constant.ConfigConstant"/>
-	
+
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">		<!-- 数据库驱动 -->
 		<property name="driverClass" value="${jdbc.driverClass}" />		<!-- 连接URL串 -->
