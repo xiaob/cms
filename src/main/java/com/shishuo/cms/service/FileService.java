@@ -94,7 +94,7 @@ public class FileService {
 	 */
 
 	public File addFile(long folderId, String name, String url, String images,
-			String description, int type) {
+			String description, int type,int status) {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setName(name);
@@ -103,6 +103,7 @@ public class FileService {
 		file.setDescription(description);
 		file.setType(type);
 		file.setCreateTime(new Date());
+		file.setStatus(status);
 		fileDao.addFile(file);
 		return file;
 	}
@@ -159,21 +160,30 @@ public class FileService {
 		return pageVo;
 	}
 	
-	public PageVo<File> getFileListByTypePage(int type, int pageNum){
+	public PageVo<File> getFileListByTypePage(int type,int status, int pageNum){
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
 		pageVo.setUrl("");
-		List<File> list = this.getFileListByType(type, pageVo.getOffset(), pageVo.getRows());
+		List<File> list = this.getFileListByType(type, status,pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileListByTypeCount(type));
+		pageVo.setCount(this.getFileListByTypeCount(type,status));
 		return pageVo;
 	}
 	
-	public List<File> getFileListByType(int type,long offset,long rows){
-		return fileDao.getFileListByType(type, offset, rows);
+	public List<File> getFileListByType(int type,int status,long offset,long rows){
+		return fileDao.getFileListByType(type, status,offset, rows);
 	}
 	
-	public int getFileListByTypeCount(int type){
-		return (int)fileDao.getFileListByTypeCount(type);
+	public int getFileListByTypeCount(int type,int status){
+		return (int)fileDao.getFileListByTypeCount(type,status);
+	}
+	
+	public boolean recycle(long fileId,int status){
+		boolean result = false;
+		File file = this.getFileById(fileId);
+		file.setStatus(status);
+		fileDao.getRecycle(file);
+		result=true;
+		return result;
 	}
 }

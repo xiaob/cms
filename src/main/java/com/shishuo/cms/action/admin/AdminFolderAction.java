@@ -60,7 +60,6 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "sort") int sort,
 			@RequestParam(value = "status") int status){
 		folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status, type, sort);
-		System.out.println("chenggogn");
 		return "redirect:/admin/folder/allFolder.do";
 	}
 }

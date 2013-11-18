@@ -21,7 +21,7 @@
                               <i class="icon-tags"></i>
                           </div>
                           <div class="value">
-                              <h1>${fileCount}</h1>
+                              <h1>${articleCount}</h1>
                               <p>文章</p>
                           </div>
                       </section>

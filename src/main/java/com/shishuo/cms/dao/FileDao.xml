@@ -8,8 +8,8 @@
 	</select>
 	
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
-		insert into file(folderId,name,url,images,description,type,createTime)
-		value(#{folderId},#{name},#{url},#{images},#{description},#{type},#{createTime})
+		insert into file(folderId,name,url,images,description,type,status,createTime)
+		value(#{folderId},#{name},#{url},#{images},#{description},#{type},#{status},#{createTime})
 		<selectKey resultType="long" keyProperty="fileId">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -29,7 +29,13 @@
 	</select>
 	
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
-		update file set folderId=#{folderId},name=#{name},url=#{url},
+		update file set folderId=#{folderId},name=#{name},url=#{url},images=#{images},
+			description=#{description},status=#{status}
+		where fileId=#{fileId}
+	</update>
+	
+	<update id="getRecycle" parameterType="com.shishuo.cms.entity.File">
+		update file set status=#{status} where fileId=#{fileId}
 	</update>
 	
 	<select id="getFolderId" 
@@ -49,11 +55,11 @@
 	
 	<select id="getFileListByType"
 		resultType="com.shishuo.cms.entity.File">
-		select * from file where type=#{type} limit #{offset},#{rows}
+		select * from file where type=#{type} and status=#{status} limit #{offset},#{rows}
 	</select>
 	
 	<select id="getFileListByTypeCount"
 		resultType="long">
-		select count(*) from file where type=#{type}
+		select count(*) from file where type=#{type} and status=#{status}
 	</select>
 </mapper>  
