@@ -20,9 +20,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/upload")
+@RequestMapping("/admin")
 public class UpLoadAction {
 
+	@RequestMapping(value = "upload", method = RequestMethod.GET)
+	public String upload(){
+		return "admin/upload";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
 	public ModelAndView handleRequest(@RequestParam("file") MultipartFile file,
@@ -52,5 +57,7 @@ public class UpLoadAction {
 			return false;
 		}
 	}
+	
+	
 
 }
