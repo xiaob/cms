@@ -28,7 +28,7 @@
                             	 添加目录
                           </header>
                           <div class="panel-body">
-                              <form method="post" class="form-horizontal tasi-form" action="/CMS/admin/folder/addNewFolder.do">
+                              <form method="post" class="form-horizontal" action="/CMS/admin/folder/addNewFolder.do">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录名称</label>
@@ -60,6 +60,7 @@
                                         	<option value= "0">文章</option>
                                           	<option value= "1">下载</option>
                                           	<option value= "2">商品</option>
+                                          	<option value= "3">图片</option>
                                         </select>
                                       </div>
                                   </div>

@@ -19,7 +19,7 @@
                 <div class="panel-body">
                 	<div class="adv-table">
                     	<div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
-                            <table cellspacing="0" cellpadding="0" border="0" id="hidden-table-info" class="display table table-bordered dataTable" aria-describedby="hidden-table-info_info">
+                            <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
                							<th>
@@ -46,12 +46,20 @@
                                     	<td>${e.name}</td>
                                     	<td><a href="">${e.url}</a></td>
                                     	<td>${e.images}</td>
-                                    	<td>
-                                    		${e.description}
-                                    	</td>
+                                    	<td>${e.description}</td>
+                                    	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="/CMS/admin/folder/oneFolder.do?folderId=${e.folderId}" title="修改">修改</a>
+                  							<a href="/CMS/admin/file/oneFile.do?fileId=${e.fileId}" title="修改">
+                  								<button class="btn btn-primary btn-xs">
+                  									<i class="icon-pencil"></i>
+                  								</button>
+                  							</a>
+                  							<a href="/CMS/admin/file/recycle.do?fileId=${e.fileId}&status=0" title="回收站">
+                  								<button class="btn btn-danger btn-xs">
+                  									<i class="icon-trash "></i>
+                  								</button>
+                  							</a>
                 						</td>
                                 	</tr>
                                 	</#list>

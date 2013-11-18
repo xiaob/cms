@@ -88,8 +88,10 @@ public interface FileDao {
 	
 	public long getAllListCount();
 	
-	public List<File> getFileListByType(@Param("type") int type,
+	public List<File> getFileListByType(@Param("type") int type,@Param("status") int status,
 			@Param("offset") long offset, @Param("rows") long rows);
 	
-	public long getFileListByTypeCount(@Param("type") int type);
+	public long getFileListByTypeCount(@Param("type") int type,@Param("status") int status);
+
+	public int getRecycle(File file);
 }
