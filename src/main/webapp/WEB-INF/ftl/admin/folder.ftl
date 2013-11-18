@@ -39,7 +39,7 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">英文名称</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control round-input" name="folderEname">
+                                          <input type="text" class="form-control" name="folderEname">
                                       </div>
                                   </div>
                                   <div class="form-group">

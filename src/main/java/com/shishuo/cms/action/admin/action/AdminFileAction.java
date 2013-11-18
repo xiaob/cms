@@ -13,11 +13,11 @@ import com.shishuo.cms.entity.vo.PageVo;
 @RequestMapping("/admin/file")
 public class AdminFileAction extends AdminBaseAction{
 
-	@RequestMapping(value = "/allFile.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/articleList.do",method = RequestMethod.GET)
 	public String allFolder(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,ModelMap modelMap){
-		PageVo<File> pageVo = fileService.getAllListPage(pageNum);
+		PageVo<File> pageVo = fileService.getFileListByTypePage(0, pageNum);
 		modelMap.put("pageVo", pageVo);
-		return "admin/allFile";
+		return "admin/articleList";
 	}
 	
 }

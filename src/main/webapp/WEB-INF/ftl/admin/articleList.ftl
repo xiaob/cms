@@ -14,7 +14,7 @@
         	<!-- page start-->
             <section class="panel">
             	<header class="panel-heading">
-               		 所有文件
+               		 所有文章列表
                 </header>
                 <div class="panel-body">
                 	<div class="adv-table">
@@ -25,17 +25,13 @@
                							<th>
                   							<input class="check-all" type="checkbox" />
                 						</th>
-                						<th>目录Id</th>
-                						<th>父类Id</th>
-                						<th>顶栏Id</th>
-                						<th>英文名称</th>
-                						<th>名称</th>
-                						<th>文件数</th>
-                						<th>状态</th>
-                						<th>类型</th>
-                						<th>所属板块</th>
-                						<th>序列</th>
-                						<th>等级</th>
+                						<th>文件Id</th>
+                						<th>所属目录Id</th>
+                						<th>文章名称</th>
+                						<th>文章链接</th>
+                						<th>文字图片</th>
+                						<th>文章类型</th>
+                						<th>时间</th>
                 						<th>操作</th>
               						</tr>
                                 </thead>
@@ -45,25 +41,14 @@
                             			<td>
                   							<input type="checkbox" name="${e_index}"/>
                							</td>
+               							<td>${e.fileId}</td>
                             			<td>${e.folderId}</td>
-                                    	<td>${e.fatherId}</td>
-                                    	<td>${e.topId}</td>
-                                    	<td>${e.ename}</td>
                                     	<td>${e.name}</td>
-                                    	<td>${e.count}</td>
-                                    	<td>${e.status}</td>
+                                    	<td><a href="">${e.url}</a></td>
+                                    	<td>${e.images}</td>
                                     	<td>
-                                    		<#if e.type==0>
-                                    			文章
-                                    		<#elseif e.type==1>
-                                    			下载
-                                    		<#elseif e.type==2>
-                                    			商品
-                                    		</#if>
+                                    		${e.description}
                                     	</td>
-                                    	<td>${e.template}</td>
-                                    	<td>${e.sort}</td>
-                                    	<td>${e.rank}</td>
                                     	<td>
                   							<!-- Icons -->
                   							<a href="/CMS/admin/folder/oneFolder.do?folderId=${e.folderId}" title="修改">修改</a>
