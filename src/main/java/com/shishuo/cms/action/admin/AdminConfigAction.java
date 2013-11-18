@@ -1,6 +1,7 @@
 package com.shishuo.cms.action.admin;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -25,11 +26,15 @@ public class AdminConfigAction extends AdminBaseAction {
 	}
 
 	private List<String> getTemplate() {
+		List<String> templateList = new ArrayList<String>();
 		String templatePath = System
-				.getProperty(SystemConstant.WEB_APP_ROOT_KEY) + "/WEB-INF/ftl";
+				.getProperty(SystemConstant.SHISHUO_CMS_ROOT) + "/WEB-INF/ftl";
 		File dir = new File(templatePath);
 		File[] files = dir.listFiles();
 		for (File file : files) {
+			if (file.isDirectory() && !file.getName().equals("admin")) {
+				templateList.add(file.getName());
+			}
 			logger.debug(file.getName());
 		}
 		return null;

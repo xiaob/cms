@@ -10,5 +10,5 @@ public class SystemConstant {
 	/**
 	 * 
 	 */
-	public static String WEB_APP_ROOT_KEY = "cms.app.root";
+	public static String SHISHUO_CMS_ROOT = "shishuo.cms.root";
 }
