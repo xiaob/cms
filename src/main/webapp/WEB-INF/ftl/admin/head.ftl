@@ -100,7 +100,7 @@
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-upload-alt"></i> <span>下载管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">上传文件</a></li>
+							<li><a href="/admin/upload">上传文件</a></li>
 							<li><a href="buttons.html">文件列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
