@@ -35,7 +35,6 @@ public class DefaultAction {
 		try {
 			Folder currentFolder = folderService.getFolderById(1);
 			modelMap.addAttribute("currentFolder", currentFolder);
-			System.out.println("###############"+ConfigConstant.DEFAUTL_TEMPLATE);
 			return ConfigConstant.getTemplatePath() + "/default";
 		} catch (Exception e) {
 			return ConfigConstant.getTemplatePath() + "/500";

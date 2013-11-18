@@ -19,7 +19,10 @@
 package com.shishuo.cms.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +39,8 @@ import com.shishuo.cms.entity.vo.PageVo;
  */
 @Service
 public class ConfigService {
+
+	public static HashMap<String, String> CONFIG_MAP = new HashMap<String, String>();
 
 	@Autowired
 	private ConfigDao configDao;
@@ -92,7 +97,7 @@ public class ConfigService {
 		PageVo<Config> pageVo = new PageVo<Config>(pageNum);
 		pageVo.setUrl("");
 		List<Config> list = this
-				.allConfig(pageVo.getOffset(), pageVo.getRows());
+				.getConfig(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
 		pageVo.setPageCount(this.allConfigCount());
 		return pageVo;
@@ -104,8 +109,8 @@ public class ConfigService {
 	 * @param long,long
 	 * @return List<Config>
 	 */
-	public List<Config> allConfig(long offset, long rows) {
-		return configDao.allConfig(offset, rows);
+	public List<Config> getConfig(long offset, long rows) {
+		return configDao.getConfig(offset, rows);
 	}
 
 	/**
@@ -117,6 +122,25 @@ public class ConfigService {
 		return configDao.allConfigCount();
 
 	}
-	
-//	public List<Config> getAll
+
+	/**
+	 * 得到所有配置
+	 * 
+	 * @return
+	 */
+	public List<Config> getAllConfig() {
+		return configDao.getAllConfig();
+	}
+
+	/**
+	 * 刷新内存中的系统配置数据
+	 */
+	@PostConstruct
+	public void refreshConfigMap() {
+		List<Config> list = this.getAllConfig();
+		for (Config config : list) {
+			CONFIG_MAP.put(config.getKey(), config.getValue());
+		}
+
+	}
 }

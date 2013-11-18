@@ -1,11 +1,9 @@
 package com.shishuo.cms.constant;
 
-import java.util.HashMap;
-import java.util.List;
-
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import com.shishuo.cms.entity.Config;
+import com.shishuo.cms.exception.ConfigIsNullException;
 import com.shishuo.cms.service.ConfigService;
 
 /**
@@ -16,27 +14,40 @@ import com.shishuo.cms.service.ConfigService;
 @Component
 public class ConfigConstant {
 
-	private ConfigService configService;
 	/**
 	 * 默认的模板
 	 */
-	public static String DEFAUTL_TEMPLATE = "default";
-	
-	public static HashMap<String,String> configHashMap = new HashMap<String,String>();
-	
-	private ConfigConstant(){
-		List<Config>  configList = configService.allConfig(0,100);
-		for(Config config:configList){
-			configHashMap.put(config.getKey(), config.getValue());
-		}
-		DEFAUTL_TEMPLATE = configHashMap.get("template");
-	}
+	public static String DEFAUTL_TEMPLATE = "defalut";
+
+	public static String KEY_TEMPLATE = "template";
+
 	/**
 	 * 得到当前模板路径
 	 * 
 	 * @return
 	 */
 	public static String getTemplatePath() {
-		return "/template/" + DEFAUTL_TEMPLATE;
+		try {
+			return "/" + getConfigValueByKey(KEY_TEMPLATE);
+		} catch (ConfigIsNullException e) {
+			return "/" + DEFAUTL_TEMPLATE;
+		}
+	}
+
+	/**
+	 * 根据key，获得对应的系统配置值
+	 * 
+	 * @param key
+	 * @return
+	 * @throws ConfigIsNullException
+	 */
+	public static String getConfigValueByKey(String key)
+			throws ConfigIsNullException {
+		String value = ConfigService.CONFIG_MAP.get(key);
+		if (StringUtils.isBlank(value)) {
+			throw new ConfigIsNullException(key + " is NULL");
+		} else {
+			return value;
+		}
 	}
 }
