@@ -29,7 +29,7 @@ public class UpLoadAction {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/photo", method = RequestMethod.POST)
+	@RequestMapping(value = "photo", method = RequestMethod.POST)
 	public ModelAndView handleRequest(@RequestParam("file") MultipartFile file,
 			HttpServletRequest request) throws Exception {
 		if (this.checkPhotoFile(file)) {

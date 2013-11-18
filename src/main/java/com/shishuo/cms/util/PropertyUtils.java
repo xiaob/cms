@@ -12,6 +12,12 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 import com.shishuo.cms.util.PropertyIsNullException;
 
+/**
+ * 属性工具类
+ * 
+ * @author Herbert
+ *
+ */
 public class PropertyUtils extends PropertyPlaceholderConfigurer {
 
 	public static final Logger logger = Logger.getLogger(PropertyUtils.class);

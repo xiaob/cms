@@ -57,9 +57,14 @@ public interface ConfigDao {
 	 * 
 	 * @return List<Config>
 	 */
-	public List<Config> allConfig(@Param("offset") long offset,
+	public List<Config> getConfig(@Param("offset") long offset,
 			@Param("rows") long rows);
-	
+
+	/**
+	 * 得到所有配置
+	 * 
+	 * @return
+	 */
 	public List<Config> getAllConfig();
 
 	/**
