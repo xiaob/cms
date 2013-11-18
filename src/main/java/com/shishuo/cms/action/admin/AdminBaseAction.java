@@ -10,8 +10,10 @@ import com.shishuo.cms.service.FolderService;
 import com.shishuo.cms.service.LogService;
 import com.shishuo.cms.service.UserService;
 
-
-
+/**
+ * @author 所有action的父类
+ *	
+ */
 @Controller
 public class AdminBaseAction {
 

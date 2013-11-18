@@ -27,6 +27,13 @@
       <script src="${basePath}/admin/js/html5shiv.js"></script>
       <script src="${basePath}/admin/js/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" type="text/javascript" href="${basePath}/admin/css/js/tinymce/tinymce.min.js">
+    </script>
+    <script type="text/javascript" type="text/javascript">
+		tinymce.init({
+   	 		mode: "textarea"
+ 		});
+	</script>
 </head>
 
 <body>

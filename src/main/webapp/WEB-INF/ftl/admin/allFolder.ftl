@@ -78,6 +78,9 @@
                              	<div class="pagination">${pageVo.pageNumHtml} </div>
                               </div>
                            </div>
+                           <form method="post">
+    	<textarea></textarea>
+		</form>
                         </div>
                   </div>
               </section>

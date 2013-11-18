@@ -93,7 +93,11 @@ public interface FolderDao {
 	 */
 	public List<Folder> getAllListPage(@Param("offset") long offset,@Param("rows") long rows);
 	
+	/**
+	 * 得到所有目录的数量
+	 * @return Integer
+	 *
+	 */
 	public long getAllListPageCount();
 	
-	public long getTypeCount(@Param("type") long type);
 }
