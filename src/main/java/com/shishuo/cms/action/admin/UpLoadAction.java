@@ -24,27 +24,27 @@ import org.springframework.web.servlet.ModelAndView;
 public class UpLoadAction {
 
 	@RequestMapping(value = "upload", method = RequestMethod.GET)
-	public String upload(){
+	public String upload() {
 		return "admin/upload";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "photo", method = RequestMethod.POST)
 	public ModelAndView handleRequest(@RequestParam("file") MultipartFile file,
 			HttpServletRequest request) throws Exception {
 		if (this.checkPhotoFile(file)) {
-		String filePathName = "images/";
-		String fileName =file.getOriginalFilename();
-		String filePath = filePathName+fileName;
-	    File source = new File(filePath.toString());   
-	    file.transferTo(source);   
-		}else{
-		   String errorMessage = "上传的文件只能是jpg,png,gif的图片格式";
+			String filePathName = "images/";
+			String fileName = file.getOriginalFilename();
+			String filePath = filePathName + fileName;
+			File source = new File(filePath.toString());
+			file.transferTo(source);
+		} else {
+			String errorMessage = "上传的文件只能是jpg,png,gif的图片格式";
 		}
 		return null;
 	}
-	
-	public  boolean checkPhotoFile(MultipartFile file) {
+
+	public boolean checkPhotoFile(MultipartFile file) {
 		if (file.isEmpty()) {
 			return false;
 		}
@@ -57,7 +57,5 @@ public class UpLoadAction {
 			return false;
 		}
 	}
-	
-	
 
 }
