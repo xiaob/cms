@@ -19,8 +19,8 @@
 	
 	<insert id="addFolder" parameterType="com.shishuo.cms.entity.Folder">
 		insert into
-		folder(fatherId,name,count,status,type,login,template,createTime)
-		value(#{fatherId},#{name},#{count},#{status},#{type},#{login},#{template},#{createTime})
+		folder(fatherId,name,count,status,type,template,createTime,sort,rank)
+		value(#{fatherId},#{name},#{count},#{status},#{type},#{template},#{createTime},#{sort},#{rank})
 		<selectKey resultType="long" keyProperty="folderId">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -31,6 +31,27 @@
 	</delete>
 	
 	<update id="updateFolder" parameterType="com.shishuo.cms.entity.Folder">
-		update folder set fatherId=#{fatherId},name=#{name},count=#{count},status=#{status},
+		update folder set fatherId=#{fatherId},ename=#{ename},name=#{name},status=#{status},type=#{type},sort=#{sort}
+		where folderId=#{folderId}
 	</update>
+	
+	<select id="getAllList"
+		resultType="com.shishuo.cms.entity.Folder">
+		select * from folder
+	</select>
+	
+	<select id="getAllListPage" parameterType="Integer"
+		resultType="com.shishuo.cms.entity.Folder">
+		select * from folder limit #{offset},#{rows}
+	</select>
+	
+	<select id="getAllListPageCount"
+		resultType="long">
+		select count(*) from folder
+	</select>
+	
+	<select id="getTypeCount"
+		resultType="long">
+		select count(*) from folder where type=#{type}
+	</select>
 </mapper>  

@@ -44,7 +44,7 @@
 			<map>
 				<!-- 目录标签 -->
 				<entry key="cms_folder_list" value-ref="folderListTag" />
-				
+
 				<!-- 文件标签 -->
 				<entry key="cms_file_page" value-ref="filePageTag" />
 				<entry key="cms_file" value-ref="fileTag" />
@@ -78,6 +78,7 @@
 		<property name="exposeSpringMacroHelpers" value="true" />
 	</bean>
 	<!-- c3p0 connection pool configuration -->
+	<bean id="configConstant" class="com.shishuo.cms.constant.ConfigConstant"/>
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">		<!-- 数据库驱动 -->

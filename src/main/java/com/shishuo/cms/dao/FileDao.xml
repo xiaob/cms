@@ -36,4 +36,14 @@
 		resultType="com.shishuo.cms.entity.File">
 		select * from file where folderId=#{folderId}
 	</select>
+	
+	<select id="getAllList"
+		resultType="com.shishuo.cms.entity.File">
+		select * from file limit #{offset},#{rows}
+	</select>
+	
+	<select id="getAllListCount"
+		resultType="long">
+		select count(*) from file
+	</select>
 </mapper>  

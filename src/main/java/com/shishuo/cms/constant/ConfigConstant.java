@@ -3,6 +3,8 @@ package com.shishuo.cms.constant;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.shishuo.cms.entity.Config;
 import com.shishuo.cms.service.ConfigService;
 
@@ -11,6 +13,7 @@ import com.shishuo.cms.service.ConfigService;
  * 
  * @author Herbert
  */
+@Component
 public class ConfigConstant {
 
 	private ConfigService configService;
@@ -21,7 +24,7 @@ public class ConfigConstant {
 	
 	public static HashMap<String,String> configHashMap = new HashMap<String,String>();
 	
-	public ConfigConstant(){
+	private ConfigConstant(){
 		List<Config>  configList = configService.allConfig(0,100);
 		for(Config config:configList){
 			configHashMap.put(config.getKey(), config.getValue());

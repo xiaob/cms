@@ -77,8 +77,8 @@
 					<li class="sub-menu">
 						<a href="javascript:;"> <i class="icon-folder-open"></i> <span>目录管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">增加目录</a></li>
-							<li><a href="buttons.html">目录列表</a></li>
+							<li><a href="/CMS/admin/folder/addFolder.do">增加目录</a></li>
+							<li><a href="/CMS/admin/folder/allFolder.do">目录列表</a></li>
 						</ul>						
 					</li>
 					<li class="sub-menu">
@@ -122,6 +122,14 @@
 						</ul>
 					</li>					
 					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-shopping-cart"></i> <span>订单管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">增加商品</a></li>
+							<li><a href="buttons.html">商品列表</a></li>
+							<li><a href="widget.html">回收站</a></li>
+						</ul>
+					</li>					
+					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-group"></i> <span>用户管理</span></a>
 						<ul class="sub">
 							<li><a href="general.html">General</a></li>
@@ -131,7 +139,18 @@
 							<li><a href="nestable.html">Nestable</a></li>
 							<li><a href="font_awesome.html">Font Awesome</a></li>
 						</ul>
-					</li>													
+					</li>
+					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-signin"></i> <span>招聘管理</span></a>
+						<ul class="sub">
+							<li><a href="general.html">General</a></li>
+							<li><a href="buttons.html">Buttons</a></li>
+							<li><a href="widget.html">Widget</a></li>
+							<li><a href="slider.html">Slider</a></li>
+							<li><a href="nestable.html">Nestable</a></li>
+							<li><a href="font_awesome.html">Font Awesome</a></li>
+						</ul>
+					</li>																	
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-cogs"></i> <span>系统管理</span></a>
 						<ul class="sub">

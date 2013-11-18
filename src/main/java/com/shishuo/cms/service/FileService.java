@@ -140,4 +140,22 @@ public class FileService {
 	public File getFolderId(long folderId) {
 		return fileDao.getFolderId(folderId);
 	}
+	
+	public List<File> getAllList(long offset,long rows){
+		return fileDao.getAllList(offset, rows);
+	}
+	
+	public int getAllListCount(){
+		return (int) fileDao.getAllListCount();
+	}
+	
+	public PageVo<File> getAllListPage(int pageNum){
+		PageVo<File> pageVo = new PageVo<File>(pageNum);
+		pageVo.setRows(5);
+		pageVo.setUrl("");
+		List<File> list = this.getAllList(pageVo.getOffset(), pageVo.getRows());
+		pageVo.setList(list);
+		pageVo.setCount(this.getAllListCount());
+		return pageVo;
+	}
 }
