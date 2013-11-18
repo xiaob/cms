@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
   <head>
-  	<base href="${basePath}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,18 +11,18 @@
     <title>Justified Nav Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="${basePath}/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${basePath}/css/style.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="${basePath}/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
+      <script src="${basePath}/js/html5shiv.js"></script>
+      <script src="${basePath}/js/respond.min.js"></script>
     <![endif]-->
   </head>
 
@@ -33,7 +32,7 @@
 
       <div class="masthead">
       	<div>
-      		<img src="images/jiawacms.png" style=" height: 60px;margin-bottom: 10px;margin-left: 10px;"/>
+      		<img src="${basePath}/images/jiawacms.png" style=" height: 60px;margin-bottom: 10px;margin-left: 10px;"/>
       	</div>
         <ul class="nav nav-justified">
           <@cms_folder_list fatherId="0">

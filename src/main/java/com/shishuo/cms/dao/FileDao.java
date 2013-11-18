@@ -87,4 +87,9 @@ public interface FileDao {
 	public List<File> getAllList(@Param("offset") long offset, @Param("rows") long rows);
 	
 	public long getAllListCount();
+	
+	public List<File> getFileListByType(@Param("type") int type,
+			@Param("offset") long offset, @Param("rows") long rows);
+	
+	public long getFileListByTypeCount(@Param("type") int type);
 }

@@ -114,5 +114,10 @@
 		<property name="basePackage" value="com.shishuo.cms.dao" />
 
 	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 4M -->
+		<property name="maxUploadSize" value="4194304" />
+	</bean>
 	<mvc:default-servlet-handler />
 </beans>

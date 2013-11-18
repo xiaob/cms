@@ -19,7 +19,7 @@
                 <div class="panel-body">
                 	<div class="adv-table">
                     	<div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
-                            <table cellspacing="0" cellpadding="0" border="0" id="hidden-table-info" class="display table table-bordered dataTable" aria-describedby="hidden-table-info_info">
+                            <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
                							<th>
@@ -66,7 +66,7 @@
                                     	<td>${e.rank}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="/CMS/admin/folder/oneFolder.do?folderId=${e.folderId}" title="修改">修改</a>
+                							<a href="/CMS/admin/folder/oneFolder.do?folderId=${e.folderId}" title="修改"><button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button></a>
                 						</td>
                                 	</tr>
                                 	</#list>
