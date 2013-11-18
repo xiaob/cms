@@ -10,22 +10,22 @@
 <link rel="shortcut icon" href="img/favicon.png">
 <title>FlatLab - Flat & Responsive Bootstrap Admin Template</title>
 <!-- Bootstrap core CSS -->
-<link href="${basePath}/default/css/bootstrap.min.css" rel="stylesheet">
-<link href="${basePath}/default/css/bootstrap-reset.css"
+<link href="${basePath}/admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}/admin/css/bootstrap-reset.css"
 	rel="stylesheet">
 <!--external css-->
 <link
-	href="${basePath}/default/assets/font-awesome/css/font-awesome.css"
+	href="${basePath}/admin/assets/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
 <!-- Custom styles for this template -->
-<link href="${basePath}/default/css/style.css" rel="stylesheet">
-<link href="${basePath}/default/css/style-responsive.css"
+<link href="${basePath}/admin/css/style.css" rel="stylesheet">
+<link href="${basePath}/admin/css/style-responsive.css"
 	rel="stylesheet" />
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
 <!--[if lt IE 9]>
-      <script src="${basePath}/default/js/html5shiv.js"></script>
-      <script src="${basePath}/default/js/respond.min.js"></script>
+      <script src="${basePath}/admin/js/html5shiv.js"></script>
+      <script src="${basePath}/admin/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -36,7 +36,7 @@
 		<header class="header white-bg">
 			<!--logo start-->
 			<a href="${basePath}" class="logo" title="访问前台页面">
-				<img src="${basePath}/default/images/logo.png" style="height: 38px;" />
+				<img src="${basePath}/admin/images/logo.png" style="height: 38px;" />
 			</a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">
@@ -48,7 +48,7 @@
                   <!-- user login dropdown start-->
                   <li class="dropdown">
                       <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                          <img alt="" src="${basePath}/default/img/avatar1_small.jpg">
+                          <img alt="" src="${basePath}/admin/img/avatar1_small.jpg">
                           <span class="username">Jhon Doue</span>
                           <b class="caret"></b>
                       </a>

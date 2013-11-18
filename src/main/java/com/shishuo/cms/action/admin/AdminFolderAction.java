@@ -1,4 +1,4 @@
-package com.shishuo.cms.action.admin.action;
+package com.shishuo.cms.action.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

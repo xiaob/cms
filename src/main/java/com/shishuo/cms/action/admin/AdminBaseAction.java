@@ -1,4 +1,4 @@
-package com.shishuo.cms.action.admin.action;
+package com.shishuo.cms.action.admin;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
