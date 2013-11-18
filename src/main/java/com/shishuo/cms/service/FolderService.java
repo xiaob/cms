@@ -25,9 +25,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.dao.FolderDao;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
+import com.shishuo.cms.entity.vo.PageVo;
 
 /**
  * 目录服务
@@ -87,25 +89,29 @@ public class FolderService {
 	 * 
 	 * @param fatherId
 	 * @param name
-	 * @param count
 	 * @param status
 	 * @param type
-	 * @param template
-	 * @param sort
-	 * @param rank
-	 * @return
+	 * @return Folder
 	 */
-	public Folder addFolder(long fatherId, String name, int count, int status,
-			int type, String template, int sort, int rank) {
+	public Folder addFolder(long fatherId, String name, int status, String ename,
+			int type) {
 		Folder folder = new Folder();
+		Folder fatherFolder = new Folder();
 		folder.setFatherId(fatherId);
+		if(fatherId==0){
+			folder.setTopId(0);
+		}else{
+			fatherFolder = this.getFolderById(fatherId);
+			folder.setTopId(fatherFolder.getTopId());
+		}
+		folder.setEname(ename);
 		folder.setName(name);
-		folder.setCount(count);
+		folder.setCount(0);
 		folder.setStatus(status);
 		folder.setType(type);
-		folder.setTemplate(template);
-		folder.setSort(sort);
-		folder.setRank(rank);
+		folder.setTemplate(ConfigConstant.DEFAUTL_TEMPLATE);
+		folder.setSort(1);
+		folder.setRank(0);
 		folder.setCreateTime(new Date());
 		folderDao.addFolder(folder);
 		return folder;
@@ -131,21 +137,18 @@ public class FolderService {
 	 * @param count
 	 * @param status
 	 * @param type
-	 * @param login
 	 * @param template
 	 * @return folder
 	 */
-	public Folder updateFolderById(long folderId, long fatherId, String name,
-			int count, int status, int type, String template, int sort, int rank) {
+	public Folder updateFolderById(long folderId, long fatherId, String ename,String name,
+			int status, int type, int sort) {
 		Folder folder = this.getFolderById(folderId);
 		folder.setFatherId(fatherId);
+		folder.setEname(ename);
 		folder.setName(name);
-		folder.setCount(count);
 		folder.setStatus(status);
 		folder.setType(type);
-		folder.setTemplate(template);
 		folder.setSort(sort);
-		folder.setRank(rank);
 		folderDao.updateFolder(folder);
 		return folder;
 	}
@@ -153,5 +156,31 @@ public class FolderService {
 	public Folder getFolderByEname(String ename) {
 		Folder folder = folderDao.getFolderByEname(ename);
 		return folder;
+	}
+	
+	public List<Folder> getAllList(){
+		return folderDao.getAllList();
+	}
+	
+	public List<Folder> getAllListPage(long offset, long rows){
+		return folderDao.getAllListPage(offset, rows);
+	}
+	
+	public int getAllListPageCount(){
+		return (int)folderDao.getAllListPageCount();
+	}
+	
+	public PageVo<Folder> getAllListPageByNum(int pageNum){
+		PageVo<Folder> pageVo = new PageVo<Folder>(pageNum);
+		pageVo.setUrl("/CMS/admin/folder/allFolder.do?");
+		pageVo.setRows(5);
+		List<Folder> list = folderDao.getAllListPage(pageVo.getOffset(), pageVo.getRows());
+		pageVo.setList(list);
+		pageVo.setCount(this.getAllListPageCount());
+		return pageVo;
+	}
+	
+	public long getTypeCount(long type){
+		return folderDao.getTypeCount(type);
 	}
 }

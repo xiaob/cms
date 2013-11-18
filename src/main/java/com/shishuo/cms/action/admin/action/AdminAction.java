@@ -16,16 +16,30 @@
  *	See the License for the specific language governing permissions and
  *	limitations under the License.
  */
-package com.shishuo.cms.constant;
 
-public class FolderConstant {
 
-	// 目录类型
-	public static String[] TYPE = { "文章", "下载", "商品" };
+package com.shishuo.cms.action.admin.action;
 
-	// 登陆
-	public static String[] LOGIN = { "不需要登录", "需要登录" };
-	
-	//
-	public static String[] STATIC = {"隐藏","显示"};
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+/**
+ * @author lqq
+ *
+ */
+
+@Controller
+@RequestMapping("/admin")
+public class AdminAction extends AdminBaseAction{
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String login(ModelMap modelMap){
+		modelMap.put("fileCount", folderService.getTypeCount(0));
+		modelMap.put("downloadCount", folderService.getTypeCount(1));
+		modelMap.put("commodityCount", folderService.getTypeCount(2));
+		modelMap.put("userCount", userService.getUserListCount());
+		return "admin/default";
+	}	
 }

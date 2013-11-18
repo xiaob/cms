@@ -31,6 +31,7 @@ import com.shishuo.cms.entity.Folder;
  * @author Harbored
  * 
  */
+
 @Repository
 public interface FolderDao {
 
@@ -76,7 +77,23 @@ public interface FolderDao {
 	/**
 	 * 通过ename获得指定目录
 	 * @param ename
-	 * @return
+	 * @return Folder
 	 */
 	public Folder getFolderByEname(String ename);
+	
+	/**
+	 * 得到所有目录的列表
+	 *@return List<Folder>
+	 */
+	public List<Folder> getAllList();
+	
+	/**
+	 * 得到所有目录的列表的分页
+	 *@return List<Folder>
+	 */
+	public List<Folder> getAllListPage(@Param("offset") long offset,@Param("rows") long rows);
+	
+	public long getAllListPageCount();
+	
+	public long getTypeCount(@Param("type") long type);
 }

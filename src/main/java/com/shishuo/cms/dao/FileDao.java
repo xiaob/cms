@@ -83,4 +83,13 @@ public interface FileDao {
 	public int updateFile(File file);
 
 	public File getFolderId(@Param("folderId") long folderId);
+	
+	public List<File> getAllList(@Param("offset") long offset, @Param("rows") long rows);
+	
+	public long getAllListCount();
+	
+	public List<File> getFileListByType(@Param("type") int type,
+			@Param("offset") long offset, @Param("rows") long rows);
+	
+	public long getFileListByTypeCount(@Param("type") int type);
 }

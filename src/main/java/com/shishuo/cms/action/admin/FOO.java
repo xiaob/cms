@@ -17,24 +17,19 @@
  *	limitations under the License.
  */
 
-
 package com.shishuo.cms.action.admin;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.ContextLoaderListener;
 
 /**
- * @author lqq
- *
+ * 
+ * 
+ * @author Herbert
+ * 
  */
+public class FOO {
 
-@Controller
-@RequestMapping("/admin")
-public class AdminAction {
+	public static void main(String[] args) {
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String login(){
-		return "admin/default";
-	}	
+	}
 }

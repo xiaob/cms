@@ -140,4 +140,40 @@ public class FileService {
 	public File getFolderId(long folderId) {
 		return fileDao.getFolderId(folderId);
 	}
+	
+	public List<File> getAllList(long offset,long rows){
+		return fileDao.getAllList(offset, rows);
+	}
+	
+	public int getAllListCount(){
+		return (int) fileDao.getAllListCount();
+	}
+	
+	public PageVo<File> getAllListPage(int pageNum){
+		PageVo<File> pageVo = new PageVo<File>(pageNum);
+		pageVo.setRows(5);
+		pageVo.setUrl("");
+		List<File> list = this.getAllList(pageVo.getOffset(), pageVo.getRows());
+		pageVo.setList(list);
+		pageVo.setCount(this.getAllListCount());
+		return pageVo;
+	}
+	
+	public PageVo<File> getFileListByTypePage(int type, int pageNum){
+		PageVo<File> pageVo = new PageVo<File>(pageNum);
+		pageVo.setRows(5);
+		pageVo.setUrl("");
+		List<File> list = this.getFileListByType(type, pageVo.getOffset(), pageVo.getRows());
+		pageVo.setList(list);
+		pageVo.setCount(this.getFileListByTypeCount(type));
+		return pageVo;
+	}
+	
+	public List<File> getFileListByType(int type,long offset,long rows){
+		return fileDao.getFileListByType(type, offset, rows);
+	}
+	
+	public int getFileListByTypeCount(int type){
+		return (int)fileDao.getFileListByTypeCount(type);
+	}
 }

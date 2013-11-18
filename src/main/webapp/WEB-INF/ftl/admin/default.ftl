@@ -10,8 +10,8 @@
                               <i class="icon-user"></i>
                           </div>
                           <div class="value">
-                              <h1>22</h1>
-                              <p>New Users</p>
+                              <h1>${userCount}</h1>
+                              <p>用户</p>
                           </div>
                       </section>
                   </div>
@@ -21,8 +21,8 @@
                               <i class="icon-tags"></i>
                           </div>
                           <div class="value">
-                              <h1>140</h1>
-                              <p>Sales</p>
+                              <h1>${fileCount}</h1>
+                              <p>文章</p>
                           </div>
                       </section>
                   </div>
@@ -32,8 +32,8 @@
                               <i class="icon-shopping-cart"></i>
                           </div>
                           <div class="value">
-                              <h1>345</h1>
-                              <p>New Order</p>
+                              <h1>${commodityCount}</h1>
+                              <p>商品</p>
                           </div>
                       </section>
                   </div>
@@ -43,8 +43,8 @@
                               <i class="icon-bar-chart"></i>
                           </div>
                           <div class="value">
-                              <h1>34,500</h1>
-                              <p>Total Profit</p>
+                              <h1>${downloadCount}</h1>
+                              <p>下载</p>
                           </div>
                       </section>
                   </div>

@@ -77,15 +77,15 @@
 					<li class="sub-menu">
 						<a href="javascript:;"> <i class="icon-folder-open"></i> <span>目录管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">增加目录</a></li>
-							<li><a href="buttons.html">目录列表</a></li>
+							<li><a href="/CMS/admin/folder/addFolder.do">增加目录</a></li>
+							<li><a href="/CMS/admin/folder/allFolder.do">目录列表</a></li>
 						</ul>						
 					</li>
 					<li class="sub-menu">
 						<a href="javascript:;"> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
 							<li><a href="general.html">增加文章</a></li>
-							<li><a href="buttons.html">文章列表</a></li>
+							<li><a href="/CMS/admin/file/articleList.do">文章列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
 					</li>
