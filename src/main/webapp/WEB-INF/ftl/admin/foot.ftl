@@ -12,7 +12,14 @@
 
 	<!--common script for all pages-->
 	<script src="${basePath}/admin/js/common-scripts.js"></script>
-
-
+	<script type="text/javascript" type="text/javascript" 
+    	src="${basePath}/admin/js/tinymce/jquery.tinymce.min.js">
+	</script>
+	<script type="text/javascript" type="text/javascript" 
+    	src="${basePath}/admin/js/tinymce/tinymce.min.js">
+	</script>
+	<script type="text/javascript" type="text/javascript">
+		tinymce.init({selector:'textarea'});
+ 	</script>
 </body>
 </html>

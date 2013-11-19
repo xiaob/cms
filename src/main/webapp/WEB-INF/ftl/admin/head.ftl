@@ -28,13 +28,7 @@
       <script src="${basePath}/admin/js/html5shiv.js"></script>
       <script src="${basePath}/admin/js/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript" type="text/javascript" href="${basePath}/admin/css/js/tinymce/tinymce.min.js">
-    </script>
-    <script type="text/javascript" type="text/javascript">
-		tinymce.init({
-   	 		mode: "textarea"
- 		});
-	</script>
+    
 </head>
 <body>
 	<section id="container" class="">
@@ -106,7 +100,11 @@
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-upload-alt"></i> <span>下载管理</span></a>
 						<ul class="sub">
+<<<<<<< HEAD
 							<li><a href="#">上传文件</a></li>
+=======
+							<li><a href="/CMS/admin/upload">上传文件</a></li>
+>>>>>>> branch 'master' of git@git.oschina.net:shishuo/CMS.git
 							<li><a href="buttons.html">文件列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
@@ -130,7 +128,7 @@
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-group"></i> <span>用户管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">General</a></li>
+							<li><a href="/CMS/admin/user/addUser.do">添加用户</a></li>
 							<li><a href="buttons.html">Buttons</a></li>
 							<li><a href="widget.html">Widget</a></li>
 							<li><a href="slider.html">Slider</a></li>
