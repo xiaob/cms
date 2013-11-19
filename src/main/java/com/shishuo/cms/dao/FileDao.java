@@ -116,6 +116,29 @@ public interface FileDao {
 	public List<File> getFileListByType(@Param("type") int type,@Param("status") int status,
 			@Param("offset") long offset, @Param("rows") long rows);
 	
+
+	
+
+	/**
+	 * 获取用户图片
+	 * @return list
+	 */
+	public List<File> getUserImageList(@Param("userId") long userId, @Param("type") int type,
+			@Param("offset") long offset, @Param("rows") long rows);
+	
+	/**
+	 * 获取用户图片的数量
+	 * @return int
+	 */
+	public int getUserImageCount(@Param("userId") long userId, @Param("type") int type);
+	
+	
+	/**
+	 * 修改用户图片
+	 * @return int
+	 */
+	public int  updateImage(@Param("folderId") long folderId, @Param("fileId") long fileId,@Param("userId") long userId);
+
 	/**
 	 * 获取不同类型的文件的数量
 	 * @param Integer
@@ -131,4 +154,5 @@ public interface FileDao {
 	 * @return Integer
 	 */
 	public int getRecycle(File file);
+
 }

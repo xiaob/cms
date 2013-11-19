@@ -247,4 +247,26 @@ public class FileService {
 		result=true;
 		return result;
 	}
+	
+	public List<File> getUserImageList(long userId, int type,long offset,long rows){
+		return fileDao.getUserImageList(userId, type, offset, rows);
+	}
+	
+	public int getUserImageCount(long userId,int type){
+		return fileDao.getUserImageCount(userId, type);
+	}
+	
+	public PageVo<File> getUserImagePage(long userId,int type, int pageNum){
+		PageVo<File> pageVo = new PageVo<File>(pageNum);
+		pageVo.setRows(20);
+		pageVo.setUrl("");
+		List<File> list = this.getUserImageList(userId, type, pageVo.getOffset(), pageVo.getRows());
+		pageVo.setList(list);
+		pageVo.setCount(this.getUserImageCount(userId, type));
+		return pageVo;
+	}
+	
+	public int updateImage(long folderId,long fileId,long userId){
+		return fileDao.updateImage(folderId, fileId, userId);
+	}
 }

@@ -27,5 +27,13 @@ public class FileConstant {
 
 	// 文件类型
 	public static String[] TYPE = { "文章", "下载", "商品" };
+	
+	/*
+	 * 1 代表文章
+	 * 2 代表下载
+	 * 3 代表商品
+	 * 4 代表图片
+	 */
+	public static int[] FILETYPE = {1,2,3};
 
 }

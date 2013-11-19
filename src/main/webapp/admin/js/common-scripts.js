@@ -108,9 +108,36 @@ var Script = function () {
             $(this).find(".value").html("");
             $(this).find(".value").animate({
                 height: i
-            }, 2000)
-        })
+            }, 2000);
+        });
     }
 
 
 }();
+
+
+/**
+ * 显示表单的错误提示
+ * @param id 表单ID
+ * @param errors 错误列表
+ */
+function showErrors(id,errors){
+	id.find('p[class=help-block]').hide();
+	id.find('input,select').parent().parent().removeClass("has-error");
+	for(var name in errors){
+		var e = id.find('p[for='+name+']');
+		id.find('input[name='+name+'],select[name='+name+']').parent().parent().addClass("has-error");
+		if(e.length==0){
+			id.find('input[name='+name+'],select[name='+name+']').after('<p for="'+name+'" class="help-block"></p>');
+			e = id.find('p[for='+name+']');
+		}
+		if(errors[name]!=""){
+			e.html(errors[name]);
+			e.show();
+		}
+	}
+}
+
+$(function(){
+	$("[data-toggle='switch']").wrap('<div class="make-switch" data-on-label="开启" data-off-label="关闭"/>').parent().bootstrapSwitch();
+});

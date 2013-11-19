@@ -28,7 +28,8 @@
       <script src="${basePath}/admin/js/html5shiv.js"></script>
       <script src="${basePath}/admin/js/respond.min.js"></script>
     <![endif]-->
-    
+
+<script src="${basePath}/admin/js/jquery.js"></script>
 </head>
 
 <body>
