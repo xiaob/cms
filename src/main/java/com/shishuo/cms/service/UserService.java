@@ -43,15 +43,13 @@ public class UserService {
 	/**
 	 * 增加用户
 	 * 
-	 * @param openId
-	 *            ,type,name
-	 * @return
+	 * @param name
+	 * @return User
 	 */
-	public User addUser(long userId, long openId, int type, String name) {
+	public User addUser(String name) {
 		User user = new User();
-		user.setUserId(userId);
-		user.setOpenId(openId);
-		user.setType(type);
+		user.setOpenId(0);
+		user.setType(0);
 		user.setName(name);
 		user.setCreateTime(new Date());
 		userDao.addUser(user);
@@ -76,7 +74,7 @@ public class UserService {
 	 */
 	public PageVo<User> getUserPage(int pageNum) {
 		PageVo<User> pageVo = new PageVo<User>(pageNum);
-		pageVo.setUrl("");
+		pageVo.setUrl("/CMS/admin/user/allList.do?");
 		List<User> list = this
 				.getUserList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
@@ -100,9 +98,8 @@ public class UserService {
 	 * @param userId
 	 * @return user
 	 */
-	public User updateUser(long userId, long openId, int type, String name) {
+	public User updateUser(long userId, int type, String name) {
 		User user = this.getUserById(userId);
-		user.setOpenId(openId);
 		user.setType(type);
 		user.setName(name);
 		userDao.updateUser(user);

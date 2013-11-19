@@ -1,3 +1,5 @@
+<#assign menu="system">
+<#assign submenu="system_basic">
 <#include "head.ftl">
 <style type="text/css">
 .pagination {
@@ -79,7 +81,7 @@
                               </div>
                            </div>
                            <form method="post">
-    							<textarea id="textarea1"></textarea>
+    							<textarea mce_editable="true"></textarea>
 							</form>
                         </div>
                   </div>

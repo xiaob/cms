@@ -1,6 +1,6 @@
 <#assign menu="system">
 <#assign submenu="system_basic">
-<#include "head.ftl">
+<#include "../head.ftl">
 <style type="text/css">
 .pagination {
     border-radius: 4px;
@@ -8,7 +8,6 @@
     margin: 0;
     padding-left: 0;
 }
-
 </style>
 	<!--main content start-->
 	<section id="main-content">
@@ -16,7 +15,7 @@
         	<!-- page start-->
             <section class="panel">
             	<header class="panel-heading">
-               		 所有文章列表
+               		 所有管理员列表
                 </header>
                 <div class="panel-body">
                 	<div class="adv-table">
@@ -27,12 +26,10 @@
                							<th>
                   							<input class="check-all" type="checkbox" />
                 						</th>
-                						<th>文件Id</th>
-                						<th>所属目录Id</th>
-                						<th>文章名称</th>
-                						<th>文章链接</th>
-                						<th>文字图片</th>
-                						<th>文章类型</th>
+                						<th>管理员Id</th>
+                						<th>管理员名称</th>
+                						<th>密码</th>
+                						<th>状态</th>
                 						<th>时间</th>
                 						<th>操作</th>
               						</tr>
@@ -43,21 +40,19 @@
                             			<td>
                   							<input type="checkbox" name="${e_index}"/>
                							</td>
-               							<td>${e.fileId}</td>
-                            			<td>${e.folderId}</td>
+                            			<td>${e.adminId}</td>
                                     	<td>${e.name}</td>
-                                    	<td><a href="">${e.url}</a></td>
-                                    	<td>${e.images}</td>
-                                    	<td>${e.description}</td>
+                                    	<td>${e.password}</td>
+                                    	<td>${e.status}</td>
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="/CMS/admin/file/oneFile.do?fileId=${e.fileId}" title="修改">
-                  								<button class="btn btn-primary btn-xs">
-                  									<i class="icon-pencil"></i>
-                  								</button>
-                  							</a>
-                  							<a href="/CMS/admin/file/recycle.do?fileId=${e.fileId}&status=0" title="回收站">
+                							<a href="/CMS/admin/admin/oneAdmin.do?adminId=${e.adminId}" title="修改">
+                								<button class="btn btn-primary btn-xs">
+                									<i class="icon-pencil"></i>
+                								</button>
+                							</a>
+                							<a href="/CMS/admin/admin/deleteAdmin.do?adminId=${e.adminId}" title="删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>
@@ -78,4 +73,4 @@
           </section>
 		</section>
 		<!--main content end-->
-<#include "foot.ftl">
+<#include "../foot.ftl">
