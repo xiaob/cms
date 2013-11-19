@@ -19,10 +19,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 文件上传
+ *
+ */
 @Controller
 @RequestMapping("/admin")
 public class UpLoadAction {
 
+	
 	@RequestMapping(value = "upload", method = RequestMethod.GET)
 	public String upload() {
 		return "admin/upload";
@@ -33,7 +38,7 @@ public class UpLoadAction {
 	public ModelAndView handleRequest(@RequestParam("file") MultipartFile file,
 			HttpServletRequest request) throws Exception {
 		if (this.checkPhotoFile(file)) {
-			String filePathName = "images/";
+			String filePathName = "";
 			String fileName = file.getOriginalFilename();
 			String filePath = filePathName + fileName;
 			File source = new File(filePath.toString());
