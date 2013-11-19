@@ -30,7 +30,7 @@
                             	 添加目录
                           </header>
                           <div class="panel-body">
-                              <form method="post" class="form-horizontal" action="/CMS/admin/folder/addNewFolder.do">
+                              <form method="post" class="form-horizontal" action="${basePath}/admin/folder/addNewFolder.do">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录名称</label>
@@ -76,7 +76,8 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <input class="button" value="增加" type="submit" style="height:35px">
+                                  	<label class="col-sm-2 col-sm-2 control-label"></label>
+                                      <input class="button" value="增加" type="submit" style="height: 35px;margin-left: 15px; width: 60px;">
                                   </div>
                                  </fieldset>
                               </form>

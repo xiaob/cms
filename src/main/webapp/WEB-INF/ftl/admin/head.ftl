@@ -73,21 +73,21 @@
 				<!-- sidebar menu goes here-->
 				<ul class="sidebar-menu" id="nav-accordion">
 					<li class="">
-						<a  class="active" href="${basePath}/admin"> <i class="icon-home"></i> <span>首页</span></a>
+						<a class="active" href="${basePath}/admin"> <i class="icon-home"></i> <span>首页</span></a>
 					</li>
 					<li class="sub-menu">
 						<a href="javascript:;"> <i class="icon-folder-open"></i> <span>目录管理</span></a>
 						<ul class="sub">
-							<li><a href="/CMS/admin/folder/addFolder.do">增加目录</a></li>
-							<li><a href="/CMS/admin/folder/allFolder.do">目录列表</a></li>
+							<li><a href="${basePath}/admin/folder/addFolder.do">增加目录</a></li>
+							<li><a href="${basePath}/admin/folder/allFolder.do">目录列表</a></li>
 						</ul>						
 					</li>
 					<li class="sub-menu">
 						<a href="javascript:;"> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
-							<li><a href="/CMS/admin/file/addArticle.do">增加文章</a></li>
-							<li><a href="/CMS/admin/file/articleList.do">文章列表</a></li>
-							<li><a href="/CMS/admin/file/recycleList.do">回收站</a></li>
+							<li><a href="${basePath}/admin/file/addArticle.do">增加文章</a></li>
+							<li><a href="${basePath}/admin/file/articleList.do">文章列表</a></li>
+							<li><a href="${basePath}/admin/file/recycleList.do">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">
@@ -101,11 +101,8 @@
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-upload-alt"></i> <span>下载管理</span></a>
 						<ul class="sub">
-<<<<<<< HEAD
 							<li><a href="#">上传文件</a></li>
-=======
 							<li><a href="/CMS/admin/upload">上传文件</a></li>
->>>>>>> branch 'master' of git@git.oschina.net:shishuo/CMS.git
 							<li><a href="buttons.html">文件列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
@@ -117,29 +114,7 @@
 							<li><a href="buttons.html">商品列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
-					</li>
-					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-shopping-cart"></i> <span>订单管理</span></a>
-						<ul class="sub">
-							<li><a href="general.html">增加商品</a></li>
-							<li><a href="buttons.html">商品列表</a></li>
-							<li><a href="widget.html">回收站</a></li>
-						</ul>
 					</li>										
-					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-group"></i> <span>管理员管理</span></a>
-						<ul class="sub">
-							<li><a href="/CMS/admin/admin/addAdmin.do">添加管理员</a></li>
-							<li><a href="/CMS/admin/admin/allList.do">管理员列表</a></li>
-						</ul>
-					</li>
-					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-group"></i> <span>用户管理</span></a>
-						<ul class="sub">
-							<li><a href="/CMS/admin/user/addUser.do">添加用户</a></li>
-							<li><a href="buttons.html">用户列表</a></li>
-						</ul>
-					</li>
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-signin"></i> <span>招聘管理</span></a>
 						<ul class="sub">
@@ -152,9 +127,13 @@
 						</ul>
 					</li>																	
 					<li class="sub-menu ">
-						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>系统管理</span></a>
+						<a href="javascript:;"> <i class="icon-cogs"></i> <span>系统管理</span></a>
 						<ul class="sub">
 							<li  <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
+							<li><a href="${basePath}/admin/admin/addAdmin.do">添加管理员</a></li>
+							<li><a href="${basePath}/admin/admin/allList.do">管理员列表</a></li>
+							<li><a href="${basePath}/admin/user/addUser.do">添加用户</a></li>
+							<li><a href="${basePath}/admin/user/allList.do">用户列表</a></li>
 						</ul>
 					</li>
 				</ul>

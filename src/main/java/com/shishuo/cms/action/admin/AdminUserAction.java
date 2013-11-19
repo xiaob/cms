@@ -52,7 +52,7 @@ public class AdminUserAction extends AdminBaseAction{
 	@RequestMapping(value = "/deleteUser.do",method = RequestMethod.GET)
 	public String deleteUser(@RequestParam(value = "userId") long userId){
 		userService.deleteUserById(userId);
-		return "redirect:/admin/admin/allList.do";
+		return "redirect:/admin/user/allList.do";
 	}
 
 }
