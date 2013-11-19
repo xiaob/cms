@@ -127,14 +127,17 @@
 						</ul>
 					</li>										
 					<li class="sub-menu ">
+						<a href="javascript:;"> <i class="icon-group"></i> <span>管理员管理</span></a>
+						<ul class="sub">
+							<li><a href="/CMS/admin/admin/addAdmin.do">添加管理员</a></li>
+							<li><a href="/CMS/admin/admin/allList.do">管理员列表</a></li>
+						</ul>
+					</li>
+					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-group"></i> <span>用户管理</span></a>
 						<ul class="sub">
 							<li><a href="/CMS/admin/user/addUser.do">添加用户</a></li>
-							<li><a href="buttons.html">Buttons</a></li>
-							<li><a href="widget.html">Widget</a></li>
-							<li><a href="slider.html">Slider</a></li>
-							<li><a href="nestable.html">Nestable</a></li>
-							<li><a href="font_awesome.html">Font Awesome</a></li>
+							<li><a href="buttons.html">用户列表</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">

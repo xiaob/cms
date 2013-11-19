@@ -31,10 +31,11 @@ public class DefaultAction {
 	private ConfigService configService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest request, ModelMap modelMap) {
+	public String home(@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,HttpServletRequest request, ModelMap modelMap) {
 		try {
 			Folder currentFolder = folderService.getFolderById(1);
 			modelMap.addAttribute("currentFolder", currentFolder);
+			modelMap.addAttribute("pageNum", pageNum);
 			return ConfigConstant.getTemplatePath() + "/default";
 		} catch (Exception e) {
 			return ConfigConstant.getTemplatePath() + "/500";
