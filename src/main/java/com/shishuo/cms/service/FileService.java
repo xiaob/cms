@@ -144,15 +144,7 @@ public class FileService {
 		return file;
 	}
 
-	/**
-	 * 通过folderId获得文件
-	 * @param folderId
-	 * @return File
-	 *
-	 */
-	public File getFolderId(long folderId) {
-		return fileDao.getFolderId(folderId);
-	}
+
 	
 	/**
 	 * 所有文件列表

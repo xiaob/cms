@@ -81,12 +81,6 @@ public interface FileDao {
 	 */
 	public int updateFile(File file);
 
-	/**
-	 * 通过folderId获得文件
-	 * @param Long
-	 * @return Folder
-	 */
-	public File getFolderId(@Param("folderId") long folderId);
 	
 	/**
 	 * 所有文件的分页

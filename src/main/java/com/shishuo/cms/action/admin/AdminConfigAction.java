@@ -28,7 +28,6 @@ public class AdminConfigAction extends AdminBaseAction {
 	public String basic(ModelMap modelMap) {
 		List<String> templateList = this.getTemplate();
 		modelMap.addAttribute("templateList", templateList);
-		modelMap.addAttribute("configMap", ConfigService.CONFIG_MAP);
 		return "admin/config/basic";
 	}
 

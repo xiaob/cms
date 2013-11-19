@@ -27,15 +27,15 @@
                   <div class="col-lg-12">
                       <section class="panel">
                           <header class="panel-heading">
-                            	 添加管理员
+                            	 添加用户
                           </header>
                           <div class="panel-body">
-                              <form method="post" class="form-horizontal" action="/CMS/admin/admin/addNewAdmin.do">
+                              <form method="post" class="form-horizontal" action="${basePath}/admin/user/addNewUser.do">
                               	<fieldset>
                                   <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">管理员名称</label>
+                                      <label class="col-sm-2 col-sm-2 control-label">用户名称</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="adminName">
+                                          <input type="text" class="form-control" name="userName">
                                       </div>
                                   </div>
                                   <div class="form-group">
