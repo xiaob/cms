@@ -29,7 +29,13 @@
 	</select>
 	
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
-		update file set folderId=#{folderId},name=#{name},url=#{url},
+		update file set folderId=#{folderId},name=#{name},url=#{url},images=#{images},
+			description=#{description},status=#{status}
+		where fileId=#{fileId}
+	</update>
+	
+	<update id="getRecycle" parameterType="com.shishuo.cms.entity.File">
+		update file set status=#{status} where fileId=#{fileId}
 	</update>
 	<update id="updateImage" parameterType="com.shishuo.cms.entity.File">
 	     update file set folderId = #{folderId} where fileId = #{fileId} and userId = #{userId}
@@ -59,11 +65,11 @@
 	
 	<select id="getFileListByType"
 		resultType="com.shishuo.cms.entity.File">
-		select * from file where type=#{type} limit #{offset},#{rows}
+		select * from file where type=#{type} and status=#{status} limit #{offset},#{rows}
 	</select>
 	
 	<select id="getFileListByTypeCount"
 		resultType="long">
-		select count(*) from file where type=#{type}
+		select count(*) from file where type=#{type} and status=#{status}
 	</select>
 </mapper>  

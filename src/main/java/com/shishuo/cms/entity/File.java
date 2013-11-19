@@ -69,6 +69,11 @@ public class File {
 	 * 文件类型
 	 */
 	private int type;
+	
+	/**
+	 * 文件状态
+	 */
+	private int status;
 
 	/**
 	 * 时间
@@ -129,6 +134,14 @@ public class File {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public Date getCreateTime() {

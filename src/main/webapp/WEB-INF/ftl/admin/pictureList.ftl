@@ -1,3 +1,5 @@
+<#assign menu="system">
+<#assign submenu="system_basic">
 <#include "head.ftl">
 
     <!-- Bootstrap core CSS -->
@@ -34,20 +36,22 @@
                   <div class="panel-body">
                   	<div class="dropzone clickable dz-clickable dz-started">
 	                    <#list filePage.list as file>
-	                     <div class="dz-preview dz-processing dz-image-preview dz-success"> 
+	                     <div class="dz-preview dz-processing dz-image-preview dz-success img" id="img_${file.fileId}"> 
 	                     	 <div class="dz-details">
 	                     	 	<div data-dz-size="" class="dz-size" style="font-size:12px;">
-	                     	 		<input type="checkbox" style="margin-top:2px;"><span style="padding-left:5px;">${file.name?substring(0,8)}</span>
+	                     	 		<input type="checkbox" style="margin-top:2px;" class="dz_img" ><span style="padding-left:5px;">${file.name?substring(0,8)}</span>
 	                     	 	</div>
 	                     	 	<img data-dz-thumbnail=""  src="${file.images}"> 
 	                     	 </div>
-	                     	<div class="dz-error-mark delete" style="opacity: 1;"><span>✘</span></div>
+	                     	<div class="dz_delete" style="opacity: 1;display:none;background-image: url("../images/spritemap.png");background-repeat: no-repeat; background-position: -268px -123px;">
+	                     		<span>✘</span>
+	                     	</div>
 	                     </div>
 	                     </#list>
 	                     ${filePage.pageNumHtml}
                      </div>
                      <div style="margin-top:10px;">
-                     	<input type="checkbox" style="margin-top:2px;">全选
+                     	<input type="checkbox" style="margin-top:2px;" class="all">全选
                      	<button class="btn btn-primary" type="button">批量删除</button>
                      	<div class="btn-group">
                                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">批量修改<span class="caret"></span></button>
@@ -67,8 +71,12 @@
 	    <!-- js placed at the end of the document so the pages load faster -->
   <!-- js placed at the end of the document so the pages load faster -->
     <script src="${basePath}/admin/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="${basePath}/admin/js/dropzone.js"></script>
     <!--common script for all pages-->
-    <script src="js/common-scripts.js"></script>
+    <script src="${basePath}/admin/js/common-scripts.js"></script>
+    <script type="text/javascript">
+      $(function()){
+           alert("11111");
+      }
+    </script>
 	  
 <#include "foot.ftl">

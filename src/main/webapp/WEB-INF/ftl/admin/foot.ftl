@@ -7,6 +7,7 @@
 	<script src="${basePath}/admin/js/jquery.scrollTo.min.js"></script>
 	<script src="${basePath}/admin/js/jquery.nicescroll.js"
 		type="text/javascript"></script>
+	<script src="${basePath}/admin/js/dropzone.js"></script>
 	<script src="${basePath}/admin/js/respond.min.js"></script>
 
 	<!--common script for all pages-->

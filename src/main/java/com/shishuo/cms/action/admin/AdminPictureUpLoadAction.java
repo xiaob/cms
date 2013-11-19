@@ -39,7 +39,7 @@ public class AdminPictureUpLoadAction extends AdminBaseAction {
 			String webroot = System.getProperty("cms.app.root");
 			String path = webroot+"/upload/"+System.currentTimeMillis()+".jpg";
 			File source = new File(path);
-			fileService.addFile(0, file.getOriginalFilename(), path, "", "", 4);
+			fileService.addFile(0, file.getOriginalFilename(), path, "", "", 4,1);
 			file.transferTo(source);
 		} else {
 			String errorMessage = "上传的文件只能是jpg,png,gif的图片格式";
@@ -84,7 +84,7 @@ public class AdminPictureUpLoadAction extends AdminBaseAction {
     		             HttpServletRequest request){
     	String[] fileIdArray = fileId.split(",");
     	for(String id : fileIdArray){
-    		fileService.updateImage(folderId, Long.parseLong(id), 4);
+    		fileService.updateImage(folderId, Long.parseLong(id), 1);
     	}
     	return null;
     }

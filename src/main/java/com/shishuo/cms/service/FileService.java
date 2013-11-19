@@ -36,16 +36,16 @@ import com.shishuo.cms.entity.vo.PageVo;
  */
 @Service
 public class FileService {
-
+	
+	@Autowired
+	private FileDao fileDao;
+	
 	/**
 	 * 得到目录
 	 * 
 	 * @param fileId
-	 * @return
+	 * @return File
 	 */
-	@Autowired
-	private FileDao fileDao;
-
 	public File getFileById(long fileId) {
 		return fileDao.getFileById(fileId);
 	}
@@ -80,7 +80,7 @@ public class FileService {
 
 	/**
 	 * 得到目录的所有文件的数量
-	 * 
+	 * @param folderId
 	 * @return Integer
 	 */
 	public int getFileListByFoderIdCount(long folderId) {
@@ -94,7 +94,7 @@ public class FileService {
 	 */
 
 	public File addFile(long folderId, String name, String url, String images,
-			String description, int type) {
+			String description, int type,int status) {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setName(name);
@@ -103,6 +103,7 @@ public class FileService {
 		file.setDescription(description);
 		file.setType(type);
 		file.setCreateTime(new Date());
+		file.setStatus(status);
 		fileDao.addFile(file);
 		return file;
 	}
@@ -122,6 +123,12 @@ public class FileService {
 	 * 更新文件
 	 * 
 	 * @param fileId
+	 * @param folderId
+	 * @param name
+	 * @param url
+	 * @param images
+	 * @param description
+	 * @param type
 	 * @return file
 	 */
 	public File updateFileById(long fileId, long folderId, String name,
@@ -137,18 +144,42 @@ public class FileService {
 		return file;
 	}
 
+	/**
+	 * 通过folderId获得文件
+	 * @param folderId
+	 * @return File
+	 *
+	 */
 	public File getFolderId(long folderId) {
 		return fileDao.getFolderId(folderId);
 	}
 	
+	/**
+	 * 所有文件列表
+	 * @param offset
+	 * @param rows
+	 * @return List<File>
+	 *
+	 */
 	public List<File> getAllList(long offset,long rows){
 		return fileDao.getAllList(offset, rows);
 	}
 	
+	/**
+	 * 获取所有文件的数量
+	 * @return Integer
+	 *
+	 */
 	public int getAllListCount(){
 		return (int) fileDao.getAllListCount();
 	}
 	
+	/**
+	 * 获取所有文件的分页
+	 * @param Integer
+	 * @return PageVo<File>
+	 *
+	 */
 	public PageVo<File> getAllListPage(int pageNum){
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
@@ -159,22 +190,62 @@ public class FileService {
 		return pageVo;
 	}
 	
-	public PageVo<File> getFileListByTypePage(int type, int pageNum){
+	/**
+	 * 获取不同文件类型的分页
+	 * @param type
+	 * @param status
+	 * @param pageNum
+	 * @return PageVo<File>
+	 *
+	 */
+	public PageVo<File> getFileListByTypePage(int type,int status, int pageNum){
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
 		pageVo.setUrl("");
-		List<File> list = this.getFileListByType(type, pageVo.getOffset(), pageVo.getRows());
+		List<File> list = this.getFileListByType(type, status,pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileListByTypeCount(type));
+		pageVo.setCount(this.getFileListByTypeCount(type,status));
 		return pageVo;
 	}
 	
-	public List<File> getFileListByType(int type,long offset,long rows){
-		return fileDao.getFileListByType(type, offset, rows);
+	/**
+	 * 获取不同类型的文件的列表
+	 * @param type
+	 * @param status
+	 * @param offset
+	 * @param rows
+	 * @return List<File>
+	 *
+	 */
+	public List<File> getFileListByType(int type,int status,long offset,long rows){
+		return fileDao.getFileListByType(type, status,offset, rows);
 	}
 	
-	public int getFileListByTypeCount(int type){
-		return (int)fileDao.getFileListByTypeCount(type);
+	/**
+	 * 获取不同类型的文件的数量
+	 * @param type
+	 * @param status
+	 * @param Integer
+	 *
+	 */
+	public int getFileListByTypeCount(int type,int status){
+		return (int)fileDao.getFileListByTypeCount(type,status);
+	}
+	
+	/**
+	 * 放进回收站或者从回收站中还原
+	 * @param fileId
+	 * @param status
+	 * @return boolean
+	 *
+	 */
+	public boolean recycle(long fileId,int status){
+		boolean result = false;
+		File file = this.getFileById(fileId);
+		file.setStatus(status);
+		fileDao.getRecycle(file);
+		result=true;
+		return result;
 	}
 	
 	public List<File> getUserImageList(long userId, int type,long offset,long rows){

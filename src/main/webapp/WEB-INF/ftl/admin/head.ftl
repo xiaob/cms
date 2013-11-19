@@ -17,6 +17,7 @@
 <link
 	href="${basePath}/admin/assets/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
+<link href="${basePath}/admin/css/dropzone.css" rel="stylesheet"/>	
 <!-- Custom styles for this template -->
 <link href="${basePath}/admin/css/style.css" rel="stylesheet">
 <link href="${basePath}/admin/css/style-responsive.css"
@@ -27,6 +28,13 @@
       <script src="${basePath}/admin/js/html5shiv.js"></script>
       <script src="${basePath}/admin/js/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" type="text/javascript" href="${basePath}/admin/css/js/tinymce/tinymce.min.js">
+    </script>
+    <script type="text/javascript" type="text/javascript">
+		tinymce.init({
+   	 		mode: "textarea"
+ 		});
+	</script>
 </head>
 <body>
 	<section id="container" class="">
@@ -82,9 +90,9 @@
 					<li class="sub-menu">
 						<a href="javascript:;"> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">增加文章</a></li>
+							<li><a href="/CMS/admin/file/addArticle.do">增加文章</a></li>
 							<li><a href="/CMS/admin/file/articleList.do">文章列表</a></li>
-							<li><a href="widget.html">回收站</a></li>
+							<li><a href="/CMS/admin/file/recycleList.do">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">
@@ -142,14 +150,9 @@
 						</ul>
 					</li>																	
 					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-cogs"></i> <span>系统管理</span></a>
+						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>系统管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">General</a></li>
-							<li><a href="buttons.html">Buttons</a></li>
-							<li><a href="widget.html">Widget</a></li>
-							<li><a href="slider.html">Slider</a></li>
-							<li><a href="nestable.html">Nestable</a></li>
-							<li><a href="font_awesome.html">Font Awesome</a></li>
+							<li  <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
 						</ul>
 					</li>
 				</ul>

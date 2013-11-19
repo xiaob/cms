@@ -89,6 +89,7 @@ public class FolderService {
 	 * 
 	 * @param fatherId
 	 * @param name
+	 * @param ename
 	 * @param status
 	 * @param type
 	 * @return Folder
@@ -133,11 +134,11 @@ public class FolderService {
 	 * 
 	 * @param folderId
 	 * @param fatherId
+	 * @param ename
 	 * @param name
-	 * @param count
 	 * @param status
 	 * @param type
-	 * @param template
+	 * @param sort
 	 * @return folder
 	 */
 	public Folder updateFolderById(long folderId, long fatherId, String ename,String name,
@@ -153,23 +154,52 @@ public class FolderService {
 		return folder;
 	}
 
+	/**
+	 * 通过ename获得目录
+	 * @param ename
+	 * @return Folder
+	 *
+	 */
 	public Folder getFolderByEname(String ename) {
 		Folder folder = folderDao.getFolderByEname(ename);
 		return folder;
 	}
 	
+	/**
+	 * 获得无参的所有的目录列表
+	 * @return List<Folder>
+	 *
+	 */
 	public List<Folder> getAllList(){
 		return folderDao.getAllList();
 	}
 	
+	/**
+	 * 获得分页的所有目录的列表
+	 * @param offset
+	 * @param rows
+	 * @return List<Folder>
+	 *
+	 */
 	public List<Folder> getAllListPage(long offset, long rows){
 		return folderDao.getAllListPage(offset, rows);
 	}
 	
+	/**
+	 * 获得所有目录的数量
+	 * @return Integer
+	 *
+	 */
 	public int getAllListPageCount(){
 		return (int)folderDao.getAllListPageCount();
 	}
 	
+	/**
+	 * 获得所有目录的分页
+	 * @param Integer
+	 * @return PageVo<Folder>
+	 *
+	 */
 	public PageVo<Folder> getAllListPageByNum(int pageNum){
 		PageVo<Folder> pageVo = new PageVo<Folder>(pageNum);
 		pageVo.setUrl("/CMS/admin/folder/allFolder.do?");
@@ -180,7 +210,4 @@ public class FolderService {
 		return pageVo;
 	}
 	
-	public long getTypeCount(long type){
-		return folderDao.getTypeCount(type);
-	}
 }

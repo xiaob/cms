@@ -14,7 +14,7 @@
         	<!-- page start-->
             <section class="panel">
             	<header class="panel-heading">
-               		 所有目录
+               		 文章回收站
                 </header>
                 <div class="panel-body">
                 	<div class="adv-table">
@@ -25,17 +25,13 @@
                							<th>
                   							<input class="check-all" type="checkbox" />
                 						</th>
-                						<th>目录Id</th>
-                						<th>父类Id</th>
-                						<th>顶栏Id</th>
-                						<th>英文名称</th>
-                						<th>名称</th>
-                						<th>文件数</th>
-                						<th>状态</th>
-                						<th>类型</th>
-                						<th>所属板块</th>
-                						<th>序列</th>
-                						<th>等级</th>
+                						<th>文件Id</th>
+                						<th>所属目录Id</th>
+                						<th>文章名称</th>
+                						<th>文章链接</th>
+                						<th>文字图片</th>
+                						<th>文章类型</th>
+                						<th>时间</th>
                 						<th>操作</th>
               						</tr>
                                 </thead>
@@ -45,30 +41,25 @@
                             			<td>
                   							<input type="checkbox" name="${e_index}"/>
                							</td>
+               							<td>${e.fileId}</td>
                             			<td>${e.folderId}</td>
-                                    	<td>${e.fatherId}</td>
-                                    	<td>${e.topId}</td>
-                                    	<td>${e.ename}</td>
                                     	<td>${e.name}</td>
-                                    	<td>${e.count}</td>
-                                    	<td>${e.status}</td>
-                                    	<td>
-                                    		<#if e.type==0>
-                                    			文章
-                                    		<#elseif e.type==1>
-                                    			下载
-                                    		<#elseif e.type==2>
-                                    			商品
-                                    		<#elseif e.type==3>
-                                    			图片
-                                    		</#if>
-                                    	</td>
-                                    	<td>${e.template}</td>
-                                    	<td>${e.sort}</td>
-                                    	<td>${e.rank}</td>
+                                    	<td><a href="">${e.url}</a></td>
+                                    	<td>${e.images}</td>
+                                    	<td>${e.description}</td>
+                                    	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="/CMS/admin/folder/oneFolder.do?folderId=${e.folderId}" title="修改"><button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button></a>
+                  							<a href="/CMS/admin/file/recycle.do?fileId=${e.fileId}&status=1" title="还原">
+                  								<button class="btn btn-success btn-xs">
+                  									<i class="icon-ok"></i>
+                  								</button>
+                  							</a>
+                  							<a href="/CMS/admin/file/deleteFile.do?fileId=${e.fileId}" title="彻底删除">
+                  								<button class="btn btn-danger btn-xs">
+                  									<i class="icon-remove"></i>
+                  								</button>
+                  							</a>
                 						</td>
                                 	</tr>
                                 	</#list>
@@ -78,9 +69,6 @@
                              	<div class="pagination">${pageVo.pageNumHtml} </div>
                               </div>
                            </div>
-                           <form method="post">
-    	<textarea></textarea>
-		</form>
                         </div>
                   </div>
               </section>

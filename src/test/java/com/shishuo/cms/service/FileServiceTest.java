@@ -14,11 +14,11 @@ public class FileServiceTest {
 	@Autowired
 	private FileService fileService;
 
-	@Test
-	public void testAddFile() {
-		assertEquals(2, fileService.addFile(2, "bb", "sef", "", "yhdwe", 0)
-				.getFolderId());
-	}
+//	@Test
+//	public void testAddFile() {
+//		assertEquals(2, fileService.addFile(2, "bb", "sef", "", "yhdwe", 0)
+//				.getFolderId());
+//	}
 
 	@Test
 	public void testDeleteFileById() {

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author lqq
+ * @author 进入网站后台首页
  *
  */
 
@@ -36,9 +37,9 @@ public class AdminAction extends AdminBaseAction{
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String login(ModelMap modelMap){
-		modelMap.put("fileCount", folderService.getTypeCount(0));
-		modelMap.put("downloadCount", folderService.getTypeCount(1));
-		modelMap.put("commodityCount", folderService.getTypeCount(2));
+		modelMap.put("articleCount", fileService.getFileListByTypeCount(0,1));
+		modelMap.put("downloadCount", fileService.getFileListByTypeCount(1,1));
+		modelMap.put("commodityCount", fileService.getFileListByTypeCount(2,1));
 		modelMap.put("userCount", userService.getUserListCount());
 		return "admin/default";
 	}	

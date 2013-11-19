@@ -35,7 +35,7 @@ public class ConfigConstant {
 	}
 
 	/**
-	 * 根据key，获得对应的系统配置值
+	 * 根据key，获得对应的系统配置的值
 	 * 
 	 * @param key
 	 * @return
