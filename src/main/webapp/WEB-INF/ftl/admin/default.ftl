@@ -1,3 +1,5 @@
+<#assign menu="system">
+<#assign submenu="system_basic">
 <#include "head.ftl">
 		<!--main content start-->
 		<section id="main-content">

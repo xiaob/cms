@@ -57,17 +57,4 @@ public class DefaultAction {
 		return ConfigConstant.getTemplatePath() + "/"+currentFolder.getTemplate();
 	}
 	
-//	@RequestMapping(value = "/template.do", method = RequestMethod.GET)
-//	public String template(HttpServletRequest request, ModelMap modelMap,
-//			@RequestParam(value = "templateName", defaultValue = "1") String templateName){
-//		try {
-//			List<Config> list = configService
-//			HashMap<K, V> map = 
-//			Folder currentFolder = folderService.getFolderById(1);
-//			modelMap.addAttribute("currentFolder", currentFolder);
-//			return ConfigConstant.getTemplatePath() + "/default";
-//		} catch (Exception e) {
-//			return ConfigConstant.getTemplatePath() + "/500";
-//		}
-//	}
 }

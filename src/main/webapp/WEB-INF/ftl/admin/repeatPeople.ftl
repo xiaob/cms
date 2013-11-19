@@ -1,3 +1,5 @@
+<#assign menu="system">
+<#assign submenu="system_basic">
 <#include "head.ftl">
 <body id="body-right">
 <div id="body-wrapper-right">

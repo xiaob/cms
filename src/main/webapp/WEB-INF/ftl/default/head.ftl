@@ -1,46 +1,53 @@
 <!DOCTYPE html>
-<html lang="zh_CN">
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>Justified Nav Template for Bootstrap</title>
+    <title>师说cms</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="${basePath}/css/bootstrap.css" rel="stylesheet">
+    <link href="${basePath}/default/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${basePath}/default/css/theme.css" rel="stylesheet">
+    <link href="${basePath}/default/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="${basePath}/default/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="${basePath}/default/css/flexslider.css"/>
+    <link href="${basePath}/default/assets/bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="${basePath}/default/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="${basePath}/default/assets/revolution_slider/css/rs-style.css" media="screen">
+    <link rel="stylesheet" href="${basePath}/default/assets/revolution_slider/rs-plugin/css/settings.css" media="screen">
 
     <!-- Custom styles for this template -->
-    <link href="${basePath}/css/style.css" rel="stylesheet">
+    <link href="${basePath}/default/css/style.css" rel="stylesheet">
+    <link href="${basePath}/default/css/style-responsive.css" rel="stylesheet" />
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="${basePath}/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-      <script src="${basePath}/js/html5shiv.js"></script>
-      <script src="${basePath}/js/respond.min.js"></script>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
     <![endif]-->
   </head>
 
   <body>
-  
-    <div class="container">
-
-      <div class="masthead">
-      	<div>
-      		<img src="${basePath}/images/jiawacms.png" style=" height: 60px;margin-bottom: 10px;margin-left: 10px;"/>
-      	</div>
-        <ul class="nav nav-justified">
-          <@cms_folder_list fatherId="0">
-	          <#list folderList as folder>
-	          <li <#if folder.folderId == currentFolder.topId>class="active"</#if> ><a href="${basePath}${folder.ename}">${folder.name}</a></li>
-	          </#list>
-		  </@cms_folder_list>
-        </ul>
-      </div>
-      
-    </div>
+     <!--header start-->
+    <header class="header-frontend">
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">师说<span>CMS</span></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--header end-->

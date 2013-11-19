@@ -17,12 +17,15 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 import static freemarker.template.ObjectWrapper.DEFAULT_WRAPPER;
 
+
 /**
- * @author Administrator folder标签
+ * folder标签
+ * 
+ * @author lqq
+ *
  */
 @Service
-public class FolderListTag implements TemplateDirectiveModel {
-
+public class FolderListTag implements TemplateDirectiveModel { 
 	@Autowired
 	private FolderService folderService;
 
