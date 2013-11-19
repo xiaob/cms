@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.exception.ValidateException;
+import com.shishuo.cms.service.AdminService;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.FileService;
 import com.shishuo.cms.service.FolderService;
@@ -35,6 +36,8 @@ public class AdminBaseAction {
 	
 	@Autowired
 	protected UserService userService;
+	@Autowired
+	protected AdminService adminService;
 	String root = "admin";
 
 	/**
