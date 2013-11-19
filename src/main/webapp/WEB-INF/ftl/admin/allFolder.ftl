@@ -79,8 +79,8 @@
                               </div>
                            </div>
                            <form method="post">
-    	<textarea></textarea>
-		</form>
+    							<textarea id="textarea1"></textarea>
+							</form>
                         </div>
                   </div>
               </section>

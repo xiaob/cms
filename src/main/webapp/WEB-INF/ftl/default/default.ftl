@@ -25,6 +25,5 @@
           <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
-
     </div> <!-- /container -->
 <#include "foot.ftl">    
