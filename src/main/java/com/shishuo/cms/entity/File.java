@@ -38,7 +38,13 @@ public class File {
 	 * 所属目录Id
 	 */
 	private long folderId;
-
+	
+	/**
+	 * 用户Id
+	 */
+	private long userId;
+	
+	
 	/**
 	 * 文件名称
 	 */
@@ -131,6 +137,14 @@ public class File {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 }

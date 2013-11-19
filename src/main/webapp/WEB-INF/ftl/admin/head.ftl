@@ -28,9 +28,7 @@
       <script src="${basePath}/admin/js/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body>
-
 	<section id="container" class="">
 		<!--header start-->
 		<header class="header white-bg">
@@ -92,15 +90,15 @@
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-camera-retro"></i> <span>图片管理</span></a>
 						<ul class="sub">
-							<li><a href="general.html">上传图片</a></li>
-							<li><a href="buttons.html">图片列表</a></li>
-							<li><a href="widget.html">回收站</a></li>
+							<li><a href="${basePath}/admin/picture/">上传图片</a></li>
+							<li><a href="${basePath}/admin/picture/list">图片列表</a></li>
+							<li><a href="${basePath}/admin/picture/trash">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-upload-alt"></i> <span>下载管理</span></a>
 						<ul class="sub">
-							<li><a href="/admin/upload">上传文件</a></li>
+							<li><a href="#">上传文件</a></li>
 							<li><a href="buttons.html">文件列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
