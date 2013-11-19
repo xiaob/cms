@@ -9,7 +9,10 @@
 		type="text/javascript"></script>
 	<script src="${basePath}/admin/js/dropzone.js"></script>
 	<script src="${basePath}/admin/js/respond.min.js"></script>
-
+	<script src="${basePath}/admin/js/jquery.form.min.js"></script>
+	<script src="${basePath}/admin/js/tinymce/jquery.tinymce.min.js"></script>
+	<script src="${basePath}/admin/js/tinymce/tinymce.min.js"></script>
+	
 	<!--common script for all pages-->
 	<script src="${basePath}/admin/js/common-scripts.js"></script>
 
