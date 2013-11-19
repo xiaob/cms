@@ -30,7 +30,7 @@
                             	 添加用户
                           </header>
                           <div class="panel-body">
-                              <form method="post" class="form-horizontal" action="${basePath}/admin/user/addNewUser.do">
+                              <form method="post" class="form-horizontal" action="${basePath}/admin/user/addNew">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">用户名称</label>

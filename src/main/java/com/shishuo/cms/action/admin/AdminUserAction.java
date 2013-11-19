@@ -15,44 +15,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin/user")
 public class AdminUserAction extends AdminBaseAction{
 
-	@RequestMapping(value = "/addUsern.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/add",method = RequestMethod.GET)
 	public String addUser(ModelMap modelMap){
 		
 		return "admin/user/addUser";
 	}
 	
-	@RequestMapping(value = "/addNewUser.do",method = RequestMethod.POST)
+	@RequestMapping(value = "/addNew",method = RequestMethod.POST)
 	public String addNewUser(@RequestParam(value = "userName") String userName){
 		userService.addUser(userName);
-		return "redirect:/admin/user/allList.do";
+		return "redirect:/admin/user/allList";
 	}
 	
-	@RequestMapping(value = "/allList.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/allList",method = RequestMethod.GET)
 	public String allList(@RequestParam(value = "pageNum",defaultValue="1") int pageNum,
 			ModelMap modelMap){
 		modelMap.put("pageVo", userService.getUserPage(pageNum));
 		return "admin/user/allUser";
 	}
 	
-	@RequestMapping(value = "/oneAdmin.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/one",method = RequestMethod.GET)
 	public String oneAdmin(@RequestParam(value = "userId") long userId,
 			ModelMap modelMap){
 		modelMap.put("admin", userService.getUserById(userId));
 		return "admin/user/updateUser";
 	}
 	
-	@RequestMapping(value = "/updateUser.do",method = RequestMethod.POST)
+	@RequestMapping(value = "/update",method = RequestMethod.POST)
 	public String updateAdmin(@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "userId") long userId,
 			@RequestParam(value = "type") int type){
 		userService.updateUser(userId, type, userName);
-		return "redirect:/admin/user/allList.do";
+		return "redirect:/admin/user/allList";
 	}
 	
-	@RequestMapping(value = "/deleteUser.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/delete",method = RequestMethod.GET)
 	public String deleteUser(@RequestParam(value = "userId") long userId){
 		userService.deleteUserById(userId);
-		return "redirect:/admin/user/allList.do";
+		return "redirect:/admin/user/allList";
 	}
 
 }
