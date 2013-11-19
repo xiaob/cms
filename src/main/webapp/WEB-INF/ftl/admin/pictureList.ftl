@@ -10,7 +10,7 @@
     <link href="${basePath}/admin/css/dropzone.css" rel="stylesheet"/>
       <!-- Custom styles for this template -->
     <link href="${basePath}/admin/css/style.css" rel="stylesheet">
-    <link href="${basePath}/admin/css/style-responsive.css" rel="stylesheet" />
+    <link href="${basePath}/admin/css/style-responsive.css" rel="stylesheet"/>
     
 <section id="main-content">
           <section class="wrapper">
