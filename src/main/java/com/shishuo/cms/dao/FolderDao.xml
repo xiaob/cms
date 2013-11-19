@@ -19,8 +19,8 @@
 	
 	<insert id="addFolder" parameterType="com.shishuo.cms.entity.Folder">
 		insert into
-		folder(fatherId,name,count,status,type,template,createTime,sort,rank)
-		value(#{fatherId},#{name},#{count},#{status},#{type},#{template},#{createTime},#{sort},#{rank})
+		folder(fatherId,ename,name,topId,count,status,type,template,createTime,sort,rank)
+		value(#{fatherId},#{ename},#{name},#{topId},#{count},#{status},#{type},#{template},#{createTime},#{sort},#{rank})
 		<selectKey resultType="long" keyProperty="folderId">
 			SELECT LAST_INSERT_ID()
 		</selectKey>

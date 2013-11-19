@@ -1,6 +1,5 @@
 package com.shishuo.cms.action.admin;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,30 +24,20 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 进入添加目录页面
 	 *
 	 */
-	@RequestMapping(value = "/addFolder.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/add",method = RequestMethod.GET)
 	public String login(ModelMap modelMap){
 		modelMap.put("folderAll", folderService.getAllList());
-		modelMap.put("foldername", "");
-		modelMap.put("folderename", "");
+		modelMap.put("folderName", "");
+		modelMap.put("folderEname", "");
 		return "admin/folder";
 	}
 	
 	/**
 	 * @author 添加新的目录
 	 *
-	 */
-	@RequestMapping(value = "/addNewFolder.do",method = RequestMethod.POST)
-	public String addFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
-			@RequestParam(value = "folderName") String folderName,
-			@RequestParam(value = "folderEname") String folderEname,
-			@RequestParam(value = "type") int type,
-			@RequestParam(value = "status") int status){
-		folderService.addFolder(fatherId, folderName, status, folderEname, type);
-		return "redirect:/admin";
-	}
-	
+	 */	
 	@ResponseBody
-	@RequestMapping(value = "/addNewFolder.json",method = RequestMethod.POST)
+	@RequestMapping(value = "/addNew.json",method = RequestMethod.POST)
 	public JsonVo<String> addNewFolder(
 			@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
 			@RequestParam(value = "folderName") String folderName,
@@ -58,16 +47,15 @@ public class AdminFolderAction extends AdminBaseAction{
 			ModelMap modelMap) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
-
-			if(folderName==null){
-				json.getErrors().put("foldername", "目录名称不能为空");
+			if(folderName.equals("")){
+				json.getErrors().put("folderName", "目录名称不能为空");
 			}
-			if(folderEname==null){
-				json.getErrors().put("folderename", "英文名称不能为空");
+			if(folderEname.equals("")){
+				json.getErrors().put("folderEname", "英文名称不能为空");
 			}
-			folderService.addFolder(fatherId, folderName, status, folderEname, type);
 			// 检测校验结果
 			validate(json);
+			folderService.addFolder(fatherId, folderName, status, folderEname, type);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -81,7 +69,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 所有目录列表分页
 	 *
 	 */
-	@RequestMapping(value = "/allFolder.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/all",method = RequestMethod.GET)
 	public String allFolder(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,ModelMap modelMap){
 		PageVo<Folder> pageVo = folderService.getAllListPageByNum(pageNum);
 		modelMap.put("pageVo", pageVo);
@@ -92,7 +80,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 进入修改目录资料页面
 	 *
 	 */
-	@RequestMapping(value = "/oneFolder.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/one",method = RequestMethod.GET)
 	public String oneFolder(@RequestParam(value = "folderId", defaultValue = "1") long folderId,ModelMap modelMap){
 		Folder folder = folderService.getFolderById(folderId);
 		if(folder.getFatherId()==0){
@@ -110,7 +98,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 修改目录资料
 	 *
 	 */
-	@RequestMapping(value = "/updateFolder.do",method = RequestMethod.POST)
+	@RequestMapping(value = "/update",method = RequestMethod.POST)
 	public String updateFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "folderName") String folderName,
@@ -119,6 +107,6 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "sort") int sort,
 			@RequestParam(value = "status") int status){
 		folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status, type, sort);
-		return "redirect:/admin/folder/allFolder.do";
+		return "redirect:/admin/folder/all";
 	}
 }

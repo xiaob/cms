@@ -1,5 +1,5 @@
-<#assign menu="system">
-<#assign submenu="system_basic">
+<#assign menu="folder">
+<#assign submenu="folder_add">
 <#include "head.ftl">
 <style type="text/css">
 .m-bot15 {
@@ -30,20 +30,21 @@
                             	 添加目录
                           </header>
                           <div class="panel-body">
-                              <form id="addFolder_form" method="post" class="form-horizontal" action="${basePath}/admin/folder/addNewFolder.json">
+                              <form id="addFolder_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/folder/addNew.json">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录名称</label>
                                       <div class="col-sm-10">
                                           <input type="text" class="form-control" name="folderName"
-                                          	placeholder="目录名称" id="folderName" value="${foldername}">
+                                          	placeholder="目录名称" id="folderName" >${folderName}
+                                          </input>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">英文名称</label>
                                       <div class="col-sm-10">
                                           <input type="text" class="form-control" name="folderEname"
-                                          	placeholder="英文名称" id="folderEname" value="${folderename}">
+                                          	placeholder="英文名称" id="folderEname" value="${folderEname}">
                                       </div>
                                   </div>
                                   <div class="form-group">
@@ -97,7 +98,9 @@
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-					
+					bootbox.alert("保存成功，将刷新页面", function() {
+						window.location.reload();
+					});
 				}else{
 					showErrors($('#addFolder_form'),data.errors);
 				}
