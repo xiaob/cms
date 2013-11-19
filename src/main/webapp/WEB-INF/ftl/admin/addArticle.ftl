@@ -23,7 +23,7 @@
                             	添加文章
                           </header>
                           <div class="panel-body">
-                              <form method="post" class="form-horizontal" action="/CMS/admin/file/addNewArticle.do">
+                              <form method="post" class="form-horizontal" action="${basePath}/admin/file/addNewArticle.do">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章名称</label>

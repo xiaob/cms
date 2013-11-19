@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.shishuo.cms.service.ConfigService;
+
 public class BasePathFilter implements Filter {
 
 	public void destroy() {
@@ -24,11 +26,11 @@ public class BasePathFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		HttpSession session = request.getSession();
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName()
 				+ ":" + request.getServerPort() + path;
-		session.setAttribute("basePath", basePath);
+		request.setAttribute("basePath", basePath);
+		request.setAttribute("configMap", ConfigService.CONFIG_MAP);
 		chain.doFilter(request, response);
 	}
 

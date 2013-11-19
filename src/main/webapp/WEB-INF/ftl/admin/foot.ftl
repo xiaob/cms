@@ -10,6 +10,7 @@
 	<script src="${basePath}/admin/assets/tinymce/jquery.tinymce.min.js"></script>
 	<script src="${basePath}/admin/assets/tinymce/tinymce.min.js"></script>
 	<script src="${basePath}/admin/js/bootstrap-switch.js"></script>
+	<script src="${basePath}/admin/js/bootbox.min.js"></script>
 	
 	<!--common script for all pages-->
 	<script src="${basePath}/admin/js/common-scripts.js"></script>

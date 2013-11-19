@@ -11,18 +11,18 @@
     <title>师说CMS 后台</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="${basePath}/default/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${basePath}/default/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="${basePath}/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${basePath}/admin/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="${basePath}/default/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${basePath}/admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="${basePath}/default/css/style.css" rel="stylesheet">
-    <link href="${basePath}/default/css/style-responsive.css" rel="stylesheet" />
+    <link href="${basePath}/admin/css/style.css" rel="stylesheet">
+    <link href="${basePath}/admin/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-    <script src="${basePath}/default/js/html5shiv.js"></script>
-    <script src="${basePath}/default/js/respond.min.js"></script>
+    <script src="${basePath}/admin/js/html5shiv.js"></script>
+    <script src="${basePath}/admin/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -31,7 +31,7 @@
     <div class="container">
 
       <form class="form-signin" action="index.html">
-        <h2 class="form-signin-heading"><img src="${basePath}/default/images/logo.png" style="height:38px;"/></h2>
+        <h2 class="form-signin-heading"><img src="${basePath}/admin/images/logo.png" style="height:38px;"/></h2>
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="邮箱" autofocus>
             <input type="password" class="form-control" placeholder="密码">

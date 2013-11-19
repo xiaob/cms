@@ -30,7 +30,7 @@
                             	 添加管理员
                           </header>
                           <div class="panel-body">
-                              <form method="post" class="form-horizontal" action="/CMS/admin/admin/addNewAdmin.do">
+                              <form method="post" class="form-horizontal" action="${basePath}/admin/admin/addNewAdmin.do">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">管理员名称</label>

@@ -30,25 +30,27 @@
                             	 添加目录
                           </header>
                           <div class="panel-body">
-                              <form method="post" class="form-horizontal" action="/CMS/admin/folder/addNewFolder.do">
+                              <form id="addFolder_form" method="post" class="form-horizontal" action="${basePath}/admin/folder/addNewFolder.json">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录名称</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="folderName">
+                                          <input type="text" class="form-control" name="folderName"
+                                          	placeholder="目录名称" id="folderName" value="${foldername}">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">英文名称</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="folderEname">
+                                          <input type="text" class="form-control" name="folderEname"
+                                          	placeholder="英文名称" id="folderEname" value="${folderename}">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">父级标签</label>
                                       <div class="col-sm-10">
                                         <select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="fatherId">
-                                        	<option>未分类</option>
+                                        	<option value="0">未分类</option>
                                         	<#list folderAll as folder>  	
                                           		<option value="${folder.folderId}">${folder.name}</option>
                                         	</#list>
@@ -76,7 +78,8 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <input class="button" value="增加" type="submit" style="height:35px">
+                                  	<label class="col-sm-2 col-sm-2 control-label"></label>
+                                      <button class="btn btn-danger" type="submit">保存</button>
                                   </div>
                                  </fieldset>
                               </form>
@@ -88,4 +91,18 @@
           </section>
 		</section>
 		<!--main content end-->
+<script type="text/javascript">
+	$(function() {
+		$('#addFolder_form').ajaxForm({
+			dataType : 'json',
+			success : function(data) {
+				if (data.result) {
+					
+				}else{
+					showErrors($('#addFolder_form'),data.errors);
+				}
+			}
+		});
+	});	
+</script>
 <#include "foot.ftl">

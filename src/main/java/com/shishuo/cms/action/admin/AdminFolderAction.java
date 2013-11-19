@@ -1,12 +1,15 @@
 package com.shishuo.cms.action.admin;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 
 
@@ -25,6 +28,8 @@ public class AdminFolderAction extends AdminBaseAction{
 	@RequestMapping(value = "/addFolder.do",method = RequestMethod.GET)
 	public String login(ModelMap modelMap){
 		modelMap.put("folderAll", folderService.getAllList());
+		modelMap.put("foldername", "");
+		modelMap.put("folderename", "");
 		return "admin/folder";
 	}
 	
@@ -41,6 +46,36 @@ public class AdminFolderAction extends AdminBaseAction{
 		folderService.addFolder(fatherId, folderName, status, folderEname, type);
 		return "redirect:/admin";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/addNewFolder.json",method = RequestMethod.POST)
+	public JsonVo<String> addNewFolder(
+			@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
+			@RequestParam(value = "folderName") String folderName,
+			@RequestParam(value = "folderEname") String folderEname,
+			@RequestParam(value = "type",defaultValue = "0") int type,
+			@RequestParam(value = "status",defaultValue = "1") int status,
+			ModelMap modelMap) {
+		JsonVo<String> json = new JsonVo<String>();
+		try {
+
+			if(folderName==null){
+				json.getErrors().put("foldername", "目录名称不能为空");
+			}
+			if(folderEname==null){
+				json.getErrors().put("folderename", "英文名称不能为空");
+			}
+			folderService.addFolder(fatherId, folderName, status, folderEname, type);
+			// 检测校验结果
+			validate(json);
+			json.setResult(true);
+		} catch (Exception e) {
+			json.setResult(false);
+			json.setMsg(e.getMessage());
+		}
+		return json;
+	}
+	
 	
 	/**
 	 * @author 所有目录列表分页

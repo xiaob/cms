@@ -15,7 +15,7 @@
         	<!-- page start-->
             <section class="panel">
             	<header class="panel-heading">
-               		 所有管理员列表
+               		 所有用户列表
                 </header>
                 <div class="panel-body">
                 	<div class="adv-table">
@@ -26,10 +26,10 @@
                							<th>
                   							<input class="check-all" type="checkbox" />
                 						</th>
-                						<th>管理员Id</th>
-                						<th>管理员名称</th>
-                						<th>密码</th>
-                						<th>状态</th>
+                						<th>用户Id</th>
+                						<th>用户名称</th>
+                						<th>OpenId</th>
+                						<th>类型</th>
                 						<th>时间</th>
                 						<th>操作</th>
               						</tr>
@@ -40,10 +40,10 @@
                             			<td>
                   							<input type="checkbox" name="${e_index}"/>
                							</td>
-                            			<td>${e.adminId}</td>
+                            			<td>${e.userId}</td>
                                     	<td>${e.name}</td>
-                                    	<td>${e.password}</td>
-                                    	<td>${e.status}</td>
+                                    	<td>${e.openId}</td>
+                                    	<td>${e.type}</td>
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
