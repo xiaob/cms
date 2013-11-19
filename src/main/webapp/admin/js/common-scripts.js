@@ -29,6 +29,10 @@ var Script = function () {
 //    sidebar toggle
 
     $(function() {
+    	tinyMCE.init({
+			mode:"specific_textareas"
+		});
+    	
         function responsiveView() {
             var wSize = $(window).width();
             if (wSize <= 768) {
