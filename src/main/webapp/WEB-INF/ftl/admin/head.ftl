@@ -90,6 +90,7 @@
 							<li><a href="${basePath}/admin/file/recycleList.do">回收站</a></li>
 						</ul>
 					</li>
+					<#if configMap.function_photo=="on">
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-camera-retro"></i> <span>图片管理</span></a>
 						<ul class="sub">
@@ -98,6 +99,8 @@
 							<li><a href="${basePath}/admin/picture/trash">回收站</a></li>
 						</ul>
 					</li>
+					</#if>
+					<#if configMap.function_download=="on">
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-upload-alt"></i> <span>下载管理</span></a>
 						<ul class="sub">
@@ -107,6 +110,8 @@
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
 					</li>
+					</#if>
+					<#if configMap.function_shop=="on">					
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-gift"></i> <span>商品管理</span></a>
 						<ul class="sub">
@@ -114,7 +119,8 @@
 							<li><a href="buttons.html">商品列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
-					</li>										
+					</li>	
+					</#if>
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-signin"></i> <span>招聘管理</span></a>
 						<ul class="sub">
@@ -127,7 +133,7 @@
 						</ul>
 					</li>																	
 					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-cogs"></i> <span>系统管理</span></a>
+						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>系统管理</span></a>
 						<ul class="sub">
 							<li  <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
 							<li><a href="${basePath}/admin/admin/addAdmin.do">添加管理员</a></li>
