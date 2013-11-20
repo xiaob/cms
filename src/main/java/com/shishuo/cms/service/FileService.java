@@ -99,6 +99,7 @@ public class FileService {
 		file.setFolderId(folderId);
 		file.setName(name);
 		file.setUrl(url);
+		file.setUserId(1);
 		file.setImages(images);
 		file.setDescription(description);
 		file.setType(type);
@@ -144,15 +145,7 @@ public class FileService {
 		return file;
 	}
 
-	/**
-	 * 通过folderId获得文件
-	 * @param folderId
-	 * @return File
-	 *
-	 */
-	public File getFolderId(long folderId) {
-		return fileDao.getFolderId(folderId);
-	}
+
 	
 	/**
 	 * 所有文件列表

@@ -29,9 +29,9 @@ public class FileTag implements TemplateDirectiveModel {
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
 		// 获取页面的参数
-		Integer folderId = Integer.parseInt(params.get("folderId").toString());
+		Integer fileId = Integer.parseInt(params.get("fileId").toString());
 		// 获取指定的文件
-		File file = fileService.getFolderId(folderId);
+		File file = fileService.getFileById(fileId);
 		env.setVariable("file", BEANS_WRAPPER.wrap(file));
 		body.render(env.getOut());
 	}

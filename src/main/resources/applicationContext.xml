@@ -44,7 +44,6 @@
 			<map>
 				<!-- 目录标签 -->
 				<entry key="cms_folder_list" value-ref="folderListTag" />
-
 				<!-- 文件标签 -->
 				<entry key="cms_file_page" value-ref="filePageTag" />
 				<entry key="cms_file" value-ref="fileTag" />

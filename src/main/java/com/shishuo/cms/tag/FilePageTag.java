@@ -32,6 +32,7 @@ public class FilePageTag implements TemplateDirectiveModel {
 			TemplateDirectiveBody body) throws TemplateException, IOException {
 		// 获取页面的参数
 		Integer folderId = Integer.parseInt(params.get("folderId").toString());
+		Integer type = Integer.parseInt(params.get("type").toString());
 		Integer pageNum = Integer.parseInt(params.get("pageNum").toString());
 		// 获取文件的分页
 		PageVo<File> pageVo = fileService.getFilePageByFoderId(folderId,

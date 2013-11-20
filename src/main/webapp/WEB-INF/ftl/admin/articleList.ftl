@@ -1,5 +1,5 @@
-<#assign menu="system">
-<#assign submenu="system_basic">
+<#assign menu="article">
+<#assign submenu="article_list">
 <#include "head.ftl">
 <style type="text/css">
 .pagination {

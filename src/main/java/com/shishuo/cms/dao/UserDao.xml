@@ -4,8 +4,11 @@
 
 	<insert id="addUser" parameterType="com.shishuo.cms.entity.User">
 		insert into
-		user(userId,openId,type,name,createTime)
-		value(#{userId},#{openId},#{type},#{name},#{createTime})
+		user(openId,type,name,createTime)
+		value(#{openId},#{type},#{name},#{createTime})
+		<selectKey resultType="long" keyProperty="userId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 	
 	<select id="getUserById" 
