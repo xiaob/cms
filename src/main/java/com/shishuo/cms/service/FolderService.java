@@ -18,6 +18,8 @@
  */package com.shishuo.cms.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +61,7 @@ public class FolderService {
 	 * @param fatherId
 	 * @return List<Folder>
 	 */
-	public List<Folder> getFolderListByFatherId(long fatherId) {
+	public List<FolderVo> getFolderListByFatherId(long fatherId) {
 		return folderDao.getFolderListByFatherId(fatherId);
 	}
 
@@ -70,10 +72,10 @@ public class FolderService {
 	 * @return List<FolderVo>
 	 */
 	public List<FolderVo> getFolderVoListByFatherId(long fatherId) {
-		List<Folder> list = this.getFolderListByFatherId(fatherId);
+		List<FolderVo> list = this.getFolderListByFatherId(fatherId);
 		List<FolderVo> allList = new ArrayList<FolderVo>();
 		for (Folder folder : list) {
-			List<Folder> folderList = this.getFolderListByFatherId(folder
+			List<FolderVo> folderList = this.getFolderListByFatherId(folder
 					.getFolderId());
 			for (Folder f : folderList) {
 				FolderVo foderVo = new FolderVo();
@@ -97,14 +99,7 @@ public class FolderService {
 	public Folder addFolder(long fatherId, String name, int status, String ename,
 			int type) {
 		Folder folder = new Folder();
-		Folder fatherFolder = new Folder();
 		folder.setFatherId(fatherId);
-		if(fatherId==0){
-			folder.setTopId(folder.getFolderId());
-		}else{
-			fatherFolder = this.getFolderById(fatherId);
-			folder.setTopId(fatherFolder.getTopId());
-		}
 		folder.setEname(ename);
 		folder.setName(name);
 		folder.setCount(0);
@@ -115,6 +110,15 @@ public class FolderService {
 		folder.setRank(0);
 		folder.setCreateTime(new Date());
 		folderDao.addFolder(folder);
+		Folder fo = this.getFolderByEname(ename);
+		if(fo.getFatherId()==0){
+			fo.setPath(fo.getFolderId()+"");
+			fo.setLevel(1);
+		}else{
+			fo.setPath(folderDao.getFolderById(fo.getFatherId()).getPath()+"#"+fo.getFolderId());
+			fo.setLevel(folderDao.getFolderById(fo.getFatherId()).getLevel()+1);
+		}
+		folderDao.updateFolder(fo);
 		return folder;
 	}
 
@@ -174,6 +178,7 @@ public class FolderService {
 		return folderDao.getAllList();
 	}
 	
+	
 	/**
 	 * 获得分页的所有目录的列表
 	 * @param offset
@@ -210,4 +215,33 @@ public class FolderService {
 		return pageVo;
 	}
 	
+	public List<FolderVo> getAllFolder(){
+		List<FolderVo>  allFolderList = new ArrayList<FolderVo>();
+		this.getFolderList(allFolderList,0);
+		return allFolderList;
+	}
+	
+	private void getFolderList(List<FolderVo> allFolderList,long fatherId){
+		List<FolderVo>  folderList = folderDao.getFolderListByFatherId(fatherId);
+		Collections.sort(folderList, new ComparatorFolderList());
+		for(FolderVo folder:folderList){
+			allFolderList.add(folder);
+			this.getFolderList(allFolderList,folder.getFolderId());
+		}
+	}
+	
+	class ComparatorFolderList implements Comparator<Object>{
+
+		@Override
+		public int compare(Object arg0, Object arg1) {
+			FolderVo folderVo1 = (FolderVo)arg0;
+			FolderVo folderVo2 = (FolderVo)arg1;
+			String str1=folderVo1.getSort()+"";
+			String str2=folderVo2.getSort()+"";
+			int flag= str1.compareTo(str2);
+			return flag;
+			
+		}
+
+	}
 }

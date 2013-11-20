@@ -1,5 +1,7 @@
 package com.shishuo.cms.action.admin;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 
@@ -69,11 +72,11 @@ public class AdminFolderAction extends AdminBaseAction{
 	/**
 	 * @author 所有目录列表分页
 	 *
-	 */
+	 */	
 	@RequestMapping(value = "/all",method = RequestMethod.GET)
-	public String allFolder(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,ModelMap modelMap){
-		PageVo<Folder> pageVo = folderService.getAllListPageByNum(pageNum);
-		modelMap.put("pageVo", pageVo);
+	public String adminAllFolder(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,ModelMap modelMap){
+		List<FolderVo> list = folderService.getAllFolder();
+		modelMap.put("list", list);
 		return "admin/allFolder";
 	}
 	

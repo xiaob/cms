@@ -24,6 +24,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.entity.vo.FolderVo;
 
 /**
  * 目录服务
@@ -49,7 +50,7 @@ public interface FolderDao {
 	 * @param fatherId
 	 * @return List<Folder>
 	 */
-	public List<Folder> getFolderListByFatherId(@Param("fatherId") long fatherId);
+	public List<FolderVo> getFolderListByFatherId(@Param("fatherId") long fatherId);
 
 	/**
 	 * 增加目录

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.service.FolderService;
 
 import freemarker.core.Environment;
@@ -37,7 +38,7 @@ public class FolderListTag implements TemplateDirectiveModel {
 		Integer fatherId = Integer.parseInt(params.get("fatherId").toString());
 
 		// 获得目录列表
-		List<Folder> list = folderService.getFolderListByFatherId(fatherId);
+		List<FolderVo> list = folderService.getFolderListByFatherId(fatherId);
 		env.setVariable("folderList", DEFAULT_WRAPPER.wrap(list));
 		body.render(env.getOut());
 	}
