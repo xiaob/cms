@@ -1,5 +1,6 @@
 package com.shishuo.cms.action.admin;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,15 +99,46 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 修改目录资料
 	 *
 	 */
-	@RequestMapping(value = "/update",method = RequestMethod.POST)
-	public String updateFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
+//	@RequestMapping(value = "/update",method = RequestMethod.POST)
+//	public String updateFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
+//			@RequestParam(value = "folderId") long folderId,
+//			@RequestParam(value = "folderName") String folderName,
+//			@RequestParam(value = "folderEname") String folderEname,
+//			@RequestParam(value = "type") int type,
+//			@RequestParam(value = "sort") int sort,
+//			@RequestParam(value = "status") int status){
+//		folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status, type, sort);
+//		return "redirect:/admin/folder/all";
+//	}
+	@ResponseBody
+	@RequestMapping(value = "/update.json",method = RequestMethod.POST)
+	public JsonVo<String> updateFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "folderName") String folderName,
 			@RequestParam(value = "folderEname") String folderEname,
 			@RequestParam(value = "type") int type,
-			@RequestParam(value = "sort") int sort,
+			@RequestParam(value = "sort",defaultValue="0") int sort,
 			@RequestParam(value = "status") int status){
-		folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status, type, sort);
-		return "redirect:/admin/folder/all";
+		JsonVo<String> json = new JsonVo<String>();	
+		try {
+			if(folderName.equals("")){
+				json.getErrors().put("folderName", "目录名称不能为空");
+			}
+			if(folderEname.equals("")){
+				json.getErrors().put("folderEname", "英文名称不能为空");
+			}
+			if(sort==0){
+				json.getErrors().put("sort", "目录序列不能为空");
+			}
+			
+			// 检测校验结果
+			validate(json);
+			folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status, type, sort);
+			json.setResult(true);
+		} catch (Exception e) {
+			json.setResult(false);
+			json.setMsg(e.getMessage());
+		}
+		return json;
 	}
 }

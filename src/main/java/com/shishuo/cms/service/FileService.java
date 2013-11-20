@@ -99,6 +99,7 @@ public class FileService {
 		file.setFolderId(folderId);
 		file.setName(name);
 		file.setUrl(url);
+		file.setUserId(1);
 		file.setImages(images);
 		file.setDescription(description);
 		file.setType(type);

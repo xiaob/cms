@@ -1,5 +1,5 @@
 <#assign menu="system">
-<#assign submenu="system_basic">
+<#assign submenu="user_list">
 <#include "../head.ftl">
 <style type="text/css">
 
@@ -12,38 +12,42 @@
 			<div class="col-lg-12">
 			<section class="panel">
 				<header class="panel-heading">
- 					修改管理员资料
+ 					修改用户资料
 				</header>
 				<div class="panel-body">
-					<form method="post" class="form-horizontal tasi-form" action="/CMS/admin/admin/update">
+					<form id="update_user_form" method="post" class="form-horizontal" autocomplete="off" action="/CMS/admin/user/update.json">
 					<fieldset>
 						<div class="form-group">
-							<label class="col-sm-2 col-sm-2 control-label">管理员Id</label>
+							<label class="col-sm-2 col-sm-2 control-label">用户Id</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="adminId" value="${admin.adminId}">
+								<input type="text" class="form-control" name="userId" value="${user.userId}">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 col-sm-2 control-label">管理员名称</label>
+							<label class="col-sm-2 col-sm-2 control-label">用户名称</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="adminName" value="${admin.name}">
+								<input type="text" class="form-control" name="userName" value="${user.name}"
+									placeholder="用户名称" id="userName">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 col-sm-2 control-label">密码</label>
+							<label class="col-sm-2 col-sm-2 control-label">open</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control round-input" name="password" value="${admin.password}">
+								<input type="text" class="form-control round-input" name="open" value="${user.openId}"
+									placeholder="open" id="open">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 col-sm-2 control-label">状态</label>
+							<label class="col-sm-2 col-sm-2 control-label">类型</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control round-input" name="status" value="${admin.status}">
+								<input type="text" class="form-control round-input" name="type" value="${user.type}"
+									placeholder="管理员名称" id="type">
 							</div>
 						</div>
 						<div class="form-group">
-							<input class="button" value="修改" type="submit" style="height:35px">
-						</div>
+                        	<label class="col-sm-2 col-sm-2 control-label"></label>
+                        	<button class="btn btn-danger" type="submit">修改</button>
+                        </div>
 					</fieldset>
 				</form>
 				</div>
@@ -54,4 +58,20 @@
 		</section>
 	</section>
  <!--main content end-->
+<script type="text/javascript">
+	$(function() {
+		$('#update_user_form').ajaxForm({
+			dataType : 'json',
+			success : function(data) {
+				if (data.result) {
+					bootbox.alert("保存成功，将刷新页面", function() {
+						window.location.reload();
+					});
+				}else{
+					showErrors($('#update_user_form'),data.errors);
+				}
+			}
+		});
+	});	
+</script>
 <#include "../foot.ftl">

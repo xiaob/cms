@@ -12,7 +12,6 @@
 		select * from config
 	</select>
 
-	
 	<insert id="addConfig" parameterType="com.shishuo.cms.entity.Config">
 		insert into
 		config(`key`,`value`,createTime)
