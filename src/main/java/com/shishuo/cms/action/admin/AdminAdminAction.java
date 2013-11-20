@@ -20,7 +20,7 @@ public class AdminAdminAction extends AdminBaseAction{
 	
 	@RequestMapping(value = "/addNew",method = RequestMethod.POST)
 	public String addNewUser(@RequestParam(value = "adminName") String adminName){
-		adminService.addAdmin(adminName, AdminConstant.PASS_WORD, 0);
+//		adminService.addAdmin(adminName, AdminConstant.PASS_WORD, 0);
 		return "redirect:/admin/admin/allList.do";
 	}
 	

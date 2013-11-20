@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.exception.AuthException;
@@ -78,7 +79,6 @@ public class AuthAction extends BaseAction {
 			adminService.adminLogin(email, password, request);
 
 		} catch (Exception e) {
-			json.setResult(false);
 			json.getErrors().put("password", "邮箱或密码错误");
 		}
 		return json;
@@ -112,6 +112,4 @@ public class AuthAction extends BaseAction {
 			out.close();
 		}
 	}
-
-
 }
