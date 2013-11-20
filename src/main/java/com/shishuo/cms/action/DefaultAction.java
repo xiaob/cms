@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.entity.Folder;
@@ -27,6 +28,7 @@ public class DefaultAction {
 
 	@Autowired
 	private FolderService folderService;
+	
 	@Autowired
 	private ConfigService configService;
 
@@ -44,7 +46,13 @@ public class DefaultAction {
 	
 	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
 	public String admin(HttpServletRequest request, ModelMap modelMap) {
-		return "admin/login";
+		return "admin/admin";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "login.json", method = RequestMethod.POST)
+	public String login(HttpServletRequest request, ModelMap modelMap) {
+		return "admin/admin";
 	}
 
 	@RequestMapping(value = "/{ename}", method = RequestMethod.GET)

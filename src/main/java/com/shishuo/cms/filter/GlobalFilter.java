@@ -10,11 +10,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.MDC;
 
 import com.shishuo.cms.service.ConfigService;
+import com.shishuo.cms.util.HttpUtils;
 
-public class BasePathFilter implements Filter {
+public class GlobalFilter implements Filter {
 
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -31,7 +33,9 @@ public class BasePathFilter implements Filter {
 				+ ":" + request.getServerPort() + path;
 		request.setAttribute("basePath", basePath);
 		request.setAttribute("configMap", ConfigService.CONFIG_MAP);
+		MDC.put("ip", HttpUtils.getIp(request));
 		chain.doFilter(request, response);
+		MDC.remove("ip");
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {

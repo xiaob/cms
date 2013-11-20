@@ -1,5 +1,5 @@
 <#assign menu="system">
-<#assign submenu="system_basic">
+<#assign submenu="user_list">
 <#include "../head.ftl">
 <style type="text/css">
 .pagination {
@@ -47,12 +47,12 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="/CMS/admin/admin/oneAdmin.do?adminId=${e.adminId}" title="修改">
+                							<a href="/CMS/admin/user/one?userId=${e.userId}" title="修改">
                 								<button class="btn btn-primary btn-xs">
                 									<i class="icon-pencil"></i>
                 								</button>
                 							</a>
-                							<a href="/CMS/admin/admin/deleteAdmin.do?adminId=${e.adminId}" title="删除">
+                							<a href="/CMS/admin/user/delete?userId=${e.userId}" title="删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>

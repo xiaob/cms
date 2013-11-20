@@ -1,5 +1,5 @@
-<#assign menu="system">
-<#assign submenu="system_basic">
+<#assign menu="article">
+<#assign submenu="add_article">
 <#include "head.ftl">
 <style type="text/css">
 .m-bot15 {
@@ -23,19 +23,20 @@
                             	添加文章
                           </header>
                           <div class="panel-body">
-                              <form method="post" class="form-horizontal" action="${basePath}/admin/file/addNewArticle.do">
+                              <form id="add_article_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/file/addNew.json">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章名称</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="fileName" value="">
+                                          <input type="text" class="form-control" name="fileName" value="${fileName}"
+                                          	placeholder="文章名称" id="fileName">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">所属目录</label>
                                       <div class="col-sm-10">
                                          <select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;height: 40px;" name="folderId">
-                                        	<option>未分类</option>
+                                        	<option value="0">未分类</option>
                                         	<#list folderAll as folder>  	
                                           		<option value="${folder.folderId}">${folder.name}</option>
                                         	</#list>
@@ -45,19 +46,22 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章链接</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="url" value="">
+                                          <input type="text" class="form-control" name="url" value="${url}"
+                                          	placeholder="文章链接" id="url">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章图片</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="images" value="">
+                                          <input type="text" class="form-control" name="images" value="${images}"
+                                          	placeholder="文章图片" id="images">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章种类</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="description" value="">
+                                          <input type="text" class="form-control" name="description" value="${description}"
+                                          	placeholder="文章种类" id="description">
                                       </div>
                                   </div>
                                   <div class="form-group">
@@ -80,4 +84,20 @@
           </section>
 		</section>
 		<!--main content end-->
+<script type="text/javascript">
+	$(function() {
+		$('#add_article_form').ajaxForm({
+			dataType : 'json',
+			success : function(data) {
+				if (data.result) {
+					bootbox.alert("保存成功，将刷新页面", function() {
+						window.location.reload();
+					});
+				}else{
+					showErrors($('#add_article_form'),data.errors);
+				}
+			}
+		});
+	});	
+</script>
 <#include "foot.ftl">

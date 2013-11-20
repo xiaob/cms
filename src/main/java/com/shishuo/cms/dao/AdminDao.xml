@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="getAllListCount"
-		resultType="long">
+		resultType="int">
 		select count(*) from admin
 	</select>
 	
@@ -33,5 +33,10 @@
 	<select id="getAdminById" parameterType="long"
 		resultType="com.shishuo.cms.entity.Admin">
 		select * from admin where adminId=#{adminId}
+	</select>
+	
+	<select id="getAdminByEmail" parameterType="String"
+		resultType="com.shishuo.cms.entity.Admin">
+		select * from admin where email=#{email}
 	</select>
 </mapper>  

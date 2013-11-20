@@ -35,11 +35,6 @@ public class Folder {
 	private long folderId;
 
 	/**
-	 * 顶栏Id
-	 */
-	private long topId;
-
-	/**
 	 * 父亲Id
 	 */
 	private long fatherId;
@@ -87,6 +82,33 @@ public class Folder {
 	 * 时间
 	 */
 	private Date createTime;
+	
+	/**
+	 *路径
+	 */
+	private String path;
+	
+	/**
+	 *目录级别
+	 */
+	private int level;
+	
+	
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
 	public long getFolderId() {
 		return folderId;
@@ -94,14 +116,6 @@ public class Folder {
 
 	public void setFolderId(long folderId) {
 		this.folderId = folderId;
-	}
-
-	public long getTopId() {
-		return topId;
-	}
-
-	public void setTopId(long topId) {
-		this.topId = topId;
 	}
 
 	public long getFatherId() {

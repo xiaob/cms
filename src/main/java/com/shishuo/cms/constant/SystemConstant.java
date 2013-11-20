@@ -7,8 +7,16 @@ package com.shishuo.cms.constant;
  * 
  */
 public class SystemConstant {
+	
 	/**
-	 * 
+	 * 应用部署路径的KEY
 	 */
-	public static String SHISHUO_CMS_ROOT = "shishuo.cms.root";
+	public static final String SHISHUO_CMS_ROOT = "shishuo.cms.root";
+	
+	
+	/**
+	 * Session中的管理员ID的KEY
+	 */
+	public static final String SESSION_ADMIN_ID = "SESSION_ADMIN_ID";
+
 }

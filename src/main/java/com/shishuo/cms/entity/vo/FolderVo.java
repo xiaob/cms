@@ -24,14 +24,14 @@ import java.util.List;
 import com.shishuo.cms.entity.Folder;
 
 public class FolderVo extends Folder {
-	List<FolderVo> fileList = new ArrayList<FolderVo>();
+	List<FolderVo> folderVoList = new ArrayList<FolderVo>();
 
-	public List<FolderVo> getFileList() {
-		return fileList;
+	public List<FolderVo> getFolderVo() {
+		return folderVoList;
 	}
 
-	public void setFileList(List<FolderVo> fileList) {
-		this.fileList = fileList;
+	public void setFolderVo(List<FolderVo> folderVoList) {
+		this.folderVoList = folderVoList;
 	}
 
 }

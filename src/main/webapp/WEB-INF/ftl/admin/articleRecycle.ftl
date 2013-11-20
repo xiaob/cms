@@ -1,5 +1,5 @@
-<#assign menu="system">
-<#assign submenu="system_basic">
+<#assign menu="article">
+<#assign submenu="article_recycle">
 <#include "head.ftl">
 <style type="text/css">
 .pagination {
@@ -52,12 +52,12 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="/CMS/admin/file/recycle.do?fileId=${e.fileId}&status=1" title="还原">
+                  							<a href="/CMS/admin/file/recycle?fileId=${e.fileId}&status=1" title="还原">
                   								<button class="btn btn-success btn-xs">
                   									<i class="icon-ok"></i>
                   								</button>
                   							</a>
-                  							<a href="/CMS/admin/file/deleteFile.do?fileId=${e.fileId}" title="彻底删除">
+                  							<a href="/CMS/admin/file/delete?fileId=${e.fileId}" title="彻底删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-remove"></i>
                   								</button>

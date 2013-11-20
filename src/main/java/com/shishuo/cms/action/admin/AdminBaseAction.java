@@ -24,16 +24,16 @@ public class AdminBaseAction {
 
 	@Autowired
 	protected ConfigService configSevice;
-	
+
 	@Autowired
 	protected FolderService folderService;
-	
+
 	@Autowired
 	protected FileService fileService;
-	
+
 	@Autowired
 	protected LogService logService;
-	
+
 	@Autowired
 	protected UserService userService;
 	@Autowired
@@ -49,7 +49,10 @@ public class AdminBaseAction {
 	 */
 	protected <T> void validate(JsonVo<T> json) throws ValidateException {
 		if (json.getErrors().size() > 0) {
+			json.setResult(false);
 			throw new ValidateException("有错误发生");
+		} else {
+			json.setResult(true);
 		}
 	}
 	// protected boolean getPower(long adminId,String actionName){
