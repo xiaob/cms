@@ -78,25 +78,25 @@
 					<li class="sub-menu">
 						<a href="javascript:;" <#if menu="folder">class="active"</#if>> <i class="icon-folder-open"></i> <span>目录管理</span></a>
 						<ul class="sub">
-							<li><a href="${basePath}/admin/folder/add">增加目录</a></li>
-							<li><a href="${basePath}/admin/folder/all">目录列表</a></li>
+							<li <#if submenu="add_folder">class="active"</#if>><a href="${basePath}/admin/folder/add">增加目录</a></li>
+							<li <#if submenu="folder_list">class="active"</#if>><a href="${basePath}/admin/folder/all">目录列表</a></li>
 						</ul>						
 					</li>
 					<li class="sub-menu">
-						<a href="javascript:;" <#if menu="artcile">class="active"</#if>> <i class="icon-book"></i> <span>文章管理</span></a>
+						<a href="javascript:;" <#if menu="article">class="active"</#if>> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
-							<li><a href="${basePath}/admin/file/add">增加文章</a></li>
-							<li><a href="${basePath}/admin/file/articleList">文章列表</a></li>
-							<li><a href="${basePath}/admin/file/recycleList">回收站</a></li>
+							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/file/add">增加文章</a></li>
+							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/file/articleList">文章列表</a></li>
+							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/file/recycleList">回收站</a></li>
 						</ul>
 					</li>
 					<#if configMap.function_photo=="on">
 					<li class="sub-menu ">
 						<a href="javascript:;" > <i class="icon-camera-retro"></i> <span>图片管理</span></a>
 						<ul class="sub">
-							<li><a href="${basePath}/admin/picture/">上传图片</a></li>
-							<li><a href="${basePath}/admin/picture/list">图片列表</a></li>
-							<li><a href="${basePath}/admin/picture/trash">回收站</a></li>
+							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/picture/">上传图片</a></li>
+							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/picture/list">图片列表</a></li>
+							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/picture/trash">回收站</a></li>
 						</ul>
 					</li>
 					</#if>
@@ -119,11 +119,7 @@
 							<li><a href="buttons.html">商品列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
-<<<<<<< HEAD
-					</li>	
-=======
 					</li>											
->>>>>>> branch 'master' of git@git.oschina.net:shishuo/CMS.git
 					</#if>
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-signin"></i> <span>招聘管理</span></a>
@@ -139,11 +135,11 @@
 					<li class="sub-menu ">
 						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>系统管理</span></a>
 						<ul class="sub">
-							<li  <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
-							<li><a href="${basePath}/admin/admin/add">添加管理员</a></li>
-							<li><a href="${basePath}/admin/admin/allList">管理员列表</a></li>
-							<li><a href="${basePath}/admin/user/add">添加用户</a></li>
-							<li><a href="${basePath}/admin/user/allList">用户列表</a></li>
+							<li <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
+							<li <#if submenu="add_admin">class="active"</#if>><a href="${basePath}/admin/admin/add">添加管理员</a></li>
+							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/allList">管理员列表</a></li>
+							<li <#if submenu="add_user">class="active"</#if>><a href="${basePath}/admin/user/add">添加用户</a></li>
+							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/allList">用户列表</a></li>
 						</ul>
 					</li>
 				</ul>

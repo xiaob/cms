@@ -1,5 +1,5 @@
 <#assign menu="folder">
-<#assign submenu="add_folder">
+<#assign submenu="folder_add">
 <#include "head.ftl">
 <style type="text/css">
 .m-bot15 {

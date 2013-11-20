@@ -15,7 +15,7 @@
  					修改目录
 				</header>
 				<div class="panel-body">
-					<form id="update_folder_form" method="post" class="form-horizontal tasi-form" autocomplete="off" action="/CMS/admin/folder/update.json">
+					<form method="post" class="form-horizontal tasi-form" action="/CMS/admin/folder/update">
 					<fieldset>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">目录Id</label>
@@ -26,15 +26,13 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">目录名称</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="folderName" value="${folder.name}"
-									placeholder="目录名称" id="folderName">
+								<input type="text" class="form-control" name="folderName" value="${folder.name}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">英文名称</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control round-input" name="folderEname" value="${folder.ename}"
-									placeholder="英文名称" id="folderEname">
+								<input type="text" class="form-control round-input" name="folderEname" value="${folder.ename}">
 							</div>
 						</div>
 						<div class="form-group">
@@ -85,14 +83,12 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">目录序列</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="sort" value="${folder.sort}"
-									placeholder="序列" id="sort">
+								<input type="text" class="form-control" name="sort" value="${folder.sort}">
 							</div>
 						</div>
 						<div class="form-group">
-                        	<label class="col-sm-2 col-sm-2 control-label"></label>
-                            <button class="btn btn-danger" type="submit">修改</button>
-                        </div>
+							<input class="button" value="修改" type="submit" style="height:35px">
+						</div>
 					</fieldset>
 				</form>
 				</div>
@@ -102,21 +98,5 @@
 <!-- page end-->
 		</section>
 	</section>
-<script type="text/javascript">
-	$(function() {
-		$('#update_folder_form').ajaxForm({
-			dataType : 'json',
-			success : function(data) {
-				if (data.result) {
-					bootbox.alert("保存成功，将刷新页面", function() {
-						window.location.reload();
-					});
-				}else{
-					showErrors($('#update_folder_form'),data.errors);
-				}
-			}
-		});
-	});	
-</script>
  <!--main content end-->
 <#include "foot.ftl">

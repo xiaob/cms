@@ -19,16 +19,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SHISHUO CMS Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	<repositories>
-		<repository>
-			<id>google-maven-snapshot-repository</id>
-			<name>Google Maven Snapshot Repository</name>
-			<url>https://m2repos.googlecode.com/svn/nexus</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -150,11 +140,6 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-lgpl</artifactId>
 			<version>1.9.13</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code</groupId>
-			<artifactId>kaptcha</artifactId>
-			<version>2.3.2</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-validator</groupId>
