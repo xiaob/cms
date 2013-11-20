@@ -15,7 +15,7 @@
  					修改管理员资料
 				</header>
 				<div class="panel-body">
-					<form method="post" class="form-horizontal tasi-form" action="/CMS/admin/admin/updateAdmin.do">
+					<form method="post" class="form-horizontal tasi-form" action="/CMS/admin/admin/update">
 					<fieldset>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">管理员Id</label>

@@ -70,7 +70,7 @@
                                     	<td>${e.rank}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="/CMS/admin/folder/oneFolder.do?folderId=${e.folderId}" title="修改"><button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button></a>
+                							<a href="/CMS/admin/folder/one?folderId=${e.folderId}" title="修改"><button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button></a>
                 						</td>
                                 	</tr>
                                 	</#list>

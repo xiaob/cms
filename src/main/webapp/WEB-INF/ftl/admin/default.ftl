@@ -1,4 +1,4 @@
-<#assign menu="system">
+<#assign menu="default">
 <#assign submenu="system_basic">
 <#include "head.ftl">
 		<!--main content start-->

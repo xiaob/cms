@@ -8,7 +8,7 @@
 <meta name="keyword"
 	content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <link rel="shortcut icon" href="img/favicon.png">
-<title>FlatLab - Flat & Responsive Bootstrap Admin Template</title>
+<title>${configMap.sitename} - 后台</title>
 <!-- Bootstrap core CSS -->
 <link href="${basePath}/admin/css/bootstrap.min.css" rel="stylesheet">
 <link href="${basePath}/admin/css/bootstrap-reset.css"
@@ -73,26 +73,26 @@
 				<!-- sidebar menu goes here-->
 				<ul class="sidebar-menu" id="nav-accordion">
 					<li class="">
-						<a class="active" href="${basePath}/admin"> <i class="icon-home"></i> <span>首页</span></a>
+						<a <#if menu="default">class="active"</#if> href="${basePath}/admin"> <i class="icon-home"></i> <span>首页</span></a>
 					</li>
 					<li class="sub-menu">
-						<a href="javascript:;"> <i class="icon-folder-open"></i> <span>目录管理</span></a>
+						<a href="javascript:;" <#if menu="folder">class="active"</#if>> <i class="icon-folder-open"></i> <span>目录管理</span></a>
 						<ul class="sub">
-							<li><a href="${basePath}/admin/folder/addFolder.do">增加目录</a></li>
-							<li><a href="${basePath}/admin/folder/allFolder.do">目录列表</a></li>
+							<li><a href="${basePath}/admin/folder/add">增加目录</a></li>
+							<li><a href="${basePath}/admin/folder/all">目录列表</a></li>
 						</ul>						
 					</li>
 					<li class="sub-menu">
-						<a href="javascript:;"> <i class="icon-book"></i> <span>文章管理</span></a>
+						<a href="javascript:;" <#if menu="artcile">class="active"</#if>> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
-							<li><a href="${basePath}/admin/file/addArticle.do">增加文章</a></li>
-							<li><a href="${basePath}/admin/file/articleList.do">文章列表</a></li>
-							<li><a href="${basePath}/admin/file/recycleList.do">回收站</a></li>
+							<li><a href="${basePath}/admin/file/add">增加文章</a></li>
+							<li><a href="${basePath}/admin/file/articleList">文章列表</a></li>
+							<li><a href="${basePath}/admin/file/recycleList">回收站</a></li>
 						</ul>
 					</li>
 					<#if configMap.function_photo=="on">
 					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-camera-retro"></i> <span>图片管理</span></a>
+						<a href="javascript:;" > <i class="icon-camera-retro"></i> <span>图片管理</span></a>
 						<ul class="sub">
 							<li><a href="${basePath}/admin/picture/">上传图片</a></li>
 							<li><a href="${basePath}/admin/picture/list">图片列表</a></li>
@@ -102,7 +102,7 @@
 					</#if>
 					<#if configMap.function_download=="on">
 					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-upload-alt"></i> <span>下载管理</span></a>
+						<a href="javascript:;" > <i class="icon-upload-alt"></i> <span>下载管理</span></a>
 						<ul class="sub">
 							<li><a href="#">上传文件</a></li>
 							<li><a href="/CMS/admin/upload">上传文件</a></li>
@@ -113,13 +113,17 @@
 					</#if>
 					<#if configMap.function_shop=="on">					
 					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-gift"></i> <span>商品管理</span></a>
+						<a href="javascript:;" > <i class="icon-gift"></i> <span>商品管理</span></a>
 						<ul class="sub">
 							<li><a href="general.html">增加商品</a></li>
 							<li><a href="buttons.html">商品列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
+<<<<<<< HEAD
 					</li>	
+=======
+					</li>											
+>>>>>>> branch 'master' of git@git.oschina.net:shishuo/CMS.git
 					</#if>
 					<li class="sub-menu ">
 						<a href="javascript:;"> <i class="icon-signin"></i> <span>招聘管理</span></a>
@@ -136,10 +140,10 @@
 						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>系统管理</span></a>
 						<ul class="sub">
 							<li  <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
-							<li><a href="${basePath}/admin/admin/addAdmin.do">添加管理员</a></li>
-							<li><a href="${basePath}/admin/admin/allList.do">管理员列表</a></li>
-							<li><a href="${basePath}/admin/user/addUser.do">添加用户</a></li>
-							<li><a href="${basePath}/admin/user/allList.do">用户列表</a></li>
+							<li><a href="${basePath}/admin/admin/add">添加管理员</a></li>
+							<li><a href="${basePath}/admin/admin/allList">管理员列表</a></li>
+							<li><a href="${basePath}/admin/user/add">添加用户</a></li>
+							<li><a href="${basePath}/admin/user/allList">用户列表</a></li>
 						</ul>
 					</li>
 				</ul>

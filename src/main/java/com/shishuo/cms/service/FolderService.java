@@ -100,7 +100,7 @@ public class FolderService {
 		Folder fatherFolder = new Folder();
 		folder.setFatherId(fatherId);
 		if(fatherId==0){
-			folder.setTopId(0);
+			folder.setTopId(folder.getFolderId());
 		}else{
 			fatherFolder = this.getFolderById(fatherId);
 			folder.setTopId(fatherFolder.getTopId());
