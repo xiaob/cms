@@ -99,7 +99,7 @@ function showErrors(id,errors){
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-								
+					location.href="${basePath}/admin/";			
 				}else{
 					showErrors($('#adminForm'),data.errors);
 				}

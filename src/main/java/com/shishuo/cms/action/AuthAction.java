@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.shishuo.cms.entity.vo.JsonVo;
+import com.shishuo.cms.exception.AuthException;
 import com.shishuo.cms.exception.ValidateException;
+import com.shishuo.cms.service.AdminService;
 
 /**
  * @author Herbert
@@ -36,6 +38,9 @@ public class AuthAction extends BaseAction {
 	@Autowired
 	private DefaultKaptcha captchaProducer;
 
+	@Autowired
+	private AdminService adminService;
+
 	@RequestMapping(value = "admin/login", method = RequestMethod.GET)
 	public String admin(HttpServletRequest request, ModelMap modelMap) {
 		return "admin/login";
@@ -49,7 +54,7 @@ public class AuthAction extends BaseAction {
 			@RequestParam(value = "captcha") String captcha,
 			HttpServletRequest request, ModelMap modelMap) {
 		JsonVo<String> json = new JsonVo<String>();
-		
+
 		try {
 			String kaptcha = (String) request.getSession().getAttribute(
 					com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
@@ -71,8 +76,11 @@ public class AuthAction extends BaseAction {
 
 			this.validate(json);
 
-		} catch (ValidateException e) {
+			adminService.adminLogin(email, password, request);
 
+		} catch (Exception e) {
+			json.setResult(false);
+			json.getErrors().put("password", "邮箱或密码错误");
 		}
 		return json;
 	}

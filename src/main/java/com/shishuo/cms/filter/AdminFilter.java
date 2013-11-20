@@ -8,32 +8,46 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.shishuo.cms.constant.SystemConstant;
+
 public class AdminFilter implements Filter {
-	
+
 	protected final Logger logger = Logger.getLogger(this.getClass());
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-//		System.out.println(32);
-		logger.debug("admin login");
-		chain.doFilter(request, response);
+	public void doFilter(ServletRequest servletRequest,
+			ServletResponse servletResponse, FilterChain chain)
+			throws IOException, ServletException {
+		HttpServletRequest request = (HttpServletRequest) servletRequest;
+		HttpServletResponse response = (HttpServletResponse) servletResponse;
+		Long adminId = (Long) request.getSession().getAttribute(
+				SystemConstant.SESSION_ADMIN_ID);
+//		if (adminId == null) {
+//			String path = request.getContextPath();
+//			String basePath = request.getScheme() + "://"
+//					+ request.getServerName() + ":" + request.getServerPort()
+//					+ path;
+//			response.sendRedirect(basePath + "/");
+//		} else {
+			chain.doFilter(request, response);
+//		}
 	}
 
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
