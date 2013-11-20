@@ -206,16 +206,16 @@ public class FolderService {
 		return pageVo;
 	}
 	
-	public List<FolderVo> getAllFolder(){
-		List<FolderVo>  allFolderList = new ArrayList<FolderVo>();
+	public List<Folder> getAllFolder(){
+		List<Folder>  allFolderList = new ArrayList<Folder>();
 		this.getFolderList(allFolderList,0);
 		return allFolderList;
 	}
 	
-	private void getFolderList(List<FolderVo> allFolderList,long fatherId){
-		List<FolderVo>  folderList = folderDao.getFolderListByFatherId(fatherId);
+	private void getFolderList(List<Folder> allFolderList,long fatherId){
+		List<Folder>  folderList = folderDao.getFolderListByFatherId(fatherId);
 		Collections.sort(folderList, new ComparatorFolderList());
-		for(FolderVo folder:folderList){
+		for(Folder folder:folderList){
 			allFolderList.add(folder);
 			this.getFolderList(allFolderList,folder.getFolderId());
 		}
