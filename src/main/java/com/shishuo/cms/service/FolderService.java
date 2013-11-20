@@ -61,7 +61,7 @@ public class FolderService {
 	 * @param fatherId
 	 * @return List<Folder>
 	 */
-	public List<FolderVo> getFolderListByFatherId(long fatherId) {
+	public List<Folder> getFolderListByFatherId(long fatherId) {
 		return folderDao.getFolderListByFatherId(fatherId);
 	}
 
@@ -72,10 +72,10 @@ public class FolderService {
 	 * @return List<FolderVo>
 	 */
 	public List<FolderVo> getFolderVoListByFatherId(long fatherId) {
-		List<FolderVo> list = this.getFolderListByFatherId(fatherId);
+		List<Folder> list = this.getFolderListByFatherId(fatherId);
 		List<FolderVo> allList = new ArrayList<FolderVo>();
 		for (Folder folder : list) {
-			List<FolderVo> folderList = this.getFolderListByFatherId(folder
+			List<Folder> folderList = this.getFolderListByFatherId(folder
 					.getFolderId());
 			for (Folder f : folderList) {
 				FolderVo foderVo = new FolderVo();
@@ -99,6 +99,7 @@ public class FolderService {
 	public Folder addFolder(long fatherId, String name, int status, String ename,
 			int type) {
 		Folder folder = new Folder();
+		Folder fatherFolder = new Folder();
 		folder.setFatherId(fatherId);
 		folder.setEname(ename);
 		folder.setName(name);
@@ -110,15 +111,6 @@ public class FolderService {
 		folder.setRank(0);
 		folder.setCreateTime(new Date());
 		folderDao.addFolder(folder);
-		Folder fo = this.getFolderByEname(ename);
-		if(fo.getFatherId()==0){
-			fo.setPath(fo.getFolderId()+"");
-			fo.setLevel(1);
-		}else{
-			fo.setPath(folderDao.getFolderById(fo.getFatherId()).getPath()+"#"+fo.getFolderId());
-			fo.setLevel(folderDao.getFolderById(fo.getFatherId()).getLevel()+1);
-		}
-		folderDao.updateFolder(fo);
 		return folder;
 	}
 
@@ -177,7 +169,6 @@ public class FolderService {
 	public List<Folder> getAllList(){
 		return folderDao.getAllList();
 	}
-	
 	
 	/**
 	 * 获得分页的所有目录的列表

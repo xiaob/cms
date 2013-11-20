@@ -50,7 +50,7 @@ public interface FolderDao {
 	 * @param fatherId
 	 * @return List<Folder>
 	 */
-	public List<FolderVo> getFolderListByFatherId(@Param("fatherId") long fatherId);
+	public List<Folder> getFolderListByFatherId(@Param("fatherId") long fatherId);
 
 	/**
 	 * 增加目录
