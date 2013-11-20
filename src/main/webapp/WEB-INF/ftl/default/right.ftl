@@ -6,18 +6,17 @@
                     <div class="category">
                         <h3>分类</h3>
                         <ul class="list-unstyled">
-                        	<@cms_folder_list fatherId="0">
-                        	<#list folderList as folder>
-                            <li><a href="${basePath}/${folder.ename}"><i class="  icon-angle-right"></i> ${folder.name}</a></li>
-                            </#list>
+                        	<@cms_folder_list fatherId="0" >
+	                        	<#list folderList as folder>
+	                            <li><a href="${basePath}/${folder.name}"><i class="  icon-angle-right"></i> ${folder.name}</a></li>
+	                            </#list>
                             </@cms_folder_list>
                         </ul>
                     </div>
 
                     <div class="blog-post">
                         <h3>最近发布的博客</h3>
-                        <@cms_blog_latest fatherId = "">
-                        <#list latestBlog as blog>
+                      
                         <div class="media">
                             <a href="javascript:;" class="pull-left">
                                 <img alt="" blog-thumb-1.jpg"="" blog="" img="" default="" cms="" localhost:8080="" http:="" src="${basePath}/default/img/blog/blog-thumb-1.jpg" class=" ">
@@ -29,8 +28,7 @@
                                 </p>
                             </div>
                         </div>
-                         </#list>
-                        </@cms_blog_latest>
+                         
                         <div class="media">
                             <a href="javascript:;" class="pull-left">
                                 <img alt="" blog-thumb-2.jpg"="" blog="" img="" default="" cms="" localhost:8080="" http:="" src="${basePath}/default/img/blog/blog-thumb-2.jpg" class=" ">
