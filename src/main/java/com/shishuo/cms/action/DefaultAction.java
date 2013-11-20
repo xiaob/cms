@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.entity.Folder;
@@ -27,14 +28,16 @@ public class DefaultAction {
 
 	@Autowired
 	private FolderService folderService;
+	
 	@Autowired
 	private ConfigService configService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest request, ModelMap modelMap) {
+	public String home(@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,HttpServletRequest request, ModelMap modelMap) {
 		try {
 			Folder currentFolder = folderService.getFolderById(1);
 			modelMap.addAttribute("currentFolder", currentFolder);
+			modelMap.addAttribute("pageNum", pageNum);
 			return ConfigConstant.getTemplatePath() + "/default";
 		} catch (Exception e) {
 			return ConfigConstant.getTemplatePath() + "/500";
@@ -43,7 +46,13 @@ public class DefaultAction {
 	
 	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
 	public String admin(HttpServletRequest request, ModelMap modelMap) {
-		return "admin/login";
+		return "admin/admin";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "login.json", method = RequestMethod.POST)
+	public String login(HttpServletRequest request, ModelMap modelMap) {
+		return "admin/admin";
 	}
 
 	@RequestMapping(value = "/{ename}", method = RequestMethod.GET)
@@ -55,6 +64,11 @@ public class DefaultAction {
 		modelMap.addAttribute("pageNum", pageNum);
 		System.out.println("###############"+ConfigConstant.DEFAUTL_TEMPLATE);
 		return ConfigConstant.getTemplatePath() + "/"+currentFolder.getTemplate();
+	}
+	
+	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	public String detail(){
+		return "default/detail";
 	}
 	
 }

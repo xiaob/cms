@@ -24,35 +24,88 @@
     <script src="${basePath}/admin/js/html5shiv.js"></script>
     <script src="${basePath}/admin/js/respond.min.js"></script>
     <![endif]-->
+    <script src="${basePath}/admin/js/jquery.js"></script>
+    <script src="${basePath}/admin/js/jquery.form.min.js"></script>
+	<style type="text/css">
+p.error {
+	color: #DE5959;
+}
+
+.form-signin input[type="text"].error, .form-signin input[type="password"].error {
+	border-color: #b94a48;
+	color: #b94a48;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+input.error:focus {
+	border-color: #953b39;
+	color: #b94a48;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px
+		#d59392;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+}	
+	</style>
 </head>
 
   <body class="login-body">
 
     <div class="container">
 
-      <form class="form-signin" action="index.html">
+      <form class="form-signin" id="adminForm" action="${basePath}/auth/admin/login.json"  autocomplete="off" method="post">
         <h2 class="form-signin-heading"><img src="${basePath}/admin/images/logo.png" style="height:38px;"/></h2>
         <div class="login-wrap">
-            <input type="text" class="form-control" placeholder="邮箱" autofocus>
-            <input type="password" class="form-control" placeholder="密码">
+            <input type="text" name="email" class="form-control" placeholder="邮箱" autofocus>
+            <input type="password" name="password" class="form-control" placeholder="密码">
+            <div>
+                <input type="text" name="captcha" class="form-control" placeholder="验证码" style="width:100px;float:left;"> <img style="cursor:pointer;cursor:hand;margin-top: -13px;" onclick="this.src='${basePath}/auth/captcha?'+Math.random();" src="${basePath}/auth/captcha" >
+            </div>
+            <div class="clearfix"></div>
+            <div>
+                <p class="error" for="captcha" style="display:none;"></p>
+            </div>
             <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Remember me
                 <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
             </label>
             <button class="btn btn-lg btn-login btn-block" type="submit">登录</button>
-            <div class="registration">
-                Don't have an account yet?
-                <a class="" href="registration.html">
-                    Create an account
-                </a>
-            </div>
-
         </div>
-
       </form>
 
     </div>
-
-
+<script type="text/javascript">
+/**
+ * 显示表单的错误提示
+ * @param id 表单ID
+ * @param errors 错误列表
+ */
+function showErrors(id,errors){
+	id.find('p[class=error]').hide();
+	id.find('input,select').removeClass("error");
+	for(var name in errors){
+		var e = id.find('p[for='+name+']');
+		id.find('input[name='+name+'],select[name='+name+']').addClass("error");
+		if(e.length==0){
+			id.find('input[name='+name+'],select[name='+name+']').after('<p for="'+name+'" class="error"></p>');
+			e = id.find('p[for='+name+']');
+		}
+		if(errors[name]!=""){
+			e.html(errors[name]);
+			e.show();
+		}
+	}
+}
+	$(function() {
+		$('#adminForm').ajaxForm({
+			dataType : 'json',
+			success : function(data) {
+				if (data.result) {
+								
+				}else{
+					showErrors($('#adminForm'),data.errors);
+				}
+			}
+		});
+	});	
+</script>    
   </body>
 </html>

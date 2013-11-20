@@ -39,22 +39,12 @@
 	</filter-mapping>
 
 	<filter>
-		<filter-name>basePath</filter-name>
-		<filter-class>com.shishuo.cms.filter.BasePathFilter</filter-class>
+		<filter-name>globalFilter</filter-name>
+		<filter-class>com.shishuo.cms.filter.GlobalFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
-		<filter-name>basePath</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
-	<filter>
-		<filter-name>log4jFilter</filter-name>
-		<filter-class>com.shishuo.cms.filter.Log4jFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>log4jFilter</filter-name>
+		<filter-name>globalFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 

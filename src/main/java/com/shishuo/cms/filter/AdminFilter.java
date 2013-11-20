@@ -9,7 +9,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.apache.log4j.Logger;
+
 public class AdminFilter implements Filter {
+	
+	protected final Logger logger = Logger.getLogger(this.getClass());
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -22,6 +26,7 @@ public class AdminFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 //		System.out.println(32);
+		logger.debug("admin login");
 		chain.doFilter(request, response);
 	}
 
