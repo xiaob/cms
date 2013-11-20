@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.entity.vo.CommentVo;
 import com.shishuo.cms.service.CommentService;
-import com.shishuo.cms.service.FolderService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
