@@ -47,84 +47,69 @@
                         <div class="col-lg-10 col-sm-10">
                             <h1><a href="blog_detail.html">${file.name}</a></h1>
                             <p>${file.description}</p>
+                            <@cms_comment_list fileId = "8">
+                            <#list commentVoList as comment>
                             <div class="media">
+                             <#if  comment_index ==0>
                                 <h3>评论</h3>
                                 <hr>
+                             </#if>
                                 <a href="javascript:;" class="pull-left">
-                                    <img alt="" src="default/img/avatar1.jpg" class="media-object">
+                                    <img alt="" src="${basePath}/default/img/avatar1.jpg" class="media-object">
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading">
-                                        Anjelina Joli <span>|</span>
-                                        <span>12 July 2013, 10:20 </span>
+                                        ${comment.name} <span>|</span>
+                                        <span>${comment.createTime?string("yyyy-MM-dd")}</span>
                                     </h4>
                                     <p>
-                                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                                        ${comment.content}
                                     </p>
-                                    <a href="javascript:;">Reply</a>
+                                    <a href="javascript:;">回复</a>
                                     <hr>
                                     <!-- Nested media object -->
+                                    <#list comment.childComment as child>
                                     <div class="media">
                                         <a href="javascript:;" class="pull-left">
-                                            <img alt="" src="default/img/avatar2.jpg" class="media-object">
+                                            <img alt="" src="${basePath}/default/img/avatar2.jpg" class="media-object">
                                         </a>
                                         <div class="media-body">
                                             <h4 class="media-heading">
-                                                Tom Cruse <span>|</span>
-                                                <span>12 July 2013, 10:30 </span>
+                                                ${child.name} <span>|</span>
+                                                <span>${child.createTime?string("yyyy-MM-dd")}</span>
                                             </h4>
                                             <p>
-                                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                                               ${child.content} 
                                             </p>
-                                            <a href="javascript:;">Reply</a>
+                                            <a href="javascript:;">回复</a>
                                         </div>
                                     </div>
                                     <!--end media-->
                                     <hr>
-                                    <div class="media">
-                                        <a href="javascript:;" class="pull-left">
-                                            <img alt="" src="default/img/avatar1.jpg" class="media-object">
-                                        </a>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">
-                                                Nicol Kidman <span>|</span>
-                                                <span>12 July 2013, 10:40 </span>
-                                            </h4>
-                                            <p>
-                                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                                            </p>
-                                            <a href="javascript:;">Reply</a>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <!--end media-->
+                                    </#list>
                                 </div>
                             </div>
-                            <div class="media">
-	                                <a href="javascript:;" class="pull-left">
-	                                    <img alt="" src="default/img/avatar2.jpg" class="media-object">
-	                                </a>
-	                                <div class="media-body">
-	                                    <h4 class="media-heading">
-	                                        Tom Cruse <span>|</span>
-	                                        <span>12 July 2013, 11:10 </span>
-	                                    </h4>
-	                                    <p>
-	                                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-	                                    </p>
-	                                    <a href="javascript:;">Reply</a>
-	                                </div>
-                                </div>
+                            </#list>
+                            </@cms_comment_list>
                                 <div class="post-comment">
 	                                <h3 class="skills">发布评论</h3>
-	                                <form role="form" class="form-horizontal">
+	                                <form role="form" class="form-horizontal" action="comment/add" method="post">
+	                                    <div class="form-group">
+	                                        <div class="col-lg-4">
+	                                            <input type="text" class="col-lg-12 form-control" placeholder="名字" name="name">
+	                                        </div>
+	                                        <div class="col-lg-4">
+	                                            <input type="text" class="col-lg-12 form-control" placeholder="邮箱" name="email">
+	                                        </div>
+	                                        <input type="hidden" name="fileId" value="8">
+                                        </div>
 	                                    <div class="form-group">
 	                                        <div class="col-lg-12">
-	                                            <textarea class=" form-control" rows="8" placeholder="评语"></textarea>
+	                                            <textarea class=" form-control" rows="8" placeholder="评语" name="content"></textarea>
 	                                        </div>
 	                                    </div>
 	                                    <p>
-	                                        <button class="btn btn-danger pull-right" type="submit">Post Comment</button>
+	                                        <button class="btn btn-danger pull-right" type="submit">发布</button>
 	                                    </p>
 	                                </form>
                                 </div>  

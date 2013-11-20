@@ -3,7 +3,6 @@
     <div class="container">
         <div class="row">
             <!--blog start-->
-            
             <div class="col-lg-9 ">
             <@cms_file_page type="0" folderId="1" pageNum="${pageNum}">
                <#list pageVo.list as file>

@@ -15,7 +15,7 @@
                             	 修改文章
                           </header>
                           <div class="panel-body">
-                              <form id="update_article_form" method="post" class="form-horizontal" autocomplete="off" action="/CMS/admin/file/update.json">
+                              <form method="post" class="form-horizontal tasi-form" action="/CMS/admin/file/update">
                               	<fieldset>
                               	  <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文件Id</label>
@@ -40,35 +40,30 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章名称</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="fileName" value="${file.name}"
-                                          	placeholder="文章名称" id="fileName">
+                                          <input type="text" class="form-control" name="fileName" value="${file.name}">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章链接</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="url" value="${file.url}"
-                                          	placeholder="文章链接" id="url">
+                                          <input type="text" class="form-control" name="url" value="${file.url}">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章图片</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="images" value="${file.images}"
-                                          	placeholder="文章图片" id="fileName">
+                                          <input type="text" class="form-control" name="images" value="${file.images}">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">文章种类</label>
+                                      <label class="col-sm-2 col-sm-2 control-label">文章类型</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="description" value="${file.description}"
-                                          	placeholder="文章种类" id="description">
+                                          <input type="text" class="form-control" name="description" value="${file.description}">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                        			<label class="col-sm-2 col-sm-2 control-label"></label>
-                            		<button class="btn btn-danger" type="submit">修改</button>
-                        		  </div>
+                                      <input class="button" value="修改" type="submit" style="height:35px">
+                                  </div>
                                  </fieldset>
                               </form>
                           </div>
@@ -79,20 +74,4 @@
           </section>
 		</section>
 		<!--main content end-->
-<script type="text/javascript">
-	$(function() {
-		$('#update_article_form').ajaxForm({
-			dataType : 'json',
-			success : function(data) {
-				if (data.result) {
-					bootbox.alert("保存成功，将刷新页面", function() {
-						window.location.reload();
-					});
-				}else{
-					showErrors($('#update_article_form'),data.errors);
-				}
-			}
-		});
-	});	
-</script>
 <#include "foot.ftl">

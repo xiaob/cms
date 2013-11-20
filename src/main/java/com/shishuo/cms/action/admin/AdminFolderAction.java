@@ -1,8 +1,5 @@
 package com.shishuo.cms.action.admin;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.entity.Folder;
-import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 
@@ -72,11 +68,11 @@ public class AdminFolderAction extends AdminBaseAction{
 	/**
 	 * @author 所有目录列表分页
 	 *
-	 */	
+	 */
 	@RequestMapping(value = "/all",method = RequestMethod.GET)
-	public String adminAllFolder(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,ModelMap modelMap){
-		List<FolderVo> list = folderService.getAllFolder();
-		modelMap.put("list", list);
+	public String allFolder(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,ModelMap modelMap){
+		PageVo<Folder> pageVo = folderService.getAllListPageByNum(pageNum);
+		modelMap.put("pageVo", pageVo);
 		return "admin/allFolder";
 	}
 	
@@ -102,46 +98,15 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 修改目录资料
 	 *
 	 */
-//	@RequestMapping(value = "/update",method = RequestMethod.POST)
-//	public String updateFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
-//			@RequestParam(value = "folderId") long folderId,
-//			@RequestParam(value = "folderName") String folderName,
-//			@RequestParam(value = "folderEname") String folderEname,
-//			@RequestParam(value = "type") int type,
-//			@RequestParam(value = "sort") int sort,
-//			@RequestParam(value = "status") int status){
-//		folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status, type, sort);
-//		return "redirect:/admin/folder/all";
-//	}
-	@ResponseBody
-	@RequestMapping(value = "/update.json",method = RequestMethod.POST)
-	public JsonVo<String> updateFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
+	@RequestMapping(value = "/update",method = RequestMethod.POST)
+	public String updateFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "folderName") String folderName,
 			@RequestParam(value = "folderEname") String folderEname,
 			@RequestParam(value = "type") int type,
-			@RequestParam(value = "sort",defaultValue="0") int sort,
+			@RequestParam(value = "sort") int sort,
 			@RequestParam(value = "status") int status){
-		JsonVo<String> json = new JsonVo<String>();	
-		try {
-			if(folderName.equals("")){
-				json.getErrors().put("folderName", "目录名称不能为空");
-			}
-			if(folderEname.equals("")){
-				json.getErrors().put("folderEname", "英文名称不能为空");
-			}
-			if(sort==0){
-				json.getErrors().put("sort", "目录序列不能为空");
-			}
-			
-			// 检测校验结果
-			validate(json);
-			folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status, type, sort);
-			json.setResult(true);
-		} catch (Exception e) {
-			json.setResult(false);
-			json.setMsg(e.getMessage());
-		}
-		return json;
+		folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status, type, sort);
+		return "redirect:/admin/folder/all";
 	}
 }

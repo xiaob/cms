@@ -1,5 +1,5 @@
 <#assign menu="system">
-<#assign submenu="add_admin">
+<#assign submenu="system_basic">
 <#include "../head.ftl">
 <style type="text/css">
 .m-bot15 {
@@ -30,18 +30,16 @@
                             	 添加管理员
                           </header>
                           <div class="panel-body">
-                              <form id="add_admin_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/admin/addNew.json">
+                              <form method="post" class="form-horizontal" action="${basePath}/admin/admin/addNew">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">管理员名称</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="adminName"
-                                          	placeholder="管理员名称" id="adminName" vaule="${adminName}">
+                                          <input type="text" class="form-control" name="adminName">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                  	<label class="col-sm-2 col-sm-2 control-label"></label>
-                                      <button class="btn btn-danger" type="submit">增加</button>
+                                      <input class="button" value="增加" type="submit" style="height:35px">
                                   </div>
                                  </fieldset>
                               </form>
@@ -53,20 +51,4 @@
           </section>
 		</section>
 		<!--main content end-->
-<script type="text/javascript">
-	$(function() {
-		$('#add_admin_form').ajaxForm({
-			dataType : 'json',
-			success : function(data) {
-				if (data.result) {
-					bootbox.alert("保存成功，将刷新页面", function() {
-						window.location.reload();
-					});
-				}else{
-					showErrors($('#add_admin_form'),data.errors);
-				}
-			}
-		});
-	});	
-</script>
 <#include "../foot.ftl">

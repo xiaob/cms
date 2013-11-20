@@ -232,7 +232,6 @@ public class FolderService {
 	
 	class ComparatorFolderList implements Comparator<Object>{
 
-		@Override
 		public int compare(Object arg0, Object arg1) {
 			FolderVo folderVo1 = (FolderVo)arg0;
 			FolderVo folderVo2 = (FolderVo)arg1;

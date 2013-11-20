@@ -1,5 +1,5 @@
 <#assign menu="system">
-<#assign submenu="admin_list">
+<#assign submenu="system_basic">
 <#include "../head.ftl">
 <style type="text/css">
 
@@ -15,7 +15,7 @@
  					修改管理员资料
 				</header>
 				<div class="panel-body">
-					<form id="update_admin_form" method="post" class="form-horizontal" autocomplete="off" action="/CMS/admin/admin/update.json">
+					<form method="post" class="form-horizontal tasi-form" action="/CMS/admin/admin/update">
 					<fieldset>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">管理员Id</label>
@@ -26,28 +26,24 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">管理员名称</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="adminName" value="${admin.name}"
-									placeholder="管理员名称" id="adminName">
+								<input type="text" class="form-control" name="adminName" value="${admin.name}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">密码</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control round-input" name="password" value="${admin.password}"
-									placeholder="密码" id="password">
+								<input type="text" class="form-control round-input" name="password" value="${admin.password}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">状态</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control round-input" name="status" value="${admin.status}"
-									placeholder="状态" id="status">
+								<input type="text" class="form-control round-input" name="status" value="${admin.status}">
 							</div>
 						</div>
 						<div class="form-group">
-                        	<label class="col-sm-2 col-sm-2 control-label"></label>
-                        	<button class="btn btn-danger" type="submit">修改</button>
-                        </div>
+							<input class="button" value="修改" type="submit" style="height:35px">
+						</div>
 					</fieldset>
 				</form>
 				</div>
@@ -58,20 +54,4 @@
 		</section>
 	</section>
  <!--main content end-->
-<script type="text/javascript">
-	$(function() {
-		$('#update_admin_form').ajaxForm({
-			dataType : 'json',
-			success : function(data) {
-				if (data.result) {
-					bootbox.alert("保存成功，将刷新页面", function() {
-						window.location.reload();
-					});
-				}else{
-					showErrors($('#update_admin_form'),data.errors);
-				}
-			}
-		});
-	});	
-</script>
 <#include "../foot.ftl">

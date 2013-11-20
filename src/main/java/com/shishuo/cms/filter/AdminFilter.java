@@ -19,13 +19,11 @@ public class AdminFilter implements Filter {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 
-	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void doFilter(ServletRequest servletRequest,
 			ServletResponse servletResponse, FilterChain chain)
 			throws IOException, ServletException {
@@ -44,7 +42,6 @@ public class AdminFilter implements Filter {
 //		}
 	}
 
-	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
 
