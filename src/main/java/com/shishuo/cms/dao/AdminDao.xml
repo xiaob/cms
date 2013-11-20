@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="getAllListCount"
-		resultType="long">
+		resultType="int">
 		select count(*) from admin
 	</select>
 	

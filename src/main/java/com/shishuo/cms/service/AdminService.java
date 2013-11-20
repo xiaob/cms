@@ -68,7 +68,7 @@ public class AdminService {
 	}
 
 	public int getAllListCount() {
-		return (int) adminDao.getAllListCount();
+		return adminDao.getAllListCount();
 	}
 
 	public PageVo<Admin> getAllListPage(int pageNum) {
