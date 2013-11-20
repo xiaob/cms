@@ -17,14 +17,18 @@
  *	limitations under the License.
  */package com.shishuo.cms.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.dao.FileDao;
 import com.shishuo.cms.entity.File;
+import com.shishuo.cms.entity.User;
+import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.PageVo;
 
 /**
@@ -40,14 +44,24 @@ public class FileService {
 	@Autowired
 	private FileDao fileDao;
 	
+	@Autowired
+	private UserService userService;
+	
 	/**
 	 * 得到目录
 	 * 
 	 * @param fileId
 	 * @return File
 	 */
-	public File getFileById(long fileId) {
-		return fileDao.getFileById(fileId);
+	public FileVo getFileById(long fileId) {
+		File file = fileDao.getFileById(fileId);
+		FileVo fileVo = new FileVo();
+		if(file != null){
+			BeanUtils.copyProperties(file, fileVo);
+			User user = userService.getUserById(file.getUserId());
+			fileVo.setUser(user);
+		}
+		return fileVo;
 	}
 
 	/**
@@ -57,10 +71,10 @@ public class FileService {
 	 * @return pageVo
 	 */
 
-	public PageVo<File> getFilePageByFoderId(long folderId, int pageNum) {
-		PageVo<File> pageVo = new PageVo<File>(pageNum);
+	public PageVo<FileVo> getFilePageByFoderId(long folderId, int pageNum) {
+		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
 		pageVo.setUrl("filePage.do?");
-		List<File> list = this.getFileListByFoderId(folderId,
+		List<FileVo> list = this.getFileListByFoderId(folderId,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
 		pageVo.setPageCount(this.getFileListByFoderIdCount(folderId));
@@ -74,8 +88,19 @@ public class FileService {
 	 * @return
 	 */
 
-	public List<File> getFileListByFoderId(long folderId, long offset, long rows) {
-		return fileDao.getFileListByFoderId(folderId, offset, rows);
+	public List<FileVo> getFileListByFoderId(long folderId, long offset, long rows) {
+		List<File> list = fileDao.getFileListByFoderId(folderId, offset, rows);
+		List<FileVo> voList = new ArrayList<FileVo>();
+		if(list.size()>0){
+			for(File file : list){
+				FileVo vo =new FileVo();
+				User user = userService.getUserById(file.getUserId());
+				BeanUtils.copyProperties(file, vo);
+				vo.setUser(user);
+				voList.add(vo);
+			}
+		}
+		return voList;
 	}
 
 	/**

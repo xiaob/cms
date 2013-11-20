@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.entity.File;
+import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.FileService;
 
@@ -35,7 +36,7 @@ public class FilePageTag implements TemplateDirectiveModel {
 		Integer type = Integer.parseInt(params.get("type").toString());
 		Integer pageNum = Integer.parseInt(params.get("pageNum").toString());
 		// 获取文件的分页
-		PageVo<File> pageVo = fileService.getFilePageByFoderId(folderId,
+		PageVo<FileVo> pageVo = fileService.getFilePageByFoderId(folderId,
 				pageNum);
 		env.setVariable("pageVo", BEANS_WRAPPER.wrap(pageVo));
 		body.render(env.getOut());

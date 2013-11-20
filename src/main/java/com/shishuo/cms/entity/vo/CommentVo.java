@@ -7,7 +7,15 @@ import com.shishuo.cms.entity.Comment;
 import com.shishuo.cms.entity.User;
 
 public class CommentVo extends Comment{
+	
+	/**
+	 * 子评论
+	 */
     private	List<Comment> childComment = new ArrayList<Comment>();
+    
+    /**
+	 * 评论用户
+	 */
     private User user;
 
 	public User getUser() {

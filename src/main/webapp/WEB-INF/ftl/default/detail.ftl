@@ -4,7 +4,7 @@
         <div class="row">
             <!--blog start-->
             <div class="col-lg-9 ">
-            <@cms_file fileId = "8">
+            <@cms_file fileId = "${fileId}">
                 <div class="blog-item">
                     <div class="row">
                         <div class="col-lg-2 col-sm-2">
@@ -15,7 +15,7 @@
                                 <span class="comnt-ico">
                                     <i class="icon-comments"></i>
                                 </span>
-                                <span class="value">15</span>
+                                <span class="value">${file.commentCount}</span>
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-10">
@@ -28,26 +28,18 @@
                     <div class="row">
                         <div class="col-lg-2 col-sm-2 text-right">
                             <div class="author">
-                                By <a href="#">Admin</a>
+                                                                                                            作者 <a >${file.user.name}</a>
                             </div>
-                            <ul class="list-unstyled">
-                                <li><a href="javascript:;"><em>travel</em></a></li>
-                                <li><a href="javascript:;"><em>tour</em></a></li>
-                                <li><a href="javascript:;"><em>recreation</em></a></li>
-                                <li><a href="javascript:;"><em>tourism</em></a></li>
-                            </ul>
                             <div class="shate-view">
                                 <ul class="list-unstyled">
-                                    <li><a href="javascript:;">209 View</a></li>
-                                    <li><a href="javascript:;">23 Share</a></li>
-
+                                    <li><a >浏览人数:${file.viewCount}</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-10">
-                            <h1><a href="blog_detail.html">${file.name}</a></h1>
+                            <h1>${file.name}</h1>
                             <p>${file.description}</p>
-                            <@cms_comment_list fileId = "8">
+                            <@cms_comment_list fileId = "${fileId}">
                             <#list commentVoList as comment>
                             <div class="media">
                              <#if  comment_index ==0>

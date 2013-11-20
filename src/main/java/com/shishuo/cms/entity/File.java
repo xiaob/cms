@@ -38,13 +38,12 @@ public class File {
 	 * 所属目录Id
 	 */
 	private long folderId;
-	
+
 	/**
 	 * 用户Id
 	 */
 	private long userId;
-	
-	
+
 	/**
 	 * 文件名称
 	 */
@@ -69,7 +68,7 @@ public class File {
 	 * 文件类型
 	 */
 	private int type;
-	
+
 	/**
 	 * 文件状态
 	 */
@@ -79,6 +78,16 @@ public class File {
 	 * 时间
 	 */
 	private Date createTime;
+
+	/**
+	 * 浏览人数
+	 */
+	private int viewCount;
+
+	/**
+	 * 评论人数
+	 */
+	private int commentCount;
 
 	public long getFileId() {
 		return fileId;
@@ -160,4 +169,19 @@ public class File {
 		this.userId = userId;
 	}
 
+	public int getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
 }
