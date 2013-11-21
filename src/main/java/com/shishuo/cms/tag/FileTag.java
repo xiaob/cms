@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.entity.File;
+import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.service.FileService;
 
 import freemarker.core.Environment;
@@ -31,7 +32,7 @@ public class FileTag implements TemplateDirectiveModel {
 		// 获取页面的参数
 		Integer fileId = Integer.parseInt(params.get("fileId").toString());
 		// 获取指定的文件
-		File file = fileService.getFileById(fileId);
+		FileVo file = fileService.getFileById(fileId);
 		env.setVariable("file", BEANS_WRAPPER.wrap(file));
 		body.render(env.getOut());
 	}

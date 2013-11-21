@@ -66,8 +66,10 @@ public class DefaultAction {
 		return ConfigConstant.getTemplatePath() + "/"+currentFolder.getTemplate();
 	}
 	
-	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public String detail(){
+	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
+	public String detail(@PathVariable long fileId,ModelMap modelMap){
+		String a = "";
+		modelMap.addAttribute("fileId", fileId);
 		return "default/detail";
 	}
 	

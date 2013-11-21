@@ -219,6 +219,6 @@
 	</build>
 	<properties>
 		<webapp.port>8080</webapp.port>
-		<webapp.path>/CMS</webapp.path>
+		<webapp.path>/</webapp.path>
 	</properties>
 </project>
