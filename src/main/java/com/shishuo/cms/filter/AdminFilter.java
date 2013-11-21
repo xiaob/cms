@@ -15,6 +15,13 @@ import org.apache.log4j.Logger;
 
 import com.shishuo.cms.constant.SystemConstant;
 
+/**
+ * 
+ * 管理过滤器
+ * 
+ * @author Herbert
+ *
+ */
 public class AdminFilter implements Filter {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
@@ -27,19 +34,21 @@ public class AdminFilter implements Filter {
 	public void doFilter(ServletRequest servletRequest,
 			ServletResponse servletResponse, FilterChain chain)
 			throws IOException, ServletException {
+		logger.info("admin login ...");
+		
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		Long adminId = (Long) request.getSession().getAttribute(
 				SystemConstant.SESSION_ADMIN_ID);
-//		if (adminId == null) {
-//			String path = request.getContextPath();
-//			String basePath = request.getScheme() + "://"
-//					+ request.getServerName() + ":" + request.getServerPort()
-//					+ path;
-//			response.sendRedirect(basePath + "/");
-//		} else {
+		if (adminId == null) {
+			String path = request.getContextPath();
+			String basePath = request.getScheme() + "://"
+					+ request.getServerName() + ":" + request.getServerPort()
+					+ path;
+			response.sendRedirect(basePath + "/");
+		} else {
 			chain.doFilter(request, response);
-//		}
+		}
 	}
 
 	public void destroy() {
