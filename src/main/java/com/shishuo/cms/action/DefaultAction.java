@@ -68,6 +68,7 @@ public class DefaultAction {
 	
 	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
 	public String detail(@PathVariable long fileId,ModelMap modelMap){
+		String a = "";
 		modelMap.addAttribute("fileId", fileId);
 		return "default/detail";
 	}

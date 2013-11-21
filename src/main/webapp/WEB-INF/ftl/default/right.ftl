@@ -8,7 +8,7 @@
                         <ul class="list-unstyled">
                         	<@cms_folder_list fatherId="0" >
 	                        	<#list folderList as folder>
-	                            <li><a href="${basePath}/${folder.name}"><i class="  icon-angle-right"></i> ${folder.name}</a></li>
+	                            <li><a href="${basePath}/${folder.ename}"><i class="  icon-angle-right"></i> ${folder.name}</a></li>
 	                            </#list>
                             </@cms_folder_list>
                         </ul>
