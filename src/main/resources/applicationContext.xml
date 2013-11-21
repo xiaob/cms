@@ -16,16 +16,12 @@
 	         http://www.springframework.org/schema/task 
 	         http://www.springframework.org/schema/task/spring-task-3.2.xsd"
 	default-lazy-init="true">
+	<tx:annotation-driven />
+	<task:annotation-driven />
+	
 	<!-- 自动扫描的包名 -->
 	<context:component-scan base-package="com.shishuo.cms"></context:component-scan>
 
-	<!-- 默认的注解映射的支持 -->
-	<mvc:annotation-driven />
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-	</bean>
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -34,51 +30,7 @@
 			</list>
 		</property>
 	</bean>
-	<tx:annotation-driven />
-	<task:annotation-driven />
-	<bean id="freemarkerConfig"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
-		<property name="defaultEncoding" value="UTF-8" />
-		<property name="freemarkerVariables">
-			<map>
-				<!-- 目录标签 -->
-				<entry key="cms_folder_list" value-ref="folderListTag" />
-				<!-- 文件标签 -->
-				<entry key="cms_file_page" value-ref="filePageTag" />
-				<entry key="cms_file" value-ref="fileTag" />
-				<!-- 评论标签 -->
-				<entry key="cms_comment_list"  value-ref="commentTag"></entry>
-			</map>
-		</property>
-		<property name="freemarkerSettings">
-			<props>
-				<prop key="template_update_delay">10</prop>
-				<prop key="defaultEncoding">UTF-8</prop>
-				<prop key="url_escaping_charset">UTF-8</prop>
-				<prop key="locale">zh_CN</prop>
-				<prop key="boolean_format">true,false</prop>
-				<prop key="time_format">HH:mm:ss</prop>
-				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
-				<prop key="date_format">yyyy-MM-dd</prop>
-				<prop key="number_format">#.##</prop>
-				<prop key="whitespace_stripping">true</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
-		<property name="cache" value="false" />
-		<property name="prefix" value="/" />
-		<property name="suffix" value=".ftl" />
-		<property name="contentType" value="text/html;charset=utf-8" />
-		<property name="exposeRequestAttributes" value="true" />
-		<property name="exposeSessionAttributes" value="true" />
-		<property name="exposeSpringMacroHelpers" value="true" />
-	</bean>
-
+	
 	<!-- c3p0 connection pool configuration -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">		<!-- 数据库驱动 -->
@@ -114,46 +66,4 @@
 		<property name="basePackage" value="com.shishuo.cms.dao" />
 
 	</bean>
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 4M -->
-		<property name="maxUploadSize" value="4194304" />
-	</bean>
-
-	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
-		<property name="config">
-			<bean class="com.google.code.kaptcha.util.Config">
-				<!--通过构造函数注入属性值 -->
-				<constructor-arg type="java.util.Properties">
-					<props>
-						<!-- 验证码宽度 -->
-						<prop key="kaptcha.image.width">150</prop>
-						<!-- 验证码高度 -->
-						<prop key="kaptcha.image.height">60</prop>
-						<!-- 生成验证码内容范围 -->
-						<prop key="kaptcha.textproducer.char.string">abcde2345678gfynmnpwx</prop>
-						<!-- 验证码个数 -->
-						<prop key="kaptcha.textproducer.char.length">5</prop>
-						<!-- 是否有边框 -->
-						<prop key="kaptcha.border">no</prop>
-						<!-- 验证码字体颜色 -->
-						<prop key="kaptcha.textproducer.font.color">red</prop>
-						<!-- 验证码字体大小 -->
-						<prop key="kaptcha.textproducer.font.size">35</prop>
-						<!-- 验证码所属字体样式 -->
-						<prop key="kaptcha.textproducer.font.names">Arial, Courier</prop>
-						<prop key="kaptcha.background.clear.from">white</prop>
-						<prop key="kaptcha.background.clear.to">white</prop>
-						<prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
-						<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
-						<!-- 干扰线颜色 -->
-						<prop key="kaptcha.noise.color">red</prop>
-						<!-- 验证码文本字符间距 -->
-						<prop key="kaptcha.textproducer.char.space">4</prop>
-					</props>
-				</constructor-arg>
-			</bean>
-		</property>
-	</bean>
-	<mvc:default-servlet-handler />
 </beans>

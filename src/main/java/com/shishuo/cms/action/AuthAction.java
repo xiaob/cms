@@ -79,7 +79,7 @@ public class AuthAction extends BaseAction {
 			adminService.adminLogin(email, password, request);
 
 		} catch (Exception e) {
-			json.getErrors().put("password", "邮箱或密码错误");
+//			logger.
 		}
 		return json;
 	}
