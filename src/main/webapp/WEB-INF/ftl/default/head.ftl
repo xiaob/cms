@@ -49,7 +49,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">师说<span>CMS</span></a>
+                    <a class="navbar-brand" href="${basePath}/">师说<span>CMS</span></a>
                 </div>
             </div>
         </div>

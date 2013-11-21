@@ -47,6 +47,7 @@ public class FileService {
 	@Autowired
 	private UserService userService;
 	
+	
 	/**
 	 * 得到目录
 	 * 
@@ -73,6 +74,7 @@ public class FileService {
 
 	public PageVo<FileVo> getFilePageByFoderId(long folderId, int pageNum) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
+		
 		pageVo.setUrl("/CMS/folder/"+folderId+"?");
 		pageVo.setRows(1);
 		List<FileVo> list = this.getFileListByFoderId(folderId,
@@ -288,4 +290,27 @@ public class FileService {
 	public int updateImage(long folderId,long fileId,long userId){
 		return fileDao.updateImage(folderId, fileId, userId);
 	}
+	
+	
+	/**
+	 * 更新浏览人数
+	 * @param fileId
+	 * @param viewCount
+	 *
+	 */
+	 public void updateViewCount(long fileId,int nowViewCount){
+		 fileDao.updateViewCount(fileId, nowViewCount+1);
+	 }
+	 
+	 
+	 /**
+	  * 更新评论数
+	  * @param FileId
+	  * @param commentCount
+	  * @return void
+	  */
+		public void updateCommentCount(long fileId,int commentCount){
+			fileDao.updateCommentCount(fileId, commentCount+1);
+		}
+	 
 }

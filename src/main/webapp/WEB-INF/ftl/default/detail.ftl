@@ -129,7 +129,7 @@
 			dataType:  'json',
 			success:function(data){
 				if(data.result){
-					location.href="${basePath}/detail/"+${fileId};
+					location.href="${basePath}/${ename}/"+${fileId};
 				}else{
 					alert(data.msg);
 				}

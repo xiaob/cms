@@ -38,9 +38,9 @@
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-10">
-                            <h1><a href="${basePath}/detail/${file.fileId}">${file.name}</a></h1>
+                            <h1><a href="${basePath}/${currentFolder.ename}/${file.fileId}">${file.name}</a></h1>
                             <p>${file.description}</p>
-                            <a href="detail/${file.fileId}" class="btn btn-danger">瞧一瞧</a>
+                            <a href="${basePath}/${currentFolder.ename}/${file.fileId}" class="btn btn-danger">瞧一瞧</a>
                         </div>
                     </div>
                 </div>
