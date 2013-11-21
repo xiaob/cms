@@ -61,6 +61,7 @@ public class DefaultAction {
 			ModelMap modelMap) {
 		Folder currentFolder = folderService.getFolderByEname(ename);
 		modelMap.addAttribute("currentFolder", currentFolder);
+		
 		modelMap.addAttribute("pageNum", pageNum);
 		System.out.println("###############"+ConfigConstant.DEFAUTL_TEMPLATE);
 		return ConfigConstant.getTemplatePath() + "/"+currentFolder.getTemplate();
@@ -68,7 +69,6 @@ public class DefaultAction {
 	
 	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
 	public String detail(@PathVariable long fileId,ModelMap modelMap){
-		String a = "";
 		modelMap.addAttribute("fileId", fileId);
 		return "default/detail";
 	}

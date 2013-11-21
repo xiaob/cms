@@ -73,11 +73,12 @@ public class FileService {
 
 	public PageVo<FileVo> getFilePageByFoderId(long folderId, int pageNum) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
-		pageVo.setUrl("filePage.do?");
+		pageVo.setUrl("/CMS/folder/"+folderId+"?");
+		pageVo.setRows(1);
 		List<FileVo> list = this.getFileListByFoderId(folderId,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setPageCount(this.getFileListByFoderIdCount(folderId));
+		pageVo.setCount(this.getFileListByFoderIdCount(folderId));
 		return pageVo;
 	}
 

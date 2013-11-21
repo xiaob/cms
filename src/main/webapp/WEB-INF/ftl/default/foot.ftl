@@ -36,7 +36,7 @@
          </div>
      </footer>
   <!-- js placed at the end of the document so the pages load faster -->
-    <script src="${basePath}/default/js/jquery.js"></script>
+    
     <script src="${basePath}/default/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${basePath}/default/js/hover-dropdown.js"></script>
     <script defer src="${basePath}/default/js/jquery.flexslider.js"></script>
@@ -44,7 +44,7 @@
 
     <script src="${basePath}/default/js/jquery.easing.min.js"></script>
     <script src="${basePath}/default/js/link-hover.js"></script>
-
+    
      <!--common script for all pages-->
     <script src="${basePath}/default/js/common-scripts.js"></script>
 

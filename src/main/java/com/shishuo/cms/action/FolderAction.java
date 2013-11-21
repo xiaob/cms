@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shishuo.cms.constant.ConfigConstant;
+import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.entity.vo.FileVo;
+import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.FolderService;
 
 @Controller
@@ -22,7 +25,10 @@ public class FolderAction {
 	public String folder(@PathVariable long folderId,
 			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
-		return ConfigConstant.getTemplatePath() + "/folder";
+		modelMap.addAttribute("pageNum", pageNum);
+		Folder currentFolder =  folderService.getFolderById(folderId);
+		modelMap.addAttribute("currentFolder", currentFolder);
+		return ConfigConstant.getTemplatePath() + "/"+currentFolder.getTemplate();
 	}
 	
 }

@@ -11,21 +11,21 @@
     <title>师说CMS 后台</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="${basePath}/admin/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${basePath}/admin/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="${basePath}/system/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${basePath}/system/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="${basePath}/admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${basePath}/system/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="${basePath}/admin/css/style.css" rel="stylesheet">
-    <link href="${basePath}/admin/css/style-responsive.css" rel="stylesheet" />
+    <link href="${basePath}/system/css/style.css" rel="stylesheet">
+    <link href="${basePath}/system/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-    <script src="${basePath}/admin/js/html5shiv.js"></script>
-    <script src="${basePath}/admin/js/respond.min.js"></script>
+    <script src="${basePath}/system/js/html5shiv.js"></script>
+    <script src="${basePath}/system/js/respond.min.js"></script>
     <![endif]-->
-    <script src="${basePath}/admin/js/jquery.js"></script>
-    <script src="${basePath}/admin/js/jquery.form.min.js"></script>
+    <script src="${basePath}/system/js/jquery.js"></script>
+    <script src="${basePath}/system/js/jquery.form.min.js"></script>
 	<style type="text/css">
 p.error {
 	color: #DE5959;
@@ -53,10 +53,10 @@ input.error:focus {
     <div class="container">
 
       <form class="form-signin" id="adminForm" action="${basePath}/auth/admin/login.json"  autocomplete="off" method="post">
-        <h2 class="form-signin-heading"><img src="${basePath}/admin/images/logo.png" style="height:38px;"/></h2>
+        <h2 class="form-signin-heading"><img src="${basePath}/system/images/logo.png" style="height:38px;"/></h2>
         <div class="login-wrap">
-            <input type="text" name="email" class="form-control" placeholder="邮箱" autofocus>
-            <input type="password" name="password" class="form-control" placeholder="密码">
+            <input type="text" name="email" class="form-control" placeholder="邮箱" value="herbertyang@163.com" autofocus>
+            <input type="password" name="password" class="form-control" placeholder="密码" value="111111">
             <div>
                 <input type="text" name="captcha" class="form-control" placeholder="验证码" style="width:100px;float:left;"> <img style="cursor:pointer;cursor:hand;margin-top: -13px;" onclick="this.src='${basePath}/auth/captcha?'+Math.random();" src="${basePath}/auth/captcha" >
             </div>
