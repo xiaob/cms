@@ -131,7 +131,7 @@
 						<!-- 验证码高度 -->
 						<prop key="kaptcha.image.height">60</prop>
 						<!-- 生成验证码内容范围 -->
-						<prop key="kaptcha.textproducer.char.string">abcdefghijklmnopqrstuvwxyz</prop>
+						<prop key="kaptcha.textproducer.char.string">abcde2345678gfynmnpwx</prop>
 						<!-- 验证码个数 -->
 						<prop key="kaptcha.textproducer.char.length">5</prop>
 						<!-- 是否有边框 -->

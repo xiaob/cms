@@ -1,5 +1,5 @@
-<#assign menu="system">
-<#assign submenu="system_basic">
+<#assign menu="article">
+<#assign submenu="article_list">
 <#include "head.ftl">
 <style type="text/css">
 .pagination {
@@ -24,15 +24,12 @@
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
-               							<th>
-                  							<input class="check-all" type="checkbox" />
-                						</th>
                 						<th>文件Id</th>
                 						<th>所属目录Id</th>
                 						<th>文章名称</th>
                 						<th>文章链接</th>
                 						<th>文字图片</th>
-                						<th>文章类型</th>
+                						<th>文章内容</th>
                 						<th>时间</th>
                 						<th>操作</th>
               						</tr>
@@ -40,9 +37,6 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
-                            			<td>
-                  							<input type="checkbox" name="${e_index}"/>
-               							</td>
                							<td>${e.fileId}</td>
                             			<td>${e.folderId}</td>
                                     	<td>${e.name}</td>

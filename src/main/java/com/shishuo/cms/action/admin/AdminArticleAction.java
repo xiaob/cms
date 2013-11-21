@@ -46,7 +46,7 @@ public class AdminArticleAction extends AdminBaseAction{
 			modelMap.put("folderName", folder.getName());
 		}
 		modelMap.put("file", file);
-		modelMap.put("folderAll", folderService.getAllList());
+		modelMap.put("folderAll", folderService.getAllFolder());
 		return "admin/updateArticle";
 	}
 	/**
@@ -55,7 +55,7 @@ public class AdminArticleAction extends AdminBaseAction{
 	 */
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
 	public String addArticle(ModelMap modelMap){
-		modelMap.put("folderAll", folderService.getAllList());
+		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("fileName", "");
 		modelMap.put("url", "");
 		modelMap.put("images", "");
@@ -96,7 +96,7 @@ public class AdminArticleAction extends AdminBaseAction{
 				json.getErrors().put("images", "文章图片不能为空");
 			}
 			if(description.equals("")){
-				json.getErrors().put("description", "文章种类不能为空");
+				json.getErrors().put("description", "文章内容不能为空");
 			}
 			
 			// 检测校验结果
@@ -145,7 +145,7 @@ public class AdminArticleAction extends AdminBaseAction{
 				json.getErrors().put("images", "文章图片不能为空");
 			}
 			if(description.equals("")){
-				json.getErrors().put("description", "文章种类不能为空");
+				json.getErrors().put("description", "文章内容不能为空");
 			}
 			
 			// 检测校验结果
