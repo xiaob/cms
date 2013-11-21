@@ -50,4 +50,8 @@
 		select count(*) from folder
 	</select>
 
+	<select id="getFolderVoListByFatherId" 
+		resultType="com.shishuo.cms.entity.vo.FolderVo">
+		select * from folder where fatherId=#{fatherId}
+	</select>
 </mapper>  

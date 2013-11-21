@@ -1,5 +1,5 @@
 <#assign menu="system">
-<#assign submenu="system_basic">
+<#assign submenu="user_list">
 <#include "../head.ftl">
 <style type="text/css">
 .pagination {
@@ -23,9 +23,6 @@
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
-               							<th>
-                  							<input class="check-all" type="checkbox" />
-                						</th>
                 						<th>用户Id</th>
                 						<th>用户名称</th>
                 						<th>OpenId</th>
@@ -37,9 +34,6 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
-                            			<td>
-                  							<input type="checkbox" name="${e_index}"/>
-               							</td>
                             			<td>${e.userId}</td>
                                     	<td>${e.name}</td>
                                     	<td>${e.openId}</td>
@@ -47,12 +41,12 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="/CMS/admin/admin/one?adminId=${e.adminId}" title="修改">
+                							<a href="/CMS/admin/admin/one?userId=${e.userId}" title="修改">
                 								<button class="btn btn-primary btn-xs">
                 									<i class="icon-pencil"></i>
                 								</button>
                 							</a>
-                							<a href="/CMS/admin/admin/delete?adminId=${e.adminId}" title="删除">
+                							<a href="/CMS/admin/admin/delete?userId=${e.userId}" title="删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>
