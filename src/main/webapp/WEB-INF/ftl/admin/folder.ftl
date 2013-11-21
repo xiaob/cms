@@ -1,5 +1,5 @@
 <#assign menu="folder">
-<#assign submenu="folder_add">
+<#assign submenu="add_folder">
 <#include "head.ftl">
 <style type="text/css">
 .m-bot15 {
@@ -53,7 +53,11 @@
                                         <select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="fatherId">
                                         	<option value="0">未分类</option>
                                         	<#list folderAll as folder>  	
-                                          		<option value="${folder.folderId}">${folder.name}</option>
+                                          		<option value="${folder.folderId}">
+                                          		<#list 1..folder.level as i>
+                                          		-
+                                          		</#list>
+                                          		${folder.name}</option>
                                         	</#list>
                                         </select>
                                       </div>

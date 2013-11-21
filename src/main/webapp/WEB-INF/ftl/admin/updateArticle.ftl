@@ -1,5 +1,5 @@
-<#assign menu="system">
-<#assign submenu="system_basic">
+<#assign menu="article">
+<#assign submenu="update_article">
 <#include "head.ftl">
 <style type="text/css">
 
@@ -15,7 +15,7 @@
                             	 修改文章
                           </header>
                           <div class="panel-body">
-                              <form method="post" class="form-horizontal tasi-form" action="/CMS/admin/file/update">
+                              <form id="update_article_form" method="post" class="form-horizontal" autocomplete="off" action="/CMS/admin/file/update.json">
                               	<fieldset>
                               	  <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文件Id</label>
@@ -32,7 +32,11 @@
                                          <select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;height: 40px;" name="folderId">
                                         	<option value="0">未分类</option>
                                         	<#list folderAll as folder>  	
-                                          		<option value="${folder.folderId}">${folder.name}</option>
+                                          		<option value="${folder.folderId}">
+                                          		<#list 1..folder.level as i>
+                                          		-
+                                          		</#list>
+                                          		${folder.name}</option>
                                         	</#list>
                                         </select>
                                       </div>
@@ -40,30 +44,35 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章名称</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="fileName" value="${file.name}">
+                                          <input type="text" class="form-control" name="fileName" value="${file.name}"
+                                          	placeholder="文章名称" id="fileName">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章链接</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="url" value="${file.url}">
+                                          <input type="text" class="form-control" name="url" value="${file.url}"
+                                          	placeholder="文章链接" id="url">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章图片</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="images" value="${file.images}">
+                                          <input type="text" class="form-control" name="images" value="${file.images}"
+                                          	placeholder="文章图片" id="fileName">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">文章类型</label>
+                                      <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="description" value="${file.description}">
+                                          <input type="text" class="form-control" name="description" value="${file.description}"
+                                          	placeholder="文章内容" id="description">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <input class="button" value="修改" type="submit" style="height:35px">
-                                  </div>
+                        			<label class="col-sm-2 col-sm-2 control-label"></label>
+                            		<button class="btn btn-danger" type="submit">修改</button>
+                        		  </div>
                                  </fieldset>
                               </form>
                           </div>
@@ -74,4 +83,20 @@
           </section>
 		</section>
 		<!--main content end-->
+<script type="text/javascript">
+	$(function() {
+		$('#update_article_form').ajaxForm({
+			dataType : 'json',
+			success : function(data) {
+				if (data.result) {
+					bootbox.alert("保存成功，将刷新页面", function() {
+						window.location.reload();
+					});
+				}else{
+					showErrors($('#update_article_form'),data.errors);
+				}
+			}
+		});
+	});	
+</script>
 <#include "foot.ftl">

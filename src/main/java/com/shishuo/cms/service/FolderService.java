@@ -71,7 +71,7 @@ public class FolderService {
 	 * @param fatherId
 	 * @return List<FolderVo>
 	 */
-	public List<FolderVo> getFolderVoListByFatherId(long fatherId) {
+	public List<FolderVo> getFolderVoListByFatherIdPage(long fatherId) {
 		List<Folder> list = this.getFolderListByFatherId(fatherId);
 		List<FolderVo> allList = new ArrayList<FolderVo>();
 		for (Folder folder : list) {
@@ -206,16 +206,16 @@ public class FolderService {
 		return pageVo;
 	}
 	
-	public List<Folder> getAllFolder(){
-		List<Folder>  allFolderList = new ArrayList<Folder>();
+	public List<FolderVo> getAllFolder(){
+		List<FolderVo>  allFolderList = new ArrayList<FolderVo>();
 		this.getFolderList(allFolderList,0);
 		return allFolderList;
 	}
 	
-	private void getFolderList(List<Folder> allFolderList,long fatherId){
-		List<Folder>  folderList = folderDao.getFolderListByFatherId(fatherId);
+	private void getFolderList(List<FolderVo> allFolderList,long fatherId){
+		List<FolderVo>  folderList = folderDao.getFolderVoListByFatherId(fatherId);
 		Collections.sort(folderList, new ComparatorFolderList());
-		for(Folder folder:folderList){
+		for(FolderVo folder:folderList){
 			allFolderList.add(folder);
 			this.getFolderList(allFolderList,folder.getFolderId());
 		}
@@ -228,10 +228,11 @@ public class FolderService {
 			FolderVo folderVo2 = (FolderVo)arg1;
 			String str1=folderVo1.getSort()+"";
 			String str2=folderVo2.getSort()+"";
-			int flag= str1.compareTo(str2);
-			return flag;
-			
+			return str1.compareTo(str2);		
 		}
-
+	}
+	
+	public List<FolderVo> getFolderVoListByFatherId(long fatherId){
+		return folderDao.getFolderVoListByFatherId(fatherId);
 	}
 }

@@ -1,5 +1,5 @@
 <#assign menu="system">
-<#assign submenu="system_basic">
+<#assign submenu="admin_list">
 <#include "../head.ftl">
 <style type="text/css">
 .pagination {
@@ -23,9 +23,6 @@
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
-               							<th>
-                  							<input class="check-all" type="checkbox" />
-                						</th>
                 						<th>管理员Id</th>
                 						<th>管理员名称</th>
                 						<th>密码</th>
@@ -37,9 +34,6 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
-                            			<td>
-                  							<input type="checkbox" name="${e_index}"/>
-               							</td>
                             			<td>${e.adminId}</td>
                                     	<td>${e.name}</td>
                                     	<td>${e.password}</td>

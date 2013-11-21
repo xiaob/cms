@@ -101,4 +101,6 @@ public interface FolderDao {
 	 */
 	public long getAllListPageCount();
 	
+	public List<FolderVo> getFolderVoListByFatherId(@Param("fatherId") long fatherId);
+	
 }
