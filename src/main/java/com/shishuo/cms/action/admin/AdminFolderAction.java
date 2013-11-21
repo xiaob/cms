@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,8 +84,8 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 进入修改目录资料页面
 	 *
 	 */
-	@RequestMapping(value = "/one",method = RequestMethod.GET)
-	public String oneFolder(@RequestParam(value = "folderId", defaultValue = "1") long folderId,ModelMap modelMap){
+	@RequestMapping(value = "/{folderId}",method = RequestMethod.GET)
+	public String oneFolder(@PathVariable long folderId,ModelMap modelMap){
 		Folder folder = folderService.getFolderById(folderId);
 		if(folder.getFatherId()==0){
 			modelMap.put("fatherFolderName","未分类");
@@ -117,10 +118,21 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 删除目录
 	 *
 	 */
-	@RequestMapping(value = "/delete",method = RequestMethod.POST)
+	@RequestMapping(value = "/delete/{folderId}",method = RequestMethod.GET)
 	public String deleteFolder(
-			@RequestParam(value = "folderId") long folderId){
+			@PathVariable long folderId){
 		folderService.deleteFolderById(folderId);
+		return "redirect:/admin/folder/all";
+	}
+	
+	/**
+	 * @author 修改目录顺序
+	 *
+	 */
+	@RequestMapping(value = "/update/sort",method = RequestMethod.POST)
+	public String updateSort(
+			@PathVariable int sort){
+		
 		return "redirect:/admin/folder/all";
 	}
 }

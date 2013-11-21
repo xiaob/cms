@@ -14,4 +14,27 @@
 	<select id="getChildCommentList"  parameterType="long" resultType="com.shishuo.cms.entity.Comment">
 		select * from `comment` where fileId = #{fileId} and fatherId = #{fatherId} order by createTime desc
 	</select>
+	
+	<update id="updateCommentStatus" parameterType="com.shishuo.cms.entity.Comment">
+		update `comment` set status=#{status} where commentId=#{commentId}
+	</update>
+	
+	<select id="getCommentById" parameterType="long"
+		resultType="com.shishuo.cms.entity.Comment">
+		select * from `comment` where commentId=#{commentId}
+	</select>
+	
+	<select id="getAllList" parameterType="long"
+		resultType="com.shishuo.cms.entity.vo.CommentVo">
+		select * from `comment` limit #{offset},#{rows}
+	</select>
+	
+	<select id="getAllListCount"
+		resultType="Integer">
+		select count(*) from `comment`
+	</select>
+	
+	<select id="getCommentByStatusCount"
+		resultType="com.shishuo.cms.entity.vo.CommentVo">
+	</select>
 </mapper>  

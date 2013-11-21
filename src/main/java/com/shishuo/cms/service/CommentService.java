@@ -8,10 +8,17 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shishuo.cms.constant.CommentConstant;
 import com.shishuo.cms.dao.CommentDao;
 import com.shishuo.cms.entity.Comment;
 import com.shishuo.cms.entity.vo.CommentVo;
+import com.shishuo.cms.entity.vo.PageVo;
 
+/**
+ * 评论服务
+ * @author Administrator
+ *
+ */
 @Service
 public class CommentService {
 		
@@ -68,5 +75,46 @@ public class CommentService {
 			 }
 		 }
 		return commentVoList;
+	}
+	
+	/**
+	 * 评论审核
+	 * @param commentId
+	 * @param status
+	 * @return Integer
+	 */
+	public int updateCommentStatus(long commentId,int status){
+		Comment comment = this.getCommentById(commentId);
+		comment.setStatus(status);
+		return commentDao.updateCommentStatus(comment);
+	}
+	
+	public Comment getCommentById(long commentId){
+		return commentDao.getCommentById(commentId);
+	}
+	
+	public List<CommentVo> getAllList(long offset, long rows){
+		return commentDao.getAllList(offset, rows);
+	}
+	
+	public int getAllListCount(){
+		return commentDao.getAllListCount();
+	}
+	
+	public PageVo<CommentVo> getAllListPage(int pageNum){
+		PageVo<CommentVo> pageVo = new PageVo<CommentVo>(pageNum);
+		pageVo.setUrl("/CMS/admin/comment/all?");
+		pageVo.setRows(5);
+		List<CommentVo> list = this.getAllList(pageVo.getOffset(), pageVo.getRows());
+		for(CommentVo commentVo:list){
+			if(commentVo.getStatus()==1){
+				commentVo.setAuditing(CommentConstant.STATUS[1]);
+			}else{
+				commentVo.setAuditing(CommentConstant.STATUS[0]);
+			}
+		}
+		pageVo.setList(list);
+		pageVo.setCount(this.getAllListCount());
+		return pageVo;
 	}
 }

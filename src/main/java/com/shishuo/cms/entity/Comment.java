@@ -2,17 +2,53 @@ package com.shishuo.cms.entity;
 
 import java.util.Date;
 
+/**
+ * 评论实体
+ * @author Administrator
+ *
+ */
+
 public class Comment {
 	
+	/**
+	 * 评论Id
+	 */
     private long commentId;
-    private long fileId; 
+    /**
+	 * 所属文件Id
+	 */
+    private long fileId;
+    /**
+	 * 所属用户Id
+	 */
     private long userId;
+    /**
+	 * 所属用户email
+	 */
 	private String email;
+	/**
+	 * 评论名称
+	 */
     private String name;
+    /**
+	 * 评论内容
+	 */
     private String content;
+    /**
+	 * 所属Ip
+	 */
     private String ip;
+    /**
+	 * 父亲Id
+	 */
     private long fatherId;
+    /**
+	 * 审核状态
+	 */
     private int status;
+    /**
+	 * 时间
+	 */
     private Date createTime;
     
 	public long getCommentId() {

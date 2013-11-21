@@ -13,7 +13,18 @@ public class CommentVo extends Comment{
 	 */
     private	List<Comment> childComment = new ArrayList<Comment>();
     
-    /**
+    private String auditing;
+    
+    
+    public String getAuditing() {
+		return auditing;
+	}
+
+	public void setAuditing(String auditing) {
+		this.auditing = auditing;
+	}
+
+	/**
 	 * 评论用户
 	 */
     private User user;

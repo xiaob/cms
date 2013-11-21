@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.shishuo.cms.entity.Admin;
 
+/**
+ * 管理员
+ */
 @Repository
 public interface AdminDao {
 

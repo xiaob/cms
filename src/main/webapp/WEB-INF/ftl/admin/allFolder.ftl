@@ -20,10 +20,13 @@
                 </header>
                 <div class="panel-body">
                 	<div class="adv-table">
+                		<form id="update_sort_form" method="post" class="form-horizontal tasi-form" action="/CMS/admin/folder/update/sort.json">
+						<fieldset>
                     	<div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
+                                		<th>顺序</th>
                 						<th>英文名称</th>
                 						<th>名称</th>
                 						<th>文件数</th>
@@ -35,9 +38,10 @@
               						</tr>
                                 </thead>
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
-                            		
                             		<#list list as e>
                             		<tr class="gradeA odd">
+                            			<td><input type="text" value="${e.sort}" name="sort" class="txt" style="width:40px;">
+                            			</td>
 										<td>
 										<#list 1..e.level as i>
 										————
@@ -61,12 +65,12 @@
                                     	<td>${e.rank}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="/CMS/admin/folder/one?folderId=${e.folderId}" title="修改">
+                							<a href="/CMS/admin/folder/${e.folderId}" title="修改">
                 								<button class="btn btn-primary btn-xs">
                 									<i class="icon-pencil"></i>
                 								</button>
                 							</a>
-                							<a href="/CMS/admin/folder/delete?folderId=${e.folderId}" title="删除">
+                							<a href="/CMS/admin/folder/delete/${e.folderId}" title="删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>
@@ -77,9 +81,12 @@
                                	</tbody>
                               </table>
                            </div>
-                           <form method="post">
-    							<textarea mce_editable="true"></textarea>
-							</form>
+                           <div class="form-group">
+                        	<label class="col-sm-2 col-sm-2 control-label"></label>
+                            <button class="btn btn-danger" type="submit">提交</button>
+                        </div>
+						</fieldset>
+						</form>
                         </div>
                   </div>
               </section>
