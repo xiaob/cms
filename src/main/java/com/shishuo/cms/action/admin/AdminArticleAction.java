@@ -98,7 +98,6 @@ public class AdminArticleAction extends AdminBaseAction{
 			if(description.equals("")){
 				json.getErrors().put("description", "文章内容不能为空");
 			}
-			
 			// 检测校验结果
 			validate(json);
 			fileService.addFile(folderId, fileName, url, images, description, 0,1);

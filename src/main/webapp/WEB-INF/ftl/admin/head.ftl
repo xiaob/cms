@@ -90,6 +90,13 @@
 							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/file/recycleList">回收站</a></li>
 						</ul>
 					</li>
+					<li class="sub-menu">
+						<a href="javascript:;" <#if menu="comment">class="active"</#if>> <i class="icon-book"></i> <span>评论管理</span></a>
+						<ul class="sub">
+							<li <#if submenu="comment_list">class="active"</#if>><a href="${basePath}/admin/comment/all">所有评论</a></li>
+							<li <#if submenu="auditing_list_comment">class="active"</#if>><a href="${basePath}/admin/comment/auditing/list">审核评论列表</a></li>
+						</ul>
+					</li>
 					<#if configMap.function_photo=="on">
 					<li class="sub-menu ">
 						<a href="javascript:;" > <i class="icon-camera-retro"></i> <span>图片管理</span></a>
@@ -105,7 +112,7 @@
 						<a href="javascript:;" > <i class="icon-upload-alt"></i> <span>下载管理</span></a>
 						<ul class="sub">
 							<li><a href="#">上传文件</a></li>
-							<li><a href="/CMS/admin/upload">上传文件</a></li>
+							<li><a href="${basePath}/admin/upload">上传文件</a></li>
 							<li><a href="buttons.html">文件列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>

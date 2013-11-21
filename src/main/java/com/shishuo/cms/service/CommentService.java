@@ -117,4 +117,22 @@ public class CommentService {
 		pageVo.setCount(this.getAllListCount());
 		return pageVo;
 	}
+	
+	public List<CommentVo> getCommentByStatus(long offset,long rows, int status){
+		return commentDao.getCommentByStatus(offset, rows, status);
+	}
+	
+	public int getCommentByStatusCount(int status){
+		return commentDao.getCommentByStatusCount(status);
+	}
+	
+	public PageVo<CommentVo> getCommentByStatusPage(int pageNum,int status){
+		PageVo<CommentVo> pageVo =  new PageVo<CommentVo>(pageNum);
+		pageVo.setUrl("");
+		pageVo.setRows(5);
+		List<CommentVo> list = this.getCommentByStatus(pageVo.getOffset(), pageVo.getRows(), status);
+		pageVo.setList(list);
+		pageVo.setCount(this.getCommentByStatusCount(status));
+		return pageVo;
+	}
 }

@@ -41,12 +41,12 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="/CMS/admin/admin/one?adminId=${e.adminId}" title="修改">
+                							<a href="${basePath}/admin/admin/one?adminId=${e.adminId}" title="修改">
                 								<button class="btn btn-primary btn-xs">
                 									<i class="icon-pencil"></i>
                 								</button>
                 							</a>
-                							<a href="/CMS/admin/admin/delete?adminId=${e.adminId}" title="删除">
+                							<a href="${basePath}/admin/admin/delete?adminId=${e.adminId}" title="删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>

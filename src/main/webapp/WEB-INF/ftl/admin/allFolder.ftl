@@ -20,7 +20,7 @@
                 </header>
                 <div class="panel-body">
                 	<div class="adv-table">
-                		<form id="update_sort_form" method="post" class="form-horizontal tasi-form" action="/CMS/admin/folder/update/sort.json">
+                		<form id="update_sort_form" method="post" class="form-horizontal tasi-form" action="${basePath}/admin/folder/update/sort.json">
 						<fieldset>
                     	<div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
                             <table class="table table-striped table-advance table-hover">
@@ -65,12 +65,12 @@
                                     	<td>${e.rank}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="/CMS/admin/folder/${e.folderId}" title="修改">
+                							<a href="${basePath}/admin/folder/${e.folderId}" title="修改">
                 								<button class="btn btn-primary btn-xs">
                 									<i class="icon-pencil"></i>
                 								</button>
                 							</a>
-                							<a href="/CMS/admin/folder/delete/${e.folderId}" title="删除">
+                							<a href="${basePath}/admin/folder/delete/${e.folderId}" title="删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>

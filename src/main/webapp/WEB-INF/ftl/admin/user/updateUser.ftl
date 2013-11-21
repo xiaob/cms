@@ -15,7 +15,7 @@
  					修改用户资料
 				</header>
 				<div class="panel-body">
-					<form id="update_user_form" method="post" class="form-horizontal" autocomplete="off" action="/CMS/admin/user/update.json">
+					<form id="update_user_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/user/update.json">
 					<fieldset>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">用户Id</label>
