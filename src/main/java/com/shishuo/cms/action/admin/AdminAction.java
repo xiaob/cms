@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin")
 public class AdminAction extends AdminBaseAction{
 
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String login(ModelMap modelMap){
 		modelMap.put("articleCount", fileService.getFileListByTypeCount(0,1));
