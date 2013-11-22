@@ -27,9 +27,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.entity.File;
+import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.FileService;
+import com.shishuo.cms.service.FolderService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
@@ -46,6 +48,10 @@ public class FilePageTag implements TemplateDirectiveModel {
 
 	@Autowired
 	private FileService fileService;
+	
+	@Autowired
+	private FolderService folderService;
+	
 
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
@@ -54,8 +60,7 @@ public class FilePageTag implements TemplateDirectiveModel {
 		Integer type = Integer.parseInt(params.get("type").toString());
 		Integer pageNum = Integer.parseInt(params.get("pageNum").toString());
 		// 获取文件的分页
-		PageVo<FileVo> pageVo = fileService.getFilePageByFoderId(folderId,
-				pageNum);
+		PageVo<FileVo> pageVo = fileService.getFilePageByFoderId(folderId,pageNum);
 		env.setVariable("pageVo", BEANS_WRAPPER.wrap(pageVo));
 		body.render(env.getOut());
 	}

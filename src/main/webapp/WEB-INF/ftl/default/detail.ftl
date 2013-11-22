@@ -1,3 +1,8 @@
+<style>
+.error{
+	color:red;
+}
+</style>
 <#include "head.ftl">
     <!--container start-->
     <div class="container">
@@ -85,19 +90,19 @@
                             </@cms_comment_list>
                                 <div class="post-comment">
 	                                <h3 class="skills">发布评论</h3>
-	                                <form role="form" class="form-horizontal" action="comment/add" method="post">
+	                                <form role="form" class="form-horizontal" id="comment_form" action="${basePath}/comment/add" method="post">
 	                                    <div class="form-group">
 	                                        <div class="col-lg-4">
-	                                            <input type="text" class="col-lg-12 form-control" placeholder="名字" name="name">
+	                                            <input type="text" class="col-lg-12 form-control" alt="名字" placeholder="名字" name="name" required>
 	                                        </div>
 	                                        <div class="col-lg-4">
-	                                            <input type="text" class="col-lg-12 form-control" placeholder="邮箱" name="email">
+	                                            <input type="text" class="col-lg-12 form-control" alt="邮箱" placeholder="邮箱" name="email">
 	                                        </div>
-	                                        <input type="hidden" name="fileId" value="8">
+	                                        <input type="hidden" name="fileId" value="${fileId}">
                                         </div>
 	                                    <div class="form-group">
 	                                        <div class="col-lg-12">
-	                                            <textarea class=" form-control" rows="8" placeholder="评语" name="content"></textarea>
+	                                            <textarea class=" form-control" rows="8" placeholder="评语" name="content" required></textarea>
 	                                        </div>
 	                                    </div>
 	                                    <p>
@@ -115,4 +120,22 @@
         </div>
     </div>
     <!--container end-->
-    <#include "foot.ftl">
+    
+ 
+   <script type="text/javascript">
+	$(function(){
+		$("#comment_form").validate();
+        $("#comment_form").ajaxForm({
+			dataType:  'json',
+			success:function(data){
+				if(data.result){
+					location.href="${basePath}/${ename}/"+${fileId};
+				}else{
+					alert(data.msg);
+				}
+			}
+	      });
+
+    });
+   </script>
+   <#include "foot.ftl">

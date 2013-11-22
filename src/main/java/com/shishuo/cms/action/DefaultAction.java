@@ -30,8 +30,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.ConfigConstant;
+import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.service.ConfigService;
+import com.shishuo.cms.service.FileService;
 import com.shishuo.cms.service.FolderService;
 
 /**
@@ -44,6 +46,9 @@ public class DefaultAction {
 
 	@Autowired
 	private FolderService folderService;
+	
+	@Autowired
+	private FileService fileService;
 	
 	@Autowired
 	private ConfigService configService;
@@ -77,15 +82,22 @@ public class DefaultAction {
 			ModelMap modelMap) {
 		Folder currentFolder = folderService.getFolderByEname(ename);
 		modelMap.addAttribute("currentFolder", currentFolder);
+		
 		modelMap.addAttribute("pageNum", pageNum);
 		System.out.println("###############"+ConfigConstant.DEFAUTL_TEMPLATE);
 		return ConfigConstant.getTemplatePath() + "/"+currentFolder.getTemplate();
 	}
 	
 	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
-	public String detail(@PathVariable long fileId,ModelMap modelMap){
-//		String a = "";
+
+
+	public String detail(@PathVariable long fileId,
+			             @PathVariable String ename,
+			             ModelMap modelMap){
+		File file = fileService.getFileById(fileId);
+		fileService.updateViewCount(fileId, file.getViewCount());
 		modelMap.addAttribute("fileId", fileId);
+		modelMap.addAttribute("ename", ename);
 		return "default/detail";
 	}
 	

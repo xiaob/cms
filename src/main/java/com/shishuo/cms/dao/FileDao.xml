@@ -40,6 +40,12 @@
 	<update id="updateImage" parameterType="com.shishuo.cms.entity.File">
 	     update file set folderId = #{folderId} where fileId = #{fileId} and userId = #{userId}
 	</update>
+	<update id="updateViewCount" parameterType="long">
+		 update file set viewCount = #{viewCount} where fileId = #{fileId}
+	</update>
+	<update id="updateCommentCount" parameterType="long">
+	     update file set commentCount = #{commentCount} where fileId = #{fileId}
+	</update>
 	<select id="getUserImageList" resultType="com.shishuo.cms.entity.File" parameterType="long">
 		 select * from file where userId = #{userId} and type=4 limit #{offset},#{rows}
 	</select>

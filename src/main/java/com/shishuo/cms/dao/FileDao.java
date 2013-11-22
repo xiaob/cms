@@ -148,5 +148,23 @@ public interface FileDao {
 	 * @return Integer
 	 */
 	public int getRecycle(File file);
+	
+	/**
+	 * 更新浏览人数
+	 * @param FileId
+	 * @param viewCount
+	 * @return int
+	 */
+	public int updateViewCount(@Param("fileId") long fileId,@Param("viewCount") int viewCount);
+	
+	/**
+	 * 更新评论数
+	 * @param FileId
+	 * @param commentCount
+	 * @return int
+	 */
+	
+	public int updateCommentCount(@Param("fileId") long fileId,@Param("commentCount") int commentCount);
+	
 
 }

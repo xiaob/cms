@@ -111,7 +111,7 @@ public class PageVo<T> {
 		if (this.getPageCount() != 1) {
 			for (int i = 1; i <= this.getPageCount(); i++) {
 				if (i == pageNum) {
-					sb.append("<li><a href='" + this.getUrl() + "pageNum=" + i
+					sb.append("<li class='active'><a   href='" + this.getUrl() + "pageNum=" + i
 							+ "' class='number current' title='" + i + "'>" + i
 							+ "</a></li>");
 				} else {

@@ -26,6 +26,10 @@
     <!-- Custom styles for this template -->
     <link href="${basePath}/default/css/style.css" rel="stylesheet">
     <link href="${basePath}/default/css/style-responsive.css" rel="stylesheet" />
+    <script src="${basePath}/default/js/jquery.js"></script>
+    <script src="${basePath}/default/js/jquery.form.js"></script>
+    <script src="${basePath}/default/js/jquery.validate.js"></script>  
+    
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -45,7 +49,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">师说<span>CMS</span></a>
+                    <a class="navbar-brand" href="${basePath}/">师说<span>CMS</span></a>
                 </div>
             </div>
         </div>
