@@ -1,6 +1,6 @@
 /*---LEFT BAR ACCORDION----*/
 $(function() {
-	tinymce.init({selector:'textarea'});
+
     $('#nav-accordion').dcAccordion({
         eventType: 'click',
         autoClose: true,
@@ -30,7 +30,7 @@ var Script = function () {
 //    sidebar toggle
 
     $(function() {
-    	
+
         function responsiveView() {
             var wSize = $(window).width();
             if (wSize <= 768) {

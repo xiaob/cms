@@ -101,6 +101,11 @@ public interface FolderDao {
 	 */
 	public long getAllListPageCount();
 	
+	/**
+	 * 得到fatherId下的所有子目录包括子目录的子目录
+	 * @param fatherId
+	 * @return List<FolderVo>
+	 */
 	public List<FolderVo> getFolderVoListByFatherId(@Param("fatherId") long fatherId);
 	
 }

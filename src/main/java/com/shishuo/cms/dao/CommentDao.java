@@ -46,6 +46,12 @@ public interface CommentDao {
 	 */
 	public List<Comment> getCommentList(@Param("fileId") long fileId);
 	
+	/**
+	 * 获得某篇文章下某条评论的回复
+	 * @param fileId
+	 * @param fatherId
+	 * @return List<Comment>
+	 */
 	public List<Comment> getChildCommentList(@Param("fileId") long fileId,@Param("fatherId") long fatherId);
 	
 	/**
@@ -62,12 +68,34 @@ public interface CommentDao {
 	 */
 	public Comment getCommentById(@Param("commentId") long commentId);
 	
+	/**
+	 * 获得所有评论
+	 * @param offset
+	 * @param rows
+	 * @return List<CommentVo>
+	 */
 	public List<CommentVo> getAllList(@Param("offset") long offset,@Param("rows") long rows);
 	
+	/**
+	 * 获得所有评论的数量
+	 * @return Integer
+	 */
 	public int getAllListCount();
 	
+	/**
+	 * 获得某状态下的评论列表
+	 * @param offset
+	 * @param rows
+	 * @param status
+	 * @return Integer
+	 */
 	public List<CommentVo> getCommentByStatus(@Param("offset") long offset,@Param("rows") long rows,@Param("status")int status);
 	
+	/**
+	 * 获得某状态下的评论数量
+	 * @param status
+	 * @return Integer
+	 */
 	public int getCommentByStatusCount(@Param("status")int status);
 	  
 }

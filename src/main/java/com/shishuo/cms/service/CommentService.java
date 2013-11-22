@@ -107,18 +107,38 @@ public class CommentService {
 		return commentDao.updateCommentStatus(comment);
 	}
 	
+	/**
+	 * 通过id获得指定评论
+	 * @param commentId
+	 * @return Comment
+	 */
 	public Comment getCommentById(long commentId){
 		return commentDao.getCommentById(commentId);
 	}
 	
+	/**
+	 * 获得所有评论
+	 * @param offset
+	 * @param rows
+	 * @return List<CommentVo>
+	 */
 	public List<CommentVo> getAllList(long offset, long rows){
 		return commentDao.getAllList(offset, rows);
 	}
 	
+	/**
+	 * 获得所有评论的数量
+	 * @return Integer
+	 */
 	public int getAllListCount(){
 		return commentDao.getAllListCount();
 	}
 	
+	/**
+	 * 获得所有评论的分页
+	 * @param pageNum
+	 * @return PageVo<CommentVo>
+	 */
 	public PageVo<CommentVo> getAllListPage(int pageNum){
 		PageVo<CommentVo> pageVo = new PageVo<CommentVo>(pageNum);
 		pageVo.setUrl("/CMS/admin/comment/all?");
@@ -136,14 +156,32 @@ public class CommentService {
 		return pageVo;
 	}
 	
+	/**
+	 * 获得某状态下的所有评论
+	 * @param offset
+	 * @param rows
+	 * @param status
+	 * @return List<CommentVo>
+	 */
 	public List<CommentVo> getCommentByStatus(long offset,long rows, int status){
 		return commentDao.getCommentByStatus(offset, rows, status);
 	}
 	
+	/**
+	 * 获得某状态下的评论的数量
+	 * @param status
+	 * @return Integer
+	 */
 	public int getCommentByStatusCount(int status){
 		return commentDao.getCommentByStatusCount(status);
 	}
 	
+	/**
+	 * 获得某状态下的评论的分页
+	 * @param pageNum
+	 * @param status
+	 * @return PageVo<CommentVo>
+	 */
 	public PageVo<CommentVo> getCommentByStatusPage(int pageNum,int status){
 		PageVo<CommentVo> pageVo =  new PageVo<CommentVo>(pageNum);
 		pageVo.setUrl("");

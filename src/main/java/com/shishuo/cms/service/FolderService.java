@@ -206,12 +206,19 @@ public class FolderService {
 		return pageVo;
 	}
 	
+	/**
+	 * 获得所有目录并通过递归实现目录树
+	 * @return List<FolderVo>
+	 */
 	public List<FolderVo> getAllFolder(){
 		List<FolderVo>  allFolderList = new ArrayList<FolderVo>();
 		this.getFolderList(allFolderList,0);
 		return allFolderList;
 	}
 	
+	/**
+	 * 实现目录树的递归方法
+	 */
 	private void getFolderList(List<FolderVo> allFolderList,long fatherId){
 		List<FolderVo>  folderList = folderDao.getFolderVoListByFatherId(fatherId);
 		Collections.sort(folderList, new ComparatorFolderList());
@@ -221,6 +228,9 @@ public class FolderService {
 		}
 	}
 	
+	/**
+	 * 实现同级目录排序的内部类
+	 */
 	class ComparatorFolderList implements Comparator<Object>{
 
 		public int compare(Object arg0, Object arg1) {
@@ -232,6 +242,11 @@ public class FolderService {
 		}
 	}
 	
+	/** 
+	 * 获得某目录下的所有子目录包括子目录当中的子目录
+	 * @param fatherId
+	 * @return List<FolderVo>
+	 */
 	public List<FolderVo> getFolderVoListByFatherId(long fatherId){
 		return folderDao.getFolderVoListByFatherId(fatherId);
 	}

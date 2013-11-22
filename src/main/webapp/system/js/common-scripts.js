@@ -1,5 +1,6 @@
 /*---LEFT BAR ACCORDION----*/
 $(function() {
+	tinymce.init({mode: "textareas"});
     $('#nav-accordion').dcAccordion({
         eventType: 'click',
         autoClose: true,
