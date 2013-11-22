@@ -20,7 +20,7 @@
                 </header>
                 <div class="panel-body">
                 	<div class="adv-table">
-                		<form id="update_sort_form" method="post" class="form-horizontal tasi-form" action="/CMS/admin/folder/update/sort.json">
+                		<form id="update_sort_form" method="post" class="form-horizontal tasi-form" action="${basePath}/admin/folder/update/sort.json">
 						<fieldset>
                     	<div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
                             <table class="table table-striped table-advance table-hover">
@@ -40,7 +40,7 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list list as e>
                             		<tr class="gradeA odd">
-                            			<td><input type="text" value="${e.sort}" name="sort" class="txt" style="width:40px;">
+                            			<td class="folderSort"><input type="text" value="${e.sort}" name="sort" class="txt" style="width:40px;">
                             			</td>
 										<td>
 										<#list 1..e.level as i>
@@ -65,12 +65,12 @@
                                     	<td>${e.rank}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="/CMS/admin/folder/${e.folderId}" title="修改">
+                							<a href="${basePath}/admin/folder/${e.folderId}" title="修改">
                 								<button class="btn btn-primary btn-xs">
                 									<i class="icon-pencil"></i>
                 								</button>
                 							</a>
-                							<a href="/CMS/admin/folder/delete/${e.folderId}" title="删除">
+                							<a href="${basePath}/admin/folder/delete/${e.folderId}" title="删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>
@@ -94,4 +94,20 @@
           </section>
 		</section>
 		<!--main content end-->
+<script type="text/javascript">
+	$(function() {
+		$('#update_sort_form').ajaxForm({
+			dataType : 'json',
+			success : function(data) {
+				if (data.result) {
+					bootbox.alert("修改成功，将刷新页面", function() {
+						window.location.reload();
+					});
+				}else{
+					showErrors($('#update_sort_form'),data.errors);
+				}
+			}
+		});
+	});	
+</script>
 <#include "foot.ftl">

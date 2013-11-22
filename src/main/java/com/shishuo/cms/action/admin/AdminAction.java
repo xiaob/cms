@@ -2,12 +2,12 @@
  * 
  *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
  *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
  *
  *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
  *	You may obtain a copy of the License at
  *	 
- *		http://www.shishuo.com/jiawacms/licenses
  *		http://www.apache.org/licenses/LICENSE-2.0
  *
  *	Unless required by applicable law or agreed to in writing, software
@@ -17,14 +17,12 @@
  *	limitations under the License.
  */
 
-
 package com.shishuo.cms.action.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author lqq
@@ -36,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin")
 public class AdminAction extends AdminBaseAction{
 
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String login(ModelMap modelMap){
 		modelMap.put("articleCount", fileService.getFileListByTypeCount(0,1));

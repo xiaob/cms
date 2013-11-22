@@ -52,12 +52,12 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="/CMS/admin/file/recycle?fileId=${e.fileId}&status=1" title="还原">
+                  							<a href="${basePath}/admin/file/recycle?fileId=${e.fileId}&status=1" title="还原">
                   								<button class="btn btn-success btn-xs">
                   									<i class="icon-ok"></i>
                   								</button>
                   							</a>
-                  							<a href="/CMS/admin/file/delete?fileId=${e.fileId}" title="彻底删除">
+                  							<a href="${basePath}/admin/file/delete?fileId=${e.fileId}" title="彻底删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-remove"></i>
                   								</button>

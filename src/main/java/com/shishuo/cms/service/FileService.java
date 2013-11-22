@@ -2,12 +2,12 @@
  * 
  *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
  *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
  *
  *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
  *	You may obtain a copy of the License at
  *	 
- *		http://www.shishuo.com/jiawacms/licenses
  *		http://www.apache.org/licenses/LICENSE-2.0
  *
  *	Unless required by applicable law or agreed to in writing, software
@@ -15,7 +15,8 @@
  *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *	See the License for the specific language governing permissions and
  *	limitations under the License.
- */package com.shishuo.cms.service;
+ */
+package com.shishuo.cms.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +48,7 @@ public class FileService {
 	@Autowired
 	private UserService userService;
 	
+	
 	/**
 	 * 得到目录
 	 * 
@@ -73,11 +75,13 @@ public class FileService {
 
 	public PageVo<FileVo> getFilePageByFoderId(long folderId, int pageNum) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
-		pageVo.setUrl("filePage.do?");
+		
+		pageVo.setUrl("/CMS/folder/"+folderId+"?");
+		pageVo.setRows(1);
 		List<FileVo> list = this.getFileListByFoderId(folderId,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setPageCount(this.getFileListByFoderIdCount(folderId));
+		pageVo.setCount(this.getFileListByFoderIdCount(folderId));
 		return pageVo;
 	}
 
@@ -287,4 +291,27 @@ public class FileService {
 	public int updateImage(long folderId,long fileId,long userId){
 		return fileDao.updateImage(folderId, fileId, userId);
 	}
+	
+	
+	/**
+	 * 更新浏览人数
+	 * @param fileId
+	 * @param viewCount
+	 *
+	 */
+	 public void updateViewCount(long fileId,int nowViewCount){
+		 fileDao.updateViewCount(fileId, nowViewCount+1);
+	 }
+	 
+	 
+	 /**
+	  * 更新评论数
+	  * @param FileId
+	  * @param commentCount
+	  * @return void
+	  */
+		public void updateCommentCount(long fileId,int commentCount){
+			fileDao.updateCommentCount(fileId, commentCount+1);
+		}
+	 
 }

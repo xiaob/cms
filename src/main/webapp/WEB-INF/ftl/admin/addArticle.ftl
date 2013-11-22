@@ -64,8 +64,9 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="description" value="${description}"
-                                          	placeholder="文章内容" id="description">
+                                          <textarea name="description" value="${description}" placeholder="文章内容">
+                                          </textarea>
+                                          <p class="help-block" for="description"></p>
                                       </div>
                                   </div>
                                   <div class="form-group">

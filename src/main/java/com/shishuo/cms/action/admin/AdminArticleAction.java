@@ -1,3 +1,21 @@
+/*
+ * 
+ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
+ *
+ *	Licensed under the Apache License, Version 2.0 (the "License");
+ *	you may not use this file except in compliance with the License.
+ *	You may obtain a copy of the License at
+ *	 
+ *		http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *	Unless required by applicable law or agreed to in writing, software
+ *	distributed under the License is distributed on an "AS IS" BASIS,
+ *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *	See the License for the specific language governing permissions and
+ *	limitations under the License.
+ */
 package com.shishuo.cms.action.admin;
 
 import org.springframework.stereotype.Controller;
@@ -67,15 +85,6 @@ public class AdminArticleAction extends AdminBaseAction{
 	 * @author 添加新文章
 	 *
 	 */
-//	@RequestMapping(value = "/addNew",method = RequestMethod.POST)
-//	public String addNewArticle(@RequestParam(value = "fileName") String fileName,
-//			@RequestParam(value = "url") String url,
-//			@RequestParam(value = "folderId") long folderId,
-//			@RequestParam(value = "images") String images,
-//			@RequestParam(value = "description") String description){
-//		fileService.addFile(folderId, fileName, url, images, description, 0,1);
-//		return "redirect:/admin/file/articleList";
-//	}
 	@ResponseBody
 	@RequestMapping(value = "/addNew.json",method = RequestMethod.POST)
 	public JsonVo<String> addNewArticle(@RequestParam(value = "fileName") String fileName,
@@ -98,7 +107,6 @@ public class AdminArticleAction extends AdminBaseAction{
 			if(description.equals("")){
 				json.getErrors().put("description", "文章内容不能为空");
 			}
-			
 			// 检测校验结果
 			validate(json);
 			fileService.addFile(folderId, fileName, url, images, description, 0,1);
@@ -114,16 +122,6 @@ public class AdminArticleAction extends AdminBaseAction{
 	 * @author 修改文章资料
 	 *
 	 */
-//	@RequestMapping(value = "/update",method = RequestMethod.POST)
-//	public String updateArticle(@RequestParam(value = "fileName") String fileName,
-//			@RequestParam(value = "url") String url,
-//			@RequestParam(value = "folderId") long folderId,
-//			@RequestParam(value = "fileId") long fileId,
-//			@RequestParam(value = "images") String images,
-//			@RequestParam(value = "description") String description){
-//		fileService.updateFileById(fileId, folderId, fileName, url, images, description, 0);
-//		return "redirect:/admin/file/articleList";
-//	}
 	@ResponseBody
 	@RequestMapping(value = "/update.json",method = RequestMethod.POST)
 	public JsonVo<String> updateArticle(@RequestParam(value = "fileName") String fileName,

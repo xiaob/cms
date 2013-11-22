@@ -8,8 +8,8 @@
 	</select>
 	
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
-		insert into file(folderId,userId,name,url,images,description,type,createTime,viewCount,commentCount)
-		value(#{folderId},#{userId},#{name},#{url},#{images},#{description},#{type},#{createTime},#{viewCount},#{commentCount})
+		insert into file(folderId,userId,name,url,images,description,type,status,createTime,viewCount,commentCount)
+		value(#{folderId},#{userId},#{name},#{url},#{images},#{description},#{type},#{status}#{createTime},#{viewCount},#{commentCount})
 		<selectKey resultType="long" keyProperty="fileId">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -39,6 +39,12 @@
 	</update>
 	<update id="updateImage" parameterType="com.shishuo.cms.entity.File">
 	     update file set folderId = #{folderId} where fileId = #{fileId} and userId = #{userId}
+	</update>
+	<update id="updateViewCount" parameterType="long">
+		 update file set viewCount = #{viewCount} where fileId = #{fileId}
+	</update>
+	<update id="updateCommentCount" parameterType="long">
+	     update file set commentCount = #{commentCount} where fileId = #{fileId}
 	</update>
 	<select id="getUserImageList" resultType="com.shishuo.cms.entity.File" parameterType="long">
 		 select * from file where userId = #{userId} and type=4 limit #{offset},#{rows}

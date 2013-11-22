@@ -15,7 +15,7 @@
                             	 修改文章
                           </header>
                           <div class="panel-body">
-                              <form id="update_article_form" method="post" class="form-horizontal" autocomplete="off" action="/CMS/admin/file/update.json">
+                              <form id="update_article_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/file/update.json">
                               	<fieldset>
                               	  <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文件Id</label>

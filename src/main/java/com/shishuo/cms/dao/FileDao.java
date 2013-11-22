@@ -2,12 +2,12 @@
  * 
  *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
  *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
  *
  *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
  *	You may obtain a copy of the License at
  *	 
- *		http://www.shishuo.com/jiawacms/licenses
  *		http://www.apache.org/licenses/LICENSE-2.0
  *
  *	Unless required by applicable law or agreed to in writing, software
@@ -148,5 +148,23 @@ public interface FileDao {
 	 * @return Integer
 	 */
 	public int getRecycle(File file);
+	
+	/**
+	 * 更新浏览人数
+	 * @param FileId
+	 * @param viewCount
+	 * @return int
+	 */
+	public int updateViewCount(@Param("fileId") long fileId,@Param("viewCount") int viewCount);
+	
+	/**
+	 * 更新评论数
+	 * @param FileId
+	 * @param commentCount
+	 * @return int
+	 */
+	
+	public int updateCommentCount(@Param("fileId") long fileId,@Param("commentCount") int commentCount);
+	
 
 }

@@ -15,7 +15,7 @@
  					修改目录
 				</header>
 				<div class="panel-body">
-					<form id="update_folder_form" method="post" class="form-horizontal tasi-form" autocomplete="off" action="/CMS/admin/folder/update.json">
+					<form id="update_folder_form" method="post" class="form-horizontal tasi-form" autocomplete="off" action="${basePath}/admin/folder/update.json">
 					<fieldset>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">目录Id</label>

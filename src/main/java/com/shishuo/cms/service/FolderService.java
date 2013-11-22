@@ -2,12 +2,12 @@
  * 
  *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
  *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
  *
  *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
  *	You may obtain a copy of the License at
  *	 
- *		http://www.shishuo.com/cms/licenses
  *		http://www.apache.org/licenses/LICENSE-2.0
  *
  *	Unless required by applicable law or agreed to in writing, software
@@ -15,7 +15,8 @@
  *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *	See the License for the specific language governing permissions and
  *	limitations under the License.
- */package com.shishuo.cms.service;
+ */
+package com.shishuo.cms.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,7 +100,6 @@ public class FolderService {
 	public Folder addFolder(long fatherId, String name, int status, String ename,
 			int type) {
 		Folder folder = new Folder();
-		Folder fatherFolder = new Folder();
 		folder.setFatherId(fatherId);
 		folder.setEname(ename);
 		folder.setName(name);
@@ -206,12 +206,19 @@ public class FolderService {
 		return pageVo;
 	}
 	
+	/**
+	 * 获得所有目录并通过递归实现目录树
+	 * @return List<FolderVo>
+	 */
 	public List<FolderVo> getAllFolder(){
 		List<FolderVo>  allFolderList = new ArrayList<FolderVo>();
 		this.getFolderList(allFolderList,0);
 		return allFolderList;
 	}
 	
+	/**
+	 * 实现目录树的递归方法
+	 */
 	private void getFolderList(List<FolderVo> allFolderList,long fatherId){
 		List<FolderVo>  folderList = folderDao.getFolderVoListByFatherId(fatherId);
 		Collections.sort(folderList, new ComparatorFolderList());
@@ -221,6 +228,9 @@ public class FolderService {
 		}
 	}
 	
+	/**
+	 * 实现同级目录排序的内部类
+	 */
 	class ComparatorFolderList implements Comparator<Object>{
 
 		public int compare(Object arg0, Object arg1) {
@@ -232,6 +242,11 @@ public class FolderService {
 		}
 	}
 	
+	/** 
+	 * 获得某目录下的所有子目录包括子目录当中的子目录
+	 * @param fatherId
+	 * @return List<FolderVo>
+	 */
 	public List<FolderVo> getFolderVoListByFatherId(long fatherId){
 		return folderDao.getFolderVoListByFatherId(fatherId);
 	}
