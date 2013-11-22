@@ -40,7 +40,7 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list list as e>
                             		<tr class="gradeA odd">
-                            			<td><input type="text" value="${e.sort}" name="sort" class="txt" style="width:40px;">
+                            			<td class="folderSort"><input type="text" value="${e.sort}" name="sort" class="txt" style="width:40px;">
                             			</td>
 										<td>
 										<#list 1..e.level as i>
@@ -94,4 +94,20 @@
           </section>
 		</section>
 		<!--main content end-->
+<script type="text/javascript">
+	$(function() {
+		$('#update_sort_form').ajaxForm({
+			dataType : 'json',
+			success : function(data) {
+				if (data.result) {
+					bootbox.alert("修改成功，将刷新页面", function() {
+						window.location.reload();
+					});
+				}else{
+					showErrors($('#update_sort_form'),data.errors);
+				}
+			}
+		});
+	});	
+</script>
 <#include "foot.ftl">

@@ -17,6 +17,7 @@ import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.service.ConfigService;
 
 /**
+ * 网站配置action
  * @author Herbert
  * 
  */
@@ -24,6 +25,11 @@ import com.shishuo.cms.service.ConfigService;
 @RequestMapping("/admin/config")
 public class AdminConfigAction extends AdminBaseAction {
 
+	/**
+	 * 网站配置
+	 * @author Administrator
+	 *
+	 */
 	@RequestMapping(value = "/basic", method = RequestMethod.GET)
 	public String basic(ModelMap modelMap) {
 		List<String> templateList = this.getTemplate();
@@ -31,6 +37,11 @@ public class AdminConfigAction extends AdminBaseAction {
 		return "admin/config/basic";
 	}
 
+	/**
+	 * 修改网站配置
+	 * @author Administrator
+	 *
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/basic.json", method = RequestMethod.POST)
 	public JsonVo<String> basicSubmit(
