@@ -40,9 +40,13 @@ public class File {
 	private long folderId;
 
 	/**
-	 * 用户Id
+	 * 管理员Id
 	 */
-	private long userId;
+	private long adminId;
+	/**
+	 * 是否有固定图片
+	 */
+	private int picture;
 
 	/**
 	 * 文件名称
@@ -50,19 +54,19 @@ public class File {
 	private String name;
 
 	/**
-	 * 文件外部URL
+	 * 文件内容
 	 */
-	private String url;
+	private String content;
 
 	/**
-	 * 文件描述图片
+	 * 浏览人数
 	 */
-	private String images;
+	private int viewCount;
 
 	/**
-	 * 文件描述
+	 * 评论人数
 	 */
-	private String description;
+	private int commentCount;
 
 	/**
 	 * 文件类型
@@ -78,16 +82,6 @@ public class File {
 	 * 时间
 	 */
 	private Date createTime;
-
-	/**
-	 * 浏览人数
-	 */
-	private int viewCount;
-
-	/**
-	 * 评论人数
-	 */
-	private int commentCount;
 
 	public long getFileId() {
 		return fileId;
@@ -113,28 +107,20 @@ public class File {
 		this.name = name;
 	}
 
-	public String getUrl() {
-		return url;
+	public int getPicture() {
+		return picture;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setPicture(int picture) {
+		this.picture = picture;
 	}
 
-	public String getImages() {
-		return images;
+	public String getContent() {
+		return content;
 	}
 
-	public void setImages(String images) {
-		this.images = images;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public int getType() {
@@ -161,12 +147,12 @@ public class File {
 		this.createTime = createTime;
 	}
 
-	public long getUserId() {
-		return userId;
+	public long getAdminId() {
+		return adminId;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setAdminId(long adminId) {
+		this.adminId = adminId;
 	}
 
 	public int getViewCount() {

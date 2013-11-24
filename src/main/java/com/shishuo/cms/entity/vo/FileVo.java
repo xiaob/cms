@@ -18,18 +18,23 @@
  */
 package com.shishuo.cms.entity.vo;
 
+import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.File;
-import com.shishuo.cms.entity.User;
 
-public class FileVo extends File{
-    private User user;
+/**
+ * @author Herbert
+ * 
+ */
+public class FileVo extends File {
 
-	public User getUser() {
-		return user;
+	private Admin admin;
+
+	public Admin getAdmin() {
+		return admin;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
-    
+
 }

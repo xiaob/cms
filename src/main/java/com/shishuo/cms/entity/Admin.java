@@ -20,9 +20,11 @@ package com.shishuo.cms.entity;
 
 import java.util.Date;
 
-/** 管理员实体
+/**
+ * 管理员实体
+ * 
  * @author Administrator
- *
+ * 
  */
 
 public class Admin {
@@ -31,22 +33,27 @@ public class Admin {
 	 * 管理员Id
 	 */
 	private long adminId;
-	
+
+	/**
+	 * 邮箱地址
+	 */
+	private String email;
+
 	/**
 	 * 管理员名称
 	 */
 	private String name;
-	
+
 	/**
 	 * 密码
 	 */
 	private String password;
-	
+
 	/**
 	 * 状态
 	 */
 	private int status;
-	
+
 	/**
 	 * 时间
 	 */
@@ -90,6 +97,14 @@ public class Admin {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

@@ -18,6 +18,17 @@
  */
 package com.shishuo.cms.constant;
 
+/**
+ * @author Herbert
+ * 
+ */
 public class LogConstant {
-
+	/**
+	 * 日志等级
+	 * 
+	 * @author Herbert
+	 */
+	public static enum LEVEL {
+		DEBUG, INFO, WARN, ERROR, FATAL
+	};
 }

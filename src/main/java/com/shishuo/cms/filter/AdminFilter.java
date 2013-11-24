@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.shishuo.cms.constant.SystemConstant;
+import com.shishuo.cms.entity.Admin;
 
 /**
  * 
@@ -56,9 +57,9 @@ public class AdminFilter implements Filter {
 		
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		Long adminId = (Long) request.getSession().getAttribute(
-				SystemConstant.SESSION_ADMIN_ID);
-		if (adminId == null) {
+		Admin admin = (Admin) request.getSession().getAttribute(
+				SystemConstant.SESSION_ADMIN);
+		if (admin == null) {
 			String path = request.getContextPath();
 			String basePath = request.getScheme() + "://"
 					+ request.getServerName() + ":" + request.getServerPort()

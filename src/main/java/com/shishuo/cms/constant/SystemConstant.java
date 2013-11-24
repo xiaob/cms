@@ -33,8 +33,9 @@ public class SystemConstant {
 	
 	
 	/**
-	 * Session中的管理员ID的KEY
+	 * Session中的管理员Key
 	 */
-	public static final String SESSION_ADMIN_ID = "SESSION_ADMIN_ID";
+	public static final String SESSION_ADMIN = "SESSION_ADMIN";
+	
 
 }

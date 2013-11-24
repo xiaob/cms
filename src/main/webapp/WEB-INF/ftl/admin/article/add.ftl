@@ -1,6 +1,6 @@
 <#assign menu="article">
 <#assign submenu="add_article">
-<#include "head.ftl">
+<#include "/admin/head.ftl">
 <style type="text/css">
 .m-bot15 {
     margin-bottom: 0;
@@ -23,61 +23,40 @@
                             	添加文章
                           </header>
                           <div class="panel-body">
-                              <form id="add_article_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/file/addNew.json">
+                              <form id="add_article_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/article/add.json">
+                              	<input type="hidden" class="form-control" name="picture" value="NO_EXIST">
                               	<fieldset>
                                   <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">文章名称</label>
+                                      <label class="col-sm-2 col-sm-2 control-label">标题</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="fileName" value="${fileName}"
-                                          	placeholder="文章名称" id="fileName">
+                                          <input type="text" class="form-control" name="name" placeholder="标题" id="name">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">所属目录</label>
                                       <div class="col-sm-10">
                                          <select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;height: 40px;" name="folderId">
-                                        	<option value="0">未分类</option>
-                                        	<#list folderAll as folder>  	
+                                        	<#list allFolderList as folder>  	
                                           		<option value="${folder.folderId}">
-                                          		<#list 1..folder.level as i>
-                                          		-
-                                          		</#list>
-                                          		${folder.name}</option>
+                                          		<#list 1..folder.level as i>-</#list> ${folder.name}
+                                          		</option>
                                         	</#list>
                                         </select>
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">文章链接</label>
-                                      <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="url" value="${url}"
-                                          	placeholder="文章链接" id="url">
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">文章图片</label>
-                                      <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="images" value="${images}"
-                                          	placeholder="文章图片" id="images">
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
                                       <div class="col-sm-10">
-                                          <textarea name="description" value="${description}" placeholder="文章内容">
+                                          <textarea name="content"  placeholder="文章内容">
                                           </textarea>
                                           <p class="help-block" for="description"></p>
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">文件类型</label>
-                                      <div class="col-sm-10">
-                                          <label class="col-sm-2 col-sm-2 control-label">文章</label>
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                  	<label class="col-sm-2 col-sm-2 control-label"></label>
-                                      <input class="button" value="增加" type="submit" style="height: 35px;margin-left: 15px; width: 60px;">
+                                  		<label class="col-sm-2 col-sm-2 control-label"></label>
+                                  		<div class="col-sm-10">
+                                      		<button class="btn btn-danger" type="submit">保存</button>
+                                      	</div>
                                   </div>
                                  </fieldset>
                               </form>
@@ -105,4 +84,4 @@
 		});
 	});	
 </script>
-<#include "foot.ftl">
+<#include "/admin/foot.ftl">

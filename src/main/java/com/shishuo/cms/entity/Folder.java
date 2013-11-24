@@ -47,24 +47,13 @@ public class Folder {
 	private String name;
 
 	/**
-	 * 文件数
+	 * 路径
 	 */
-	private int count;
-
+	private String path;
 	/**
-	 * 状态
+	 * 层级
 	 */
-	private int status;
-
-	/**
-	 * 类型
-	 */
-	private int type;
-
-	/**
-	 * 模板
-	 */
-	private String template;
+	private int level;
 
 	/**
 	 * 排序
@@ -72,40 +61,40 @@ public class Folder {
 	private int sort;
 
 	/**
+	 * 文件数
+	 */
+	private int count;
+
+	/**
+	 * 模板
+	 */
+	private String template;
+
+	/**
 	 * 等级
 	 */
 	private int rank;
 
 	/**
+	 * 类型
+	 */
+	private int type;
+	/**
+	 * 状态
+	 */
+	private int status;
+
+	/**
 	 * 时间
 	 */
 	private Date createTime;
-	
-	/**
-	 *路径
-	 */
-	private String path;
-	
-	/**
-	 *目录级别
-	 */
-	private int level;
-	
-	
+
 	public String getPath() {
 		return path;
 	}
 
 	public void setPath(String path) {
 		this.path = path;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
 	}
 
 	public long getFolderId() {
@@ -196,4 +185,13 @@ public class Folder {
 		this.createTime = createTime;
 	}
 
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	
 }

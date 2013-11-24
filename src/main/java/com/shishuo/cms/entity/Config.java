@@ -38,7 +38,15 @@ public class Config {
 	 * 值
 	 */
 	private String value;
+	/**
+	 * 描述
+	 */
+	private String description;
 
+	/**
+	 * 类型：0 系统定义 1 产品定义
+	 */
+	private int type;
 	/**
 	 * 时间
 	 */
@@ -66,6 +74,22 @@ public class Config {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 }

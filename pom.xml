@@ -234,7 +234,7 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>log4j.properties</include>
-					<include>jdbc.properties</include>
+					<include>shishuocms.properties</include>
 					<include>applicationContext.xml</include>
 					<include>spring-servlet.xml</include>
 				</includes>

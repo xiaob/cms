@@ -18,10 +18,14 @@
  */
 package com.shishuo.cms.action.admin;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.shishuo.cms.constant.SystemConstant;
+import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.exception.ValidateException;
 import com.shishuo.cms.service.AdminService;
@@ -59,7 +63,6 @@ public class AdminBaseAction {
 	protected AdminService adminService;
 	@Autowired
 	protected CommentService commentService;
-	String root = "admin";
 
 	/**
 	 * 参数校验
@@ -76,6 +79,7 @@ public class AdminBaseAction {
 			json.setResult(true);
 		}
 	}
+
 	// protected boolean getPower(long adminId,String actionName){
 	// boolean result = false;
 	// AdminActionBean action = adminActionBeanService.getByName(actionName);
@@ -88,8 +92,16 @@ public class AdminBaseAction {
 	// return result;
 	// }
 	//
-	// protected Admin getAdmin(HttpServletRequest request) {
-	// Admin admin = (Admin) request.getSession().getAttribute("admin");
-	// return admin;
-	// }
+
+	/**
+	 * 从session中获得管理员的信息
+	 * 
+	 * @param request
+	 * @return
+	 */
+	protected Admin getAdmin(HttpServletRequest request) {
+		Admin admin = (Admin) request.getSession().getAttribute(
+				SystemConstant.SESSION_ADMIN);
+		return admin;
+	}
 }

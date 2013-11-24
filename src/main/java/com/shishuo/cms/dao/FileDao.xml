@@ -3,74 +3,86 @@
 <mapper namespace="com.shishuo.cms.dao.FileDao">
 
 	<select id="getFileById" parameterType="long"
-		resultType="com.shishuo.cms.entity.File">
+		resultType="com.shishuo.cms.entity.vo.FileVo">
 		select * from file where fileId=#{fileId}
 	</select>
-	
+
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
-		insert into file(folderId,userId,name,url,images,description,type,status,createTime,viewCount,commentCount)
-		value(#{folderId},#{userId},#{name},#{url},#{images},#{description},#{type},#{status}#{createTime},#{viewCount},#{commentCount})
+		insert into
+		file(folderId,adminId,picture,name,content,viewCount,commentCount,type,status,createTime,)
+		value(#{folderId},#{adminId},#{picture},#{name},#{content},#{viewCount},#{commentCount},#{description},#{type},#{status}#{createTime})
 		<selectKey resultType="long" keyProperty="fileId">
-			SELECT LAST_INSERT_ID()
+			SELECT
+			LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	
+
 	<delete id="deleteFile" parameterType="com.shishuo.cms.entity.File">
-		delete from file where fileId=#{fileId}
+		delete from file where
+		fileId=#{fileId}
 	</delete>
-	<select id="getFileListByFoderId" 
-		resultType="com.shishuo.cms.entity.File">
-		select * from file where folderId=#{folderId} limit #{offset},#{rows}
+	<select id="getFileListByFoderId" resultType="com.shishuo.cms.entity.vo.FileVo">
+		select * from file
+		where folderId=#{folderId} limit #{offset},#{rows}
 	</select>
-	
-	<select id="getFileListByFoderIdCount" 
-		resultType="Integer">
-		select count(*) from file where folderId=#{folderId}
+
+	<select id="getFileListByFoderIdCount" resultType="Integer">
+		select
+		count(*) from file where folderId=#{folderId}
 	</select>
-	
+
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
-		update file set folderId=#{folderId},name=#{name},url=#{url},images=#{images},
-			description=#{description},status=#{status}
+		update file set
+		folderId=#{folderId},name=#{name},url=#{url},images=#{images},
+		description=#{description},status=#{status}
 		where fileId=#{fileId}
 	</update>
-	
+
 	<update id="getRecycle" parameterType="com.shishuo.cms.entity.File">
-		update file set status=#{status} where fileId=#{fileId}
+		update file set
+		status=#{status} where fileId=#{fileId}
 	</update>
 	<update id="updateImage" parameterType="com.shishuo.cms.entity.File">
-	     update file set folderId = #{folderId} where fileId = #{fileId} and userId = #{userId}
+		update file set folderId
+		= #{folderId} where fileId = #{fileId} and userId =
+		#{userId}
 	</update>
 	<update id="updateViewCount" parameterType="long">
-		 update file set viewCount = #{viewCount} where fileId = #{fileId}
+		update file set
+		viewCount = #{viewCount} where fileId = #{fileId}
 	</update>
 	<update id="updateCommentCount" parameterType="long">
-	     update file set commentCount = #{commentCount} where fileId = #{fileId}
+		update file set
+		commentCount = #{commentCount} where fileId = #{fileId}
 	</update>
-	<select id="getUserImageList" resultType="com.shishuo.cms.entity.File" parameterType="long">
-		 select * from file where userId = #{userId} and type=4 limit #{offset},#{rows}
+	<select id="getUserImageList" resultType="com.shishuo.cms.entity.File"
+		parameterType="long">
+		select * from file where userId = #{userId} and type=4
+		limit
+		#{offset},#{rows}
 	</select>
-	
-    <select id="getUserImageCount" resultType="int" parameterType="long">
-		 select count(1) from file where userId = #{userId} and type=4 
+
+	<select id="getUserImageCount" resultType="int" parameterType="long">
+		select count(1) from file where userId = #{userId} and type=4
 	</select>
-	
-	<select id="getAllList"
-		resultType="com.shishuo.cms.entity.File">
-		select * from file limit #{offset},#{rows}
+
+	<select id="getAllList" resultType="com.shishuo.cms.entity.File">
+		select * from file limit
+		#{offset},#{rows}
 	</select>
-	
-	<select id="getAllListCount"
-		resultType="long">
-		select count(*) from file
+
+	<select id="getAllListCount" resultType="long">
+		select count(*) from
+		file
 	</select>
-	
-	<select id="getFileListByType"
-		resultType="com.shishuo.cms.entity.File">
-		select * from file where type=#{type} and status=#{status} limit #{offset},#{rows}
+
+	<select id="getFileListByType" resultType="com.shishuo.cms.entity.File">
+		select * from file
+		where type=#{type} and status=#{status} limit #{offset},#{rows}
 	</select>
-	
-	<select id="getFileListByTypeCount"
-		resultType="long">
-		select count(*) from file where type=#{type} and status=#{status}
+
+	<select id="getFileListByTypeCount" resultType="long">
+		select count(*)
+		from file where type=#{type} and status=#{status}
 	</select>
 </mapper>  

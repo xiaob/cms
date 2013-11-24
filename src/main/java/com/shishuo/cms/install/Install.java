@@ -5,11 +5,16 @@ import java.io.Console;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.Date;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import com.mysql.jdbc.Connection;
+import com.shishuo.cms.util.AuthUtils;
 
 /**
  * 
@@ -21,8 +26,8 @@ import com.mysql.jdbc.Connection;
  * 
  */
 public class Install {
-	private static String CMS_PROPERTIES = "src/main/resources/jdbc.properties";
-	private static String CMS_INSTALL_SQL = "src/main/resources/install.sql";
+	private static String CMS_PROPERTIES = "src/main/resources/shishuocms.properties";
+	private static String CMS_INSTALL_SQL = "sql/install.sql";
 
 	Console console = System.console();
 
@@ -35,7 +40,8 @@ public class Install {
 				System.out.println("\n\n安装成功，使用 mvn jetty:run 运行系统。\n\n");
 				break;
 			} else {
-				System.out.println("第" + i + "/10 安装失败，请根据错误提示检测 " + CMS_PROPERTIES+" 相关数据库的配置是否正常。");
+				System.out.println("第" + i + "/10 安装失败，请根据错误提示检测 "
+						+ CMS_PROPERTIES + " 相关数据库的配置是否正常。");
 			}
 		}
 	}
@@ -69,6 +75,8 @@ public class Install {
 	 */
 	private boolean importData() {
 		console.readLine("\n按control+c推出，按其它键继续安装。。。\n");
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
 			BufferedInputStream bis = new BufferedInputStream(
 					new FileInputStream(CMS_PROPERTIES));
@@ -78,17 +86,46 @@ public class Install {
 			String driver = props.getProperty("jdbc.driverClass");
 			String username = props.getProperty("jdbc.user");
 			String password = props.getProperty("jdbc.password");
+			String email = props.getProperty("cms.admin.email");
+			if (StringUtils.isBlank(email)
+					|| !EmailValidator.getInstance().isValid(email)) {
+				throw new InstallException(email + " 邮件格式不正确");
+			}
 			Class.forName(driver).newInstance();
-			Connection conn = (Connection) DriverManager.getConnection(url,
-					username, password);
+			conn = (Connection) DriverManager.getConnection(url, username,
+					password);
 			ScriptRunner runner = new ScriptRunner(conn);
 			runner.setErrorLogWriter(null);
 			runner.setLogWriter(null);
-			runner.runScript(new InputStreamReader(new FileInputStream(CMS_INSTALL_SQL)));
+			runner.runScript(new InputStreamReader(new FileInputStream(
+					CMS_INSTALL_SQL), "UTF-8"));
+			// 增加超级管理员帐号
+			String pwd = AuthUtils.getPassword("111111", email);
+			String sql = "INSERT INTO `admin`(`adminId`,`email`,`password`,`name`,`status`,`createTime`) VALUES (?,?,?,?,?,?)";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, 1);
+			stmt.setString(2, email);
+			stmt.setString(3, pwd);
+			stmt.setString(4, "admin");
+			stmt.setInt(5, 1);
+			stmt.setDate(6, new java.sql.Date(new Date().getTime()));
+			stmt.executeUpdate();
+			conn.commit();
 			return true;
 		} catch (Exception e) {
 			System.out.println("ERROR: " + e.getMessage());
 			return false;
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				System.out.println("ERROR: " + e.getMessage());
+			}
 		}
 	}
 }

@@ -44,12 +44,12 @@ import com.shishuo.cms.util.AuthUtils;
 @Service
 public class AdminService {
 
-	
 	@Autowired
 	private AdminDao adminDao;
 
 	/**
 	 * 添加管理员
+	 * 
 	 * @param email
 	 * @param name
 	 * @param password
@@ -57,18 +57,20 @@ public class AdminService {
 	 */
 	public Admin addAdmin(String email, String name, String password)
 			throws AuthException {
+		email = email.toLowerCase();
 		Admin admin = new Admin();
 		admin.setName(name);
+		admin.setEmail(email);
 		admin.setStatus(AdminConstant.STATUS_INIT);
 		admin.setCreateTime(new Date());
-		admin.setPassword(AuthUtils.getPassword(password, email, admin
-				.getCreateTime().getTime() + ""));
+		admin.setPassword(AuthUtils.getPassword(password, email));
 		adminDao.addAdmin(admin);
 		return admin;
 	}
 
 	/**
 	 * 管理员登陆
+	 * 
 	 * @param email
 	 * @param password
 	 * @param request
@@ -79,12 +81,11 @@ public class AdminService {
 		if (admin == null) {
 			throw new AuthException("没有此用户");
 		}
-		String loginPassword = AuthUtils.getPassword(password, email, admin
-				.getCreateTime().getTime() + "");
+		String loginPassword = AuthUtils.getPassword(password, email);
 		if (loginPassword.equals(admin.getPassword())) {
 			HttpSession session = request.getSession();
-			session.setAttribute(SystemConstant.SESSION_ADMIN_ID,
-					admin.getAdminId());
+			admin.setPassword("");
+			session.setAttribute(SystemConstant.SESSION_ADMIN, admin);
 		} else {
 			throw new AuthException("密码不正确");
 		}
@@ -99,6 +100,7 @@ public class AdminService {
 
 	/**
 	 * 获得所有管理员
+	 * 
 	 * @param offset
 	 * @param rows
 	 * @return List<Admin>
@@ -109,6 +111,7 @@ public class AdminService {
 
 	/**
 	 * 获得所有管理员的数量
+	 * 
 	 * @return Integer
 	 */
 	public int getAllListCount() {
@@ -117,6 +120,7 @@ public class AdminService {
 
 	/**
 	 * 获得所有管理员的分页
+	 * 
 	 * @param Integer
 	 * @return PageVo<Admin>
 	 */
@@ -133,6 +137,7 @@ public class AdminService {
 
 	/**
 	 * 修改管理员资料
+	 * 
 	 * @param adminId
 	 * @param name
 	 * @param password
@@ -151,6 +156,7 @@ public class AdminService {
 
 	/**
 	 * 删除管理员
+	 * 
 	 * @param adminId
 	 * @return Integer
 	 */

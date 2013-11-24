@@ -37,8 +37,12 @@ public class Log {
 	/**
 	 * 描述
 	 */
-	private String description;
+	private String content;
 
+	/**
+	 * 日志等级：DEBUG INFO WARN ERROR FATAL
+	 */
+	private String level;
 	/**
 	 * 时间
 	 */
@@ -52,12 +56,20 @@ public class Log {
 		this.logId = logId;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getContent() {
+		return content;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 	public Date getCreateTime() {

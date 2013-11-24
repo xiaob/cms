@@ -24,6 +24,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.cms.entity.File;
+import com.shishuo.cms.entity.vo.FileVo;
 
 /**
  * 文件服务
@@ -40,15 +41,15 @@ public interface FileDao {
 	 * @param fileId
 	 * @return File
 	 */
-	public File getFileById(@Param("fileId") long fileId);
+	public FileVo getFileById(@Param("fileId") long fileId);
 
 	/**
 	 * 得到目录的所有文件
 	 * 
 	 * @param foderId
-	 * @return List<File>
+	 * @return List<FileVo>
 	 */
-	public List<File> getFileListByFoderId(@Param("folderId") long folderId,
+	public List<FileVo> getFileListByFoderId(@Param("folderId") long folderId,
 			@Param("offset") long offset, @Param("rows") long rows);
 
 	/**

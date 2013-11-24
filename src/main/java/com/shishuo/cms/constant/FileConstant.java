@@ -20,20 +20,41 @@ package com.shishuo.cms.constant;
 
 /**
  * 文件常量
+ * 
  * @author Zhang jiale
- *
+ * 
  */
 public class FileConstant {
 
-	// 文件类型
-	public static String[] TYPE = { "文章", "下载", "商品" };
-	
-	/*
-	 * 1 代表文章
-	 * 2 代表下载
-	 * 3 代表商品
-	 * 4 代表图片
+	/**
+	 * 文件类型
+	 * 
+	 * @author Herbert
+	 * 
 	 */
-	public static int[] FILETYPE = {1,2,3};
+	public static enum TYPE {
+		ARTICLE, PHOTO, DOWNLOAD, SHOP
+	};
+
+	/**
+	 * 是否拥护配图
+	 * 
+	 * @author Herbert
+	 * 
+	 */
+	public static enum PICTURE {
+		NO_EXIST, EXIST
+	};
+
+	/**
+	 * 文件状态
+	 * 
+	 * @author Herbert
+	 * 
+	 */
+	public static enum STATUS {
+		DISABLE, DISPLAY
+	};
+
 
 }

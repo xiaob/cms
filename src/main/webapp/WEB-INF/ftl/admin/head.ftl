@@ -49,7 +49,7 @@
                   <!-- user login dropdown start-->
                   <li class="dropdown">
                       <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                          <img alt="" src="${basePath}/admin/img/avatar1_small.jpg">
+                          <img alt="" src="${basePath}/system/img/avatar1_small.jpg">
                           <span class="username">Jhon Doue</span>
                           <b class="caret"></b>
                       </a>
@@ -85,9 +85,9 @@
 					<li class="sub-menu">
 						<a href="javascript:;" <#if menu="article">class="active"</#if>> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
-							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/file/add">增加文章</a></li>
-							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/file/articleList">文章列表</a></li>
-							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/file/recycleList">回收站</a></li>
+							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/article/add">增加文章</a></li>
+							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/article/articleList">文章列表</a></li>
+							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/recycleList">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu">
