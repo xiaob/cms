@@ -104,16 +104,16 @@ public class AdminArticleAction extends AdminBaseAction {
 			if (StringUtils.isBlank(name)) {
 				json.getErrors().put("name", "文章名称不能为空");
 			}
-			FileConstant.PICTURE enumPicture = FileConstant.PICTURE
+			FileConstant.Picture enumPicture = FileConstant.Picture
 					.valueOf(picture);
 			if (enumPicture == null) {
-				enumPicture = FileConstant.PICTURE.NO_EXIST;
+				enumPicture = FileConstant.Picture.NO_EXIST;
 			}
 			// 检测校验结果
 			validate(json);
 			fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-					FileConstant.PICTURE.NO_EXIST, name, content,
-					FileConstant.TYPE.ARTICLE, FileConstant.STATUS.DISPLAY);
+					FileConstant.Picture.NO_EXIST, name, content,
+					FileConstant.Type.ARTICLE, FileConstant.Status.DISPLAY);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

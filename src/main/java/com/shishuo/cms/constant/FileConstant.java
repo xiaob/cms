@@ -32,7 +32,7 @@ public class FileConstant {
 	 * @author Herbert
 	 * 
 	 */
-	public static enum TYPE {
+	public static enum Type {
 		ARTICLE, PHOTO, DOWNLOAD, SHOP
 	};
 
@@ -42,7 +42,7 @@ public class FileConstant {
 	 * @author Herbert
 	 * 
 	 */
-	public static enum PICTURE {
+	public static enum Picture {
 		NO_EXIST, EXIST
 	};
 
@@ -52,7 +52,7 @@ public class FileConstant {
 	 * @author Herbert
 	 * 
 	 */
-	public static enum STATUS {
+	public static enum Status {
 		DISABLE, DISPLAY
 	};
 

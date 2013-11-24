@@ -124,8 +124,8 @@ public class FileService {
 	 * @return
 	 */
 	public File addFile(long folderId, long adminId,
-			FileConstant.PICTURE picture, String name, String content,
-			FileConstant.TYPE type, FileConstant.STATUS status) {
+			FileConstant.Picture picture, String name, String content,
+			FileConstant.Type type, FileConstant.Status status) {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
@@ -164,8 +164,8 @@ public class FileService {
 	 * @return
 	 */
 	public File updateFileById(long fileId, long folderId, long adminId,
-			FileConstant.PICTURE picture, String name, String content,
-			int type, FileConstant.STATUS status) {
+			FileConstant.Picture picture, String name, String content,
+			int type, FileConstant.Status status) {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
