@@ -13,21 +13,14 @@
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">网站名称</label>
 						<div class="col-lg-10">
 							<input type="text" placeholder="网站名称" id="inputEmail1" name="sitename"
-								class="form-control" value="${configMap.sitename}">
+								class="form-control" value="${configMap.sys_sitename}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">网站描述</label>
 						<div class="col-lg-10">
 							<input type="text" placeholder="网站描述" id="inputEmail1" name="sitedesc"
-								class="form-control" value="${configMap.sitedesc}">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">网站URL</label>
-						<div class="col-lg-10">
-							<input type="text" placeholder="网站URL" id="inputEmail1" name="siteurl"
-								class="form-control"  value="${configMap.siteurl}">
+								class="form-control" value="${configMap.sys_sitedesc}">
 						</div>
 					</div>
 					<div class="form-group">
@@ -43,19 +36,19 @@
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">是否开启图片展示模块</label>
 						<div class="col-lg-10">
-							<input type="checkbox" name="functionPhoto" <#if configMap.function_photo=="on">checked="checked"</#if> data-toggle="switch" />
+							<input type="checkbox" name="functionPhoto" <#if configMap.sys_function_photo=="on">checked="checked"</#if> data-toggle="switch" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">是否开启下载模块</label>
 						<div class="col-lg-10">
-							<input type="checkbox" name="functionDownload" <#if configMap.function_download=="on">checked="checked"</#if> data-toggle="switch" />
+							<input type="checkbox" name="functionDownload" <#if configMap.sys_function_download=="on">checked="checked"</#if> data-toggle="switch" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">是否开启商品模块</label>
 						<div class="col-lg-10">
-							<input type="checkbox" name="functionShop" <#if configMap.function_shop=="on">checked="checked"</#if> data-toggle="switch" />
+							<input type="checkbox" name="functionShop" <#if configMap.sys_function_shop=="on">checked="checked"</#if> data-toggle="switch" />
 						</div>
 					</div>
 					<div class="form-group">

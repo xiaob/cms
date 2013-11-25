@@ -33,7 +33,7 @@ public class FileConstant {
 	 * 
 	 */
 	public static enum Type {
-		ARTICLE, PHOTO, DOWNLOAD, SHOP
+		article, photo, download, shop
 	};
 
 	/**
@@ -43,7 +43,7 @@ public class FileConstant {
 	 * 
 	 */
 	public static enum Picture {
-		NO_EXIST, EXIST
+		no_exist, exist
 	};
 
 	/**
@@ -53,7 +53,7 @@ public class FileConstant {
 	 * 
 	 */
 	public static enum Status {
-		HIDDEN, DISPLAY
+		hidden, display
 	};
 
 }

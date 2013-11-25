@@ -73,40 +73,4 @@
 		<property name="basePackage" value="com.shishuo.cms.dao" />
 	</bean>
 
-
-	<bean id="smartChineseAnalyzer"
-		class="org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer">
-	</bean>
-
-	<!-- also, using the SimpleFSLockFactory ,数据文件存放位置设置 -->
-	<bean id="luceneDirectory" class="org.apache.lucene.store.SimpleFSDirectory">
-		<constructor-arg>
-			<bean class="java.io.File">
-				<constructor-arg value="${config.search.indexDir}" />
-			</bean>
-		</constructor-arg>
-		<constructor-arg>
-			<bean class="org.apache.lucene.store.SimpleFSLockFactory" />
-		</constructor-arg>
-	</bean>
-
-	<bean id="indexWriter" class="org.apache.lucene.index.IndexWriter">
-		<constructor-arg ref="luceneDirectory" />
-		<constructor-arg>
-			<bean class="org.apache.lucene.index.IndexWriterConfig">
-				<constructor-arg ref="smartChineseAnalyzer" />
-			</bean>
-		</constructor-arg>
-	</bean>
-
-	<bean id="indexSearcher" class="org.apache.lucene.search.IndexSearcher"
-		depends-on="indexWriter">
-		<constructor-arg ref="luceneDirectory" />
-	</bean>
-
-	<bean id="queryParser"
-		class="org.apache.lucene.queryParser.standard.StandardQueryParser">
-		<constructor-arg ref="luceneAnalyzer" />
-	</bean>
-
 </beans>

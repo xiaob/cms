@@ -51,7 +51,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	public String allFolder(
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
-		PageVo<File> pageVo = fileService.getFileListByTypePage(FileConstant.Type.ARTICLE, FileConstant.Status.DISPLAY, pageNum);
+		PageVo<File> pageVo = fileService.getFileListByTypePage(FileConstant.Type.article, FileConstant.Status.display, pageNum);
 		modelMap.put("pageVo", pageVo);
 		return "admin/articleList";
 	}
@@ -105,13 +105,13 @@ public class AdminArticleAction extends AdminBaseAction {
 				json.getErrors().put("name", "文章名称不能为空");
 			}
 			if(StringUtils.isBlank(picture.toString())){
-				picture=FileConstant.Picture.NO_EXIST;
+				picture=FileConstant.Picture.no_exist;
 			}
 			// 检测校验结果
 			validate(json);
 			fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
 					picture, name, content,
-					FileConstant.Type.ARTICLE, FileConstant.Status.DISPLAY);
+					FileConstant.Type.article, FileConstant.Status.display);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -181,7 +181,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	public String recycleList(
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
-		modelMap.put("pageVo", fileService.getFileListByTypePage(FileConstant.Type.ARTICLE, FileConstant.Status.HIDDEN, pageNum));
+		modelMap.put("pageVo", fileService.getFileListByTypePage(FileConstant.Type.article, FileConstant.Status.hidden, pageNum));
 		return "admin/articleRecycle";
 	}
 

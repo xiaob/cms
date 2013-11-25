@@ -14,6 +14,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import com.mysql.jdbc.Connection;
+import com.shishuo.cms.constant.AdminConstant;
 import com.shishuo.cms.exception.InstallException;
 import com.shishuo.cms.util.AuthUtils;
 
@@ -108,7 +109,7 @@ public class Install {
 			stmt.setString(2, email);
 			stmt.setString(3, pwd);
 			stmt.setString(4, "admin");
-			stmt.setInt(5, 1);
+			stmt.setString(5, AdminConstant.Status.NORMAL.name());
 			stmt.setDate(6, new java.sql.Date(new Date().getTime()));
 			stmt.executeUpdate();
 			conn.commit();

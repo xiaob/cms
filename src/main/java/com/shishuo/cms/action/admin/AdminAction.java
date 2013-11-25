@@ -39,9 +39,9 @@ public class AdminAction extends AdminBaseAction{
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String login(ModelMap modelMap){
-		modelMap.put("articleCount", fileService.getFileListByTypeCount(FileConstant.Type.ARTICLE,FileConstant.Status.DISPLAY));
-		modelMap.put("downloadCount", fileService.getFileListByTypeCount(FileConstant.Type.DOWNLOAD,FileConstant.Status.DISPLAY));
-		modelMap.put("commodityCount", fileService.getFileListByTypeCount(FileConstant.Type.SHOP,FileConstant.Status.DISPLAY));
+		modelMap.put("articleCount", fileService.getFileListByTypeCount(FileConstant.Type.article,FileConstant.Status.display));
+		modelMap.put("downloadCount", fileService.getFileListByTypeCount(FileConstant.Type.download,FileConstant.Status.display));
+		modelMap.put("commodityCount", fileService.getFileListByTypeCount(FileConstant.Type.shop,FileConstant.Status.display));
 		modelMap.put("userCount", userService.getUserListCount());
 		return "admin/default";
 	}	

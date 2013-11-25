@@ -232,10 +232,10 @@ public class FileService {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
 		pageVo.setUrl("/admin/article/articleList?");
-		List<File> list = this.getFileListByType(FileConstant.Type.ARTICLE, status,
+		List<File> list = this.getFileListByType(FileConstant.Type.article, status,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileListByTypeCount(FileConstant.Type.ARTICLE, status));
+		pageVo.setCount(this.getFileListByTypeCount(FileConstant.Type.article, status));
 		return pageVo;
 	}
 
