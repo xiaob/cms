@@ -46,9 +46,14 @@ public class File {
 	 */
 	private long adminId;
 	/**
-	 * 是否有固定图片
+	 * 大图路径
 	 */
-	private FileConstant.Picture picture;
+	private String bigPicture;
+	
+	/**
+	 * 小图路径
+	 */
+	private String smallPicture;
 
 	/**
 	 * 文件名称
@@ -157,12 +162,20 @@ public class File {
 		this.commentCount = commentCount;
 	}
 
-	public FileConstant.Picture getPicture() {
-		return picture;
+	public String getBigPicture() {
+		return bigPicture;
 	}
 
-	public void setPicture(FileConstant.Picture picture) {
-		this.picture = picture;
+	public void setBigPicture(String bigPicture) {
+		this.bigPicture = bigPicture;
+	}
+
+	public String getSmallPicture() {
+		return smallPicture;
+	}
+
+	public void setSmallPicture(String smallPicture) {
+		this.smallPicture = smallPicture;
 	}
 
 	public FileConstant.Type getType() {
