@@ -15,10 +15,10 @@ public class LogServiceTest {
 	@Autowired
 	private LogService logService;
 
-	@Test
-	public void testAddLog() {
-		assertEquals("sdef", logService.addLog("sdef").getDescription());
-	}
+//	@Test
+//	public void testAddLog() {
+//		assertEquals("sdef", logService.addLog("sdef").getDescription());
+//	}
 
 	@Test
 	public void testGetLogPage() {

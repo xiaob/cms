@@ -26,13 +26,13 @@ public class FileServiceTest {
 		assertEquals(true, fileService.deleteFileById(3));
 	}
 
-	@Test
-	public void testUpdateFileById() {
-		assertEquals(
-				2,
-				fileService.updateFileById(1, 2, "ibk", "sdgr", "ibksdg",
-						"hjjuy", 2).getFolderId());
-	}
+//	@Test
+//	public void testUpdateFileById() {
+//		assertEquals(
+//				2,
+//				fileService.updateFileById(1, 2, "ibk", "sdgr", "ibksdg",
+//						"hjjuy", 2).getFolderId());
+//	}
 
 	@Test
 	public void testGetFilePageByFoderId() {
