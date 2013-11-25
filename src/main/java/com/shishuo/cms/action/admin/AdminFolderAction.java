@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.entity.vo.JsonVo;
@@ -63,8 +64,9 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
 			@RequestParam(value = "folderName") String folderName,
 			@RequestParam(value = "folderEname") String folderEname,
-			@RequestParam(value = "type",defaultValue = "0") int type,
-			@RequestParam(value = "status",defaultValue = "1") int status,
+			@RequestParam(value = "type") FolderConstant.Type type,
+			@RequestParam(value = "status") FolderConstant.Status status,
+			@RequestParam(value = "rank") FolderConstant.Rank rank,
 			ModelMap modelMap) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -76,7 +78,7 @@ public class AdminFolderAction extends AdminBaseAction{
 			}
 			// 检测校验结果
 			validate(json);
-			folderService.addFolder(fatherId, folderName, status, folderEname, type);
+			folderService.addFolder(fatherId, folderName, status, folderEname, type,rank);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -124,10 +126,11 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "folderName") String folderName,
 			@RequestParam(value = "folderEname") String folderEname,
-			@RequestParam(value = "type") int type,
 			@RequestParam(value = "sort") int sort,
-			@RequestParam(value = "status") int status){
-		folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status, type, sort);
+			@RequestParam(value = "type") FolderConstant.Type type,
+			@RequestParam(value = "status") FolderConstant.Status status,
+			@RequestParam(value = "rank") FolderConstant.Rank rank){
+		folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status,type, rank,sort);
 		return "redirect:/admin/folder/all";
 	}
 	

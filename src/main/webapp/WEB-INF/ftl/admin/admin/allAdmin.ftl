@@ -23,7 +23,6 @@
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
-                						<th>管理员Id</th>
                 						<th>管理员名称</th>
                 						<th>密码</th>
                 						<th>状态</th>
@@ -34,7 +33,6 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
-                            			<td>${e.adminId}</td>
                                     	<td>${e.name}</td>
                                     	<td>${e.password}</td>
                                     	<td>${e.status}</td>

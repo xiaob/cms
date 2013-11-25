@@ -49,19 +49,17 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">文章链接</label>
-                                      <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="url" value="${file.url}"
-                                          	placeholder="文章链接" id="url">
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">文章图片</label>
-                                      <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="images" value="${file.images}"
-                                          	placeholder="文章图片" id="fileName">
-                                      </div>
-                                  </div>
+									<label class="col-sm-2 col-sm-2 control-label">文章图片</label>
+									<div class="col-sm-10">
+										<#if file.status == NO_EXIST>
+										<input type="radio" name="picture" value="NO_EXIST" checked="checked"/>NO_EXIST
+										<input type="radio" name="picture" value="EXIST"/>EXIST
+										<#else>
+										<input type="radio" name="picture" value="NO_EXIST"/>NO_EXIST
+										<input type="radio" name="picture" value="EXIST" checked="checked"/>EXIST
+										</#if>
+									</div>
+								  </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
                                       <div class="col-sm-10">

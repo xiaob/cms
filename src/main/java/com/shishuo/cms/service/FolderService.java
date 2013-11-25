@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.ConfigConstant;
+import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.dao.FolderDao;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
@@ -97,8 +98,8 @@ public class FolderService {
 	 * @param type
 	 * @return Folder
 	 */
-	public Folder addFolder(long fatherId, String name, int status, String ename,
-			int type) {
+	public Folder addFolder(long fatherId, String name, FolderConstant.Status status, String ename,
+			FolderConstant.Type type,FolderConstant.Rank rank) {
 		Folder folder = new Folder();
 		folder.setFatherId(fatherId);
 		folder.setEname(ename);
@@ -108,7 +109,7 @@ public class FolderService {
 		folder.setType(type);
 		folder.setTemplate(ConfigConstant.DEFAUTL_TEMPLATE);
 		folder.setSort(1);
-		folder.setRank(0);
+		folder.setRank(rank);
 		folder.setCreateTime(new Date());
 		folderDao.addFolder(folder);
 		return folder;
@@ -138,13 +139,14 @@ public class FolderService {
 	 * @return folder
 	 */
 	public Folder updateFolderById(long folderId, long fatherId, String ename,String name,
-			int status, int type, int sort) {
+			FolderConstant.Status status, FolderConstant.Type type,FolderConstant.Rank rank, int sort) {
 		Folder folder = this.getFolderById(folderId);
 		folder.setFatherId(fatherId);
 		folder.setEname(ename);
 		folder.setName(name);
 		folder.setStatus(status);
 		folder.setType(type);
+		folder.setRank(rank);
 		folder.setSort(sort);
 		folderDao.updateFolder(folder);
 		return folder;

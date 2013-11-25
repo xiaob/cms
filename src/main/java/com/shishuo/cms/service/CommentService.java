@@ -63,7 +63,7 @@ public class CommentService {
 		comment.setFileId(fileId);
 		comment.setFatherId(0);
 		comment.setEmail(email);
-		comment.setStatus(1);
+		comment.setStatus(CommentConstant.Status.DISABLE);
 		comment.setContent(content);
 		comment.setCreateTime(new Date());
 		comment.setIp(ip);
@@ -101,7 +101,7 @@ public class CommentService {
 	 * @param status
 	 * @return Integer
 	 */
-	public int updateCommentStatus(long commentId,int status){
+	public int updateCommentStatus(long commentId,CommentConstant.Status status){
 		Comment comment = this.getCommentById(commentId);
 		comment.setStatus(status);
 		return commentDao.updateCommentStatus(comment);
@@ -144,13 +144,6 @@ public class CommentService {
 		pageVo.setUrl("/CMS/admin/comment/all?");
 		pageVo.setRows(5);
 		List<CommentVo> list = this.getAllList(pageVo.getOffset(), pageVo.getRows());
-		for(CommentVo commentVo:list){
-			if(commentVo.getStatus()==1){
-				commentVo.setAuditing(CommentConstant.STATUS[1]);
-			}else{
-				commentVo.setAuditing(CommentConstant.STATUS[0]);
-			}
-		}
 		pageVo.setList(list);
 		pageVo.setCount(this.getAllListCount());
 		return pageVo;

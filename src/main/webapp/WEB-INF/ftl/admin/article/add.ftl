@@ -45,11 +45,23 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
+									<label class="col-sm-2 col-sm-2 control-label">文章图片</label>
+									<div class="col-sm-10">
+										<#if file.status == NO_EXIST>
+										<input type="radio" name="picture" value="NO_EXIST" checked="checked"/>NO_EXIST
+										<input type="radio" name="picture" value="EXIST"/>EXIST
+										<#else>
+										<input type="radio" name="picture" value="NO_EXIST"/>NO_EXIST
+										<input type="radio" name="picture" value="EXIST" checked="checked"/>EXIST
+										</#if>
+									</div>
+								  </div>
+                                  <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
                                       <div class="col-sm-10">
                                           <textarea name="content"  placeholder="文章内容">
                                           </textarea>
-                                          <p class="help-block" for="description"></p>
+                                          <p class="help-block" for="content"></p>
                                       </div>
                                   </div>
                                   <div class="form-group">

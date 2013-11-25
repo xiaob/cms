@@ -50,17 +50,7 @@
                                     	<td>${e.name}</td>
                                     	<td>${e.count}</td>
                                     	<td>${e.status}</td>
-                                    	<td>
-                                    		<#if e.type==0>
-                                    			文章
-                                    		<#elseif e.type==1>
-                                    			下载
-                                    		<#elseif e.type==2>
-                                    			商品
-                                    		<#elseif e.type==3>
-                                    			图片
-                                    		</#if>
-                                    	</td>
+                                    	<td>${e.type}</td>
                                     	<td>${e.template}</td>
                                     	<td>${e.rank}</td>
                                     	<td>

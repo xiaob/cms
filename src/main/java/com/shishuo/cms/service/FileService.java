@@ -128,8 +128,7 @@ public class FileService {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
-		file.setBigPicture(picture);
-		file.setSmallPicture(picture);
+		file.setPicture(picture);
 		file.setName(name);
 		file.setContent(content);
 		file.setViewCount(0);
@@ -153,6 +152,7 @@ public class FileService {
 	}
 
 	/**
+	 * 修改文件
 	 * @param fileId
 	 * @param folderId
 	 * @param adminId
@@ -169,7 +169,7 @@ public class FileService {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
-		file.setBigPicture(picture);
+		file.setPicture(picture);
 		file.setName(name);
 		file.setContent(content);
 		file.setViewCount(0);
