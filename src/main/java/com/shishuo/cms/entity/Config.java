@@ -42,7 +42,7 @@ public class Config {
 	 * 描述
 	 */
 	private String description;
-
+	
 	/**
 	 * 类型：0 系统定义 1 产品定义
 	 */

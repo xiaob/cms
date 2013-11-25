@@ -97,7 +97,7 @@ INSERT INTO `config` VALUES ('template','default','网站模板名称',0,'2012-0
 INSERT INTO `folder` (`folderId`,`fatherId`,`ename`,`name`,`path`,`level`,`sort`,`count`,`template`,`rank`,`type`,`status`,`createTime`) VALUES (1,0,'default','默认','1',1,1,0,'default',0,0,0,'2012-08-08 00:00:00');
 
 # 增加第一篇文章
-INSERT INTO `file` (`fileId`, `folderId`, `adminId`,`picture`,`name`, `content`, `viewCount`, `commentCount`, `type`, `status`, `createTime`) VALUES ('1', '1', '1','0', '你好，世界！', '越过长城，走向世界。', '0', '0', '0', '1', now());
+INSERT INTO `file` (`fileId`, `folderId`, `adminId`,`picture`,`name`, `content`, `viewCount`, `commentCount`, `type`, `status`, `createTime`) VALUES ('1', '1', '1','0', '你好，世界！', '跨越长城，我们可以到达世界的任何角落。', '0', '0', '0', '1', now());
 
 
 

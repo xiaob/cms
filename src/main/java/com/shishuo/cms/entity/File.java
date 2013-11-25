@@ -20,6 +20,8 @@ package com.shishuo.cms.entity;
 
 import java.util.Date;
 
+import com.shishuo.cms.constant.FileConstant;
+
 /**
  * 文件实体
  * 
@@ -46,7 +48,7 @@ public class File {
 	/**
 	 * 是否有固定图片
 	 */
-	private int picture;
+	private FileConstant.Picture picture;
 
 	/**
 	 * 文件名称
@@ -71,12 +73,12 @@ public class File {
 	/**
 	 * 文件类型
 	 */
-	private int type;
+	private FileConstant.Type type;
 
 	/**
 	 * 文件状态
 	 */
-	private int status;
+	private FileConstant.Status status;
 
 	/**
 	 * 时间
@@ -107,14 +109,6 @@ public class File {
 		this.name = name;
 	}
 
-	public int getPicture() {
-		return picture;
-	}
-
-	public void setPicture(int picture) {
-		this.picture = picture;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -123,19 +117,11 @@ public class File {
 		this.content = content;
 	}
 
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	public int getStatus() {
+	public FileConstant.Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(FileConstant.Status status) {
 		this.status = status;
 	}
 
@@ -170,4 +156,21 @@ public class File {
 	public void setCommentCount(int commentCount) {
 		this.commentCount = commentCount;
 	}
+
+	public FileConstant.Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(FileConstant.Picture picture) {
+		this.picture = picture;
+	}
+
+	public FileConstant.Type getType() {
+		return type;
+	}
+
+	public void setType(FileConstant.Type type) {
+		this.type = type;
+	}
+	
 }

@@ -95,7 +95,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	public JsonVo<String> addArticle(
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "folderId") long folderId,
-			@RequestParam(value = "picture") String picture,
+			@RequestParam(value = "picture") FileConstant.Picture picture,
 			@RequestParam(value = "content") String content,
 			HttpServletRequest request) {
 
@@ -103,11 +103,6 @@ public class AdminArticleAction extends AdminBaseAction {
 		try {
 			if (StringUtils.isBlank(name)) {
 				json.getErrors().put("name", "文章名称不能为空");
-			}
-			FileConstant.Picture enumPicture = FileConstant.Picture
-					.valueOf(picture);
-			if (enumPicture == null) {
-				enumPicture = FileConstant.Picture.NO_EXIST;
 			}
 			// 检测校验结果
 			validate(json);

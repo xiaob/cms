@@ -129,13 +129,13 @@ public class FileService {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
-		file.setPicture(picture.ordinal());
+		file.setPicture(picture);
 		file.setName(name);
 		file.setContent(content);
 		file.setViewCount(0);
 		file.setCommentCount(0);
-		file.setType(type.ordinal());
-		file.setStatus(status.ordinal());
+		file.setType(type);
+		file.setStatus(status);
 		file.setCreateTime(new Date());
 		fileDao.addFile(file);
 		return file;
@@ -165,17 +165,17 @@ public class FileService {
 	 */
 	public File updateFileById(long fileId, long folderId, long adminId,
 			FileConstant.Picture picture, String name, String content,
-			int type, FileConstant.Status status) {
+			FileConstant.Type type, FileConstant.Status status) {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
-		file.setPicture(picture.ordinal());
+		file.setPicture(picture);
 		file.setName(name);
 		file.setContent(content);
 		file.setViewCount(0);
 		file.setCommentCount(0);
 		file.setType(type);
-		file.setStatus(status.ordinal());
+		file.setStatus(status);
 		fileDao.updateFile(file);
 		return file;
 	}
@@ -276,9 +276,9 @@ public class FileService {
 	 */
 	public boolean recycle(long fileId, int status) {
 		boolean result = false;
-		File file = this.getFileById(fileId);
-		file.setStatus(status);
-		fileDao.getRecycle(file);
+//		File file = this.getFileById(fileId);
+//		file.setStatus(status);
+//		fileDao.getRecycle(file);
 		result = true;
 		return result;
 	}

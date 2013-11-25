@@ -24,7 +24,7 @@ package com.shishuo.cms.constant;
  * @author Zhang jiale
  * 
  */
-public class FileConstant {
+public class FileConstant  extends BaseConstant{
 
 	/**
 	 * 文件类型
@@ -45,16 +45,5 @@ public class FileConstant {
 	public static enum Picture {
 		NO_EXIST, EXIST
 	};
-
-	/**
-	 * 文件状态
-	 * 
-	 * @author Herbert
-	 * 
-	 */
-	public static enum Status {
-		DISABLE, DISPLAY
-	};
-
 
 }
