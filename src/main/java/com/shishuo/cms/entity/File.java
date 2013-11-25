@@ -172,6 +172,4 @@ public class File {
 	public void setType(FileConstant.Type type) {
 		this.type = type;
 	}
-
-	
 }
