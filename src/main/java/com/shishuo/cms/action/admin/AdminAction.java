@@ -24,6 +24,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.shishuo.cms.constant.FileConstant;
+
 /**
  * @author lqq
  * @author 进入网站后台首页
@@ -37,9 +39,9 @@ public class AdminAction extends AdminBaseAction{
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String login(ModelMap modelMap){
-		modelMap.put("articleCount", fileService.getFileListByTypeCount(0,1));
-		modelMap.put("downloadCount", fileService.getFileListByTypeCount(1,1));
-		modelMap.put("commodityCount", fileService.getFileListByTypeCount(2,1));
+		modelMap.put("articleCount", fileService.getFileListByTypeCount(FileConstant.Type.ARTICLE,FileConstant.Status.DISPLAY));
+		modelMap.put("downloadCount", fileService.getFileListByTypeCount(FileConstant.Type.DOWNLOAD,FileConstant.Status.DISPLAY));
+		modelMap.put("commodityCount", fileService.getFileListByTypeCount(FileConstant.Type.SHOP,FileConstant.Status.DISPLAY));
 		modelMap.put("userCount", userService.getUserListCount());
 		return "admin/default";
 	}	

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.shishuo.cms.constant.UserConstant;
 import com.shishuo.cms.entity.vo.JsonVo;
 
 /**
@@ -59,7 +60,6 @@ public class AdminUserAction extends AdminBaseAction{
 			if(userName.equals("")){
 				json.getErrors().put("userName", "用户名称不能为空");
 			}
-			
 			// 检测校验结果
 			validate(json);
 			userService.addUser(userName);
@@ -103,21 +103,15 @@ public class AdminUserAction extends AdminBaseAction{
 	@ResponseBody
 	@RequestMapping(value = "/update.json",method = RequestMethod.POST)
 	public JsonVo<String> updateAdmin(@RequestParam(value = "userName") String userName,
-			@RequestParam(value = "userId") long userId,
-			@RequestParam(value = "type",defaultValue="-1") int type){
-		
+			@RequestParam(value = "userId") long userId){
 		JsonVo<String> json = new JsonVo<String>();	
 		try {
 			if(userName.equals("")){
 				json.getErrors().put("userName", "用户名称不能为空");
 			}
-			if(type==-1){
-				json.getErrors().put("type", "用户类型不能为空");
-			}
-			
 			// 检测校验结果
 			validate(json);
-			userService.updateUser(userId, type, userName);
+			userService.updateUser(userId, UserConstant.Type.SHISHUO, userName);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

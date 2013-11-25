@@ -1,6 +1,6 @@
 <#assign menu="system">
 <#assign submenu="system_basic">
-<#include "head.ftl">
+<#include "/admin/head.ftl">
 <style type="text/css">
 
 </style>
@@ -15,7 +15,7 @@
  					修改目录
 				</header>
 				<div class="panel-body">
-					<form id="update_folder_form" method="post" class="form-horizontal tasi-form" autocomplete="off" action="${basePath}/admin/folder/update.json">
+					<form id="update_folder_form" method="post" class="form-horizontal tasi-form" autocomplete="off" action="${basePath}/admin/folder/updateFolder.json">
 					<fieldset>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">目录Id</label>
@@ -55,31 +55,40 @@
 							<label class="col-sm-2 col-sm-2 control-label">目录类型</label>
 							<div class="col-sm-10">
 								<label class="col-sm-2 col-sm-2 control-label">
-									<#if folder.type==0>
- 										文章
-									<#elseif folder.type==1>
- 										下载
-									<#elseif folder.type==2>
- 										商品
-									</#if>
+									${folder.type}
 								</label>
 								<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="type">
-									<option value= "0">文章</option>
-									<option value= "1">下载</option>
-									<option value= "2">商品</option>
+									<option value= "ARTICLE">文章</option>
+									<option value= "DOWNLOAD">下载</option>
+									<option value= "SHOP">商品</option>
+									<option value= "PHOTO">图片</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">目录状态</label>
 							<div class="col-sm-10">
-								<#if folder.status == 0>
-								<input type="radio" name="status" value="0" checked="checked"/>隐藏
-								<input type="radio" name="status" value="1"/>显示
+								<#if folder.status.equals("HIDDEN")>
+								<input type="radio" name="status" value="HIDDEN" checked="checked"/>隐藏
+								<input type="radio" name="status" value="DISPLAY"/>显示
 								<#else>
-								<input type="radio" name="status" value="0"/>显示
-								<input type="radio" name="status" value="1" checked="checked"/>隐藏
+								<input type="radio" name="status" value="HIDDEN"/>显示
+								<input type="radio" name="status" value="DISPLAY" checked="checked"/>隐藏
 								</#if>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 col-sm-2 control-label">目录等级</label>
+							<div class="col-sm-10">
+								<label class="col-sm-2 col-sm-2 control-label">
+									${folder.rank}
+								</label>
+								<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="rank">
+									<option value= "EVERYONE">EVERYONE</option>
+									<option value= "LOGIN">LOGIN</option>
+									<option value= "VIP">VIP</option>
+									<option value= "ADMIN">ADMIN</option>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
@@ -102,7 +111,8 @@
 <!-- page end-->
 		</section>
 	</section>
-<script type="text/javascript">
+ <!--main content end-->
+ <script type="text/javascript">
 	$(function() {
 		$('#update_folder_form').ajaxForm({
 			dataType : 'json',
@@ -118,5 +128,4 @@
 		});
 	});	
 </script>
- <!--main content end-->
-<#include "foot.ftl">
+<#include "/admin/foot.ftl">

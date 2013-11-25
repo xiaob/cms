@@ -1,6 +1,6 @@
 <#assign menu="system">
 <#assign submenu="add_admin">
-<#include "../head.ftl">
+<#include "/admin/head.ftl">
 <style type="text/css">
 .m-bot15 {
     margin-bottom: 5px;
@@ -40,6 +40,20 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
+                                      <label class="col-sm-2 col-sm-2 control-label">密码</label>
+                                      <div class="col-sm-10">
+                                          <input type="text" class="form-control" name="password"
+                                          	placeholder="管理员密码" value="111111">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-sm-2 col-sm-2 control-label">状态</label>
+                                      <div class="col-sm-10">
+                                          <input type="text" class="form-control" name="status"
+                                          	placeholder="管理员状态" value="INIT">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
                                   	<label class="col-sm-2 col-sm-2 control-label"></label>
                                       <button class="btn btn-danger" type="submit">增加</button>
                                   </div>
@@ -69,4 +83,4 @@
 		});
 	});	
 </script>
-<#include "../foot.ftl">
+<#include "/admin/foot.ftl">

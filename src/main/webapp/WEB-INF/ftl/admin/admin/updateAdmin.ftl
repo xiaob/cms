@@ -1,6 +1,6 @@
 <#assign menu="system">
 <#assign submenu="update_admin">
-<#include "../head.ftl">
+<#include "/admin/head.ftl">
 <style type="text/css">
 
 </style>
@@ -33,15 +33,18 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">密码</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control round-input" name="password" value="${admin.password}"
+								<input type="text" class="form-control round-input" name="password" value=""
 									placeholder="密码" id="password">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">状态</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control round-input" name="status" value="${admin.status}"
-									placeholder="状态" id="status">
+								<label class="col-sm-2 col-sm-2 control-label">${admin.status}</label>
+								<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="status"> 	
+                                	<option value= "NORMAL">正常</option>
+                                	<option value= "FREEZE">冻结</option>
+                                </select>
 							</div>
 						</div>
 						<div class="form-group">
@@ -74,4 +77,4 @@
 		});
 	});	
 </script>
-<#include "../foot.ftl">
+<#include "/admin/foot.ftl">

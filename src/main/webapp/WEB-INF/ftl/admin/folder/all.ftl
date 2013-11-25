@@ -1,6 +1,6 @@
 <#assign menu="folder">
 <#assign submenu="folder_list">
-<#include "head.ftl">
+<#include "/admin/head.ftl">
 <style type="text/css">
 .pagination {
     border-radius: 4px;
@@ -20,8 +20,6 @@
                 </header>
                 <div class="panel-body">
                 	<div class="adv-table">
-                		<form id="update_sort_form" method="post" class="form-horizontal tasi-form" action="${basePath}/admin/folder/update/sort.json">
-						<fieldset>
                     	<div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
@@ -50,17 +48,7 @@
                                     	<td>${e.name}</td>
                                     	<td>${e.count}</td>
                                     	<td>${e.status}</td>
-                                    	<td>
-                                    		<#if e.type==0>
-                                    			文章
-                                    		<#elseif e.type==1>
-                                    			下载
-                                    		<#elseif e.type==2>
-                                    			商品
-                                    		<#elseif e.type==3>
-                                    			图片
-                                    		</#if>
-                                    	</td>
+                                    	<td>${e.type}</td>
                                     	<td>${e.template}</td>
                                     	<td>${e.rank}</td>
                                     	<td>
@@ -81,12 +69,6 @@
                                	</tbody>
                               </table>
                            </div>
-                           <div class="form-group">
-                        	<label class="col-sm-2 col-sm-2 control-label"></label>
-                            <button class="btn btn-danger" type="submit">提交</button>
-                        </div>
-						</fieldset>
-						</form>
                         </div>
                   </div>
               </section>
@@ -94,20 +76,4 @@
           </section>
 		</section>
 		<!--main content end-->
-<script type="text/javascript">
-	$(function() {
-		$('#update_sort_form').ajaxForm({
-			dataType : 'json',
-			success : function(data) {
-				if (data.result) {
-					bootbox.alert("修改成功，将刷新页面", function() {
-						window.location.reload();
-					});
-				}else{
-					showErrors($('#update_sort_form'),data.errors);
-				}
-			}
-		});
-	});	
-</script>
-<#include "foot.ftl">
+<#include "/admin/foot.ftl">

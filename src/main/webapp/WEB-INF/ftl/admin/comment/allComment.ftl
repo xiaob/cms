@@ -36,21 +36,7 @@
                                     	<td>${commentVo.name}</td>
                                     	<td>${commentVo.content}</td>
                                     	<td>${commentVo.auditing}</td>
-                                    	<td>
-                                    		<#if commentVo.status==1>
-                                    			<a href="${basePath}/admin/comment/cancel/${commentVo.commentId}" title="撤销审核通过">
-                                    				<button class="btn btn-danger btn-xs">
-                  									<i class="icon-remove"></i>
-                  									</button>
-                                    			</a>
-                                    		<#else>
-                                    			<a href="${basePath}/admin/comment/${commentVo.commentId}" title="前往审核">
-                                    				<button class="btn btn-success btn-xs">
-                  									<i class="icon-ok"></i>
-                  									</button>
-                                    			</a>
-                                    		</#if>
-                                    	</td>
+                                    	<td>${commentVo.status}</td>
                                 	</tr>
                                 	</#list>
                                	</tbody>

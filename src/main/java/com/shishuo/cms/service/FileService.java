@@ -128,8 +128,7 @@ public class FileService {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
-		file.setBigPicture(picture);
-		file.setSmallPicture(picture);
+		file.setPicture(picture);
 		file.setName(name);
 		file.setContent(content);
 		file.setViewCount(0);
@@ -153,6 +152,7 @@ public class FileService {
 	}
 
 	/**
+	 * 修改文件
 	 * @param fileId
 	 * @param folderId
 	 * @param adminId
@@ -169,7 +169,7 @@ public class FileService {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
-		file.setBigPicture(picture);
+		file.setPicture(picture);
 		file.setName(name);
 		file.setContent(content);
 		file.setViewCount(0);
@@ -220,7 +220,7 @@ public class FileService {
 	}
 
 	/**
-	 * 获取不同文件类型的分页
+	 * 获取文章文件类型的分页
 	 * 
 	 * @param type
 	 * @param status
@@ -228,14 +228,14 @@ public class FileService {
 	 * @return PageVo<File>
 	 * 
 	 */
-	public PageVo<File> getFileListByTypePage(int type, int status, int pageNum) {
+	public PageVo<File> getFileListByTypePage(FileConstant.Type type, FileConstant.Status status, int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl("");
-		List<File> list = this.getFileListByType(type, status,
+		pageVo.setUrl("/admin/article/articleList?");
+		List<File> list = this.getFileListByType(FileConstant.Type.ARTICLE, status,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileListByTypeCount(type, status));
+		pageVo.setCount(this.getFileListByTypeCount(FileConstant.Type.ARTICLE, status));
 		return pageVo;
 	}
 
@@ -249,7 +249,7 @@ public class FileService {
 	 * @return List<File>
 	 * 
 	 */
-	public List<File> getFileListByType(int type, int status, long offset,
+	public List<File> getFileListByType(FileConstant.Type type, FileConstant.Status status, long offset,
 			long rows) {
 		return fileDao.getFileListByType(type, status, offset, rows);
 	}
@@ -262,8 +262,8 @@ public class FileService {
 	 * @param Integer
 	 * 
 	 */
-	public int getFileListByTypeCount(int type, int status) {
-		return (int) fileDao.getFileListByTypeCount(type, status);
+	public int getFileListByTypeCount(FileConstant.Type type, FileConstant.Status status) {
+		return fileDao.getFileListByTypeCount(type, status);
 	}
 
 	/**
@@ -274,13 +274,11 @@ public class FileService {
 	 * @return boolean
 	 * 
 	 */
-	public boolean recycle(long fileId, int status) {
-		boolean result = false;
-//		File file = this.getFileById(fileId);
-//		file.setStatus(status);
-//		fileDao.getRecycle(file);
-		result = true;
-		return result;
+	public void recycle(long fileId, FileConstant.Status status) {
+		File file = this.getFileById(fileId);
+		file.setStatus(status);
+		fileDao.getRecycle(file);
+
 	}
 
 	public List<File> getUserImageList(long userId, int type, long offset,

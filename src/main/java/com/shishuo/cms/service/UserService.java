@@ -24,6 +24,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shishuo.cms.constant.UserConstant;
 import com.shishuo.cms.dao.UserDao;
 import com.shishuo.cms.entity.User;
 import com.shishuo.cms.entity.vo.PageVo;
@@ -49,7 +50,7 @@ public class UserService {
 	public User addUser(String name) {
 		User user = new User();
 		user.setOpenId(0);
-		user.setType(0);
+		user.setType(UserConstant.Type.SHISHUO);
 		user.setName(name);
 		user.setCreateTime(new Date());
 		userDao.addUser(user);
@@ -98,7 +99,7 @@ public class UserService {
 	 * @param userId
 	 * @return user
 	 */
-	public User updateUser(long userId, int type, String name) {
+	public User updateUser(long userId, UserConstant.Type type, String name) {
 		User user = this.getUserById(userId);
 		user.setType(type);
 		user.setName(name);

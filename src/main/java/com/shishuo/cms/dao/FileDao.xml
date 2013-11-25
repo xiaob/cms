@@ -9,11 +9,11 @@
 
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
 		insert into
-		file(folderId,adminId,picture,name,content,viewCount,commentCount,type,status,createTime,)
-		value(#{folderId},#{adminId},#{picture},#{name},#{content},#{viewCount},#{commentCount},#{type},#{status}#{createTime})
+		file(folderId,adminId,picture,name,content,viewCount,commentCount,type,status,createTime)
+		value(#{folderId},#{adminId},#{picture},#{name},#{content},#{viewCount},#{commentCount},#{type},#{status},#{createTime})
 		<selectKey resultType="long" keyProperty="fileId">
 			SELECT
-			LAST_INSERT_ID()
+			LAST_INSERT_ID()	
 		</selectKey>
 	</insert>
 
@@ -33,8 +33,8 @@
 
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
 		update file set
-		folderId=#{folderId},name=#{name},url=#{url},images=#{images},
-		description=#{description},status=#{status}
+		folderId=#{folderId},name=#{name},picture=#{picture}
+		content=#{content},status=#{status}
 		where fileId=#{fileId}
 	</update>
 
@@ -81,7 +81,7 @@
 		where type=#{type} and status=#{status} limit #{offset},#{rows}
 	</select>
 
-	<select id="getFileListByTypeCount" resultType="long">
+	<select id="getFileListByTypeCount" resultType="Integer">
 		select count(*)
 		from file where type=#{type} and status=#{status}
 	</select>

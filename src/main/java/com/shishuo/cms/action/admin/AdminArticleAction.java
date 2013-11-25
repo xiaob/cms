@@ -51,7 +51,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	public String allFolder(
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
-		PageVo<File> pageVo = fileService.getFileListByTypePage(0, 1, pageNum);
+		PageVo<File> pageVo = fileService.getFileListByTypePage(FileConstant.Type.ARTICLE, FileConstant.Status.DISPLAY, pageNum);
 		modelMap.put("pageVo", pageVo);
 		return "admin/articleList";
 	}
@@ -104,10 +104,13 @@ public class AdminArticleAction extends AdminBaseAction {
 			if (StringUtils.isBlank(name)) {
 				json.getErrors().put("name", "文章名称不能为空");
 			}
+			if(StringUtils.isBlank(picture.toString())){
+				picture=FileConstant.Picture.NO_EXIST;
+			}
 			// 检测校验结果
 			validate(json);
 			fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-					FileConstant.Picture.NO_EXIST, name, content,
+					picture, name, content,
 					FileConstant.Type.ARTICLE, FileConstant.Status.DISPLAY);
 			json.setResult(true);
 		} catch (Exception e) {
@@ -129,7 +132,7 @@ public class AdminArticleAction extends AdminBaseAction {
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "fileId") long fileId,
 			@RequestParam(value = "images") String images,
-			@RequestParam(value = "description") String description) {
+			@RequestParam(value = "content") String content) {
 
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -142,8 +145,8 @@ public class AdminArticleAction extends AdminBaseAction {
 			if (images.equals("")) {
 				json.getErrors().put("images", "文章图片不能为空");
 			}
-			if (description.equals("")) {
-				json.getErrors().put("description", "文章内容不能为空");
+			if (content.equals("")) {
+				json.getErrors().put("content", "文章内容不能为空");
 			}
 
 			// 检测校验结果
@@ -165,7 +168,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	 */
 	@RequestMapping(value = "/recycle.do", method = RequestMethod.GET)
 	public String recycle(@RequestParam(value = "fileId") long fileId,
-			@RequestParam(value = "status") int status) {
+			@RequestParam(value = "status") FileConstant.Status status) {
 		fileService.recycle(fileId, status);
 		return "redirect:/admin/file/articleList";
 	}
@@ -178,7 +181,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	public String recycleList(
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
-		modelMap.put("pageVo", fileService.getFileListByTypePage(0, 0, pageNum));
+		modelMap.put("pageVo", fileService.getFileListByTypePage(FileConstant.Type.ARTICLE, FileConstant.Status.HIDDEN, pageNum));
 		return "admin/articleRecycle";
 	}
 

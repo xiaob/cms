@@ -32,7 +32,8 @@ public class CommentConstant {
 		/**
 		 * 禁用
 		 */
-		DISABLE, /**
+		DISABLE, 
+		/**
 		 * 显示
 		 */
 		DISPLAY

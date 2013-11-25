@@ -24,7 +24,6 @@
                           </header>
                           <div class="panel-body">
                               <form id="add_article_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/article/add.json">
-                              	<input type="hidden" class="form-control" name="picture" value="NO_EXIST">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">标题</label>
@@ -45,11 +44,20 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
+									<label class="col-sm-2 col-sm-2 control-label">文章图片</label>
+									<div class="col-sm-10">
+										<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;height: 40px;" name="picture">
+                                        	<option value="NO_EXIST">NO_EXIST</option>
+                                        	<option value="EXIST">EXIST</option>
+                                        </select>
+									</div>
+								  </div>
+                                  <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
                                       <div class="col-sm-10">
-                                          <textarea name="content"  placeholder="文章内容">
+                                          <textarea id="content" name="content" placeholder="文章内容">
                                           </textarea>
-                                          <p class="help-block" for="description"></p>
+                                          <p class="help-block" for="content"></p>
                                       </div>
                                   </div>
                                   <div class="form-group">
@@ -70,6 +78,10 @@
 		<!--main content end-->
 <script type="text/javascript">
 	$(function() {
+		$('#add_article_form').bind('form-pre-serialize', function(event,form,options,veto){
+    		tinyMCE.triggerSave();
+		});
+		
 		$('#add_article_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {

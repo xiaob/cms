@@ -37,8 +37,9 @@ public class AdminConstant {
 		INIT, /**
 		 * 正常，可以使用
 		 */
-		NORMAL, /**
-		 * 正常，可以使用
+		NORMAL, 
+		/**
+		 * 冻结，无法使用
 		 */
 		FREEZE
 	};

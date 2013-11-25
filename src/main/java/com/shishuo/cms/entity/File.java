@@ -46,7 +46,7 @@ public class File {
 	 */
 	private long adminId;
 	/**
-	 * 
+	 * 图片路径
 	 */
 	private FileConstant.Picture picture;
 

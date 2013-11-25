@@ -1,8 +1,7 @@
 <#assign menu="system">
 <#assign submenu="update_user">
-<#include "../head.ftl">
+<#include "/admin/head.ftl">
 <style type="text/css">
-
 </style>
 <!--main content start-->
 	<section id="main-content">
@@ -40,8 +39,8 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">类型</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control round-input" name="type" value="${user.type}"
-									placeholder="管理员名称" id="type">
+								<label type="text" class="form-control round-input" name="type" value="${user.type}"
+									placeholder="用户类型" id="type">${user.type}</label>
 							</div>
 						</div>
 						<div class="form-group">
@@ -74,4 +73,4 @@
 		});
 	});	
 </script>
-<#include "../foot.ftl">
+<#include "/admin/foot.ftl">

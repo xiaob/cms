@@ -23,6 +23,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.shishuo.cms.constant.FileConstant;
+import com.shishuo.cms.constant.FileConstant.Type;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.vo.FileVo;
 
@@ -108,7 +110,7 @@ public interface FileDao {
 	 * @return List<File>
 	 *
 	 */
-	public List<File> getFileListByType(@Param("type") int type,@Param("status") int status,
+	public List<File> getFileListByType(@Param("type") FileConstant.Type type,@Param("status") FileConstant.Status status,
 			@Param("offset") long offset, @Param("rows") long rows);
 	
 
@@ -141,7 +143,7 @@ public interface FileDao {
 	 * @return Long
 	 *
 	 */
-	public long getFileListByTypeCount(@Param("type") int type,@Param("status") int status);
+	public int getFileListByTypeCount(@Param("type") FileConstant.Type type,@Param("status") FileConstant.Status status);
 
 	/**
 	 * 放进回收站或者还原
@@ -166,6 +168,7 @@ public interface FileDao {
 	 */
 	
 	public int updateCommentCount(@Param("fileId") long fileId,@Param("commentCount") int commentCount);
+
 	
 
 }

@@ -55,13 +55,13 @@ public class AdminService {
 	 * @param password
 	 * @return Admin
 	 */
-	public Admin addAdmin(String email, String name, String password,AdminConstant.STATUS_INIT)
+	public Admin addAdmin(String email, String name, String password,AdminConstant.Status status)
 			throws AuthException {
 		email = email.toLowerCase();
 		Admin admin = new Admin();
 		admin.setName(name);
 		admin.setEmail(email);
-		admin.setStatus(AdminConstant.STATUS_INIT);
+		admin.setStatus(status);
 		admin.setCreateTime(new Date());
 		admin.setPassword(AuthUtils.getPassword(password, email));
 		adminDao.addAdmin(admin);
@@ -145,7 +145,7 @@ public class AdminService {
 	 * @return Admin
 	 */
 	public Admin updateAdmin(long adminId, String name, String password,
-			int status) {
+			AdminConstant.Status status) {
 		Admin admin = this.getAdminById(adminId);
 		admin.setName(name);
 		admin.setPassword(password);

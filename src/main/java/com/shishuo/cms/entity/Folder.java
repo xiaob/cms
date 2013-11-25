@@ -188,5 +188,13 @@ public class Folder {
 		this.level = level;
 	}
 
+	public FolderConstant.Type getType() {
+		return type;
+	}
+
+	public FolderConstant.Status getStatus() {
+		return status;
+	}
+
 	
 }
