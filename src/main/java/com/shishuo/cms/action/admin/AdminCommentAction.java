@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.shishuo.cms.constant.CommentConstant;
+
 /**
  * 评论action
  * @author Zhangjiale
@@ -64,7 +66,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	@RequestMapping(value = "/auditing", method = RequestMethod.POST)
 	public String auditingComment(
 			@RequestParam(value="commentId") long commentId){
-		commentService.updateCommentStatus(commentId, 1);
+		commentService.updateCommentStatus(commentId, CommentConstant.Status.DISPLAY);
 		return "redirect:/admin/comment/all";
 	}
 	
@@ -84,7 +86,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	 */
 	@RequestMapping(value = "/cancel/{commentId}", method = RequestMethod.GET)
 	public String cancelAuditing(@PathVariable long commentId){
-		commentService.updateCommentStatus(commentId, 0);
+		commentService.updateCommentStatus(commentId, CommentConstant.Status.DISABLE);
 		return "redirect:/admin/comment/all";
 	}
 }

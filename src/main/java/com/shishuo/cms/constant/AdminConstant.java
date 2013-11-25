@@ -26,10 +26,6 @@ package com.shishuo.cms.constant;
  */
 public class AdminConstant {
 
-	/**
-	 * @author Herbert
-	 *
-	 */
 	public static enum Status {
 		/**
 		 * 初始化，需要修改密码
@@ -37,8 +33,9 @@ public class AdminConstant {
 		INIT, /**
 		 * 正常，可以使用
 		 */
-		NORMAL, /**
-		 * 正常，可以使用
+		NORMAL, 
+		/**
+		 * 冻结，无法使用
 		 */
 		FREEZE
 	};

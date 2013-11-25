@@ -59,9 +59,9 @@ public class LogService {
 	 * @param description
 	 * @return log
 	 */
-	public Log addLog(LogConstant.LEVEL level, String content) {
+	public Log addLog(LogConstant.Level level, String content) {
 		Log log = new Log();
-		log.setLevel(level.name());
+		log.setLevel(level);
 		log.setContent(content);
 		log.setCreateTime(new Date());
 		logDao.addLog(log);

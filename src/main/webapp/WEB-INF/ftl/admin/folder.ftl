@@ -66,10 +66,10 @@
                                       <label class="col-sm-2 col-sm-2 control-label">目录类型</label>
                                       <div class="col-sm-10">
                                       	<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="type"> 	
-                                        	<option value= "0">文章</option>
-                                          	<option value= "1">下载</option>
-                                          	<option value= "2">商品</option>
-                                          	<option value= "3">图片</option>
+                                        	<option value= "ARTICLE">文章</option>
+                                          	<option value= "DOWNLOAD">下载</option>
+                                          	<option value= "SHOP">商品</option>
+                                          	<option value= "PHOTO">图片</option>
                                         </select>
                                       </div>
                                   </div>
@@ -77,8 +77,8 @@
                                       <label class="col-sm-2 col-sm-2 control-label">目录状态</label>
                                       <div class="col-sm-10">
                                       	<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="status"> 	
-                                        	<option value= "0">隐藏</option>
-                                          	<option value= "1">显示</option>
+                                        	<option value= "HIDDEN">隐藏</option>
+                                          	<option value= "DISPLAY">显示</option>
                                         </select>
                                       </div>
                                   </div>

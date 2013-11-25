@@ -18,6 +18,7 @@
  */
 package com.shishuo.cms.action.admin;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.shishuo.cms.constant.AdminConstant;
+import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.entity.vo.JsonVo;
 
 
@@ -54,7 +57,8 @@ public class AdminAdminAction extends AdminBaseAction {
 	@ResponseBody
 	@RequestMapping(value = "/addNew.json", method = RequestMethod.POST)
 	public JsonVo<String> addNewUser(
-			@RequestParam(value = "adminName") String adminName) {
+			@RequestParam(value = "adminName") String adminName,
+			@RequestParam(value = "adminName") String password) {
 
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -63,7 +67,7 @@ public class AdminAdminAction extends AdminBaseAction {
 			}
 			// 检测校验结果
 			validate(json);
-			adminService.addAdmin("email", adminName, "1234567");
+			adminService.addAdmin("email", adminName, password,AdminConstant.Status.INIT);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -105,7 +109,7 @@ public class AdminAdminAction extends AdminBaseAction {
 			@RequestParam(value = "adminName") String adminName,
 			@RequestParam(value = "password") String password,
 			@RequestParam(value = "adminId") long adminId,
-			@RequestParam(value = "status", defaultValue = "-1") int status) {
+			@RequestParam(value = "status") AdminConstant.Status status) {
 
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -114,9 +118,6 @@ public class AdminAdminAction extends AdminBaseAction {
 			}
 			if (password.equals("")) {
 				json.getErrors().put("password", "密码不能为空");
-			}
-			if (status == -1) {
-				json.getErrors().put("status", "状态不能为空");
 			}
 
 			// 检测校验结果
