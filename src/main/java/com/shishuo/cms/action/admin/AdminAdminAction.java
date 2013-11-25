@@ -61,7 +61,6 @@ public class AdminAdminAction extends AdminBaseAction {
 			if (adminName.equals("")) {
 				json.getErrors().put("adminName", "管理员名称不能为空");
 			}
-
 			// 检测校验结果
 			validate(json);
 			adminService.addAdmin("email", adminName, "1234567");

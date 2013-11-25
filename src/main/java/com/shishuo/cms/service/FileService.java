@@ -72,7 +72,6 @@ public class FileService {
 
 	public PageVo<FileVo> getFilePageByFoderId(long folderId, int pageNum) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
-
 		pageVo.setUrl("/CMS/folder/" + folderId + "?");
 		pageVo.setRows(1);
 		List<FileVo> list = this.getFileListByFoderId(folderId,
@@ -129,7 +128,8 @@ public class FileService {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
-		file.setPicture(picture);
+		file.setBigPicture(picture);
+		file.setSmallPicture(picture);
 		file.setName(name);
 		file.setContent(content);
 		file.setViewCount(0);
@@ -169,7 +169,7 @@ public class FileService {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
-		file.setPicture(picture);
+		file.setBigPicture(picture);
 		file.setName(name);
 		file.setContent(content);
 		file.setViewCount(0);

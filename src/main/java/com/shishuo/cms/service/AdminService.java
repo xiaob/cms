@@ -55,7 +55,7 @@ public class AdminService {
 	 * @param password
 	 * @return Admin
 	 */
-	public Admin addAdmin(String email, String name, String password)
+	public Admin addAdmin(String email, String name, String password,AdminConstant.STATUS_INIT)
 			throws AuthException {
 		email = email.toLowerCase();
 		Admin admin = new Admin();
