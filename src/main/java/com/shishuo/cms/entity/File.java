@@ -46,7 +46,7 @@ public class File {
 	 */
 	private long adminId;
 	/**
-	 * 是否有固定图片
+	 * 
 	 */
 	private FileConstant.Picture picture;
 
@@ -172,6 +172,5 @@ public class File {
 	public void setType(FileConstant.Type type) {
 		this.type = type;
 	}
-	
-	
+
 }
