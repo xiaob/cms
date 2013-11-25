@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd      
 	         http://www.springframework.org/schema/tx   
@@ -14,11 +15,13 @@
 	         http://www.springframework.org/schema/context     
 	         http://www.springframework.org/schema/context/spring-context-3.2.xsd
 	         http://www.springframework.org/schema/task 
-	         http://www.springframework.org/schema/task/spring-task-3.2.xsd"
+	         http://www.springframework.org/schema/task/spring-task-3.2.xsd
+	         http://www.springframework.org/schema/util 
+	         http://www.springframework.org/schema/task/spring-util-3.2.xsd"
 	default-lazy-init="true">
 	<tx:annotation-driven />
 	<task:annotation-driven />
-	
+
 	<!-- 自动扫描的包名 -->
 	<context:component-scan base-package="com.shishuo.cms"></context:component-scan>
 
@@ -31,8 +34,8 @@
 			</list>
 		</property>
 	</bean>
-	
-	<!-- c3p0 connection pool configuration 数据库的配置-->
+
+	<!-- c3p0 connection pool configuration 数据库的配置 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClass}" />		<!-- 数据库驱动 -->
@@ -53,21 +56,57 @@
 		<property name="checkoutTimeout" value="10000" />		<!-- 获取新连接的超时时间为10000毫秒 -->
 	</bean>
 
-	<!-- 创建SqlSessionFactory，同时指定数据源-->
+	<!-- 创建SqlSessionFactory，同时指定数据源 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- 配置事务管理器-->
+	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!--创建数据映射器，数据映射器必须为接口-->
+	<!--创建数据映射器，数据映射器必须为接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 		<property name="basePackage" value="com.shishuo.cms.dao" />
-
 	</bean>
+
+
+	<bean id="smartChineseAnalyzer"
+		class="org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer">
+	</bean>
+
+	<!-- also, using the SimpleFSLockFactory ,数据文件存放位置设置 -->
+	<bean id="luceneDirectory" class="org.apache.lucene.store.SimpleFSDirectory">
+		<constructor-arg>
+			<bean class="java.io.File">
+				<constructor-arg value="${config.search.indexDir}" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<bean class="org.apache.lucene.store.SimpleFSLockFactory" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="indexWriter" class="org.apache.lucene.index.IndexWriter">
+		<constructor-arg ref="luceneDirectory" />
+		<constructor-arg>
+			<bean class="org.apache.lucene.index.IndexWriterConfig">
+				<constructor-arg ref="smartChineseAnalyzer" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<bean id="indexSearcher" class="org.apache.lucene.search.IndexSearcher"
+		depends-on="indexWriter">
+		<constructor-arg ref="luceneDirectory" />
+	</bean>
+
+	<bean id="queryParser"
+		class="org.apache.lucene.queryParser.standard.StandardQueryParser">
+		<constructor-arg ref="luceneAnalyzer" />
+	</bean>
+
 </beans>

@@ -40,7 +40,12 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">状态</label>
 							<div class="col-sm-10">
+<<<<<<< HEAD
 								<label class="col-sm-2 col-sm-2 control-label">${admin.status}</label>
+=======
+								<input type="text" class="form-control round-input" name="password" value="${admin.status}"
+									placeholder="状态" id="status">
+>>>>>>> branch 'master' of git@git.oschina.net:shishuo/CMS.git
 								<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="status"> 	
                                 	<option value= "NORMAL">正常</option>
                                 	<option value= "FREEZE">冻结</option>

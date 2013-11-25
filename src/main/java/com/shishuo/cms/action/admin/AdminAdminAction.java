@@ -58,7 +58,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/addNew.json", method = RequestMethod.POST)
 	public JsonVo<String> addNewUser(
 			@RequestParam(value = "adminName") String adminName,
-			@RequestParam(value = "adminName") String password,
+			@RequestParam(value = "password") String password,
 			@RequestParam(value = "status") AdminConstant.Status status) {
 
 		JsonVo<String> json = new JsonVo<String>();
@@ -68,7 +68,7 @@ public class AdminAdminAction extends AdminBaseAction {
 			}
 			// 检测校验结果
 			validate(json);
-			adminService.addAdmin("email", adminName, password,status);
+			adminService.addAdmin("email", adminName, password,AdminConstant.Status.INIT);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

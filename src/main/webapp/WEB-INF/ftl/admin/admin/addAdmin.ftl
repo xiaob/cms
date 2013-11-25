@@ -43,6 +43,7 @@
                                       <label class="col-sm-2 col-sm-2 control-label">密码</label>
                                       <div class="col-sm-10">
                                           <input type="text" class="form-control" name="password"
+<<<<<<< HEAD
                                           	placeholder="管理员密码" value="111111">
                                       </div>
                                   </div>
@@ -51,6 +52,9 @@
                                       <div class="col-sm-10">
                                           <input type="text" class="form-control" name="status"
                                           	placeholder="管理员状态" value="INIT">
+=======
+                                          	placeholder="管理员密码" id="password" vaule="111111">
+>>>>>>> branch 'master' of git@git.oschina.net:shishuo/CMS.git
                                       </div>
                                   </div>
                                   <div class="form-group">

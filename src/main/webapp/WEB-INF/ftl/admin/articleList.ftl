@@ -42,7 +42,10 @@
                             			<td>${e.folderId}</td>
                                     	<td>${e.picture}</td>
                                     	<td>${e.content}</td>
+<<<<<<< HEAD
                                     	<td>${e.status}</td>
+=======
+>>>>>>> branch 'master' of git@git.oschina.net:shishuo/CMS.git
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
