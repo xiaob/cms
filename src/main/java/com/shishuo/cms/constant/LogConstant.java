@@ -28,7 +28,7 @@ public class LogConstant {
 	 * 
 	 * @author Herbert
 	 */
-	public static enum LEVEL {
+	public static enum Level {
 		DEBUG, INFO, WARN, ERROR, FATAL
 	};
 }

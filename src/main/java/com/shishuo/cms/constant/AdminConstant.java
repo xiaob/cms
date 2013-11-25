@@ -27,17 +27,19 @@ package com.shishuo.cms.constant;
 public class AdminConstant {
 
 	/**
-	 * 初始化，需要修改密码
+	 * @author Herbert
+	 *
 	 */
-	public static int STATUS_INIT = 0;
-
-	/**
-	 * 正常，可以使用
-	 */
-	public static int STATUS_NORMAL = 1;
-
-	/**
-	 * 冻结，禁止使用
-	 */
-	public static int STATUS_FREEZE = -1;
+	public static enum Status {
+		/**
+		 * 初始化，需要修改密码
+		 */
+		INIT, /**
+		 * 正常，可以使用
+		 */
+		NORMAL, /**
+		 * 正常，可以使用
+		 */
+		FREEZE
+	};
 }

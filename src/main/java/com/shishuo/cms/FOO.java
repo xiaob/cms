@@ -19,7 +19,6 @@
 
 package com.shishuo.cms;
 
-import org.springframework.web.context.ContextLoaderListener;
 
 /**
  * 
@@ -30,6 +29,6 @@ import org.springframework.web.context.ContextLoaderListener;
 public class FOO {
 
 	public static void main(String[] args) {
-
+		System.out.println("欢迎来到Java的世界，欢迎使用师说CMS。");
 	}
 }

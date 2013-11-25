@@ -20,6 +20,8 @@ package com.shishuo.cms.entity;
 
 import java.util.Date;
 
+import com.shishuo.cms.constant.LogConstant;
+
 /**
  * 日志实体
  * 
@@ -42,7 +44,7 @@ public class Log {
 	/**
 	 * 日志等级：DEBUG INFO WARN ERROR FATAL
 	 */
-	private String level;
+	private LogConstant.Level level;
 	/**
 	 * 时间
 	 */
@@ -64,11 +66,12 @@ public class Log {
 		this.content = content;
 	}
 
-	public String getLevel() {
+
+	public LogConstant.Level getLevel() {
 		return level;
 	}
 
-	public void setLevel(String level) {
+	public void setLevel(LogConstant.Level level) {
 		this.level = level;
 	}
 

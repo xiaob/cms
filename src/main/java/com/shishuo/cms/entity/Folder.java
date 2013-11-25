@@ -20,6 +20,8 @@ package com.shishuo.cms.entity;
 
 import java.util.Date;
 
+import com.shishuo.cms.constant.FolderConstant;
+
 /**
  * 目录实体
  * 
@@ -73,16 +75,16 @@ public class Folder {
 	/**
 	 * 等级
 	 */
-	private int rank;
+	private FolderConstant.Rank rank;
 
 	/**
 	 * 类型
 	 */
-	private int type;
+	private FolderConstant.Type type;
 	/**
 	 * 状态
 	 */
-	private int status;
+	private FolderConstant.Status status;
 
 	/**
 	 * 时间
@@ -137,22 +139,6 @@ public class Folder {
 		this.count = count;
 	}
 
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
 	public String getTemplate() {
 		return template;
 	}
@@ -169,12 +155,21 @@ public class Folder {
 		this.sort = sort;
 	}
 
-	public int getRank() {
+
+	public FolderConstant.Rank getRank() {
 		return rank;
 	}
 
-	public void setRank(int rank) {
+	public void setRank(FolderConstant.Rank rank) {
 		this.rank = rank;
+	}
+
+	public void setType(FolderConstant.Type type) {
+		this.type = type;
+	}
+
+	public void setStatus(FolderConstant.Status status) {
+		this.status = status;
 	}
 
 	public Date getCreateTime() {

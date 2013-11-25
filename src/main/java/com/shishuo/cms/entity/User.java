@@ -20,6 +20,8 @@ package com.shishuo.cms.entity;
 
 import java.util.Date;
 
+import com.shishuo.cms.constant.UserConstant;
+
 /**
  * 用户实体
  * 
@@ -42,7 +44,7 @@ public class User {
 	/**
 	 * 帐号类型
 	 */
-	private int type;
+	private UserConstant.Type type;
 
 	/**
 	 * 用户名
@@ -70,11 +72,12 @@ public class User {
 		this.openId = openId;
 	}
 
-	public int getType() {
+
+	public UserConstant.Type getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(UserConstant.Type type) {
 		this.type = type;
 	}
 

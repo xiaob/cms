@@ -20,6 +20,8 @@ package com.shishuo.cms.entity;
 
 import java.util.Date;
 
+import com.shishuo.cms.constant.ConfigConstant;
+
 /**
  * 网站配置实体
  * 
@@ -43,10 +45,11 @@ public class Config {
 	 */
 	private String description;
 	
+
 	/**
-	 * 类型：0 系统定义 1 产品定义
+	 * 
 	 */
-	private int type;
+	private ConfigConstant.Type type;
 	/**
 	 * 时间
 	 */
@@ -84,12 +87,13 @@ public class Config {
 		this.description = description;
 	}
 
-	public int getType() {
+	public ConfigConstant.Type getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(ConfigConstant.Type type) {
 		this.type = type;
 	}
+
 
 }

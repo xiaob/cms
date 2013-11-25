@@ -1,4 +1,4 @@
-package com.shishuo.cms.install;
+package com.shishuo.cms;
 
 import java.io.BufferedInputStream;
 import java.io.Console;
@@ -14,6 +14,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import com.mysql.jdbc.Connection;
+import com.shishuo.cms.exception.InstallException;
 import com.shishuo.cms.util.AuthUtils;
 
 /**

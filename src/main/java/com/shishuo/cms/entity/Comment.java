@@ -20,6 +20,8 @@ package com.shishuo.cms.entity;
 
 import java.util.Date;
 
+import com.shishuo.cms.constant.CommentConstant;
+
 /**
  * 评论实体
  * 
@@ -68,7 +70,7 @@ public class Comment {
 	/**
 	 * 审核状态
 	 */
-	private int status;
+	private CommentConstant.Status status;
 	/**
 	 * 时间
 	 */
@@ -130,11 +132,11 @@ public class Comment {
 		this.fatherId = fatherId;
 	}
 
-	public int getStatus() {
+	public CommentConstant.Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(CommentConstant.Status status) {
 		this.status = status;
 	}
 

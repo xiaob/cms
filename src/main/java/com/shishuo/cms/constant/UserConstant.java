@@ -18,10 +18,18 @@
  */
 package com.shishuo.cms.constant;
 
+/**
+ * @author Herbert
+ * 
+ */
 public class UserConstant {
 
-	// 帐号类型
-	public static String[] TYPE = { "本站", "师说", "QQ", "微博" };
-	
-	public static String PASS_WORD="111111";
+	/**
+	 * @author Herbert
+	 * 
+	 */
+	public static enum Type {
+		SHISHUO
+	};
+
 }

@@ -1,4 +1,4 @@
-package com.shishuo.cms.install;
+package com.shishuo.cms.exception;
 
 /**
  * @author Herbert

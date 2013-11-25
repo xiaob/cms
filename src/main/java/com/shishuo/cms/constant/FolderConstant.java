@@ -20,16 +20,29 @@ package com.shishuo.cms.constant;
 
 /**
  * @author 目录属性常量
- *
+ * 
  */
 public class FolderConstant {
 
-	// 目录类型
-	public static String[] TYPE = { "文章", "下载", "商品","图片" };
+	/**
+	 * 文件类型
+	 * 
+	 * @author Herbert
+	 * 
+	 */
+	public static enum Type {
+		ARTICLE, PHOTO, DOWNLOAD, SHOP
+	};
 
-	// 登陆
-	public static String[] LOGIN = { "不需要登录", "需要登录" };
-	
-	//
-	public static String[] STATIC = {"隐藏","显示"};
+	public static enum Status {
+		HIDDEN, DISPLAY
+	};
+
+	/**
+	 * @author Herbert
+	 * 
+	 */
+	public static enum Rank {
+		EVERYONE, LOGIN, VIP, ADMIN
+	};
 }
