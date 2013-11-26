@@ -17,7 +17,6 @@
 <link
 	href="${basePath}/system/assets/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
-<link href="${basePath}/system/css/dropzone.css" rel="stylesheet"/>	
 <!-- Custom styles for this template -->
 <link href="${basePath}/system/css/style.css" rel="stylesheet">
 <link href="${basePath}/system/css/style-responsive.css"
@@ -45,20 +44,21 @@
 			</div>
 			<div class="top-nav ">
 
-              <ul class="nav pull-right top-menu">
+				<ul class="nav pull-right top-menu">
+                  <li>
+                      <input type="text" placeholder="Search" class="form-control search">
+                  </li>
                   <!-- user login dropdown start-->
                   <li class="dropdown">
-                      <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                          <img alt="" src="${basePath}/system/img/avatar1_small.jpg">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          <img src="${basePath}/system/img/avatar.png" style="width:29;height:29px;" alt="">
                           <span class="username">Jhon Doue</span>
                           <b class="caret"></b>
                       </a>
                       <ul class="dropdown-menu extended logout">
                           <div class="log-arrow-up"></div>
-                          <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
-                          <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
-                          <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
-                          <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+                          <li><a href="#"><i class="icon-cog"></i> 设置</a></li>
+                          <li><a href="login.html"><i class="icon-key"></i> 安全退出</a></li>
                       </ul>
                   </li>
                   <!-- user login dropdown end -->
