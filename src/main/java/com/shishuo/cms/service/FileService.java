@@ -18,11 +18,9 @@
  */
 package com.shishuo.cms.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +29,9 @@ import com.shishuo.cms.constant.FileConstant.Picture;
 import com.shishuo.cms.dao.FileDao;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.File;
-import com.shishuo.cms.entity.User;
 import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.PageVo;
+
 
 /**
  * 
@@ -232,7 +230,7 @@ public class FileService {
 	public PageVo<File> getFileListByTypePage(FileConstant.Type type, FileConstant.Status status, int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl("/admin/article/articleList?");
+		pageVo.setUrl("/CMS/admin/article/list?");
 		List<File> list = this.getFileListByType(FileConstant.Type.article, status,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
@@ -326,6 +324,10 @@ public class FileService {
 	 */
 	public void updateCommentCount(long fileId, int commentCount) {
 		fileDao.updateCommentCount(fileId, commentCount + 1);
+	}
+	
+	public List<File> getArticleByPicture(FileConstant.Type type , FileConstant.Picture picture){
+		return fileDao.getArticleByPicture(type, picture);
 	}
 	
 	public PageVo<File> getNewActicle(Picture picture){
