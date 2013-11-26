@@ -87,7 +87,7 @@
 						<ul class="sub">
 							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/article/add">增加文章</a></li>
 							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/article/list">文章列表</a></li>
-							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/recycle">回收站</a></li>
+							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/recycle/list">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu">

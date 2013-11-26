@@ -177,7 +177,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	 * @author 进入回收站页面
 	 * 
 	 */
-	@RequestMapping(value = "/recycle", method = RequestMethod.GET)
+	@RequestMapping(value = "/recycle/list", method = RequestMethod.GET)
 	public String recycleList(
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {

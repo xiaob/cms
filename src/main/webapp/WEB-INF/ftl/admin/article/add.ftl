@@ -48,6 +48,7 @@
 									<div class="col-sm-10">
 										<input type="radio" name="picture" value="NO_EXIST"/>NO_EXIST
 										<input type="radio" name="picture" value="EXIST"/>EXIST
+										<input />
 									</div>
 								  </div>
                                   <div class="form-group">
