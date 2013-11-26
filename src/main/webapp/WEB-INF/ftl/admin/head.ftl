@@ -86,8 +86,8 @@
 						<a href="javascript:;" <#if menu="article">class="active"</#if>> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
 							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/article/add">增加文章</a></li>
-							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/article/articleList">文章列表</a></li>
-							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/recycleList">回收站</a></li>
+							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/article/list">文章列表</a></li>
+							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/recycle">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu">
@@ -144,9 +144,9 @@
 						<ul class="sub">
 							<li <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
 							<li <#if submenu="add_admin">class="active"</#if>><a href="${basePath}/admin/admin/add">添加管理员</a></li>
-							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/allList">管理员列表</a></li>
+							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/all">管理员列表</a></li>
 							<li <#if submenu="add_user">class="active"</#if>><a href="${basePath}/admin/user/add">添加用户</a></li>
-							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/allList">用户列表</a></li>
+							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/all">用户列表</a></li>
 						</ul>
 					</li>
 				</ul>

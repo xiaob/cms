@@ -1,6 +1,6 @@
 <#assign menu="article">
 <#assign submenu="update_article">
-<#include "head.ftl">
+<#include "/admin/head.ftl">
 <style type="text/css">
 
 </style>
@@ -51,7 +51,7 @@
                                   <div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">文章图片</label>
 									<div class="col-sm-10">
-										<#if file.status == NO_EXIST>
+										<#if file.status.equals("NO_EXIST")>
 										<input type="radio" name="picture" value="NO_EXIST" checked="checked"/>NO_EXIST
 										<input type="radio" name="picture" value="EXIST"/>EXIST
 										<#else>
@@ -97,4 +97,4 @@
 		});
 	});	
 </script>
-<#include "foot.ftl">
+<#include "/admin/foot.ftl">

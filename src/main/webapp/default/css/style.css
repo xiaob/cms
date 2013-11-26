@@ -1350,80 +1350,9 @@ ul.tag li a {
 }
 
 
-.footer address a {
-    color: #f37c6b;
+.footer a {
+    color: #00adef;
 }
-
-.tweet-box {
-    background: #505b71;
-    padding: 20px 15px;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.tweet-box:before {
-    background-color: #505b71;
-    border-color: #505b71;
-    border-image: none;
-    border-right: 1px none #505b71;
-    border-style: none;
-    content: "";
-    display: block;
-    height: 22px;
-    left: 60px;
-    position: absolute;
-    top: 32px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    width: 22px;
-}
-
-.tweet-box  a, .tweet-box i{
-    color: #00adef ;
-}
-
-.tweet-box  a:hover{
-    color: #F77B6F ;
-}
-
-.tweet-box i {
-    font-size: 40px;
-    float: left;
-    margin-right: 15px;
-}
-
-.social-link-footer li {
-    float: left;
-    margin: 0 10px 10px 0px;
-
-}
-
-.social-link-footer li a {
-    color: #fff;
-    background:#505b71;
-    padding: 10px;
-    width: 50px;
-    height: 50px;
-    float: left;
-    text-align: center;
-    font-size: 20px;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -ms-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.social-link-footer li a:hover {
-    background: #F77B6F;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -ms-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-
 
 
 /*slider css*/

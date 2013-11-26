@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-lg-2 col-sm-2 text-right">
                             <div class="author">
-                                                                                                              作者 <a>${file.user.name}</a>
+                               	作者 <a>${file.admin.name}</a>
                             </div>
                             <div class="shate-view">
                                 <ul class="list-unstyled">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-lg-10 col-sm-10">
                             <h1><a href="${basePath}/${currentFolder.ename}/${file.fileId}">${file.name}</a></h1>
-                            <p>${file.description}</p>
+                            <p>${file.content}</p>
                             <a href="${basePath}/${currentFolder.ename}/${file.fileId}" class="btn btn-danger">瞧一瞧</a>
                         </div>
                     </div>

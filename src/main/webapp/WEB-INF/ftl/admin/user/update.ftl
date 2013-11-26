@@ -32,14 +32,14 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">open</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control round-input" name="open" value="${user.openId}"
+								<input type="text" class="form-control" name="open" value="${user.openId}"
 									placeholder="open" id="open">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">类型</label>
 							<div class="col-sm-10">
-								<label type="text" class="form-control round-input" name="type" value="${user.type}"
+								<label type="text" class="form-control" name="type" value="${user.type}"
 									placeholder="用户类型" id="type">${user.type}</label>
 							</div>
 						</div>

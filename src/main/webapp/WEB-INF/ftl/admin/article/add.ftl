@@ -46,20 +46,8 @@
                                   <div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">文章图片</label>
 									<div class="col-sm-10">
-<<<<<<< HEAD
-										<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;height: 40px;" name="picture">
-                                        	<option value="NO_EXIST">NO_EXIST</option>
-                                        	<option value="EXIST">EXIST</option>
-                                        </select>
-=======
-										<#if file.status == NO_EXIST>
-										<input type="radio" name="picture" value="NO_EXIST" checked="checked"/>NO_EXIST
-										<input type="radio" name="picture" value="EXIST"/>EXIST
-										<#else>
 										<input type="radio" name="picture" value="NO_EXIST"/>NO_EXIST
-										<input type="radio" name="picture" value="EXIST" checked="checked"/>EXIST
-										</#if>
->>>>>>> branch 'master' of git@git.oschina.net:shishuo/CMS.git
+										<input type="radio" name="picture" value="EXIST"/>EXIST
 									</div>
 								  </div>
                                   <div class="form-group">

@@ -1,6 +1,6 @@
 <#assign menu="article">
 <#assign submenu="article_recycle">
-<#include "head.ftl">
+<#include "/admin/head.ftl">
 <style type="text/css">
 .pagination {
     border-radius: 4px;
@@ -70,4 +70,4 @@
           </section>
 		</section>
 		<!--main content end-->
-<#include "foot.ftl">
+<#include "/admin/foot.ftl">

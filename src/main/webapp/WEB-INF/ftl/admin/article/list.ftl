@@ -1,6 +1,6 @@
 <#assign menu="article">
 <#assign submenu="article_list">
-<#include "head.ftl">
+<#include "/admin/head.ftl">
 <style type="text/css">
 .pagination {
     border-radius: 4px;
@@ -42,10 +42,7 @@
                             			<td>${e.folderId}</td>
                                     	<td>${e.picture}</td>
                                     	<td>${e.content}</td>
-<<<<<<< HEAD
                                     	<td>${e.status}</td>
-=======
->>>>>>> branch 'master' of git@git.oschina.net:shishuo/CMS.git
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
@@ -75,4 +72,4 @@
           </section>
 		</section>
 		<!--main content end-->
-<#include "foot.ftl">
+<#include "/admin/foot.ftl">

@@ -159,26 +159,6 @@
     		<scope>compile</scope>
   		</dependency>
 
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-			<version>4.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-highlighter</artifactId>
-			<version>4.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-smartcn</artifactId>
-			<version>4.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queryparser</artifactId>
-			<version>4.5.0</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -215,7 +195,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>com.shishuo.cms.install.Install</mainClass>
 					<systemProperties>
 						<systemProperty>
 							<key>file.encoding</key>

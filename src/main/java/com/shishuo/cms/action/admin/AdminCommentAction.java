@@ -44,7 +44,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	public String allComment(ModelMap modelMap,
 			@RequestParam(value="pageNum",defaultValue="1") int pageNum){
 		modelMap.put("pageVo", commentService.getAllListPage(pageNum));
-		return "admin/comment/allComment";
+		return "admin/comment/all";
 	}
 	/**
 	 * 进入审核列表页面

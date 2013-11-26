@@ -122,7 +122,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	 *
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/updateFolder.json",method = RequestMethod.POST)
+	@RequestMapping(value = "/update.json",method = RequestMethod.POST)
 	public JsonVo<String> updateFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "folderName") String folderName,
