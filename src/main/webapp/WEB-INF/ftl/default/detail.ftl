@@ -115,7 +115,12 @@
                 </div>
                 </@cms_file>
             </div>
-            <#include "right.ftl">
+            <div class="col-lg-3">
+              <div class="blog-side-item">
+              <#include "right.ftl">
+              <#include "file_acticle.ftl">
+              </div>
+            </div>
             <!--blog end-->
         </div>
     </div>
@@ -135,7 +140,6 @@
 				}
 			}
 	      });
-
     });
    </script>
    <#include "foot.ftl">
