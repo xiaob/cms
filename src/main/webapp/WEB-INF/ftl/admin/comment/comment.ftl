@@ -1,6 +1,6 @@
 <#assign menu="comment">
 <#assign submenu="auditing_comment">
-<#include "../head.ftl">
+<#include "/admin/head.ftl">
 <style type="text/css">
 
 </style>
@@ -49,4 +49,4 @@
 		</section>
 	</section>
  <!--main content end-->
-<#include "../foot.ftl">
+<#include "/admin/foot.ftl">

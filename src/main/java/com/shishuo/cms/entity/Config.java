@@ -44,12 +44,7 @@ public class Config {
 	 * 描述
 	 */
 	private String description;
-	
 
-	/**
-	 * 
-	 */
-	private ConfigConstant.Type type;
 	/**
 	 * 时间
 	 */
@@ -85,15 +80,6 @@ public class Config {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public ConfigConstant.Type getType() {
-		return type;
-	}
-
-	public void setType(ConfigConstant.Type type) {
-		this.type = type;
-	}
-
+	}  
 
 }

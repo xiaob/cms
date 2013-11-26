@@ -44,13 +44,8 @@
         <div class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="${basePath}/">师说<span>CMS</span></a>
-                </div>
+                    <a class="navbar-brand" href="${basePath}/">师说<span style="font-size: 14px; margin-left: 10px;">师者,传道授业解惑者也</span></a>
+                </div>            
             </div>
         </div>
     </header>

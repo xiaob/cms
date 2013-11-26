@@ -47,13 +47,13 @@ public class AdminArticleAction extends AdminBaseAction {
 	 * @author 进入文章列表分页的首页
 	 * 
 	 */
-	@RequestMapping(value = "/articleList", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String allFolder(
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
-		PageVo<File> pageVo = fileService.getFileListByTypePage(0, 1, pageNum);
+		PageVo<File> pageVo = fileService.getFileListByTypePage(FileConstant.Type.article, FileConstant.Status.display, pageNum);
 		modelMap.put("pageVo", pageVo);
-		return "admin/articleList";
+		return "admin/article/list";
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class AdminArticleAction extends AdminBaseAction {
 		}
 		modelMap.put("file", file);
 		modelMap.put("folderAll", folderService.getAllFolder());
-		return "admin/updateArticle";
+		return "admin/article/update";
 	}
 
 	/**
@@ -104,11 +104,14 @@ public class AdminArticleAction extends AdminBaseAction {
 			if (StringUtils.isBlank(name)) {
 				json.getErrors().put("name", "文章名称不能为空");
 			}
+			if(StringUtils.isBlank(picture.toString())){
+				picture=FileConstant.Picture.no_exist;
+			}
 			// 检测校验结果
 			validate(json);
 			fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-					FileConstant.Picture.NO_EXIST, name, content,
-					FileConstant.Type.ARTICLE, FileConstant.Status.DISPLAY);
+					picture, name, content,
+					FileConstant.Type.article, FileConstant.Status.display);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -129,7 +132,7 @@ public class AdminArticleAction extends AdminBaseAction {
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "fileId") long fileId,
 			@RequestParam(value = "images") String images,
-			@RequestParam(value = "description") String description) {
+			@RequestParam(value = "content") String content) {
 
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -142,8 +145,8 @@ public class AdminArticleAction extends AdminBaseAction {
 			if (images.equals("")) {
 				json.getErrors().put("images", "文章图片不能为空");
 			}
-			if (description.equals("")) {
-				json.getErrors().put("description", "文章内容不能为空");
+			if (content.equals("")) {
+				json.getErrors().put("content", "文章内容不能为空");
 			}
 
 			// 检测校验结果
@@ -163,23 +166,23 @@ public class AdminArticleAction extends AdminBaseAction {
 	 * @author 放进回收站，还原
 	 * 
 	 */
-	@RequestMapping(value = "/recycle.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/recycle", method = RequestMethod.GET)
 	public String recycle(@RequestParam(value = "fileId") long fileId,
-			@RequestParam(value = "status") int status) {
+			@RequestParam(value = "status") FileConstant.Status status) {
 		fileService.recycle(fileId, status);
-		return "redirect:/admin/file/articleList";
+		return "redirect:/admin/acticle/list";
 	}
 
 	/**
 	 * @author 进入回收站页面
 	 * 
 	 */
-	@RequestMapping(value = "/recycleList", method = RequestMethod.GET)
+	@RequestMapping(value = "/recycle/list", method = RequestMethod.GET)
 	public String recycleList(
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
-		modelMap.put("pageVo", fileService.getFileListByTypePage(0, 0, pageNum));
-		return "admin/articleRecycle";
+		modelMap.put("pageVo", fileService.getFileListByTypePage(FileConstant.Type.article, FileConstant.Status.hidden, pageNum));
+		return "admin/article/recycle";
 	}
 
 	/**
@@ -189,7 +192,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteFile(@RequestParam(value = "fileId") long fileId) {
 		fileService.deleteFileById(fileId);
-		return "redirect:/admin/file/recycleList";
+		return "redirect:/admin/file/recycle";
 	}
 
 }

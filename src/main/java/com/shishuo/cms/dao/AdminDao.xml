@@ -4,8 +4,8 @@
 	
 	<insert id="addAdmin" parameterType="com.shishuo.cms.entity.Admin">
 		insert into
-		admin(name,password,status,createTime)
-		value(#{name},#{password},#{status},#{createTime})
+		admin(email,name,password,status,createTime)
+		value(#{email},#{name},#{password},#{status},#{createTime})
 		<selectKey resultType="long" keyProperty="adminId">
 			SELECT LAST_INSERT_ID()
 		</selectKey>

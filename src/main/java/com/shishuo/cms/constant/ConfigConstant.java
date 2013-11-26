@@ -31,27 +31,13 @@ import com.shishuo.cms.service.ConfigService;
  */
 @Component
 public class ConfigConstant {
-
-	/**
-	 * @author Herbert
-	 *
-	 */
-	public static enum Type {
-		/**
-		 * 系统类型
-		 */
-		SYSTEM,/**
-		 * 产品类型
-		 */
-		PRODUCT
-	};
 	
 	/**
 	 * 默认的模板
 	 */
 	public static String DEFAUTL_TEMPLATE = "defalut";
 
-	public static String KEY_TEMPLATE = "template";
+	public static String KEY_TEMPLATE = "sys_template";
 
 	/**
 	 * 得到当前模板路径

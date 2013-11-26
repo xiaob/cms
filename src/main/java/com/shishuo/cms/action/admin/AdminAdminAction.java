@@ -47,7 +47,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addUser(ModelMap modelMap) {
 		modelMap.put("adminName", "");
-		return "admin/admin/addAdmin";
+		return "admin/admin/add";
 	}
 
 	/**
@@ -58,7 +58,8 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/addNew.json", method = RequestMethod.POST)
 	public JsonVo<String> addNewUser(
 			@RequestParam(value = "adminName") String adminName,
-			@RequestParam(value = "adminName") String password) {
+			@RequestParam(value = "password") String password,
+			@RequestParam(value = "status") AdminConstant.Status status) {
 
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -80,12 +81,12 @@ public class AdminAdminAction extends AdminBaseAction {
 	 * 进入管理员列表页面
 	 *
 	 */
-	@RequestMapping(value = "/allList", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String allList(
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
 		modelMap.put("pageVo", adminService.getAllListPage(pageNum));
-		return "admin/admin/allAdmin";
+		return "admin/admin/all";
 	}
 
 	/**
@@ -96,7 +97,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	public String oneAdmin(@RequestParam(value = "adminId") long adminId,
 			ModelMap modelMap) {
 		modelMap.put("admin", adminService.getAdminById(adminId));
-		return "admin/admin/updateAdmin";
+		return "admin/admin/update";
 	}
 
 	/**
@@ -138,6 +139,6 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteAdmin(@RequestParam(value = "adminId") long adminId) {
 		adminService.deleteAdmin(adminId);
-		return "redirect:/admin/admin/allList";
+		return "redirect:/admin/admin/all";
 	}
 }

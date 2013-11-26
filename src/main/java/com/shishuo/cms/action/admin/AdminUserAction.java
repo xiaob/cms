@@ -45,7 +45,7 @@ public class AdminUserAction extends AdminBaseAction{
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
 	public String addUser(ModelMap modelMap){
 		modelMap.put("userName", "");
-		return "admin/user/addUser";
+		return "admin/user/add";
 	}
 	/**
 	 * 添加用户
@@ -76,11 +76,11 @@ public class AdminUserAction extends AdminBaseAction{
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/allList",method = RequestMethod.GET)
+	@RequestMapping(value = "/all",method = RequestMethod.GET)
 	public String allList(@RequestParam(value = "pageNum",defaultValue="1") int pageNum,
 			ModelMap modelMap){
 		modelMap.put("pageVo", userService.getUserPage(pageNum));
-		return "admin/user/allUser";
+		return "admin/user/all";
 	}
 	
 	/**
@@ -92,7 +92,7 @@ public class AdminUserAction extends AdminBaseAction{
 	public String oneAdmin(@RequestParam(value = "userId") long userId,
 			ModelMap modelMap){
 		modelMap.put("user", userService.getUserById(userId));
-		return "admin/user/updateUser";
+		return "admin/user/update";
 	}
 	
 	/**
@@ -103,18 +103,12 @@ public class AdminUserAction extends AdminBaseAction{
 	@ResponseBody
 	@RequestMapping(value = "/update.json",method = RequestMethod.POST)
 	public JsonVo<String> updateAdmin(@RequestParam(value = "userName") String userName,
-			@RequestParam(value = "userId") long userId,
-			@RequestParam(value = "type",defaultValue="-1") int type){
-		
+			@RequestParam(value = "userId") long userId){
 		JsonVo<String> json = new JsonVo<String>();	
 		try {
 			if(userName.equals("")){
 				json.getErrors().put("userName", "用户名称不能为空");
 			}
-			if(type==-1){
-				json.getErrors().put("type", "用户类型不能为空");
-			}
-			
 			// 检测校验结果
 			validate(json);
 			userService.updateUser(userId, UserConstant.Type.SHISHUO, userName);
@@ -134,7 +128,7 @@ public class AdminUserAction extends AdminBaseAction{
 	@RequestMapping(value = "/delete",method = RequestMethod.GET)
 	public String deleteUser(@RequestParam(value = "userId") long userId){
 		userService.deleteUserById(userId);
-		return "redirect:/admin/user/allList";
+		return "redirect:/admin/user/all";
 	}
 
 }

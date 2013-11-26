@@ -31,11 +31,11 @@ public class FolderConstant {
 	 * 
 	 */
 	public static enum Type {
-		ARTICLE, PHOTO, DOWNLOAD, SHOP
+		article, photo, download, shop
 	};
 
 	public static enum Status {
-		HIDDEN, DISPLAY
+		hidden, display
 	};
 
 	/**
@@ -43,6 +43,6 @@ public class FolderConstant {
 	 * 
 	 */
 	public static enum Rank {
-		EVERYONE, LOGIN, VIP, ADMIN
+		everyone, login, vip, admin
 	};
 }

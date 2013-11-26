@@ -101,7 +101,13 @@ public class FolderService {
 	public Folder addFolder(long fatherId, String name, FolderConstant.Status status, String ename,
 			FolderConstant.Type type,FolderConstant.Rank rank) {
 		Folder folder = new Folder();
+		Folder fatherFolder = this.getFolderById(fatherId);
 		folder.setFatherId(fatherId);
+		if(fatherId==0){
+			folder.setLevel(1);
+		}else{
+			folder.setLevel(fatherFolder.getLevel()+1);
+		}
 		folder.setEname(ename);
 		folder.setName(name);
 		folder.setCount(0);

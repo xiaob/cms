@@ -51,7 +51,7 @@ public class AdminFolderAction extends AdminBaseAction{
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folderName", "");
 		modelMap.put("folderEname", "");
-		return "admin/folder";
+		return "admin/folder/folder";
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	public String allFolder(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,ModelMap modelMap){
 		List<FolderVo> list = folderService.getAllFolder();
 		modelMap.put("list", list);
-		return "admin/allFolder";
+		return "admin/folder/all";
 	}
 	
 	/**
@@ -114,24 +114,44 @@ public class AdminFolderAction extends AdminBaseAction{
 		}
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folder", folder);
-		return "admin/updateFolder";
+		return "admin/folder/update";
 	}
 	
 	/**
 	 * @author 修改目录资料
 	 *
 	 */
-	@RequestMapping(value = "/update",method = RequestMethod.POST)
-	public String updateFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
+	@ResponseBody
+	@RequestMapping(value = "/update.json",method = RequestMethod.POST)
+	public JsonVo<String> updateFolder(@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "folderName") String folderName,
 			@RequestParam(value = "folderEname") String folderEname,
-			@RequestParam(value = "sort") int sort,
+			@RequestParam(value = "sort",defaultValue="-1") int sort,
 			@RequestParam(value = "type") FolderConstant.Type type,
 			@RequestParam(value = "status") FolderConstant.Status status,
 			@RequestParam(value = "rank") FolderConstant.Rank rank){
-		folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status,type, rank,sort);
-		return "redirect:/admin/folder/all";
+		
+		JsonVo<String> json = new JsonVo<String>();
+		try {
+			if(folderName.equals("")){
+				json.getErrors().put("folderName", "目录名称不能为空");
+			}
+			if(folderEname.equals("")){
+				json.getErrors().put("folderEname", "英文名称不能为空");
+			}
+			if(sort==-1){
+				json.getErrors().put("sort", "目录序列不能为空");
+			}
+			// 检测校验结果
+			validate(json);
+			folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status,type, rank,sort);
+			json.setResult(true);
+		} catch (Exception e) {
+			json.setResult(false);
+			json.setMsg(e.getMessage());
+		}
+		return json;
 	}
 	
 	/**

@@ -64,7 +64,6 @@ public class AdminConfigAction extends AdminBaseAction {
 	public JsonVo<String> basicSubmit(
 			@RequestParam(value = "sitename") String sitename,
 			@RequestParam(value = "sitedesc") String sitedesc,
-			@RequestParam(value = "siteurl") String siteurl,
 			@RequestParam(value = "template") String template,
 			@RequestParam(value = "functionPhoto", required = false) String functionPhoto,
 			@RequestParam(value = "functionDownload", required = false) String functionDownload,
@@ -81,9 +80,6 @@ public class AdminConfigAction extends AdminBaseAction {
 			}
 			if (StringUtils.isBlank(sitedesc)) {
 				json.getErrors().put("sitedesc", "网站描述不能为空");
-			}
-			if (StringUtils.isBlank(siteurl)) {
-				json.getErrors().put("siteurl", "网站网址不能为空");
 			}
 			if (StringUtils.isBlank(template)) {
 				json.getErrors().put("template", "网站模板不能为空");
@@ -105,14 +101,13 @@ public class AdminConfigAction extends AdminBaseAction {
 			// 检测校验结果
 			validate(json);
 			
-			configSevice.updagteConfigByKey("sitename", sitename);
-			configSevice.updagteConfigByKey("sitedesc", sitedesc);
-			configSevice.updagteConfigByKey("siteurl", siteurl);
-			configSevice.updagteConfigByKey("template", template);
-			configSevice.updagteConfigByKey("function_photo", function_photo);
-			configSevice.updagteConfigByKey("function_download",
+			configSevice.updagteConfigByKey("sys_sitename", sitename);
+			configSevice.updagteConfigByKey("sys_sitedesc", sitedesc);
+			configSevice.updagteConfigByKey("sys_template", template);
+			configSevice.updagteConfigByKey("sys_function_photo", function_photo);
+			configSevice.updagteConfigByKey("sys_function_download",
 					function_download);
-			configSevice.updagteConfigByKey("function_shop", function_shop);
+			configSevice.updagteConfigByKey("sys_function_shop", function_shop);
 
 			configSevice.refreshConfigMap();
 			json.setResult(true);
