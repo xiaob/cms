@@ -1,4 +1,4 @@
-<#assign menu="system">
+<#assign menu="user">
 <#assign submenu="update_user">
 <#include "/admin/head.ftl">
 <style type="text/css">

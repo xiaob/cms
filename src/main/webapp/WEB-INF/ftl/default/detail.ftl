@@ -52,7 +52,7 @@
                                 <hr>
                              </#if>
                                 <a href="javascript:;" class="pull-left">
-                                    <img alt="" src="${basePath}/default/img/avatar1.jpg" class="media-object">
+                                    <img alt="" src="${basePath}/default/img/avatar.png" class="media-object">
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading">

@@ -1,6 +1,10 @@
 /*---LEFT BAR ACCORDION----*/
 $(function() {
-	tinymce.init({mode: "textareas"});
+	tinymce.init({
+		mode: "textareas",
+		 plugins : "-file",
+		 theme_advanced_buttons1 : "",
+	});
     $('#nav-accordion').dcAccordion({
         eventType: 'click',
         autoClose: true,

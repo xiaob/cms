@@ -83,7 +83,6 @@
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-					alert(data.msg);
 					bootbox.alert("保存成功，将刷新页面", function() {
 						window.location.reload();
 					});

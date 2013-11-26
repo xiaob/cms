@@ -35,8 +35,8 @@
                             		<tr class="gradeA odd">
                                     	<td>${commentVo.name}</td>
                                     	<td>${commentVo.content}</td>
-                                    	<td>${commentVo.auditing}</td>
                                     	<td>${commentVo.status}</td>
+                                    	
                                 	</tr>
                                 	</#list>
                                	</tbody>
