@@ -25,11 +25,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.FileConstant;
+import com.shishuo.cms.constant.FileConstant.Picture;
 import com.shishuo.cms.dao.FileDao;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.PageVo;
+
 
 /**
  * 
@@ -328,7 +330,7 @@ public class FileService {
 		return fileDao.getArticleByPicture(type, picture);
 	}
 	
-	public PageVo<File> getNewActicle(FileConstant.Picture picture){
+	public PageVo<File> getNewActicle(Picture picture){
 		 PageVo<File> pageFile = new PageVo<File>(1);
 		 if(picture.name().equals("exist")){
 			 pageFile.setRows(3);
