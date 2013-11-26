@@ -24,7 +24,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.cms.constant.FileConstant;
-import com.shishuo.cms.constant.FileConstant.Type;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.vo.FileVo;
 
@@ -169,6 +168,6 @@ public interface FileDao {
 	
 	public int updateCommentCount(@Param("fileId") long fileId,@Param("commentCount") int commentCount);
 
-	
+	public List<File> getArticleByPicture(@Param("type") FileConstant.Type type,@Param("picture") FileConstant.Picture picture);
 
 }

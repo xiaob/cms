@@ -88,15 +88,17 @@ public class UpdatePicture {
          return img;
 		 
 	 }
-	public static BufferedImage createThumbnail(BufferedImage img,int num) throws FileNotFoundException, IOException {
-		BufferedImage img1 = ImageIO.read(new File("E:/notes/picture/activeMq.jpg"));
-		BufferedImage thumbnail = Scalr.resize(img1,Scalr.Method.SPEED, Scalr.Mode.AUTOMATIC,num
-	               , Scalr.OP_ANTIALIAS);
-		 Graphics g = thumbnail.getGraphics();
-         g.drawImage(img1, 0, 0, null); // 绘制截取后的图
-         g.dispose();
-         // 输出为文件
-         ImageIO.write(thumbnail, "JPEG", new File("E:/notes/picture/24.jpg"));
+	public static BufferedImage createThumbnail(String img,int num) throws FileNotFoundException, IOException {
+		BufferedImage img1 = ImageIO.read(new File(img));
+//		BufferedImage thumbnail = Scalr.resize(img1,Scalr.Method.SPEED,num
+//	               , Scalr.OP_ANTIALIAS, Scalr.OP_BRIGHTER);
+		BufferedImage thumbnail= Scalr.resize(img1, Scalr.Method.SPEED, Scalr.Mode.AUTOMATIC,
+				num,Scalr.OP_ANTIALIAS);
+//		 Graphics g = thumbnail.getGraphics();
+//         g.drawImage(thumbnail, 0, 0, null); // 绘制截取后的图
+//         g.dispose();
+//         // 输出为文件
+//         ImageIO.write(thumbnail, "JPEG", new File("E:/notes/picture/24.jpg"));
 		return thumbnail;
 		}
 	
@@ -107,7 +109,7 @@ public class UpdatePicture {
 	
 //	public static void main(String[] args) throws FileNotFoundException, IOException {
 //		BufferedImage img = ImageIO.read(new File("E:/notes/picture/activeMq.jpg"));
-//		sdg(img,200, 100,645,610);
+//		createThumbnail("E:/notes/picture/activeMq.jpg",200);
 //      System.out.println("切割成功");
 //  }
 	

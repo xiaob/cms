@@ -78,11 +78,16 @@
 
 	<select id="getFileListByType" resultType="com.shishuo.cms.entity.File">
 		select * from file
-		where type=#{type} and status=#{status} limit #{offset},#{rows}
+		where type=#{type} and status=#{status} order by createTime desc limit #{offset},#{rows} 
 	</select>
 
 	<select id="getFileListByTypeCount" resultType="Integer">
 		select count(*)
 		from file where type=#{type} and status=#{status}
+	</select>
+	
+	<select id="getArticleByPicture" 
+		resultType="com.shishuo.cms.entity.File">
+		select * from file where type=#{type} and picture=#{picture}
 	</select>
 </mapper>  

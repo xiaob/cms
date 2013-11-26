@@ -1,5 +1,3 @@
-      <div class="col-lg-3">
-                <div class="blog-side-item">
                     <div class="search-row">
                         <input type="text" placeholder="Search here" class="form-control">
                     </div>

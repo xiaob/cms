@@ -46,9 +46,7 @@
                                   <div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">文章图片</label>
 									<div class="col-sm-10">
-										<input type="radio" name="picture" value="NO_EXIST"/>NO_EXIST
-										<input type="radio" name="picture" value="EXIST"/>EXIST
-										<input />
+										<input type="file" id="link" name= "link"/>
 									</div>
 								  </div>
                                   <div class="form-group">
@@ -85,6 +83,7 @@
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
+					alert(data.msg);
 					bootbox.alert("保存成功，将刷新页面", function() {
 						window.location.reload();
 					});
