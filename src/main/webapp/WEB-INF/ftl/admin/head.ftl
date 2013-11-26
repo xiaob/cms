@@ -8,7 +8,7 @@
 <meta name="keyword"
 	content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <link rel="shortcut icon" href="img/favicon.png">
-<title>${configMap.sitename} - 后台</title>
+<title>${configMap.sys_sitename} - 后台</title>
 <!-- Bootstrap core CSS -->
 <link href="${basePath}/system/css/bootstrap.min.css" rel="stylesheet">
 <link href="${basePath}/system/css/bootstrap-reset.css"
@@ -86,8 +86,8 @@
 						<a href="javascript:;" <#if menu="article">class="active"</#if>> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
 							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/article/add">增加文章</a></li>
-							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/article/articleList">文章列表</a></li>
-							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/recycleList">回收站</a></li>
+							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/article/list">文章列表</a></li>
+							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/recycle/list">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu">
@@ -97,7 +97,7 @@
 							<li <#if submenu="auditing_list_comment">class="active"</#if>><a href="${basePath}/admin/comment/auditing/list">审核评论列表</a></li>
 						</ul>
 					</li>
-					<#if configMap.function_photo=="on">
+					<#if configMap.sys_function_photo=="on">
 					<li class="sub-menu ">
 						<a href="javascript:;" > <i class="icon-camera-retro"></i> <span>图片管理</span></a>
 						<ul class="sub">
@@ -107,7 +107,7 @@
 						</ul>
 					</li>
 					</#if>
-					<#if configMap.function_download=="on">
+					<#if configMap.sys_function_download=="on">
 					<li class="sub-menu ">
 						<a href="javascript:;" > <i class="icon-upload-alt"></i> <span>下载管理</span></a>
 						<ul class="sub">
@@ -118,7 +118,7 @@
 						</ul>
 					</li>
 					</#if>
-					<#if configMap.function_shop=="on">					
+					<#if configMap.sys_function_shop=="on">					
 					<li class="sub-menu ">
 						<a href="javascript:;" > <i class="icon-gift"></i> <span>商品管理</span></a>
 						<ul class="sub">
@@ -144,9 +144,9 @@
 						<ul class="sub">
 							<li <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
 							<li <#if submenu="add_admin">class="active"</#if>><a href="${basePath}/admin/admin/add">添加管理员</a></li>
-							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/allList">管理员列表</a></li>
+							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/all">管理员列表</a></li>
 							<li <#if submenu="add_user">class="active"</#if>><a href="${basePath}/admin/user/add">添加用户</a></li>
-							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/allList">用户列表</a></li>
+							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/all">用户列表</a></li>
 						</ul>
 					</li>
 				</ul>
