@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.FileConstant;
+import com.shishuo.cms.constant.FileConstant.Picture;
 import com.shishuo.cms.dao.FileDao;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.File;
@@ -325,6 +326,17 @@ public class FileService {
 	 */
 	public void updateCommentCount(long fileId, int commentCount) {
 		fileDao.updateCommentCount(fileId, commentCount + 1);
+	}
+	
+	public PageVo<File> getNewActicle(Picture picture){
+		 PageVo<File> pageFile = new PageVo<File>(1);
+		 if(picture.name().equals("exist")){
+			 pageFile.setRows(3);
+			 List<File> fileList = this.getFileListByType(FileConstant.Type.article,
+					                      FileConstant.Status.display,pageFile.getOffset(),pageFile.getRows());
+			 pageFile.setList(fileList);
+		 }
+		 return pageFile;
 	}
 
 }

@@ -5,7 +5,7 @@
                      Powered by <a href="http://cms.shishuo.com">师说CMS</a> | UI Designed by <a href="http://www.shishuo.com">师说</a>
                  </div>
                  <div class="col-lg-7 col-sm-7 pull-right" style="text-align: right;">
-                 	最近的微博动态
+                 	
                  </div>
              </div>
          </div>

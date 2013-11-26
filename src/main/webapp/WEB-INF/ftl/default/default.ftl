@@ -50,7 +50,11 @@
 	              </div>
                 </@cms_file_page>
             </div>
-            <#include "right.ftl">
+            <div class="col-lg-3">
+              <div class="blog-side-item">
+              <#include "right.ftl">
+              </div>
+            </div>
             <!--blog end-->
         </div>
     </div>

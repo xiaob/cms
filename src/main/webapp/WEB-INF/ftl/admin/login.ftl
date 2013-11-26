@@ -64,9 +64,6 @@ input.error:focus {
             <div>
                 <p class="error" for="captcha" style="display:none;"></p>
             </div>
-            <label class="checkbox">
-                <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
-            </label>
             <button class="btn btn-lg btn-login btn-block" type="submit">登录</button>
         </div>
       </form>
