@@ -51,8 +51,8 @@ public interface CommentDao {
 	 * @param rows
 	 * @return
 	 */
-	public List<CommentVo> getCommentListByFatherId(@Param("fileId") long fileId,
-			@Param("fatherId") long fatherId,
+	public List<CommentVo> getCommentListByFatherId(
+			@Param("fileId") long fileId, @Param("fatherId") long fatherId,
 			@Param("status") CommentConstant.Status status,
 			@Param("offset") long offset, @Param("rows") long rows);
 

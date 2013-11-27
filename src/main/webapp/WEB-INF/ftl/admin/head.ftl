@@ -138,6 +138,13 @@
 							<li><a href="nestable.html">Nestable</a></li>
 							<li><a href="font_awesome.html">Font Awesome</a></li>
 						</ul>
+					</li>
+					<li class="sub-menu ">
+						<a href="javascript:;" <#if menu="user">class="active"</#if>> <i class="icon-signin"></i> <span>用户管理</span></a>
+						<ul class="sub">
+							<li <#if submenu="add_user">class="active"</#if>><a href="${basePath}/admin/user/add">添加用户</a></li>
+							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/all">用户列表</a></li>
+						</ul>
 					</li>																	
 					<li class="sub-menu ">
 						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>系统管理</span></a>
@@ -145,8 +152,6 @@
 							<li <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
 							<li <#if submenu="add_admin">class="active"</#if>><a href="${basePath}/admin/admin/add">添加管理员</a></li>
 							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/all">管理员列表</a></li>
-							<li <#if submenu="add_user">class="active"</#if>><a href="${basePath}/admin/user/add">添加用户</a></li>
-							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/all">用户列表</a></li>
 						</ul>
 					</li>
 				</ul>
