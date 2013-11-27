@@ -1,9 +1,14 @@
-![师说CMS](/src/main/webapp/default/images/logo.png "师说CMS")
+![师说CMS](/src/main/webapp/system/images/logo.png "师说CMS")
 
-# 欢迎使用 “师说CMS”
+## 欢迎使用 “师说CMS”
 
 > 一款使用Java语言开发的CMS，提供文章列表，图片展示，文件下载和电子商务
 
+## 演示地址
+
+**前台演示： **http://42.121.56.21:8080/
+
+**后台演示： **http://42.121.56.21:8080/auth/admin/login
 
 ## 前言
 
@@ -11,7 +16,20 @@
 
 ## 安装
 
-
+	# 下载代码
+	git clone http://git.oschina.net/shishuo/CMS.git
+	# 进入CMS目录
+	cd CMS
+	# 清理
+	mvn clean
+	# 编译
+	mvn compile
+	# 修改数据库配置文件
+	vi src/main/resources/shishuocms.properties
+	# 安装
+	mvn exec:java -Dexec.mainClass="com.shishuo.cms.Install"
+	# 运行
+	mvn jetty:run
 
 ## 目标
 
