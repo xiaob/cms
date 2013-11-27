@@ -108,8 +108,6 @@ public class AdminConfigAction extends AdminBaseAction {
 			configSevice.updagteConfigByKey("sys_function_download",
 					function_download);
 			configSevice.updagteConfigByKey("sys_function_shop", function_shop);
-
-			configSevice.refreshConfigMap();
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

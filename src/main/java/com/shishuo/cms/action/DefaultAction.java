@@ -61,9 +61,9 @@ public class DefaultAction {
 			Folder currentFolder = folderService.getFolderById(1);
 			modelMap.addAttribute("currentFolder", currentFolder);
 			modelMap.addAttribute("pageNum", pageNum);
-			return ConfigConstant.getTemplatePath() + "/default";
+			return configService.getTemplatePath() + "/default";
 		} catch (Exception e) {
-			return ConfigConstant.getTemplatePath() + "/500";
+			return configService.getTemplatePath() + "/500";
 		}
 	}
 
@@ -80,7 +80,7 @@ public class DefaultAction {
 		Folder currentFolder = folderService.getFolderByEname(ename);
 		modelMap.addAttribute("currentFolder", currentFolder);
 		modelMap.addAttribute("pageNum", pageNum);
-		return ConfigConstant.getTemplatePath() + "/"
+		return configService.getTemplatePath() + "/"
 				+ currentFolder.getTemplate();
 	}
 

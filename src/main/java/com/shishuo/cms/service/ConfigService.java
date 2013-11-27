@@ -19,17 +19,16 @@
 package com.shishuo.cms.service;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.dao.ConfigDao;
 import com.shishuo.cms.entity.Config;
 import com.shishuo.cms.entity.vo.PageVo;
+import com.shishuo.cms.util.MemcacheMapUtil;
 
 /**
  * 网站配置
@@ -40,10 +39,22 @@ import com.shishuo.cms.entity.vo.PageVo;
 @Service
 public class ConfigService {
 
-	public static HashMap<String, String> CONFIG_MAP = new HashMap<String, String>();
-
 	@Autowired
 	private ConfigDao configDao;
+
+	/**
+	 * 得到当前模板路径
+	 * 
+	 * @return
+	 */
+	public String getTemplatePath() {
+		Config config = this.getConfigByKey(ConfigConstant.SYS_TEMPLATE, false);
+		if (config == null) {
+			return "/" + ConfigConstant.DEFAUTL_TEMPLATE;
+		} else {
+			return "/" + config.getValue();
+		}
+	}
 
 	/**
 	 * 增加配置
@@ -83,6 +94,7 @@ public class ConfigService {
 		Config config = configDao.getConfigByKey(key);
 		config.setValue(value);
 		configDao.updateConfig(config);
+		this.getConfigByKey(key, true);
 		return config;
 	}
 
@@ -124,23 +136,20 @@ public class ConfigService {
 	}
 
 	/**
-	 * 得到所有配置
-	 * 
+	 * @param key
 	 * @return
 	 */
-	public List<Config> getAllConfig() {
-		return configDao.getAllConfig();
-	}
-
-	/**
-	 * 刷新内存中的系统配置数据
-	 */
-	@PostConstruct
-	public void refreshConfigMap() {
-		List<Config> list = this.getAllConfig();
-		for (Config config : list) {
-			CONFIG_MAP.put(config.getKey(), config.getValue());
+	public Config getConfigByKey(String key, boolean refresh) {
+		Config config = (Config) MemcacheMapUtil.get(MemcacheMapUtil.createKey(
+				"config_", key));
+		if (config == null || refresh) {
+			config = configDao.getConfigByKey(key);
+			if (config != null) {
+				MemcacheMapUtil.set(key, config);
+			}
 		}
+		return config;
 
 	}
+
 }

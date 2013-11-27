@@ -18,11 +18,7 @@
  */
 package com.shishuo.cms.constant;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-
-import com.shishuo.cms.exception.ConfigIsNullException;
-import com.shishuo.cms.service.ConfigService;
 
 /**
  * 系统配置常量
@@ -37,35 +33,11 @@ public class ConfigConstant {
 	 */
 	public static String DEFAUTL_TEMPLATE = "defalut";
 
-	public static String KEY_TEMPLATE = "sys_template";
-
-	/**
-	 * 得到当前模板路径
-	 * 
-	 * @return
-	 */
-	public static String getTemplatePath() {
-		try {
-			return "/" + getConfigValueByKey(KEY_TEMPLATE);
-		} catch (ConfigIsNullException e) {
-			return "/" + DEFAUTL_TEMPLATE;
-		}
-	}
-
-	/**
-	 * 根据key，获得对应的系统配置的值
-	 * 
-	 * @param key
-	 * @return
-	 * @throws ConfigIsNullException
-	 */
-	public static String getConfigValueByKey(String key)
-			throws ConfigIsNullException {
-		String value = ConfigService.CONFIG_MAP.get(key);
-		if (StringUtils.isBlank(value)) {
-			throw new ConfigIsNullException(key + " is NULL");
-		} else {
-			return value;
-		}
-	}
+	public static String SYS_FUNCTION_DOWNLOAD = "sys_function_download";
+	public static String SYS_FUNCTION_PHOTO = "sys_function_photo";
+	public static String SYS_FUNCTION_SHOP = "sys_function_shop";
+	public static String SYS_SITEDESC = "sys_sitedesc";
+	public static String SYS_SITENAME = "sys_sitename";
+	public static String SYS_TEMPLATE = "sys_template";
+	
 }
