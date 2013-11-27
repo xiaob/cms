@@ -25,13 +25,12 @@
                                 <img src="${basePath}/upload/${file.fileId}_big.jpg" alt=""/>
                             </div>
                             </#if>
-                            <h1><a href="${basePath}/${currentFolder.ename}/${file.fileId}">${file.name}</a></h1>
+                            <h1><a href="${basePath}/${currentFolder.ename}/${file.fileId}"><b>${file.name}</b></a></h1>
                             <div class="author">
-                               	作者：<a>${file.admin.name}</a> | 时间：${file.createTime?string("yyyy-MM-dd HH:mm")} | 浏览数：${file.viewCount}
+                               	作者：<a>${file.admin.name}</a> | 浏览数：${file.viewCount}
                             </div>
                             <hr>
                             <p>${file.content}</p>
-                            <a href="${basePath}/${currentFolder.ename}/${file.fileId}" class="btn btn-danger">瞧一瞧</a>                           
                         </div>
                     </div>
                 </div>

@@ -29,9 +29,9 @@
                                 <img src="${basePath}/upload/${file.fileId}_big.jpg" alt=""/>
                             </div>
                             </#if>
-                            <h1>${file.name}</h1>
+                            <h1><b>${file.name}</b></h1>
                             <div class="author">
-                               	作者：<a>${file.admin.name}</a> | 时间：${file.createTime?string("yyyy-MM-dd HH:mm")} | 浏览数：${file.viewCount}
+                               	作者：<a>${file.admin.name}</a> | 浏览数：${file.viewCount}
                             </div>
                             <hr>                            
                             <p>${file.content}</p>
