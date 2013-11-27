@@ -54,7 +54,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	@RequestMapping(value = "/auditing/list", method = RequestMethod.GET)
 	public String auditingList(ModelMap modelMap,
 			@RequestParam(value="pageNum",defaultValue="1") int pageNum){
-		modelMap.put("pageVo", commentService.getCommentByStatusPage(pageNum, 0));
+		modelMap.put("pageVo", commentService.getCommentByStatusPage(pageNum, CommentConstant.Status.DISABLE));
 		return "admin/comment/auditingList";
 	}
 	
@@ -63,9 +63,9 @@ public class AdminCommentAction extends AdminBaseAction{
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/auditing", method = RequestMethod.POST)
+	@RequestMapping(value = "/auditing/{commentId}", method = RequestMethod.POST)
 	public String auditingComment(
-			@RequestParam(value="commentId") long commentId){
+			@PathVariable long commentId){
 		commentService.updateCommentStatus(commentId, CommentConstant.Status.DISPLAY);
 		return "redirect:/admin/comment/all";
 	}

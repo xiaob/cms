@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="getAllList" parameterType="long"
-		resultType="com.shishuo.cms.entity.vo.CommentVo">
+		resultType="com.shishuo.cms.entity.Comment">
 		select * from `comment` limit #{offset},#{rows}
 	</select>
 	

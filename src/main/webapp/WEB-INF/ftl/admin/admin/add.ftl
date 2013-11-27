@@ -40,17 +40,17 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
+                                      <label class="col-sm-2 col-sm-2 control-label">管理员邮箱</label>
+                                      <div class="col-sm-10">
+                                          <input type="text" class="form-control" name="email"
+                                          	placeholder="管理员邮箱" id="email" vaule="${email}">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">密码</label>
                                       <div class="col-sm-10">
                                           <input type="text" class="form-control" name="password"
                                           	placeholder="管理员密码" value="111111">
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">状态</label>
-                                      <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="status"
-                                          	placeholder="管理员状态" value="INIT">
                                       </div>
                                   </div>
                                   <div class="form-group">

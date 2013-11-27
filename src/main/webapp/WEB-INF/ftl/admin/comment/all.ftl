@@ -36,7 +36,21 @@
                                     	<td>${commentVo.name}</td>
                                     	<td>${commentVo.content}</td>
                                     	<td>${commentVo.status}</td>
-                                    	
+                                    	<td>
+                                    		<#if commentVo.status=="DISABLE">
+                                    		<a href="/CMS/admin/comment/auditing/${commentVo.commentId}" title="审核">
+                                    			<button class="btn btn-success btn-xs">
+                  									<i class="icon-ok"></i>
+                  								</button>
+                                    		</a>
+                                    		<#else>
+                                    		<a href="/CMS/admin/comment/cancel/${commentVo.commentId}" title="撤销审核">
+                                    			<button class="btn btn-danger btn-xs">
+                  									<i class="icon-trash "></i>
+                  								</button>
+                                    		</a>
+                                    		</#if>
+                                    	</td>
                                 	</tr>
                                 	</#list>
                                	</tbody>

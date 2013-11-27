@@ -149,10 +149,11 @@ public class AdminArticleAction extends AdminBaseAction {
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
 	public JsonVo<String> updateArticle(
 			@RequestParam(value = "fileName") String fileName,
-			@RequestParam(value = "url") String url,
 			@RequestParam(value = "folderId") long folderId,
+			@RequestParam(value = "adminId") long adminId,
 			@RequestParam(value = "fileId") long fileId,
-			@RequestParam(value = "images") String images,
+			@RequestParam(value = "picture") FileConstant.Picture picture,
+			@RequestParam(value = "status") FileConstant.Status status,
 			@RequestParam(value = "content") String content) {
 
 		JsonVo<String> json = new JsonVo<String>();
@@ -160,21 +161,14 @@ public class AdminArticleAction extends AdminBaseAction {
 			if (fileName.equals("")) {
 				json.getErrors().put("fileName", "文章名称不能为空");
 			}
-			if (url.equals("")) {
-				json.getErrors().put("url", "文章链接不能为空");
-			}
-			if (images.equals("")) {
-				json.getErrors().put("images", "文章图片不能为空");
-			}
 			if (content.equals("")) {
 				json.getErrors().put("content", "文章内容不能为空");
 			}
 
 			// 检测校验结果
 			validate(json);
-			// fileService.updateFileById(fileId, folderId, fileName, url,
-			// images,
-			// description, 0);
+			 fileService.updateFileById(fileId, folderId, adminId,picture,fileName,
+			 content, FileConstant.Type.article,status);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -213,7 +207,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteFile(@RequestParam(value = "fileId") long fileId) {
 		fileService.deleteFileById(fileId);
-		return "redirect:/admin/article/recycle";
+		return "redirect:/admin/article/recycle/list";
 	}
 
 }

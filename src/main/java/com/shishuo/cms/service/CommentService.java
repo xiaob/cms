@@ -122,7 +122,7 @@ public class CommentService {
 	 * @param rows
 	 * @return List<CommentVo>
 	 */
-	public List<CommentVo> getAllList(long offset, long rows){
+	public List<Comment> getAllList(long offset, long rows){
 		return commentDao.getAllList(offset, rows);
 	}
 	
@@ -139,11 +139,11 @@ public class CommentService {
 	 * @param pageNum
 	 * @return PageVo<CommentVo>
 	 */
-	public PageVo<CommentVo> getAllListPage(int pageNum){
-		PageVo<CommentVo> pageVo = new PageVo<CommentVo>(pageNum);
+	public PageVo<Comment> getAllListPage(int pageNum){
+		PageVo<Comment> pageVo = new PageVo<Comment>(pageNum);
 		pageVo.setUrl("/CMS/admin/comment/all?");
 		pageVo.setRows(5);
-		List<CommentVo> list = this.getAllList(pageVo.getOffset(), pageVo.getRows());
+		List<Comment> list = this.getAllList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
 		pageVo.setCount(this.getAllListCount());
 		return pageVo;
@@ -156,7 +156,7 @@ public class CommentService {
 	 * @param status
 	 * @return List<CommentVo>
 	 */
-	public List<CommentVo> getCommentByStatus(long offset,long rows, int status){
+	public List<CommentVo> getCommentByStatus(long offset,long rows, CommentConstant.Status status){
 		return commentDao.getCommentByStatus(offset, rows, status);
 	}
 	
@@ -165,7 +165,7 @@ public class CommentService {
 	 * @param status
 	 * @return Integer
 	 */
-	public int getCommentByStatusCount(int status){
+	public int getCommentByStatusCount(CommentConstant.Status status){
 		return commentDao.getCommentByStatusCount(status);
 	}
 	
@@ -175,7 +175,7 @@ public class CommentService {
 	 * @param status
 	 * @return PageVo<CommentVo>
 	 */
-	public PageVo<CommentVo> getCommentByStatusPage(int pageNum,int status){
+	public PageVo<CommentVo> getCommentByStatusPage(int pageNum,CommentConstant.Status status){
 		PageVo<CommentVo> pageVo =  new PageVo<CommentVo>(pageNum);
 		pageVo.setUrl("");
 		pageVo.setRows(5);

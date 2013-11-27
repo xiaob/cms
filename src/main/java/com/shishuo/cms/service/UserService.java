@@ -99,9 +99,10 @@ public class UserService {
 	 * @param userId
 	 * @return user
 	 */
-	public User updateUser(long userId, UserConstant.Type type, String name) {
+	public User updateUser(long userId, long openId,UserConstant.Type type, String name) {
 		User user = this.getUserById(userId);
 		user.setType(type);
+		user.setOpenId(openId);
 		user.setName(name);
 		userDao.updateUser(user);
 		return user;

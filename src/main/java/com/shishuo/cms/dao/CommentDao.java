@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.shishuo.cms.constant.CommentConstant;
 import com.shishuo.cms.entity.Comment;
 import com.shishuo.cms.entity.vo.CommentVo;
 
@@ -74,7 +75,7 @@ public interface CommentDao {
 	 * @param rows
 	 * @return List<CommentVo>
 	 */
-	public List<CommentVo> getAllList(@Param("offset") long offset,@Param("rows") long rows);
+	public List<Comment> getAllList(@Param("offset") long offset,@Param("rows") long rows);
 	
 	/**
 	 * 获得所有评论的数量
@@ -89,13 +90,13 @@ public interface CommentDao {
 	 * @param status
 	 * @return Integer
 	 */
-	public List<CommentVo> getCommentByStatus(@Param("offset") long offset,@Param("rows") long rows,@Param("status")int status);
+	public List<CommentVo> getCommentByStatus(@Param("offset") long offset,@Param("rows") long rows,@Param("status")CommentConstant.Status status);
 	
 	/**
 	 * 获得某状态下的评论数量
 	 * @param status
 	 * @return Integer
 	 */
-	public int getCommentByStatusCount(@Param("status")int status);
+	public int getCommentByStatusCount(@Param("status")CommentConstant.Status status);
 	  
 }

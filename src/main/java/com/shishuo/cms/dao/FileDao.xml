@@ -33,7 +33,7 @@
 
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
 		update file set
-		folderId=#{folderId},name=#{name},picture=#{picture}
+		folderId=#{folderId},name=#{name},picture=#{picture},
 		content=#{content},status=#{status}
 		where fileId=#{fileId}
 	</update>

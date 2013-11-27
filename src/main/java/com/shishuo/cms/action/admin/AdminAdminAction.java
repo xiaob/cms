@@ -47,6 +47,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addUser(ModelMap modelMap) {
 		modelMap.put("adminName", "");
+		modelMap.put("email", "");
 		return "admin/admin/add";
 	}
 
@@ -58,17 +59,20 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/addNew.json", method = RequestMethod.POST)
 	public JsonVo<String> addNewUser(
 			@RequestParam(value = "adminName") String adminName,
-			@RequestParam(value = "password") String password,
-			@RequestParam(value = "status") AdminConstant.Status status) {
+			@RequestParam(value = "email") String email,
+			@RequestParam(value = "password") String password) {
 
 		JsonVo<String> json = new JsonVo<String>();
 		try {
 			if (adminName.equals("")) {
 				json.getErrors().put("adminName", "管理员名称不能为空");
 			}
+			if (email.equals("")) {
+				json.getErrors().put("email", "管理员邮箱不能为空");
+			}
 			// 检测校验结果
 			validate(json);
-			adminService.addAdmin("email", adminName, password,AdminConstant.Status.INIT);
+			adminService.addAdmin(email, adminName, password,AdminConstant.Status.INIT);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
