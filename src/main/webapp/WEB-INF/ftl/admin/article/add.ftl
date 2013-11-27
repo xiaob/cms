@@ -44,12 +44,6 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">文章图片</label>
-									<div class="col-sm-10">
-										<input type="file" id="link" name= "link"/>
-									</div>
-								  </div>
-                                  <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
                                       <div class="col-sm-10">
                                           <textarea id="content" name="content" placeholder="文章内容">
@@ -83,8 +77,29 @@
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-					bootbox.alert("保存成功，将刷新页面", function() {
-						window.location.reload();
+					bootbox.dialog({
+  						message: '<form enctype="multipart/form-data" id="add_article_picture_form" method="post" autocomplete="off" action="${basePath}/admin/article/addPicture.json"><fieldset><input type="file" id="file" name= "file" value=""/></fieldset></form>',
+  						title: "是否上传文章图片",
+  						buttons: {
+    						success: {
+      							label: "上传",
+      							className: "btn-success",
+      							callback: function() {
+        							$('#add_article_picture_form').ajaxSubmit({
+										dataType : 'json',
+										success : function(data) {
+											if (data.result) {
+												bootbox.alert("保存成功，将刷新页面", function() {
+													window.location.reload();
+												});
+											}else{
+												showErrors($('#add_article_picture_form'),data.errors);
+											}
+										}
+									});
+      							}
+    						},
+  						}
 					});
 				}else{
 					showErrors($('#add_article_form'),data.errors);

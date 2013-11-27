@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.style.DefaultValueStyler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.shishuo.cms.action.DefaultAction;
 import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.constant.UpdatePictureConstant;
@@ -107,7 +105,7 @@ public class AdminArticleAction extends AdminBaseAction {
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "content") String content,
-			@RequestParam(value ="link",defaultValue="-1.jpg") MultipartFile link,
+//			@RequestParam(value ="file",required = false) MultipartFile file,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -116,22 +114,52 @@ public class AdminArticleAction extends AdminBaseAction {
 			}
 			// 检测校验结果
 			validate(json);
+			fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
+					FileConstant.Picture.no_exist, name, content,
+					FileConstant.Type.article, FileConstant.Status.display);
+//			if(file.equals("")){
+//				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
+//						FileConstant.Picture.no_exist, name, content,
+//						FileConstant.Type.article, FileConstant.Status.display);
+//			}else{
+//				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
+//				List<File> list = fileService.getArticleByPicture(FileConstant.Type.article, FileConstant.Picture.exist);
+//				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
+//						FileConstant.Picture.exist, name, content,
+//						FileConstant.Type.article, FileConstant.Status.display);
+//				String path = webroot+"/upload/article/"+list.get(list.size()-1).getFileId()+".jpg";
+//				java.io.File source = new java.io.File(path);
+//				file.transferTo(source);
+//				updatePictureConstant.updatePicture(list.get(list.size()-1).getFileId(), path);
+//			}
+			json.setResult(true);
 			
-			if(link.equals("-1.jpg")){
-				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-						FileConstant.Picture.no_exist, name, content,
-						FileConstant.Type.article, FileConstant.Status.display);
-			}else{
+		} catch (Exception e) {
+			json.setResult(false);
+			json.setMsg(e.getMessage());
+		}
+		return json;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/addPicture.json", method = RequestMethod.POST)
+	public JsonVo<String> addPicture(
+			@RequestParam(value ="file",required = false) MultipartFile file,
+			HttpServletRequest request) {
+		JsonVo<String> json = new JsonVo<String>();
+		try {
+			// 检测校验结果
+			validate(json);
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
 				List<File> list = fileService.getArticleByPicture(FileConstant.Type.article, FileConstant.Picture.exist);
-				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-						FileConstant.Picture.exist, name, content,
+				File article = list.get(list.size()-1);
+				fileService.addFile(article.getFolderId(), this.getAdmin(request).getAdminId(),
+						FileConstant.Picture.exist, article.getName(), article.getContent(),
 						FileConstant.Type.article, FileConstant.Status.display);
-				String path = webroot+"/upload/article/"+list.get(list.size()-1).getFileId()+".jpg";
+				String path = webroot+"/upload/article/"+article.getFileId()+".jpg";
 				java.io.File source = new java.io.File(path);
-				link.transferTo(source);
-				updatePictureConstant.updatePicture(list.get(list.size()-1).getFileId(), path);
-			}
+				file.transferTo(source);
+				updatePictureConstant.updatePicture(article.getFileId(), path);
 			json.setResult(true);
 			
 		} catch (Exception e) {
