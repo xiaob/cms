@@ -51,8 +51,8 @@
                   <!-- user login dropdown start-->
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                          <img src="${basePath}/system/img/avatar.png" style="width:29;height:29px;" alt="">
-                          <span class="username">Jhon Doue</span>
+                          <img src="${SESSION_ADMIN.faceUrl}" style="width:29;height:29px;" alt="">
+                          <span class="username">${SESSION_ADMIN.name}</span>
                           <b class="caret"></b>
                       </a>
                       <ul class="dropdown-menu extended logout">

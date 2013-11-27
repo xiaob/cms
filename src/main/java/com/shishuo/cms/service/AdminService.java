@@ -31,6 +31,7 @@ import com.shishuo.cms.constant.AdminConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.AdminDao;
 import com.shishuo.cms.entity.Admin;
+import com.shishuo.cms.entity.vo.AdminVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.AuthException;
 import com.shishuo.cms.util.AuthUtils;
@@ -55,8 +56,8 @@ public class AdminService {
 	 * @param password
 	 * @return Admin
 	 */
-	public Admin addAdmin(String email, String name, String password,AdminConstant.Status status)
-			throws AuthException {
+	public Admin addAdmin(String email, String name, String password,
+			AdminConstant.Status status) throws AuthException {
 		email = email.toLowerCase();
 		Admin admin = new Admin();
 		admin.setName(name);
@@ -77,10 +78,11 @@ public class AdminService {
 	 */
 	public void adminLogin(String email, String password,
 			HttpServletRequest request) throws AuthException {
-		Admin admin = adminDao.getAdminByEmail(email);
+		AdminVo admin = adminDao.getAdminByEmail(email);
 		if (admin == null) {
 			throw new AuthException("没有此用户");
 		}
+		admin.setFaceUrl(AuthUtils.getFaceUrl(admin.getEmail()));
 		String loginPassword = AuthUtils.getPassword(password, email);
 		if (loginPassword.equals(admin.getPassword())) {
 			HttpSession session = request.getSession();

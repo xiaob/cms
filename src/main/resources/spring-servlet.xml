@@ -42,7 +42,7 @@
 				<entry key="cms_file_page" value-ref="filePageTag" /><!-- 文件分页标签 -->
 				<entry key="cms_file" value-ref="fileTag" /><!-- 单个文件标签 -->
 				<!-- 评论标签 -->
-				<entry key="cms_comment_list" value-ref="commentTag"></entry><!-- 评论标签 -->
+				<entry key="cms_comment_page" value-ref="commentPageTag"></entry><!-- 评论标签 -->
 			</map>
 		</property>
 		<property name="freemarkerSettings">

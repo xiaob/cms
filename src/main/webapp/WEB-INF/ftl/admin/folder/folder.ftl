@@ -66,10 +66,10 @@
                                       <label class="col-sm-2 col-sm-2 control-label">目录类型</label>
                                       <div class="col-sm-10">
                                       	<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="type"> 	
-                                        	<option value= "ARTICLE">文章</option>
-                                          	<option value= "DOWNLOAD">下载</option>
-                                          	<option value= "SHOP">商品</option>
-                                          	<option value= "PHOTO">图片</option>
+                                        	<option value= "article">文章</option>
+                                          	<option value= "photo">图片</option>
+                                          	<option value= "download">下载</option>
+                                          	<option value= "shop">商品</option>
                                         </select>
                                       </div>
                                   </div>
@@ -77,10 +77,10 @@
 									<label class="col-sm-2 col-sm-2 control-label">目录等级</label>
 									<div class="col-sm-10">
 										<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="rank">
-											<option value= "EVERYONE">EVERYONE</option>
-											<option value= "LOGIN">LOGIN</option>
-											<option value= "VIP">VIP</option>
-											<option value= "ADMIN">ADMIN</option>
+											<option value= "everyone">everyone</option>
+											<option value= "login">login</option>
+											<option value= "vip">vip</option>
+											<option value= "admin">admin</option>
 										</select>
 									</div>
 								  </div>
@@ -88,8 +88,8 @@
                                       <label class="col-sm-2 col-sm-2 control-label">目录状态</label>
                                       <div class="col-sm-10">
                                       	<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="status"> 	
-                                        	<option value= "HIDDEN">隐藏</option>
-                                          	<option value= "DISPLAY">显示</option>
+                                        	<option value= "hidden">隐藏</option>
+                                          	<option value= "display">显示</option>
                                         </select>
                                       </div>
                                   </div>

@@ -26,7 +26,7 @@ public class PageVo<T> {
 	private int pageNum;
 	private int count;
 	private int offset;
-	private int rows = 5;
+	private int rows;
 	private List<T> list;
 	private String url;
 	private String pageNumHtml;
@@ -109,9 +109,17 @@ public class PageVo<T> {
 		}
 		// 页码
 		if (this.getPageCount() != 1) {
-			for (int i = 1; i <= this.getPageCount(); i++) {
+			int startNum = this.getPageNum() - 3 <= 1 ? 1
+					: this.getPageNum() - 3;
+			int endNum = this.getPageNum() + 3 >= this.getPageCount() ? this
+					.getPageCount() : this.getPageNum() + 3;
+			if (startNum > 1) {
+				sb.append("<li><a href='javascript:void(0);'>...</a></li>");
+			}
+			for (int i = startNum; i <= endNum; i++) {
 				if (i == pageNum) {
-					sb.append("<li class='active'><a   href='" + this.getUrl() + "pageNum=" + i
+					sb.append("<li class='active'><a   href='" + this.getUrl()
+							+ "pageNum=" + i
 							+ "' class='number current' title='" + i + "'>" + i
 							+ "</a></li>");
 				} else {
@@ -119,7 +127,9 @@ public class PageVo<T> {
 
 					+ "' class='number' title='" + i + "'>" + i + "</a></li>");
 				}
-
+			}
+			if (endNum < this.getPageCount()) {
+				sb.append("<li><a href='javascript:void(0);'>...</a></li>");
 			}
 		}
 		// 下一页，尾页

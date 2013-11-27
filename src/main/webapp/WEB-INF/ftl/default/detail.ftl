@@ -24,35 +24,26 @@
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-10">
+                        	<#if file.picture =="exist">
                             <div class="blog-img">
-                                <img src="${basePath}/default/img/blog/img1.jpg" alt=""/>
+                                <img src="${basePath}/upload/${file.fileId}_big.jpg" alt=""/>
                             </div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2 col-sm-2 text-right">
-                            <div class="author">
-                                作者 <a >${file.admin.name}</a>
-                            </div>
-                            <div class="shate-view">
-                                <ul class="list-unstyled">
-                                    <li><a >浏览人数:${file.viewCount}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-10 col-sm-10">
+                            </#if>
                             <h1>${file.name}</h1>
+                            <div class="author">
+                               	作者：<a>${file.admin.name}</a> | 时间：${file.createTime?string("yyyy-MM-dd HH:mm")} | 浏览数：${file.viewCount}
+                            </div>
+                            <hr>                            
                             <p>${file.content}</p>
-                            <@cms_comment_list fileId = "${fileId}">
-                            <#list commentVoList as comment>
+                            <@cms_comment_page fileId="${fileId}" pageNum="${pageNum}" rows="10">
+                            <#list commentPage.list as comment>
                             <div class="media">
                              <#if  comment_index ==0>
                                 <h3>评论</h3>
                                 <hr>
                              </#if>
                                 <a href="javascript:;" class="pull-left">
-                                    <img alt="" src="${basePath}/default/img/avatar.png" class="media-object">
+                                    <img alt="" src="${comment.faceUrl}" class="media-object">
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading">
@@ -68,7 +59,7 @@
                                     <#list comment.childComment as child>
                                     <div class="media">
                                         <a href="javascript:;" class="pull-left">
-                                            <img alt="" src="${basePath}/default/img/avatar2.jpg" class="media-object">
+                                            <img alt="" src="${child.faceUrl}" class="media-object">
                                         </a>
                                         <div class="media-body">
                                             <h4 class="media-heading">
@@ -87,7 +78,7 @@
                                 </div>
                             </div>
                             </#list>
-                            </@cms_comment_list>
+                            </@cms_comment_page>
                                 <div class="post-comment">
 	                                <h3 class="skills">发布评论</h3>
 	                                <form role="form" class="form-horizontal" id="comment_form" action="${basePath}/comment/add" method="post">

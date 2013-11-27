@@ -103,7 +103,8 @@ public class AdminUserAction extends AdminBaseAction{
 	@ResponseBody
 	@RequestMapping(value = "/update.json",method = RequestMethod.POST)
 	public JsonVo<String> updateAdmin(@RequestParam(value = "userName") String userName,
-			@RequestParam(value = "userId") long userId){
+			@RequestParam(value = "userId") long userId,
+			@RequestParam(value = "openId") long openId){
 		JsonVo<String> json = new JsonVo<String>();	
 		try {
 			if(userName.equals("")){
@@ -111,7 +112,7 @@ public class AdminUserAction extends AdminBaseAction{
 			}
 			// 检测校验结果
 			validate(json);
-			userService.updateUser(userId, UserConstant.Type.SHISHUO, userName);
+			userService.updateUser(userId,openId, UserConstant.Type.SHISHUO, userName);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

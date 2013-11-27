@@ -4,7 +4,7 @@
         <div class="row">
             <!--blog start-->
             <div class="col-lg-9 ">
-            <@cms_file_page type="0" folderId="${currentFolder.folderId}" pageNum="${pageNum}">
+            <@cms_file_page type="article" folderId="${currentFolder.folderId}" pageNum="${pageNum}" rows="10">
                <#list pageVo.list as file>
                 <div class="blog-item">
                     <div class="row">
@@ -20,27 +20,18 @@
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-10">
+                        	<#if file.picture =="exist">
                             <div class="blog-img">
-                                <img src="${basePath}/default/img/blog/img1.jpg" alt=""/>
+                                <img src="${basePath}/upload/${file.fileId}_big.jpg" alt=""/>
                             </div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2 col-sm-2 text-right">
-                            <div class="author">
-                               	作者 <a>${file.admin.name}</a>
-                            </div>
-                            <div class="shate-view">
-                                <ul class="list-unstyled">
-                                    <li><a>浏览人数:${file.viewCount}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-10 col-sm-10">
+                            </#if>
                             <h1><a href="${basePath}/${currentFolder.ename}/${file.fileId}">${file.name}</a></h1>
+                            <div class="author">
+                               	作者：<a>${file.admin.name}</a> | 时间：${file.createTime?string("yyyy-MM-dd HH:mm")} | 浏览数：${file.viewCount}
+                            </div>
+                            <hr>
                             <p>${file.content}</p>
-                            <a href="${basePath}/${currentFolder.ename}/${file.fileId}" class="btn btn-danger">瞧一瞧</a>
+                            <a href="${basePath}/${currentFolder.ename}/${file.fileId}" class="btn btn-danger">瞧一瞧</a>                           
                         </div>
                     </div>
                 </div>

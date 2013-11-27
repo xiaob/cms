@@ -28,7 +28,6 @@
 										<th>文章名称</th>
                 						<th>所属目录Id</th>
                 						<th>文字图片</th>
-                						<th>文章内容</th>
                 						<th>文章状态</th>
                 						<th>时间</th>
                 						<th>操作</th>
@@ -41,17 +40,16 @@
                							<td>${e.name}</td>
                             			<td>${e.folderId}</td>
                                     	<td>${e.picture}</td>
-                                    	<td>${e.content}</td>
                                     	<td>${e.status}</td>
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="${basePath}/admin/file/one?fileId=${e.fileId}" title="修改">
+                  							<a href="${basePath}/admin/article/one?fileId=${e.fileId}" title="修改">
                   								<button class="btn btn-primary btn-xs">
                   									<i class="icon-pencil"></i>
                   								</button>
                   							</a>
-                  							<a href="${basePath}/admin/file/recycle?fileId=${e.fileId}&status=HIDDEN" title="回收站">
+                  							<a href="${basePath}/admin/article/recycle?fileId=${e.fileId}&status=hidden" title="回收站">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>

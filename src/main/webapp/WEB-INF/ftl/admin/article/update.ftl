@@ -15,12 +15,18 @@
                             	 修改文章
                           </header>
                           <div class="panel-body">
-                              <form id="update_article_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/file/update.json">
+                              <form id="update_article_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/article/update.json">
                               	<fieldset>
-                              	  <div class="form-group">
+                              	  <div class="form-group" id="article_fileId">
                                       <label class="col-sm-2 col-sm-2 control-label">文件Id</label>
                                       <div class="col-sm-10">
                                       	<input type="text" class="form-control" name="fileId" value="${file.fileId}">
+                                      </div>
+                                  </div>
+                                  <div class="form-group" id="article_adminId">
+                                      <label class="col-sm-2 col-sm-2 control-label">管理员Id</label>
+                                      <div class="col-sm-10">
+                                      	<input type="text" class="form-control" name="adminId" value="${file.adminId}">
                                       </div>
                                   </div>
                                   <div class="form-group">
@@ -49,21 +55,33 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
+                                      <label class="col-sm-2 col-sm-2 control-label">文章状态</label>
+                                      <div class="col-sm-10">
+										<#if file.status=="hidden">
+										<input type="radio" name="status" value="hidden" checked="checked"/>hidden
+										<input type="radio" name="status" value="display"/>display
+										<#else>
+										<input type="radio" name="status" value="hidden"/>hidden
+										<input type="radio" name="status" value="display" checked="checked"/>display
+										</#if>
+									</div>
+                                  </div>
+                                  <div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">文章图片</label>
 									<div class="col-sm-10">
-										<#if file.status.equals("NO_EXIST")>
-										<input type="radio" name="picture" value="NO_EXIST" checked="checked"/>NO_EXIST
-										<input type="radio" name="picture" value="EXIST"/>EXIST
+										<#if file.picture=="no_exist">
+										<input type="radio" name="picture" value="no_exist" checked="checked"/>NO_EXIST
+										<input type="radio" name="picture" value="exist"/>EXIST
 										<#else>
-										<input type="radio" name="picture" value="NO_EXIST"/>NO_EXIST
-										<input type="radio" name="picture" value="EXIST" checked="checked"/>EXIST
+										<input type="radio" name="picture" value="no_exist"/>NO_EXIST
+										<input type="radio" name="picture" value="exist" checked="checked"/>EXIST
 										</#if>
 									</div>
 								  </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="description" value="${file.description}"
+                                          <input type="text" class="form-control" name="content" value="${file.content}"
                                           	placeholder="文章内容" id="description">
                                       </div>
                                   </div>

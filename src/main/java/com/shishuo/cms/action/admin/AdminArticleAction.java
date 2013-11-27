@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.style.DefaultValueStyler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shishuo.cms.action.DefaultAction;
 import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.constant.UpdatePictureConstant;
@@ -105,7 +107,7 @@ public class AdminArticleAction extends AdminBaseAction {
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "content") String content,
-			@RequestParam("link") MultipartFile link,
+			@RequestParam(value ="link",defaultValue="-1.jpg") MultipartFile link,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -115,9 +117,12 @@ public class AdminArticleAction extends AdminBaseAction {
 			// 检测校验结果
 			validate(json);
 			
-			if(link!=null){
+			if(link.equals("-1.jpg")){
+				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
+						FileConstant.Picture.no_exist, name, content,
+						FileConstant.Type.article, FileConstant.Status.display);
+			}else{
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-//				UpdatePictureConstant.updatePicture(folderId, path);
 				List<File> list = fileService.getArticleByPicture(FileConstant.Type.article, FileConstant.Picture.exist);
 				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
 						FileConstant.Picture.exist, name, content,
@@ -126,10 +131,6 @@ public class AdminArticleAction extends AdminBaseAction {
 				java.io.File source = new java.io.File(path);
 				link.transferTo(source);
 				updatePictureConstant.updatePicture(list.get(list.size()-1).getFileId(), path);
-			}else{
-				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-						FileConstant.Picture.no_exist, name, content,
-						FileConstant.Type.article, FileConstant.Status.display);
 			}
 			json.setResult(true);
 			
@@ -148,10 +149,11 @@ public class AdminArticleAction extends AdminBaseAction {
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
 	public JsonVo<String> updateArticle(
 			@RequestParam(value = "fileName") String fileName,
-			@RequestParam(value = "url") String url,
 			@RequestParam(value = "folderId") long folderId,
+			@RequestParam(value = "adminId") long adminId,
 			@RequestParam(value = "fileId") long fileId,
-			@RequestParam(value = "images") String images,
+			@RequestParam(value = "picture") FileConstant.Picture picture,
+			@RequestParam(value = "status") FileConstant.Status status,
 			@RequestParam(value = "content") String content) {
 
 		JsonVo<String> json = new JsonVo<String>();
@@ -159,21 +161,14 @@ public class AdminArticleAction extends AdminBaseAction {
 			if (fileName.equals("")) {
 				json.getErrors().put("fileName", "文章名称不能为空");
 			}
-			if (url.equals("")) {
-				json.getErrors().put("url", "文章链接不能为空");
-			}
-			if (images.equals("")) {
-				json.getErrors().put("images", "文章图片不能为空");
-			}
 			if (content.equals("")) {
 				json.getErrors().put("content", "文章内容不能为空");
 			}
 
 			// 检测校验结果
 			validate(json);
-			// fileService.updateFileById(fileId, folderId, fileName, url,
-			// images,
-			// description, 0);
+			 fileService.updateFileById(fileId, folderId, adminId,picture,fileName,
+			 content, FileConstant.Type.article,status);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -190,7 +185,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	public String recycle(@RequestParam(value = "fileId") long fileId,
 			@RequestParam(value = "status") FileConstant.Status status) {
 		fileService.recycle(fileId, status);
-		return "redirect:/admin/acticle/list";
+		return "redirect:/admin/article/list";
 	}
 
 	/**
@@ -212,7 +207,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteFile(@RequestParam(value = "fileId") long fileId) {
 		fileService.deleteFileById(fileId);
-		return "redirect:/admin/file/recycle";
+		return "redirect:/admin/article/recycle/list";
 	}
 
 }

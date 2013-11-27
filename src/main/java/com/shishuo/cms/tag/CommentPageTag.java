@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.entity.vo.CommentVo;
+import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.CommentService;
 
 import freemarker.core.Environment;
@@ -41,22 +42,24 @@ import freemarker.template.TemplateModel;
  * 评论标签
  * 
  * @author lqq
- *
+ * 
  */
 @Service
-public class CommentTag implements TemplateDirectiveModel{
-	
+public class CommentPageTag implements TemplateDirectiveModel {
+
 	@Autowired
 	private CommentService commentService;
 
 	@Override
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
-		// TODO Auto-generated method stub
 		Integer fileId = Integer.parseInt(params.get("fileId").toString());
-		List<CommentVo> commentVoList = commentService.getComment(fileId);
-		env.setVariable("commentVoList", BEANS_WRAPPER.wrap(commentVoList));
+		Integer pageNum = Integer.parseInt(params.get("pageNum").toString());
+		Integer rows = Integer.parseInt(params.get("rows").toString());
+		PageVo<CommentVo> commentPage = commentService.getCommentPage(fileId,
+				pageNum,rows);
+		env.setVariable("commentPage", BEANS_WRAPPER.wrap(commentPage));
 		body.render(env.getOut());
 	}
-  
+
 }
