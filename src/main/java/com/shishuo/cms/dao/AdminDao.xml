@@ -36,7 +36,7 @@
 	</select>
 	
 	<select id="getAdminByEmail" parameterType="String"
-		resultType="com.shishuo.cms.entity.Admin">
+		resultType="com.shishuo.cms.entity.vo.AdminVo">
 		select * from admin where email=#{email}
 	</select>
 </mapper>  

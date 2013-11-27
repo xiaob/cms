@@ -18,10 +18,10 @@
  */
 package com.shishuo.cms.util;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.exception.AuthException;
 
 /**
@@ -49,5 +49,21 @@ public class AuthUtils {
 			throw new AuthException("值不能为空");
 		}
 		return DigestUtils.md5Hex(password + email).toLowerCase();
+	}
+
+	/**
+	 * @param str
+	 * @return
+	 */
+	public static String MD5(String str) {
+		return DigestUtils.md5Hex(str).toLowerCase();
+	}
+
+	/**
+	 * @param email
+	 * @return
+	 */
+	public static String getFaceUrl(String email) {
+		return SystemConstant.FACE_URL + "/" + AuthUtils.MD5(email) + ".jpg";
 	}
 }

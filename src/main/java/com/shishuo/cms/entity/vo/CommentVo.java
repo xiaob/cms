@@ -22,44 +22,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shishuo.cms.entity.Comment;
-import com.shishuo.cms.entity.User;
 
 public class CommentVo extends Comment{
 	
 	/**
 	 * 子评论
 	 */
-    private	List<Comment> childComment = new ArrayList<Comment>();
+    private	List<CommentVo> childComment = new ArrayList<CommentVo>();
     
-    private String auditing;
-    
-    
-    public String getAuditing() {
-		return auditing;
+    /**
+     * 
+     */
+    private String faceUrl;
+
+	public String getFaceUrl() {
+		return faceUrl;
 	}
 
-	public void setAuditing(String auditing) {
-		this.auditing = auditing;
+	public void setFaceUrl(String faceUrl) {
+		this.faceUrl = faceUrl;
 	}
 
-	/**
-	 * 评论用户
-	 */
-    private User user;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public List<Comment> getChildComment() {
+	public List<CommentVo> getChildComment() {
 		return childComment;
 	}
 
-	public void setChildComment(List<Comment> childComment) {
+	public void setChildComment(List<CommentVo> childComment) {
 		this.childComment = childComment;
 	}
 	

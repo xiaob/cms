@@ -2,45 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shishuo.cms.dao.CommentDao">
 	<insert id="addComment" parameterType="com.shishuo.cms.entity.Comment">
-		insert into `comment` (fileId,email,name,content,ip,fatherId,status,createTime,userId)
-		 values (#{fileId},#{email},#{name},#{content},#{ip},#{fatherId},#{status},#{createTime},#{userId})
+		insert into `comment`
+		(fileId,email,name,content,ip,fatherId,status,createTime,userId)
+		values
+		(#{fileId},#{email},#{name},#{content},#{ip},#{fatherId},#{status},#{createTime},#{userId})
 		<selectKey resultType="long" keyProperty="fileId">
-			SELECT LAST_INSERT_ID()
+			SELECT
+			LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	<select id="getCommentList" parameterType="long"  resultType="com.shishuo.cms.entity.Comment">
-		select * from  `comment` where fileId = #{fileId} order by createTime desc
+
+	<select id="getCommentListByFatherId" parameterType="long"
+		resultType="com.shishuo.cms.entity.vo.CommentVo">
+		select * from `comment` where fileId = #{fileId} and
+		fatherId = #{fatherId} and status=#{status} order by createTime desc
 	</select>
-	<select id="getChildCommentList"  parameterType="long" resultType="com.shishuo.cms.entity.Comment">
-		select * from `comment` where fileId = #{fileId} and fatherId = #{fatherId} order by createTime desc
+
+	<select id="getCommentCountByFatherId" resultType="Integer">
+		select
+		count(*) from
+		`comment` where fileId = #{fileId} and
+		fatherId =
+		#{fatherId} and status=#{status}
 	</select>
-	
+
 	<update id="updateCommentStatus" parameterType="com.shishuo.cms.entity.Comment">
-		update `comment` set status=#{status} where commentId=#{commentId}
+		update `comment`
+		set status=#{status} where commentId=#{commentId}
 	</update>
-	
+
 	<select id="getCommentById" parameterType="long"
 		resultType="com.shishuo.cms.entity.Comment">
 		select * from `comment` where commentId=#{commentId}
 	</select>
-	
+
 	<select id="getAllList" parameterType="long"
 		resultType="com.shishuo.cms.entity.Comment">
 		select * from `comment` limit #{offset},#{rows}
 	</select>
-	
-	<select id="getAllListCount"
-		resultType="Integer">
-		select count(*) from `comment`
+
+	<select id="getAllListCount" resultType="Integer">
+		select count(*) from
+		`comment`
 	</select>
-	
-	<select id="getCommentByStatus"
-		resultType="com.shishuo.cms.entity.vo.CommentVo">
-		select * from `comment` where status=#{status} limit #{offset},#{rows}
+
+	<select id="getCommentByStatus" resultType="com.shishuo.cms.entity.vo.CommentVo">
+		select * from
+		`comment` where status=#{status} limit #{offset},#{rows}
 	</select>
-	
-	<select id="getCommentByStatusCount"
-		resultType="Integer">
-		select count(*) from `comment` where status=#{status}
+
+	<select id="getCommentByStatusCount" resultType="Integer">
+		select count(*)
+		from `comment` where status=#{status}
 	</select>
 </mapper>  

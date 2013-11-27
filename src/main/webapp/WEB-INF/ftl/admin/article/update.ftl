@@ -32,13 +32,10 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">所属目录Id</label>
                                       <div class="col-sm-10">
-                                      	<label class="col-sm-2 col-sm-2 control-label">
-											${folderName}
-										</label>
                                          <select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;height: 40px;" name="folderId">
-                                        	<option value="0">未分类</option>
-                                        	<#list folderAll as folder>  	
-                                          		<option value="${folder.folderId}">
+                                        	<option value="0" selected >未分类</option>
+                                        	<#list folderAll as folder>
+                                          		<option value="${folder.folderId}" <#if folder.folderId==file.folderId>selected</#if>>
                                           		<#list 1..folder.level as i>
                                           		-
                                           		</#list>
@@ -101,6 +98,8 @@
 		<!--main content end-->
 <script type="text/javascript">
 	$(function() {
+		$("#article_fileId").hide();
+		$("#article_adminId").hide();
 		$('#update_article_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {

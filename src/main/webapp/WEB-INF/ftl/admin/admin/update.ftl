@@ -17,7 +17,7 @@
 				<div class="panel-body">
 					<form id="update_admin_form" method="post" class="form-horizontal" autocomplete="off" action="/CMS/admin/admin/update.json">
 					<fieldset>
-						<div class="form-group">
+						<div class="form-group" id="update_adminId">
 							<label class="col-sm-2 col-sm-2 control-label">管理员Id</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="adminId" value="${admin.adminId}">
@@ -40,7 +40,6 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">状态</label>
 							<div class="col-sm-10">
-								<label class="col-sm-2 col-sm-2 control-label">${admin.status}</label>
 								<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="status"> 	
                                 	<option value= "NORMAL">正常</option>
                                 	<option value= "FREEZE">冻结</option>
@@ -63,6 +62,7 @@
  <!--main content end-->
 <script type="text/javascript">
 	$(function() {
+		$("#update_adminId").hide();
 		$('#update_admin_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {

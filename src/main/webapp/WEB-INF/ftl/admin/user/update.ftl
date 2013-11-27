@@ -16,7 +16,7 @@
 				<div class="panel-body">
 					<form id="update_user_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/user/update.json">
 					<fieldset>
-						<div class="form-group">
+						<div class="form-group" id="update_userId">
 							<label class="col-sm-2 col-sm-2 control-label">用户Id</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="userId" value="${user.userId}">
@@ -59,6 +59,7 @@
  <!--main content end-->
 <script type="text/javascript">
 	$(function() {
+		$("#update_userId").hide();
 		$('#update_user_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {

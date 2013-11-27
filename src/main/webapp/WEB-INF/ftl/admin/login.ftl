@@ -55,8 +55,8 @@ input.error:focus {
       <form class="form-signin" id="adminForm" action="${basePath}/auth/admin/login.json"  autocomplete="off" method="post">
         <h2 class="form-signin-heading"><img src="${basePath}/system/images/logo.png" style="height:38px;"/></h2>
         <div class="login-wrap">
-            <input type="text" name="email" class="form-control" placeholder="邮箱" value="herbertyang@163.com" autofocus>
-            <input type="password" name="password" class="form-control" placeholder="密码" value="111111">
+            <input type="text" name="email" class="form-control" placeholder="邮箱" value="" autofocus>
+            <input type="password" name="password" class="form-control" placeholder="密码" value="">
             <div>
                 <input type="text" name="captcha" class="form-control" placeholder="验证码" style="width:100px;float:left;"> <img style="cursor:pointer;cursor:hand;margin-top: -13px;" onclick="this.src='${basePath}/auth/captcha?'+Math.random();" src="${basePath}/auth/captcha" >
             </div>

@@ -29,9 +29,9 @@ import com.shishuo.cms.constant.FileConstant.Picture;
 import com.shishuo.cms.dao.FileDao;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.File;
+import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.PageVo;
-
 
 /**
  * 
@@ -48,6 +48,9 @@ public class FileService {
 
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private FolderService folderService;
 
 	/**
 	 * 得到目录
@@ -69,14 +72,16 @@ public class FileService {
 	 * @return pageVo
 	 */
 
-	public PageVo<FileVo> getFilePageByFoderId(long folderId, int pageNum) {
+	public PageVo<FileVo> getFilePageByFoderId(long folderId, int pageNum,
+			FileConstant.Type type, int rows) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
-		pageVo.setUrl("/CMS/folder/" + folderId + "?");
-		pageVo.setRows(1);
-		List<FileVo> list = this.getFileListByFoderId(folderId,
+		Folder folder = folderService.getFolderById(folderId);
+		pageVo.setUrl("/"+folder.getEname()+"?");
+		pageVo.setRows(rows);
+		pageVo.setCount(this.getFileListByFoderIdCount(folderId, type));
+		List<FileVo> list = this.getFileListByFoderId(folderId, type,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileListByFoderIdCount(folderId));
 		return pageVo;
 	}
 
@@ -87,10 +92,10 @@ public class FileService {
 	 * @return
 	 */
 
-	public List<FileVo> getFileListByFoderId(long folderId, long offset,
-			long rows) {
-		List<FileVo> list = fileDao
-				.getFileListByFoderId(folderId, offset, rows);
+	public List<FileVo> getFileListByFoderId(long folderId,
+			FileConstant.Type type, long offset, long rows) {
+		List<FileVo> list = fileDao.getFileListByFoderId(folderId, type,
+				offset, rows);
 		for (FileVo file : list) {
 			Admin admin = adminService.getAdminById(file.getAdminId());
 			file.setAdmin(admin);
@@ -104,8 +109,8 @@ public class FileService {
 	 * @param folderId
 	 * @return Integer
 	 */
-	public int getFileListByFoderIdCount(long folderId) {
-		return fileDao.getFileListByFoderIdCount(folderId);
+	public int getFileListByFoderIdCount(long folderId, FileConstant.Type type) {
+		return fileDao.getFileListByFoderIdCount(folderId, type);
 	}
 
 	/**
@@ -152,6 +157,7 @@ public class FileService {
 
 	/**
 	 * 修改文件
+	 * 
 	 * @param fileId
 	 * @param folderId
 	 * @param adminId
@@ -227,14 +233,16 @@ public class FileService {
 	 * @return PageVo<File>
 	 * 
 	 */
-	public PageVo<File> getFileListByTypePage(FileConstant.Type type, FileConstant.Status status, int pageNum) {
+	public PageVo<File> getFileListByTypePage(FileConstant.Type type,
+			FileConstant.Status status, int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
 		pageVo.setUrl("/CMS/admin/article/list?");
-		List<File> list = this.getFileListByType(FileConstant.Type.article, status,
-				pageVo.getOffset(), pageVo.getRows());
+		List<File> list = this.getFileListByType(FileConstant.Type.article,
+				status, pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileListByTypeCount(FileConstant.Type.article, status));
+		pageVo.setCount(this.getFileListByTypeCount(FileConstant.Type.article,
+				status));
 		return pageVo;
 	}
 
@@ -248,8 +256,8 @@ public class FileService {
 	 * @return List<File>
 	 * 
 	 */
-	public List<File> getFileListByType(FileConstant.Type type, FileConstant.Status status, long offset,
-			long rows) {
+	public List<File> getFileListByType(FileConstant.Type type,
+			FileConstant.Status status, long offset, long rows) {
 		return fileDao.getFileListByType(type, status, offset, rows);
 	}
 
@@ -261,7 +269,8 @@ public class FileService {
 	 * @param Integer
 	 * 
 	 */
-	public int getFileListByTypeCount(FileConstant.Type type, FileConstant.Status status) {
+	public int getFileListByTypeCount(FileConstant.Type type,
+			FileConstant.Status status) {
 		return fileDao.getFileListByTypeCount(type, status);
 	}
 
@@ -325,20 +334,22 @@ public class FileService {
 	public void updateCommentCount(long fileId, int commentCount) {
 		fileDao.updateCommentCount(fileId, commentCount + 1);
 	}
-	
-	public List<File> getArticleByPicture(FileConstant.Type type , FileConstant.Picture picture){
+
+	public List<File> getArticleByPicture(FileConstant.Type type,
+			FileConstant.Picture picture) {
 		return fileDao.getArticleByPicture(type, picture);
 	}
-	
-	public PageVo<File> getNewActicle(Picture picture){
-		 PageVo<File> pageFile = new PageVo<File>(1);
-		 if(picture.name().equals("exist")){
-			 pageFile.setRows(3);
-			 List<File> fileList = this.getFileListByType(FileConstant.Type.article,
-					                      FileConstant.Status.display,pageFile.getOffset(),pageFile.getRows());
-			 pageFile.setList(fileList);
-		 }
-		 return pageFile;
+
+	public PageVo<File> getNewActicle(Picture picture) {
+		PageVo<File> pageFile = new PageVo<File>(1);
+		if (picture.name().equals("exist")) {
+			pageFile.setRows(3);
+			List<File> fileList = this.getFileListByType(
+					FileConstant.Type.article, FileConstant.Status.display,
+					pageFile.getOffset(), pageFile.getRows());
+			pageFile.setList(fileList);
+		}
+		return pageFile;
 	}
 
 }

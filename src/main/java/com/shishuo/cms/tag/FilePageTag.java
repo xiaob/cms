@@ -18,7 +18,7 @@
  */
 package com.shishuo.cms.tag;
 
-import static freemarker.template.ObjectWrapper.*;
+import static freemarker.template.ObjectWrapper.BEANS_WRAPPER;
 
 import java.io.IOException;
 import java.util.Map;
@@ -26,8 +26,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.entity.File;
-import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.FileService;
@@ -39,9 +38,10 @@ import freemarker.template.TemplateDirectiveModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 
+
 /**
- * @author Administrator fileList标签
- * 
+ * @author Herbert
+ *
  */
 @Service
 public class FilePageTag implements TemplateDirectiveModel {
@@ -57,10 +57,11 @@ public class FilePageTag implements TemplateDirectiveModel {
 			TemplateDirectiveBody body) throws TemplateException, IOException {
 		// 获取页面的参数
 		Integer folderId = Integer.parseInt(params.get("folderId").toString());
-		Integer type = Integer.parseInt(params.get("type").toString());
+		FileConstant.Type type = FileConstant.Type.valueOf(params.get("type").toString());
 		Integer pageNum = Integer.parseInt(params.get("pageNum").toString());
+		Integer rows = Integer.parseInt(params.get("rows").toString());
 		// 获取文件的分页
-		PageVo<FileVo> pageVo = fileService.getFilePageByFoderId(folderId,pageNum);
+		PageVo<FileVo> pageVo = fileService.getFilePageByFoderId(folderId,pageNum,type,rows);
 		env.setVariable("pageVo", BEANS_WRAPPER.wrap(pageVo));
 		body.render(env.getOut());
 	}

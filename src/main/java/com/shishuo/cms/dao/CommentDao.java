@@ -28,75 +28,98 @@ import com.shishuo.cms.entity.Comment;
 import com.shishuo.cms.entity.vo.CommentVo;
 
 /**
- *	文章评论
+ * 文章评论
  */
 @Repository
 public interface CommentDao {
-	
+
 	/**
 	 * 添加评论
+	 * 
 	 * @param comment
 	 * @return Integer
 	 */
 	public int addComment(Comment comment);
-	
+
 	/**
-	 * 获取某文章下的所有评论
-	 * @param fileId
-	 * @return List<Comment>
-	 */
-	public List<Comment> getCommentList(@Param("fileId") long fileId);
-	
-	/**
-	 * 获得某篇文章下某条评论的回复
+	 * 获得文件下的评论（分页）
+	 * 
 	 * @param fileId
 	 * @param fatherId
-	 * @return List<Comment>
+	 * @param status
+	 * @param offset
+	 * @param rows
+	 * @return
 	 */
-	public List<Comment> getChildCommentList(@Param("fileId") long fileId,@Param("fatherId") long fatherId);
-	
+	public List<CommentVo> getCommentListByFatherId(
+			@Param("fileId") long fileId, @Param("fatherId") long fatherId,
+			@Param("status") CommentConstant.Status status,
+			@Param("offset") long offset, @Param("rows") long rows);
+
+	/**
+	 * 获得文件下的评论条数（分页）
+	 * 
+	 * @param fileId
+	 * @param fatherId
+	 * @param status
+	 * @return
+	 */
+	public int getCommentCountByFatherId(@Param("fileId") long fileId,
+			@Param("fatherId") long fatherId,
+			@Param("status") CommentConstant.Status status);
+
 	/**
 	 * 评论审核
+	 * 
 	 * @param comment
 	 * @return Integer
 	 */
 	public int updateCommentStatus(Comment comment);
-	
+
 	/**
 	 * 获得评论
+	 * 
 	 * @param commentId
 	 * @return Comment
 	 */
 	public Comment getCommentById(@Param("commentId") long commentId);
-	
+
 	/**
 	 * 获得所有评论
+	 * 
 	 * @param offset
 	 * @param rows
 	 * @return List<CommentVo>
 	 */
-	public List<Comment> getAllList(@Param("offset") long offset,@Param("rows") long rows);
-	
+	public List<Comment> getAllList(@Param("offset") long offset,
+			@Param("rows") long rows);
+
 	/**
 	 * 获得所有评论的数量
+	 * 
 	 * @return Integer
 	 */
 	public int getAllListCount();
-	
+
 	/**
 	 * 获得某状态下的评论列表
+	 * 
 	 * @param offset
 	 * @param rows
 	 * @param status
 	 * @return Integer
 	 */
-	public List<CommentVo> getCommentByStatus(@Param("offset") long offset,@Param("rows") long rows,@Param("status")CommentConstant.Status status);
-	
+	public List<CommentVo> getCommentByStatus(@Param("offset") long offset,
+			@Param("rows") long rows,
+			@Param("status") CommentConstant.Status status);
+
 	/**
 	 * 获得某状态下的评论数量
+	 * 
 	 * @param status
 	 * @return Integer
 	 */
-	public int getCommentByStatusCount(@Param("status")CommentConstant.Status status);
-	  
+	public int getCommentByStatusCount(
+			@Param("status") CommentConstant.Status status);
+
 }

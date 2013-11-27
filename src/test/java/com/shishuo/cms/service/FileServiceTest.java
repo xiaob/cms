@@ -34,10 +34,10 @@ public class FileServiceTest {
 //						"hjjuy", 2).getFolderId());
 //	}
 
-	@Test
-	public void testGetFilePageByFoderId() {
-		assertEquals(2, fileService.getFilePageByFoderId(1, 1).getPageCount());
-	}
+//	@Test
+//	public void testGetFilePageByFoderId() {
+//		assertEquals(2, fileService.getFilePageByFoderId(1, 1).getPageCount());
+//	}
 
 	@Test
 	public void testGetFileById() {

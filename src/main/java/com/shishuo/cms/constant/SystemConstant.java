@@ -38,6 +38,10 @@ public class SystemConstant {
 	public static final String SESSION_ADMIN = "SESSION_ADMIN";
 	
 	
+	/**
+	 * 头像URL 180x180
+	 */
+	public static final String FACE_URL = "http://faceurl.shishuo.com/face";
 	
 
 }

@@ -18,7 +18,6 @@
  */
 package com.shishuo.cms.action.admin;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.AdminConstant;
-import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.entity.vo.JsonVo;
 
 
@@ -121,10 +119,6 @@ public class AdminAdminAction extends AdminBaseAction {
 			if (adminName.equals("")) {
 				json.getErrors().put("adminName", "管理员名称不能为空");
 			}
-			if (password.equals("")) {
-				json.getErrors().put("password", "密码不能为空");
-			}
-
 			// 检测校验结果
 			validate(json);
 			adminService.updateAdmin(adminId, adminName, password, status);

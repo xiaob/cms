@@ -24,6 +24,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.cms.entity.Admin;
+import com.shishuo.cms.entity.vo.AdminVo;
 
 /**
  * 管理员
@@ -87,5 +88,5 @@ public interface AdminDao {
 	 * @return Admin
 	 *
 	 */
-	public Admin getAdminByEmail(@Param("email") String email);
+	public AdminVo getAdminByEmail(@Param("email") String email);
 }

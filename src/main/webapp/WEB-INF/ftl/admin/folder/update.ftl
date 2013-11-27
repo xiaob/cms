@@ -17,7 +17,7 @@
 				<div class="panel-body">
 					<form id="update_folder_form" method="post" class="form-horizontal tasi-form" autocomplete="off" action="${basePath}/admin/folder/update.json">
 					<fieldset>
-						<div class="form-group">
+						<div class="form-group" id="update_folderId">
 							<label class="col-sm-2 col-sm-2 control-label">目录Id</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="folderId" value="${folder.folderId}">
@@ -40,13 +40,14 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">父级标签</label>
 							<div class="col-sm-10">
-								<label class="col-sm-2 col-sm-2 control-label">
-									${fatherFolderName}
-								</label>
 								<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="fatherId">
 									<option value="0">未分类</option>
-									<#list folderAll as folder>
-										<option value="${folder.folderId}">${folder.name}</option>
+									<#list folderAll as fo>
+										<option value="${fo.folderId}" <#if fo.folderId==folder.fatherId>selected</#if>>
+										<#list 1..fo.level as i>
+                                          		-
+                                        </#list>
+										${fo.name}</option>
 									</#list>
 								</select>
 							</div>
@@ -54,14 +55,11 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">目录类型</label>
 							<div class="col-sm-10">
-								<label class="col-sm-2 col-sm-2 control-label">
-									${folder.type}
-								</label>
 								<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="type">
-									<option value= "article">文章</option>
-									<option value= "photo">图片</option>
-									<option value= "download">下载</option>
-									<option value= "shop">商品</option>
+									<option value= "article" <#if folder.type=="article">selected</#if>>文章</option>
+									<option value= "photo" <#if folder.type=="photo">selected</#if>>图片</option>
+									<option value= "download" <#if folder.type=="download">selected</#if>>下载</option>
+									<option value= "shop" <#if folder.type=="shop">selected</#if>>商品</option>
 								</select>
 							</div>
 						</div>
@@ -80,14 +78,11 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">目录等级</label>
 							<div class="col-sm-10">
-								<label class="col-sm-2 col-sm-2 control-label">
-									${folder.rank}
-								</label>
 								<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="rank">
-									<option value= "everyone">everyone</option>
-									<option value= "login">login</option>
-									<option value= "vip">vip</option>
-									<option value= "admin">admin</option>
+									<option value= "everyone" <#if folder.type=="everyone">selected</#if>>everyone</option>
+									<option value= "login" <#if folder.type=="login">selected</#if>>login</option>
+									<option value= "vip" <#if folder.type=="vip">selected</#if>>vip</option>
+									<option value= "admin" <#if folder.type=="admin">selected</#if>>admin</option>
 								</select>
 							</div>
 						</div>
@@ -114,6 +109,7 @@
  <!--main content end-->
  <script type="text/javascript">
 	$(function() {
+		$("#update_folderId").hide();
 		$('#update_folder_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {

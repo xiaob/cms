@@ -18,11 +18,9 @@
  */
 package com.shishuo.cms.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,23 +29,26 @@ import com.shishuo.cms.dao.CommentDao;
 import com.shishuo.cms.entity.Comment;
 import com.shishuo.cms.entity.vo.CommentVo;
 import com.shishuo.cms.entity.vo.PageVo;
+import com.shishuo.cms.util.AuthUtils;
 
 /**
  * 评论服务
+ * 
  * @author Administrator
- *
+ * 
  */
 @Service
 public class CommentService {
-		
+
 	@Autowired
 	private CommentDao commentDao;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	/**
 	 * 增加评论
+	 * 
 	 * @param fileId
 	 * @param fatherId
 	 * @param email
@@ -57,8 +58,8 @@ public class CommentService {
 	 * @return Comment
 	 * 
 	 */
-	public Comment addComment(long fileId,String email,
-			              String name,String ip,String content){
+	public Comment addComment(long fileId, String email, String name,
+			String ip, String content) {
 		Comment comment = new Comment();
 		comment.setFileId(fileId);
 		comment.setFatherId(0);
@@ -70,116 +71,141 @@ public class CommentService {
 		comment.setName(name);
 		commentDao.addComment(comment);
 		return comment;
-		
+
 	}
-	
+
 	/**
-	 * 获得评论
+	 * 获得评论分页
+	 * 
 	 * @param fileId
-	 * @return list
+	 * @param pageNum
+	 * @return
 	 */
-	public List<CommentVo> getComment(long fileId){
-		 List<Comment> commentList = commentDao.getCommentList(fileId);
-		 List<CommentVo> commentVoList = new ArrayList<CommentVo>();
-		 if(commentList != null){
-			 for(Comment comment :commentList){
-			    CommentVo commentVo = new CommentVo();
-			    BeanUtils.copyProperties(comment, commentVo);
-				List<Comment> childComment = commentDao.getChildCommentList(fileId, comment.getCommentId());
-				 if(childComment != null){
-					 commentVo.setChildComment(childComment); 
-				 }
-				commentVoList.add(commentVo);
-			 }
-		 }
-		return commentVoList;
+	public PageVo<CommentVo> getCommentPage(long fileId, int pageNum, int rows) {
+		PageVo<CommentVo> pageVo = new PageVo<CommentVo>(pageNum);
+		pageVo.setRows(rows);
+		pageVo.setCount(commentDao.getCommentCountByFatherId(fileId, 0,
+				CommentConstant.Status.DISPLAY));
+		List<CommentVo> commentList = this.getCommentListByFatherId(fileId, 0,
+				CommentConstant.Status.DISPLAY, pageVo.getOffset(),
+				pageVo.getRows());
+		for (CommentVo comment : commentList) {
+			List<CommentVo> childComment = this.getCommentListByFatherId(
+					fileId, comment.getCommentId(),
+					CommentConstant.Status.DISPLAY, 0, 50);
+			comment.setChildComment(childComment);
+		}
+		pageVo.setList(commentList);
+		return pageVo;
 	}
-	
+
+	public List<CommentVo> getCommentListByFatherId(long fileId, long fatherId,
+			CommentConstant.Status status, long offset, long rows) {
+		List<CommentVo> commentList = commentDao.getCommentListByFatherId(
+				fileId, fatherId, status, offset, rows);
+		for (CommentVo comment : commentList) {
+			comment.setFaceUrl(AuthUtils.getFaceUrl(comment.getEmail()));
+		}
+		return commentList;
+	}
+
 	/**
 	 * 评论审核
+	 * 
 	 * @param commentId
 	 * @param status
 	 * @return Integer
 	 */
-	public int updateCommentStatus(long commentId,CommentConstant.Status status){
+	public int updateCommentStatus(long commentId, CommentConstant.Status status) {
 		Comment comment = this.getCommentById(commentId);
 		comment.setStatus(status);
 		return commentDao.updateCommentStatus(comment);
 	}
-	
+
 	/**
 	 * 通过id获得指定评论
+	 * 
 	 * @param commentId
 	 * @return Comment
 	 */
-	public Comment getCommentById(long commentId){
+	public Comment getCommentById(long commentId) {
 		return commentDao.getCommentById(commentId);
 	}
-	
+
 	/**
 	 * 获得所有评论
+	 * 
 	 * @param offset
 	 * @param rows
 	 * @return List<CommentVo>
 	 */
-	public List<Comment> getAllList(long offset, long rows){
+	public List<Comment> getAllList(long offset, long rows) {
 		return commentDao.getAllList(offset, rows);
 	}
-	
+
 	/**
 	 * 获得所有评论的数量
+	 * 
 	 * @return Integer
 	 */
-	public int getAllListCount(){
+	public int getAllListCount() {
 		return commentDao.getAllListCount();
 	}
-	
+
 	/**
 	 * 获得所有评论的分页
+	 * 
 	 * @param pageNum
 	 * @return PageVo<CommentVo>
 	 */
-	public PageVo<Comment> getAllListPage(int pageNum){
+	public PageVo<Comment> getAllListPage(int pageNum) {
 		PageVo<Comment> pageVo = new PageVo<Comment>(pageNum);
 		pageVo.setUrl("/CMS/admin/comment/all?");
 		pageVo.setRows(5);
-		List<Comment> list = this.getAllList(pageVo.getOffset(), pageVo.getRows());
+		List<Comment> list = this.getAllList(pageVo.getOffset(),
+				pageVo.getRows());
 		pageVo.setList(list);
 		pageVo.setCount(this.getAllListCount());
 		return pageVo;
 	}
-	
+
 	/**
 	 * 获得某状态下的所有评论
+	 * 
 	 * @param offset
 	 * @param rows
 	 * @param status
 	 * @return List<CommentVo>
 	 */
-	public List<CommentVo> getCommentByStatus(long offset,long rows, CommentConstant.Status status){
+	public List<CommentVo> getCommentByStatus(long offset, long rows,
+			CommentConstant.Status status) {
 		return commentDao.getCommentByStatus(offset, rows, status);
 	}
-	
+
 	/**
 	 * 获得某状态下的评论的数量
+	 * 
 	 * @param status
 	 * @return Integer
 	 */
-	public int getCommentByStatusCount(CommentConstant.Status status){
+	public int getCommentByStatusCount(CommentConstant.Status status) {
 		return commentDao.getCommentByStatusCount(status);
 	}
-	
+
 	/**
 	 * 获得某状态下的评论的分页
+	 * 
 	 * @param pageNum
 	 * @param status
 	 * @return PageVo<CommentVo>
 	 */
-	public PageVo<CommentVo> getCommentByStatusPage(int pageNum,CommentConstant.Status status){
-		PageVo<CommentVo> pageVo =  new PageVo<CommentVo>(pageNum);
+	public PageVo<CommentVo> getCommentByStatusPage(int pageNum,
+			CommentConstant.Status status) {
+		PageVo<CommentVo> pageVo = new PageVo<CommentVo>(pageNum);
 		pageVo.setUrl("");
 		pageVo.setRows(5);
-		List<CommentVo> list = this.getCommentByStatus(pageVo.getOffset(), pageVo.getRows(), status);
+		List<CommentVo> list = this.getCommentByStatus(pageVo.getOffset(),
+				pageVo.getRows(), status);
 		pageVo.setList(list);
 		pageVo.setCount(this.getCommentByStatusCount(status));
 		return pageVo;

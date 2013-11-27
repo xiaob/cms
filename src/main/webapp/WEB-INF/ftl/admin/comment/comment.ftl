@@ -17,7 +17,7 @@
 				<div class="panel-body">
 					<form method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/comment/auditing/${comment.commentId}">
 					<fieldset>
-						<div class="form-group">
+						<div class="form-group" id="comment_commentId">
 							<label class="col-sm-2 col-sm-2 control-label">评论Id</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="commentId" value="${comment.commentId}">
@@ -49,4 +49,9 @@
 		</section>
 	</section>
  <!--main content end-->
+<script type="text/javascript">
+	$(function() {
+		$("#comment_commentId").hide();
+	});
+</script>
 <#include "/admin/foot.ftl">

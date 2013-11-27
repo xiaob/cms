@@ -38,7 +38,7 @@
                                     	<td>${commentVo.status}</td>
                                     	<td>
                                     		<#if commentVo.status=="DISABLE">
-                                    		<a href="/CMS/admin/comment/auditing/${commentVo.commentId}" title="审核">
+                                    		<a href="/CMS/admin/comment/${commentVo.commentId}" title="审核">
                                     			<button class="btn btn-success btn-xs">
                   									<i class="icon-ok"></i>
                   								</button>
