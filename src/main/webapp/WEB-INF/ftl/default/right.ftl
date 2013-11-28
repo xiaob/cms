@@ -13,39 +13,21 @@
                     </div>
 					<div class="blog-post">
                         <h3>最新文章</h3>
+                        <@cms_file_page type="article" folderId="${folderId}" pageNum="${pageNum}" rows="8">
+                        <#list pageVo.list as file>
                         <div class="media">
+                        	<#if file.picture == "exist">
                             <a href="javascript:;" class="pull-left">
                                 <img alt="" src="${basePath}/default/img/blog/blog-thumb-1.jpg" class=" ">
                             </a>
+                            </#if>
                             <div class="media-body">
-                                <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
+                                <h5 class="media-heading"><a href="javascript:;">${file.name}</a></h5>
                                 <p>
-                                    Donec id elit non mi porta gravida at eget metus amet int
+                                   ${file.createTime?string("yyyy-MM-dd")}
                                 </p>
                             </div>
                         </div>
-                        <div class="media">
-                            <a href="javascript:;" class="pull-left">
-                                <img alt="" src="${basePath}/default/img/blog/blog-thumb-2.jpg" class=" ">
-                            </a>
-                            <div class="media-body">
-                                <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                                <p>
-                                    Donec id elit non mi porta gravida at eget metus amet int
-                                </p>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a href="javascript:;" class="pull-left">
-                                <img alt="" src="${basePath}/default/img/blog/blog-thumb-3.jpg" class=" ">
-                            </a>
-                            <div class="media-body">
-                                <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                                <p>
-                                    Donec id elit non mi porta gravida at eget metus amet int
-                                </p>
-                            </div>
-                        </div>
+                        </#list>
+                        </@cms_file_page>
                     </div>                    
-                </div>
-            </div>

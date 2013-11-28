@@ -62,10 +62,11 @@ public class DefaultAction {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(
-			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
+			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
 		try {
 			modelMap.addAttribute("ename", "");
+			modelMap.addAttribute("folderId", "0");
 			modelMap.addAttribute("pageNum", pageNum);
 			return configService.getTemplatePath() + "/default";
 		} catch (Exception e) {
@@ -83,14 +84,13 @@ public class DefaultAction {
 	 */
 	@RequestMapping(value = "/{ename}", method = RequestMethod.GET)
 	public String folder(@PathVariable String ename,
-			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
+			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
-		Folder currentFolder = folderService.getFolderByEname(ename);
-		modelMap.addAttribute("currentFolder", currentFolder);
+		Folder folder = folderService.getFolderByEname(ename);
 		modelMap.addAttribute("ename", ename);
+		modelMap.addAttribute("folderId", folder.getFolderId());
 		modelMap.addAttribute("pageNum", pageNum);
-		return configService.getTemplatePath() + "/"
-				+ currentFolder.getTemplate();
+		return configService.getTemplatePath() + "/" + folder.getTemplate();
 	}
 
 	/**
@@ -104,12 +104,12 @@ public class DefaultAction {
 	 */
 	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
 	public String file(@PathVariable long fileId, @PathVariable String ename,
-			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
+			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
 		File file = fileService.getFileById(fileId);
 		fileService.updateViewCount(fileId, file.getViewCount());
-		modelMap.addAttribute("fileId", fileId);
 		modelMap.addAttribute("ename", ename);
+		modelMap.addAttribute("fileId", fileId);
 		modelMap.addAttribute("pageNum", pageNum);
 		return configService.getTemplatePath() + "/" + file.getTemplate();
 	}

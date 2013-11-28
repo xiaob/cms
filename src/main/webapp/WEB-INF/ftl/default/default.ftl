@@ -4,7 +4,7 @@
         <div class="row">
             <!--blog start-->
             <div class="col-lg-9 ">
-            <@cms_file_page type="article" folderId="0" pageNum="${pageNum}" rows="10">
+            <@cms_file_page type="article" folderId="${folderId}" pageNum="${pageNum}" rows="10">
                <#list pageVo.list as file>
                 <div class="blog-item">
                     <div class="row">
@@ -27,7 +27,7 @@
                             </#if>
                             <h1><a href="${basePath}/${file.folder.ename}/${file.fileId}"><b>${file.name}</b></a></h1>
                             <div class="author">
-                               	作者：<a>${file.admin.name}</a> | 浏览数：${file.viewCount}
+                               	分类：<a href="${basePath}/${file.folder.ename}">${file.folder.name}</a> | 作者：<a>${file.admin.name}</a> | 浏览数：${file.viewCount}
                             </div>
                             <hr>
                             <p>${file.content}</p>

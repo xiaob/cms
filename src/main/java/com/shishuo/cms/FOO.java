@@ -19,12 +19,6 @@
 
 package com.shishuo.cms;
 
-import java.io.File;
-import java.util.List;
-
-import org.codehaus.jackson.map.ObjectMapper;
-
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 
 /**
@@ -35,20 +29,9 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
  */
 public class FOO {
 
-	// public static void main(String[] args) {
-	// System.out.println("欢迎来到Java的世界，欢迎使用师说CMS。");
-	//
-	//
-	// }
+	 public static void main(String[] args) {
+	 System.out.println("欢迎来到Java的世界，欢迎使用师说CMS。");
 	
-	public static void main(String[] args) throws Exception
-	  {
-	    XmlMapper xmlMapper = new XmlMapper();
-	    Object entries = xmlMapper.readValue(new File("/Users/Herbert/git/CMS/src/main/webapp/WEB-INF/ftl/default/template.xml"), Object.class);
-
-	    ObjectMapper jsonMapper = new ObjectMapper();
-	    String json = jsonMapper.writeValueAsString(entries);
-	    System.out.println(json);
-	    // [{"name":"AXL","time":"19-07","price":"11.34"},{"name":"AIK","time":"19-07","price":"13.54"},{"name":"ALO","time":"19-07","price":"16.32"},{"name":"APO","time":"19-07","price":"13.56"}]
-	  }
+	
+	 }
 }
