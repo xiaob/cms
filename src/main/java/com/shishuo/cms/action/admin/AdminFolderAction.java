@@ -20,6 +20,7 @@ package com.shishuo.cms.action.admin;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,15 +43,19 @@ import com.shishuo.cms.entity.vo.JsonVo;
 @Controller
 public class AdminFolderAction extends AdminBaseAction{
 
+	@Autowired
+	private AdminConfigAction adminConfigAction;
 	/**
 	 * @author 进入添加目录页面
+	 * @throws Exception 
 	 *
 	 */
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
-	public String login(ModelMap modelMap){
+	public String login(ModelMap modelMap) throws Exception{
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folderName", "");
 		modelMap.put("folderEname", "");
+		modelMap.put("template", adminConfigAction.iterator("folder"));
 		return "admin/folder/folder";
 	}
 	
@@ -67,6 +72,7 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "type") FolderConstant.Type type,
 			@RequestParam(value = "status") FolderConstant.Status status,
 			@RequestParam(value = "rank") FolderConstant.Rank rank,
+			@RequestParam(value = "template") String template,
 			ModelMap modelMap) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -78,7 +84,7 @@ public class AdminFolderAction extends AdminBaseAction{
 			}
 			// 检测校验结果
 			validate(json);
-			folderService.addFolder(fatherId, folderName, status, folderEname, type,rank);
+			folderService.addFolder(fatherId, folderName, status, folderEname, type,rank,template);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

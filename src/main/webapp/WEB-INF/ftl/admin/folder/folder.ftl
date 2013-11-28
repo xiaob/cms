@@ -74,13 +74,23 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">目录等级</label>
+                                      <label class="col-sm-2 col-sm-2 control-label">目录等级</label>
+                                      <div class="col-sm-10">
+                                      	<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="rank"> 	
+                                        	<option value= "everyone">everyone</option>
+                                          	<option value= "login">login</option>
+                                          	<option value= "vip">vip</option>
+                                          	<option value= "admin">admin</option>
+                                        </select>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+									<label class="col-sm-2 col-sm-2 control-label">皮肤</label>
 									<div class="col-sm-10">
-										<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="rank">
-											<option value= "everyone">everyone</option>
-											<option value= "login">login</option>
-											<option value= "vip">vip</option>
-											<option value= "admin">admin</option>
+										<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="template">
+											<#list template as tem>
+											<option value= "${tem}">${tem}</option>
+											</#list>
 										</select>
 									</div>
 								  </div>
@@ -89,10 +99,6 @@
                                       <div class="col-sm-10">
                                       	<input type="radio" name="status" value="hidden"/>hidden
 										<input type="radio" name="status" value="display"/>display
-                                      	<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="status"> 	
-                                        	<option value= "hidden">隐藏</option>
-                                          	<option value= "display">显示</option>
-                                        </select>
                                       </div>
                                   </div>
                                   <div class="form-group">

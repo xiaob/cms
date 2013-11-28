@@ -52,6 +52,8 @@ public class AdminArticleAction extends AdminBaseAction {
 
 	@Autowired
 	private UpdatePictureConstant updatePictureConstant;
+	@Autowired
+	private AdminConfigAction adminConfigAction;
 	/**
 	 * @author 进入文章列表分页的首页
 	 * 
@@ -87,11 +89,13 @@ public class AdminArticleAction extends AdminBaseAction {
 
 	/**
 	 * @author 进入添加文章页面
+	 * @throws Exception 
 	 * 
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addArticle(ModelMap modelMap) {
+	public String addArticle(ModelMap modelMap) throws Exception {
 		modelMap.put("allFolderList", folderService.getAllFolder());
+		modelMap.put("template", adminConfigAction.iterator("file"));
 		return "admin/article/add";
 	}
 
@@ -105,6 +109,7 @@ public class AdminArticleAction extends AdminBaseAction {
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "content") String content,
+			@RequestParam(value = "template") String template,
 //			@RequestParam(value ="file",required = false) MultipartFile file,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
@@ -116,7 +121,7 @@ public class AdminArticleAction extends AdminBaseAction {
 			validate(json);
 			fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
 					FileConstant.Picture.no_exist, name, content,
-					FileConstant.Type.article, FileConstant.Status.display);
+					FileConstant.Type.article, FileConstant.Status.display,template);
 //			if(file.equals("")){
 //				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
 //						FileConstant.Picture.no_exist, name, content,
@@ -155,7 +160,7 @@ public class AdminArticleAction extends AdminBaseAction {
 				File article = list.get(list.size()-1);
 				fileService.addFile(article.getFolderId(), this.getAdmin(request).getAdminId(),
 						FileConstant.Picture.exist, article.getName(), article.getContent(),
-						FileConstant.Type.article, FileConstant.Status.display);
+						FileConstant.Type.article, FileConstant.Status.display,article.getTemplate());
 				String path = webroot+"/upload/article/"+article.getFileId()+".jpg";
 				java.io.File source = new java.io.File(path);
 				file.transferTo(source);
