@@ -8,7 +8,7 @@
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>师说cms</title>
+    <title>${SYS_SITENAME}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${basePath}/default/css/bootstrap.min.css" rel="stylesheet">
@@ -44,7 +44,7 @@
         <div class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="${basePath}/">师说<span style="font-size: 14px; margin-left: 10px;">师者,传道授业解惑者也</span></a>
+                    <a class="navbar-brand" href="${basePath}/">${SYS_SITENAME}<span style="font-size: 14px; margin-left: 10px;">${SYS_SITEDESC}</span></a>
                 </div>            
             </div>
         </div>

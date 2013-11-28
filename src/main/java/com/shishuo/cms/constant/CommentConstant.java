@@ -30,12 +30,12 @@ public class CommentConstant {
 	 */
 	public static enum Status {
 		/**
-		 * 禁用
+		 * 隐藏
 		 */
-		DISABLE, 
+		hidden, 
 		/**
 		 * 显示
 		 */
-		DISPLAY
+		display
 	};
 }

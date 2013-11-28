@@ -37,6 +37,8 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		if (null == modelAndView) {
 			return;
 		}
+
+		// 系统配置参数
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName()
 				+ ":" + request.getServerPort() + path;

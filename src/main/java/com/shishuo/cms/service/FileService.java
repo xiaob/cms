@@ -24,6 +24,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shishuo.cms.constant.CommentConstant;
 import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.FileConstant.Picture;
 import com.shishuo.cms.dao.FileDao;
@@ -48,9 +49,12 @@ public class FileService {
 
 	@Autowired
 	private AdminService adminService;
-	
+
 	@Autowired
 	private FolderService folderService;
+
+	@Autowired
+	private CommentService commentService;
 
 	/**
 	 * 得到目录
@@ -76,7 +80,7 @@ public class FileService {
 			FileConstant.Type type, int rows) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
 		Folder folder = folderService.getFolderById(folderId);
-		pageVo.setUrl("/"+folder.getEname()+"?");
+		pageVo.setUrl("/" + folder.getEname() + "?");
 		pageVo.setRows(rows);
 		pageVo.setCount(this.getFileListByFoderIdCount(folderId, type));
 		List<FileVo> list = this.getFileListByFoderId(folderId, type,
@@ -327,12 +331,12 @@ public class FileService {
 	/**
 	 * 更新评论数
 	 * 
-	 * @param FileId
-	 * @param commentCount
-	 * @return void
+	 * @param fileId
 	 */
-	public void updateCommentCount(long fileId, int commentCount) {
-		fileDao.updateCommentCount(fileId, commentCount + 1);
+	public void updateCommentCount(long fileId) {
+		int commentCount = commentService.getCommentCountByFatherId(fileId, 0,
+				CommentConstant.Status.display);
+		fileDao.updateCommentCount(fileId, commentCount);
 	}
 
 	public List<File> getArticleByPicture(FileConstant.Type type,

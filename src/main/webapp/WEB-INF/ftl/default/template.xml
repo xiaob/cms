@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+	<folder>
+		<item>
+			<ename>folder_temp1</ename>
+			<name>目录模板1</name>
+		</item>
+		<item>
+			<ename>folder_temp1</ename>
+			<name>目录模板1</name>
+		</item>
+	</folder>
+	<file>
+		<item>
+			<ename>folder_temp1</ename>
+			<name>目录模板1</name>
+		</item>
+		<item>
+			<ename>folder_temp1</ename>
+			<name>目录模板1</name>
+		</item>
+	</file>
+</template>

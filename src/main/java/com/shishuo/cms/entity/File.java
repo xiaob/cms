@@ -59,6 +59,11 @@ public class File {
 	 * 文件内容
 	 */
 	private String content;
+	
+	/**
+	 * 文件模板
+	 */
+	private String template;
 
 	/**
 	 * 浏览人数
@@ -172,4 +177,13 @@ public class File {
 	public void setType(FileConstant.Type type) {
 		this.type = type;
 	}
+
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+	
 }

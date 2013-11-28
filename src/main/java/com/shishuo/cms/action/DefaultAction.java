@@ -53,13 +53,19 @@ public class DefaultAction {
 	@Autowired
 	private ConfigService configService;
 
+	/**
+	 * 首页
+	 * 
+	 * @param pageNum
+	 * @param modelMap
+	 * @return
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(
 			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
-			HttpServletRequest request, ModelMap modelMap) {
+			ModelMap modelMap) {
 		try {
-			Folder currentFolder = folderService.getFolderById(1);
-			modelMap.addAttribute("currentFolder", currentFolder);
+			modelMap.addAttribute("ename", "");
 			modelMap.addAttribute("pageNum", pageNum);
 			return configService.getTemplatePath() + "/default";
 		} catch (Exception e) {
@@ -67,25 +73,37 @@ public class DefaultAction {
 		}
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "login.json", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, ModelMap modelMap) {
-		return "admin/admin";
-	}
-
+	/**
+	 * 目录页
+	 * 
+	 * @param ename
+	 * @param pageNum
+	 * @param modelMap
+	 * @return
+	 */
 	@RequestMapping(value = "/{ename}", method = RequestMethod.GET)
 	public String folder(@PathVariable String ename,
 			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
 		Folder currentFolder = folderService.getFolderByEname(ename);
 		modelMap.addAttribute("currentFolder", currentFolder);
+		modelMap.addAttribute("ename", ename);
 		modelMap.addAttribute("pageNum", pageNum);
 		return configService.getTemplatePath() + "/"
 				+ currentFolder.getTemplate();
 	}
 
+	/**
+	 * 文件页
+	 * 
+	 * @param fileId
+	 * @param ename
+	 * @param pageNum
+	 * @param modelMap
+	 * @return
+	 */
 	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
-	public String detail(@PathVariable long fileId, @PathVariable String ename,
+	public String file(@PathVariable long fileId, @PathVariable String ename,
 			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
 		File file = fileService.getFileById(fileId);
@@ -93,7 +111,7 @@ public class DefaultAction {
 		modelMap.addAttribute("fileId", fileId);
 		modelMap.addAttribute("ename", ename);
 		modelMap.addAttribute("pageNum", pageNum);
-		return "default/detail";
+		return configService.getTemplatePath() + "/" + file.getTemplate();
 	}
 
 }

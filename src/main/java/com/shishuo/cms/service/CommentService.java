@@ -64,7 +64,7 @@ public class CommentService {
 		comment.setFileId(fileId);
 		comment.setFatherId(0);
 		comment.setEmail(email);
-		comment.setStatus(CommentConstant.Status.DISABLE);
+		comment.setStatus(CommentConstant.Status.display);
 		comment.setContent(content);
 		comment.setCreateTime(new Date());
 		comment.setIp(ip);
@@ -84,19 +84,24 @@ public class CommentService {
 	public PageVo<CommentVo> getCommentPage(long fileId, int pageNum, int rows) {
 		PageVo<CommentVo> pageVo = new PageVo<CommentVo>(pageNum);
 		pageVo.setRows(rows);
-		pageVo.setCount(commentDao.getCommentCountByFatherId(fileId, 0,
-				CommentConstant.Status.DISPLAY));
+		pageVo.setCount(this.getCommentCountByFatherId(fileId, 0,
+				CommentConstant.Status.display));
 		List<CommentVo> commentList = this.getCommentListByFatherId(fileId, 0,
-				CommentConstant.Status.DISPLAY, pageVo.getOffset(),
+				CommentConstant.Status.display, pageVo.getOffset(),
 				pageVo.getRows());
 		for (CommentVo comment : commentList) {
 			List<CommentVo> childComment = this.getCommentListByFatherId(
 					fileId, comment.getCommentId(),
-					CommentConstant.Status.DISPLAY, 0, 50);
+					CommentConstant.Status.display, 0, 50);
 			comment.setChildComment(childComment);
 		}
 		pageVo.setList(commentList);
 		return pageVo;
+	}
+
+	public int getCommentCountByFatherId(long fileId, long fatherId,
+			CommentConstant.Status status) {
+		return commentDao.getCommentCountByFatherId(fileId, 0, status);
 	}
 
 	public List<CommentVo> getCommentListByFatherId(long fileId, long fatherId,

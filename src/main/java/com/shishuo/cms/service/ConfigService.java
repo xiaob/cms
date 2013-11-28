@@ -21,6 +21,7 @@ package com.shishuo.cms.service;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,11 +49,12 @@ public class ConfigService {
 	 * @return
 	 */
 	public String getTemplatePath() {
-		Config config = this.getConfigByKey(ConfigConstant.SYS_TEMPLATE, false);
-		if (config == null) {
+		String template = this.getConfigByKey(ConfigConstant.SYS_TEMPLATE,
+				false);
+		if (StringUtils.isBlank(template)) {
 			return "/" + ConfigConstant.DEFAUTL_TEMPLATE;
 		} else {
-			return "/" + config.getValue();
+			return "/" + template;
 		}
 	}
 
@@ -139,16 +141,19 @@ public class ConfigService {
 	 * @param key
 	 * @return
 	 */
-	public Config getConfigByKey(String key, boolean refresh) {
-		Config config = (Config) MemcacheMapUtil.get(MemcacheMapUtil.createKey(
+	public String getConfigByKey(String key, boolean refresh) {
+		String value = (String) MemcacheMapUtil.get(MemcacheMapUtil.createKey(
 				"config_", key));
-		if (config == null || refresh) {
-			config = configDao.getConfigByKey(key);
-			if (config != null) {
+		if (StringUtils.isBlank(value) || refresh) {
+			Config config = configDao.getConfigByKey(key);
+			if (config == null) {
+				value = "";
+			} else {
+				value = config.getValue();
 				MemcacheMapUtil.set(key, config);
 			}
 		}
-		return config;
+		return value;
 
 	}
 

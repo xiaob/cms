@@ -66,8 +66,7 @@ public class CommentAction {
 			HttpServletRequest request, ModelMap modelMap) {
 		commentService.addComment(fileId, email, name,
 				HttpUtils.getIp(request), HtmlUtils.htmlEscape(content));
-		File file = fileService.getFileById(fileId);
-		fileService.updateCommentCount(fileId, file.getCommentCount());
+		fileService.updateCommentCount(fileId);
 		JsonVo<String> json = new JsonVo<String>();
 		json.setResult(true);
 		return json;
