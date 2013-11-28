@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.CommentConstant;
 import com.shishuo.cms.constant.FileConstant;
+import com.shishuo.cms.constant.FileConstant.Status;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.constant.FileConstant.Picture;
 import com.shishuo.cms.dao.FileDao;
@@ -183,7 +184,7 @@ public class FileService {
 	 */
 	public File updateFileById(long fileId, long folderId, long adminId,
 			FileConstant.Picture picture, String name, String content,
-			FileConstant.Type type, FileConstant.Status status) {
+			FileConstant.Type type, FileConstant.Status status,String template) {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
@@ -193,6 +194,7 @@ public class FileService {
 		file.setViewCount(0);
 		file.setCommentCount(0);
 		file.setType(type);
+		file.setTemplate(template);
 		file.setStatus(status);
 		fileDao.updateFile(file);
 		return file;

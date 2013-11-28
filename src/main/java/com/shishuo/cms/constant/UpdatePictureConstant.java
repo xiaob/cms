@@ -96,9 +96,4 @@ public class UpdatePictureConstant {
 		         // 输出为文件
 		         ImageIO.write(tag1, "JPEG", new File(webroot+"/upload/article/"+id+"_small.jpg"));
 	}
-	
-//	public static void main(String[] args) throws IOException {
-//		UpdatePictureConstant uo = new UpdatePictureConstant();
-//		uo.updatePicture(1,"E:/notes/picture/activeMq.jpg");
-//	}
 }
