@@ -20,9 +20,15 @@ package com.shishuo.cms.action.admin;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -129,5 +135,48 @@ public class AdminConfigAction extends AdminBaseAction {
 			logger.debug(file.getName());
 		}
 		return templateList;
+	}
+	
+	private List<String> iterator() throws DocumentException {
+		//遍历元素节点
+		//获取文档对象下的根元素
+		SAXReader reader = new SAXReader();
+//		Document doc=reader.read(System
+//				.getProperty(SystemConstant.SHISHUO_CMS_ROOT) + "/WEB-INF/ftl/default/template.xml");
+		Document doc = reader.read("C:/Users/Administrator/git/CMS/src/main/webapp/WEB-INF/ftl/default/template.xml");
+		Element root = doc.getRootElement();
+		List<String> list1 = new ArrayList<String>();
+		List<String> list3 = new ArrayList<String>();
+		//获取根元素下的子元素
+		String tagname = root.getName();
+		System.out.println("根结点的名称是："+root.getName()); 
+		root.setName("folder");
+		List<Element> list = root.elements("item");
+		System.out.println("根结点的名称是："+root.getName()); 
+		System.out.println(list.size());
+		for (int i = 0; i < list.size(); i++) {
+			Element bookEle = list.get(i);
+			String nameEleText = bookEle.elementTextTrim("ename");
+			list1.add(nameEleText);
+		}
+//		for(int i = 0; i < list1.size(); i++){
+//			Element bookEle = list1.get(i);
+//			String nameEleText = bookEle.elementTextTrim("ename");
+//			list3.add(nameEleText);
+//		}
+		Set<String> set = new HashSet<String>();
+		set.addAll(list1);
+		List<String> list2 = new ArrayList<String>();
+		list2.addAll(set);
+		System.out.println(list2.size());
+		for(int i = 0; i < list2.size(); i++){
+			System.out.println(list2.get(i));
+		}
+		return list2;
+		}
+	
+	public static void main(String[] args) throws DocumentException {
+		AdminConfigAction a = new AdminConfigAction();
+		a.iterator();
 	}
 }

@@ -3,6 +3,7 @@ $(function() {
 	tinymce.init({
 		mode: "textareas",
 		 plugins : "-file",
+		 language : "zh_CN",
 		 theme_advanced_buttons1 : "",
 	});
     $('#nav-accordion').dcAccordion({

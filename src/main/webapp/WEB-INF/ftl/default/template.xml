@@ -6,8 +6,8 @@
 			<name>目录模板1</name>
 		</item>
 		<item>
-			<ename>folder_temp1</ename>
-			<name>目录模板1</name>
+			<ename>folder_temp2</ename>
+			<name>目录模板2</name>
 		</item>
 	</folder>
 	<file>
@@ -17,7 +17,7 @@
 		</item>
 		<item>
 			<ename>folder_temp2</ename>
-			<name>目录模板1</name>
+			<name>目录模板2</name>
 		</item>
 	</file>
 </template>

@@ -87,6 +87,8 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录状态</label>
                                       <div class="col-sm-10">
+                                      	<input type="radio" name="status" value="hidden"/>hidden
+										<input type="radio" name="status" value="display"/>display
                                       	<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="status"> 	
                                         	<option value= "hidden">隐藏</option>
                                           	<option value= "display">显示</option>
