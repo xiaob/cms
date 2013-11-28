@@ -143,7 +143,8 @@ public class AdminConfigAction extends AdminBaseAction {
 	public List<String> iterator (String template)throws Exception{
 	    XmlMapper xmlMapper = new XmlMapper();
 	    List<String> list = new ArrayList<String>();
-	    List entries = xmlMapper.readValue(new File("C:/Users/Administrator/git/CMS/src/main/webapp/WEB-INF/ftl/default/"+template+".xml"), List.class);
+	    List entries = xmlMapper.readValue(new File(System
+				.getProperty(SystemConstant.SHISHUO_CMS_ROOT) +"/WEB-INF/ftl/default/"+template+".xml"), List.class);
 	    for(int i=0;i<entries.size();i++){
 	    	String[] str = entries.get(i).toString().split(",");
 	    		String[] strin = str[0].split("=");
