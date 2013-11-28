@@ -8,7 +8,7 @@
 <meta name="keyword"
 	content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <link rel="shortcut icon" href="img/favicon.png">
-<title>${configMap.sys_sitename} - 后台</title>
+<title>${SYS_SITENAME} - 后台</title>
 <!-- Bootstrap core CSS -->
 <link href="${basePath}/system/css/bootstrap.min.css" rel="stylesheet">
 <link href="${basePath}/system/css/bootstrap-reset.css"
@@ -97,7 +97,7 @@
 							<li <#if submenu="auditing_list_comment">class="active"</#if>><a href="${basePath}/admin/comment/auditing/list">审核评论列表</a></li>
 						</ul>
 					</li>
-					<#if configMap.sys_function_photo=="on">
+					<#if SYS_FUNCTION_PHOTO=="on">
 					<li class="sub-menu ">
 						<a href="javascript:;" > <i class="icon-camera-retro"></i> <span>图片管理</span></a>
 						<ul class="sub">
@@ -107,7 +107,7 @@
 						</ul>
 					</li>
 					</#if>
-					<#if configMap.sys_function_download=="on">
+					<#if SYS_FUNCTION_DOWNLOAD=="on">
 					<li class="sub-menu ">
 						<a href="javascript:;" > <i class="icon-upload-alt"></i> <span>下载管理</span></a>
 						<ul class="sub">
@@ -118,7 +118,7 @@
 						</ul>
 					</li>
 					</#if>
-					<#if configMap.sys_function_shop=="on">					
+					<#if SYS_FUNCTION_SHOP=="on">					
 					<li class="sub-menu ">
 						<a href="javascript:;" > <i class="icon-gift"></i> <span>商品管理</span></a>
 						<ul class="sub">

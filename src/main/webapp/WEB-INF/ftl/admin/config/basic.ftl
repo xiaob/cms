@@ -13,14 +13,14 @@
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">网站名称</label>
 						<div class="col-lg-10">
 							<input type="text" placeholder="网站名称" id="inputEmail1" name="sitename"
-								class="form-control" value="${configMap.sys_sitename}">
+								class="form-control" value="${SYS_SITENAME}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">网站描述</label>
 						<div class="col-lg-10">
 							<input type="text" placeholder="网站描述" id="inputEmail1" name="sitedesc"
-								class="form-control" value="${configMap.sys_sitedesc}">
+								class="form-control" value="${SYS_SITEDESC}">
 						</div>
 					</div>
 					<div class="form-group">
@@ -36,19 +36,19 @@
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">是否开启图片展示模块</label>
 						<div class="col-lg-10">
-							<input type="checkbox" name="functionPhoto" <#if configMap.sys_function_photo=="on">checked="checked"</#if> data-toggle="switch" />
+							<input type="checkbox" name="functionPhoto" <#if SYS_FUNCTION_PHOTO=="on">checked="checked"</#if> data-toggle="switch" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">是否开启下载模块</label>
 						<div class="col-lg-10">
-							<input type="checkbox" name="functionDownload" <#if configMap.sys_function_download=="on">checked="checked"</#if> data-toggle="switch" />
+							<input type="checkbox" name="functionDownload" <#if SYS_FUNCTION_PHOTO=="on">checked="checked"</#if> data-toggle="switch" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">是否开启商品模块</label>
 						<div class="col-lg-10">
-							<input type="checkbox" name="functionShop" <#if configMap.sys_function_shop=="on">checked="checked"</#if> data-toggle="switch" />
+							<input type="checkbox" name="functionShop" <#if SYS_FUNCTION_SHOP=="on">checked="checked"</#if> data-toggle="switch" />
 						</div>
 					</div>
 					<div class="form-group">

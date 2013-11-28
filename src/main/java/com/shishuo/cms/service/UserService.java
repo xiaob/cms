@@ -75,7 +75,8 @@ public class UserService {
 	 */
 	public PageVo<User> getUserPage(int pageNum) {
 		PageVo<User> pageVo = new PageVo<User>(pageNum);
-		pageVo.setUrl("/CMS/admin/user/allList.do?");
+		pageVo.setRows(5);
+		pageVo.setUrl("/CMS/admin/user/all?");
 		List<User> list = this
 				.getUserList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);

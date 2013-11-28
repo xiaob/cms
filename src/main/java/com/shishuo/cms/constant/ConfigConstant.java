@@ -31,7 +31,7 @@ public class ConfigConstant {
 	/**
 	 * 默认的模板
 	 */
-	public static String DEFAUTL_TEMPLATE = "defalut";
+	public static String DEFAUTL_TEMPLATE = "default";
 
 	public static String SYS_FUNCTION_DOWNLOAD = "sys_function_download";
 	public static String SYS_FUNCTION_PHOTO = "sys_function_photo";
