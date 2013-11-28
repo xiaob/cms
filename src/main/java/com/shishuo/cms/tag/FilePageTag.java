@@ -61,7 +61,7 @@ public class FilePageTag implements TemplateDirectiveModel {
 		Integer pageNum = Integer.parseInt(params.get("pageNum").toString());
 		Integer rows = Integer.parseInt(params.get("rows").toString());
 		// 获取文件的分页
-		PageVo<FileVo> pageVo = fileService.getFilePageByFoderId(folderId,pageNum,type,rows);
+		PageVo<FileVo> pageVo = fileService.getFilePageByFolderId(folderId,pageNum,type,rows);
 		env.setVariable("pageVo", BEANS_WRAPPER.wrap(pageVo));
 		body.render(env.getOut());
 	}

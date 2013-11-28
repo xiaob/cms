@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.CommentConstant;
 import com.shishuo.cms.constant.FileConstant;
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.constant.FileConstant.Picture;
 import com.shishuo.cms.dao.FileDao;
 import com.shishuo.cms.entity.Admin;
@@ -76,14 +77,19 @@ public class FileService {
 	 * @return pageVo
 	 */
 
-	public PageVo<FileVo> getFilePageByFoderId(long folderId, int pageNum,
+	public PageVo<FileVo> getFilePageByFolderId(long folderId, int pageNum,
 			FileConstant.Type type, int rows) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
 		Folder folder = folderService.getFolderById(folderId);
-		pageVo.setUrl("/" + folder.getEname() + "?");
+		if (folder == null) {
+			pageVo.setUrl(SystemConstant.BASE_PATH + "/?");
+		} else {
+			pageVo.setUrl(SystemConstant.BASE_PATH + "/" + folder.getEname()
+					+ "?");
+		}
 		pageVo.setRows(rows);
-		pageVo.setCount(this.getFileListByFoderIdCount(folderId, type));
-		List<FileVo> list = this.getFileListByFoderId(folderId, type,
+		pageVo.setCount(this.getFileCountByFolderId(folderId, type));
+		List<FileVo> list = this.getFileListByFolderId(folderId, type,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
 		return pageVo;
@@ -96,13 +102,15 @@ public class FileService {
 	 * @return
 	 */
 
-	public List<FileVo> getFileListByFoderId(long folderId,
+	public List<FileVo> getFileListByFolderId(long folderId,
 			FileConstant.Type type, long offset, long rows) {
 		List<FileVo> list = fileDao.getFileListByFoderId(folderId, type,
 				offset, rows);
 		for (FileVo file : list) {
 			Admin admin = adminService.getAdminById(file.getAdminId());
+			Folder folder = folderService.getFolderById(file.getFileId());
 			file.setAdmin(admin);
+			file.setFolder(folder);;
 		}
 		return list;
 	}
@@ -113,8 +121,8 @@ public class FileService {
 	 * @param folderId
 	 * @return Integer
 	 */
-	public int getFileListByFoderIdCount(long folderId, FileConstant.Type type) {
-		return fileDao.getFileListByFoderIdCount(folderId, type);
+	public int getFileCountByFolderId(long folderId, FileConstant.Type type) {
+		return fileDao.getFileCountByFoderId(folderId, type);
 	}
 
 	/**

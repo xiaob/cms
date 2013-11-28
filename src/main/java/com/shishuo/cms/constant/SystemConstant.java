@@ -31,6 +31,10 @@ public class SystemConstant {
 	 */
 	public static final String SHISHUO_CMS_ROOT = "shishuo.cms.root";
 	
+	/**
+	 * 网址
+	 */
+	public static  String BASE_PATH = "";
 	
 	/**
 	 * Session中的管理员Key
