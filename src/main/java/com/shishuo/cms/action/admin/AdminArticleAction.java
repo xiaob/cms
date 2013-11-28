@@ -45,7 +45,6 @@ import com.shishuo.cms.entity.vo.PageVo;
  * @author 文件action
  * 
  */
-
 @Controller
 @RequestMapping("/admin/article")
 public class AdminArticleAction extends AdminBaseAction {
@@ -120,23 +119,8 @@ public class AdminArticleAction extends AdminBaseAction {
 			// 检测校验结果
 			validate(json);
 			fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-					FileConstant.Picture.no_exist, name, content,
-					FileConstant.Type.article, FileConstant.Status.display,template);
-//			if(file.equals("")){
-//				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-//						FileConstant.Picture.no_exist, name, content,
-//						FileConstant.Type.article, FileConstant.Status.display);
-//			}else{
-//				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-//				List<File> list = fileService.getArticleByPicture(FileConstant.Type.article, FileConstant.Picture.exist);
-//				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-//						FileConstant.Picture.exist, name, content,
-//						FileConstant.Type.article, FileConstant.Status.display);
-//				String path = webroot+"/upload/article/"+list.get(list.size()-1).getFileId()+".jpg";
-//				java.io.File source = new java.io.File(path);
-//				file.transferTo(source);
-//				updatePictureConstant.updatePicture(list.get(list.size()-1).getFileId(), path);
-//			}
+			FileConstant.Picture.no_exist, name, content,
+			FileConstant.Type.article, FileConstant.Status.display,template);
 			json.setResult(true);
 			
 		} catch (Exception e) {
@@ -146,19 +130,23 @@ public class AdminArticleAction extends AdminBaseAction {
 		return json;
 	}
 	
+	/**
+	 * @author 图片上传
+	 *
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/addPicture.json", method = RequestMethod.POST)
 	public JsonVo<String> addPicture(
-			@RequestParam(value ="file",required = false) MultipartFile file,
+			@RequestParam(value ="file") MultipartFile file,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
 			// 检测校验结果
 			validate(json);
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-				List<File> list = fileService.getArticleByPicture(FileConstant.Type.article, FileConstant.Picture.exist);
+				List<File> list = fileService.getArticleByPicture(FileConstant.Type.article, FileConstant.Picture.no_exist);
 				File article = list.get(list.size()-1);
-				fileService.addFile(article.getFolderId(), this.getAdmin(request).getAdminId(),
+				fileService.updateFileById(article.getFileId(),article.getFolderId(), this.getAdmin(request).getAdminId(),
 						FileConstant.Picture.exist, article.getName(), article.getContent(),
 						FileConstant.Type.article, FileConstant.Status.display,article.getTemplate());
 				String path = webroot+"/upload/article/"+article.getFileId()+".jpg";
@@ -187,6 +175,7 @@ public class AdminArticleAction extends AdminBaseAction {
 			@RequestParam(value = "fileId") long fileId,
 			@RequestParam(value = "picture") FileConstant.Picture picture,
 			@RequestParam(value = "status") FileConstant.Status status,
+			@RequestParam(value = "template") String template,
 			@RequestParam(value = "content") String content) {
 
 		JsonVo<String> json = new JsonVo<String>();
@@ -201,7 +190,7 @@ public class AdminArticleAction extends AdminBaseAction {
 			// 检测校验结果
 			validate(json);
 			 fileService.updateFileById(fileId, folderId, adminId,picture,fileName,
-			 content, FileConstant.Type.article,status);
+			 content, FileConstant.Type.article,status,template);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

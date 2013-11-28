@@ -80,19 +80,6 @@ public class AdminBaseAction {
 		}
 	}
 
-	// protected boolean getPower(long adminId,String actionName){
-	// boolean result = false;
-	// AdminActionBean action = adminActionBeanService.getByName(actionName);
-	// Power power = powerService.getPower(adminId, action.getActionId());
-	// if(power == null){
-	//
-	// }else{
-	// result = true;
-	// }
-	// return result;
-	// }
-	//
-
 	/**
 	 * 从session中获得管理员的信息
 	 * 
