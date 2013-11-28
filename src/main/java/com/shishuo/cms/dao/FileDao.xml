@@ -23,12 +23,11 @@
 	</delete>
 	<select id="getFileListByFoderId" resultType="com.shishuo.cms.entity.vo.FileVo">
 		select * from file
-		where folderId=#{folderId} and type = #{type} limit #{offset},#{rows}
+		where type = #{type} <if test="folderId!=0">and folderId=#{folderId}</if> limit #{offset},#{rows}
 	</select>
 
-	<select id="getFileListByFoderIdCount" resultType="Integer">
-		select
-		count(*) from file where folderId=#{folderId} and type = #{type} 
+	<select id="getFileCountByFoderId" resultType="Integer">
+		select count(*) from file where type = #{type}  <if test="folderId!=0">and folderId=#{folderId}</if>
 	</select>
 
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">

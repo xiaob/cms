@@ -60,7 +60,7 @@ public interface FileDao {
 	 * @param foderId
 	 * @return Integer
 	 */
-	public int getFileListByFoderIdCount(@Param("folderId") long folderId,
+	public int getFileCountByFoderId(@Param("folderId") long folderId,
 			@Param("type") FileConstant.Type type);
 
 	/**

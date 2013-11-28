@@ -3,6 +3,7 @@ package com.shishuo.cms.filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shishuo.cms.constant.ConfigConstant;
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.util.HttpUtils;
 
@@ -59,6 +61,10 @@ public class GlobalInterceptor implements HandlerInterceptor {
 				.addObject("SYS_TEMPLATE", configService.getConfigByKey(
 						ConfigConstant.SYS_TEMPLATE, true));
 		MDC.put("ip", HttpUtils.getIp(request));
+
+		if (StringUtils.isBlank(SystemConstant.BASE_PATH)) {
+			SystemConstant.BASE_PATH = basePath;
+		}
 	}
 
 	@Override

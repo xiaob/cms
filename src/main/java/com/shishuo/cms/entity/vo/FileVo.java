@@ -20,6 +20,7 @@ package com.shishuo.cms.entity.vo;
 
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.File;
+import com.shishuo.cms.entity.Folder;
 
 /**
  * @author Herbert
@@ -29,12 +30,22 @@ public class FileVo extends File {
 
 	private Admin admin;
 
+	private Folder folder;
+
 	public Admin getAdmin() {
 		return admin;
 	}
 
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
+	}
+
+	public Folder getFolder() {
+		return folder;
+	}
+
+	public void setFolder(Folder folder) {
+		this.folder = folder;
 	}
 
 }
