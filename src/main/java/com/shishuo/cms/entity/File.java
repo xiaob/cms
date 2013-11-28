@@ -61,7 +61,7 @@ public class File {
 	private String content;
 	
 	/**
-	 * 文件模板
+	 * 皮肤
 	 */
 	private String template;
 

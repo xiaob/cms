@@ -1,10 +1,7 @@
-/* Import fonts */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
-
 body {
     color: #797979;
     background: #f1f2f7;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     padding: 0px !important;
     margin: 0px !important;
     font-size:14px;

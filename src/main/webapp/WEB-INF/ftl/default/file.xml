@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<file>
+	<item>
+		<ename>file_temp1</ename>
+		<name>文件模板1</name>
+	</item>
+	<item>
+		<ename>file_temp2</ename>
+		<name>文件模板2</name>
+	</item>
+</file>

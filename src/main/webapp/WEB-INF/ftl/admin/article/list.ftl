@@ -27,7 +27,8 @@
                                 		<th>文章Id</th>
 										<th>文章名称</th>
                 						<th>所属目录Id</th>
-                						<th>文字图片</th>
+                						<th>文章图片</th>
+                						<th>皮肤</th>
                 						<th>文章状态</th>
                 						<th>时间</th>
                 						<th>操作</th>
@@ -40,6 +41,7 @@
                							<td>${e.name}</td>
                             			<td>${e.folderId}</td>
                                     	<td>${e.picture}</td>
+                                    	<td>${e.template}</td>
                                     	<td>${e.status}</td>
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>

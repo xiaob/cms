@@ -18,14 +18,11 @@
                         <div class="media">
                         	<#if file.picture == "exist">
                             <a href="javascript:;" class="pull-left">
-                                <img alt="" src="${basePath}/default/img/blog/blog-thumb-1.jpg" class=" ">
+                                <img alt="" src="${basePath}/upload/${file.fileId}_small.jpg" class=" ">
                             </a>
                             </#if>
                             <div class="media-body">
-                                <h5 class="media-heading"><a href="javascript:;">${file.name}</a></h5>
-                                <p>
-                                   ${file.createTime?string("yyyy-MM-dd")}
-                                </p>
+                                <a href="javascript:;">${file.name}</a>（${file.createTime?string("yyyy-MM-dd")}）
                             </div>
                         </div>
                         </#list>

@@ -9,8 +9,8 @@
 
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
 		insert into
-		file(folderId,adminId,picture,name,content,viewCount,commentCount,type,status,createTime)
-		value(#{folderId},#{adminId},#{picture},#{name},#{content},#{viewCount},#{commentCount},#{type},#{status},#{createTime})
+		file(folderId,adminId,picture,name,content,viewCount,commentCount,type,status,template,createTime)
+		value(#{folderId},#{adminId},#{picture},#{name},#{content},#{viewCount},#{commentCount},#{type},#{status},#{template},#{createTime})
 		<selectKey resultType="long" keyProperty="fileId">
 			SELECT
 			LAST_INSERT_ID()	
@@ -33,7 +33,7 @@
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
 		update file set
 		folderId=#{folderId},name=#{name},picture=#{picture},
-		content=#{content},status=#{status}
+		content=#{content},status=#{status},template=#{template}
 		where fileId=#{fileId}
 	</update>
 
