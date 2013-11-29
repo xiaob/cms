@@ -24,6 +24,7 @@
                             	<thead>
                                 	<tr>
                 						<th>管理员名称</th>
+                						<th>电子邮箱</th>
                 						<th>状态</th>
                 						<th>时间</th>
                 						<th>操作</th>
@@ -33,6 +34,7 @@
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
                                     	<td>${e.name}</td>
+                                    	<td>${e.email}</td>
                                     	<td>${e.status}</td>
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>

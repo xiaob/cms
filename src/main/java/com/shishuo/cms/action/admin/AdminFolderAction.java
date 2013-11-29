@@ -75,12 +75,19 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "template") String template,
 			ModelMap modelMap) {
 		JsonVo<String> json = new JsonVo<String>();
+		List<Folder> list = folderService.getAllList();
 		try {
 			if(folderName.equals("")){
 				json.getErrors().put("folderName", "目录名称不能为空");
 			}
 			if(folderEname.equals("")){
 				json.getErrors().put("folderEname", "英文名称不能为空");
+			}else{
+				for(Folder folder:list){
+					if(folderEname.equals(folder.getEname())){
+						json.getErrors().put("folderEname", "英文名称不能重复");
+					}
+				}
 			}
 			// 检测校验结果
 			validate(json);
@@ -135,22 +142,29 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "folderName") String folderName,
 			@RequestParam(value = "folderEname") String folderEname,
-			@RequestParam(value = "sort",defaultValue="-1") int sort,
+			@RequestParam(value = "sort",defaultValue="0") int sort,
 			@RequestParam(value = "type") FolderConstant.Type type,
 			@RequestParam(value = "status") FolderConstant.Status status,
 			@RequestParam(value = "rank") FolderConstant.Rank rank){
 		
 		JsonVo<String> json = new JsonVo<String>();
+		List<Folder> list = folderService.getAllList();
 		try {
 			if(folderName.equals("")){
 				json.getErrors().put("folderName", "目录名称不能为空");
 			}
 			if(folderEname.equals("")){
 				json.getErrors().put("folderEname", "英文名称不能为空");
+			}else{
+				for(Folder folder:list){
+					if(folderId !=folder.getFolderId()){
+						if(folderEname.equals(folder.getEname())){
+							json.getErrors().put("folderEname", "英文名称不能重复");
+						}
+					}
+				}
 			}
-			if(sort==-1){
-				json.getErrors().put("sort", "目录序列不能为空");
-			}
+
 			// 检测校验结果
 			validate(json);
 			folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status,type, rank,sort);

@@ -103,6 +103,7 @@
                                   </div>
                                  </fieldset>
                               </form>
+                              <p id="allFolder">目录已添加成功，是否<a href="${basePath}/admin/folder/all">前往查看目录</a></p>
                           </div>
                       </section>
                   </div>
@@ -113,13 +114,12 @@
 		<!--main content end-->
 <script type="text/javascript">
 	$(function() {
+	$("#allFolder").hide();
 		$('#addFolder_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-					bootbox.alert("保存成功，将刷新页面", function() {
-						window.location.reload();
-					});
+					$("#allFolder").show();
 				}else{
 					showErrors($('#addFolder_form'),data.errors);
 				}

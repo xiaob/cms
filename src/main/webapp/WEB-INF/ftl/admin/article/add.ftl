@@ -69,6 +69,7 @@
                                   </div>
                                  </fieldset>
                               </form>
+                              <p>文章添加成功。<a href="<a href="${basePath}/${folderEname}/${articleId}">">查看文章</a></p>
                           </div>
                       </section>
                   </div>

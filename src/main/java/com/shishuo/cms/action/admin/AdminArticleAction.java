@@ -63,6 +63,7 @@ public class AdminArticleAction extends AdminBaseAction {
 			ModelMap modelMap) {
 		PageVo<File> pageVo = fileService.getFileListByTypePage(FileConstant.Type.article, FileConstant.Status.display, pageNum);
 		modelMap.put("pageVo", pageVo);
+		modelMap.put("folderList", folderService.getAllList());
 		return "admin/article/list";
 	}
 
@@ -97,6 +98,8 @@ public class AdminArticleAction extends AdminBaseAction {
 	public String addArticle(ModelMap modelMap) throws Exception {
 		modelMap.put("allFolderList", folderService.getAllFolder());
 		modelMap.put("template", adminConfigAction.iterator("file"));
+		modelMap.put("folderEname", "");
+		modelMap.put("articleId","");
 		return "admin/article/add";
 	}
 

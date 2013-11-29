@@ -38,7 +38,11 @@
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
                             			<td>${e.fileId}</td>
-               							<td>${e.name}</td>
+                            			<#list folderList as folder>
+                            			<#if folder.folderId==e.folderId>
+               								<td><a href="${basePath}/${folder.ename}/${e.fileId}">${e.name}</a></td>
+               							</#if>
+               							</#list>
                             			<td>${e.folderId}</td>
                                     	<td>${e.picture}</td>
                                     	<td>${e.template}</td>

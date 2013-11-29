@@ -170,4 +170,8 @@ public class AdminService {
 	public int deleteAdmin(long adminId) {
 		return adminDao.deleteAdmin(adminId);
 	}
+	
+	public List<Admin> getAllAdmin(){
+		return adminDao.getAllAdmin();
+	}
 }

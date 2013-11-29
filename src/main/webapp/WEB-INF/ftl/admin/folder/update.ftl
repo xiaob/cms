@@ -82,10 +82,10 @@
                         <div class="form-group">
                         	<label class="col-sm-2 col-sm-2 control-label">目录等级</label>
                         	<div class="col-sm-10">
-                            	<input type="radio" name="rank" value="everyone" <#if folder.type=="everyone">checked</#if>/>everyone
-								<input type="radio" name="rank" value="login" <#if folder.type=="login">checked</#if>/>login
-								<input type="radio" name="rank" value="vip" <#if folder.type=="vip">checked</#if>/>vip
-								<input type="radio" name="rank" value="admin" <#if folder.type=="admin">checked</#if>/>admin
+                            	<input type="radio" name="rank" value="everyone" <#if folder.rank=="everyone">checked</#if>/>everyone
+								<input type="radio" name="rank" value="login" <#if folder.rank=="login">checked</#if>/>login
+								<input type="radio" name="rank" value="vip" <#if folder.rank=="vip">checked</#if>/>vip
+								<input type="radio" name="rank" value="admin" <#if folder.rank=="admin">checked</#if>/>admin
                         	</div>
                         </div>
 						<div class="form-group">
@@ -106,6 +106,7 @@
                         </div>
 					</fieldset>
 				</form>
+				<p id="allFolder">目录已修改成功，是否<a href="${basePath}/admin/folder/all">前往查看目录</a></p>
 				</div>
 			</section>
 		</div>
@@ -117,13 +118,12 @@
  <script type="text/javascript">
 	$(function() {
 		$("#update_folderId").hide();
+		$("#allFolder").hide();
 		$('#update_folder_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-					bootbox.alert("保存成功，将刷新页面", function() {
-						window.location.reload();
-					});
+					$("#allFolder").show();
 				}else{
 					showErrors($('#update_folder_form'),data.errors);
 				}

@@ -18,6 +18,8 @@
  */
 package com.shishuo.cms.action.admin;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.AdminConstant;
+import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.vo.JsonVo;
 
 
@@ -60,6 +63,7 @@ public class AdminAdminAction extends AdminBaseAction {
 			@RequestParam(value = "email") String email,
 			@RequestParam(value = "password") String password) {
 
+		List<Admin> list = adminService.getAllAdmin();
 		JsonVo<String> json = new JsonVo<String>();
 		try {
 			if (adminName.equals("")) {
@@ -67,6 +71,12 @@ public class AdminAdminAction extends AdminBaseAction {
 			}
 			if (email.equals("")) {
 				json.getErrors().put("email", "管理员邮箱不能为空");
+			}else{
+				for(Admin admin:list){
+					if(email.equals(admin.getEmail())){
+						json.getErrors().put("email", "管理员邮箱不能重复");
+					}
+				}
 			}
 			// 检测校验结果
 			validate(json);
@@ -110,14 +120,26 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
 	public JsonVo<String> updateAdmin(
 			@RequestParam(value = "adminName") String adminName,
+			@RequestParam(value = "email") String email,
 			@RequestParam(value = "password",defaultValue="-1") String password,
 			@RequestParam(value = "adminId") long adminId,
 			@RequestParam(value = "status") AdminConstant.Status status) {
 
 		JsonVo<String> json = new JsonVo<String>();
+		List<Admin> list = adminService.getAllAdmin();
 		try {
 			if (adminName.equals("")) {
 				json.getErrors().put("adminName", "管理员名称不能为空");
+			}
+			if(email.equals("")){
+				json.getErrors().put("email", "电子邮箱不能为空");
+				for(Admin admin:list){
+					if(admin.getAdminId()!=adminId){
+						if(email.equals(admin.getEmail())){
+							json.getErrors().put("email", "电子邮箱不能重复");
+						}
+					}
+				}
 			}
 			// 检测校验结果
 			validate(json);

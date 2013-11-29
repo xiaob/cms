@@ -99,13 +99,14 @@ public class DefaultAction {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
-	public String file(@PathVariable long fileId, @PathVariable String ename,
+	@RequestMapping(value = "/{fileId}", method = RequestMethod.GET)
+	public String file(@PathVariable long fileId,
 			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
 		File file = fileService.getFileById(fileId);
 		fileService.updateViewCount(fileId, file.getViewCount());
-		modelMap.addAttribute("ename", ename);
+		Folder folder = folderService.getFolderById(file.getFolderId());
+		modelMap.addAttribute("ename", folder.getEname());
 		modelMap.addAttribute("fileId", fileId);
 		modelMap.addAttribute("pageNum", pageNum);
 		return configService.getTemplatePath() + "/" + file.getTemplate();
