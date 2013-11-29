@@ -18,7 +18,6 @@
  */
 package com.shishuo.cms.action;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -100,13 +99,14 @@ public class DefaultAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
-	public String file(@PathVariable long fileId, @PathVariable String ename,
+	public String file(@PathVariable String ename, @PathVariable long fileId,
 			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
 		File file = fileService.getFileById(fileId);
 		fileService.updateViewCount(fileId, file.getViewCount());
 		modelMap.addAttribute("ename", ename);
 		modelMap.addAttribute("fileId", fileId);
+		modelMap.addAttribute("folderId", file.getFileId());
 		modelMap.addAttribute("pageNum", pageNum);
 		return configService.getTemplatePath() + "/" + file.getTemplate();
 	}

@@ -16,11 +16,6 @@
                         <@cms_file_page type="article" folderId="${folderId}" pageNum="${pageNum}" rows="8">
                         <#list pageVo.list as file>
                         <div class="media">
-                        	<#if file.picture == "exist">
-                            <a href="javascript:;" class="pull-left">
-                                <img alt="" src="${basePath}/upload/${file.fileId}_small.jpg" class=" ">
-                            </a>
-                            </#if>
                             <div class="media-body">
                                 <a href="javascript:;">${file.name}</a>（${file.createTime?string("yyyy-MM-dd")}）
                             </div>
