@@ -26,11 +26,17 @@
 	# 编译
 	mvn compile
 	# 修改数据库配置文件
-	vi src/main/resources/shishuocms.properties
+		1、 把 src/main/resources/shishuocms.properties 拷贝到 CMS目录下
+		2、 修改shishuocms.properties里的超级管理员的email，和数据库连接的相关信息
 	# 安装
 	mvn exec:java -Dexec.mainClass="com.shishuo.cms.Install"
 	# 运行
 	mvn jetty:run
+	# 后台地址
+	http://127.0.0。1:8080/auth/admin/login
+	用户名：(shishuocms.properties里的超级管理员的email)
+	密  码：shishuocms
+
 
 ## 目标
 

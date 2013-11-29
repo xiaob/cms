@@ -28,8 +28,9 @@ import com.shishuo.cms.util.AuthUtils;
  * 
  */
 public class Install {
-	private static String CMS_PROPERTIES = "src/main/resources/shishuocms.properties";
+	private static String CMS_PROPERTIES = "shishuocms.properties";
 	private static String CMS_INSTALL_SQL = "sql/install.sql";
+	private static String ADMIN_PASSWORD = "shishuocms";
 
 	Console console = System.console();
 
@@ -102,7 +103,7 @@ public class Install {
 			runner.runScript(new InputStreamReader(new FileInputStream(
 					CMS_INSTALL_SQL), "UTF-8"));
 			// 增加超级管理员帐号
-			String pwd = AuthUtils.getPassword("111111", email);
+			String pwd = AuthUtils.getPassword(ADMIN_PASSWORD, email);
 			String sql = "INSERT INTO `admin`(`adminId`,`email`,`password`,`name`,`status`,`createTime`) VALUES (?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, 1);
