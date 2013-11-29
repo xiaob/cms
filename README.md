@@ -11,6 +11,18 @@
 
 **后台演示：** http://42.121.56.21:8080/auth/admin/login
 
+## 技术关键词
+* jQuery
+* Bootstrap
+* Java
+* Maven
+* Spring
+* Spring MVC
+* MyBatis
+* MySQL
+* FreeMarker
+* Lucene
+
 ## 前言
 
 师说CMS是由长沙师说网络科技有限公司开源的一款CMS产品，其公司推出的“师说" http://www.shishuo.com ，是一个专业人才交流平台，致力于解决人才与企业和人才与人才之间交流的平台。
