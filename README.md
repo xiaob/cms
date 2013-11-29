@@ -68,6 +68,14 @@
  - 电子商务模块
  - 用户注册登录模块
  - 后台管理模块
+ 
+## 效果图
+首页<br>
+![首页](/doc/images/default.png "首页")<br>
+登录<br>
+![登录](/doc/images/login.png "登录")<br>
+文章管理<br>
+![文章管理](/doc/images/file.png "文章管理")
 
 ## 开发
 
