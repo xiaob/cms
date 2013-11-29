@@ -30,13 +30,13 @@ public class AdminConstant {
 		/**
 		 * 初始化，需要修改密码
 		 */
-		INIT, /**
+		init, /**
 		 * 正常，可以使用
 		 */
-		NORMAL, 
+		normal, 
 		/**
 		 * 冻结，无法使用
 		 */
-		FREEZE
+		freeze
 	};
 }

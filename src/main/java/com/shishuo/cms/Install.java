@@ -109,8 +109,8 @@ public class Install {
 			stmt.setInt(1, 1);
 			stmt.setString(2, email);
 			stmt.setString(3, pwd);
-			stmt.setString(4, "admin");
-			stmt.setString(5, AdminConstant.Status.NORMAL.name());
+			stmt.setString(4, "超级管理员");
+			stmt.setString(5, AdminConstant.Status.normal.name());
 			stmt.setDate(6, new java.sql.Date(new Date().getTime()));
 			stmt.executeUpdate();
 			conn.commit();

@@ -70,7 +70,7 @@ public class AdminAdminAction extends AdminBaseAction {
 			}
 			// 检测校验结果
 			validate(json);
-			adminService.addAdmin(email, adminName, password,AdminConstant.Status.INIT);
+			adminService.addAdmin(email, adminName, password,AdminConstant.Status.init);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
