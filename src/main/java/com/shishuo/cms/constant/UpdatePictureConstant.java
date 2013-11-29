@@ -35,7 +35,6 @@ public class UpdatePictureConstant {
         		num = srcHeight/srcWidth+1;
         	}	
         }
-//		String picture = ConfigConstant.IMAGE;
         String picture = "300x700;81x81;";
 		System.out.println(picture);
 		String[] str = picture.split(";");
@@ -53,22 +52,14 @@ public class UpdatePictureConstant {
 			}
 			descWidth=descImg.getWidth();
 			descHeight=descImg.getHeight();
-			System.out.println("descWidth="+descWidth+"********descHeight="+descHeight);
-			System.out.println("(descWidth-width)/2="+(descWidth-width)/2+"*******(descHeight-height)/2="+(descHeight-height)/2);
-			Graphics gq = descImg.getGraphics();
-			gq.drawImage(descImg, 0, 0, null); // 绘制截取后的图
-			gq.dispose();
-			ImageIO.write(descImg, "JPEG", new File(webroot+"/upload/article/"+descWidth+".jpg"));
 			finalImg=UpdatePicture.sdg(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
 			BufferedImage tag = new BufferedImage(width, height,
 	                 BufferedImage.TYPE_INT_RGB);
-			
 			Graphics g = tag.getGraphics();
 	         g.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
 	         g.dispose();
 	         // 输出为文件
 	         ImageIO.write(tag, "JPEG", new File(webroot+"/upload/article/"+id+"_big.jpg"));
-	         
 	         
 	         String[] se1 = str[1].split("x");
 				height=Integer.parseInt(se1[0]);
@@ -80,16 +71,9 @@ public class UpdatePictureConstant {
 				}
 				descWidth=descImg.getWidth();
 				descHeight=descImg.getHeight();
-				System.out.println("descWidth="+descWidth+"********descHeight="+descHeight);
-				System.out.println("(descWidth-width)/2="+(descWidth-width)/2+"*******(descHeight-height)/2="+(descHeight-height)/2);
-				Graphics gq1 = descImg.getGraphics();
-				gq1.drawImage(descImg, 0, 0, null); // 绘制截取后的图
-				gq1.dispose();
-				ImageIO.write(descImg, "JPEG", new File(webroot+"/upload/article/"+descWidth+".jpg"));
 				finalImg=UpdatePicture.sdg(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
 				BufferedImage tag1 = new BufferedImage(width, height,
 		                 BufferedImage.TYPE_INT_RGB);
-				
 				Graphics g1 = tag1.getGraphics();
 		         g1.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
 		         g1.dispose();

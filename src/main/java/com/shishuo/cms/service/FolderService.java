@@ -24,16 +24,13 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.dao.FolderDao;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
-import com.shishuo.cms.entity.vo.PageVo;
 
 /**
  * 目录服务
@@ -66,27 +63,6 @@ public class FolderService {
 	public List<Folder> getFolderListByFatherId(long fatherId) {
 		return folderDao.getFolderListByFatherId(fatherId);
 	}
-
-//	/**
-//	 * 得到所有子目录，包括子目录的子目录
-//	 * 
-//	 * @param fatherId
-//	 * @return List<FolderVo>
-//	 */
-//	public List<FolderVo> getFolderVoListByFatherIdPage(long fatherId) {
-//		List<Folder> list = this.getFolderListByFatherId(fatherId);
-//		List<FolderVo> allList = new ArrayList<FolderVo>();
-//		for (Folder folder : list) {
-//			List<Folder> folderList = this.getFolderListByFatherId(folder
-//					.getFolderId());
-//			for (Folder f : folderList) {
-//				FolderVo foderVo = new FolderVo();
-//				BeanUtils.copyProperties(f, foderVo);
-//				allList.add(foderVo);
-//			}
-//		}
-//		return allList;
-//	}
 
 	/**
 	 * 增加目录

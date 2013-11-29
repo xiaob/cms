@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.CommentConstant;
 import com.shishuo.cms.constant.FileConstant;
-import com.shishuo.cms.constant.FileConstant.Status;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.constant.FileConstant.Picture;
 import com.shishuo.cms.dao.FileDao;
@@ -252,7 +251,7 @@ public class FileService {
 			FileConstant.Status status, int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl("/CMS/admin/article/list?");
+		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/article/list?");
 		List<File> list = this.getFileListByType(type,
 				status, pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);

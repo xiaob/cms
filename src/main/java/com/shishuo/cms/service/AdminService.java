@@ -129,7 +129,7 @@ public class AdminService {
 	public PageVo<Admin> getAllListPage(int pageNum) {
 		PageVo<Admin> pageVo = new PageVo<Admin>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl("/CMS/admin/admin/all?");
+		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/admin/all?");
 		List<Admin> list = this
 				.getAllList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);

@@ -20,16 +20,9 @@ package com.shishuo.cms.action.admin;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +32,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.JsonVo;
 
 /**
