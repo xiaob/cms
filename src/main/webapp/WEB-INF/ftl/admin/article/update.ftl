@@ -45,10 +45,27 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
+									<label class="col-sm-2 col-sm-2 control-label">皮肤</label>
+									<div class="col-sm-10">
+										<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="template">
+											<#list template as tem>
+											<option value= "${tem}" <#if file.template=="${tem}">selected</#if>>${tem}</option>
+											</#list>
+										</select>
+									</div>
+								  </div>
+                                  <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章名称</label>
                                       <div class="col-sm-10">
                                           <input type="text" class="form-control" name="fileName" value="${file.name}"
                                           	placeholder="文章名称" id="fileName">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
+                                      <div class="col-sm-10">
+                                          <input type="text" class="form-control" name="content" value="${file.content}"
+                                          	placeholder="文章内容" id="description">
                                       </div>
                                   </div>
                                   <div class="form-group">
@@ -75,13 +92,6 @@
 										</#if>
 									</div>
 								  </div>
-                                  <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
-                                      <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="content" value="${file.content}"
-                                          	placeholder="文章内容" id="description">
-                                      </div>
-                                  </div>
                                   <div class="form-group">
                         			<label class="col-sm-2 col-sm-2 control-label"></label>
                             		<button class="btn btn-danger" type="submit">修改</button>

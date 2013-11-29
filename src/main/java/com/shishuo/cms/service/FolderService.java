@@ -48,7 +48,7 @@ public class FolderService {
 	private FolderDao folderDao;
 
 	/**
-	 * 得到目录
+	 * 得到指定目录
 	 * 
 	 * @param folderId
 	 * @return Folder
@@ -67,26 +67,26 @@ public class FolderService {
 		return folderDao.getFolderListByFatherId(fatherId);
 	}
 
-	/**
-	 * 得到所有子目录，包括子目录的子目录
-	 * 
-	 * @param fatherId
-	 * @return List<FolderVo>
-	 */
-	public List<FolderVo> getFolderVoListByFatherIdPage(long fatherId) {
-		List<Folder> list = this.getFolderListByFatherId(fatherId);
-		List<FolderVo> allList = new ArrayList<FolderVo>();
-		for (Folder folder : list) {
-			List<Folder> folderList = this.getFolderListByFatherId(folder
-					.getFolderId());
-			for (Folder f : folderList) {
-				FolderVo foderVo = new FolderVo();
-				BeanUtils.copyProperties(f, foderVo);
-				allList.add(foderVo);
-			}
-		}
-		return allList;
-	}
+//	/**
+//	 * 得到所有子目录，包括子目录的子目录
+//	 * 
+//	 * @param fatherId
+//	 * @return List<FolderVo>
+//	 */
+//	public List<FolderVo> getFolderVoListByFatherIdPage(long fatherId) {
+//		List<Folder> list = this.getFolderListByFatherId(fatherId);
+//		List<FolderVo> allList = new ArrayList<FolderVo>();
+//		for (Folder folder : list) {
+//			List<Folder> folderList = this.getFolderListByFatherId(folder
+//					.getFolderId());
+//			for (Folder f : folderList) {
+//				FolderVo foderVo = new FolderVo();
+//				BeanUtils.copyProperties(f, foderVo);
+//				allList.add(foderVo);
+//			}
+//		}
+//		return allList;
+//	}
 
 	/**
 	 * 增加目录
@@ -196,22 +196,6 @@ public class FolderService {
 	 */
 	public int getAllListPageCount(){
 		return (int)folderDao.getAllListPageCount();
-	}
-	
-	/**
-	 * 获得所有目录的分页
-	 * @param Integer
-	 * @return PageVo<Folder>
-	 *
-	 */
-	public PageVo<Folder> getAllListPageByNum(int pageNum){
-		PageVo<Folder> pageVo = new PageVo<Folder>(pageNum);
-		pageVo.setUrl("/CMS/admin/folder/allFolder.do?");
-		pageVo.setRows(5);
-		List<Folder> list = folderDao.getAllListPage(pageVo.getOffset(), pageVo.getRows());
-		pageVo.setList(list);
-		pageVo.setCount(this.getAllListPageCount());
-		return pageVo;
 	}
 	
 	/**

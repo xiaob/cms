@@ -3,13 +3,28 @@
 ## 欢迎使用 “师说CMS”
 
 > 使用Java语言开发的CMS（使用Apache2协议，可免费用于商业用途）<br>
-> Spring MVC为表现层，Spring为业务层，MyBatis为数据层。项目大量使用注解，代码注释清晰，文档齐全，是学习和二次开发的首选。
+> Spring MVC为表现层，Spring为业务层，MyBatis为数据层。项目大量使用注解，代码注释清晰，文档齐全，是学习和二次开发的首选。<br>
+><br>
+>QQ群：7343505
+
 
 ## 演示地址
 
 **前台演示：** http://42.121.56.21:8080/
 
 **后台演示：** http://42.121.56.21:8080/auth/admin/login
+
+## 技术关键词
+* jQuery
+* Bootstrap
+* Java
+* Maven
+* Spring
+* Spring MVC
+* MyBatis
+* MySQL
+* FreeMarker
+* Lucene
 
 ## 前言
 
@@ -26,11 +41,17 @@
 	# 编译
 	mvn compile
 	# 修改数据库配置文件
-	vi src/main/resources/shishuocms.properties
+		1、 把 src/main/resources/shishuocms.properties 拷贝到 CMS目录下
+		2、 修改shishuocms.properties里的超级管理员的email，和数据库连接的相关信息
 	# 安装
 	mvn exec:java -Dexec.mainClass="com.shishuo.cms.Install"
 	# 运行
 	mvn jetty:run
+	# 后台地址
+	http://127.0.0。1:8080/auth/admin/login
+	用户名：(shishuocms.properties里的超级管理员的email)
+	密  码：shishuocms
+
 
 ## 目标
 
@@ -47,6 +68,14 @@
  - 电子商务模块
  - 用户注册登录模块
  - 后台管理模块
+ 
+## 效果图
+首页<br>
+![首页](/doc/images/default.png "首页")<br>
+登录<br>
+![登录](/doc/images/login.png "登录")<br>
+文章管理<br>
+![文章管理](/doc/images/file.png "文章管理")
 
 ## 开发
 

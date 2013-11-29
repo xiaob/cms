@@ -40,10 +40,8 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">状态</label>
 							<div class="col-sm-10">
-								<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="status"> 	
-                                	<option value= "NORMAL">正常</option>
-                                	<option value= "FREEZE">冻结</option>
-                                </select>
+                                <input type="radio" name="status" value="NORMAL" <#if admin.status=="NORMAL">checked="checked"</#if>/>正常
+								<input type="radio" name="status" value="FREEZE" <#if admin.status=="FREEZE">checked="checked"</#if>/>冻结
 							</div>
 						</div>
 						<div class="form-group">

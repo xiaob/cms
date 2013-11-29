@@ -85,7 +85,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String allList(
-			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
 		modelMap.put("pageVo", adminService.getAllListPage(pageNum));
 		return "admin/admin/all";
@@ -110,7 +110,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
 	public JsonVo<String> updateAdmin(
 			@RequestParam(value = "adminName") String adminName,
-			@RequestParam(value = "password") String password,
+			@RequestParam(value = "password",defaultValue="-1") String password,
 			@RequestParam(value = "adminId") long adminId,
 			@RequestParam(value = "status") AdminConstant.Status status) {
 
@@ -121,7 +121,11 @@ public class AdminAdminAction extends AdminBaseAction {
 			}
 			// 检测校验结果
 			validate(json);
-			adminService.updateAdmin(adminId, adminName, password, status);
+			if(password.equals("-1")){
+				adminService.updateAdmin(adminId, adminName, "", status);
+			}else{
+				adminService.updateAdmin(adminId, adminName, password, status);
+			}
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

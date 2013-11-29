@@ -109,7 +109,7 @@ public class FileService {
 				offset, rows);
 		for (FileVo file : list) {
 			Admin admin = adminService.getAdminById(file.getAdminId());
-			Folder folder = folderService.getFolderById(file.getFileId());
+			Folder folder = folderService.getFolderById(file.getFolderId());
 			file.setAdmin(admin);
 			file.setFolder(folder);;
 		}
@@ -117,7 +117,7 @@ public class FileService {
 	}
 
 	/**
-	 * 得到目录的所有文件的数量
+	 * 得到目录的某种文件的数量
 	 * 
 	 * @param folderId
 	 * @return Integer
@@ -240,7 +240,7 @@ public class FileService {
 	}
 
 	/**
-	 * 获取文章文件类型的分页
+	 * 获取文章的分页
 	 * 
 	 * @param type
 	 * @param status
@@ -253,10 +253,10 @@ public class FileService {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
 		pageVo.setUrl("/CMS/admin/article/list?");
-		List<File> list = this.getFileListByType(FileConstant.Type.article,
+		List<File> list = this.getFileListByType(type,
 				status, pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileListByTypeCount(FileConstant.Type.article,
+		pageVo.setCount(this.getFileListByTypeCount(type,
 				status));
 		return pageVo;
 	}

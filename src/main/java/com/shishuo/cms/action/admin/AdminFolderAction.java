@@ -107,10 +107,11 @@ public class AdminFolderAction extends AdminBaseAction{
 	
 	/**
 	 * @author 进入修改目录资料页面
+	 * @throws Exception 
 	 *
 	 */
 	@RequestMapping(value = "/{folderId}",method = RequestMethod.GET)
-	public String oneFolder(@PathVariable long folderId,ModelMap modelMap){
+	public String oneFolder(@PathVariable long folderId,ModelMap modelMap) throws Exception{
 		Folder folder = folderService.getFolderById(folderId);
 		if(folder.getFatherId()==0){
 			modelMap.put("fatherFolderName","未分类");
@@ -120,6 +121,7 @@ public class AdminFolderAction extends AdminBaseAction{
 		}
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folder", folder);
+		modelMap.put("template", adminConfigAction.iterator("folder"));
 		return "admin/folder/update";
 	}
 	

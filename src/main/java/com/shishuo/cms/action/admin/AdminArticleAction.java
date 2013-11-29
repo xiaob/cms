@@ -58,8 +58,8 @@ public class AdminArticleAction extends AdminBaseAction {
 	 * 
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String allFolder(
-			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+	public String allAticle(
+			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
 		PageVo<File> pageVo = fileService.getFileListByTypePage(FileConstant.Type.article, FileConstant.Status.display, pageNum);
 		modelMap.put("pageVo", pageVo);
@@ -68,12 +68,13 @@ public class AdminArticleAction extends AdminBaseAction {
 
 	/**
 	 * @author 进入修改文章页面
+	 * @throws Exception 
 	 * 
 	 */
-	@RequestMapping(value = "/one", method = RequestMethod.GET)
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String one(
 			@RequestParam(value = "fileId", defaultValue = "1") long fileId,
-			ModelMap modelMap) {
+			ModelMap modelMap) throws Exception {
 		File file = fileService.getFileById(fileId);
 		if (file.getFolderId() == 0) {
 			modelMap.put("folderName", "未分类");
@@ -83,6 +84,7 @@ public class AdminArticleAction extends AdminBaseAction {
 		}
 		modelMap.put("file", file);
 		modelMap.put("folderAll", folderService.getAllFolder());
+		modelMap.put("template", adminConfigAction.iterator("file"));
 		return "admin/article/update";
 	}
 

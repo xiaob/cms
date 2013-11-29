@@ -8,7 +8,6 @@
     margin: 0;
     padding-left: 0;
 }
-
 </style>
 	<!--main content start-->
 	<section id="main-content">
@@ -37,7 +36,7 @@
                                     	<td>${commentVo.content}</td>
                                     	<td>${commentVo.status}</td>
                                     	<td>
-                                    		<#if commentVo.status=="DISABLE">
+                                    		<#if commentVo.status=="hidden">
                                     		<a href="/CMS/admin/comment/${commentVo.commentId}" title="审核">
                                     			<button class="btn btn-success btn-xs">
                   									<i class="icon-ok"></i>
