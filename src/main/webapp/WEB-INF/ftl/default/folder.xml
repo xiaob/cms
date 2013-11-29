@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <folder>
 	<item>
-		<ename>folder_temp1</ename>
-		<name>目录模板1</name>
-	</item>
-	<item>
-		<ename>folder_temp2</ename>
-		<name>目录模板2</name>
+		<ename>default</ename>
+		<name>目录模板</name>
 	</item>
 </folder>
