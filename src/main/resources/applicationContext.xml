@@ -63,6 +63,7 @@
 				<entry key="cms_folder_list" value-ref="folderListTag" />
 				<!-- 文件标签 -->
 				<entry key="cms_file_page" value-ref="filePageTag" />
+				<entry key="cms_file" value-ref="fileTag" /><!-- 单个文件标签 -->
 				<!-- 评论标签 -->
 				<entry key="cms_comment_page" value-ref="commentPageTag"/>
 			</map>

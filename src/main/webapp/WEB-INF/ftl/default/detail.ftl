@@ -9,7 +9,7 @@
         <div class="row">
             <!--blog start-->
             <div class="col-lg-9 ">
-            <@cms_file fileId = "${fileId}">
+            <@cms_file fileId="${fileId}">
                 <div class="blog-item">
                     <div class="row">
                         <div class="col-lg-2 col-sm-2">
@@ -109,7 +109,6 @@
             <div class="col-lg-3">
               <div class="blog-side-item">
               <#include "right.ftl">
-              <#include "file_acticle.ftl">
               </div>
             </div>
             <!--blog end-->

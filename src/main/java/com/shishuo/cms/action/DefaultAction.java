@@ -18,7 +18,6 @@
  */
 package com.shishuo.cms.action;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -108,6 +107,7 @@ public class DefaultAction {
 		Folder folder = folderService.getFolderById(file.getFolderId());
 		modelMap.addAttribute("ename", folder.getEname());
 		modelMap.addAttribute("fileId", fileId);
+		modelMap.addAttribute("folderId", file.getFileId());
 		modelMap.addAttribute("pageNum", pageNum);
 		return configService.getTemplatePath() + "/" + file.getTemplate();
 	}
