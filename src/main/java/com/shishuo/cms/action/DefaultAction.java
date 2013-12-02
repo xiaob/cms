@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.exception.FileNotFoundException;
 import com.shishuo.cms.exception.FolderNotFoundException;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.FileService;
@@ -102,11 +103,12 @@ public class DefaultAction {
 	 * @param pageNum
 	 * @param modelMap
 	 * @return
+	 * @throws FileNotFoundException 
 	 */
 	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
 	public String file(@PathVariable String ename, @PathVariable long fileId,
 			@RequestParam(value = "p", defaultValue = "1") long pageNum,
-			ModelMap modelMap) {
+			ModelMap modelMap) throws FileNotFoundException {
 		File file = fileService.getFileByFileId(fileId);
 		fileService.updateViewCount(fileId, file.getViewCount());
 		modelMap.addAttribute("ename", ename);
