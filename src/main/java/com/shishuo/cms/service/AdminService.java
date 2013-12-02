@@ -170,6 +170,13 @@ public class AdminService {
 	public int deleteAdmin(long adminId) {
 		return adminDao.deleteAdmin(adminId);
 	}
+	
+	/**
+	 * 通过email获得管理员资料
+	 * 
+	 * @param email
+	 * @return Admin
+	 */
 	public Admin getAdminByEmail(String email){
 		return adminDao.getAdminByEmail(email);
 	}

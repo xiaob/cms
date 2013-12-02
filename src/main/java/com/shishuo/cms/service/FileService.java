@@ -58,7 +58,7 @@ public class FileService {
 	private CommentService commentService;
 
 	/**
-	 * 得到目录
+	 * 得到文件
 	 * 
 	 * @param fileId
 	 * @return File
@@ -96,7 +96,7 @@ public class FileService {
 	}
 
 	/**
-	 * 得到目录的所有文件
+	 * 得到目录下的所有文件
 	 * 
 	 * @param foderId
 	 * @return
@@ -200,45 +200,6 @@ public class FileService {
 	}
 
 	/**
-	 * 所有文件列表
-	 * 
-	 * @param offset
-	 * @param rows
-	 * @return List<File>
-	 * 
-	 */
-	public List<File> getAllList(long offset, long rows) {
-		return fileDao.getAllList(offset, rows);
-	}
-
-	/**
-	 * 获取所有文件的数量
-	 * 
-	 * @return Integer
-	 * 
-	 */
-	public int getAllListCount() {
-		return (int) fileDao.getAllListCount();
-	}
-
-	/**
-	 * 获取所有文件的分页
-	 * 
-	 * @param Integer
-	 * @return PageVo<File>
-	 * 
-	 */
-	public PageVo<File> getAllListPage(int pageNum) {
-		PageVo<File> pageVo = new PageVo<File>(pageNum);
-		pageVo.setRows(5);
-		pageVo.setUrl("");
-		List<File> list = this.getAllList(pageVo.getOffset(), pageVo.getRows());
-		pageVo.setList(list);
-		pageVo.setCount(this.getAllListCount());
-		return pageVo;
-	}
-
-	/**
 	 * 获取文章的分页
 	 * 
 	 * @param type
@@ -303,16 +264,16 @@ public class FileService {
 
 	}
 
-	public List<File> getUserImageList(long userId, int type, long offset,
+	public List<File> getUserImageList(long userId, FileConstant.Type type, long offset,
 			long rows) {
 		return fileDao.getUserImageList(userId, type, offset, rows);
 	}
 
-	public int getUserImageCount(long userId, int type) {
+	public int getUserImageCount(long userId, FileConstant.Type type) {
 		return fileDao.getUserImageCount(userId, type);
 	}
 
-	public PageVo<File> getUserImagePage(long userId, int type, int pageNum) {
+	public PageVo<File> getUserImagePage(long userId, FileConstant.Type type, int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(20);
 		pageVo.setUrl("");

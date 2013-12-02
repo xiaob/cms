@@ -9,11 +9,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.shishuo.cms.service.ConfigService;
 
 @Service
 public class UpdatePictureConstant {
 
+	@Autowired
+	private ConfigService configService;
+	
 	public void updatePicture(long id,String image) throws FileNotFoundException, IOException{
 		BufferedImage bi = ImageIO.read(new File(image));
         int srcWidth = bi.getWidth(); // 源图宽度
@@ -35,7 +41,7 @@ public class UpdatePictureConstant {
         		num = srcHeight/srcWidth+1;
         	}	
         }
-        String picture = "300x700;81x81;";
+        String picture = configService.getConfigByKey("article_picture_size", true);
 		System.out.println(picture);
 		String[] str = picture.split(";");
 		BufferedImage descImg = null;
@@ -56,12 +62,12 @@ public class UpdatePictureConstant {
 			BufferedImage tag = new BufferedImage(width, height,
 	                 BufferedImage.TYPE_INT_RGB);
 			Graphics g = tag.getGraphics();
-	         g.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
-	         g.dispose();
-	         // 输出为文件
-	         ImageIO.write(tag, "JPEG", new File(webroot+"/upload/article/"+id+"_big.jpg"));
-	         
-	         String[] se1 = str[1].split("x");
+	        g.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
+	        g.dispose();
+	        // 输出为文件
+	        ImageIO.write(tag, "JPEG", new File(webroot+"/upload/article/"+id+"_big.jpg"));
+	        
+	        String[] se1 = str[1].split("x");
 				height=Integer.parseInt(se1[0]);
 				width=Integer.parseInt(se1[1]);
 				if(height>=width){
@@ -75,9 +81,9 @@ public class UpdatePictureConstant {
 				BufferedImage tag1 = new BufferedImage(width, height,
 		                 BufferedImage.TYPE_INT_RGB);
 				Graphics g1 = tag1.getGraphics();
-		         g1.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
-		         g1.dispose();
-		         // 输出为文件
-		         ImageIO.write(tag1, "JPEG", new File(webroot+"/upload/article/"+id+"_small.jpg"));
+		        g1.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
+		        g1.dispose();
+		        // 输出为文件
+		        ImageIO.write(tag1, "JPEG", new File(webroot+"/upload/article/"+id+"_small.jpg"));
 	}
 }

@@ -65,16 +65,6 @@
 		select count(1) from file where userId = #{userId} and type=4
 	</select>
 
-	<select id="getAllList" resultType="com.shishuo.cms.entity.File">
-		select * from file limit
-		#{offset},#{rows}
-	</select>
-
-	<select id="getAllListCount" resultType="long">
-		select count(*) from
-		file
-	</select>
-
 	<select id="getFileListByType" resultType="com.shishuo.cms.entity.File">
 		select * from file
 		where type=#{type} and status=#{status} order by createTime desc limit #{offset},#{rows} 
