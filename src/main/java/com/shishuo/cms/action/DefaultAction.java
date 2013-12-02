@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.exception.FolderNotFoundException;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.FileService;
 import com.shishuo.cms.service.FolderService;
@@ -82,11 +83,15 @@ public class DefaultAction {
 	public String folder(@PathVariable String ename,
 			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
-		Folder folder = folderService.getFolderByEname(ename);
-		modelMap.addAttribute("ename", ename);
-		modelMap.addAttribute("folderId", folder.getFolderId());
-		modelMap.addAttribute("pageNum", pageNum);
-		return configService.getTemplatePath() + "/default";
+		try {
+			Folder folder = folderService.getFolderByEname(ename);
+			modelMap.addAttribute("ename", ename);
+			modelMap.addAttribute("folderId", folder.getFolderId());
+			modelMap.addAttribute("pageNum", pageNum);
+			return configService.getTemplatePath() + "/default";
+		} catch (FolderNotFoundException e) {
+			return configService.getTemplatePath() + "/404";
+		}
 	}
 
 	/**

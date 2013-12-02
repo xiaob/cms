@@ -26,14 +26,15 @@ import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.CommentConstant;
 import com.shishuo.cms.constant.FileConstant;
-import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.constant.FileConstant.Picture;
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.FileDao;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.PageVo;
+import com.shishuo.cms.exception.FileNotFoundException;
 
 /**
  * 
@@ -62,12 +63,17 @@ public class FileService {
 	 * 
 	 * @param fileId
 	 * @return File
+	 * @throws FileNotFoundException 
 	 */
-	public FileVo getFileById(long fileId) {
+	public FileVo getFileById(long fileId) throws FileNotFoundException {
 		FileVo file = fileDao.getFileById(fileId);
-		Admin admin = adminService.getAdminById(file.getAdminId());
-		file.setAdmin(admin);
-		return file;
+		if (file == null) {
+			throw new FileNotFoundException(fileId  +" 文件，不存在");
+		} else {
+			Admin admin = adminService.getAdminById(file.getAdminId());
+			file.setAdmin(admin);
+			return file;
+		}
 	}
 
 	/**
@@ -110,7 +116,8 @@ public class FileService {
 			Admin admin = adminService.getAdminById(file.getAdminId());
 			Folder folder = folderService.getFolderById(file.getFolderId());
 			file.setAdmin(admin);
-			file.setFolder(folder);;
+			file.setFolder(folder);
+			;
 		}
 		return list;
 	}
@@ -140,7 +147,7 @@ public class FileService {
 	 */
 	public File addFile(long folderId, long adminId,
 			FileConstant.Picture picture, String name, String content,
-			FileConstant.Type type, FileConstant.Status status,String template) {
+			FileConstant.Type type, FileConstant.Status status, String template) {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
@@ -183,7 +190,7 @@ public class FileService {
 	 */
 	public File updateFileById(long fileId, long folderId, long adminId,
 			FileConstant.Picture picture, String name, String content,
-			FileConstant.Type type, FileConstant.Status status,String template) {
+			FileConstant.Type type, FileConstant.Status status, String template) {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
@@ -212,12 +219,11 @@ public class FileService {
 			FileConstant.Status status, int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/article/list?");
-		List<File> list = this.getFileListByType(type,
-				status, pageVo.getOffset(), pageVo.getRows());
+		pageVo.setUrl(SystemConstant.BASE_PATH + "/admin/article/list?");
+		List<File> list = this.getFileListByType(type, status,
+				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileListByTypeCount(type,
-				status));
+		pageVo.setCount(this.getFileListByTypeCount(type, status));
 		return pageVo;
 	}
 
@@ -264,8 +270,8 @@ public class FileService {
 
 	}
 
-	public List<File> getUserImageList(long userId, FileConstant.Type type, long offset,
-			long rows) {
+	public List<File> getUserImageList(long userId, FileConstant.Type type,
+			long offset, long rows) {
 		return fileDao.getUserImageList(userId, type, offset, rows);
 	}
 
@@ -273,7 +279,8 @@ public class FileService {
 		return fileDao.getUserImageCount(userId, type);
 	}
 
-	public PageVo<File> getUserImagePage(long userId, FileConstant.Type type, int pageNum) {
+	public PageVo<File> getUserImagePage(long userId, FileConstant.Type type,
+			int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(20);
 		pageVo.setUrl("");
