@@ -1,5 +1,5 @@
 <#assign menu="system">
-<#assign submenu="admin_list">
+<#assign submenu="system_picture">
 <#include "/admin/head.ftl">
 <style type="text/css">
 .pagination {
@@ -20,47 +20,39 @@
                 <div class="panel-body">
                 	<div class="adv-table">
                     	<div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
-                            <table class="table table-striped table-advance table-hover">
-                            	<thead>
-                                	<tr>
-                						<th>管理员名称</th>
-                						<th>状态</th>
-                						<th>时间</th>
-                						<th>操作</th>
-              						</tr>
-                                </thead>
-                            	<tbody role="alert" aria-live="polite" aria-relevant="all">
-                            		<#list pageVo.list as e>
-                            		<tr class="gradeA odd">
-                                    	<td>${e.name}</td>
-                                    	<td>${e.status}</td>
-                                    	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                                    	<td>
-                  							<!-- Icons -->
-                							<a href="${basePath}/admin/admin/one?adminId=${e.adminId}" title="修改">
-                								<button class="btn btn-primary btn-xs">
-                									<i class="icon-pencil"></i>
-                								</button>
-                							</a>
-                							<a href="${basePath}/admin/admin/delete?adminId=${e.adminId}" title="删除">
-                  								<button class="btn btn-danger btn-xs">
-                  									<i class="icon-trash "></i>
-                  								</button>
-                  							</a>
-                						</td>
-                                	</tr>
-                                	</#list>
-                               	</tbody>
-                              </table>
-                              <div style="height: 30px;">
-                             	<div class="pagination">${pageVo.pageNumHtml} </div>
-                              </div>
-                           </div>
+                    	<form id="add_article_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/config/update/picture.json">
+                            <fieldset>
+                    		<div class="form-group">
+                            	<label class="col-sm-2 col-sm-2 control-label">大图</label>
+                                <div class="col-sm-10">
+                                	<label class="col-sm-2 col-sm-2 control-label">最大宽度</label>
+                                	<input type="number" class="small-text" value="800" id="picture_big_w" name="bigWidth">
+                                	<label class="col-sm-2 col-sm-2 control-label">最大高度</label>
+                                	<input type="number" class="small-text" value="800" id="picture_big_h" name="bigHeight">
+                                </div>
+                           	</div>
+                           	<div class="form-group">
+                            	<label class="col-sm-2 col-sm-2 control-label">小图</label>
+                                <div class="col-sm-10">
+                                	<label class="col-sm-2 col-sm-2 control-label">最大宽度</label>
+                                	<input type="number" class="small-text" value="300" id="picture_small_w" name="smallWidth">
+                                	<label class="col-sm-2 col-sm-2 control-label">最大高度</label>
+                                	<input type="number" class="small-text" value="300" id="picture_small_h" name="smallHeight">
+                                </div>
+                           	</div>
+                           	<div class="form-group">
+                            	<label class="col-sm-2 col-sm-2 control-label"></label>
+                            	<div class="col-sm-10">
+                                	<button class="btn btn-danger" type="submit">修改配置</button>
+                            	</div>
+                            </div>
+                        </fieldset>
+                        </form>
                         </div>
                   </div>
-              </section>
+			</section>
               <!-- page end-->
-          </section>
 		</section>
+	</section>
 		<!--main content end-->
 <#include "/admin/foot.ftl">

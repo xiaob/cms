@@ -150,6 +150,7 @@
 						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>系统管理</span></a>
 						<ul class="sub">
 							<li <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
+							<li <#if submenu="system_picture">class="active"</#if>><a href="${basePath}/admin/config/picture">图片设置</a></li>
 							<li <#if submenu="add_admin">class="active"</#if>><a href="${basePath}/admin/admin/add">添加管理员</a></li>
 							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/all">管理员列表</a></li>
 						</ul>

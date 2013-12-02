@@ -104,8 +104,7 @@ public class DefaultAction {
 			ModelMap modelMap) {
 		File file = fileService.getFileById(fileId);
 		fileService.updateViewCount(fileId, file.getViewCount());
-		Folder folder = folderService.getFolderById(file.getFolderId());
-		modelMap.addAttribute("ename", folder.getEname());
+		modelMap.addAttribute("ename", ename);
 		modelMap.addAttribute("fileId", fileId);
 		modelMap.addAttribute("folderId", file.getFileId());
 		modelMap.addAttribute("pageNum", pageNum);

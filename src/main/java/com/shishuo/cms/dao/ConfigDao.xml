@@ -2,16 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shishuo.cms.dao.ConfigDao">
 	
-	<select id="getConfig" 
-		resultType="com.shishuo.cms.entity.Config">
-		select * from config limit #{offset},#{rows}
-	</select>
-	
-	<select id="getAllConfig" 
-		resultType="com.shishuo.cms.entity.Config">
-		select * from config
-	</select>
-
 	<insert id="addConfig" parameterType="com.shishuo.cms.entity.Config">
 		insert into
 		config(`key`,`value`,createTime)

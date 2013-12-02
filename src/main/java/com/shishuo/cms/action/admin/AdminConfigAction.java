@@ -117,6 +117,44 @@ public class AdminConfigAction extends AdminBaseAction {
 		return json;
 	}
 
+	@RequestMapping(value = "/picture", method = RequestMethod.GET)
+	public String picture(){
+		return "admin/config/picture";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/update/picture.json", method = RequestMethod.GET)
+	public JsonVo<String> updatePicture(
+			@RequestParam(value = "bigWidth") String bigWidth,
+			@RequestParam(value = "bigheight") String bigheight,
+			@RequestParam(value = "smallWidth") String smallWidth,
+			@RequestParam(value = "smallHeight") String smallHeight){
+		JsonVo<String> json = new JsonVo<String>();
+		try {
+			if (StringUtils.isBlank(bigWidth)) {
+				json.getErrors().put("bigWidth", "大图的宽度不能为空");
+			}
+			if (StringUtils.isBlank(bigheight)) {
+				json.getErrors().put("bigheight", "大图的高度不能为空");
+			}
+			if (StringUtils.isBlank(smallWidth)) {
+				json.getErrors().put("smallWidth", "小图的宽度不能为空");
+			}
+			if (StringUtils.isBlank(smallHeight)) {
+				json.getErrors().put("smallHeight", "小图的高度不能为空");
+			}
+			
+			// 检测校验结果
+			validate(json);
+			String strb = bigWidth+"x"+bigheight+";"+smallWidth+"x"+smallHeight+";";
+			configSevice.updagteConfigByKey("article_picture_size", strb);
+			json.setResult(true);
+		} catch (Exception e) {
+			json.setResult(false);
+			json.setMsg(e.getMessage());
+		}
+		return json;
+	}
+	
 	private List<String> getTemplate() {
 		List<String> templateList = new ArrayList<String>();
 		String templatePath = System
