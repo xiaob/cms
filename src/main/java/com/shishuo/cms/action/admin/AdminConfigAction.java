@@ -117,6 +117,11 @@ public class AdminConfigAction extends AdminBaseAction {
 		return json;
 	}
 
+	@RequestMapping(value = "/picture", method = RequestMethod.GET)
+	public String picture(){
+		return "admin/config/picture";
+	}
+	
 	private List<String> getTemplate() {
 		List<String> templateList = new ArrayList<String>();
 		String templatePath = System

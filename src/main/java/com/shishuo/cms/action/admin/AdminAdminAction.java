@@ -18,8 +18,6 @@
  */
 package com.shishuo.cms.action.admin;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,7 +61,7 @@ public class AdminAdminAction extends AdminBaseAction {
 			@RequestParam(value = "email") String email,
 			@RequestParam(value = "password") String password) {
 
-		List<Admin> list = adminService.getAllAdmin();
+		Admin admin = adminService.getAdminByEmail(email);
 		JsonVo<String> json = new JsonVo<String>();
 		try {
 			if (adminName.equals("")) {
@@ -72,10 +70,8 @@ public class AdminAdminAction extends AdminBaseAction {
 			if (email.equals("")) {
 				json.getErrors().put("email", "管理员邮箱不能为空");
 			}else{
-				for(Admin admin:list){
-					if(email.equals(admin.getEmail())){
-						json.getErrors().put("email", "管理员邮箱不能重复");
-					}
+				if(admin!=null){
+					json.getErrors().put("email", "管理员邮箱不能重复");
 				}
 			}
 			// 检测校验结果
@@ -121,24 +117,23 @@ public class AdminAdminAction extends AdminBaseAction {
 	public JsonVo<String> updateAdmin(
 			@RequestParam(value = "adminName") String adminName,
 			@RequestParam(value = "email") String email,
-			@RequestParam(value = "password",defaultValue="-1") String password,
+			@RequestParam(value = "password") String password,
 			@RequestParam(value = "adminId") long adminId,
 			@RequestParam(value = "status") AdminConstant.Status status) {
 
 		JsonVo<String> json = new JsonVo<String>();
-		List<Admin> list = adminService.getAllAdmin();
+		Admin admin = adminService.getAdminByEmail(email);
 		try {
 			if (adminName.equals("")) {
 				json.getErrors().put("adminName", "管理员名称不能为空");
 			}
 			if(email.equals("")){
 				json.getErrors().put("email", "电子邮箱不能为空");
-				for(Admin admin:list){
-					if(admin.getAdminId()!=adminId){
-						if(email.equals(admin.getEmail())){
-							json.getErrors().put("email", "电子邮箱不能重复");
-						}
-					}
+			}else{
+				if(admin==null || admin.getAdminId()==adminId){
+					
+				}else{
+					json.getErrors().put("email", "管理员邮箱不能重复");
 				}
 			}
 			// 检测校验结果

@@ -69,7 +69,7 @@
                                   </div>
                                  </fieldset>
                               </form>
-                              <p>文章添加成功。<a href="<a href="${basePath}/${folderEname}/${articleId}">">查看文章</a></p>
+                              <p id="add_article_p">文章添加成功.<a href="<a href="${basePath}/admin/article/list">">前往文章列表</a></p>
                           </div>
                       </section>
                   </div>
@@ -83,7 +83,7 @@
 		$('#add_article_form').bind('form-pre-serialize', function(event,form,options,veto){
     		tinyMCE.triggerSave();
 		});
-		
+		$("#add_article_p").hide();
 		$('#add_article_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {
@@ -100,9 +100,7 @@
 										dataType : 'json',
 										success : function(data) {
 											if (data.result) {
-												bootbox.alert("保存成功，将刷新页面", function() {
-													window.location.reload();
-												});
+												$("#add_article_p").show();
 											}else{
 												showErrors($('#add_article_picture_form'),data.errors);
 											}
