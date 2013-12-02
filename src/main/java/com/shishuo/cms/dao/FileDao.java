@@ -75,7 +75,7 @@ public interface FileDao {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteFile(File file);
+	public boolean deleteFile(@Param("fileId") long fileId,@Param("status") FileConstant.Status status);
 
 	/**
 	 * 修改文件
@@ -141,7 +141,8 @@ public interface FileDao {
 	 * @param File
 	 * @return Integer
 	 */
-	public int getRecycle(File file);
+	public int updateStatusByFileId(@Param("fileId") long fileId,
+			@Param("status") FileConstant.Status status);
 
 	/**
 	 * 更新浏览人数

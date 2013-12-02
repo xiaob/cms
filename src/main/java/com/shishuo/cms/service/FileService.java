@@ -63,7 +63,7 @@ public class FileService {
 	 * @param fileId
 	 * @return File
 	 */
-	public FileVo getFileById(long fileId) {
+	public FileVo getFileByFileId(long fileId) {
 		FileVo file = fileDao.getFileById(fileId);
 		Admin admin = adminService.getAdminById(file.getAdminId());
 		file.setAdmin(admin);
@@ -89,7 +89,7 @@ public class FileService {
 		}
 		pageVo.setRows(rows);
 		pageVo.setCount(this.getFileCountByFolderId(folderId, type));
-		List<FileVo> list = this.getFileListByFolderId(folderId, type,
+		List<FileVo> list = this.getAllFileByFolderId(folderId,FileConstant.Status.display,type,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
 		return pageVo;
@@ -102,7 +102,7 @@ public class FileService {
 	 * @return
 	 */
 
-	public List<FileVo> getFileListByFolderId(long folderId,
+	public List<FileVo> getAllFileByFolderId(long folderId,FileConstant.Status status,
 			FileConstant.Type type, long offset, long rows) {
 		List<FileVo> list = fileDao.getFileListByFoderId(folderId, type,
 				offset, rows);
@@ -163,9 +163,8 @@ public class FileService {
 	 * @param fileId
 	 * @return boolean
 	 */
-	public boolean deleteFileById(long fileId) {
-		File file = fileDao.getFileById(fileId);
-		return fileDao.deleteFile(file);
+	public boolean deleteFileByFileId(long fileId) {
+		return fileDao.deleteFile(fileId,FileConstant.Status.hidden);
 	}
 
 	/**
@@ -181,7 +180,7 @@ public class FileService {
 	 * @param status
 	 * @return
 	 */
-	public File updateFileById(long fileId, long folderId, long adminId,
+	public File updateFileByFileId(long fileId, long folderId, long adminId,
 			FileConstant.Picture picture, String name, String content,
 			FileConstant.Type type, FileConstant.Status status,String template) {
 		File file = fileDao.getFileById(fileId);
@@ -200,7 +199,7 @@ public class FileService {
 	}
 
 	/**
-	 * 获取文章的分页
+	 * 获取某种文件的分页
 	 * 
 	 * @param type
 	 * @param status
@@ -208,15 +207,15 @@ public class FileService {
 	 * @return PageVo<File>
 	 * 
 	 */
-	public PageVo<File> getFileListByTypePage(FileConstant.Type type,
+	public PageVo<File> getAllFileByTypePage(FileConstant.Type type,
 			FileConstant.Status status, int pageNum) {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/article/list?");
-		List<File> list = this.getFileListByType(type,
+		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/"+type+"/list?");
+		List<File> list = this.getAllFileByType(type,
 				status, pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileListByTypeCount(type,
+		pageVo.setCount(this.getAllFileByTypeCount(type,
 				status));
 		return pageVo;
 	}
@@ -231,7 +230,7 @@ public class FileService {
 	 * @return List<File>
 	 * 
 	 */
-	public List<File> getFileListByType(FileConstant.Type type,
+	public List<File> getAllFileByType(FileConstant.Type type,
 			FileConstant.Status status, long offset, long rows) {
 		return fileDao.getFileListByType(type, status, offset, rows);
 	}
@@ -244,24 +243,20 @@ public class FileService {
 	 * @param Integer
 	 * 
 	 */
-	public int getFileListByTypeCount(FileConstant.Type type,
+	public int getAllFileByTypeCount(FileConstant.Type type,
 			FileConstant.Status status) {
 		return fileDao.getFileListByTypeCount(type, status);
 	}
 
 	/**
 	 * 放进回收站或者从回收站中还原
-	 * 
 	 * @param fileId
 	 * @param status
 	 * @return boolean
 	 * 
 	 */
-	public void recycle(long fileId, FileConstant.Status status) {
-		File file = this.getFileById(fileId);
-		file.setStatus(status);
-		fileDao.getRecycle(file);
-
+	public void updateStatusByFileId(long fileId, FileConstant.Status status) {
+		fileDao.updateStatusByFileId(fileId,status);
 	}
 
 	public List<File> getUserImageList(long userId, FileConstant.Type type, long offset,
@@ -315,12 +310,12 @@ public class FileService {
 		return fileDao.getArticleByPicture(type, picture);
 	}
 
-	public PageVo<File> getNewActicle(Picture picture) {
+	public PageVo<File> getNewActicle(Picture picture){
 		PageVo<File> pageFile = new PageVo<File>(1);
-		if (picture.name().equals("exist")) {
+		if (picture.name().equals("exist")){
 			pageFile.setRows(3);
-			List<File> fileList = this.getFileListByType(
-					FileConstant.Type.article, FileConstant.Status.display,
+			List<File> fileList = this.getAllFileByType(
+					FileConstant.Type.article,FileConstant.Status.display,
 					pageFile.getOffset(), pageFile.getRows());
 			pageFile.setList(fileList);
 		}

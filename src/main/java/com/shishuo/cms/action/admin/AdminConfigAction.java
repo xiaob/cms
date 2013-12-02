@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.vo.JsonVo;
 
@@ -169,18 +168,5 @@ public class AdminConfigAction extends AdminBaseAction {
 		}
 		return templateList;
 	}
-	
-	public List<String> iterator (String template)throws Exception{
-	    XmlMapper xmlMapper = new XmlMapper();
-	    List<String> list = new ArrayList<String>();
-	    List entries = xmlMapper.readValue(new File(System
-				.getProperty(SystemConstant.SHISHUO_CMS_ROOT) +"/WEB-INF/ftl/default/"+template+".xml"), List.class);
-	    for(int i=0;i<entries.size();i++){
-	    	String[] str = entries.get(i).toString().split(",");
-	    		String[] strin = str[0].split("=");
-	    		list.add(strin[1]);
-	    }
-	    return list;
-	}
-	
+		
 }

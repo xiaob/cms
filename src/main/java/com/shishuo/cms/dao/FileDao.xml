@@ -4,7 +4,7 @@
 
 	<select id="getFileById" parameterType="long"
 		resultType="com.shishuo.cms.entity.vo.FileVo">
-		select * from file where fileId=#{fileId}
+		select * from file where fileId=#{fileId} and status=#{status}
 	</select>
 
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
@@ -19,7 +19,7 @@
 
 	<delete id="deleteFile" parameterType="com.shishuo.cms.entity.File">
 		delete from file where
-		fileId=#{fileId}
+		fileId=#{fileId} and status=#{status}
 	</delete>
 	<select id="getFileListByFoderId" resultType="com.shishuo.cms.entity.vo.FileVo">
 		select * from file
@@ -37,7 +37,7 @@
 		where fileId=#{fileId}
 	</update>
 
-	<update id="getRecycle" parameterType="com.shishuo.cms.entity.File">
+	<update id="updateStatusByFileId">
 		update file set
 		status=#{status} where fileId=#{fileId}
 	</update>

@@ -85,7 +85,7 @@ public class AdminPictureUpLoadAction extends AdminBaseAction {
     public String delete(@RequestParam("fileId") String fileId,HttpServletRequest request){
     	String[] fileIdArray = fileId.split(",");
     	for(String id : fileIdArray){
-    		fileService.deleteFileById(Long.parseLong(id));
+    		fileService.deleteFileByFileId(Long.parseLong(id));
     	}
     	return null;
     }

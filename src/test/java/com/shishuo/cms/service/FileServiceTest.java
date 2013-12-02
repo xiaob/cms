@@ -21,10 +21,10 @@ public class FileServiceTest {
 //				.getFolderId());
 //	}
 
-	@Test
-	public void testDeleteFileById() {
-		assertEquals(true, fileService.deleteFileById(3));
-	}
+//	@Test
+//	public void testDeleteFileById() {
+//		assertEquals(true, fileService.deleteFileById(3));
+//	}
 
 //	@Test
 //	public void testUpdateFileById() {
@@ -38,10 +38,10 @@ public class FileServiceTest {
 //	public void testGetFilePageByFoderId() {
 //		assertEquals(2, fileService.getFilePageByFoderId(1, 1).getPageCount());
 //	}
-
-	@Test
-	public void testGetFileById() {
-		assertEquals(2, fileService.getFileById(2).getFileId());
-	}
+//
+//	@Test
+//	public void testGetFileById() {
+//		assertEquals(2, fileService.getFileById(2).getFileId());
+//	}
 
 }

@@ -86,14 +86,14 @@
 						<a href="javascript:;" <#if menu="article">class="active"</#if>> <i class="icon-book"></i> <span>文章管理</span></a>
 						<ul class="sub">
 							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/article/add">增加文章</a></li>
-							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/article/list">文章列表</a></li>
-							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/recycle/list">回收站</a></li>
+							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/file/page?type="article"">文章列表</a></li>
+							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/page?status="hidden"">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu">
 						<a href="javascript:;" <#if menu="comment">class="active"</#if>> <i class="icon-book"></i> <span>评论管理</span></a>
 						<ul class="sub">
-							<li <#if submenu="comment_list">class="active"</#if>><a href="${basePath}/admin/comment/all">所有评论</a></li>
+							<li <#if submenu="comment_list">class="active"</#if>><a href="${basePath}/admin/comment/page">所有评论</a></li>
 							<li <#if submenu="auditing_list_comment">class="active"</#if>><a href="${basePath}/admin/comment/auditing/list">审核评论列表</a></li>
 						</ul>
 					</li>
@@ -102,7 +102,7 @@
 						<a href="javascript:;" > <i class="icon-camera-retro"></i> <span>图片管理</span></a>
 						<ul class="sub">
 							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/picture/">上传图片</a></li>
-							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/picture/list">图片列表</a></li>
+							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/file/page?type="photo"">图片列表</a></li>
 							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/picture/trash">回收站</a></li>
 						</ul>
 					</li>
@@ -113,7 +113,7 @@
 						<ul class="sub">
 							<li><a href="#">上传文件</a></li>
 							<li><a href="${basePath}/admin/upload">上传文件</a></li>
-							<li><a href="buttons.html">文件列表</a></li>
+							<li><a href="${basePath}/admin/file/page?type="download"">文件列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
 					</li>
@@ -123,7 +123,7 @@
 						<a href="javascript:;" > <i class="icon-gift"></i> <span>商品管理</span></a>
 						<ul class="sub">
 							<li><a href="general.html">增加商品</a></li>
-							<li><a href="buttons.html">商品列表</a></li>
+							<li><a href="${basePath}/admin/file/page?type="shop"">商品列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
 					</li>											

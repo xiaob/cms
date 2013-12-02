@@ -24,12 +24,12 @@ public class ConfigServiceTest {
 		assertEquals("h", configService.addConfig("h", "ew").getKey());
 	}
 
-	@Test
-	public void testGetConfigPage() {
-		PageVo<Config> pageVo = configService.getConfigPage(1);
-		assertNotNull(pageVo);
-		assertEquals(6, pageVo.getList().size());
-	}
+//	@Test
+//	public void testGetConfigPage() {
+//		PageVo<Config> pageVo = configService.getConfigPage(1);
+//		assertNotNull(pageVo);
+//		assertEquals(6, pageVo.getList().size());
+//	}
 
 	@Test
 	public void testDeleteConfigByKey() {

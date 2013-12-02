@@ -55,7 +55,7 @@ public class AdminFolderAction extends AdminBaseAction{
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folderName", "");
 		modelMap.put("folderEname", "");
-		modelMap.put("template", adminConfigAction.iterator("folder"));
+//		modelMap.put("template", adminConfigAction.iterator("folder"));
 		return "admin/folder/folder";
 	}
 	
@@ -128,7 +128,7 @@ public class AdminFolderAction extends AdminBaseAction{
 		}
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folder", folder);
-		modelMap.put("template", adminConfigAction.iterator("folder"));
+//		modelMap.put("template", adminConfigAction.iterator("folder"));
 		return "admin/folder/update";
 	}
 	

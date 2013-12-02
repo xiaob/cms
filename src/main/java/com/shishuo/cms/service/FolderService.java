@@ -31,6 +31,7 @@ import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.dao.FolderDao;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
+import com.shishuo.cms.exception.FolderNotFoundException;
 
 /**
  * 目录服务
@@ -74,15 +75,16 @@ public class FolderService {
 	 * @param type
 	 * @return Folder
 	 */
-	public Folder addFolder(long fatherId, String name, FolderConstant.Status status, String ename,
-			FolderConstant.Type type,FolderConstant.Rank rank,String template) {
+	public Folder addFolder(long fatherId, String name,
+			FolderConstant.Status status, String ename,
+			FolderConstant.Type type, FolderConstant.Rank rank, String template) {
 		Folder folder = new Folder();
 		Folder fatherFolder = this.getFolderById(fatherId);
 		folder.setFatherId(fatherId);
-		if(fatherId==0){
+		if (fatherId == 0) {
 			folder.setLevel(1);
-		}else{
-			folder.setLevel(fatherFolder.getLevel()+1);
+		} else {
+			folder.setLevel(fatherFolder.getLevel() + 1);
 		}
 		folder.setEname(ename);
 		folder.setName(name);
@@ -120,8 +122,9 @@ public class FolderService {
 	 * @param sort
 	 * @return folder
 	 */
-	public Folder updateFolderById(long folderId, long fatherId, String ename,String name,
-			FolderConstant.Status status, FolderConstant.Type type,FolderConstant.Rank rank, int sort) {
+	public Folder updateFolderById(long folderId, long fatherId, String ename,
+			String name, FolderConstant.Status status,
+			FolderConstant.Type type, FolderConstant.Rank rank, int sort) {
 		Folder folder = this.getFolderById(folderId);
 		folder.setFatherId(fatherId);
 		folder.setEname(ename);
@@ -136,86 +139,98 @@ public class FolderService {
 
 	/**
 	 * 通过ename获得目录
+	 * 
 	 * @param ename
 	 * @return Folder
-	 *
+	 * @throws FolderNotFoundException
+	 * 
 	 */
-	public Folder getFolderByEname(String ename) {
+	public Folder getFolderByEname(String ename) throws FolderNotFoundException {
 		Folder folder = folderDao.getFolderByEname(ename);
-		return folder;
+		if (folder == null) {
+			throw new FolderNotFoundException(ename + " 目录，不存在");
+		} else {
+			return folder;
+		}
 	}
-	
+
 	/**
 	 * 获得无参的所有的目录列表
+	 * 
 	 * @return List<Folder>
-	 *
+	 * 
 	 */
-	public List<Folder> getAllList(){
+	public List<Folder> getAllList() {
 		return folderDao.getAllList();
 	}
-	
+
 	/**
 	 * 获得分页的所有目录的列表
+	 * 
 	 * @param offset
 	 * @param rows
 	 * @return List<Folder>
-	 *
+	 * 
 	 */
-	public List<Folder> getAllListPage(long offset, long rows){
+	public List<Folder> getAllListPage(long offset, long rows) {
 		return folderDao.getAllListPage(offset, rows);
 	}
-	
+
 	/**
 	 * 获得所有目录的数量
+	 * 
 	 * @return Integer
-	 *
+	 * 
 	 */
-	public int getAllListPageCount(){
-		return (int)folderDao.getAllListPageCount();
+	public int getAllListPageCount() {
+		return (int) folderDao.getAllListPageCount();
 	}
-	
+
 	/**
 	 * 获得所有目录并通过递归实现目录树
+	 * 
 	 * @return List<FolderVo>
 	 */
-	public List<FolderVo> getAllFolder(){
-		List<FolderVo>  allFolderList = new ArrayList<FolderVo>();
-		this.getFolderList(allFolderList,0);
+	public List<FolderVo> getAllFolder() {
+		List<FolderVo> allFolderList = new ArrayList<FolderVo>();
+		this.getFolderList(allFolderList, 0);
 		return allFolderList;
 	}
-	
+
 	/**
 	 * 实现目录树的递归方法
 	 */
-	private void getFolderList(List<FolderVo> allFolderList,long fatherId){
-		List<FolderVo>  folderList = folderDao.getFolderVoListByFatherId(fatherId);
+	private void getFolderList(List<FolderVo> allFolderList, long fatherId) {
+		List<FolderVo> folderList = folderDao
+				.getFolderVoListByFatherId(fatherId);
 		Collections.sort(folderList, new ComparatorFolderList());
-		for(FolderVo folder:folderList){
+		for (FolderVo folder : folderList) {
 			allFolderList.add(folder);
-			this.getFolderList(allFolderList,folder.getFolderId());
+			this.getFolderList(allFolderList, folder.getFolderId());
 		}
 	}
-	
+
 	/**
 	 * 实现同级目录排序的内部类
 	 */
-	class ComparatorFolderList implements Comparator<Object>{
+	class ComparatorFolderList implements Comparator<Object> {
 
 		public int compare(Object arg0, Object arg1) {
-			FolderVo folderVo1 = (FolderVo)arg0;
-			FolderVo folderVo2 = (FolderVo)arg1;
-			String str1=folderVo1.getSort()+"";
-			String str2=folderVo2.getSort()+"";
-			return str1.compareTo(str2);		
+			FolderVo folderVo1 = (FolderVo) arg0;
+			FolderVo folderVo2 = (FolderVo) arg1;
+			String str1 = folderVo1.getSort() + "";
+			String str2 = folderVo2.getSort() + "";
+			return str1.compareTo(str2);
 		}
 	}
-	
-	/** 
+
+	/**
 	 * 获得某目录下的所有子目录包括子目录当中的子目录
+	 * 
 	 * @param fatherId
 	 * @return List<FolderVo>
 	 */
-	public List<FolderVo> getFolderVoListByFatherId(long fatherId){
+	public List<FolderVo> getFolderVoListByFatherId(long fatherId) {
 		return folderDao.getFolderVoListByFatherId(fatherId);
 	}
 }
