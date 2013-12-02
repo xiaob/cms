@@ -1,9 +1,4 @@
-<style>
-.error{
-	color:red;
-}
-</style>
-<#include "head.ftl">
+<#include "header.ftl">
     <!--container start-->
     <div class="container">
         <div class="row">
@@ -108,7 +103,7 @@
             </div>
             <div class="col-lg-3">
               <div class="blog-side-item">
-              <#include "right.ftl">
+              <#include "sidebar.ftl">
               </div>
             </div>
             <!--blog end-->
@@ -132,4 +127,4 @@
 	      });
     });
    </script>
-   <#include "foot.ftl">
+   <#include "footer.ftl">

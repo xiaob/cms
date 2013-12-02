@@ -11,24 +11,24 @@
     <title>${SYS_SITENAME}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="${basePath}/default/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${basePath}/default/css/theme.css" rel="stylesheet">
-    <link href="${basePath}/default/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="${TEMPLATE_PATH}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${TEMPLATE_PATH}/css/theme.css" rel="stylesheet">
+    <link href="${TEMPLATE_PATH}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="${basePath}/default/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" href="${basePath}/default/css/flexslider.css"/>
-    <link href="${basePath}/default/assets/bxslider/jquery.bxslider.css" rel="stylesheet" />
-    <link href="${basePath}/default/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+    <link href="${TEMPLATE_PATH}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="${TEMPLATE_PATH}/css/flexslider.css"/>
+    <link href="${TEMPLATE_PATH}/assets/bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="${TEMPLATE_PATH}/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="${basePath}/default/assets/revolution_slider/css/rs-style.css" media="screen">
-    <link rel="stylesheet" href="${basePath}/default/assets/revolution_slider/rs-plugin/css/settings.css" media="screen">
+    <link rel="stylesheet" href="${TEMPLATE_PATH}/assets/revolution_slider/css/rs-style.css" media="screen">
+    <link rel="stylesheet" href="${TEMPLATE_PATH}/assets/revolution_slider/rs-plugin/css/settings.css" media="screen">
 
     <!-- Custom styles for this template -->
-    <link href="${basePath}/default/css/style.css" rel="stylesheet">
-    <link href="${basePath}/default/css/style-responsive.css" rel="stylesheet" />
-    <script src="${basePath}/default/js/jquery.js"></script>
-    <script src="${basePath}/default/js/jquery.form.js"></script>
-    <script src="${basePath}/default/js/jquery.validate.js"></script>  
+    <link href="${TEMPLATE_PATH}/css/style.css" rel="stylesheet">
+    <link href="${TEMPLATE_PATH}/css/style-responsive.css" rel="stylesheet" />
+    <script src="${TEMPLATE_PATH}/js/jquery.js"></script>
+    <script src="${TEMPLATE_PATH}/js/jquery.form.js"></script>
+    <script src="${TEMPLATE_PATH}/js/jquery.validate.js"></script>  
     
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->

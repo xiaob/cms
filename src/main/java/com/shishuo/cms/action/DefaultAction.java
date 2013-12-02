@@ -86,7 +86,7 @@ public class DefaultAction {
 		modelMap.addAttribute("ename", ename);
 		modelMap.addAttribute("folderId", folder.getFolderId());
 		modelMap.addAttribute("pageNum", pageNum);
-		return configService.getTemplatePath() + "/" + folder.getTemplate();
+		return configService.getTemplatePath() + "/default";
 	}
 
 	/**
@@ -98,8 +98,8 @@ public class DefaultAction {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(value = "/{fileId}", method = RequestMethod.GET)
-	public String file(@PathVariable long fileId,
+	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
+	public String file(@PathVariable String ename, @PathVariable long fileId,
 			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
 		File file = fileService.getFileById(fileId);
@@ -109,7 +109,7 @@ public class DefaultAction {
 		modelMap.addAttribute("fileId", fileId);
 		modelMap.addAttribute("folderId", file.getFileId());
 		modelMap.addAttribute("pageNum", pageNum);
-		return configService.getTemplatePath() + "/" + file.getTemplate();
+		return configService.getTemplatePath() + "/file";
 	}
 
 }

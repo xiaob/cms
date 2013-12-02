@@ -51,11 +51,7 @@ public class ConfigService {
 	public String getTemplatePath() {
 		String template = this.getConfigByKey(ConfigConstant.SYS_TEMPLATE,
 				false);
-		if (StringUtils.isBlank(template)) {
-			return "/" + ConfigConstant.DEFAUTL_TEMPLATE;
-		} else {
-			return "/" + template;
-		}
+		return "/themes/" + template;
 	}
 
 	/**

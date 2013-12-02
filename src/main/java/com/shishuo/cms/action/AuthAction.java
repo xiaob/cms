@@ -59,7 +59,7 @@ public class AuthAction extends BaseAction {
 
 	@RequestMapping(value = "admin/login", method = RequestMethod.GET)
 	public String admin(HttpServletRequest request, ModelMap modelMap) {
-		return "admin/login";
+		return "system/login";
 	}
 
 	@ResponseBody
