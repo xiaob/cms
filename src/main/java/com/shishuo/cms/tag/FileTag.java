@@ -54,9 +54,7 @@ public class FileTag implements TemplateDirectiveModel {
 		FileVo file;
 		try {
 			file = fileService.getFileByFileId(fileId);
-			PageVo<File> pageFile = fileService.getNewActicle(file.getPicture());
 			env.setVariable("file", BEANS_WRAPPER.wrap(file));
-			env.setVariable("pageFile", BEANS_WRAPPER.wrap(pageFile));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

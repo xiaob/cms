@@ -7,7 +7,7 @@ CREATE TABLE `admin` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`adminId`),
   UNIQUE KEY `idx_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='管理员';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='管理员';
 
 CREATE TABLE `comment` (
   `commentId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
@@ -22,7 +22,7 @@ CREATE TABLE `comment` (
   `status` varchar(20) DEFAULT NULL COMMENT '状态',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='评论';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='评论';
 
 CREATE TABLE `config` (
   `key` varchar(45) NOT NULL COMMENT 'Key',
@@ -39,14 +39,13 @@ CREATE TABLE `file` (
   `picture` varchar(20) DEFAULT NULL COMMENT '大图路径',
   `name` varchar(200) DEFAULT NULL COMMENT '文件名称',
   `content` text COMMENT '文件内容',
-  `template` varchar(45) DEFAULT NULL COMMENT '模板名称',
   `viewCount` int(11) DEFAULT NULL COMMENT '浏览数',
   `commentCount` int(11) DEFAULT NULL COMMENT '评论数',
   `type` varchar(20) DEFAULT NULL COMMENT '文件类型：0 文章 1 照片 2 下载 3 商品',
   `status` varchar(20) DEFAULT NULL COMMENT '状态：0 隐藏 1 显示',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`fileId`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COMMENT='文件';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='文件';
 
 CREATE TABLE `folder` (
   `folderId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '目录ID',
@@ -57,14 +56,13 @@ CREATE TABLE `folder` (
   `level` tinyint(4) DEFAULT NULL COMMENT '层级',
   `sort` tinyint(4) DEFAULT NULL COMMENT '排序',
   `count` int(11) DEFAULT NULL COMMENT '文件数',
-  `template` varchar(45) DEFAULT NULL COMMENT '模板',
   `rank` varchar(20) DEFAULT NULL COMMENT '等级',
   `type` varchar(20) DEFAULT NULL COMMENT '目录类型：0 文章 1 照片 2 下载 3 商品',
   `status` varchar(20) DEFAULT NULL COMMENT '状态：0 隐藏 1 现实',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`folderId`),
   UNIQUE KEY `ename_UNIQUE` (`ename`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='目录';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='目录';
 
 CREATE TABLE `log` (
   `logId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志ID',
@@ -81,7 +79,8 @@ CREATE TABLE `user` (
   `name` varchar(45) DEFAULT NULL COMMENT '用户名',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户';
+
 
 
 
@@ -93,13 +92,13 @@ INSERT INTO `config` VALUES ('sys_function_photo','off','是否关闭相册模�
 INSERT INTO `config` VALUES ('sys_function_shop','off','是否关闭商场模块','2012-08-08 00:00:00');
 INSERT INTO `config` VALUES ('sys_sitename','师说','网站名称','2012-08-08 00:00:00');
 INSERT INTO `config` VALUES ('sys_sitedesc','师者,传道授业解惑者也','网站描述','2012-08-08 00:00:00');
-INSERT INTO `config` VALUES ('sys_template','default','网站模板名称','2012-08-08 00:00:00');
+INSERT INTO `config` VALUES ('sys_template','blog','网站模板名称','2012-08-08 00:00:00');
 
 # 增加默认目录
-INSERT INTO `folder` (`folderId`,`fatherId`,`ename`,`name`,`path`,`level`,`sort`,`count`,`template`,`rank`,`type`,`status`,`createTime`) VALUES (1,0,'default','默认','1',1,1,0,'default','everyone','article','display','2012-08-08 00:00:00');
+INSERT INTO `folder` (`folderId`,`fatherId`,`ename`,`name`,`path`,`level`,`sort`,`count`,`rank`,`type`,`status`,`createTime`) VALUES (1,0,'default','默认','1',1,1,0,'everyone','article','display','2012-08-08 00:00:00');
 
 # 增加第一篇文章
-INSERT INTO `file` (`fileId`, `folderId`, `adminId`,`picture`,`name`, `content`, `viewCount`, `commentCount`,`template` , `type`, `status`, `createTime`) VALUES ('1', '1', '1','no_exist', '你好，世界！', '跨越长城，我们可以到达世界的任何角落。', '0', '0','detail','article', 'display', now());
+INSERT INTO `file` (`fileId`, `folderId`, `adminId`,`picture`,`name`, `content`, `viewCount`, `commentCount`, `type`, `status`, `createTime`) VALUES ('1', '1', '1','no_exist', '你好，世界！', '跨越长城，我们可以到达世界的任何角落。', '0', '0','article', 'display', now());
 
 
 

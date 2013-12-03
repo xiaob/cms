@@ -321,17 +321,4 @@ public class FileService {
 			FileConstant.Picture picture) {
 		return fileDao.getArticleByPicture(type, picture);
 	}
-
-	public PageVo<File> getNewActicle(Picture picture){
-		PageVo<File> pageFile = new PageVo<File>(1);
-		if (picture.name().equals("exist")){
-			pageFile.setRows(3);
-			List<File> fileList = this.getAllFileByType(
-					FileConstant.Type.article,FileConstant.Status.display,
-					pageFile.getOffset(), pageFile.getRows());
-			pageFile.setList(fileList);
-		}
-		return pageFile;
-	}
-
 }
