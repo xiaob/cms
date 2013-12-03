@@ -184,14 +184,4 @@ public class AdminFolderAction extends AdminBaseAction{
 		return "redirect:/admin/folder/page";
 	}
 	
-	/**
-	 * @author 修改目录顺序
-	 *
-	 */
-	@RequestMapping(value = "/update/sort",method = RequestMethod.POST)
-	public String updateSort(
-			@PathVariable int sort){
-		
-		return "redirect:/admin/folder/page";
-	}
 }

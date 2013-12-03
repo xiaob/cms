@@ -44,7 +44,7 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="${basePath}/admin/article/recycle?fileId=${e.fileId}&status=display" title="还原">
+                  							<a href="${basePath}/admin/file/status/update?fileId=${e.fileId}&status=display" title="还原">
                   								<button class="btn btn-success btn-xs">
                   									<i class="icon-ok"></i>
                   								</button>

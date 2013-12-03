@@ -30,7 +30,6 @@
                 						<th>文件数</th>
                 						<th>状态</th>
                 						<th>类型</th>
-                						<th>所属板块</th>
                 						<th>等级</th>
                 						<th>操作</th>
               						</tr>
@@ -49,7 +48,6 @@
                                     	<td>${e.count}</td>
                                     	<td>${e.status}</td>
                                     	<td>${e.type}</td>
-                                    	<td>${e.template}</td>
                                     	<td>${e.rank}</td>
                                     	<td>
                   							<!-- Icons -->

@@ -40,7 +40,7 @@ import com.shishuo.cms.entity.vo.JsonVo;
 public class AdminAdminAction extends AdminBaseAction {
 
 	/**
-	 * 进入addAdmin页面
+	 * 进入添加admin页面
 	 *
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -101,7 +101,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	 * 进入单个admmin页面
 	 *
 	 */
-	@RequestMapping(value = "/one", method = RequestMethod.GET)
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String oneAdmin(@RequestParam(value = "adminId") long adminId,
 			ModelMap modelMap) {
 		modelMap.put("admin", adminService.getAdminById(adminId));

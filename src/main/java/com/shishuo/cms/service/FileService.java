@@ -219,12 +219,10 @@ public class FileService {
 		PageVo<File> pageVo = new PageVo<File>(pageNum);
 		pageVo.setRows(5);
 
-		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/"+type+"/list?");
+		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/file/page?status="+status+"&type="+type+"&");
 		List<File> list = this.getAllFileByType(type,
 				status, pageVo.getOffset(), pageVo.getRows());
-
 		pageVo.setList(list);
-
 		pageVo.setCount(this.getAllFileByTypeCount(type,
 				status));
 
