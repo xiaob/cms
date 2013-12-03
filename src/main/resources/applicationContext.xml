@@ -57,13 +57,14 @@
 		<property name="templateLoaderPath" value="/" /><!-- 指定路径 -->
 		<property name="defaultEncoding" value="UTF-8" /><!-- 指定编码格式 -->
 		<property name="freemarkerVariables">
-			<map>
+			<map>		
 				<!-- 目录标签 -->
 				<entry key="cms_folder_list" value-ref="folderListTag" />
-				<!-- 文件标签 -->
+				<!-- 文件分页标签 -->
 				<entry key="cms_file_page" value-ref="filePageTag" />
-				<entry key="cms_file" value-ref="fileTag" /><!-- 单个文件标签 -->
-				<!-- 评论标签 -->
+				<!-- 单个文件标签 -->
+				<entry key="cms_file" value-ref="fileTag" />
+				<!-- 评论分页标签 -->
 				<entry key="cms_comment_page" value-ref="commentPageTag"/>
 			</map>
 		</property>
