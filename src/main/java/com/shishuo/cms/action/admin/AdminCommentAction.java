@@ -40,11 +40,11 @@ public class AdminCommentAction extends AdminBaseAction{
 	 * @author 进入所有评论列表页面
 	 *
 	 */
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public String allComment(ModelMap modelMap,
 			@RequestParam(value="pageNum",defaultValue="1") int pageNum){
 		modelMap.put("pageVo", commentService.getAllListPage(pageNum));
-		return "admin/comment/all";
+		return "system/comment/all";
 	}
 	/**
 	 * 进入审核列表页面
@@ -55,7 +55,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	public String auditingList(ModelMap modelMap,
 			@RequestParam(value="pageNum",defaultValue="1") int pageNum){
 		modelMap.put("pageVo", commentService.getCommentByStatusPage(pageNum, CommentConstant.Status.hidden));
-		return "admin/comment/auditingList";
+		return "system/comment/auditingList";
 	}
 	
 	/**
@@ -67,7 +67,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	public String auditingComment(
 			@PathVariable long commentId){
 		commentService.updateCommentStatus(commentId, CommentConstant.Status.display);
-		return "redirect:/admin/comment/all";
+		return "redirect:/admin/comment/page";
 	}
 	
 	/**
@@ -77,7 +77,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	@RequestMapping(value = "/{commentId}", method = RequestMethod.GET)
 	public String comment(@PathVariable long commentId,ModelMap modelMap){
 		modelMap.put("comment", commentService.getCommentById(commentId));
-		return "admin/comment/comment";
+		return "system/comment/comment";
 	}
 	
 	/**
@@ -87,6 +87,6 @@ public class AdminCommentAction extends AdminBaseAction{
 	@RequestMapping(value = "/cancel/{commentId}", method = RequestMethod.GET)
 	public String cancelAuditing(@PathVariable long commentId){
 		commentService.updateCommentStatus(commentId, CommentConstant.Status.hidden);
-		return "redirect:/admin/comment/all";
+		return "redirect:/admin/comment/page";
 	}
 }

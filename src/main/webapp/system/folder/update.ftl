@@ -1,6 +1,6 @@
 <#assign menu="system">
 <#assign submenu="system_basic">
-<#include "/admin/head.ftl">
+<#include "/system/head.ftl">
 <style type="text/css">
 
 </style>
@@ -48,16 +48,6 @@
                                           		-
                                         </#list>
 										${fo.name}</option>
-									</#list>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 col-sm-2 control-label">皮肤</label>
-							<div class="col-sm-10">
-								<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="template">
-									<#list template as tem>
-										<option value= "${tem}" <#if folder.template="${tem}">selected</#if>>${tem}</option>
 									</#list>
 								</select>
 							</div>
@@ -131,4 +121,4 @@
 		});
 	});	
 </script>
-<#include "/admin/foot.ftl">
+<#include "/system/foot.ftl">

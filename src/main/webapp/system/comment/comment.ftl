@@ -1,6 +1,6 @@
 <#assign menu="comment">
 <#assign submenu="auditing_comment">
-<#include "/admin/head.ftl">
+<#include "/system/head.ftl">
 <style type="text/css">
 
 </style>
@@ -54,4 +54,4 @@
 		$("#comment_commentId").hide();
 	});
 </script>
-<#include "/admin/foot.ftl">
+<#include "/system/foot.ftl">

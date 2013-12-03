@@ -77,7 +77,7 @@ public class FolderService {
 	 */
 	public Folder addFolder(long fatherId, String name,
 			FolderConstant.Status status, String ename,
-			FolderConstant.Type type, FolderConstant.Rank rank, String template) {
+			FolderConstant.Type type, FolderConstant.Rank rank) {
 		Folder folder = new Folder();
 		Folder fatherFolder = this.getFolderById(fatherId);
 		folder.setFatherId(fatherId);
@@ -91,7 +91,6 @@ public class FolderService {
 		folder.setCount(0);
 		folder.setStatus(status);
 		folder.setType(type);
-		folder.setTemplate(template);
 		folder.setSort(1);
 		folder.setRank(rank);
 		folder.setCreateTime(new Date());

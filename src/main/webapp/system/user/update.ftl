@@ -1,6 +1,6 @@
 <#assign menu="user">
 <#assign submenu="update_user">
-<#include "/admin/head.ftl">
+<#include "/system/head.ftl">
 <style type="text/css">
 </style>
 <!--main content start-->
@@ -74,4 +74,4 @@
 		});
 	});	
 </script>
-<#include "/admin/foot.ftl">
+<#include "/system/foot.ftl">

@@ -55,8 +55,7 @@ public class AdminFolderAction extends AdminBaseAction{
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folderName", "");
 		modelMap.put("folderEname", "");
-//		modelMap.put("template", adminConfigAction.iterator("folder"));
-		return "admin/folder/folder";
+		return "system/folder/folder";
 	}
 	
 	/**
@@ -72,7 +71,6 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "type") FolderConstant.Type type,
 			@RequestParam(value = "status") FolderConstant.Status status,
 			@RequestParam(value = "rank") FolderConstant.Rank rank,
-			@RequestParam(value = "template") String template,
 			ModelMap modelMap) {
 		JsonVo<String> json = new JsonVo<String>();
 		List<Folder> list = folderService.getAllList();
@@ -91,7 +89,7 @@ public class AdminFolderAction extends AdminBaseAction{
 			}
 			// 检测校验结果
 			validate(json);
-			folderService.addFolder(fatherId, folderName, status, folderEname, type,rank,template);
+			folderService.addFolder(fatherId, folderName, status, folderEname, type,rank);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -105,11 +103,11 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 所有目录列表分页
 	 *
 	 */
-	@RequestMapping(value = "/all",method = RequestMethod.GET)
+	@RequestMapping(value = "/page",method = RequestMethod.GET)
 	public String allFolder(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,ModelMap modelMap){
 		List<FolderVo> list = folderService.getAllFolder();
 		modelMap.put("list", list);
-		return "admin/folder/all";
+		return "system/folder/all";
 	}
 	
 	/**
@@ -128,8 +126,7 @@ public class AdminFolderAction extends AdminBaseAction{
 		}
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folder", folder);
-//		modelMap.put("template", adminConfigAction.iterator("folder"));
-		return "admin/folder/update";
+		return "system/folder/update";
 	}
 	
 	/**
@@ -184,7 +181,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	public String deleteFolder(
 			@PathVariable long folderId){
 		folderService.deleteFolderById(folderId);
-		return "redirect:/admin/folder/all";
+		return "redirect:/admin/folder/page";
 	}
 	
 	/**
@@ -195,6 +192,6 @@ public class AdminFolderAction extends AdminBaseAction{
 	public String updateSort(
 			@PathVariable int sort){
 		
-		return "redirect:/admin/folder/all";
+		return "redirect:/admin/folder/page";
 	}
 }

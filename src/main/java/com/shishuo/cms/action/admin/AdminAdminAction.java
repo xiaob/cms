@@ -47,7 +47,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	public String addUser(ModelMap modelMap) {
 		modelMap.put("adminName", "");
 		modelMap.put("email", "");
-		return "admin/admin/add";
+		return "system/admin/add";
 	}
 
 	/**
@@ -89,12 +89,12 @@ public class AdminAdminAction extends AdminBaseAction {
 	 * 进入管理员列表页面
 	 *
 	 */
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public String allList(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
 		modelMap.put("pageVo", adminService.getAllListPage(pageNum));
-		return "admin/admin/all";
+		return "system/admin/all";
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	public String oneAdmin(@RequestParam(value = "adminId") long adminId,
 			ModelMap modelMap) {
 		modelMap.put("admin", adminService.getAdminById(adminId));
-		return "admin/admin/update";
+		return "system/admin/update";
 	}
 
 	/**
@@ -158,6 +158,6 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteAdmin(@RequestParam(value = "adminId") long adminId) {
 		adminService.deleteAdmin(adminId);
-		return "redirect:/admin/admin/all";
+		return "redirect:/admin/admin/page";
 	}
 }

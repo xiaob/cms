@@ -26,7 +26,7 @@ public class AdminFileAction extends AdminBaseAction {
 	protected UpdatePictureConstant updatePictureConstant;
 	
 	/**
-	 * @author 进入文章列表分页的首页
+	 * @author 进入某种文件的列表分页的首页
 	 * 
 	 */
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
@@ -38,7 +38,11 @@ public class AdminFileAction extends AdminBaseAction {
 		PageVo<File> pageVo = fileService.getAllFileByTypePage(FileConstant.Type.article, status, pageNum);
 		modelMap.put("pageVo", pageVo);
 		modelMap.put("folderList", folderService.getAllList());
-		return "admin/article/list";
+		if(status.equals(FileConstant.Status.hidden)){
+			return "system/"+type+"/recycle";
+		}else{
+			return "system/"+type+"/list";
+		}
 	}
 	
 	/**
@@ -79,7 +83,7 @@ public class AdminFileAction extends AdminBaseAction {
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
 				fileService.updateFileByFileId(fileId,article.getFolderId(), this.getAdmin(request).getAdminId(),
 						FileConstant.Picture.exist, article.getName(), article.getContent(),
-						FileConstant.Type.article, FileConstant.Status.display,article.getTemplate());
+						FileConstant.Type.article, FileConstant.Status.display);
 				String path = webroot+"/upload/"+type+"/"+article.getFileId()+".jpg";
 				java.io.File source = new java.io.File(path);
 				file.transferTo(source);

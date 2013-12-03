@@ -63,8 +63,7 @@ public class AdminArticleAction extends AdminFileAction {
 		}
 		modelMap.put("file", file);
 		modelMap.put("folderAll", folderService.getAllFolder());
-//		modelMap.put("template", adminConfigAction.iterator("file"));
-		return "admin/article/update";
+		return "system/article/update";
 	}
 
 	/**
@@ -75,10 +74,9 @@ public class AdminArticleAction extends AdminFileAction {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addArticle(ModelMap modelMap) throws Exception {
 		modelMap.put("allFolderList", folderService.getAllFolder());
-//		modelMap.put("template", adminConfigAction.iterator("file"));
 		modelMap.put("folderEname", "");
 		modelMap.put("articleId","");
-		return "admin/article/add";
+		return "system/article/add";
 	}
 
 	/**
@@ -91,7 +89,6 @@ public class AdminArticleAction extends AdminFileAction {
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "content") String content,
-			@RequestParam(value = "template") String template,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -102,7 +99,7 @@ public class AdminArticleAction extends AdminFileAction {
 			validate(json);
 			File file = fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
 			FileConstant.Picture.no_exist, name, content,
-			FileConstant.Type.article, FileConstant.Status.display,template);
+			FileConstant.Type.article, FileConstant.Status.display);
 			json.setT(file.getFileId()+"");
 			json.setResult(true);
 			
@@ -126,7 +123,6 @@ public class AdminArticleAction extends AdminFileAction {
 			@RequestParam(value = "fileId") long fileId,
 			@RequestParam(value = "picture") FileConstant.Picture picture,
 			@RequestParam(value = "status") FileConstant.Status status,
-			@RequestParam(value = "template") String template,
 			@RequestParam(value = "content") String content) {
 
 		JsonVo<String> json = new JsonVo<String>();
@@ -141,7 +137,7 @@ public class AdminArticleAction extends AdminFileAction {
 			// 检测校验结果
 			validate(json);
 			 fileService.updateFileByFileId(fileId, folderId, adminId,picture,fileName,
-			 content, FileConstant.Type.article,status,template);
+			 content, FileConstant.Type.article,status);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

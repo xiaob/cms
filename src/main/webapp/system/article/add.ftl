@@ -1,6 +1,6 @@
 <#assign menu="article">
 <#assign submenu="add_article">
-<#include "/admin/head.ftl">
+<#include "/system/head.ftl">
 <style type="text/css">
 .m-bot15 {
     margin-bottom: 0;
@@ -43,16 +43,6 @@
                                         </select>
                                       </div>
                                   </div>
-                                  <div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">皮肤</label>
-									<div class="col-sm-10">
-										<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="template">
-											<#list template as tem>
-											<option value= "${tem}">${tem}</option>
-											</#list>
-										</select>
-									</div>
-								  </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
                                       <div class="col-sm-10">
@@ -119,4 +109,4 @@
 		});
 	});	
 </script>
-<#include "/admin/foot.ftl">
+<#include "/system/foot.ftl">

@@ -45,7 +45,7 @@ public class AdminUserAction extends AdminBaseAction{
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
 	public String addUser(ModelMap modelMap){
 		modelMap.put("userName", "");
-		return "admin/user/add";
+		return "system/user/add";
 	}
 	/**
 	 * 添加用户
@@ -76,11 +76,11 @@ public class AdminUserAction extends AdminBaseAction{
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/all",method = RequestMethod.GET)
+	@RequestMapping(value = "/page",method = RequestMethod.GET)
 	public String allList(@RequestParam(value = "p",defaultValue="1") int pageNum,
 			ModelMap modelMap){
 		modelMap.put("pageVo", userService.getUserPage(pageNum));
-		return "admin/user/all";
+		return "system/user/all";
 	}
 	
 	/**
@@ -88,11 +88,11 @@ public class AdminUserAction extends AdminBaseAction{
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/one",method = RequestMethod.GET)
+	@RequestMapping(value = "/user",method = RequestMethod.GET)
 	public String oneAdmin(@RequestParam(value = "userId") long userId,
 			ModelMap modelMap){
 		modelMap.put("user", userService.getUserById(userId));
-		return "admin/user/update";
+		return "system/user/update";
 	}
 	
 	/**
@@ -129,7 +129,7 @@ public class AdminUserAction extends AdminBaseAction{
 	@RequestMapping(value = "/delete",method = RequestMethod.GET)
 	public String deleteUser(@RequestParam(value = "userId") long userId){
 		userService.deleteUserById(userId);
-		return "redirect:/admin/user/all";
+		return "redirect:/admin/user/page";
 	}
 
 }

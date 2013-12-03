@@ -1,6 +1,6 @@
 <#assign menu="comment">
 <#assign submenu="comment_list">
-<#include "../head.ftl">
+<#include "/system/head.ftl">
 <style type="text/css">
 .pagination {
     border-radius: 4px;
@@ -62,4 +62,4 @@
           </section>
 		</section>
 		<!--main content end-->
-<#include "../foot.ftl">
+<#include "/system/foot.ftl">

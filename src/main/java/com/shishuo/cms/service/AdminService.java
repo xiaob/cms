@@ -79,7 +79,6 @@ public class AdminService {
 	public void adminLogin(String email, String password,
 			HttpServletRequest request) throws AuthException {
 		AdminVo admin = adminDao.getAdminByEmail(email);
-		System.out.println("***********************"+admin.getEmail());
 		if (admin == null) {
 			throw new AuthException("没有此用户");
 		}

@@ -1,6 +1,6 @@
 <#assign menu="comment">
 <#assign submenu="auditing_list_comment">
-<#include "../head.ftl">
+<#include "/system/head.ftl">
 <style type="text/css">
 .m-bot15 {
     margin-bottom: 0;
@@ -64,4 +64,4 @@
           </section>
 		</section>
 		<!--main content end-->
-<#include "../foot.ftl">
+<#include "/system/foot.ftl">

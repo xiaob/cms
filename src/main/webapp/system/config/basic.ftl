@@ -1,6 +1,6 @@
 <#assign menu="system">
 <#assign submenu="system_basic">
-<#include "../head.ftl">
+<#include "/system/head.ftl">
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
@@ -79,4 +79,4 @@
 		});
 	});	
 </script>
-<#include "../foot.ftl">
+<#include "/system/foot.ftl">
