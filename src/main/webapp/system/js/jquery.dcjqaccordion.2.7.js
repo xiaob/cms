@@ -24,7 +24,7 @@
 			menuClose     : true,
 			autoClose    : true,
 			autoExpand	 : false,
-			speed        : 'slow',
+			speed        : 'fast',
 			saveState	 : true,
 			disableLink	 : true,
 			showCount : false,
