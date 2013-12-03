@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.entity.vo.PageVo;
 
 @Controller
@@ -75,7 +76,7 @@ public class AdminPictureUpLoadAction extends AdminBaseAction {
     @RequestMapping(value = "list", method = RequestMethod.GET)
 	 public String list(@RequestParam(value="pageNum",required=false,defaultValue="1") int pageNum,
 			            HttpServletRequest request,ModelMap modelMap){
-           PageVo<com.shishuo.cms.entity.File> filePage = fileService.getUserImagePage(1, 4, pageNum);
+           PageVo<com.shishuo.cms.entity.File> filePage = fileService.getUserImagePage(1, FileConstant.Type.shop, pageNum);
           modelMap.addAttribute("filePage", filePage);
     	    return "admin/pictureList";
     }
@@ -84,7 +85,7 @@ public class AdminPictureUpLoadAction extends AdminBaseAction {
     public String delete(@RequestParam("fileId") String fileId,HttpServletRequest request){
     	String[] fileIdArray = fileId.split(",");
     	for(String id : fileIdArray){
-    		fileService.deleteFileById(Long.parseLong(id));
+    		fileService.deleteFileByFileId(Long.parseLong(id));
     	}
     	return null;
     }

@@ -4,7 +4,7 @@
 
 	<select id="getFileById" parameterType="long"
 		resultType="com.shishuo.cms.entity.vo.FileVo">
-		select * from file where fileId=#{fileId}
+		select * from file where fileId=#{fileId} and status=#{status}
 	</select>
 
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
@@ -19,7 +19,7 @@
 
 	<delete id="deleteFile" parameterType="com.shishuo.cms.entity.File">
 		delete from file where
-		fileId=#{fileId}
+		fileId=#{fileId} and status=#{status}
 	</delete>
 	<select id="getFileListByFoderId" resultType="com.shishuo.cms.entity.vo.FileVo">
 		select * from file
@@ -33,11 +33,11 @@
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
 		update file set
 		folderId=#{folderId},name=#{name},picture=#{picture},
-		content=#{content},status=#{status}
+		content=#{content},status=#{status},template=#{template}
 		where fileId=#{fileId}
 	</update>
 
-	<update id="getRecycle" parameterType="com.shishuo.cms.entity.File">
+	<update id="updateStatusByFileId">
 		update file set
 		status=#{status} where fileId=#{fileId}
 	</update>
@@ -63,16 +63,6 @@
 
 	<select id="getUserImageCount" resultType="int" parameterType="long">
 		select count(1) from file where userId = #{userId} and type=4
-	</select>
-
-	<select id="getAllList" resultType="com.shishuo.cms.entity.File">
-		select * from file limit
-		#{offset},#{rows}
-	</select>
-
-	<select id="getAllListCount" resultType="long">
-		select count(*) from
-		file
 	</select>
 
 	<select id="getFileListByType" resultType="com.shishuo.cms.entity.File">

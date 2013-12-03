@@ -18,9 +18,6 @@
  */
 package com.shishuo.cms.action.admin;
 
-
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -31,49 +28,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.FileConstant;
-import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.constant.UpdatePictureConstant;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.JsonVo;
-import com.shishuo.cms.entity.vo.PageVo;
 
 /**
  * @author 文件action
  * 
  */
-
 @Controller
 @RequestMapping("/admin/article")
-public class AdminArticleAction extends AdminBaseAction {
+public class AdminArticleAction extends AdminFileAction {
 
 	@Autowired
-	private UpdatePictureConstant updatePictureConstant;
-	/**
-	 * @author 进入文章列表分页的首页
-	 * 
-	 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String allFolder(
-			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-			ModelMap modelMap) {
-		PageVo<File> pageVo = fileService.getFileListByTypePage(FileConstant.Type.article, FileConstant.Status.display, pageNum);
-		modelMap.put("pageVo", pageVo);
-		return "admin/article/list";
-	}
+	private AdminConfigAction adminConfigAction;
 
 	/**
 	 * @author 进入修改文章页面
+	 * @throws Exception 
 	 * 
 	 */
-	@RequestMapping(value = "/one", method = RequestMethod.GET)
-	public String one(
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String article(
 			@RequestParam(value = "fileId", defaultValue = "1") long fileId,
-			ModelMap modelMap) {
-		File file = fileService.getFileById(fileId);
+			ModelMap modelMap) throws Exception {
+		File file = fileService.getFileByFileId(fileId);
 		if (file.getFolderId() == 0) {
 			modelMap.put("folderName", "未分类");
 		} else {
@@ -82,17 +63,20 @@ public class AdminArticleAction extends AdminBaseAction {
 		}
 		modelMap.put("file", file);
 		modelMap.put("folderAll", folderService.getAllFolder());
-		return "admin/article/update";
+		return "system/article/update";
 	}
 
 	/**
 	 * @author 进入添加文章页面
+	 * @throws Exception 
 	 * 
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addArticle(ModelMap modelMap) {
+	public String addArticle(ModelMap modelMap) throws Exception {
 		modelMap.put("allFolderList", folderService.getAllFolder());
-		return "admin/article/add";
+		modelMap.put("folderEname", "");
+		modelMap.put("articleId","");
+		return "system/article/add";
 	}
 
 	/**
@@ -105,7 +89,6 @@ public class AdminArticleAction extends AdminBaseAction {
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "content") String content,
-//			@RequestParam(value ="file",required = false) MultipartFile file,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
@@ -114,24 +97,10 @@ public class AdminArticleAction extends AdminBaseAction {
 			}
 			// 检测校验结果
 			validate(json);
-			fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-					FileConstant.Picture.no_exist, name, content,
-					FileConstant.Type.article, FileConstant.Status.display);
-//			if(file.equals("")){
-//				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-//						FileConstant.Picture.no_exist, name, content,
-//						FileConstant.Type.article, FileConstant.Status.display);
-//			}else{
-//				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-//				List<File> list = fileService.getArticleByPicture(FileConstant.Type.article, FileConstant.Picture.exist);
-//				fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-//						FileConstant.Picture.exist, name, content,
-//						FileConstant.Type.article, FileConstant.Status.display);
-//				String path = webroot+"/upload/article/"+list.get(list.size()-1).getFileId()+".jpg";
-//				java.io.File source = new java.io.File(path);
-//				file.transferTo(source);
-//				updatePictureConstant.updatePicture(list.get(list.size()-1).getFileId(), path);
-//			}
+			File file = fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
+			FileConstant.Picture.no_exist, name, content,
+			FileConstant.Type.article, FileConstant.Status.display);
+			json.setT(file.getFileId()+"");
 			json.setResult(true);
 			
 		} catch (Exception e) {
@@ -141,34 +110,6 @@ public class AdminArticleAction extends AdminBaseAction {
 		return json;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/addPicture.json", method = RequestMethod.POST)
-	public JsonVo<String> addPicture(
-			@RequestParam(value ="file",required = false) MultipartFile file,
-			HttpServletRequest request) {
-		JsonVo<String> json = new JsonVo<String>();
-		try {
-			// 检测校验结果
-			validate(json);
-				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-				List<File> list = fileService.getArticleByPicture(FileConstant.Type.article, FileConstant.Picture.exist);
-				File article = list.get(list.size()-1);
-				fileService.addFile(article.getFolderId(), this.getAdmin(request).getAdminId(),
-						FileConstant.Picture.exist, article.getName(), article.getContent(),
-						FileConstant.Type.article, FileConstant.Status.display);
-				String path = webroot+"/upload/article/"+article.getFileId()+".jpg";
-				java.io.File source = new java.io.File(path);
-				file.transferTo(source);
-				updatePictureConstant.updatePicture(article.getFileId(), path);
-			json.setResult(true);
-			
-		} catch (Exception e) {
-			json.setResult(false);
-			json.setMsg(e.getMessage());
-		}
-		return json;
-	}
-
 	/**
 	 * @author 修改文章资料
 	 * 
@@ -195,7 +136,7 @@ public class AdminArticleAction extends AdminBaseAction {
 
 			// 检测校验结果
 			validate(json);
-			 fileService.updateFileById(fileId, folderId, adminId,picture,fileName,
+			 fileService.updateFileByFileId(fileId, folderId, adminId,picture,fileName,
 			 content, FileConstant.Type.article,status);
 			json.setResult(true);
 		} catch (Exception e) {
@@ -203,39 +144,6 @@ public class AdminArticleAction extends AdminBaseAction {
 			json.setMsg(e.getMessage());
 		}
 		return json;
-	}
-
-	/**
-	 * @author 放进回收站，还原
-	 * 
-	 */
-	@RequestMapping(value = "/recycle", method = RequestMethod.GET)
-	public String recycle(@RequestParam(value = "fileId") long fileId,
-			@RequestParam(value = "status") FileConstant.Status status) {
-		fileService.recycle(fileId, status);
-		return "redirect:/admin/article/list";
-	}
-
-	/**
-	 * @author 进入回收站页面
-	 * 
-	 */
-	@RequestMapping(value = "/recycle/list", method = RequestMethod.GET)
-	public String recycleList(
-			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-			ModelMap modelMap) {
-		modelMap.put("pageVo", fileService.getFileListByTypePage(FileConstant.Type.article, FileConstant.Status.hidden, pageNum));
-		return "admin/article/recycle";
-	}
-
-	/**
-	 * @author 彻底删除文件
-	 * 
-	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String deleteFile(@RequestParam(value = "fileId") long fileId) {
-		fileService.deleteFileById(fileId);
-		return "redirect:/admin/article/recycle/list";
 	}
 
 }

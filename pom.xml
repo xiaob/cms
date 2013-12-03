@@ -217,6 +217,27 @@
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<outputDirectory>${project.build.directory}/classes</outputDirectory>
+							<resources>
+								<resource>
+									<directory>.</directory>
+									<includes>
+										<include>shishuocms.properties</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
@@ -247,6 +268,10 @@
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
+				<includes>
+					<include>applicationContext.xml</include>
+					<include>log4j.properties</include>
+				</includes>
 			</resource>
 		</resources>
 	</build>

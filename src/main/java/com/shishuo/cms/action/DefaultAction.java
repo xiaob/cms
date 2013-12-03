@@ -18,8 +18,6 @@
  */
 package com.shishuo.cms.action;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,14 +25,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.exception.FileNotFoundException;
+import com.shishuo.cms.exception.FolderNotFoundException;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.FileService;
 import com.shishuo.cms.service.FolderService;
+import com.shishuo.cms.service.ThemeService;
 
 /**
  * 首页
@@ -53,6 +52,9 @@ public class DefaultAction {
 	@Autowired
 	private ConfigService configService;
 
+	@Autowired
+	private ThemeService themeService;
+
 	/**
 	 * 首页
 	 * 
@@ -62,15 +64,12 @@ public class DefaultAction {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(
-			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
+			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
-		try {
-			modelMap.addAttribute("ename", "");
-			modelMap.addAttribute("pageNum", pageNum);
-			return configService.getTemplatePath() + "/default";
-		} catch (Exception e) {
-			return configService.getTemplatePath() + "/500";
-		}
+		modelMap.addAttribute("ename", "");
+		modelMap.addAttribute("folderId", "0");
+		modelMap.addAttribute("pageNum", pageNum);
+		return themeService.getDefaultTheme();
 	}
 
 	/**
@@ -83,14 +82,18 @@ public class DefaultAction {
 	 */
 	@RequestMapping(value = "/{ename}", method = RequestMethod.GET)
 	public String folder(@PathVariable String ename,
-			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
+			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
-		Folder currentFolder = folderService.getFolderByEname(ename);
-		modelMap.addAttribute("currentFolder", currentFolder);
-		modelMap.addAttribute("ename", ename);
-		modelMap.addAttribute("pageNum", pageNum);
-		return configService.getTemplatePath() + "/"
-				+ currentFolder.getTemplate();
+		try {
+			Folder folder = folderService.getFolderByEname(ename);
+			modelMap.addAttribute("ename", ename);
+			modelMap.addAttribute("folderId", folder.getFolderId());
+			modelMap.addAttribute("pageNum", pageNum);
+			return themeService.getFolderTheme(folder.getEname(),
+					folder.getType());
+		} catch (FolderNotFoundException e) {
+			return configService.getTemplatePath() + "/404";
+		}
 	}
 
 	/**
@@ -101,17 +104,19 @@ public class DefaultAction {
 	 * @param pageNum
 	 * @param modelMap
 	 * @return
+	 * @throws FileNotFoundException
 	 */
 	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
-	public String file(@PathVariable long fileId, @PathVariable String ename,
-			@RequestParam(value = "pageNum", defaultValue = "1") long pageNum,
-			ModelMap modelMap) {
-		File file = fileService.getFileById(fileId);
+	public String file(@PathVariable String ename, @PathVariable long fileId,
+			@RequestParam(value = "p", defaultValue = "1") long pageNum,
+			ModelMap modelMap) throws FileNotFoundException {
+		File file = fileService.getFileByFileId(fileId);
 		fileService.updateViewCount(fileId, file.getViewCount());
-		modelMap.addAttribute("fileId", fileId);
 		modelMap.addAttribute("ename", ename);
+		modelMap.addAttribute("fileId", fileId);
+		modelMap.addAttribute("folderId", file.getFileId());
 		modelMap.addAttribute("pageNum", pageNum);
-		return configService.getTemplatePath() + "/" + file.getTemplate();
+		return configService.getTemplatePath() + "/file";
 	}
 
 }

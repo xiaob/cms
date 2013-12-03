@@ -77,7 +77,7 @@ public interface CommentDao {
 	public int updateCommentStatus(Comment comment);
 
 	/**
-	 * 获得评论
+	 * 通过指定Id获得评论
 	 * 
 	 * @param commentId
 	 * @return Comment

@@ -75,7 +75,7 @@ public interface FileDao {
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteFile(File file);
+	public boolean deleteFile(@Param("fileId") long fileId,@Param("status") FileConstant.Status status);
 
 	/**
 	 * 修改文件
@@ -84,25 +84,6 @@ public interface FileDao {
 	 * @return Integer
 	 */
 	public int updateFile(File file);
-
-	/**
-	 * 所有文件的分页
-	 * 
-	 * @param Long
-	 * @param Long
-	 * @return List<Folder>
-	 * 
-	 */
-	public List<File> getAllList(@Param("offset") long offset,
-			@Param("rows") long rows);
-
-	/**
-	 * 所有文件的数量
-	 * 
-	 * @return Long
-	 * 
-	 */
-	public long getAllListCount();
 
 	/**
 	 * 获取不同类型的文件
@@ -124,7 +105,7 @@ public interface FileDao {
 	 * @return list
 	 */
 	public List<File> getUserImageList(@Param("userId") long userId,
-			@Param("type") int type, @Param("offset") long offset,
+			@Param("type") FileConstant.Type type, @Param("offset") long offset,
 			@Param("rows") long rows);
 
 	/**
@@ -133,7 +114,7 @@ public interface FileDao {
 	 * @return int
 	 */
 	public int getUserImageCount(@Param("userId") long userId,
-			@Param("type") int type);
+			@Param("type") FileConstant.Type type);
 
 	/**
 	 * 修改用户图片
@@ -160,7 +141,8 @@ public interface FileDao {
 	 * @param File
 	 * @return Integer
 	 */
-	public int getRecycle(File file);
+	public int updateStatusByFileId(@Param("fileId") long fileId,
+			@Param("status") FileConstant.Status status);
 
 	/**
 	 * 更新浏览人数

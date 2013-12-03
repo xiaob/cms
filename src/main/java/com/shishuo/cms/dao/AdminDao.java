@@ -89,4 +89,5 @@ public interface AdminDao {
 	 *
 	 */
 	public AdminVo getAdminByEmail(@Param("email") String email);
+	
 }

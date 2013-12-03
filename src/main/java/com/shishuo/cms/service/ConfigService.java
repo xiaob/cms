@@ -19,7 +19,6 @@
 package com.shishuo.cms.service;
 
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,6 @@ import org.springframework.stereotype.Service;
 import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.dao.ConfigDao;
 import com.shishuo.cms.entity.Config;
-import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.util.MemcacheMapUtil;
 
 /**
@@ -51,11 +49,7 @@ public class ConfigService {
 	public String getTemplatePath() {
 		String template = this.getConfigByKey(ConfigConstant.SYS_TEMPLATE,
 				false);
-		if (StringUtils.isBlank(template)) {
-			return "/" + ConfigConstant.DEFAUTL_TEMPLATE;
-		} else {
-			return "/" + template;
-		}
+		return "/themes/" + template;
 	}
 
 	/**
@@ -98,43 +92,6 @@ public class ConfigService {
 		configDao.updateConfig(config);
 		this.getConfigByKey(key, true);
 		return config;
-	}
-
-	/**
-	 * 配置项目分页
-	 * 
-	 * 
-	 * @param int
-	 * @return PageVo
-	 */
-	public PageVo<Config> getConfigPage(int pageNum) {
-		PageVo<Config> pageVo = new PageVo<Config>(pageNum);
-		pageVo.setUrl("");
-		List<Config> list = this
-				.getConfig(pageVo.getOffset(), pageVo.getRows());
-		pageVo.setList(list);
-		pageVo.setPageCount(this.allConfigCount());
-		return pageVo;
-	}
-
-	/**
-	 * 所有配置
-	 * 
-	 * @param long,long
-	 * @return List<Config>
-	 */
-	public List<Config> getConfig(long offset, long rows) {
-		return configDao.getConfig(offset, rows);
-	}
-
-	/**
-	 * 所有配置的数量
-	 * 
-	 * @return Integer
-	 */
-	public int allConfigCount() {
-		return configDao.allConfigCount();
-
 	}
 
 	/**

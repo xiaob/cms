@@ -40,4 +40,5 @@ public class ConfigConstant {
 	public static String SYS_SITENAME = "sys_sitename";
 	public static String SYS_TEMPLATE = "sys_template";
 	
+	public static String ARTICLE_PICTURE_SIZE = "article_picture_size";
 }

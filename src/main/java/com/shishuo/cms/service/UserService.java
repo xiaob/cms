@@ -24,6 +24,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.constant.UserConstant;
 import com.shishuo.cms.dao.UserDao;
 import com.shishuo.cms.entity.User;
@@ -76,7 +77,7 @@ public class UserService {
 	public PageVo<User> getUserPage(int pageNum) {
 		PageVo<User> pageVo = new PageVo<User>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl("/CMS/admin/user/all?");
+		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/user/all?");
 		List<User> list = this
 				.getUserList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);

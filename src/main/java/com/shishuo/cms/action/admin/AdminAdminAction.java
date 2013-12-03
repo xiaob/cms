@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.AdminConstant;
+import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.vo.JsonVo;
 
 
@@ -46,7 +47,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	public String addUser(ModelMap modelMap) {
 		modelMap.put("adminName", "");
 		modelMap.put("email", "");
-		return "admin/admin/add";
+		return "system/admin/add";
 	}
 
 	/**
@@ -60,6 +61,7 @@ public class AdminAdminAction extends AdminBaseAction {
 			@RequestParam(value = "email") String email,
 			@RequestParam(value = "password") String password) {
 
+		Admin admin = adminService.getAdminByEmail(email);
 		JsonVo<String> json = new JsonVo<String>();
 		try {
 			if (adminName.equals("")) {
@@ -67,10 +69,14 @@ public class AdminAdminAction extends AdminBaseAction {
 			}
 			if (email.equals("")) {
 				json.getErrors().put("email", "管理员邮箱不能为空");
+			}else{
+				if(admin!=null){
+					json.getErrors().put("email", "管理员邮箱不能重复");
+				}
 			}
 			// 检测校验结果
 			validate(json);
-			adminService.addAdmin(email, adminName, password,AdminConstant.Status.INIT);
+			adminService.addAdmin(email, adminName, password,AdminConstant.Status.init);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -83,12 +89,12 @@ public class AdminAdminAction extends AdminBaseAction {
 	 * 进入管理员列表页面
 	 *
 	 */
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public String allList(
-			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
 		modelMap.put("pageVo", adminService.getAllListPage(pageNum));
-		return "admin/admin/all";
+		return "system/admin/all";
 	}
 
 	/**
@@ -99,7 +105,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	public String oneAdmin(@RequestParam(value = "adminId") long adminId,
 			ModelMap modelMap) {
 		modelMap.put("admin", adminService.getAdminById(adminId));
-		return "admin/admin/update";
+		return "system/admin/update";
 	}
 
 	/**
@@ -110,18 +116,33 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
 	public JsonVo<String> updateAdmin(
 			@RequestParam(value = "adminName") String adminName,
+			@RequestParam(value = "email") String email,
 			@RequestParam(value = "password") String password,
 			@RequestParam(value = "adminId") long adminId,
 			@RequestParam(value = "status") AdminConstant.Status status) {
 
 		JsonVo<String> json = new JsonVo<String>();
+		Admin admin = adminService.getAdminByEmail(email);
 		try {
 			if (adminName.equals("")) {
 				json.getErrors().put("adminName", "管理员名称不能为空");
 			}
+			if(email.equals("")){
+				json.getErrors().put("email", "电子邮箱不能为空");
+			}else{
+				if(admin==null || admin.getAdminId()==adminId){
+					
+				}else{
+					json.getErrors().put("email", "管理员邮箱不能重复");
+				}
+			}
 			// 检测校验结果
 			validate(json);
-			adminService.updateAdmin(adminId, adminName, password, status);
+			if(password.equals("-1")){
+				adminService.updateAdmin(adminId, adminName, "", status);
+			}else{
+				adminService.updateAdmin(adminId, adminName, password, status);
+			}
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -137,6 +158,6 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteAdmin(@RequestParam(value = "adminId") long adminId) {
 		adminService.deleteAdmin(adminId);
-		return "redirect:/admin/admin/all";
+		return "redirect:/admin/admin/page";
 	}
 }

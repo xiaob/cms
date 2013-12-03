@@ -20,8 +20,6 @@ package com.shishuo.cms.entity;
 
 import java.util.Date;
 
-import com.shishuo.cms.constant.ConfigConstant;
-
 /**
  * 网站配置实体
  * 

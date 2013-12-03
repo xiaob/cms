@@ -20,15 +20,9 @@ package com.shishuo.cms.action.admin;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -122,6 +116,44 @@ public class AdminConfigAction extends AdminBaseAction {
 		return json;
 	}
 
+	@RequestMapping(value = "/picture", method = RequestMethod.GET)
+	public String picture(){
+		return "admin/config/picture";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/update/picture.json", method = RequestMethod.GET)
+	public JsonVo<String> updatePicture(
+			@RequestParam(value = "bigWidth") String bigWidth,
+			@RequestParam(value = "bigheight") String bigheight,
+			@RequestParam(value = "smallWidth") String smallWidth,
+			@RequestParam(value = "smallHeight") String smallHeight){
+		JsonVo<String> json = new JsonVo<String>();
+		try {
+			if (StringUtils.isBlank(bigWidth)) {
+				json.getErrors().put("bigWidth", "大图的宽度不能为空");
+			}
+			if (StringUtils.isBlank(bigheight)) {
+				json.getErrors().put("bigheight", "大图的高度不能为空");
+			}
+			if (StringUtils.isBlank(smallWidth)) {
+				json.getErrors().put("smallWidth", "小图的宽度不能为空");
+			}
+			if (StringUtils.isBlank(smallHeight)) {
+				json.getErrors().put("smallHeight", "小图的高度不能为空");
+			}
+			
+			// 检测校验结果
+			validate(json);
+			String strb = bigWidth+"x"+bigheight+";"+smallWidth+"x"+smallHeight+";";
+			configSevice.updagteConfigByKey("article_picture_size", strb);
+			json.setResult(true);
+		} catch (Exception e) {
+			json.setResult(false);
+			json.setMsg(e.getMessage());
+		}
+		return json;
+	}
+	
 	private List<String> getTemplate() {
 		List<String> templateList = new ArrayList<String>();
 		String templatePath = System
@@ -136,47 +168,5 @@ public class AdminConfigAction extends AdminBaseAction {
 		}
 		return templateList;
 	}
-	
-	private List<String> iterator() throws DocumentException {
-		//遍历元素节点
-		//获取文档对象下的根元素
-		SAXReader reader = new SAXReader();
-//		Document doc=reader.read(System
-//				.getProperty(SystemConstant.SHISHUO_CMS_ROOT) + "/WEB-INF/ftl/default/template.xml");
-		Document doc = reader.read("C:/Users/Administrator/git/CMS/src/main/webapp/WEB-INF/ftl/default/template.xml");
-		Element root = doc.getRootElement();
-		List<String> list1 = new ArrayList<String>();
-		List<String> list3 = new ArrayList<String>();
-		//获取根元素下的子元素
-		String tagname = root.getName();
-		System.out.println("根结点的名称是："+root.getName()); 
-		root.setName("folder");
-		List<Element> list = root.elements("item");
-		System.out.println("根结点的名称是："+root.getName()); 
-		System.out.println(list.size());
-		for (int i = 0; i < list.size(); i++) {
-			Element bookEle = list.get(i);
-			String nameEleText = bookEle.elementTextTrim("ename");
-			list1.add(nameEleText);
-		}
-//		for(int i = 0; i < list1.size(); i++){
-//			Element bookEle = list1.get(i);
-//			String nameEleText = bookEle.elementTextTrim("ename");
-//			list3.add(nameEleText);
-//		}
-		Set<String> set = new HashSet<String>();
-		set.addAll(list1);
-		List<String> list2 = new ArrayList<String>();
-		list2.addAll(set);
-		System.out.println(list2.size());
-		for(int i = 0; i < list2.size(); i++){
-			System.out.println(list2.get(i));
-		}
-		return list2;
-		}
-	
-	public static void main(String[] args) throws DocumentException {
-		AdminConfigAction a = new AdminConfigAction();
-		a.iterator();
-	}
+		
 }

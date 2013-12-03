@@ -80,7 +80,7 @@ public class LogService {
 	}
 
 	/**
-	 * 所有日志
+	 * 所有日志的数量
 	 * 
 	 * @return Integer
 	 */

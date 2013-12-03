@@ -102,8 +102,8 @@ public class PageVo<T> {
 		// 首页，上一页
 		if (this.getPageNum() != 1) {
 			sb.append("<li><a href='" + this.getUrl()
-					+ "pageNum=1' title='首页'>&laquo; 首页</a></li>");
-			sb.append("<li><a href='" + this.getUrl() + "pageNum="
+					+ "p=1' title='首页'>&laquo; 首页</a></li>");
+			sb.append("<li><a href='" + this.getUrl() + "p="
 					+ (this.getPageNum() - 1)
 					+ "' title='上一页'>&laquo; 上一页</a></li>");
 		}
@@ -119,11 +119,11 @@ public class PageVo<T> {
 			for (int i = startNum; i <= endNum; i++) {
 				if (i == pageNum) {
 					sb.append("<li class='active'><a   href='" + this.getUrl()
-							+ "pageNum=" + i
+							+ "p=" + i
 							+ "' class='number current' title='" + i + "'>" + i
 							+ "</a></li>");
 				} else {
-					sb.append("<li><a href='" + this.getUrl() + "pageNum=" + i
+					sb.append("<li><a href='" + this.getUrl() + "p=" + i
 
 					+ "' class='number' title='" + i + "'>" + i + "</a></li>");
 				}
@@ -134,10 +134,10 @@ public class PageVo<T> {
 		}
 		// 下一页，尾页
 		if (this.getPageNum() < this.getPageCount()) {
-			sb.append("<li><a href='" + this.getUrl() + "pageNum="
+			sb.append("<li><a href='" + this.getUrl() + "p="
 					+ (this.getPageNum() + 1)
 					+ "' title='下一页'>下一页&raquo;</a></li>");
-			sb.append("<li><a href='" + this.getUrl() + "pageNum="
+			sb.append("<li><a href='" + this.getUrl() + "p="
 					+ this.getPageCount() + "' title='末页'>末页 &raquo;</a></li>");
 		}
 		sb.append("</ul>");

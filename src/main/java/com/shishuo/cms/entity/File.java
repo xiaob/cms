@@ -61,11 +61,6 @@ public class File {
 	private String content;
 	
 	/**
-	 * 文件模板
-	 */
-	private String template;
-
-	/**
 	 * 浏览人数
 	 */
 	private int viewCount;
@@ -178,12 +173,4 @@ public class File {
 		this.type = type;
 	}
 
-	public String getTemplate() {
-		return template;
-	}
-
-	public void setTemplate(String template) {
-		this.template = template;
-	}
-	
 }

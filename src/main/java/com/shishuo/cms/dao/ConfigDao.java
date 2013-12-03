@@ -18,8 +18,6 @@
  */
 package com.shishuo.cms.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -48,31 +46,6 @@ public interface ConfigDao {
 	 * return Integer
 	 */
 	public int deleteConfig(@Param("key") String key);
-
-	/**
-	 * 查看所有配置
-	 * 
-	 * @param offset
-	 * @param rows
-	 * 
-	 * @return List<Config>
-	 */
-	public List<Config> getConfig(@Param("offset") long offset,
-			@Param("rows") long rows);
-
-	/**
-	 * 得到所有配置
-	 * 
-	 * @return
-	 */
-	public List<Config> getAllConfig();
-
-	/**
-	 * 查看所有配置的数量
-	 * 
-	 * return Integer
-	 */
-	public int allConfigCount();
 
 	/**
 	 * 更新配置

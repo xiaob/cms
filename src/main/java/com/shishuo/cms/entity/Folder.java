@@ -68,11 +68,6 @@ public class Folder {
 	private int count;
 
 	/**
-	 * 模板
-	 */
-	private String template;
-
-	/**
 	 * 等级
 	 */
 	private FolderConstant.Rank rank;
@@ -137,14 +132,6 @@ public class Folder {
 
 	public void setCount(int count) {
 		this.count = count;
-	}
-
-	public String getTemplate() {
-		return template;
-	}
-
-	public void setTemplate(String template) {
-		this.template = template;
 	}
 
 	public int getSort() {

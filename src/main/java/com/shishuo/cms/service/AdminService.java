@@ -129,7 +129,7 @@ public class AdminService {
 	public PageVo<Admin> getAllListPage(int pageNum) {
 		PageVo<Admin> pageVo = new PageVo<Admin>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl("/CMS/admin/admin/allList.do?");
+		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/admin/all?");
 		List<Admin> list = this
 				.getAllList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
@@ -152,6 +152,8 @@ public class AdminService {
 		Admin admin = this.getAdminById(adminId);
 		admin.setName(name);
 		if(password.equals("")){
+			admin.setPassword(admin.getPassword());
+		}else{
 			admin.setPassword(AuthUtils.getPassword(password, admin.getEmail()));
 		}
 		admin.setStatus(status);
@@ -167,5 +169,15 @@ public class AdminService {
 	 */
 	public int deleteAdmin(long adminId) {
 		return adminDao.deleteAdmin(adminId);
+	}
+	
+	/**
+	 * 通过email获得管理员资料
+	 * 
+	 * @param email
+	 * @return Admin
+	 */
+	public Admin getAdminByEmail(String email){
+		return adminDao.getAdminByEmail(email);
 	}
 }

@@ -28,8 +28,9 @@ import com.shishuo.cms.util.AuthUtils;
  * 
  */
 public class Install {
-	private static String CMS_PROPERTIES = "src/main/resources/shishuocms.properties";
+	private static String CMS_PROPERTIES = "shishuocms.properties";
 	private static String CMS_INSTALL_SQL = "sql/install.sql";
+	private static String ADMIN_PASSWORD = "shishuocms";
 
 	Console console = System.console();
 
@@ -37,21 +38,43 @@ public class Install {
 
 		Install install = new Install();
 		install.welcome();
-		for (int i = 1; i <= 10; i++) {
-			if (install.importData()) {
-				System.out.println("\n\n安装成功，使用 mvn jetty:run 运行系统。\n\n");
-				break;
-			} else {
-				System.out.println("第" + i + "/10 安装失败，请根据错误提示检测 "
-						+ CMS_PROPERTIES + " 相关数据库的配置是否正常。");
-			}
-		}
+//		for (int i = 1; i <= 10; i++) {
+//			if (install.importData()) {
+//				System.out.println("\n\n安装成功，使用 mvn jetty:run 运行系统。\n\n");
+//				break;
+//			} else {
+//				System.out.println("第" + i + "/10 安装失败，请根据错误提示检测 "
+//						+ CMS_PROPERTIES + " 相关数据库的配置是否正常。");
+//			}
+//		}
 	}
 
 	/**
 	 * 
 	 */
 	private void welcome() {
+		System.out.println("                                                                                ");
+		System.out.println("          7                                                                     ");
+		System.out.println("          ,,       7,,,,,,,,,,,,,,,,,,    ,=,,,,,,,      ,, 7       ,,,         ");
+		System.out.println("    ,,   ,,,7  ,,,,,,,,,,,,,,,,,,,,,, 7  ,,,,,,,,,,,,  I,,,,,      ,,,,         ");
+		System.out.println("  ,,,,,  ,,,  ?,,,,,,,,=II?,,,,,,,,,    7,,,,,,,,,,, 7   ,,,,     ,,,,          ");
+		System.out.println("  ,,,,,   ,,   =+      7,,7                7,,,I         7,,,  7?,,+    7       ");
+		System.out.println("  :,,,,   ,,        7  ,,,,                             I ,,,,,,,,,,,,,,,       ");
+		System.out.println("  7,,,    ,,    77,,,,,,,,,,,,,,,,,,    7I,,,,,,,,7 7,,,,,,,,,,,,,,,,,,,,       ");
+		System.out.println("  7,,,    ,,   ,,,,,,,,,,,,,,,,,,,,,   ,,,,,,,,,,,   ,,,,,,+        ,,,, 7      ");
+		System.out.println("   =,,    ,,   ,,,,,,,,,,,,=   =,,,    ,,,,,,,,,,     ,,,?7        ,,,:         ");
+		System.out.println("   ,,,    ,,    ,,,     ,,=     ,,,7    ,,,7 ,,,=    7,,,,,,,,,,,,,,,,          ");
+		System.out.println("  7,,,    ,,    ,,,     ,,I     ,,,          ,,,     ,,,,,,,,,,,,,,,            ");
+		System.out.println("   ,,,   +,,    ,,,    7,,?     ,,,          ,,,     ,,, 7    ,,,7              ");
+		System.out.println("   ,,,   ,,,   ~,,?     ,,,     ,,,         ,,,,         ,,   ,,,               ");
+		System.out.println("    ,7   ,,    ,,,     ~,,,     7,,=       7,,,? 7,,    ,,7   ,,                ");
+		System.out.println("        ,,,    ,,,     ,,,,      ,,=       ,,,,,,,,7   ,,,   ,,,                ");
+		System.out.println("     7,,,,,    ,,,     ,,,,      ,,7      ,,,,,,,~    ,,,    ,,,=         7 ,,  ");
+		System.out.println("  ,,,,,,,,7      7     ,,,,             7,,,,,,,7   7,,,     ,,,,,,,~I I:,,,,=  ");
+		System.out.println(" ,,,,,,,,7             ,,,,             ,,,,,      +,,,     I,,,,,,,,,,,,,,,,   ");
+		System.out.println("  7?,,I                ,,,,             ,,,7       ,,,       ,,,,,,,,,,,,,,,,   ");
+		System.out.println("                       777                                       7 ,,,,,,,,,    ");
+		System.out.println("                                                                        7       ");
 		Properties props = System.getProperties();
 		System.out.println("\n\n欢迎使用【师说CMS】\n\n");
 		System.out.println("Windows: set MAVEN_OPTS=-Dfile.encoding=UTF-8");
@@ -102,14 +125,14 @@ public class Install {
 			runner.runScript(new InputStreamReader(new FileInputStream(
 					CMS_INSTALL_SQL), "UTF-8"));
 			// 增加超级管理员帐号
-			String pwd = AuthUtils.getPassword("111111", email);
+			String pwd = AuthUtils.getPassword(ADMIN_PASSWORD, email);
 			String sql = "INSERT INTO `admin`(`adminId`,`email`,`password`,`name`,`status`,`createTime`) VALUES (?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, 1);
 			stmt.setString(2, email);
 			stmt.setString(3, pwd);
-			stmt.setString(4, "admin");
-			stmt.setString(5, AdminConstant.Status.NORMAL.name());
+			stmt.setString(4, "超级管理员");
+			stmt.setString(5, AdminConstant.Status.normal.name());
 			stmt.setDate(6, new java.sql.Date(new Date().getTime()));
 			stmt.executeUpdate();
 			conn.commit();

@@ -20,6 +20,7 @@ package com.shishuo.cms.action.admin;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,16 +43,19 @@ import com.shishuo.cms.entity.vo.JsonVo;
 @Controller
 public class AdminFolderAction extends AdminBaseAction{
 
+	@Autowired
+	private AdminConfigAction adminConfigAction;
 	/**
 	 * @author 进入添加目录页面
+	 * @throws Exception 
 	 *
 	 */
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
-	public String login(ModelMap modelMap){
+	public String login(ModelMap modelMap) throws Exception{
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folderName", "");
 		modelMap.put("folderEname", "");
-		return "admin/folder/folder";
+		return "system/folder/folder";
 	}
 	
 	/**
@@ -69,12 +73,19 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "rank") FolderConstant.Rank rank,
 			ModelMap modelMap) {
 		JsonVo<String> json = new JsonVo<String>();
+		List<Folder> list = folderService.getAllList();
 		try {
 			if(folderName.equals("")){
 				json.getErrors().put("folderName", "目录名称不能为空");
 			}
 			if(folderEname.equals("")){
 				json.getErrors().put("folderEname", "英文名称不能为空");
+			}else{
+				for(Folder folder:list){
+					if(folderEname.equals(folder.getEname())){
+						json.getErrors().put("folderEname", "英文名称不能重复");
+					}
+				}
 			}
 			// 检测校验结果
 			validate(json);
@@ -92,19 +103,20 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 所有目录列表分页
 	 *
 	 */
-	@RequestMapping(value = "/all",method = RequestMethod.GET)
+	@RequestMapping(value = "/page",method = RequestMethod.GET)
 	public String allFolder(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,ModelMap modelMap){
 		List<FolderVo> list = folderService.getAllFolder();
 		modelMap.put("list", list);
-		return "admin/folder/all";
+		return "system/folder/all";
 	}
 	
 	/**
 	 * @author 进入修改目录资料页面
+	 * @throws Exception 
 	 *
 	 */
 	@RequestMapping(value = "/{folderId}",method = RequestMethod.GET)
-	public String oneFolder(@PathVariable long folderId,ModelMap modelMap){
+	public String oneFolder(@PathVariable long folderId,ModelMap modelMap) throws Exception{
 		Folder folder = folderService.getFolderById(folderId);
 		if(folder.getFatherId()==0){
 			modelMap.put("fatherFolderName","未分类");
@@ -114,7 +126,7 @@ public class AdminFolderAction extends AdminBaseAction{
 		}
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folder", folder);
-		return "admin/folder/update";
+		return "system/folder/update";
 	}
 	
 	/**
@@ -127,22 +139,29 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "folderName") String folderName,
 			@RequestParam(value = "folderEname") String folderEname,
-			@RequestParam(value = "sort",defaultValue="-1") int sort,
+			@RequestParam(value = "sort",defaultValue="0") int sort,
 			@RequestParam(value = "type") FolderConstant.Type type,
 			@RequestParam(value = "status") FolderConstant.Status status,
 			@RequestParam(value = "rank") FolderConstant.Rank rank){
 		
 		JsonVo<String> json = new JsonVo<String>();
+		List<Folder> list = folderService.getAllList();
 		try {
 			if(folderName.equals("")){
 				json.getErrors().put("folderName", "目录名称不能为空");
 			}
 			if(folderEname.equals("")){
 				json.getErrors().put("folderEname", "英文名称不能为空");
+			}else{
+				for(Folder folder:list){
+					if(folderId !=folder.getFolderId()){
+						if(folderEname.equals(folder.getEname())){
+							json.getErrors().put("folderEname", "英文名称不能重复");
+						}
+					}
+				}
 			}
-			if(sort==-1){
-				json.getErrors().put("sort", "目录序列不能为空");
-			}
+
 			// 检测校验结果
 			validate(json);
 			folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status,type, rank,sort);
@@ -162,7 +181,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	public String deleteFolder(
 			@PathVariable long folderId){
 		folderService.deleteFolderById(folderId);
-		return "redirect:/admin/folder/all";
+		return "redirect:/admin/folder/page";
 	}
 	
 	/**
@@ -173,6 +192,6 @@ public class AdminFolderAction extends AdminBaseAction{
 	public String updateSort(
 			@PathVariable int sort){
 		
-		return "redirect:/admin/folder/all";
+		return "redirect:/admin/folder/page";
 	}
 }
