@@ -33,6 +33,7 @@ import com.shishuo.cms.exception.FolderNotFoundException;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.FileService;
 import com.shishuo.cms.service.FolderService;
+import com.shishuo.cms.service.ThemeService;
 
 /**
  * 首页
@@ -51,6 +52,9 @@ public class DefaultAction {
 	@Autowired
 	private ConfigService configService;
 
+	@Autowired
+	private ThemeService themeService;
+
 	/**
 	 * 首页
 	 * 
@@ -62,14 +66,10 @@ public class DefaultAction {
 	public String home(
 			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
-		try {
-			modelMap.addAttribute("ename", "");
-			modelMap.addAttribute("folderId", "0");
-			modelMap.addAttribute("pageNum", pageNum);
-			return configService.getTemplatePath() + "/default";
-		} catch (Exception e) {
-			return configService.getTemplatePath() + "/500";
-		}
+		modelMap.addAttribute("ename", "");
+		modelMap.addAttribute("folderId", "0");
+		modelMap.addAttribute("pageNum", pageNum);
+		return themeService.getDefaultTheme();
 	}
 
 	/**
@@ -89,7 +89,8 @@ public class DefaultAction {
 			modelMap.addAttribute("ename", ename);
 			modelMap.addAttribute("folderId", folder.getFolderId());
 			modelMap.addAttribute("pageNum", pageNum);
-			return configService.getTemplatePath() + "/default";
+			return themeService.getFolderTheme(folder.getEname(),
+					folder.getType());
 		} catch (FolderNotFoundException e) {
 			return configService.getTemplatePath() + "/404";
 		}
@@ -103,7 +104,7 @@ public class DefaultAction {
 	 * @param pageNum
 	 * @param modelMap
 	 * @return
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 */
 	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
 	public String file(@PathVariable String ename, @PathVariable long fileId,
