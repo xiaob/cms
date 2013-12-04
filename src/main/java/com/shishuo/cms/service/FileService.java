@@ -129,6 +129,17 @@ public class FileService {
 	}
 	
 	/**
+	 * 得到目录下的所有文件
+	 * 
+	 * @param foderId
+	 * @return
+	 */
+
+	public List<File> getAllFileByFolderId(long folderId) {
+		return fileDao.getAllFileByFolderId(folderId);
+	}
+	
+	/**
 	 * 得到目录的某种文件的数量
 	 * 
 	 * @param folderId
@@ -310,5 +321,23 @@ public class FileService {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean checkPhotoFile(MultipartFile file) {
+		if (file.isEmpty()) {
+			return false;
+		}
+		if (file.getContentType().equals("image/jpg")
+				|| file.getContentType().equals("image/png")
+				|| file.getContentType().equals("image/jpeg")
+				|| file.getContentType().equals("image/gif")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public int updateFolderId(long fileId,long folderId){
+		return fileDao.updateFolderId(fileId, folderId);
 	}
 }

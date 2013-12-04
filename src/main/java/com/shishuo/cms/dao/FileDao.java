@@ -139,5 +139,4 @@ public interface FileDao {
 
 	public int updateCommentCount(@Param("fileId") long fileId,
 			@Param("commentCount") int commentCount);
-	
 }
