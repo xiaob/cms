@@ -213,7 +213,6 @@ public class FolderService {
 	 * 实现同级目录排序的内部类
 	 */
 	class ComparatorFolderList implements Comparator<Object> {
-
 		public int compare(Object arg0, Object arg1) {
 			FolderVo folderVo1 = (FolderVo) arg0;
 			FolderVo folderVo2 = (FolderVo) arg1;
