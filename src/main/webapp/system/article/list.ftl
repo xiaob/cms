@@ -37,11 +37,7 @@
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
                             			<td>${e.fileId}</td>
-                            			<#list folderList as folder>
-                            			<#if folder.folderId==e.folderId>
-               								<td><a href="${basePath}/${folder.ename}/${e.fileId}">${e.name}</a></td>
-               							</#if>
-               							</#list>
+               							<td><a href="${basePath}/${e.folder.ename}/${e.fileId}">${e.name}</a></td>
                             			<td>${e.folderId}</td>
                                     	<td>${e.picture}</td>
                                     	<td>${e.status}</td>
@@ -53,7 +49,7 @@
                   									<i class="icon-pencil"></i>
                   								</button>
                   							</a>
-                  							<a href="${basePath}/admin/file/status/update?fileId=${e.fileId}&status=hidden" title="回收站">
+                  							<a class="js_article_delete" href="${basePath}/admin/file/status/update?fileId=${e.fileId}&status=hidden" title="把${e.name}放进回收站">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>

@@ -20,7 +20,7 @@
                   <div class="col-lg-12">
                       <section class="panel">
                           <header class="panel-heading">
-                            	添加文章
+                            	添加下载文件
                           </header>
                           <div class="panel-body">
                               <form id="add_article_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/article/add.json">
@@ -34,7 +34,7 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">所属目录</label>
                                       <div class="col-sm-10">
-                                         <select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;height: 45px;" name="folderId">
+                                         <select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;height: 40px;" name="folderId">
                                         	<#list allFolderList as folder>  	
                                           		<option value="${folder.folderId}">
                                           		<#list 1..folder.level as i>-</#list> ${folder.name}
@@ -59,7 +59,7 @@
                                   </div>
                                  </fieldset>
                               </form>
-                              <p id="add_article_p">文章添加成功.<a href="<a href="${basePath}/admin/article/list">">前往文章列表</a></p>
+                              <p id="add_article_p">文件添加成功.<a href="<a href="${basePath}/admin/article/list">">前往下载文件列表</a></p>
                           </div>
                       </section>
                   </div>
@@ -80,16 +80,10 @@
 				if (data.result) {
 					$('#fileId').prop("value",data.t);
 					bootbox.dialog({
+					
   						message: '<form enctype="multipart/form-data" id="add_article_picture_form" method="post" autocomplete="off" action="${basePath}/admin/file/upload.json"><fieldset><input type="file" id="file" name= "file" value=""/><input type="text" id="fileId" name="fileId" value=""/><input id="type" name="type" value="article"/></fieldset></form>',
   						title: "是否上传文章图片",
   						buttons: {
-  							add : {
-								label : "继续添加",
-								className : "btn-primary",
-								callback : function() {
-									window.location.reload();
-								}
-							},
     						success: {
       							label: "上传",
       							className: "btn-success",
@@ -106,13 +100,6 @@
 									});
       							}
     						},
-    						list : {
-								label : "查看文件夹列表",
-								className : "btn-danger",
-								callback : function() {
-									window.location.href="${basePath}/admin/file/page?type=article";
-								}
-							},
   						}
 					});
 				}else{

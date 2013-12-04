@@ -11,6 +11,7 @@
 	<script src="${basePath}/system/assets/tinymce/tinymce.min.js"></script>
 	<script src="${basePath}/system/js/bootstrap-switch.js"></script>
 	<script src="${basePath}/system/js/bootbox.min.js"></script>
+	<script src="${basePath}/system/js/jquery.json.js"></script>
 	<!--common script for all pages-->
 	<script src="${basePath}/system/js/common-scripts.js"></script>
 

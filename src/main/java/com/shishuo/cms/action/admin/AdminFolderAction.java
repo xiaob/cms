@@ -20,6 +20,9 @@ package com.shishuo.cms.action.admin;
 
 import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.FolderConstant;
+import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.entity.vo.JsonVo;
@@ -55,7 +59,7 @@ public class AdminFolderAction extends AdminBaseAction{
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folderName", "");
 		modelMap.put("folderEname", "");
-		return "system/folder/folder";
+		return "system/folder/add";
 	}
 	
 	/**
@@ -73,7 +77,7 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "rank") FolderConstant.Rank rank,
 			ModelMap modelMap) {
 		JsonVo<String> json = new JsonVo<String>();
-		List<Folder> list = folderService.getAllList();
+		List<FolderVo> list = folderService.getAllFolder();
 		try {
 			if(folderName.equals("")){
 				json.getErrors().put("folderName", "目录名称不能为空");
@@ -124,7 +128,7 @@ public class AdminFolderAction extends AdminBaseAction{
 			Folder fatherFolder = folderService.getFolderById(folder.getFatherId());
 			modelMap.put("fatherFolderName", fatherFolder.getName());
 		}
-		modelMap.put("folderAll", folderService.getAllFolder());
+		modelMap.put("folderAll", folderService.getAllFolderByType(folder.getType()));
 		modelMap.put("folder", folder);
 		return "system/folder/update";
 	}
@@ -145,7 +149,7 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "rank") FolderConstant.Rank rank){
 		
 		JsonVo<String> json = new JsonVo<String>();
-		List<Folder> list = folderService.getAllList();
+		List<FolderVo> list = folderService.getAllFolder();
 		try {
 			if(folderName.equals("")){
 				json.getErrors().put("folderName", "目录名称不能为空");
@@ -177,11 +181,44 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 删除目录
 	 *
 	 */
-	@RequestMapping(value = "/delete/{folderId}",method = RequestMethod.GET)
-	public String deleteFolder(
-			@PathVariable long folderId){
-		folderService.deleteFolderById(folderId);
-		return "redirect:/admin/folder/page";
+	@ResponseBody
+	@RequestMapping(value = "/sort.json",method = RequestMethod.POST)
+	public JsonVo<String> delete(@RequestParam(value = "sortJson") String sortJson){
+		JsonVo<String> json = new JsonVo<String>();
+		JSONArray array = JSONArray.fromObject(sortJson);
+		 for(int i=0;i<array.size();i++){
+			JSONObject folder =  array.getJSONObject(i);
+			String folderId = folder.get("folderId").toString();
+			String sort = folder.get("sort").toString();
+			folderService.updateSort(Long.parseLong(folderId),Integer.parseInt(sort));
+		 }
+		 json.setResult(true);
+		return json;
+	}
+	
+	/**
+	 * @author 删除目录
+	 *
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/delete.json",method = RequestMethod.POST)
+	public JsonVo<String> delete(@RequestParam(value = "folderId") long folderId){
+		JsonVo<String> json = new JsonVo<String>();
+		List<Folder> folderList = folderService.getFolderListByFatherId(folderId);
+		if(folderList.size()==0){
+			List<File> list = fileService.getAllFileByFolderId(folderId);
+			if(list.size()!=0){
+				json.setResult(false);
+				json.setMsg("此目录下还有文件,不能被删除。");
+			}else{
+				json.setResult(true);
+				folderService.deleteFolderById(folderId);
+			}
+		}else{
+			json.setResult(false);
+			json.setMsg("此目录下有子目录，不能删除。");
+		}
+		return json;
 	}
 	
 }

@@ -86,8 +86,9 @@ public class FolderService {
 		} else {
 			folder.setLevel(fatherFolder.getLevel() + 1);
 		}
-		folder.setEname(ename);
+		folder.setEname(ename.trim());
 		folder.setName(name);
+		folder.setPath("");
 		folder.setCount(0);
 		folder.setStatus(status);
 		folder.setType(type);
@@ -95,6 +96,11 @@ public class FolderService {
 		folder.setRank(rank);
 		folder.setCreateTime(new Date());
 		folderDao.addFolder(folder);
+		if(fatherId==0){
+			this.updatePath(folder.getFolderId(), folder.getFolderId()+"");
+		}else{
+			this.updatePath(folder.getFolderId(), fatherFolder.getPath()+"#"+folder.getFolderId());
+		}
 		return folder;
 	}
 
@@ -125,6 +131,12 @@ public class FolderService {
 			String name, FolderConstant.Status status,
 			FolderConstant.Type type, FolderConstant.Rank rank, int sort) {
 		Folder folder = this.getFolderById(folderId);
+		Folder fatherFolder = this.getFolderById(fatherId);
+		if(fatherId==0){
+			folder.setPath(folder.getFolderId()+"");
+		}else{
+			folder.setPath(fatherFolder.getPath()+"#"+folder.getFolderId());
+		}
 		folder.setFatherId(fatherId);
 		folder.setEname(ename);
 		folder.setName(name);
@@ -151,16 +163,6 @@ public class FolderService {
 		} else {
 			return folder;
 		}
-	}
-
-	/**
-	 * 获得无参的所有的目录列表
-	 * 
-	 * @return List<Folder>
-	 * 
-	 */
-	public List<Folder> getAllList() {
-		return folderDao.getAllList();
 	}
 
 	/**
@@ -230,5 +232,36 @@ public class FolderService {
 	 */
 	public List<FolderVo> getFolderVoListByFatherId(long fatherId) {
 		return folderDao.getFolderVoListByFatherId(fatherId);
+	}
+	
+	/**
+	 * 通过指定Id修改其目录的序列
+	 * @param folderId
+	 * @param sort
+	 * @return Integer
+	 */
+	public int updateSort(long folderId,int sort){
+		return folderDao.updateSort(folderId, sort);
+	}
+	
+	/**
+	 * 通过指定Id修改其目录的路径
+	 * @param folderId
+	 * @param path
+	 * @return Integer
+	 */
+	public int updatePath(long folderId,String path){
+		return folderDao.updatePath(folderId, path);
+	}
+	
+	/**
+	 * 获得某种类型的目录列表
+	 * @param FolderConstant.Type
+	 * @return List<Folder>
+	 */
+	public List<FolderVo> getAllFolderByType(FolderConstant.Type type){
+		List<FolderVo> folderList= folderDao.getAllFolderByType(type);
+		Collections.sort(folderList, new ComparatorFolderList());
+		return folderList;
 	}
 }

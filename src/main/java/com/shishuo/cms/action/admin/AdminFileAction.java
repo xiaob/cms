@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.constant.UpdatePictureConstant;
 import com.shishuo.cms.entity.File;
+import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.FileNotFoundException;
@@ -36,9 +38,8 @@ public class AdminFileAction extends AdminBaseAction {
 			@RequestParam(value = "status", defaultValue = "display") FileConstant.Status status,
 			@RequestParam(value = "type", defaultValue = "article") FileConstant.Type type,
 			ModelMap modelMap) {
-		PageVo<File> pageVo = fileService.getAllFileByTypePage(type, status, pageNum);
+		PageVo<FileVo> pageVo = fileService.getAllFileByTypePage(type, status, pageNum);
 		modelMap.put("pageVo", pageVo);
-		modelMap.put("folderList", folderService.getAllList());
 		if(status.equals(FileConstant.Status.hidden)){
 			return "system/"+type+"/recycle";
 		}else{
@@ -51,11 +52,13 @@ public class AdminFileAction extends AdminBaseAction {
 	 * @throws FileNotFoundException 
 	 * 
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String deleteFile(@RequestParam(value = "fileId") long fileId) throws FileNotFoundException {
-		File file = fileService.getFileByFileId(fileId);
+	@ResponseBody
+	@RequestMapping(value = "/delete.json", method = RequestMethod.POST)
+	public JsonVo<String> deleteFile(@RequestParam(value = "fileId") long fileId) throws FileNotFoundException {
+		JsonVo<String> json = new JsonVo<String>();
 		fileService.deleteFileByFileId(fileId);
-		return "redirect:/admin/file/page?type="+file.getType()+"&status="+file.getStatus();
+		json.setResult(true);
+		return json;
 	}
 	
 	/**
@@ -90,7 +93,8 @@ public class AdminFileAction extends AdminBaseAction {
 				String path = webroot+"/upload/"+type+"/"+article.getFileId()+".jpg";
 				java.io.File source = new java.io.File(path);
 				file.transferTo(source);
-				updatePictureConstant.updatePicture(article.getFileId(), path);
+				String picture = configSevice.getConfigByKey("article_picture_size", true);
+				updatePictureConstant.updateArticlePicture(article.getFileId(), path,picture);
 			json.setResult(true);
 			
 		} catch (Exception e) {

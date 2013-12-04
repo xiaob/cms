@@ -37,18 +37,38 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list list as e>
                             		<tr class="gradeA odd">
-                            			<td class="folderSort"><input type="text" value="${e.sort}" name="sort" class="txt" style="width:40px;">
-                            			</td>
-										<td>
-										<#list 1..e.level as i>
-										————
+                            			<td class="folderSort">
+                            			<#list 1..e.level as i>
+										—
 										</#list>
-                                    	${e.ename}</td>
+                            			<input type="text" folderId="${e.folderId}" value="${e.sort}" name="sort" class="js_folder_sort" style="width:40px;">
+                            			</td>
+										<td>${e.ename}</td>
                                     	<td>${e.name}</td>
                                     	<td>${e.count}</td>
-                                    	<td>${e.status}</td>
-                                    	<td>${e.type}</td>
-                                    	<td>${e.rank}</td>
+                                    	<td><#if e.status="display" >显示<#else>隐藏</#if></td>
+                                    	<td>
+                                    	<#if e.type="article">
+                                    	文章
+                                    	<#elseif e.type="photo">
+                                    	相册
+                                    	<#elseif e.type="download">
+                                    	下载
+                                    	<#elseif e.type="shop">
+                                    	商城
+                                    	</#if>
+                                    	</td>
+                                    	<td>
+										<#if e.rank="everyone">
+                                    	所有人
+                                    	<#elseif e.rank="login">
+                                    	登陆用户
+                                    	<#elseif e.rank="vip">
+                                    	VIP
+                                    	<#elseif e.rank="admin">
+                                    	管理员
+                                    	</#if>                                    	
+                                    	</td>
                                     	<td>
                   							<!-- Icons -->
                 							<a href="${basePath}/admin/folder/${e.folderId}" title="修改">
@@ -56,7 +76,7 @@
                 									<i class="icon-pencil"></i>
                 								</button>
                 							</a>
-                							<a href="${basePath}/admin/folder/delete/${e.folderId}" title="删除">
+                							<a class="js_folder_delete" folderId="${e.folderId}" href="javascript:void(0);" title="删除${e.name}">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>
@@ -67,6 +87,7 @@
                                	</tbody>
                               </table>
                            </div>
+                           <div><button class="btn btn-info js_update_sort" type="button"><i class="icon-refresh"></i> 更新排序</button></div>
                         </div>
                   </div>
               </section>
@@ -74,4 +95,55 @@
           </section>
 		</section>
 		<!--main content end-->
+		<script>
+			$(function(){
+				$('.js_update_sort').click(function(){
+					var folderSort=new Array();
+					$('.js_folder_sort').each(function(i, element){
+						var folder= {};
+						folder.folderId=$(element).attr('folderId');
+						folder.sort=$(element).val();
+						folderSort.push(folder);				
+					});
+					$.post("${basePath}/admin/folder/sort.json", { "sortJson": $.toJSON(folderSort)},function(data){
+						if(data.result){
+							bootbox.alert("更新成功", function() {
+								window.location.href="${basePath}/admin/folder/page";
+							});
+						}else{
+							bootbox.alert(data.msg, function() {});
+						}
+					}, "json");
+				});
+				$('.js_folder_delete').click(function(){
+					var folderId = $(this).attr('folderId')
+					bootbox.dialog({
+						message : "是否"+$(this).attr('title')+"文件夹",
+						title : "提示",
+						buttons : {
+							delete : {
+								label : "删除",
+								className : "btn-success",
+								callback : function() {
+									$.post("${basePath}/admin/folder/delete.json", { "folderId": folderId},
+								   	function(data){
+								   		if(data.result){
+								   			window.location.reload();
+								   		}else{
+								   			bootbox.alert(data.msg, function() {});
+								   		}
+								   	}, "json");
+								}
+							},
+							cancel : {
+								label : "取消",
+								className : "btn-primary",
+								callback : function() {
+								}
+							}
+						}
+					});					
+				});			
+			});
+		</script>
 <#include "/system/foot.ftl">

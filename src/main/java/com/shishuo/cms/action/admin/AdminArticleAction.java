@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.FileConstant;
+import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.JsonVo;
@@ -51,7 +52,7 @@ public class AdminArticleAction extends AdminFileAction {
 	 * 
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String article(
+	public String update(
 			@RequestParam(value = "fileId", defaultValue = "1") long fileId,
 			ModelMap modelMap) throws Exception {
 		File file = fileService.getFileByFileId(fileId);
@@ -62,7 +63,7 @@ public class AdminArticleAction extends AdminFileAction {
 			modelMap.put("folderName", folder.getName());
 		}
 		modelMap.put("file", file);
-		modelMap.put("folderAll", folderService.getAllFolder());
+		modelMap.put("folderAll", folderService.getAllFolderByType(FolderConstant.Type.article));
 		return "system/article/update";
 	}
 
@@ -73,7 +74,7 @@ public class AdminArticleAction extends AdminFileAction {
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addArticle(ModelMap modelMap) throws Exception {
-		modelMap.put("allFolderList", folderService.getAllFolder());
+		modelMap.put("allFolderList", folderService.getAllFolderByType(FolderConstant.Type.article));
 		modelMap.put("folderEname", "");
 		modelMap.put("articleId","");
 		return "system/article/add";
@@ -85,7 +86,7 @@ public class AdminArticleAction extends AdminFileAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/add.json", method = RequestMethod.POST)
-	public JsonVo<String> addArticle(
+	public JsonVo<String> add(
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "content") String content,

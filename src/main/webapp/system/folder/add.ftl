@@ -65,26 +65,54 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录类型</label>
                                       <div class="col-sm-10">
-                                        <input type="radio" name="type" value="article"/>文章
-										<input type="radio" name="type" value="photo" />图片
-										<input type="radio" name="type" value="download"/>下载
-										<input type="radio" name="type" value="shop" />商品
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" value="article" name="type" checked>
+                                        	文章
+                                  		</label>
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" value="photo" name="type">
+                                        	图片
+                                  		</label>
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" value="download" name="type">
+                                        	下载
+                                  		</label>                                 			
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" value="shop" name="type">
+                                        	商品
+                                  		</label>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录等级</label>
                                       <div class="col-sm-10">
-                                        <input type="radio" name="rank" value="everyone"/>everyone
-										<input type="radio" name="rank" value="login" />login
-										<input type="radio" name="rank" value="vip"/>vip
-										<input type="radio" name="rank" value="admin" />admin
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" value="everyone" name="rank" checked>
+                                        	所有人
+                                  		</label>
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" value="login" name="rank">
+                                        	登录用户
+                                  		</label>
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" value="vip" name="rank">
+                                        	VIP
+                                  		</label>                                 			
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" value="admin" name="rank">
+                                        	管理员
+                                  		</label>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录状态</label>
                                       <div class="col-sm-10">
-                                      	<input type="radio" name="status" value="hidden"/>hidden
-										<input type="radio" name="status" value="display"/>display
+                                      	<label class="checkbox-inline">
+                                    		<input type="radio" name="status" value="display" checked/>显示
+                                  		</label>
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" name="status" value="hidden"/>隐藏
+                                  		</label>
                                       </div>
                                   </div>
                                   <div class="form-group">
@@ -93,7 +121,6 @@
                                   </div>
                                  </fieldset>
                               </form>
-                              <p id="allFolder">目录已添加成功，是否<a href="${basePath}/admin/folder/all">前往查看目录</a></p>
                           </div>
                       </section>
                   </div>
@@ -104,12 +131,30 @@
 		<!--main content end-->
 <script type="text/javascript">
 	$(function() {
-	$("#allFolder").hide();
 		$('#addFolder_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-					$("#allFolder").show();
+					bootbox.dialog({
+						message : "保存成功",
+						title : "提示",
+						buttons : {
+							add : {
+								label : "继续添加",
+								className : "btn-success",
+								callback : function() {
+									window.location.reload();
+								}
+							},
+							list : {
+								label : "查看文件夹列表",
+								className : "btn-primary",
+								callback : function() {
+									window.location.href="${basePath}/admin/folder/page";
+								}
+							},
+						}
+					});
 				}else{
 					showErrors($('#addFolder_form'),data.errors);
 				}

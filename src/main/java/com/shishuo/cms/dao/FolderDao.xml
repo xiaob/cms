@@ -19,8 +19,8 @@
 	
 	<insert id="addFolder" parameterType="com.shishuo.cms.entity.Folder">
 		insert into
-		folder(fatherId,ename,name,level,count,status,type,createTime,sort,rank)
-		value(#{fatherId},#{ename},#{name},#{level},#{count},#{status},#{type},#{createTime},#{sort},#{rank})
+		folder(fatherId,ename,name,path,level,count,status,type,createTime,sort,rank)
+		value(#{fatherId},#{ename},#{name},#{path},#{level},#{count},#{status},#{type},#{createTime},#{sort},#{rank})
 		<selectKey resultType="long" keyProperty="folderId">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -31,7 +31,7 @@
 	</delete>
 	
 	<update id="updateFolder" parameterType="com.shishuo.cms.entity.Folder">
-		update folder set fatherId=#{fatherId},ename=#{ename},name=#{name},status=#{status},type=#{type},sort=#{sort}
+		update folder set fatherId=#{fatherId},ename=#{ename},name=#{name},path=#{path},status=#{status},type=#{type},sort=#{sort}
 		where folderId=#{folderId}
 	</update>
 	
@@ -53,5 +53,18 @@
 	<select id="getFolderVoListByFatherId" 
 		resultType="com.shishuo.cms.entity.vo.FolderVo">
 		select * from folder where fatherId=#{fatherId}
+	</select>
+	
+	<update id="updateSort" parameterType="long">
+		update folder set sort=#{sort} where folderId=#{folderId}
+	</update>
+	
+	<update id="updatePath">
+		update folder set path=#{path} where folderId=#{folderId}
+	</update>
+	
+	<select id="getAllFolderByType"
+		resultType="com.shishuo.cms.entity.vo.FolderVo">
+		select * from folder where type=#{type}
 	</select>
 </mapper>  

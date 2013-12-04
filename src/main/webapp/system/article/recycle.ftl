@@ -49,7 +49,7 @@
                   									<i class="icon-ok"></i>
                   								</button>
                   							</a>
-                  							<a href="${basePath}/admin/article/delete?fileId=${e.fileId}" title="彻底删除">
+                  							<a class="js_article_delete" fileId="${e.fileId}" title="彻底删除${e.name}">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-remove"></i>
                   								</button>
@@ -70,4 +70,63 @@
           </section>
 		</section>
 		<!--main content end-->
+<script>
+$(function(){
+	$('.js_article_delete').click(function(){
+		var fileId = $(this).attr('fileId')
+		bootbox.dialog({
+			message : "是否"+$(this).attr('title')+"文件夹",
+			title : "提示",
+				buttons : {
+				delete : {
+					label : "删除",
+					className : "btn-success",
+					callback : function() {
+					$.post("${basePath}/admin/article/delete.json", { "fileId": fileId},
+						function(data){
+							if(data.result){
+								bootbox.dialog({
+									message : "删除成功",
+									title : "提示",
+									buttons : {
+										delete : {
+											label : "继续清理",
+											className : "btn-success",
+											callback : function() {
+												$.post("${basePath}/admin/folder/delete.json", { "folderId": folderId},
+											   	function(data){
+											   		if(data.result){
+											   			window.location.reload();
+											   		}else{
+											   			bootbox.alert(data.msg, function() {});
+											   		}
+											   	}, "json");
+											}
+										},
+										cancel : {
+											label : "返回文章列表",
+											className : "btn-primary",
+											callback : function() {
+												window.location.href="${basePath}/admin/file/page?type=article";
+											}
+										}
+									}
+								});
+							}else{
+								bootbox.alert(data.msg, function() {});
+							}
+						}, "json");
+					}
+				},
+			cancel : {
+				label : "取消",
+				className : "btn-primary",
+				callback : function() {
+					}
+				}
+			}
+		});					
+	});			
+});
+</script>
 <#include "/system/foot.ftl">

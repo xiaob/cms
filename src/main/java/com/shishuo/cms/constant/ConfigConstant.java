@@ -41,4 +41,5 @@ public class ConfigConstant {
 	public static String SYS_TEMPLATE = "sys_template";
 	
 	public static String ARTICLE_PICTURE_SIZE = "article_picture_size";
+	public static String PICTURE_SIZE="picture_size";
 }

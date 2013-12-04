@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
 
@@ -107,5 +108,11 @@ public interface FolderDao {
 	 * @return List<FolderVo>
 	 */
 	public List<FolderVo> getFolderVoListByFatherId(@Param("fatherId") long fatherId);
+	
+	public int updateSort(@Param("folderId") long folderId,@Param("sort") int sort);
+	
+	public int updatePath(@Param("folderId") long folderId,@Param("path") String path);
+	
+	public List<FolderVo> getAllFolderByType(@Param("type") FolderConstant.Type type);
 	
 }
