@@ -14,7 +14,7 @@
 	
 	<select id="getFolderListByFatherId" 
 		resultType="com.shishuo.cms.entity.Folder">
-		select * from folder where fatherId=#{fatherId} order by sort desc
+		select * from folder where fatherId=#{fatherId} order by sort
 	</select>
 	
 	<insert id="addFolder" parameterType="com.shishuo.cms.entity.Folder">
