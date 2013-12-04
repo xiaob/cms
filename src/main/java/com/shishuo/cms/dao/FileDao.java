@@ -36,33 +36,10 @@ import com.shishuo.cms.entity.vo.FileVo;
 @Repository
 public interface FileDao {
 
-	/**
-	 * 得到文件
-	 * 
-	 * @param fileId
-	 * @return File
-	 */
-	public FileVo getFileById(@Param("fileId") long fileId);
-
-	/**
-	 * 得到目录的所有文件
-	 * 
-	 * @param foderId
-	 * @return List<FileVo>
-	 */
-	public List<FileVo> getDisplayFileByFoderId(@Param("folderId") long folderId,
-			@Param("type") FileConstant.Type type,@Param("status") FileConstant.Status status,
-			@Param("offset") long offset, @Param("rows") long rows);
-
-	/**
-	 * 得到目录的所有文件的数量
-	 * 
-	 * @param foderId
-	 * @return Integer
-	 */
-	public int getFileCountByFoderId(@Param("folderId") long folderId,
-			@Param("type") FileConstant.Type type);
-
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 增加文件
 	 * 
@@ -70,13 +47,22 @@ public interface FileDao {
 	 */
 	public int addFile(File file);
 
+	// ///////////////////////////////
+	// /////       刪除                         ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 删除文件
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteFile(@Param("fileId") long fileId,@Param("status") FileConstant.Status status);
+	public boolean deleteFile(@Param("fileId") long fileId,
+			@Param("status") FileConstant.Status status);
 
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 修改文件
 	 * 
@@ -84,31 +70,6 @@ public interface FileDao {
 	 * @return Integer
 	 */
 	public int updateFile(File file);
-
-	/**
-	 * 获取不同类型的文件
-	 * 
-	 * @param Integer
-	 * @param Integer
-	 * @param Long
-	 * @param Long
-	 * @return List<File>
-	 * 
-	 */
-	public List<FileVo> getFileListByType(@Param("type") FileConstant.Type type,
-			@Param("status") FileConstant.Status status,
-			@Param("offset") long offset, @Param("rows") long rows);
-
-	/**
-	 * 获取不同类型的文件的数量
-	 * 
-	 * @param Integer
-	 * @param Integer
-	 * @return Long
-	 * 
-	 */
-	public int getFileListByTypeCount(@Param("type") FileConstant.Type type,
-			@Param("status") FileConstant.Status status);
 
 	/**
 	 * 放进回收站或者还原
@@ -140,10 +101,53 @@ public interface FileDao {
 	public int updateCommentCount(@Param("fileId") long fileId,
 			@Param("commentCount") int commentCount);
 
-	public List<File> getArticleByPicture(
-			@Param("type") FileConstant.Type type,
-			@Param("picture") FileConstant.Picture picture);
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
 	
-	public int getFileCountByFolderId(@Param("folderId") long folderId);
+	/**
+	 * 得到文件
+	 * 
+	 * @param fileId
+	 * @return File
+	 */
+	public FileVo getFileById(@Param("fileId") long fileId);
+
+	/**
+	 * 得到目录的所有文件
+	 * 
+	 * @param foderId
+	 * @return List<FileVo>
+	 */
+	public List<FileVo> getFileListByTypeAndFoderId(@Param("type") FileConstant.Type type,@Param("folderId") long folderId,
+			@Param("status") FileConstant.Status status,
+			@Param("offset") long offset, @Param("rows") long rows);
+
+	/**
+	 * 得到目录的所有文件的数量
+	 * 
+	 * @param foderId
+	 * @return Integer
+	 */
+	public int getFileCountByTypeAndFoderId(FileConstant.Type type,@Param("folderId") long folderId);
+
 	
+	/**
+	 * 得到目录的所有文件
+	 * 
+	 * @param foderId
+	 * @return List<FileVo>
+	 */
+	public List<FileVo> getFileListByType(@Param("type") FileConstant.Type type,
+			@Param("status") FileConstant.Status status,
+			@Param("offset") long offset, @Param("rows") long rows);
+
+	/**
+	 * 得到目录的所有文件的数量
+	 * 
+	 * @param foderId
+	 * @return Integer
+	 */
+	public int getFileCountByType(@Param("type") FileConstant.Type type);
+
 }

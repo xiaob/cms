@@ -204,10 +204,10 @@ public class AdminFolderAction extends AdminBaseAction{
 	@RequestMapping(value = "/delete.json",method = RequestMethod.POST)
 	public JsonVo<String> delete(@RequestParam(value = "folderId") long folderId){
 		JsonVo<String> json = new JsonVo<String>();
-		List<Folder> folderList = folderService.getFolderListByFatherId(folderId);
+		List<FolderVo> folderList = folderService.getFolderListByFatherId(folderId);
 		if(folderList.size()==0){
-			
-			if(list.size()!=0){
+			int count = fileService.getFileCountByFolderId(folderId);
+			if(count!=0){
 				json.setResult(false);
 				json.setMsg("此目录下还有文件,不能被删除。");
 			}else{

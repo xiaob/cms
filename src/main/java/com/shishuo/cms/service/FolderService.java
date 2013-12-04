@@ -61,7 +61,7 @@ public class FolderService {
 	 * @param fatherId
 	 * @return List<Folder>
 	 */
-	public List<Folder> getFolderListByFatherId(long fatherId) {
+	public List<FolderVo> getFolderListByFatherId(long fatherId) {
 		return folderDao.getFolderListByFatherId(fatherId);
 	}
 
@@ -166,18 +166,6 @@ public class FolderService {
 	}
 
 	/**
-	 * 获得分页的所有目录的列表
-	 * 
-	 * @param offset
-	 * @param rows
-	 * @return List<Folder>
-	 * 
-	 */
-	public List<Folder> getAllListPage(long offset, long rows) {
-		return folderDao.getAllListPage(offset, rows);
-	}
-
-	/**
 	 * 获得所有目录的数量
 	 * 
 	 * @return Integer
@@ -203,7 +191,7 @@ public class FolderService {
 	 */
 	private void getFolderList(List<FolderVo> allFolderList, long fatherId) {
 		List<FolderVo> folderList = folderDao
-				.getFolderVoListByFatherId(fatherId);
+				.getFolderListByFatherId(fatherId);
 		Collections.sort(folderList, new ComparatorFolderList());
 		for (FolderVo folder : folderList) {
 			allFolderList.add(folder);
@@ -222,16 +210,6 @@ public class FolderService {
 			String str2 = folderVo2.getSort() + "";
 			return str1.compareTo(str2);
 		}
-	}
-
-	/**
-	 * 获得某目录下的所有子目录包括子目录当中的子目录
-	 * 
-	 * @param fatherId
-	 * @return List<FolderVo>
-	 */
-	public List<FolderVo> getFolderVoListByFatherId(long fatherId) {
-		return folderDao.getFolderVoListByFatherId(fatherId);
 	}
 	
 	/**
@@ -254,7 +232,7 @@ public class FolderService {
 		return folderDao.updatePath(folderId, path);
 	}
 	
-	public int getFileCountByFolderId(long folderId){
-		return 0;
+	public List<FolderVo> getAllFolderByType(FolderConstant.Type type){
+		return folderDao.getAllFolderByType(type);
 	}
 }

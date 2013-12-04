@@ -1,4 +1,4 @@
-package com.shishuo.cms.constant;
+package com.shishuo.cms.util;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -10,6 +10,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.springframework.stereotype.Service;
+
+import com.shishuo.cms.constant.FileConstant;
+import com.shishuo.cms.constant.SystemConstant;
+import com.shishuo.cms.constant.FileConstant.Type;
 
 
 @Service

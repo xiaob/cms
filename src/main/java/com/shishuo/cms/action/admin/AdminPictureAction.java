@@ -32,10 +32,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.SystemConstant;
+import com.shishuo.cms.constant.UploadConstant;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
+import com.shishuo.cms.util.UploadUtils;
 
 @Controller
 @RequestMapping("/admin/picture")
@@ -65,7 +67,7 @@ public class AdminPictureAction extends AdminBaseAction {
 		try {
 			// 检测校验结果
 			validate(json);
-			if (fileService.checkPhotoFile(file)) {
+			if (UploadUtils.checkUploadFile(file, UploadConstant.Type.file)) {
 				Admin admin = this.getAdmin(request);
 				File fi= fileService.addFile(0,admin.getAdminId(), FileConstant.Picture.exist, 
 						file.getOriginalFilename(),content, FileConstant.Type.photo, FileConstant.Status.display);

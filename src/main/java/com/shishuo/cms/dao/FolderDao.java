@@ -49,9 +49,10 @@ public interface FolderDao {
 	 * 得到所有子目录
 	 * 
 	 * @param fatherId
-	 * @return List<Folder>
+	 * @return List<FolderVo>
 	 */
-	public List<Folder> getFolderListByFatherId(@Param("fatherId") long fatherId);
+	public List<FolderVo> getFolderListByFatherId(@Param("fatherId") long fatherId);
+	
 
 	/**
 	 * 增加目录
@@ -66,6 +67,7 @@ public interface FolderDao {
 	 * @param folder
 	 * @return boolean
 	 */
+	// FIXME 传入参数 folderId, status
 	public boolean deleteFolder(Folder folder);
 
 	/**
@@ -84,30 +86,12 @@ public interface FolderDao {
 	public Folder getFolderByEname(String ename);
 	
 	/**
-	 * 得到所有目录的列表
-	 *@return List<Folder>
-	 */
-	public List<Folder> getAllList();
-	
-	/**
-	 * 得到所有目录的列表的分页
-	 *@return List<Folder>
-	 */
-	public List<Folder> getAllListPage(@Param("offset") long offset,@Param("rows") long rows);
-	
-	/**
 	 * 得到所有目录的数量
 	 * @return Integer
 	 *
 	 */
 	public long getAllListPageCount();
-	
-	/**
-	 * 得到fatherId下的所有子目录包括子目录的子目录
-	 * @param fatherId
-	 * @return List<FolderVo>
-	 */
-	public List<FolderVo> getFolderVoListByFatherId(@Param("fatherId") long fatherId);
+
 	
 	public int updateSort(@Param("folderId") long folderId,@Param("sort") int sort);
 	

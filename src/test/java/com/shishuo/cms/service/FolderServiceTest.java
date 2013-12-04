@@ -44,9 +44,9 @@ public class FolderServiceTest {
 		assertEquals(3, folderService.getFolderListByFatherId(2).size());
 	}
 
-	@Test
-	public void testGetFolderVoListByFatherId() {
-		assertEquals(3, folderService.getFolderVoListByFatherId(1).size());
-	}
+//	@Test
+//	public void testGetFolderVoListByFatherId() {
+//		assertEquals(3, folderService.getFolderVoListByFatherId(1).size());
+//	}
 
 }

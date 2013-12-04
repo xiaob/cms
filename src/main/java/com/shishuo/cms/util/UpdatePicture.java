@@ -16,7 +16,7 @@
  *	See the License for the specific language governing permissions and
  *	limitations under the License.
  */
-package com.shishuo.cms.constant;
+package com.shishuo.cms.util;
 
 import java.awt.Image;
 import java.awt.Toolkit;

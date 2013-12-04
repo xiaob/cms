@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="getFolderListByFatherId" 
-		resultType="com.shishuo.cms.entity.Folder">
+		resultType="com.shishuo.cms.entity.vo.FolderVo">
 		select * from folder where fatherId=#{fatherId} order by sort
 	</select>
 	
@@ -38,21 +38,6 @@
 	<select id="getAllList"
 		resultType="com.shishuo.cms.entity.Folder">
 		select * from folder
-	</select>
-	
-	<select id="getAllListPage" parameterType="Integer"
-		resultType="com.shishuo.cms.entity.Folder">
-		select * from folder limit #{offset},#{rows}
-	</select>
-	
-	<select id="getAllListPageCount"
-		resultType="long">
-		select count(*) from folder
-	</select>
-
-	<select id="getFolderVoListByFatherId" 
-		resultType="com.shishuo.cms.entity.vo.FolderVo">
-		select * from folder where fatherId=#{fatherId}
 	</select>
 	
 	<update id="updateSort" parameterType="long">

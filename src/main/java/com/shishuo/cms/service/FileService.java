@@ -100,7 +100,7 @@ public class FileService {
 					+ "?");
 		}
 		pageVo.setRows(rows);
-		pageVo.setCount(this.getFileCountByFolderId(folderId, type));
+		pageVo.setCount(this.getFileCountByFolderId(folderId,type));
 		List<FileVo> list = this.getDisplayFileByFolderId(folderId,FileConstant.Status.display,type,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
@@ -116,7 +116,7 @@ public class FileService {
 
 	public List<FileVo> getDisplayFileByFolderId(long folderId,FileConstant.Status status,
 			FileConstant.Type type, long offset, long rows) {
-		List<FileVo> list = fileDao.getDisplayFileByFoderId(folderId, type,status,
+		List<FileVo> list = fileDao.getFileListByFoderId(folderId, type,status,
 				offset, rows);
 		for (FileVo file : list) {
 			Admin admin = adminService.getAdminById(file.getAdminId());
@@ -134,8 +134,8 @@ public class FileService {
 	 * @param folderId
 	 * @return Integer
 	 */
-	public int getFileCountByFolderId(long folderId, FileConstant.Type type) {
-		return fileDao.getFileCountByFoderId(folderId, type);
+	public int getFileCountByFolderId(long folderId,FileConstant.Type type) {
+		return fileDao.getFileCountByFoderId(folderId,type);
 	}
 
 	/**
@@ -229,8 +229,7 @@ public class FileService {
 			fileVo.setFolder(folderDao.getFolderById(fileVo.getFolderId()));
 		}
 		pageVo.setList(list);
-		pageVo.setCount(this.getAllFileByTypeCount(type,
-				status));
+		pageVo.setCount(this.getFileListByTypeCount(type));
 
 		return pageVo;
 	}
@@ -258,9 +257,8 @@ public class FileService {
 	 * @param Integer
 	 * 
 	 */
-	public int getAllFileByTypeCount(FileConstant.Type type,
-			FileConstant.Status status) {
-		return fileDao.getFileListByTypeCount(type, status);
+	public int getFileListByTypeCount(FileConstant.Type type) {
+		return fileDao.getFileListByTypeCount(type);
 	}
 
 	/**
@@ -298,32 +296,4 @@ public class FileService {
 		fileDao.updateCommentCount(fileId, commentCount);
 	}
 
-	public boolean checkPhotoFile(MultipartFile file) {
-		if (file.isEmpty()) {
-			return false;
-		}
-		if (file.getContentType().equals("image/jpg")
-				|| file.getContentType().equals("image/png")
-				|| file.getContentType().equals("image/jpeg")
-				|| file.getContentType().equals("image/gif")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean checkPhotoFile(MultipartFile file) {
-		if (file.isEmpty()) {
-			return false;
-		}
-		if (file.getContentType().equals("image/jpg")
-				|| file.getContentType().equals("image/png")
-				|| file.getContentType().equals("image/jpeg")
-				|| file.getContentType().equals("image/gif")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
 }

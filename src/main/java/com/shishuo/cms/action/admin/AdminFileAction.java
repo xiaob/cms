@@ -14,12 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.constant.UpdatePictureConstant;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.FileNotFoundException;
+import com.shishuo.cms.util.UpdatePictureConstant;
 
 @Controller
 @RequestMapping("/admin/file")

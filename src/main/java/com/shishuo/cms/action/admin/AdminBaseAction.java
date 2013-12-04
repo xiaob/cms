@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.constant.UpdatePictureConstant;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.exception.ValidateException;
@@ -36,6 +35,7 @@ import com.shishuo.cms.service.FileService;
 import com.shishuo.cms.service.FolderService;
 import com.shishuo.cms.service.LogService;
 import com.shishuo.cms.service.UserService;
+import com.shishuo.cms.util.UpdatePictureConstant;
 
 /**
  * @author 所有action的父类

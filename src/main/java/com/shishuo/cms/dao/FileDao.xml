@@ -27,7 +27,7 @@
 	</select>
 
 	<select id="getFileCountByFoderId" resultType="Integer">
-		select count(*) from file where type = #{type}  <if test="folderId!=0">and folderId=#{folderId}</if>
+		select count(*) from file where type = #{type}<if test="folderId!=0">and folderId=#{folderId}</if>
 	</select>
 
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
@@ -59,16 +59,7 @@
 
 	<select id="getFileListByTypeCount" resultType="Integer">
 		select count(*)
-		from file where type=#{type} and status=#{status}
+		from file where type=#{type}
 	</select>
 	
-	<select id="getArticleByPicture" 
-		resultType="com.shishuo.cms.entity.File">
-		select * from file where type=#{type} and picture=#{picture}
-	</select>
-	
-	<select id="getFileCountByFolderId" parameterType="long"
-		resultType="Integer">
-		select count(*) from file where folderId=#{folderId}
-	</select>
 </mapper>  
