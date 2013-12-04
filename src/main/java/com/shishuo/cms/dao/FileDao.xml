@@ -67,13 +67,8 @@
 		select * from file where type=#{type} and picture=#{picture}
 	</select>
 	
-	<select id="getAllFileByFolderId" parameterType="long"
-		resultType="com.shishuo.cms.entity.File">
-		select * from file where folderId=#{folderId}
+	<select id="getFileCountByFolderId" parameterType="long"
+		resultType="Integer">
+		select count(*) from file where folderId=#{folderId}
 	</select>
-	
-	<update id="updateFolderId" parameterType="long">
-		update file set folderId=#{folderId}
-		where fileId=#{fileId}
-	</update>
 </mapper>  

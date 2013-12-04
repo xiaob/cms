@@ -206,7 +206,7 @@ public class AdminFolderAction extends AdminBaseAction{
 		JsonVo<String> json = new JsonVo<String>();
 		List<Folder> folderList = folderService.getFolderListByFatherId(folderId);
 		if(folderList.size()==0){
-			List<File> list = fileService.getAllFileByFolderId(folderId);
+			
 			if(list.size()!=0){
 				json.setResult(false);
 				json.setMsg("此目录下还有文件,不能被删除。");

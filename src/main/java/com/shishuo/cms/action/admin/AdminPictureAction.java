@@ -18,6 +18,8 @@
  */
 package com.shishuo.cms.action.admin;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -41,11 +43,21 @@ public class AdminPictureAction extends AdminBaseAction {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String upload() {
-		return "system/picture/upload";
+		return "system/photo/upload";
 	}
-
+	
 	@ResponseBody
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	@RequestMapping(value = "/preview", method = RequestMethod.POST)
+	public JsonVo<String> preview(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException{
+		JsonVo<String> json = new JsonVo<String>();
+		String path="";
+		java.io.File source = new java.io.File(path);
+		file.transferTo(source);
+		return json;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
 	public JsonVo<String> uploadPicture(@RequestParam("file") MultipartFile file,
 			@RequestParam(value= "content") String content,
 			HttpServletRequest request) throws Exception {
@@ -54,7 +66,7 @@ public class AdminPictureAction extends AdminBaseAction {
 			// 检测校验结果
 			validate(json);
 			if (fileService.checkPhotoFile(file)) {
-				Admin admin = (Admin)request.getSession();
+				Admin admin = this.getAdmin(request);
 				File fi= fileService.addFile(0,admin.getAdminId(), FileConstant.Picture.exist, 
 						file.getOriginalFilename(),content, FileConstant.Type.photo, FileConstant.Status.display);
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
@@ -66,7 +78,6 @@ public class AdminPictureAction extends AdminBaseAction {
 			} else {
 				String errorMessage = "上传的文件只能是jpg,png,gif的图片格式";
 			}
-			
 		} catch (Exception e) {
 			json.setResult(false);
 			json.setMsg(e.getMessage());

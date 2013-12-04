@@ -144,8 +144,6 @@ public interface FileDao {
 			@Param("type") FileConstant.Type type,
 			@Param("picture") FileConstant.Picture picture);
 	
-	public List<File> getAllFileByFolderId(@Param("folderId") long folderId);
+	public int getFileCountByFolderId(@Param("folderId") long folderId);
 	
-	public int updateFolderId(@Param("fileId") long fileId,@Param("folderId") long folderId);
-
 }

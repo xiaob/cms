@@ -86,7 +86,7 @@ public class FolderService {
 		} else {
 			folder.setLevel(fatherFolder.getLevel() + 1);
 		}
-		folder.setEname(ename);
+		folder.setEname(ename.trim());
 		folder.setName(name);
 		folder.setPath("");
 		folder.setCount(0);
@@ -254,14 +254,7 @@ public class FolderService {
 		return folderDao.updatePath(folderId, path);
 	}
 	
-	/**
-	 * 获得某种类型的目录列表
-	 * @param FolderConstant.Type
-	 * @return List<Folder>
-	 */
-	public List<FolderVo> getAllFolderByType(FolderConstant.Type type){
-		List<FolderVo> folderList= folderDao.getAllFolderByType(type);
-		Collections.sort(folderList, new ComparatorFolderList());
-		return folderList;
+	public int getFileCountByFolderId(long folderId){
+		return 0;
 	}
 }
