@@ -57,9 +57,7 @@
 		<property name="templateLoaderPath" value="/" /><!-- 指定路径 -->
 		<property name="defaultEncoding" value="UTF-8" /><!-- 指定编码格式 -->
 		<property name="freemarkerVariables">
-			<map>
-				<!-- 所有目录标签 -->
-				<entry key="cms_folder_all" value-ref="folderAllTag" />			
+			<map>		
 				<!-- 目录标签 -->
 				<entry key="cms_folder_list" value-ref="folderListTag" />
 				<!-- 文件分页标签 -->
