@@ -54,6 +54,9 @@
                                 	</#list>
                                	</tbody>
                               </table>
+                              <div style="height: 30px;">
+                             	<div class="pagination">${pageVo.pageNumHtml} </div>
+                              </div>
                            </div>
                         </div>
                   </div>

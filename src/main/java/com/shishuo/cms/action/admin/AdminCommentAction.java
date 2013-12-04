@@ -81,7 +81,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	}
 	
 	/**
-	 * @author 审核未通过
+	 * @author 垃圾评论
 	 *
 	 */
 	@RequestMapping(value = "/cancel/{commentId}", method = RequestMethod.GET)

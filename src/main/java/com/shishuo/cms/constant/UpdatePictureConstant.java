@@ -14,12 +14,16 @@ import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.service.ConfigService;
 
+
 @Service
 public class UpdatePictureConstant {
 
 	@Autowired
 	private ConfigService configService;
 	
+	/**
+	 * 按照指定大小切割图片并存到服务器
+	 */
 	public void updatePicture(long id,String image) throws FileNotFoundException, IOException{
 		BufferedImage bi = ImageIO.read(new File(image));
         int srcWidth = bi.getWidth(); // 源图宽度
@@ -42,30 +46,29 @@ public class UpdatePictureConstant {
         	}	
         }
         String picture = configService.getConfigByKey("article_picture_size", true);
-		System.out.println(picture);
 		String[] str = picture.split(";");
 		BufferedImage descImg = null;
 		Image finalImg= null;
 		int height = 0;
 		int width = 0;
 			String[] se = str[0].split("x");
-			height=Integer.parseInt(se[0]);
-			width=Integer.parseInt(se[1]);
-			if(height>=width){
-				descImg=UpdatePicture.createThumbnail(image,height*num);
-			}else{
-				descImg=UpdatePicture.createThumbnail(image,width*num);
-			}
-			descWidth=descImg.getWidth();
-			descHeight=descImg.getHeight();
-			finalImg=UpdatePicture.sdg(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
-			BufferedImage tag = new BufferedImage(width, height,
+				height=Integer.parseInt(se[0]);
+				width=Integer.parseInt(se[1]);
+				if(height>=width){
+					descImg=UpdatePicture.createThumbnail(image,height*num);
+				}else{
+					descImg=UpdatePicture.createThumbnail(image,width*num);
+				}
+				descWidth=descImg.getWidth();
+				descHeight=descImg.getHeight();
+				finalImg=UpdatePicture.sdg(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
+				BufferedImage tag = new BufferedImage(width, height,
 	                 BufferedImage.TYPE_INT_RGB);
-			Graphics g = tag.getGraphics();
-	        g.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
-	        g.dispose();
-	        // 输出为文件
-	        ImageIO.write(tag, "JPEG", new File(webroot+"/upload/article/"+id+"_big.jpg"));
+				Graphics g = tag.getGraphics();
+				g.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
+				g.dispose();
+				// 输出为文件
+				ImageIO.write(tag, "JPEG", new File(webroot+"/upload/article/"+id+"_big.jpg"));
 	        
 	        String[] se1 = str[1].split("x");
 				height=Integer.parseInt(se1[0]);

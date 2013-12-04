@@ -111,12 +111,13 @@ public class DefaultAction {
 			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) throws FileNotFoundException {
 		File file = fileService.getFileByFileId(fileId);
+		Folder folder = folderService.getFolderById(file.getFolderId());
 		fileService.updateViewCount(fileId, file.getViewCount());
 		modelMap.addAttribute("ename", ename);
 		modelMap.addAttribute("fileId", fileId);
 		modelMap.addAttribute("folderId", file.getFileId());
 		modelMap.addAttribute("pageNum", pageNum);
-		return configService.getTemplatePath() + "/file";
+		return themeService.getFileTheme(folder.getEname(), file.getType());
 	}
 
 }

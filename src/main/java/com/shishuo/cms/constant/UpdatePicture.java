@@ -39,6 +39,9 @@ import org.imgscalr.Scalr;
  */
 public class UpdatePicture {
 
+	/**
+	 * 获得切割后的图片
+	 */
 	 public static Image sdg(BufferedImage image,int x, int y, int destWidth,
 	            int destHeight) throws IOException{
 		 ImageFilter cropFilter;
@@ -48,11 +51,14 @@ public class UpdatePicture {
          return img;
 		 
 	 }
+	 /**
+	  * 获得按尺寸放大或缩小后的图片
+	  */
 	public static BufferedImage createThumbnail(String img,int num) throws FileNotFoundException, IOException {
 		BufferedImage img1 = ImageIO.read(new File(img));
 		BufferedImage thumbnail= Scalr.resize(img1, Scalr.Method.SPEED, Scalr.Mode.AUTOMATIC,
 				num,Scalr.OP_ANTIALIAS);
 		return thumbnail;
-		}
+	}
 	
 }

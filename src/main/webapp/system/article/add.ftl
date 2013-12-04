@@ -78,10 +78,10 @@
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
+					$('#fileId').prop("value",data.t);
 					bootbox.dialog({
-						$("#fileId").hide();
-						$("#fileId").text(data.t);
-  						message: '<form enctype="multipart/form-data" id="add_article_picture_form" method="post" autocomplete="off" action="${basePath}/admin/article/addPicture.json"><fieldset><input type="file" id="file" name= "file" value=""/><laber id="fileId" name="fileId" value=""/></fieldset></form>',
+					
+  						message: '<form enctype="multipart/form-data" id="add_article_picture_form" method="post" autocomplete="off" action="${basePath}/admin/file/upload.json"><fieldset><input type="file" id="file" name= "file" value=""/><input type="text" id="fileId" name="fileId" value=""/><input id="type" name="type" value="article"/></fieldset></form>',
   						title: "是否上传文章图片",
   						buttons: {
     						success: {

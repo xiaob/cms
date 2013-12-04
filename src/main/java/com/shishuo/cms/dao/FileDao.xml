@@ -4,7 +4,7 @@
 
 	<select id="getFileById" parameterType="long"
 		resultType="com.shishuo.cms.entity.vo.FileVo">
-		select * from file where fileId=#{fileId} and status=#{status}
+		select * from file where fileId=#{fileId}
 	</select>
 
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
@@ -33,7 +33,7 @@
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
 		update file set
 		folderId=#{folderId},name=#{name},picture=#{picture},
-		content=#{content},status=#{status},template=#{template}
+		content=#{content},status=#{status}
 		where fileId=#{fileId}
 	</update>
 

@@ -39,7 +39,7 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="${basePath}/admin/admin/one?adminId=${e.adminId}" title="修改">
+                							<a href="${basePath}/admin/admin/update?adminId=${e.adminId}" title="修改">
                 								<button class="btn btn-primary btn-xs">
                 									<i class="icon-pencil"></i>
                 								</button>

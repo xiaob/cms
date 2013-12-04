@@ -96,7 +96,7 @@
                         </div>
 					</fieldset>
 				</form>
-				<p id="allFolder">目录已修改成功，是否<a href="${basePath}/admin/folder/all">前往查看目录</a></p>
+				<p id="allFolder">目录已修改成功，是否<a href="${basePath}/admin/folder/page">前往查看目录</a></p>
 				</div>
 			</section>
 		</div>

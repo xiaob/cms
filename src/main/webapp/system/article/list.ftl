@@ -28,7 +28,6 @@
 										<th>文章名称</th>
                 						<th>所属目录Id</th>
                 						<th>文章图片</th>
-                						<th>皮肤</th>
                 						<th>文章状态</th>
                 						<th>时间</th>
                 						<th>操作</th>
@@ -45,7 +44,6 @@
                							</#list>
                             			<td>${e.folderId}</td>
                                     	<td>${e.picture}</td>
-                                    	<td>${e.template}</td>
                                     	<td>${e.status}</td>
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
@@ -55,7 +53,7 @@
                   									<i class="icon-pencil"></i>
                   								</button>
                   							</a>
-                  							<a href="${basePath}/admin/article/recycle?fileId=${e.fileId}&status=hidden" title="回收站">
+                  							<a href="${basePath}/admin/file/status/update?fileId=${e.fileId}&status=hidden" title="回收站">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>

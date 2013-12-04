@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.shishuo.cms.constant.ConfigConstant;
+import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.constant.SystemConstant;
 
@@ -31,6 +32,13 @@ public class ThemeService {
 	 */
 	private String[] folderDisplay = { "folder-{ename}", "folder-{type}",
 			"folder", "default" };
+	
+
+	/**
+	 * 文件模板启用顺序
+	 */
+	private String[] fileDisplay = { "file-{ename}-{type}", "file-{type}",
+			"file", "default" };
 
 	/**
 	 * 得到首页（默认页）模板
@@ -43,7 +51,7 @@ public class ThemeService {
 				return this.getTheme(theme);
 			}
 		}
-		return this.getTheme(defatulDisplay[defatulDisplay.length]);
+		return this.getTheme(defatulDisplay[defatulDisplay.length-1]);
 	}
 
 	/**
@@ -55,13 +63,31 @@ public class ThemeService {
 	 */
 	public String getFolderTheme(String ename, FolderConstant.Type type) {
 		for (String theme : folderDisplay) {
-			theme = theme.replaceAll("{ename}", ename).replaceAll("{type}",
+			theme = theme.replace("{ename}", ename).replace("{type}",
 					type.name());
 			if (this.isExist(theme)) {
 				return this.getTheme(theme);
 			}
 		}
-		return this.getTheme(folderDisplay[folderDisplay.length]);
+		return this.getTheme(folderDisplay[folderDisplay.length-1]);
+	}
+	
+	/**
+	 * 得到文件夹模板
+	 * 
+	 * @param ename
+	 * @param type
+	 * @return
+	 */
+	public String getFileTheme(String ename, FileConstant.Type type) {
+		for (String theme : fileDisplay) {
+			theme = theme.replace("{ename}", ename).replace("{type}",
+					type.name());
+			if (this.isExist(theme)) {
+				return this.getTheme(theme);
+			}
+		}
+		return this.getTheme(fileDisplay[fileDisplay.length-1]);
 	}
 
 	/**

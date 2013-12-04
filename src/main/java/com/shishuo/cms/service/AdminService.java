@@ -101,7 +101,7 @@ public class AdminService {
 	}
 
 	/**
-	 * 获得所有管理员
+	 * 获得所有管理员的分页数据
 	 * 
 	 * @param offset
 	 * @param rows
@@ -129,7 +129,7 @@ public class AdminService {
 	public PageVo<Admin> getAllListPage(int pageNum) {
 		PageVo<Admin> pageVo = new PageVo<Admin>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/admin/all?");
+		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/admin/page?");
 		List<Admin> list = this
 				.getAllList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);

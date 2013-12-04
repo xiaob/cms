@@ -76,7 +76,6 @@ public class CommentService {
 
 	/**
 	 * 获得评论分页
-	 * 
 	 * @param fileId
 	 * @param pageNum
 	 * @return
@@ -165,7 +164,7 @@ public class CommentService {
 	 */
 	public PageVo<Comment> getAllListPage(int pageNum) {
 		PageVo<Comment> pageVo = new PageVo<Comment>(pageNum);
-		pageVo.setUrl("/CMS/admin/comment/all?");
+		pageVo.setUrl("/CMS/admin/comment/page?");
 		pageVo.setRows(5);
 		List<Comment> list = this.getAllList(pageVo.getOffset(),
 				pageVo.getRows());

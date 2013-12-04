@@ -77,7 +77,7 @@ public class UserService {
 	public PageVo<User> getUserPage(int pageNum) {
 		PageVo<User> pageVo = new PageVo<User>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/user/all?");
+		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/user/page?");
 		List<User> list = this
 				.getUserList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
