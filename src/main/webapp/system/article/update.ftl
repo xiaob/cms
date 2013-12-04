@@ -33,7 +33,6 @@
                                       <label class="col-sm-2 col-sm-2 control-label">所属目录Id</label>
                                       <div class="col-sm-10">
                                          <select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;height: 40px;" name="folderId">
-                                        	<option value="0" selected >未分类</option>
                                         	<#list folderAll as folder>
                                           		<option value="${folder.folderId}" <#if folder.folderId==file.folderId>selected</#if>>
                                           		<#list 1..folder.level as i>
@@ -61,25 +60,23 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章状态</label>
                                       <div class="col-sm-10">
-										<#if file.status=="hidden">
-										<input type="radio" name="status" value="hidden" checked="checked"/>hidden
-										<input type="radio" name="status" value="display"/>display
-										<#else>
-										<input type="radio" name="status" value="hidden"/>hidden
-										<input type="radio" name="status" value="display" checked="checked"/>display
-										</#if>
-									</div>
+                                      	<label class="checkbox-inline">
+                                    		<input type="radio" name="status" value="display" <#if file.status=="display">checked</#if>/>显示
+                                  		</label>
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" name="status" value="hidden"<#if file.status=="hidden">checked</#if>/>隐藏
+                                  		</label>
+                                      </div>
                                   </div>
                                   <div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">文章图片</label>
 									<div class="col-sm-10">
-										<#if file.picture=="no_exist">
-										<input type="radio" name="picture" value="no_exist" checked="checked"/>NO_EXIST
-										<input type="radio" name="picture" value="exist"/>EXIST
-										<#else>
-										<input type="radio" name="picture" value="no_exist"/>NO_EXIST
-										<input type="radio" name="picture" value="exist" checked="checked"/>EXIST
-										</#if>
+										<label class="checkbox-inline">
+										<input type="radio" name="picture" value="no_exist" <#if file.picture=="no_exist">checked</#if>/>没有配图
+										</label>
+										<label class="checkbox-inline">
+										<input type="radio" name="picture" value="exist" <#if file.picture=="exist">checked</#if>/>有配图
+										</label>
 									</div>
 								  </div>
                                   <div class="form-group">
@@ -104,8 +101,25 @@
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-					bootbox.alert("保存成功，将刷新页面", function() {
-						window.location.reload();
+					bootbox.dialog({
+						message : "更新成功",
+						title : "提示",
+						buttons : {
+							update : {
+								label : "返回",
+								className : "btn-success",
+								callback : function() {
+									window.location.reload();
+								}
+							},
+							list : {
+								label : "前往文件夹列表",
+								className : "btn-primary",
+								callback : function() {
+									window.location.href="${basePath}/admin/file/page?type=article";
+								}
+							},
+						}
 					});
 				}else{
 					showErrors($('#update_article_form'),data.errors);

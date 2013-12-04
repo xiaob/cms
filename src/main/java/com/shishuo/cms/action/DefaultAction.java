@@ -86,8 +86,7 @@ public class DefaultAction {
 			ModelMap modelMap) {
 		try {
 			Folder folder = folderService.getFolderByEname(ename);
-			modelMap.addAttribute("ename", ename);
-			modelMap.addAttribute("folderId", folder.getFolderId());
+			modelMap.addAttribute("folder",folder);
 			modelMap.addAttribute("pageNum", pageNum);
 			return themeService.getFolderTheme(folder.getEname(),
 					folder.getType());
@@ -113,9 +112,8 @@ public class DefaultAction {
 		File file = fileService.getFileByFileId(fileId);
 		Folder folder = folderService.getFolderById(file.getFolderId());
 		fileService.updateViewCount(fileId, file.getViewCount());
-		modelMap.addAttribute("ename", ename);
-		modelMap.addAttribute("fileId", fileId);
-		modelMap.addAttribute("folderId", file.getFileId());
+		modelMap.addAttribute("file", file);
+		modelMap.addAttribute("folder",folder);
 		modelMap.addAttribute("pageNum", pageNum);
 		return themeService.getFileTheme(folder.getEname(), file.getType());
 	}

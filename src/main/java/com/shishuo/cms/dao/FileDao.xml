@@ -23,7 +23,7 @@
 	</delete>
 	<select id="getFileListByFoderId" resultType="com.shishuo.cms.entity.vo.FileVo">
 		select * from file
-		where type = #{type} <if test="folderId!=0">and folderId=#{folderId}</if> limit #{offset},#{rows}
+		where type = #{type} <if test="folderId!=0">and folderId=#{folderId}</if>and status=#{status} limit #{offset},#{rows}
 	</select>
 
 	<select id="getFileCountByFoderId" resultType="Integer">
@@ -41,31 +41,18 @@
 		update file set
 		status=#{status} where fileId=#{fileId}
 	</update>
-	<update id="updateImage" parameterType="com.shishuo.cms.entity.File">
-		update file set folderId
-		= #{folderId} where fileId = #{fileId} and userId =
-		#{userId}
-	</update>
+	
 	<update id="updateViewCount" parameterType="long">
 		update file set
 		viewCount = #{viewCount} where fileId = #{fileId}
 	</update>
+	
 	<update id="updateCommentCount" parameterType="long">
 		update file set
 		commentCount = #{commentCount} where fileId = #{fileId}
 	</update>
-	<select id="getUserImageList" resultType="com.shishuo.cms.entity.File"
-		parameterType="long">
-		select * from file where userId = #{userId} and type=4
-		limit
-		#{offset},#{rows}
-	</select>
 
-	<select id="getUserImageCount" resultType="int" parameterType="long">
-		select count(1) from file where userId = #{userId} and type=4
-	</select>
-
-	<select id="getFileListByType" resultType="com.shishuo.cms.entity.File">
+	<select id="getFileListByType" resultType="com.shishuo.cms.entity.vo.FileVo">
 		select * from file
 		where type=#{type} and status=#{status} order by createTime desc limit #{offset},#{rows} 
 	</select>
@@ -79,4 +66,14 @@
 		resultType="com.shishuo.cms.entity.File">
 		select * from file where type=#{type} and picture=#{picture}
 	</select>
+	
+	<select id="getAllFileByFolderId" parameterType="long"
+		resultType="com.shishuo.cms.entity.File">
+		select * from file where folderId=#{folderId}
+	</select>
+	
+	<update id="updateFolderId" parameterType="long">
+		update file set folderId=#{folderId}
+		where fileId=#{fileId}
+	</update>
 </mapper>  

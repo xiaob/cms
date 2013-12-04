@@ -59,7 +59,7 @@
 		<property name="freemarkerVariables">
 			<map>
 				<!-- 所有目录标签 -->
-				<entry key="cms_folder_all" value-ref="FolderAllTag" />			
+				<entry key="cms_folder_all" value-ref="folderAllTag" />			
 				<!-- 目录标签 -->
 				<entry key="cms_folder_list" value-ref="folderListTag" />
 				<!-- 文件分页标签 -->
