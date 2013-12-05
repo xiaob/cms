@@ -17,7 +17,7 @@
                         <#list pageVo.list as file>
                         <div class="media">
                             <div class="media-body">
-                                <a href="javascript:;">${file.name}</a>（${file.createTime?string("yyyy-MM-dd")}）
+                                <a href="${basePath}/${file.folder.ename}/${file.fileId}">${file.name}</a>（${file.createTime?string("yyyy-MM-dd")}）
                             </div>
                         </div>
                         </#list>
