@@ -44,7 +44,7 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="${basePath}/admin/file/status/update?fileId=${e.fileId}&status=display" title="还原">
+                  							<a class="article_update_status" fileId="${e.fileId}" title="还原${e.name}">
                   								<button class="btn btn-success btn-xs">
                   									<i class="icon-ok"></i>
                   								</button>
@@ -72,6 +72,58 @@
 		<!--main content end-->
 <script>
 $(function(){
+	$('.article_update_status').click(function(){
+		var fileId = $(this).attr('fileId');
+		var status= "display";
+		bootbox.dialog({
+			message : "是否"+$(this).attr('title')+"文件",
+			title : "提示",
+				buttons : {
+				delete : {
+					label : "确定",
+					className : "btn-success",
+					callback : function() {
+					$.post("${basePath}/admin/file/status/update.json", { 
+						"fileId": fileId,
+						"status": status},
+						function(data){
+							if(data.result){
+								bootbox.dialog({
+									message : "操作成功",
+									title : "提示",
+									buttons : {
+										delete : {
+											label : "返回回收站",
+											className : "btn-success",
+											callback : function() {
+												window.location.href="${basePath}/admin/article/page?status=hidden"
+											}
+										},
+										cancel : {
+											label : "返回文章列表",
+											className : "btn-primary",
+											callback : function() {
+												window.location.href="${basePath}/admin/file/page?type=article";
+											}
+										}
+									}
+								});
+							}else{
+								bootbox.alert(data.msg, function() {});
+							}
+						}, "json");
+					}
+				},
+			cancel : {
+				label : "取消",
+				className : "btn-primary",
+				callback : function() {
+					}
+				}
+			}
+		});					
+	});
+		
 	$('.js_article_delete').click(function(){
 		var fileId = $(this).attr('fileId')
 		bootbox.dialog({
