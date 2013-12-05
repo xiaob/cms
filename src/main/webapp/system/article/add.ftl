@@ -59,7 +59,6 @@
                                   </div>
                                  </fieldset>
                               </form>
-                              <p id="add_article_p">文章添加成功.<a href="<a href="${basePath}/admin/article/list">">前往文章列表</a></p>
                           </div>
                       </section>
                   </div>
@@ -73,18 +72,16 @@
 		$('#add_article_form').bind('form-pre-serialize', function(event,form,options,veto){
     		tinyMCE.triggerSave();
 		});
-		$("#add_article_p").hide();
 		$('#add_article_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-					$('#fileId').prop("value",data.t);
 					bootbox.dialog({
-  						message: '<form enctype="multipart/form-data" id="add_article_picture_form" method="post" autocomplete="off" action="${basePath}/admin/file/upload.json"><fieldset><input type="file" id="file" name= "file" value=""/><input type="text" id="fileId" name="fileId" value=""/><input id="type" name="type" value="article"/></fieldset></form>',
+  						message: '<form enctype="multipart/form-data" id="add_article_picture_form" method="post" autocomplete="off" action="${basePath}/admin/file/upload.json"><fieldset><input type="file" id="file" name= "file" value=""/><input type="hidden" name= "fileId" value="'+data.t+'"/><input type="hidden" name="type" value="article"/></fieldset></form>',
   						title: "是否上传文章图片",
   						buttons: {
   							add : {
-								label : "继续添加",
+								label : "再次添加文章",
 								className : "btn-primary",
 								callback : function() {
 									window.location.reload();
@@ -98,7 +95,26 @@
 										dataType : 'json',
 										success : function(data) {
 											if (data.result) {
-												$("#add_article_p").show();
+												bootbox.dialog({
+  													message: '图片上传成功',
+  													title: "提示",
+							  						buttons: {
+							  							add : {
+															label : "继续添加文章",
+															className : "btn-primary",
+															callback : function() {
+																window.location.reload();
+															}
+														},
+							    						list : {
+															label : "查看文件夹列表",
+															className : "btn-danger",
+															callback : function() {
+																window.location.href="${basePath}/admin/file/page?type=article";
+															}
+														},
+							  						}
+												});
 											}else{
 												showErrors($('#add_article_picture_form'),data.errors);
 											}

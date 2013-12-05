@@ -99,15 +99,15 @@ public class AdminFileAction extends AdminBaseAction {
 	public JsonVo<String> upload(
 			@RequestParam(value ="file") MultipartFile file,
 			@RequestParam(value ="type") FileConstant.Type type,
-			@RequestParam(value ="fileId") String fileId,
+			@RequestParam(value ="fileId") long fileId,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
 			// 检测校验结果
 			validate(json);
-			File article = fileService.getFileByFileId(Long.parseLong(fileId));
+			File article = fileService.getFileByFileId(fileId);
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-				fileService.updateFileByFileId(Long.parseLong(fileId),article.getFolderId(), this.getAdmin(request).getAdminId(),
+				fileService.updateFileByFileId(fileId,article.getFolderId(), this.getAdmin(request).getAdminId(),
 						FileConstant.Picture.exist, article.getName(), article.getContent(),
 						FileConstant.Type.article, FileConstant.Status.display);
 				String path = webroot+"/upload/"+type+"/"+article.getFileId()+".jpg";
