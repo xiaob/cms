@@ -7,6 +7,9 @@
 ><br>
 >QQ群：7343505
 
+## 捐赠
+如果您喜欢“师说CMS”，认为“师说CMS”确实给您带来方便和帮助，那么欢迎您捐赠。这笔钱会用在“师说CMS”的服务器费用上。非常感谢，您的捐赠，是我们前进的动力。我们将定期公开捐赠和支出。<br>
+<a href='http://me.alipay.com/herbert'> <img src='https://img.alipay.com/sys/personalprod/style/mc/btn-index.png' /> </a>
 
 ## 演示地址
 
