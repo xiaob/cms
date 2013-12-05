@@ -33,6 +33,10 @@ import com.shishuo.cms.entity.Config;
 @Repository
 public interface ConfigDao {
 
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 增加配置
 	 * 
@@ -40,6 +44,10 @@ public interface ConfigDao {
 	 */
 	public int addConfig(Config config);
 
+	// ///////////////////////////////
+	// /////       刪除                         ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 删除配置
 	 * 
@@ -47,6 +55,10 @@ public interface ConfigDao {
 	 */
 	public int deleteConfig(@Param("key") String key);
 
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 更新配置
 	 * 
@@ -54,6 +66,10 @@ public interface ConfigDao {
 	 */
 	public int updateConfig(Config config);
 
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 查看配置
 	 * 

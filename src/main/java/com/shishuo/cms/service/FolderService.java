@@ -45,26 +45,10 @@ public class FolderService {
 	@Autowired
 	private FolderDao folderDao;
 
-	/**
-	 * 得到指定目录
-	 * 
-	 * @param folderId
-	 * @return Folder
-	 */
-	public Folder getFolderById(long folderId) {
-		return folderDao.getFolderById(folderId);
-	}
-
-	/**
-	 * 得到所有子目录
-	 * 
-	 * @param fatherId
-	 * @return List<Folder>
-	 */
-	public List<FolderVo> getFolderListByFatherId(long fatherId) {
-		return folderDao.getFolderListByFatherId(fatherId);
-	}
-
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 增加目录
 	 * 
@@ -104,6 +88,10 @@ public class FolderService {
 		return folder;
 	}
 
+	// ///////////////////////////////
+	// /////       刪除                         ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 删除目录
 	 * 
@@ -111,10 +99,13 @@ public class FolderService {
 	 * @return boolean
 	 */
 	public boolean deleteFolderById(long folderId) {
-		Folder folder = this.getFolderById(folderId);
-		return folderDao.deleteFolder(folder);
+		return folderDao.deleteFolder(folderId);
 	}
 
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 更新目录
 	 * 
@@ -149,6 +140,50 @@ public class FolderService {
 	}
 
 	/**
+	 * 通过指定Id修改其目录的序列
+	 * @param folderId
+	 * @param sort
+	 * @return Integer
+	 */
+	public int updateSort(long folderId,int sort){
+		return folderDao.updateSort(folderId, sort);
+	}
+
+	/**
+	 * 通过指定Id修改其目录的路径
+	 * @param folderId
+	 * @param path
+	 * @return Integer
+	 */
+	public int updatePath(long folderId,String path){
+		return folderDao.updatePath(folderId, path);
+	}
+
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 得到指定目录
+	 * 
+	 * @param folderId
+	 * @return Folder
+	 */
+	public Folder getFolderById(long folderId) {
+		return folderDao.getFolderById(folderId);
+	}
+
+	/**
+	 * 得到所有子目录
+	 * 
+	 * @param fatherId
+	 * @return List<Folder>
+	 */
+	public List<FolderVo> getFolderListByFatherId(long fatherId) {
+		return folderDao.getFolderListByFatherId(fatherId);
+	}
+
+	/**
 	 * 通过ename获得目录
 	 * 
 	 * @param ename
@@ -163,16 +198,6 @@ public class FolderService {
 		} else {
 			return folder;
 		}
-	}
-
-	/**
-	 * 获得所有目录的数量
-	 * 
-	 * @return Integer
-	 * 
-	 */
-	public int getAllListPageCount() {
-		return (int) folderDao.getAllListPageCount();
 	}
 
 	/**
@@ -200,6 +225,13 @@ public class FolderService {
 	}
 
 	/**
+	 * 获得某种类型的目录集合
+	 */
+	public List<FolderVo> getAllFolderByType(FolderConstant.Type type){
+		return folderDao.getAllFolderByType(type);
+	}
+	
+	/**
 	 * 实现同级目录排序的内部类
 	 */
 	class ComparatorFolderList implements Comparator<Object> {
@@ -212,27 +244,4 @@ public class FolderService {
 		}
 	}
 	
-	/**
-	 * 通过指定Id修改其目录的序列
-	 * @param folderId
-	 * @param sort
-	 * @return Integer
-	 */
-	public int updateSort(long folderId,int sort){
-		return folderDao.updateSort(folderId, sort);
-	}
-	
-	/**
-	 * 通过指定Id修改其目录的路径
-	 * @param folderId
-	 * @param path
-	 * @return Integer
-	 */
-	public int updatePath(long folderId,String path){
-		return folderDao.updatePath(folderId, path);
-	}
-	
-	public List<FolderVo> getAllFolderByType(FolderConstant.Type type){
-		return folderDao.getAllFolderByType(type);
-	}
 }

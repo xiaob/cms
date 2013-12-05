@@ -46,6 +46,10 @@ public class CommentService {
 	@Autowired
 	private UserService userService;
 
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 增加评论
 	 * 
@@ -74,6 +78,27 @@ public class CommentService {
 
 	}
 
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 修改评论状态
+	 * 
+	 * @param commentId
+	 * @param status
+	 * @return Integer
+	 */
+	public int updateCommentStatus(long commentId, CommentConstant.Status status) {
+		Comment comment = this.getCommentById(commentId);
+		comment.setStatus(status);
+		return commentDao.updateCommentStatus(comment);
+	}
+
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 获得评论分页
 	 * @param fileId
@@ -114,19 +139,6 @@ public class CommentService {
 	}
 
 	/**
-	 * 评论审核
-	 * 
-	 * @param commentId
-	 * @param status
-	 * @return Integer
-	 */
-	public int updateCommentStatus(long commentId, CommentConstant.Status status) {
-		Comment comment = this.getCommentById(commentId);
-		comment.setStatus(status);
-		return commentDao.updateCommentStatus(comment);
-	}
-
-	/**
 	 * 通过id获得指定评论
 	 * 
 	 * @param commentId
@@ -143,7 +155,7 @@ public class CommentService {
 	 * @param rows
 	 * @return List<CommentVo>
 	 */
-	public List<Comment> getAllList(long offset, long rows) {
+	public List<Comment> getCommentList(long offset, long rows) {
 		return commentDao.getAllList(offset, rows);
 	}
 
@@ -152,7 +164,7 @@ public class CommentService {
 	 * 
 	 * @return Integer
 	 */
-	public int getAllListCount() {
+	public int getCommentListCount() {
 		return commentDao.getAllListCount();
 	}
 
@@ -162,14 +174,14 @@ public class CommentService {
 	 * @param pageNum
 	 * @return PageVo<CommentVo>
 	 */
-	public PageVo<Comment> getAllListPage(int pageNum) {
+	public PageVo<Comment> getCommentListPage(int pageNum) {
 		PageVo<Comment> pageVo = new PageVo<Comment>(pageNum);
 		pageVo.setUrl("/CMS/admin/comment/page?");
 		pageVo.setRows(5);
-		List<Comment> list = this.getAllList(pageVo.getOffset(),
+		List<Comment> list = this.getCommentList(pageVo.getOffset(),
 				pageVo.getRows());
 		pageVo.setList(list);
-		pageVo.setCount(this.getAllListCount());
+		pageVo.setCount(this.getCommentListCount());
 		return pageVo;
 	}
 

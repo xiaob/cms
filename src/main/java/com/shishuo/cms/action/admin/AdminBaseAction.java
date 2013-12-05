@@ -35,7 +35,7 @@ import com.shishuo.cms.service.FileService;
 import com.shishuo.cms.service.FolderService;
 import com.shishuo.cms.service.LogService;
 import com.shishuo.cms.service.UserService;
-import com.shishuo.cms.util.UpdatePictureConstant;
+import com.shishuo.cms.util.UpdatePictureUtils;
 
 /**
  * @author 所有action的父类
@@ -65,7 +65,7 @@ public class AdminBaseAction {
 	@Autowired
 	protected CommentService commentService;
 	@Autowired
-	protected UpdatePictureConstant updatePictureConsTant;
+	protected UpdatePictureUtils updatePictureConsTant;
 
 	/**
 	 * 参数校验

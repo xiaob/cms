@@ -34,6 +34,10 @@ import com.shishuo.cms.entity.vo.AdminVo;
 @Repository
 public interface AdminDao {
 
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 添加管理员
 	 * @param Admin
@@ -42,6 +46,34 @@ public interface AdminDao {
 	 */
 	public int addAdmin(Admin admin);
 
+	// ///////////////////////////////
+	// /////       刪除                         ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 删除管理员
+	 * @param adminId
+	 * @return Integer
+	 *
+	 */
+	public int deleteAdmin(@Param("adminId") long adminId);
+
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 修改管理员资料
+	 * @param Adin
+	 * @return Integer
+	 *
+	 */
+	public int updateAdmin(Admin admin);
+
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 获取所有管理员列表
 	 * @param offset
@@ -58,22 +90,6 @@ public interface AdminDao {
 	 *
 	 */
 	public int getAllListCount();
-
-	/**
-	 * 修改管理员资料
-	 * @param Adin
-	 * @return Integer
-	 *
-	 */
-	public int updateAdmin(Admin admin);
-
-	/**
-	 * 删除管理员
-	 * @param adminId
-	 * @return Integer
-	 *
-	 */
-	public int deleteAdmin(@Param("adminId") long adminId);
 
 	/**
 	 * 通过Id获得指定管理员资料

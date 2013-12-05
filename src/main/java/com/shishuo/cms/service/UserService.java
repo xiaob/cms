@@ -42,6 +42,10 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 增加用户
 	 * 
@@ -58,6 +62,42 @@ public class UserService {
 		return user;
 	}
 
+	// ///////////////////////////////
+	// /////       刪除                         ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 删除用户
+	 * 
+	 * @param userId
+	 */
+	public int deleteUserById(long userId) {
+		return userDao.deleteUserById(userId);
+	}
+
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 更新用户数据
+	 * 
+	 * @param userId
+	 * @return user
+	 */
+	public User updateUser(long userId, long openId,UserConstant.Type type, String name) {
+		User user = this.getUserById(userId);
+		user.setType(type);
+		user.setOpenId(openId);
+		user.setName(name);
+		userDao.updateUser(user);
+		return user;
+	}
+
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 根据Id得到用户信息
 	 * 
@@ -83,31 +123,6 @@ public class UserService {
 		pageVo.setList(list);
 		pageVo.setCount(this.getUserListCount());
 		return pageVo;
-	}
-
-	/**
-	 * 删除用户
-	 * 
-	 * @param userId
-	 */
-	public int deleteUserById(long userId) {
-		User user = this.getUserById(userId);
-		return userDao.deleteUserById(user);
-	}
-
-	/**
-	 * 更新用户数据
-	 * 
-	 * @param userId
-	 * @return user
-	 */
-	public User updateUser(long userId, long openId,UserConstant.Type type, String name) {
-		User user = this.getUserById(userId);
-		user.setType(type);
-		user.setOpenId(openId);
-		user.setName(name);
-		userDao.updateUser(user);
-		return user;
 	}
 
 	/**

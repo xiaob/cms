@@ -1,4 +1,4 @@
-<#assign menu="picture">
+<#assign menu="photo">
 <#assign submenu="add_picture">
 <#include "/system/head.ftl">
 <style type="text/css">

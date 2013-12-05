@@ -43,7 +43,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public String allComment(ModelMap modelMap,
 			@RequestParam(value="pageNum",defaultValue="1") int pageNum){
-		modelMap.put("pageVo", commentService.getAllListPage(pageNum));
+		modelMap.put("pageVo", commentService.getCommentListPage(pageNum));
 		return "system/comment/all";
 	}
 	/**

@@ -41,17 +41,10 @@ public class ConfigService {
 	@Autowired
 	private ConfigDao configDao;
 
-	/**
-	 * 得到当前模板路径
-	 * 
-	 * @return
-	 */
-	public String getTemplatePath() {
-		String template = this.getConfigByKey(ConfigConstant.SYS_TEMPLATE,
-				false);
-		return "/themes/" + template;
-	}
-
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 增加配置
 	 * 
@@ -68,17 +61,25 @@ public class ConfigService {
 		return config;
 	}
 
+	// ///////////////////////////////
+	// /////       刪除                         ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 删除配置
 	 * 
 	 * @param key
 	 * @return Integer
 	 */
-
+	
 	public int deleteConfigByKey(String key) {
 		return configDao.deleteConfig(key);
 	}
 
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+		
 	/**
 	 * 更新配置
 	 * 
@@ -92,6 +93,20 @@ public class ConfigService {
 		configDao.updateConfig(config);
 		this.getConfigByKey(key, true);
 		return config;
+	}
+
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	/**
+	 * 得到当前模板路径
+	 * 
+	 * @return
+	 */
+	public String getTemplatePath() {
+		String template = this.getConfigByKey(ConfigConstant.SYS_TEMPLATE,
+				false);
+		return "/themes/" + template;
 	}
 
 	/**

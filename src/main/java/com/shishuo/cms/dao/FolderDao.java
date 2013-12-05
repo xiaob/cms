@@ -37,6 +37,48 @@ import com.shishuo.cms.entity.vo.FolderVo;
 @Repository
 public interface FolderDao {
 
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	/**
+	 * 增加目录
+	 * 
+	 * @return Integer
+	 */
+	public int addFolder(Folder folder);
+
+	
+	// ///////////////////////////////
+	// /////       刪除                         ////////
+	// ///////////////////////////////
+	/**
+	 * 删除目录
+	 * 
+	 * @param folder
+	 * @return boolean
+	 */
+	// FIXME 传入参数 folderId, status
+	public boolean deleteFolder(@Param("folderId") long folderId);
+
+	
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+	/**
+	 * 更新目录
+	 * 
+	 * @param folder
+	 * @return Integer
+	 */
+	public int updateFolder(Folder folder);
+
+	public int updateSort(@Param("folderId") long folderId,@Param("sort") int sort);
+
+	public int updatePath(@Param("folderId") long folderId,@Param("path") String path);
+
+	// ///////////////////////////////
+	// /////       查询                         ////////
+	// ///////////////////////////////
 	/**
 	 * 得到目录
 	 * 
@@ -55,30 +97,6 @@ public interface FolderDao {
 	
 
 	/**
-	 * 增加目录
-	 * 
-	 * @return Integer
-	 */
-	public int addFolder(Folder folder);
-
-	/**
-	 * 删除目录
-	 * 
-	 * @param folder
-	 * @return boolean
-	 */
-	// FIXME 传入参数 folderId, status
-	public boolean deleteFolder(Folder folder);
-
-	/**
-	 * 更新目录
-	 * 
-	 * @param folder
-	 * @return Integer
-	 */
-	public int updateFolder(Folder folder);
-
-	/**
 	 * 通过ename获得指定目录
 	 * @param ename
 	 * @return Folder
@@ -86,17 +104,10 @@ public interface FolderDao {
 	public Folder getFolderByEname(String ename);
 	
 	/**
-	 * 得到所有目录的数量
+	 * 得到某种类型的所有目录
 	 * @return Integer
 	 *
 	 */
-	public long getAllListPageCount();
-
-	
-	public int updateSort(@Param("folderId") long folderId,@Param("sort") int sort);
-	
-	public int updatePath(@Param("folderId") long folderId,@Param("path") String path);
-	
 	public List<FolderVo> getAllFolderByType(@Param("type") FolderConstant.Type type);
 	
 }

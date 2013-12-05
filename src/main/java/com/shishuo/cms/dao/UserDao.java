@@ -35,6 +35,10 @@ import com.shishuo.cms.entity.User;
 @Repository
 public interface UserDao {
 
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 增加用户
 	 * 
@@ -43,6 +47,34 @@ public interface UserDao {
 	 */
 	public int addUser(User user);
 
+	// ///////////////////////////////
+	// /////       刪除                         ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 删除用户
+	 * 
+	 * @param User
+	 * @return Integer
+	 */
+	public int deleteUserById(@Param("userId") long userId);
+
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 更新用户数据
+	 * 
+	 * @param userId
+	 * @return Integer
+	 */
+	public int updateUser(User user);
+
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 根据Id得到用户信息
 	 * 
@@ -52,7 +84,7 @@ public interface UserDao {
 	public User getUserById(@Param("userId") long userId);
 
 	/**
-	 * 得到所有用户数据
+	 * 得到用户数据的列表
 	 * 
 	 * @param long,long
 	 * @return List<User>
@@ -67,21 +99,5 @@ public interface UserDao {
 	 * @return Integer
 	 */
 	public int getUserListCount();
-
-	/**
-	 * 删除用户
-	 * 
-	 * @param User
-	 * @return Integer
-	 */
-	public int deleteUserById(User user);
-
-	/**
-	 * 更新用户数据
-	 * 
-	 * @param userId
-	 * @return Integer
-	 */
-	public int updateUser(User user);
 
 }

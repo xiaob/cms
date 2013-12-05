@@ -1,5 +1,5 @@
-<#assign menu="article">
-<#assign submenu="article_list">
+<#assign menu="photo">
+<#assign submenu="photo_list">
 <#include "/system/head.ftl">
 <style type="text/css">
 .cs-style-3 figcaption {

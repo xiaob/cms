@@ -23,7 +23,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.CommentConstant;
 import com.shishuo.cms.constant.FileConstant;
@@ -62,6 +61,126 @@ public class FileService {
 	@Autowired
 	private CommentService commentService;
 
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 增加文件
+	 * 
+	 * @param folderId
+	 * @param adminId
+	 * @param picture
+	 *            {@link:FileConstant.PICTURE}
+	 * @param name
+	 * @param content
+	 * @param type
+	 * @param status
+	 * @return
+	 */
+	public File addFile(long folderId, long adminId,
+			FileConstant.Picture picture, String name, String content,
+			FileConstant.Type type, FileConstant.Status status) {
+		File file = new File();
+		file.setFolderId(folderId);
+		file.setAdminId(adminId);
+		file.setPicture(picture);
+		file.setName(name);
+		file.setContent(content);
+		file.setViewCount(0);
+		file.setCommentCount(0);
+		file.setType(type);
+		file.setStatus(status);
+		file.setCreateTime(new Date());
+		fileDao.addFile(file);
+		return file;
+	}
+
+	// ///////////////////////////////
+	// /////       刪除                         ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 删除文件
+	 * 
+	 * @param fileId
+	 * @return boolean
+	 */
+	public boolean deleteFileByFileId(long fileId) {
+		return fileDao.deleteFile(fileId,FileConstant.Status.hidden);
+	}
+
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 修改文件
+	 * 
+	 * @param fileId
+	 * @param folderId
+	 * @param adminId
+	 * @param picture
+	 * @param name
+	 * @param content
+	 * @param type
+	 * @param status
+	 * @return
+	 */
+	public File updateFileByFileId(long fileId, long folderId, long adminId,
+			FileConstant.Picture picture, String name, String content,
+			FileConstant.Type type, FileConstant.Status status) {
+		File file = fileDao.getFileById(fileId);
+		file.setFolderId(folderId);
+		file.setAdminId(adminId);
+		file.setPicture(picture);
+		file.setName(name);
+		file.setContent(content);
+		file.setViewCount(0);
+		file.setCommentCount(0);
+		file.setType(type);
+		file.setStatus(status);
+		fileDao.updateFile(file);
+		return file;
+	}
+
+	/**
+	 * 修改文件的状态
+	 * @param fileId
+	 * @param status
+	 * @return boolean
+	 * 
+	 */
+	public void updateStatusByFileId(long fileId, FileConstant.Status status) {
+		fileDao.updateStatusByFileId(fileId,status);
+	}
+
+	/**
+	 * 更新浏览人数
+	 * 
+	 * @param fileId
+	 * @param viewCount
+	 * 
+	 */
+	public void updateViewCount(long fileId, int nowViewCount) {
+		fileDao.updateViewCount(fileId, nowViewCount + 1);
+	}
+
+	/**
+	 * 更新评论数
+	 * 
+	 * @param fileId
+	 */
+	public void updateCommentCount(long fileId) {
+		int commentCount = commentService.getCommentCountByFatherId(fileId, 0,
+				CommentConstant.Status.display);
+		fileDao.updateCommentCount(fileId, commentCount);
+	}
+
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 得到文件
 	 * 
@@ -100,23 +219,23 @@ public class FileService {
 					+ "?");
 		}
 		pageVo.setRows(rows);
-		pageVo.setCount(this.getFileCountByFolderId(folderId,type));
-		List<FileVo> list = this.getDisplayFileByFolderId(folderId,FileConstant.Status.display,type,
+		pageVo.setCount(this.getFileCountByFolderId(folderId,type,FileConstant.Status.display));
+		List<FileVo> list = this.getFileListByTypeAndFoderId(folderId,FileConstant.Status.display,type,
 				pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
 		return pageVo;
 	}
 
 	/**
-	 * 得到目录下的显示的文件
+	 * 得到目录下的文件
 	 * 
 	 * @param foderId
 	 * @return
 	 */
 
-	public List<FileVo> getDisplayFileByFolderId(long folderId,FileConstant.Status status,
+	public List<FileVo> getFileListByTypeAndFoderId(long folderId,FileConstant.Status status,
 			FileConstant.Type type, long offset, long rows) {
-		List<FileVo> list = fileDao.getFileListByFoderId(folderId, type,status,
+		List<FileVo> list = fileDao.getFileListByTypeAndFoderId(type,folderId,status,
 				offset, rows);
 		for (FileVo file : list) {
 			Admin admin = adminService.getAdminById(file.getAdminId());
@@ -132,81 +251,16 @@ public class FileService {
 	 * 得到目录的某种文件的数量
 	 * 
 	 * @param folderId
+	 * @param type
+	 * @param status
 	 * @return Integer
 	 */
-	public int getFileCountByFolderId(long folderId,FileConstant.Type type) {
-		return fileDao.getFileCountByFoderId(folderId,type);
+	public int getFileCountByFolderId(long folderId,FileConstant.Type type,FileConstant.Status status) {
+		return fileDao.getFileCountByTypeAndFoderId(type,folderId,status);
 	}
-
-	/**
-	 * 增加文件
-	 * 
-	 * @param folderId
-	 * @param adminId
-	 * @param picture
-	 *            {@link:FileConstant.PICTURE}
-	 * @param name
-	 * @param content
-	 * @param type
-	 * @param status
-	 * @return
-	 */
-	public File addFile(long folderId, long adminId,
-			FileConstant.Picture picture, String name, String content,
-			FileConstant.Type type, FileConstant.Status status) {
-		File file = new File();
-		file.setFolderId(folderId);
-		file.setAdminId(adminId);
-		file.setPicture(picture);
-		file.setName(name);
-		file.setContent(content);
-		file.setViewCount(0);
-		file.setCommentCount(0);
-		file.setType(type);
-		file.setStatus(status);
-		file.setCreateTime(new Date());
-		fileDao.addFile(file);
-		return file;
-	}
-
-	/**
-	 * 删除文件
-	 * 
-	 * @param fileId
-	 * @return boolean
-	 */
-	public boolean deleteFileByFileId(long fileId) {
-		return fileDao.deleteFile(fileId,FileConstant.Status.hidden);
-	}
-
-	/**
-	 * 修改文件
-	 * 
-	 * @param fileId
-	 * @param folderId
-	 * @param adminId
-	 * @param picture
-	 * @param name
-	 * @param content
-	 * @param type
-	 * @param status
-	 * @return
-	 */
-	public File updateFileByFileId(long fileId, long folderId, long adminId,
-			FileConstant.Picture picture, String name, String content,
-			FileConstant.Type type, FileConstant.Status status) {
-		File file = fileDao.getFileById(fileId);
-		file.setFolderId(folderId);
-		file.setAdminId(adminId);
-		file.setPicture(picture);
-		file.setName(name);
-		file.setContent(content);
-		file.setViewCount(0);
-		file.setCommentCount(0);
-		file.setType(type);
-		file.setStatus(status);
-		fileDao.updateFile(file);
-		return file;
+	
+	public int getFileCountByFolderId(long folderId) {
+		return fileDao.getFileCountByFolderId(folderId);
 	}
 
 	/**
@@ -229,7 +283,7 @@ public class FileService {
 			fileVo.setFolder(folderDao.getFolderById(fileVo.getFolderId()));
 		}
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileListByTypeCount(type));
+		pageVo.setCount(this.getFileCountByType(type));
 
 		return pageVo;
 	}
@@ -257,43 +311,8 @@ public class FileService {
 	 * @param Integer
 	 * 
 	 */
-	public int getFileListByTypeCount(FileConstant.Type type) {
-		return fileDao.getFileListByTypeCount(type);
-	}
-
-	/**
-	 * 放进回收站或者从回收站中还原
-	 * @param fileId
-	 * @param status
-	 * @return boolean
-	 * 
-	 */
-	public void updateStatusByFileId(long fileId, FileConstant.Status status) {
-		fileDao.updateStatusByFileId(fileId,status);
-	}
-
-
-
-	/**
-	 * 更新浏览人数
-	 * 
-	 * @param fileId
-	 * @param viewCount
-	 * 
-	 */
-	public void updateViewCount(long fileId, int nowViewCount) {
-		fileDao.updateViewCount(fileId, nowViewCount + 1);
-	}
-
-	/**
-	 * 更新评论数
-	 * 
-	 * @param fileId
-	 */
-	public void updateCommentCount(long fileId) {
-		int commentCount = commentService.getCommentCountByFatherId(fileId, 0,
-				CommentConstant.Status.display);
-		fileDao.updateCommentCount(fileId, commentCount);
+	public int getFileCountByType(FileConstant.Type type) {
+		return fileDao.getFileCountByType(type);
 	}
 
 }

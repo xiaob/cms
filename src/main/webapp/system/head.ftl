@@ -99,10 +99,10 @@
 					</li>
 					<#if SYS_FUNCTION_PHOTO=="on">
 					<li class="sub-menu ">
-						<a href="javascript:;" > <i class="icon-camera-retro"></i> <span>图片管理</span></a>
+						<a href="javascript:;" <#if menu="photo">class="active"</#if>> <i class="icon-camera-retro"></i> <span>图片管理</span></a>
 						<ul class="sub">
-							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/picture/">上传图片</a></li>
-							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/file/page?type=photo">图片列表</a></li>
+							<li <#if submenu="add_picture">class="active"</#if>><a href="${basePath}/admin/picture/">上传图片</a></li>
+							<li <#if submenu="photo_list">class="active"</#if>><a href="${basePath}/admin/file/page?type=photo">图片列表</a></li>
 							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/picture/trash">回收站</a></li>
 						</ul>
 					</li>

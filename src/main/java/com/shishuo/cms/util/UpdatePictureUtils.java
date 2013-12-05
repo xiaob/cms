@@ -1,24 +1,67 @@
+/*
+ * 
+ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
+ *
+ *	Licensed under the Apache License, Version 2.0 (the "License");
+ *	you may not use this file except in compliance with the License.
+ *	You may obtain a copy of the License at
+ *	 
+ *		http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *	Unless required by applicable law or agreed to in writing, software
+ *	distributed under the License is distributed on an "AS IS" BASIS,
+ *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *	See the License for the specific language governing permissions and
+ *	limitations under the License.
+ */
 package com.shishuo.cms.util;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.constant.FileConstant.Type;
-
 
 @Service
-public class UpdatePictureConstant {
+public class UpdatePictureUtils {
 
+	/**
+	 * 获得切割后的图片
+	 */
+	 public Image cut(BufferedImage image,int x, int y, int destWidth,
+	            int destHeight) throws IOException{
+		 ImageFilter cropFilter;
+		 cropFilter = new CropImageFilter(x, y, destWidth, destHeight);
+		 Image img = Toolkit.getDefaultToolkit().createImage(
+                 new FilteredImageSource(image.getSource(), cropFilter));
+         return img;
+		 
+	 }
+	 /**
+	  * 获得按尺寸放大或缩小后的图片
+	  */
+	public BufferedImage createThumbnail(String img,int num) throws FileNotFoundException, IOException {
+		BufferedImage img1 = ImageIO.read(new File(img));
+		BufferedImage thumbnail= Scalr.resize(img1, Scalr.Method.SPEED, Scalr.Mode.AUTOMATIC,
+				num,Scalr.OP_ANTIALIAS);
+		return thumbnail;
+	}
+	
 	/**
 	 * 按照指定大小切割图片并存到服务器
 	 */
@@ -52,13 +95,13 @@ public class UpdatePictureConstant {
 				height=Integer.parseInt(se[0]);
 				width=Integer.parseInt(se[1]);
 				if(height>=width){
-					descImg=UpdatePicture.createThumbnail(image,height*num);
+					descImg=this.createThumbnail(image,height*num);
 				}else{
-					descImg=UpdatePicture.createThumbnail(image,width*num);
+					descImg=this.createThumbnail(image,width*num);
 				}
 				descWidth=descImg.getWidth();
 				descHeight=descImg.getHeight();
-				finalImg=UpdatePicture.sdg(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
+				finalImg=this.cut(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
 				BufferedImage tag = new BufferedImage(width, height,
 	                 BufferedImage.TYPE_INT_RGB);
 				Graphics g = tag.getGraphics();
@@ -71,13 +114,13 @@ public class UpdatePictureConstant {
 				height=Integer.parseInt(se1[0]);
 				width=Integer.parseInt(se1[1]);
 				if(height>=width){
-					descImg=UpdatePicture.createThumbnail(image,height*num);
+					descImg=this.createThumbnail(image,height*num);
 				}else{
-					descImg=UpdatePicture.createThumbnail(image,width*num);
+					descImg=this.createThumbnail(image,width*num);
 				}
 				descWidth=descImg.getWidth();
 				descHeight=descImg.getHeight();
-				finalImg=UpdatePicture.sdg(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
+				finalImg=this.cut(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
 				BufferedImage tag1 = new BufferedImage(width, height,
 		                 BufferedImage.TYPE_INT_RGB);
 				Graphics g1 = tag1.getGraphics();
@@ -116,13 +159,13 @@ public class UpdatePictureConstant {
 				height=Integer.parseInt(se[0]);
 				width=Integer.parseInt(se[1]);
 				if(height>=width){
-					descImg=UpdatePicture.createThumbnail(image,height*num);
+					descImg=this.createThumbnail(image,height*num);
 				}else{
-					descImg=UpdatePicture.createThumbnail(image,width*num);
+					descImg=this.createThumbnail(image,width*num);
 				}
 				descWidth=descImg.getWidth();
 				descHeight=descImg.getHeight();
-				finalImg=UpdatePicture.sdg(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
+				finalImg=this.cut(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
 				BufferedImage tag = new BufferedImage(width, height,
 	                 BufferedImage.TYPE_INT_RGB);
 				Graphics g = tag.getGraphics();

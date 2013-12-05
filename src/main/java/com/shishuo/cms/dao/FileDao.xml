@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+  
+ 	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ 	长沙市师说网络科技有限公司 版权所有
+ 	http://www.shishuo.com
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+ 	You may obtain a copy of the License at
+ 	 
+ 		http://www.apache.org/licenses/LICENSE-2.0
+ 
+ 	Unless required by applicable law or agreed to in writing, software
+ 	distributed under the License is distributed on an "AS IS" BASIS,
+ 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ 	See the License for the specific language governing permissions and
+ 	limitations under the License.
+ 
+-->
 <mapper namespace="com.shishuo.cms.dao.FileDao">
 
-	<select id="getFileById" parameterType="long"
-		resultType="com.shishuo.cms.entity.vo.FileVo">
-		select * from file where fileId=#{fileId}
-	</select>
-
+	<!-- ############################## -->
+	<!-- ######        增加                      ###### -->
+	<!-- ############################## -->
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
 		insert into
 		file(folderId,adminId,picture,name,content,viewCount,commentCount,type,status,createTime)
@@ -16,19 +33,19 @@
 			LAST_INSERT_ID()	
 		</selectKey>
 	</insert>
+	
+	<!-- ############################## -->
+	<!-- ######       删除                         ###### -->
+	<!-- ############################## -->
 
 	<delete id="deleteFile" parameterType="com.shishuo.cms.entity.File">
 		delete from file where
 		fileId=#{fileId} and status=#{status}
 	</delete>
-	<select id="getFileListByFoderId" resultType="com.shishuo.cms.entity.vo.FileVo">
-		select * from file
-		where type = #{type} <if test="folderId!=0">and folderId=#{folderId}</if>and status=#{status} limit #{offset},#{rows}
-	</select>
 
-	<select id="getFileCountByFoderId" resultType="Integer">
-		select count(*) from file where type = #{type}<if test="folderId!=0">and folderId=#{folderId}</if>
-	</select>
+	<!-- ############################## -->
+	<!-- ######       修改                         ###### -->
+	<!-- ############################## -->
 
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
 		update file set
@@ -41,7 +58,7 @@
 		update file set
 		status=#{status} where fileId=#{fileId}
 	</update>
-	
+
 	<update id="updateViewCount" parameterType="long">
 		update file set
 		viewCount = #{viewCount} where fileId = #{fileId}
@@ -52,14 +69,37 @@
 		commentCount = #{commentCount} where fileId = #{fileId}
 	</update>
 
+	<!-- ############################## -->
+	<!-- ######       查询                         ###### -->
+	<!-- ############################## -->
+
+	<select id="getFileById" parameterType="long"
+		resultType="com.shishuo.cms.entity.vo.FileVo">
+		select * from file where fileId=#{fileId}
+	</select>
+
+	<select id="getFileListByTypeAndFoderId" resultType="com.shishuo.cms.entity.vo.FileVo">
+		select * from file
+		where type = #{type} <if test="folderId!=0">and folderId=#{folderId}</if>and status=#{status} limit #{offset},#{rows}
+	</select>
+	
+	<select id="getFileCountByTypeAndFoderId" resultType="Integer">
+		select count(*) from file where type=#{type}<if test="folderId!=0">and folderId=#{folderId}</if>and status=#{status}
+	</select>
+	
 	<select id="getFileListByType" resultType="com.shishuo.cms.entity.vo.FileVo">
 		select * from file
 		where type=#{type} and status=#{status} order by createTime desc limit #{offset},#{rows} 
 	</select>
 
-	<select id="getFileListByTypeCount" resultType="Integer">
+	<select id="getFileCountByType" resultType="Integer">
 		select count(*)
 		from file where type=#{type}
 	</select>
 	
+	<select id="getFileCountByFolderId" resultType="Integer">
+		select count(*) from 
+		file where folderId=#{folderId}
+	</select>
+
 </mapper>  

@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+  
+ 	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ 	长沙市师说网络科技有限公司 版权所有
+ 	http://www.shishuo.com
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+ 	You may obtain a copy of the License at
+ 	 
+ 		http://www.apache.org/licenses/LICENSE-2.0
+ 
+ 	Unless required by applicable law or agreed to in writing, software
+ 	distributed under the License is distributed on an "AS IS" BASIS,
+ 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ 	See the License for the specific language governing permissions and
+ 	limitations under the License.
+ 
+-->
 <mapper namespace="com.shishuo.cms.dao.FolderDao">
 
-	<select id="getFolderById" 
-		resultType="com.shishuo.cms.entity.Folder">
-		select * from folder where folderId=#{folderId}
-	</select>
-	
-	<select id="getFolderByEname" 
-		resultType="com.shishuo.cms.entity.Folder">
-		select * from folder where ename=#{ename}
-	</select>
-	
-	<select id="getFolderListByFatherId" 
-		resultType="com.shishuo.cms.entity.vo.FolderVo">
-		select * from folder where fatherId=#{fatherId} order by sort
-	</select>
+	<!-- ############################## -->
+	<!-- ######        增加                      ###### -->
+	<!-- ############################## -->
 	
 	<insert id="addFolder" parameterType="com.shishuo.cms.entity.Folder">
 		insert into
@@ -26,19 +34,22 @@
 		</selectKey>
 	</insert>
 	
-	<delete id="deleteFolder" parameterType="com.shishuo.cms.entity.Folder">
+	<!-- ############################## -->
+	<!-- ######       删除                         ###### -->
+	<!-- ############################## -->
+	
+	<delete id="deleteFolder" parameterType="long">
 		delete from folder where folderId=#{folderId}
 	</delete>
+	
+	<!-- ############################## -->
+	<!-- ######       修改                         ###### -->
+	<!-- ############################## -->
 	
 	<update id="updateFolder" parameterType="com.shishuo.cms.entity.Folder">
 		update folder set fatherId=#{fatherId},ename=#{ename},name=#{name},path=#{path},status=#{status},type=#{type},sort=#{sort}
 		where folderId=#{folderId}
 	</update>
-	
-	<select id="getAllList"
-		resultType="com.shishuo.cms.entity.Folder">
-		select * from folder
-	</select>
 	
 	<update id="updateSort" parameterType="long">
 		update folder set sort=#{sort} where folderId=#{folderId}
@@ -48,8 +59,28 @@
 		update folder set path=#{path} where folderId=#{folderId}
 	</update>
 	
+	<!-- ############################## -->
+	<!-- ######       查询                         ###### -->
+	<!-- ############################## -->
+	
+	<select id="getFolderById" 
+		resultType="com.shishuo.cms.entity.Folder">
+		select * from folder where folderId=#{folderId}
+	</select>
+	
+	<select id="getFolderListByFatherId" 
+		resultType="com.shishuo.cms.entity.vo.FolderVo">
+		select * from folder where fatherId=#{fatherId} order by sort
+	</select>
+	
+	<select id="getFolderByEname" 
+		resultType="com.shishuo.cms.entity.Folder">
+		select * from folder where ename=#{ename}
+	</select>
+	
 	<select id="getAllFolderByType"
 		resultType="com.shishuo.cms.entity.vo.FolderVo">
 		select * from folder where type=#{type}
 	</select>
+	
 </mapper>  

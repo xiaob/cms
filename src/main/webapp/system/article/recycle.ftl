@@ -75,7 +75,7 @@ $(function(){
 	$('.js_article_delete').click(function(){
 		var fileId = $(this).attr('fileId')
 		bootbox.dialog({
-			message : "是否"+$(this).attr('title')+"文件夹",
+			message : "是否"+$(this).attr('title')+"文件",
 			title : "提示",
 				buttons : {
 				delete : {

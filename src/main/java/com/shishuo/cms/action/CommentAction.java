@@ -74,7 +74,7 @@ public class CommentAction {
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public String commentPage(@RequestParam(value="p",defaultValue="1") int p,
 			ModelMap modelMap){
-		modelMap.put("pageVo", commentService.getAllListPage(p));
+		modelMap.put("pageVo", commentService.getCommentListPage(p));
 		return "system/comment/list";
 	}
 }

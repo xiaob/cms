@@ -48,6 +48,10 @@ public class AdminService {
 	@Autowired
 	private AdminDao adminDao;
 
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 添加管理员
 	 * 
@@ -69,6 +73,52 @@ public class AdminService {
 		return admin;
 	}
 
+	// ///////////////////////////////
+	// /////       刪除                         ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 删除管理员
+	 * 
+	 * @param adminId
+	 * @return Integer
+	 */
+	public int deleteAdmin(long adminId) {
+		return adminDao.deleteAdmin(adminId);
+	}
+
+	// ///////////////////////////////
+	// /////       修改                          ////////
+	// ///////////////////////////////
+		
+	/**
+	 * 修改管理员资料
+	 * 
+	 * @param adminId
+	 * @param name
+	 * @param password
+	 * @param status
+	 * @return Admin
+	 * @throws AuthException 
+	 */
+	public Admin updateAdmin(long adminId, String name, String password,
+			AdminConstant.Status status) throws AuthException {
+		Admin admin = this.getAdminById(adminId);
+		admin.setName(name);
+		if(password.equals("")){
+			admin.setPassword(admin.getPassword());
+		}else{
+			admin.setPassword(AuthUtils.getPassword(password, admin.getEmail()));
+		}
+		admin.setStatus(status);
+		adminDao.updateAdmin(admin);
+		return admin;
+	}
+
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 管理员登陆
 	 * 
@@ -137,40 +187,6 @@ public class AdminService {
 		return pageVo;
 	}
 
-	/**
-	 * 修改管理员资料
-	 * 
-	 * @param adminId
-	 * @param name
-	 * @param password
-	 * @param status
-	 * @return Admin
-	 * @throws AuthException 
-	 */
-	public Admin updateAdmin(long adminId, String name, String password,
-			AdminConstant.Status status) throws AuthException {
-		Admin admin = this.getAdminById(adminId);
-		admin.setName(name);
-		if(password.equals("")){
-			admin.setPassword(admin.getPassword());
-		}else{
-			admin.setPassword(AuthUtils.getPassword(password, admin.getEmail()));
-		}
-		admin.setStatus(status);
-		adminDao.updateAdmin(admin);
-		return admin;
-	}
-
-	/**
-	 * 删除管理员
-	 * 
-	 * @param adminId
-	 * @return Integer
-	 */
-	public int deleteAdmin(long adminId) {
-		return adminDao.deleteAdmin(adminId);
-	}
-	
 	/**
 	 * 通过email获得管理员资料
 	 * 

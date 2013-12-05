@@ -39,20 +39,10 @@ public class LogService {
 	@Autowired
 	private LogDao logDao;
 
-	/**
-	 * 日志分页
-	 * 
-	 * @return pageVo
-	 */
-	public PageVo<Log> getLogPage(int pageNum) {
-		PageVo<Log> pageVo = new PageVo<Log>(pageNum);
-		pageVo.setUrl("");
-		List<Log> list = this.getLogList(pageVo.getOffset(), pageVo.getRows());
-		pageVo.setList(list);
-		pageVo.setCount(this.getLogListCount());
-		return pageVo;
-	}
-
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
 	 * 增加日志
 	 * 
@@ -66,6 +56,24 @@ public class LogService {
 		log.setCreateTime(new Date());
 		logDao.addLog(log);
 		return log;
+	}
+
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 日志分页
+	 * 
+	 * @return pageVo
+	 */
+	public PageVo<Log> getLogPage(int pageNum) {
+		PageVo<Log> pageVo = new PageVo<Log>(pageNum);
+		pageVo.setUrl("");
+		List<Log> list = this.getLogList(pageVo.getOffset(), pageVo.getRows());
+		pageVo.setList(list);
+		pageVo.setCount(this.getLogListCount());
+		return pageVo;
 	}
 
 	/**

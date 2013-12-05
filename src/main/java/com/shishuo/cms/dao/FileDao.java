@@ -114,7 +114,7 @@ public interface FileDao {
 	public FileVo getFileById(@Param("fileId") long fileId);
 
 	/**
-	 * 得到目录的所有文件
+	 * 得到目录的文件的列表
 	 * 
 	 * @param foderId
 	 * @return List<FileVo>
@@ -129,11 +129,12 @@ public interface FileDao {
 	 * @param foderId
 	 * @return Integer
 	 */
-	public int getFileCountByTypeAndFoderId(FileConstant.Type type,@Param("folderId") long folderId);
+	public int getFileCountByTypeAndFoderId(@Param("type")FileConstant.Type type,@Param("folderId") long folderId,
+			@Param("status") FileConstant.Status status);
 
 	
 	/**
-	 * 得到目录的所有文件
+	 * 得到某种显示的文件的列表
 	 * 
 	 * @param foderId
 	 * @return List<FileVo>
@@ -143,11 +144,21 @@ public interface FileDao {
 			@Param("offset") long offset, @Param("rows") long rows);
 
 	/**
-	 * 得到目录的所有文件的数量
+	 * 得到某种文件的数量
 	 * 
 	 * @param foderId
 	 * @return Integer
 	 */
 	public int getFileCountByType(@Param("type") FileConstant.Type type);
+	
+	/**
+	 * 得到某个目录下的文件的数量
+	 * 
+	 * @param foderId
+	 * @return Integer
+	 */
+	public int getFileCountByFolderId(@Param("folderId") long folderId);
+	
+	
 
 }

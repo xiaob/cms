@@ -33,8 +33,24 @@ import com.shishuo.cms.entity.Log;
 @Repository
 public interface LogDao {
 
+	// ///////////////////////////////
+	// /////       增加                          ////////
+	// ///////////////////////////////
+	
 	/**
-	 * 全部日志
+	 * 增加日志
+	 * 
+	 * @param Log
+	 * @return Integer
+	 */
+	public int addLog(Log log);
+
+	// ///////////////////////////////
+	// /////       查詢                          ////////
+	// ///////////////////////////////
+	
+	/**
+	 * 日志的列表
 	 * 
 	 * @return List<Log>
 	 */
@@ -47,13 +63,5 @@ public interface LogDao {
 	 * @return Integer
 	 */
 	public int getLogListCount();
-
-	/**
-	 * 增加日志
-	 * 
-	 * @param Log
-	 * @return Integer
-	 */
-	public int addLog(Log log);
 
 }
