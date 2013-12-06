@@ -92,9 +92,8 @@
 					<li class="sub-menu ">
 						<a href="javascript:;" <#if menu="photo">class="active"</#if>> <i class="icon-cloud-upload"></i> <span>附件</span></a>
 						<ul class="sub">
-							<li <#if submenu="add_picture">class="active"</#if>><a href="${basePath}/admin/picture/upload">上传图片</a></li>
+							<li <#if submenu="add_appendix">class="active"</#if>><a href="${basePath}/admin/picture/upload">上传附件</a></li>
 							<li <#if submenu="photo_list">class="active"</#if>><a href="${basePath}/admin/file/page?type=photo">图片列表</a></li>
-							<li><a href="${basePath}/admin/upload">上传文件</a></li>
 							<li><a href="${basePath}/admin/file/page?type="download"">文件列表</a></li>
 							<li <#if submenu="re">class="active"</#if>><a href="${basePath}/admin/picture/trash">回收站</a></li>
 						</ul>
