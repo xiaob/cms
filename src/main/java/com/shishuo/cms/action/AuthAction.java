@@ -36,8 +36,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.service.AdminService;
+import com.shishuo.cms.util.HttpUtils;
 
 /**
  * @author Herbert
@@ -58,8 +60,14 @@ public class AuthAction extends BaseAction {
 	private AdminService adminService;
 
 	@RequestMapping(value = "admin/login", method = RequestMethod.GET)
-	public String admin(HttpServletRequest request, ModelMap modelMap) {
+	public String adminLogin(HttpServletRequest request, ModelMap modelMap) {
 		return "system/login";
+	}
+
+	@RequestMapping(value = "admin/logout", method = RequestMethod.GET)
+	public String adminLogout(HttpServletRequest request, ModelMap modelMap) {
+		request.getSession().removeAttribute(SystemConstant.SESSION_ADMIN);
+		return "redirect:" + HttpUtils.getBasePath(request);
 	}
 
 	@ResponseBody
@@ -94,7 +102,12 @@ public class AuthAction extends BaseAction {
 			adminService.adminLogin(email, password, request);
 
 		} catch (Exception e) {
-//			logger.
+			// 异常，重置验证码
+			request.getSession().removeAttribute(
+					com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+			json.setResult(false);
+			json.getErrors().put("password", "邮箱或密码错误");
+			json.setMsg("change_captcha");
 		}
 		return json;
 	}

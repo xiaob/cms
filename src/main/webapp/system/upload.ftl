@@ -1,5 +1,5 @@
-<#assign menu="photo">
-<#assign submenu="add_picture">
+<#assign menu="appendix">
+<#assign submenu="add_appendix">
 <#include "head.ftl">
 
 	<section id="main-content">
@@ -13,7 +13,7 @@
                   	<form id="my-awesome-dropzone" class="dropzone clickable" style="min-height:520px;" action="${basePath}/admin/photo">
                   		<div class="default message" >
                   			<span>Drop files here to upload</span>
-                  			<span>从这里选择图片上传</span>
+                  			<span>从这里选择附件上传</span>
                   		</div>
                   	</form>
                      <button class="btn btn-primary upload" type="submit" style="margin-top:15px;">开始上传</button>

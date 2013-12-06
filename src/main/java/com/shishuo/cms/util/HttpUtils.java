@@ -24,6 +24,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class HttpUtils {
 
+	/**
+	 * 得到请求的IP地址
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public static String getIp(HttpServletRequest request) {
 		String ip = request.getHeader("X-Real-IP");
 		if (StringUtils.isBlank(ip)) {
@@ -36,5 +42,22 @@ public class HttpUtils {
 			ip = "0.0.0.0";
 		}
 		return ip;
+	}
+
+	/**
+	 * 得到请求的根目录
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public static String getBasePath(HttpServletRequest request) {
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName()
+				+ ":" + request.getServerPort() + path;
+		return basePath;
+	}
+	
+	public static String getRealPath() {
+		return "";
 	}
 }

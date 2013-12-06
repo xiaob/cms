@@ -1,4 +1,4 @@
-<#assign menu="photo">
+<#assign menu="appendix">
 <#assign submenu="photo_list">
 <#include "/system/head.ftl">
 <style type="text/css">

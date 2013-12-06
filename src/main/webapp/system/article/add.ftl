@@ -46,9 +46,13 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">文章内容</label>
                                       <div class="col-sm-10">
-                                          <textarea id="content" name="content" placeholder="文章内容">
-                                          </textarea>
                                           <p class="help-block" for="content"></p>
+                                          <script id="content" name="content" type="text/plain" style="width:80%;height:400px;"></script>
+                                      	  <script type="text/javascript">
+                                      	  	 $(function() {
+											   var editor = UE.getEditor('content')
+											 });
+										  </script>
                                       </div>
                                   </div>
                                   <div class="form-group">
@@ -69,9 +73,7 @@
 		<!--main content end-->
 <script type="text/javascript">
 	$(function() {
-		$('#add_article_form').bind('form-pre-serialize', function(event,form,options,veto){
-    		tinyMCE.triggerSave();
-		});
+		
 		$('#add_article_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {

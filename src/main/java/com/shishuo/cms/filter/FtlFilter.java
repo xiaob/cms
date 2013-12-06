@@ -31,6 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.shishuo.cms.util.HttpUtils;
+
 /**
  * 
  * Ftl文件安全过滤器
@@ -52,10 +54,7 @@ public class FtlFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		String path = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName()
-				+ ":" + request.getServerPort() + path;
-		response.sendRedirect(basePath + "/");
+		response.sendRedirect(HttpUtils.getBasePath(request) + "/");
 	}
 
 	public void destroy() {

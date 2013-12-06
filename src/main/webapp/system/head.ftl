@@ -47,9 +47,6 @@
 			<div class="top-nav ">
 
 				<ul class="nav pull-right top-menu">
-                  <li>
-                      <input type="text" placeholder="Search" class="form-control search">
-                  </li>
                   <!-- user login dropdown start-->
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -60,7 +57,7 @@
                       <ul class="dropdown-menu extended logout">
                           <div class="log-arrow-up"></div>
                           <li><a href="#"><i class="icon-cog"></i> 设置</a></li>
-                          <li><a href="login.html"><i class="icon-key"></i> 安全退出</a></li>
+                          <li><a href="${basePath}/auth/admin/logout"><i class="icon-key"></i> 安全退出</a></li>
                       </ul>
                   </li>
                   <!-- user login dropdown end -->
@@ -92,9 +89,8 @@
 							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/page?status=hidden">回收站</a></li>
 						</ul>
 					</li>
-					<#if SYS_FUNCTION_PHOTO=="on">
 					<li class="sub-menu ">
-						<a href="javascript:;" <#if menu="photo">class="active"</#if>> <i class="icon-camera-retro"></i> <span>附件</span></a>
+						<a href="javascript:;" <#if menu="photo">class="active"</#if>> <i class="icon-cloud-upload"></i> <span>附件</span></a>
 						<ul class="sub">
 							<li <#if submenu="add_picture">class="active"</#if>><a href="${basePath}/admin/picture/upload">上传图片</a></li>
 							<li <#if submenu="photo_list">class="active"</#if>><a href="${basePath}/admin/file/page?type=photo">图片列表</a></li>
@@ -103,8 +99,6 @@
 							<li <#if submenu="re">class="active"</#if>><a href="${basePath}/admin/picture/trash">回收站</a></li>
 						</ul>
 					</li>
-					</#if>
-					<#if SYS_FUNCTION_SHOP=="on">					
 					<li class="sub-menu ">
 						<a href="javascript:;" > <i class="icon-gift"></i> <span>商品</span></a>
 						<ul class="sub">
@@ -113,30 +107,20 @@
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
 					</li>											
-					</#if>
 					<li class="sub-menu">
-						<a href="javascript:;" <#if menu="comment">class="active"</#if>> <i class="icon-book"></i> <span>评论</span></a>
+						<a href="javascript:;" <#if menu="comment">class="active"</#if>> <i class="icon-comments"></i> <span>评论</span></a>
 						<ul class="sub">
 							<li <#if submenu="comment_list">class="active"</#if>><a href="${basePath}/admin/comment/page">所有评论</a></li>
 							<li <#if submenu="auditing_list_comment">class="active"</#if>><a href="${basePath}/admin/comment/auditing/list">审核评论列表</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu">
-						<a href="javascript:;" <#if menu="sdgb">class="active"</#if>> <i class="icon-book"></i> <span>主题</span></a>
+						<a href="javascript:;" <#if menu="sdgb">class="active"</#if>> <i class="icon-desktop"></i> <span>主题</span></a>
 						<ul class="sub">
-							<li <#if submenu="utg">class="active"</#if>><a href="javascript:;">sdg</a></li>
-							<li <#if submenu="dgbnhnht">class="active"</#if>><a href="javascript:;">dfh</a></li>
-						</ul>
-					</li>
-					<li class="sub-menu">
-						<a href="javascript:;" <#if menu="dfbgt">class="active"</#if>> <i class="icon-book"></i> <span>插件</span></a>
-						<ul class="sub">
-							<li <#if submenu="wergre">class="active"</#if>><a href="javascript:;">sdg</a></li>
-							<li <#if submenu="dfhtrntr">class="active"</#if>><a href="javascript:;">dfh</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">
-						<a href="javascript:;" <#if menu="user">class="active"</#if>> <i class="icon-signin"></i> <span>用户</span></a>
+						<a href="javascript:;" <#if menu="user">class="active"</#if>> <i class=" icon-group"></i> <span>用户</span></a>
 						<ul class="sub">
 							<li <#if submenu="add_user">class="active"</#if>><a href="${basePath}/admin/user/add">添加用户</a></li>
 							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/page">用户列表</a></li>
@@ -146,11 +130,6 @@
 						<a href="javascript:;"> <i class="icon-signin"></i> <span>招聘</span></a>
 						<ul class="sub">
 							<li><a href="general.html">General</a></li>
-							<li><a href="buttons.html">Buttons</a></li>
-							<li><a href="widget.html">Widget</a></li>
-							<li><a href="slider.html">Slider</a></li>
-							<li><a href="nestable.html">Nestable</a></li>
-							<li><a href="font_awesome.html">Font Awesome</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">

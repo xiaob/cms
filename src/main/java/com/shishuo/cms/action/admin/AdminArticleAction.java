@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.entity.File;
@@ -78,6 +79,39 @@ public class AdminArticleAction extends AdminFileAction {
 		modelMap.put("folderEname", "");
 		modelMap.put("articleId","");
 		return "system/article/add";
+	}
+	
+	/**
+	 * 图片上传
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/upload/picture.json", method = RequestMethod.POST)
+	public JsonVo<String> uploadPicture(
+			@RequestParam(value ="file") MultipartFile file,
+			@RequestParam(value ="type") SystemConstant.Type type,
+			@RequestParam(value ="fileId") long fileId,
+			HttpServletRequest request) {
+		JsonVo<String> json = new JsonVo<String>();
+		try {
+			// 检测校验结果
+			validate(json);
+			File article = fileService.getFileByFileId(fileId);
+				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
+				fileService.updateFileByFileId(fileId,article.getFolderId(), this.getAdmin(request).getAdminId(),
+						FileConstant.Picture.exist, article.getName(), article.getContent(),
+						SystemConstant.Type.article, FileConstant.Status.display);
+				String path = webroot+"/upload/"+type+"/"+fileId+".jpg";
+				java.io.File source = new java.io.File(path);
+				file.transferTo(source);
+				String picture = configSevice.getConfigByKey("article_picture_size", true);
+				updatePictureConstant.updateArticlePicture(article.getFileId(), path,picture);
+			json.setResult(true);
+			
+		} catch (Exception e) {
+			json.setResult(false);
+			json.setMsg(e.getMessage());
+		}
+		return json;
 	}
 
 	/**
