@@ -99,23 +99,28 @@ public class AdminFileAction extends AdminBaseAction {
 	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
 	public JsonVo<String> upload(
 			@RequestParam(value ="file") MultipartFile file,
-			@RequestParam(value ="type") SystemConstant.Type type,
-			@RequestParam(value ="fileId") long fileId,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
+		SystemConstant.Type type = null;
 		try {
 			// 检测校验结果
 			validate(json);
-			File article = fileService.getFileByFileId(fileId);
+			if (file.getContentType().equals("image/jpg")
+					|| file.getContentType().equals("image/png")
+					|| file.getContentType().equals("image/jpeg")
+					|| file.getContentType().equals("image/gif")){
+				type = SystemConstant.Type.photo;
+			}else if(file.getContentType().equals("zip")
+						||file.getContentType().equals("rar")){
+				type = SystemConstant.Type.download;
+			}
+			File fi= fileService.addFile(0, this.getAdmin(request).getAdminId(), FileConstant.Picture.exist, file.getName(), "", type, FileConstant.Status.display);
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-				fileService.updateFileByFileId(fileId,article.getFolderId(), this.getAdmin(request).getAdminId(),
-						FileConstant.Picture.exist, article.getName(), article.getContent(),
-						SystemConstant.Type.article, FileConstant.Status.display);
-				String path = webroot+"/upload/"+type+"/"+fileId+".jpg";
+				String path = webroot+"/upload/"+type+"/"+fi.getFileId()+".jpg";
 				java.io.File source = new java.io.File(path);
 				file.transferTo(source);
-				String picture = configSevice.getConfigByKey("article_picture_size", true);
-				updatePictureConstant.updateArticlePicture(article.getFileId(), path,picture);
+				String picture = configSevice.getConfigByKey("picture_size", true);
+				updatePictureConstant.updateArticlePicture(fi.getFileId(), path,picture);
 			json.setResult(true);
 			
 		} catch (Exception e) {

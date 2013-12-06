@@ -43,15 +43,15 @@ import com.shishuo.cms.util.UploadUtils;
 @RequestMapping("/admin/picture")
 public class AdminPhotoAction extends AdminBaseAction {
 	
-//	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-//	public String upload(ModelMap modelMap) {
-//		return "system/photo/upload";
-//	}
-	
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public String upload(ModelMap modelMap) {
-		return "system/upload";
+		return "system/photo/upload";
 	}
+	
+//	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+//	public String upload(ModelMap modelMap) {
+//		return "system/upload";
+//	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/preview", method = RequestMethod.POST)

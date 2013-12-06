@@ -77,7 +77,7 @@
 			success : function(data) {
 				if (data.result) {
 					bootbox.dialog({
-  						message: '<form enctype="multipart/form-data" id="add_article_picture_form" method="post" autocomplete="off" action="${basePath}/admin/file/upload.json"><fieldset><input type="file" id="file" name= "file" value=""/><input type="hidden" name= "fileId" value="'+data.t+'"/><input type="hidden" name="type" value="article"/></fieldset></form>',
+  						message: '<form enctype="multipart/form-data" id="add_article_picture_form" method="post" autocomplete="off" action="${basePath}/admin/article/upload/picture.json"><fieldset><input type="file" id="file" name= "file" value=""/><input type="hidden" name= "fileId" value="'+data.t+'"/><input type="hidden" name="type" value="article"/></fieldset></form>',
   						title: "是否上传文章图片",
   						buttons: {
   							add : {
