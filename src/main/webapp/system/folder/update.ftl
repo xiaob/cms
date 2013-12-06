@@ -72,7 +72,7 @@
                                         	图片
                                   		</label>
                                   		<label class="checkbox-inline">
-                                    		<input type="radio" value="download" name="type" <#if folder.type=="download">checked</#if>>
+                                    		<input type="radio" value="file" name="type" <#if folder.type=="file">checked</#if>>
                                         	下载
                                   		</label>                                 			
                                   		<label class="checkbox-inline">

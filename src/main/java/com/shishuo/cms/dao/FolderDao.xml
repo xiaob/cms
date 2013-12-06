@@ -59,6 +59,10 @@
 		update folder set path=#{path} where folderId=#{folderId}
 	</update>
 	
+	<update id="updateCount">
+		update folder set count=#{count} where folderId=#{folderId}
+	</update>
+	
 	<!-- ############################## -->
 	<!-- ######       查询                         ###### -->
 	<!-- ############################## -->

@@ -159,6 +159,10 @@ public class FolderService {
 	public int updatePath(long folderId,String path){
 		return folderDao.updatePath(folderId, path);
 	}
+	
+	public int updateCount(long folderId, int count){
+		return folderDao.updateCount(folderId, count);
+	}
 
 	// ///////////////////////////////
 	// /////       查詢                          ////////

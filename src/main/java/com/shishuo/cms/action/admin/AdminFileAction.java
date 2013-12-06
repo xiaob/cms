@@ -37,6 +37,7 @@ import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.FileNotFoundException;
 import com.shishuo.cms.util.UpdatePictureUtils;
+import com.shishuo.cms.util.UploadUtils;
 
 @Controller
 @RequestMapping("/admin/file")
@@ -102,18 +103,20 @@ public class AdminFileAction extends AdminBaseAction {
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		SystemConstant.Type type = null;
+		
 		try {
+			if(UploadUtils.checkFileType(file.getName())){
+				type = SystemConstant.Type.file;
+			}else{
+				if(UploadUtils.checkPhotoType(file.getName())){
+					type = SystemConstant.Type.photo;
+				}else{
+					json.getErrors().put("fileType", "无法识别的文件类型");
+				}
+			}
+			
 			// 检测校验结果
 			validate(json);
-			if (file.getContentType().equals("image/jpg")
-					|| file.getContentType().equals("image/png")
-					|| file.getContentType().equals("image/jpeg")
-					|| file.getContentType().equals("image/gif")){
-				type = SystemConstant.Type.photo;
-			}else if(file.getContentType().equals("zip")
-						||file.getContentType().equals("rar")){
-				type = SystemConstant.Type.file;
-			}
 			File fi= fileService.addFile(0, this.getAdmin(request).getAdminId(), FileConstant.Picture.exist, file.getName(), "", type, FileConstant.Status.display);
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
 				String path = webroot+"/upload/"+type+"/"+fi.getFileId()+".jpg";
