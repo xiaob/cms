@@ -25,9 +25,9 @@
                                 <img src="${basePath}/upload/${file.fileId}_big.jpg" alt=""/>
                             </div>
                             </#if>
-                            <h1><a href="${basePath}/${file.folder.ename}/${file.fileId}"><b>${file.name}</b></a></h1>
+                            <h1><a href="${basePath}/${file.folder.ename}/${file.fileId}.htm"><b>${file.name}</b></a></h1>
                             <div class="author">
-                            	分类：<a href="${basePath}/${file.folder.ename}">${file.folder.name}</a> | 作者：<a>${file.admin.name}</a> | 浏览数：${file.viewCount}
+                            	分类：<a href="${basePath}/${file.folder.ename}.htm">${file.folder.name}</a> | 作者：<a>${file.admin.name}</a> | 浏览数：${file.viewCount}
                             </div>
                             <hr>
                             <p>${file.content}</p>

@@ -19,6 +19,5 @@
     <script type="text/javascript" charset="utf-8" src="${basePath}/system/assets/ueditor/lang/zh-cn/zh-cn.js"></script>	
 	<!--common script for all pages-->
 	<script src="${basePath}/system/js/common-scripts.js"></script>
-
 </body>
 </html>

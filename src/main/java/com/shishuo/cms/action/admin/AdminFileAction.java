@@ -42,10 +42,10 @@ import com.shishuo.cms.util.UploadUtils;
 @Controller
 @RequestMapping("/admin/file")
 public class AdminFileAction extends AdminBaseAction {
-	
+
 	@Autowired
 	protected UpdatePictureUtils updatePictureConstant;
-	
+
 	/**
 	 * @author 进入某种文件的列表分页的首页
 	 * 
@@ -56,76 +56,85 @@ public class AdminFileAction extends AdminBaseAction {
 			@RequestParam(value = "status", defaultValue = "display") FileConstant.Status status,
 			@RequestParam(value = "type", defaultValue = "article") SystemConstant.Type type,
 			ModelMap modelMap) {
-		PageVo<FileVo> pageVo = fileService.getAllFileByTypePage(type, status, pageNum);
+		PageVo<FileVo> pageVo = fileService.getAllFileByTypePage(type, status,
+				pageNum);
 		modelMap.put("pageVo", pageVo);
 		modelMap.put("folderList", folderService.getAllFolderByType(type));
-		if(status.equals(FileConstant.Status.hidden)){
-			return "system/"+type+"/recycle";
-		}else{
-			return "system/"+type+"/list";
+		if (status.equals(FileConstant.Status.hidden)) {
+			return "system/" + type + "/recycle";
+		} else {
+			return "system/" + type + "/list";
 		}
 	}
-	
+
 	/**
 	 * @author 彻底删除文件
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 * 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/delete.json", method = RequestMethod.POST)
-	public JsonVo<String> deleteFile(@RequestParam(value = "fileId") long fileId) throws FileNotFoundException {
+	public JsonVo<String> deleteFile(@RequestParam(value = "fileId") long fileId)
+			throws FileNotFoundException {
 		JsonVo<String> json = new JsonVo<String>();
 		fileService.deleteFileByFileId(fileId);
 		json.setResult(true);
 		return json;
 	}
-	
+
 	/**
 	 * 放进回收站，还原
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/status/update.json", method = RequestMethod.POST)
-	public JsonVo<String> updateModify(@RequestParam(value = "fileId") long fileId,
+	public JsonVo<String> updateModify(
+			@RequestParam(value = "fileId") long fileId,
 			@RequestParam(value = "status") FileConstant.Status status) {
 		JsonVo<String> json = new JsonVo<String>();
 		fileService.updateStatusByFileId(fileId, status);
 		json.setResult(true);
 		return json;
 	}
-	
+
 	/**
 	 * 图片上传
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
 	public JsonVo<String> upload(
-			@RequestParam(value ="file") MultipartFile file,
+			@RequestParam(value = "file") MultipartFile file,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		SystemConstant.Type type = null;
-		
+
 		try {
-			if(UploadUtils.checkFileType(file.getName())){
+			if (UploadUtils.isFileType(file.getName(), UploadUtils.FILE_TYPE)) {
 				type = SystemConstant.Type.file;
-			}else{
-				if(UploadUtils.checkPhotoType(file.getName())){
+			} else {
+				if (UploadUtils.isFileType(file.getName(),
+						UploadUtils.PHOTO_TYPE)) {
 					type = SystemConstant.Type.photo;
-				}else{
+				} else {
 					json.getErrors().put("fileType", "无法识别的文件类型");
 				}
 			}
-			
+
 			// 检测校验结果
 			validate(json);
-			File fi= fileService.addFile(0, this.getAdmin(request).getAdminId(), FileConstant.Picture.exist, file.getName(), "", type, FileConstant.Status.display);
-				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-				String path = webroot+"/upload/"+type+"/"+fi.getFileId()+".jpg";
-				java.io.File source = new java.io.File(path);
-				file.transferTo(source);
-				String picture = configSevice.getConfigByKey("picture_size", true);
-				updatePictureConstant.updateArticlePicture(fi.getFileId(), path,picture);
+			File fi = fileService.addFile(0, this.getAdmin(request)
+					.getAdminId(), FileConstant.Picture.exist, file.getName(),
+					"", type, FileConstant.Status.display);
+			String webroot = System
+					.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
+			String path = webroot + "/upload/" + type + "/" + fi.getFileId()
+					+ ".jpg";
+			java.io.File source = new java.io.File(path);
+			file.transferTo(source);
+			String picture = configSevice.getConfigByKey("picture_size", true);
+			updatePictureConstant.updateArticlePicture(fi.getFileId(), path,
+					picture);
 			json.setResult(true);
-			
+
 		} catch (Exception e) {
 			json.setResult(false);
 			json.setMsg(e.getMessage());

@@ -29,7 +29,9 @@
       <script src="${basePath}/system/js/html5shiv.js"></script>
       <script src="${basePath}/system/js/respond.min.js"></script>
     <![endif]-->
-
+	<script type="text/javascript">
+		window.BasePath = "${basePath}";
+	</script>
 <script src="${basePath}/system/js/jquery.js"></script>
 </head>
 <body>
@@ -72,28 +74,28 @@
 				<!-- sidebar menu goes here-->
 				<ul class="sidebar-menu" id="nav-accordion">
 					<li class="">
-						<a <#if menu="default">class="active"</#if> href="${basePath}/admin"> <i class="icon-home"></i> <span>首页</span></a>
+						<a <#if menu="default">class="active"</#if> href="${basePath}/admin/index.htm"> <i class="icon-home"></i> <span>首页</span></a>
 					</li>
 					<li class="sub-menu">
 						<a href="javascript:;" <#if menu="folder">class="active"</#if>> <i class="icon-folder-open"></i> <span>目录</span></a>
 						<ul class="sub">
-							<li <#if submenu="add_folder">class="active"</#if>><a href="${basePath}/admin/folder/add">增加目录</a></li>
-							<li <#if submenu="folder_list">class="active"</#if>><a href="${basePath}/admin/folder/page">目录列表</a></li>
+							<li <#if submenu="add_folder">class="active"</#if>><a href="${basePath}/admin/folder/add.htm">增加目录</a></li>
+							<li <#if submenu="folder_list">class="active"</#if>><a href="${basePath}/admin/folder/page.htm">目录列表</a></li>
 						</ul>						
 					</li>
 					<li class="sub-menu">
 						<a href="javascript:;" <#if menu="article">class="active"</#if>> <i class="icon-book"></i> <span>文章</span></a>
 						<ul class="sub">
-							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/article/add">增加文章</a></li>
-							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/file/page?type=article">文章列表</a></li>
-							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/page?status=hidden">回收站</a></li>
+							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/article/add.htm">增加文章</a></li>
+							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/file/page.htm?type=article">文章列表</a></li>
+							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/page.htm?status=hidden">回收站</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu ">
 						<a href="javascript:;" <#if menu="photo">class="active"</#if>> <i class="icon-cloud-upload"></i> <span>附件</span></a>
 						<ul class="sub">
-							<li <#if submenu="add_appendix">class="active"</#if>><a href="${basePath}/admin/picture/upload">上传附件</a></li>
-							<li <#if submenu="photo_list">class="active"</#if>><a href="${basePath}/admin/file/page?type=photo">图片列表</a></li>
+							<li <#if submenu="add_appendix">class="active"</#if>><a href="${basePath}/admin/picture/upload.htm">上传附件</a></li>
+							<li <#if submenu="photo_list">class="active"</#if>><a href="${basePath}/admin/file/page.htm?type=photo">图片列表</a></li>
 							<li><a href="${basePath}/admin/file/page?type="download"">文件列表</a></li>
 						</ul>
 					</li>
@@ -101,15 +103,15 @@
 						<a href="javascript:;" > <i class="icon-gift"></i> <span>商品</span></a>
 						<ul class="sub">
 							<li><a href="general.html">增加商品</a></li>
-							<li><a href="${basePath}/admin/file/page?type="shop"">商品列表</a></li>
+							<li><a href="${basePath}/admin/file/page.htm?type="shop"">商品列表</a></li>
 							<li><a href="widget.html">回收站</a></li>
 						</ul>
 					</li>											
 					<li class="sub-menu">
 						<a href="javascript:;" <#if menu="comment">class="active"</#if>> <i class="icon-comments"></i> <span>评论</span></a>
 						<ul class="sub">
-							<li <#if submenu="comment_list">class="active"</#if>><a href="${basePath}/admin/comment/page">所有评论</a></li>
-							<li <#if submenu="auditing_list_comment">class="active"</#if>><a href="${basePath}/admin/comment/auditing/list">审核评论列表</a></li>
+							<li <#if submenu="comment_list">class="active"</#if>><a href="${basePath}/admin/comment/page.htm">所有评论</a></li>
+							<li <#if submenu="auditing_list_comment">class="active"</#if>><a href="${basePath}/admin/comment/auditing/list.htm">审核评论列表</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu">
@@ -120,8 +122,8 @@
 					<li class="sub-menu ">
 						<a href="javascript:;" <#if menu="user">class="active"</#if>> <i class=" icon-group"></i> <span>用户</span></a>
 						<ul class="sub">
-							<li <#if submenu="add_user">class="active"</#if>><a href="${basePath}/admin/user/add">添加用户</a></li>
-							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/page">用户列表</a></li>
+							<li <#if submenu="add_user">class="active"</#if>><a href="${basePath}/admin/user/add.htm">添加用户</a></li>
+							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/page.htm">用户列表</a></li>
 						</ul>
 					</li>	
 					<li class="sub-menu ">
@@ -133,10 +135,10 @@
 					<li class="sub-menu ">
 						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>设置</span></a>
 						<ul class="sub">
-							<li <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic">基本设置</a></li>
-							<li <#if submenu="system_picture">class="active"</#if>><a href="${basePath}/admin/config/picture">图片设置</a></li>
-							<li <#if submenu="add_admin">class="active"</#if>><a href="${basePath}/admin/admin/add">添加管理员</a></li>
-							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/page">管理员列表</a></li>
+							<li <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic.htm">基本设置</a></li>
+							<li <#if submenu="system_picture">class="active"</#if>><a href="${basePath}/admin/config/picture.htm">图片设置</a></li>
+							<li <#if submenu="add_admin">class="active"</#if>><a href="${basePath}/admin/admin/add.htm">添加管理员</a></li>
+							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/page.htm">管理员列表</a></li>
 						</ul>
 					</li>
 				</ul>

@@ -53,8 +53,6 @@ public class AdminFilter implements Filter {
 	public void doFilter(ServletRequest servletRequest,
 			ServletResponse servletResponse, FilterChain chain)
 			throws IOException, ServletException {
-		logger.info("admin login ...");
-		
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		Admin admin = (Admin) request.getSession().getAttribute(
@@ -64,7 +62,7 @@ public class AdminFilter implements Filter {
 			String basePath = request.getScheme() + "://"
 					+ request.getServerName() + ":" + request.getServerPort()
 					+ path;
-			response.sendRedirect(basePath + "/");
+			response.sendRedirect(basePath + "/auth/admin/login.htm");
 		} else {
 			chain.doFilter(request, response);
 		}

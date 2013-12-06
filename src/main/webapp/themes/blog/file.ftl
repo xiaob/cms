@@ -76,7 +76,7 @@
                             </@cms_comment_page>
                                 <div class="post-comment">
 	                                <h3 class="skills">发布评论</h3>
-	                                <form role="form" class="form-horizontal" id="comment_form" action="${basePath}/comment/add" method="post">
+	                                <form role="form" class="form-horizontal" id="comment_form" action="${basePath}/comment/add.json" method="post">
 	                                    <div class="form-group">
 	                                        <div class="col-lg-4">
 	                                            <input type="text" class="col-lg-12 form-control" alt="名字" placeholder="名字" name="name" required>
@@ -119,7 +119,7 @@
 			dataType:  'json',
 			success:function(data){
 				if(data.result){
-					location.href="${basePath}/${ename}/"+${fileId};
+					location.href="${basePath}/${ename}/"+${fileId}+".htm";
 				}else{
 					alert(data.msg);
 				}
