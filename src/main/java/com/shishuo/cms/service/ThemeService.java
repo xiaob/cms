@@ -2,6 +2,7 @@ package com.shishuo.cms.service;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,8 @@ import com.shishuo.cms.constant.SystemConstant;
  */
 @Component
 public class ThemeService {
+	
+	protected final Logger logger = Logger.getLogger(this.getClass());
 
 	@Autowired
 	private ConfigService configService;
@@ -110,13 +113,14 @@ public class ThemeService {
 	 */
 	private boolean isExist(String theme) {
 		String themePath = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT)
-				+ "themes/"
+				+ "/themes/"
 				+ configService.getConfigByKey(ConfigConstant.SYS_TEMPLATE,
 						false) + "/" + theme + ".ftl";
 		File file = new File(themePath);
 		if (file.exists()) {
 			return true;
 		} else {
+			logger.info("模板存在："+themePath);
 			return false;
 		}
 	}
