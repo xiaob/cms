@@ -283,7 +283,7 @@ public class FileService {
 			fileVo.setFolder(folderDao.getFolderById(fileVo.getFolderId()));
 		}
 		pageVo.setList(list);
-		pageVo.setCount(this.getFileCountByType(type));
+		pageVo.setCount(this.getFileCountByTypeAndStatus(type,status));
 
 		return pageVo;
 	}
@@ -313,6 +313,18 @@ public class FileService {
 	 */
 	public int getFileCountByType(SystemConstant.Type type) {
 		return fileDao.getFileCountByType(type);
+	}
+	
+	/**
+	 * 获取不同类型的文件的数量
+	 * 
+	 * @param type
+	 * @param status
+	 * @param Integer
+	 * 
+	 */
+	public int getFileCountByTypeAndStatus(SystemConstant.Type type,FileConstant.Status status) {
+		return fileDao.getFileCountByTypeAndStatus(type,status);
 	}
 
 }

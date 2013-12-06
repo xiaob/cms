@@ -24,11 +24,9 @@
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
-                						<th>文件Id</th>
-                						<th>所属目录Id</th>
+                						<th>所属目录</th>
                 						<th>文章名称</th>
-                						<th>文字图片</th>
-                						<th>文章类型</th>
+                						<th>文章图片</th>
                 						<th>时间</th>
                 						<th>操作</th>
               						</tr>
@@ -36,17 +34,20 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
-               							<td>${e.fileId}</td>
-                            			<td>${e.folderId}</td>
+               							<td class="articleId">${e.fileId}</td>
+                            			<td>${e.folder.name}</td>
                                     	<td>${e.name}</td>
-                                    	<td>${e.picture}</td>
-                                    	<td>${e.content}</td>
+                                    	<td>
+                                    		<#if e.picture=="no_exist">无配图
+                                    		<#else>有配图
+                                    		</#if>
+                                    	</td>
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
                   							<a class="article_update_status" fileId="${e.fileId}" title="还原${e.name}文章">
                   								<button class="btn btn-success btn-xs">
-                  									<i class="icon-ok"></i>
+                  									<i class="icon-share-sign"></i>
                   								</button>
                   							</a>
                   							<a class="js_article_delete" fileId="${e.fileId}" title="彻底删除${e.name}文章">
@@ -72,6 +73,7 @@
 		<!--main content end-->
 <script>
 $(function(){
+	$('.articleId').hide();
 	$('.article_update_status').click(function(){
 		var fileId = $(this).attr('fileId');
 		var status= "display";

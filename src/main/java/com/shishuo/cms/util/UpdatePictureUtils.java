@@ -34,7 +34,6 @@ import javax.imageio.ImageIO;
 import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.SystemConstant;
 
 @Service

@@ -160,6 +160,7 @@ public interface FileDao {
 	 */
 	public int getFileCountByFolderId(@Param("folderId") long folderId);
 	
+	public int getFileCountByTypeAndStatus(@Param("type") SystemConstant.Type type,@Param("status") FileConstant.Status status);
 	
 
 }

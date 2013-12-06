@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.FileConstant;
-import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.JsonVo;
@@ -96,6 +95,9 @@ public class AdminArticleAction extends AdminFileAction {
 		try {
 			if (StringUtils.isBlank(name)) {
 				json.getErrors().put("name", "文章名称不能为空");
+			}
+			if (StringUtils.isBlank(content)) {
+				json.getErrors().put("content", "文章内容不能为空");
 			}
 			// 检测校验结果
 			validate(json);

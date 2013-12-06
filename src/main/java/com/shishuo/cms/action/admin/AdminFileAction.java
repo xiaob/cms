@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.FileConstant;
-import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.vo.FileVo;
@@ -112,7 +111,7 @@ public class AdminFileAction extends AdminBaseAction {
 				fileService.updateFileByFileId(fileId,article.getFolderId(), this.getAdmin(request).getAdminId(),
 						FileConstant.Picture.exist, article.getName(), article.getContent(),
 						SystemConstant.Type.article, FileConstant.Status.display);
-				String path = webroot+"/upload/"+type+"/"+article.getFileId()+".jpg";
+				String path = webroot+"/upload/"+type+"/"+fileId+".jpg";
 				java.io.File source = new java.io.File(path);
 				file.transferTo(source);
 				String picture = configSevice.getConfigByKey("article_picture_size", true);

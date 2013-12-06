@@ -101,5 +101,9 @@
 		select count(*) from 
 		file where folderId=#{folderId}
 	</select>
+	
+	<select id="getFileCountByTypeAndStatus" resultType="Integer">
+		select count(*) from file where type=#{type} and status=#{status}
+	</select>
 
 </mapper>  
