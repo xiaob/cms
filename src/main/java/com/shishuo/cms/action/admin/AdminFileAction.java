@@ -112,7 +112,7 @@ public class AdminFileAction extends AdminBaseAction {
 				type = SystemConstant.Type.photo;
 			}else if(file.getContentType().equals("zip")
 						||file.getContentType().equals("rar")){
-				type = SystemConstant.Type.download;
+				type = SystemConstant.Type.file;
 			}
 			File fi= fileService.addFile(0, this.getAdmin(request).getAdminId(), FileConstant.Picture.exist, file.getName(), "", type, FileConstant.Status.display);
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
