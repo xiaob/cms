@@ -128,7 +128,9 @@
 									$.post("${basePath}/admin/folder/delete.json", { "folderId": folderId},
 								   	function(data){
 								   		if(data.result){
-								   			window.location.reload();
+								   			bootbox.alert("删除成功", function() {
+												window.location.href="${basePath}/admin/folder/page";
+											});
 								   		}else{
 								   			bootbox.alert(data.msg, function() {});
 								   		}

@@ -80,7 +80,7 @@ public class FileService {
 	 */
 	public File addFile(long folderId, long adminId,
 			FileConstant.Picture picture, String name, String content,
-			FileConstant.Type type, FileConstant.Status status) {
+			SystemConstant.Type type, FileConstant.Status status) {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
@@ -129,7 +129,7 @@ public class FileService {
 	 */
 	public File updateFileByFileId(long fileId, long folderId, long adminId,
 			FileConstant.Picture picture, String name, String content,
-			FileConstant.Type type, FileConstant.Status status) {
+			SystemConstant.Type type, FileConstant.Status status) {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
@@ -209,7 +209,7 @@ public class FileService {
 	 */
 
 	public PageVo<FileVo> getFilePageByFolderId(long folderId, int pageNum,
-			FileConstant.Type type, int rows) {
+			SystemConstant.Type type, int rows) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
 		Folder folder = folderService.getFolderById(folderId);
 		if (folder == null) {
@@ -234,7 +234,7 @@ public class FileService {
 	 */
 
 	public List<FileVo> getFileListByTypeAndFoderId(long folderId,FileConstant.Status status,
-			FileConstant.Type type, long offset, long rows) {
+			SystemConstant.Type type, long offset, long rows) {
 		List<FileVo> list = fileDao.getFileListByTypeAndFoderId(type,folderId,status,
 				offset, rows);
 		for (FileVo file : list) {
@@ -255,7 +255,7 @@ public class FileService {
 	 * @param status
 	 * @return Integer
 	 */
-	public int getFileCountByFolderId(long folderId,FileConstant.Type type,FileConstant.Status status) {
+	public int getFileCountByFolderId(long folderId,SystemConstant.Type type,FileConstant.Status status) {
 		return fileDao.getFileCountByTypeAndFoderId(type,folderId,status);
 	}
 	
@@ -272,7 +272,7 @@ public class FileService {
 	 * @return PageVo<File>
 	 * 
 	 */
-	public PageVo<FileVo> getAllFileByTypePage(FileConstant.Type type,
+	public PageVo<FileVo> getAllFileByTypePage(SystemConstant.Type type,
 			FileConstant.Status status, int pageNum) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
 		pageVo.setRows(5);
@@ -298,7 +298,7 @@ public class FileService {
 	 * @return List<File>
 	 * 
 	 */
-	public List<FileVo> getAllFileByType(FileConstant.Type type,
+	public List<FileVo> getAllFileByType(SystemConstant.Type type,
 			FileConstant.Status status, long offset, long rows) {
 		return fileDao.getFileListByType(type, status, offset, rows);
 	}
@@ -311,7 +311,7 @@ public class FileService {
 	 * @param Integer
 	 * 
 	 */
-	public int getFileCountByType(FileConstant.Type type) {
+	public int getFileCountByType(SystemConstant.Type type) {
 		return fileDao.getFileCountByType(type);
 	}
 

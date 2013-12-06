@@ -26,15 +26,6 @@ package com.shishuo.cms.constant;
  */
 public class FileConstant {
 
-	/**
-	 * 文件类型
-	 * 
-	 * @author Herbert
-	 * 
-	 */
-	public static enum Type {
-		article, photo, download, shop
-	};
 
 	/**
 	 * 是否拥护配图

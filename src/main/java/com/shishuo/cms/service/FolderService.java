@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.FolderConstant;
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.FolderDao;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
@@ -61,7 +62,7 @@ public class FolderService {
 	 */
 	public Folder addFolder(long fatherId, String name,
 			FolderConstant.Status status, String ename,
-			FolderConstant.Type type, FolderConstant.Rank rank) {
+			SystemConstant.Type type, FolderConstant.Rank rank) {
 		Folder folder = new Folder();
 		Folder fatherFolder = this.getFolderById(fatherId);
 		folder.setFatherId(fatherId);
@@ -120,7 +121,7 @@ public class FolderService {
 	 */
 	public Folder updateFolderById(long folderId, long fatherId, String ename,
 			String name, FolderConstant.Status status,
-			FolderConstant.Type type, FolderConstant.Rank rank, int sort) {
+			SystemConstant.Type type, FolderConstant.Rank rank, int sort) {
 		Folder folder = this.getFolderById(folderId);
 		Folder fatherFolder = this.getFolderById(fatherId);
 		if(fatherId==0){
@@ -227,7 +228,7 @@ public class FolderService {
 	/**
 	 * 获得某种类型的目录集合
 	 */
-	public List<FolderVo> getAllFolderByType(FolderConstant.Type type){
+	public List<FolderVo> getAllFolderByType(SystemConstant.Type type){
 		return folderDao.getAllFolderByType(type);
 	}
 	

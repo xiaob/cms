@@ -21,6 +21,7 @@ package com.shishuo.cms.entity;
 import java.util.Date;
 
 import com.shishuo.cms.constant.FileConstant;
+import com.shishuo.cms.constant.SystemConstant;
 
 /**
  * 文件实体
@@ -73,7 +74,7 @@ public class File {
 	/**
 	 * 文件类型
 	 */
-	private FileConstant.Type type;
+	private SystemConstant.Type type;
 
 	/**
 	 * 文件状态
@@ -165,11 +166,11 @@ public class File {
 		this.picture = picture;
 	}
 
-	public FileConstant.Type getType() {
+	public SystemConstant.Type getType() {
 		return type;
 	}
 
-	public void setType(FileConstant.Type type) {
+	public void setType(SystemConstant.Type type) {
 		this.type = type;
 	}
 

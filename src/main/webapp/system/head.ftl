@@ -13,10 +13,12 @@
 <link href="${basePath}/system/css/bootstrap.min.css" rel="stylesheet">
 <link href="${basePath}/system/css/bootstrap-reset.css"
 	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${basePath}/system/css/gallery.css" />	
 <!--external css-->
 <link
 	href="${basePath}/system/assets/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
+<link href="${basePath}/system/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />	
 <!-- Custom styles for this template -->
 <link href="${basePath}/system/css/style.css" rel="stylesheet">
 <link href="${basePath}/system/css/style-responsive.css"
@@ -101,7 +103,7 @@
 					<li class="sub-menu ">
 						<a href="javascript:;" <#if menu="photo">class="active"</#if>> <i class="icon-camera-retro"></i> <span>图片管理</span></a>
 						<ul class="sub">
-							<li <#if submenu="add_picture">class="active"</#if>><a href="${basePath}/admin/picture/">上传图片</a></li>
+							<li <#if submenu="add_picture">class="active"</#if>><a href="${basePath}/admin/picture/upload">上传图片</a></li>
 							<li <#if submenu="photo_list">class="active"</#if>><a href="${basePath}/admin/file/page?type=photo">图片列表</a></li>
 							<li <#if submenu="">class="active"</#if>><a href="${basePath}/admin/picture/trash">回收站</a></li>
 						</ul>

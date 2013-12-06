@@ -61,7 +61,7 @@ public class ThemeService {
 	 * @param type
 	 * @return
 	 */
-	public String getFolderTheme(String ename, FolderConstant.Type type) {
+	public String getFolderTheme(String ename, SystemConstant.Type type) {
 		for (String theme : folderDisplay) {
 			theme = theme.replace("{ename}", ename).replace("{type}",
 					type.name());
@@ -79,7 +79,7 @@ public class ThemeService {
 	 * @param type
 	 * @return
 	 */
-	public String getFileTheme(String ename, FileConstant.Type type) {
+	public String getFileTheme(String ename, SystemConstant.Type type) {
 		for (String theme : fileDisplay) {
 			theme = theme.replace("{ename}", ename).replace("{type}",
 					type.name());
@@ -110,7 +110,7 @@ public class ThemeService {
 	 */
 	private boolean isExist(String theme) {
 		String themePath = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT)
-				+ "themes/"
+				+ "/themes/"
 				+ configService.getConfigByKey(ConfigConstant.SYS_TEMPLATE,
 						false) + "/" + theme + ".ftl";
 		File file = new File(themePath);
