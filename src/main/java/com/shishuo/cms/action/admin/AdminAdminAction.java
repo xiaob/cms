@@ -43,7 +43,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	 * 进入添加admin页面
 	 *
 	 */
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
 	public String addUser(ModelMap modelMap) {
 		modelMap.put("adminName", "");
 		modelMap.put("email", "");
@@ -89,7 +89,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	 * 进入管理员列表页面
 	 *
 	 */
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
 	public String allList(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			ModelMap modelMap) {
@@ -101,7 +101,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	 * 进入单个admmin页面
 	 *
 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
 	public String oneAdmin(@RequestParam(value = "adminId") long adminId,
 			ModelMap modelMap) {
 		modelMap.put("admin", adminService.getAdminById(adminId));
@@ -155,7 +155,7 @@ public class AdminAdminAction extends AdminBaseAction {
 	 * 删除管理员
 	 *
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete.htm", method = RequestMethod.GET)
 	public String deleteAdmin(@RequestParam(value = "adminId") long adminId) {
 		adminService.deleteAdmin(adminId);
 		return "redirect:/admin/admin/page";

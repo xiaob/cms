@@ -52,7 +52,7 @@ public class AdminArticleAction extends AdminFileAction {
 	 * @throws Exception 
 	 * 
 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
 	public String update(
 			@RequestParam(value = "fileId", defaultValue = "1") long fileId,
 			ModelMap modelMap) throws Exception {
@@ -73,7 +73,7 @@ public class AdminArticleAction extends AdminFileAction {
 	 * @throws Exception 
 	 * 
 	 */
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
 	public String addArticle(ModelMap modelMap) throws Exception {
 		modelMap.put("allFolderList", folderService.getAllFolderByType(SystemConstant.Type.article));
 		modelMap.put("folderEname", "");

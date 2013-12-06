@@ -47,7 +47,7 @@ public class AdminConfigAction extends AdminBaseAction {
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/basic", method = RequestMethod.GET)
+	@RequestMapping(value = "/basic.htm", method = RequestMethod.GET)
 	public String basic(ModelMap modelMap) {
 		List<String> templateList = this.getTemplate();
 		modelMap.addAttribute("templateList", templateList);
@@ -116,10 +116,11 @@ public class AdminConfigAction extends AdminBaseAction {
 		return json;
 	}
 
-	@RequestMapping(value = "/picture", method = RequestMethod.GET)
+	@RequestMapping(value = "/picture.htm", method = RequestMethod.GET)
 	public String picture(){
 		return "admin/config/picture";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/update/picture.json", method = RequestMethod.GET)
 	public JsonVo<String> updatePicture(

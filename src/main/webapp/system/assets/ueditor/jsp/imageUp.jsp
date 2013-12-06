@@ -5,7 +5,9 @@
         <%@ page import="java.util.Iterator" %>
         <%@ page import="java.util.Arrays" %>
         <%@ page import="java.io.FileInputStream" %>
-        <%@ page import="ueditor.Uploader" %>
+        <%@ page import="com.shishuo.cms.util.HttpUtils" %>
+        <%@ page import="com.shishuo.cms.util.Uploader" %>
+        
 
             <%
 

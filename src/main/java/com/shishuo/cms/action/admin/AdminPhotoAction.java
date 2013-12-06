@@ -43,7 +43,7 @@ import com.shishuo.cms.util.UploadUtils;
 @RequestMapping("/admin/picture")
 public class AdminPhotoAction extends AdminBaseAction {
 	
-	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	@RequestMapping(value = "/upload.htm", method = RequestMethod.GET)
 	public String upload(ModelMap modelMap) {
 		return "system/photo/upload";
 	}
@@ -54,7 +54,7 @@ public class AdminPhotoAction extends AdminBaseAction {
 //	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/preview", method = RequestMethod.POST)
+	@RequestMapping(value = "/preview.htm", method = RequestMethod.POST)
 	public JsonVo<String> preview(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException{
 		JsonVo<String> json = new JsonVo<String>();
 		String path="";
@@ -93,7 +93,7 @@ public class AdminPhotoAction extends AdminBaseAction {
 		return json;
 	}
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list.htm", method = RequestMethod.GET)
 	 public String list(@RequestParam(value="p",required=false,defaultValue="1") int p,
 			            HttpServletRequest request,ModelMap modelMap){
           PageVo<com.shishuo.cms.entity.vo.FileVo> filePage = fileService.getAllFileByTypePage(SystemConstant.Type.photo,

@@ -49,7 +49,7 @@ public class AdminFileAction extends AdminBaseAction {
 	 * @author 进入某种文件的列表分页的首页
 	 * 
 	 */
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
 	public String articlePage(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "status", defaultValue = "display") FileConstant.Status status,

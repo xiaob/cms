@@ -42,7 +42,7 @@ public class AdminUserAction extends AdminBaseAction{
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/add",method = RequestMethod.GET)
+	@RequestMapping(value = "/add.htm",method = RequestMethod.GET)
 	public String addUser(ModelMap modelMap){
 		modelMap.put("userName", "");
 		return "system/user/add";
@@ -88,7 +88,7 @@ public class AdminUserAction extends AdminBaseAction{
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/user",method = RequestMethod.GET)
+	@RequestMapping(value = "/user.htm",method = RequestMethod.GET)
 	public String oneAdmin(@RequestParam(value = "userId") long userId,
 			ModelMap modelMap){
 		modelMap.put("user", userService.getUserById(userId));
@@ -126,7 +126,7 @@ public class AdminUserAction extends AdminBaseAction{
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/delete",method = RequestMethod.GET)
+	@RequestMapping(value = "/delete.htm",method = RequestMethod.GET)
 	public String deleteUser(@RequestParam(value = "userId") long userId){
 		userService.deleteUserById(userId);
 		return "redirect:/admin/user/page";

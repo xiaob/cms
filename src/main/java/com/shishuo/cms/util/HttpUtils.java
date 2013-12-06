@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.shishuo.cms.constant.SystemConstant;
+
 public class HttpUtils {
 
 	/**
@@ -56,8 +58,8 @@ public class HttpUtils {
 				+ ":" + request.getServerPort() + path;
 		return basePath;
 	}
-	
+
 	public static String getRealPath() {
-		return "";
+		return System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
 	}
 }

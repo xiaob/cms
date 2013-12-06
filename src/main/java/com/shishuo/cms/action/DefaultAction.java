@@ -62,7 +62,7 @@ public class DefaultAction {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String home(
 			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
@@ -80,7 +80,7 @@ public class DefaultAction {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(value = "/{ename}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{ename}.htm", method = RequestMethod.GET)
 	public String folder(@PathVariable String ename,
 			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) {
@@ -106,7 +106,7 @@ public class DefaultAction {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	@RequestMapping(value = "/{ename}/{fileId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{ename}/{fileId}.htm", method = RequestMethod.GET)
 	public String file(@PathVariable String ename, @PathVariable long fileId,
 			@RequestParam(value = "p", defaultValue = "1") long pageNum,
 			ModelMap modelMap) throws FileNotFoundException {

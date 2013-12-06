@@ -57,7 +57,7 @@ public class CommentAction {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/add.json", method = RequestMethod.POST)
 	public JsonVo<String> add(@RequestParam("name") String name,
 			@RequestParam("email") String email,
 			@RequestParam("fileId") long fileId,
@@ -71,7 +71,7 @@ public class CommentAction {
 		return json;
 	}
 	
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
 	public String commentPage(@RequestParam(value="p",defaultValue="1") int p,
 			ModelMap modelMap){
 		modelMap.put("pageVo", commentService.getCommentListPage(p));
