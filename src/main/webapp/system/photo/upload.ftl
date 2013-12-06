@@ -1,4 +1,5 @@
-<#assign menu="photo">
-<#assign submenu="add_picture">
+<#assign menu="appendix">
+<#assign submenu="add_appendix">
 <#include "/system/head.ftl">
+	
 <#include "/system/foot.ftl">
