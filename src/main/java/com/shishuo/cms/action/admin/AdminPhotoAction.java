@@ -41,11 +41,16 @@ import com.shishuo.cms.util.UploadUtils;
 
 @Controller
 @RequestMapping("/admin/picture")
-public class AdminPictureAction extends AdminBaseAction {
+public class AdminPhotoAction extends AdminBaseAction {
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public String upload() {
-		return "system/photo/upload";
+//	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+//	public String upload(ModelMap modelMap) {
+//		return "system/photo/upload";
+//	}
+	
+	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	public String upload(ModelMap modelMap) {
+		return "system/upload";
 	}
 	
 	@ResponseBody
@@ -61,6 +66,7 @@ public class AdminPictureAction extends AdminBaseAction {
 	@ResponseBody
 	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
 	public JsonVo<String> uploadPicture(@RequestParam("file") MultipartFile file,
+			@RequestParam("folderId") long folderId,
 			@RequestParam(value= "content") String content,
 			HttpServletRequest request) throws Exception {
 		JsonVo<String> json = new JsonVo<String>();
@@ -69,14 +75,14 @@ public class AdminPictureAction extends AdminBaseAction {
 			validate(json);
 			if (UploadUtils.checkUploadFile(file, UploadConstant.Type.file)) {
 				Admin admin = this.getAdmin(request);
-				File fi= fileService.addFile(0,admin.getAdminId(), FileConstant.Picture.exist, 
-						file.getOriginalFilename(),content, FileConstant.Type.photo, FileConstant.Status.display);
+				File fi= fileService.addFile(folderId,admin.getAdminId(), FileConstant.Picture.exist, 
+						file.getOriginalFilename(),content, SystemConstant.Type.photo, FileConstant.Status.display);
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-				String path = webroot+"/upload/"+FileConstant.Type.photo+fi.getFileId()+".jpg";
+				String path = webroot+"/upload/"+SystemConstant.Type.photo+fi.getFileId()+".jpg";
 				java.io.File source = new java.io.File(path);
 				file.transferTo(source);
 				String picture = configSevice.getConfigByKey("picture_size", true);
-				updatePictureConsTant.updatePicture(fi.getFileId(), path, picture, FileConstant.Type.photo);
+				updatePictureConsTant.updatePicture(fi.getFileId(), path, picture, SystemConstant.Type.photo);
 			} else {
 				String errorMessage = "上传的文件只能是jpg,png,gif的图片格式";
 			}
@@ -90,7 +96,7 @@ public class AdminPictureAction extends AdminBaseAction {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
 	 public String list(@RequestParam(value="p",required=false,defaultValue="1") int p,
 			            HttpServletRequest request,ModelMap modelMap){
-          PageVo<com.shishuo.cms.entity.vo.FileVo> filePage = fileService.getAllFileByTypePage(FileConstant.Type.photo,
+          PageVo<com.shishuo.cms.entity.vo.FileVo> filePage = fileService.getAllFileByTypePage(SystemConstant.Type.photo,
         		  FileConstant.Status.display, p);
           modelMap.addAttribute("filePage", filePage);
     	    return "system/picturelist";

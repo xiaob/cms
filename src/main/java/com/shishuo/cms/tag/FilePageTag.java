@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.FileConstant;
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.vo.FileVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.FileService;
@@ -57,7 +58,7 @@ public class FilePageTag implements TemplateDirectiveModel {
 			TemplateDirectiveBody body) throws TemplateException, IOException {
 		// 获取页面的参数
 		Integer folderId = Integer.parseInt(params.get("folderId").toString());
-		FileConstant.Type type = FileConstant.Type.valueOf(params.get("type").toString());
+		SystemConstant.Type type = SystemConstant.Type.valueOf(params.get("type").toString());
 		Integer pageNum = Integer.parseInt(params.get("pageNum").toString());
 		Integer rows = Integer.parseInt(params.get("rows").toString());
 		// 获取文件的分页

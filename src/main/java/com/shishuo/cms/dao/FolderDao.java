@@ -24,6 +24,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.cms.constant.FolderConstant;
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
 
@@ -108,6 +109,6 @@ public interface FolderDao {
 	 * @return Integer
 	 *
 	 */
-	public List<FolderVo> getAllFolderByType(@Param("type") FolderConstant.Type type);
+	public List<FolderVo> getAllFolderByType(@Param("type") SystemConstant.Type type);
 	
 }

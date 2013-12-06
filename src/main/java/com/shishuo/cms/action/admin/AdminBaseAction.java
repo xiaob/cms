@@ -66,7 +66,7 @@ public class AdminBaseAction {
 	protected CommentService commentService;
 	@Autowired
 	protected UpdatePictureUtils updatePictureConsTant;
-
+	
 	/**
 	 * 参数校验
 	 * 

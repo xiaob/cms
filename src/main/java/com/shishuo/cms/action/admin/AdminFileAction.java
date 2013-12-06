@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.FileConstant;
+import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.vo.FileVo;
@@ -53,10 +54,11 @@ public class AdminFileAction extends AdminBaseAction {
 	public String articlePage(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "status", defaultValue = "display") FileConstant.Status status,
-			@RequestParam(value = "type", defaultValue = "article") FileConstant.Type type,
+			@RequestParam(value = "type", defaultValue = "article") SystemConstant.Type type,
 			ModelMap modelMap) {
 		PageVo<FileVo> pageVo = fileService.getAllFileByTypePage(type, status, pageNum);
 		modelMap.put("pageVo", pageVo);
+		modelMap.put("folderList", folderService.getAllFolderByType(type));
 		if(status.equals(FileConstant.Status.hidden)){
 			return "system/"+type+"/recycle";
 		}else{
@@ -98,7 +100,7 @@ public class AdminFileAction extends AdminBaseAction {
 	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
 	public JsonVo<String> upload(
 			@RequestParam(value ="file") MultipartFile file,
-			@RequestParam(value ="type") FileConstant.Type type,
+			@RequestParam(value ="type") SystemConstant.Type type,
 			@RequestParam(value ="fileId") long fileId,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
@@ -109,7 +111,7 @@ public class AdminFileAction extends AdminBaseAction {
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
 				fileService.updateFileByFileId(fileId,article.getFolderId(), this.getAdmin(request).getAdminId(),
 						FileConstant.Picture.exist, article.getName(), article.getContent(),
-						FileConstant.Type.article, FileConstant.Status.display);
+						SystemConstant.Type.article, FileConstant.Status.display);
 				String path = webroot+"/upload/"+type+"/"+article.getFileId()+".jpg";
 				java.io.File source = new java.io.File(path);
 				file.transferTo(source);

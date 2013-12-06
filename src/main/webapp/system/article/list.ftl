@@ -24,9 +24,8 @@
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
-                                		<th>文章Id</th>
 										<th>文章名称</th>
-                						<th>所属目录Id</th>
+                						<th>所属目录</th>
                 						<th>文章图片</th>
                 						<th>文章状态</th>
                 						<th>时间</th>
@@ -36,11 +35,19 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
-                            			<td>${e.fileId}</td>
+                            			<td class="articleId">${e.fileId}</td>
                							<td><a href="${basePath}/${e.folder.ename}/${e.fileId}">${e.name}</a></td>
-                            			<td>${e.folderId}</td>
-                                    	<td>${e.picture}</td>
-                                    	<td>${e.status}</td>
+                            			<td>${e.folder.name}</td>
+                                    	<td>
+                                    		<#if e.picture=="no_exist">无配图
+                                    		<#else>有配图
+                                    		</#if>
+                                    	</td>
+                                    	<td>
+                                    		<#if e.status=="display">显示
+                                    		<#else>隐藏
+                                    		</#if>
+                                    	</td>
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
@@ -72,6 +79,7 @@
 		<!--main content end-->
 <script>
 $(function(){
+	$('.articleId').hide();
 	$('.js_article_update_status').click(function(){
 		var fileId = $(this).attr('fileId');
 		var status= "hidden";

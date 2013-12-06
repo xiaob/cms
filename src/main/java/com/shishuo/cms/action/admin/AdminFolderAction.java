@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.FolderConstant;
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.entity.vo.JsonVo;
@@ -71,7 +72,7 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
 			@RequestParam(value = "folderName") String folderName,
 			@RequestParam(value = "folderEname") String folderEname,
-			@RequestParam(value = "type") FolderConstant.Type type,
+			@RequestParam(value = "type") SystemConstant.Type type,
 			@RequestParam(value = "status") FolderConstant.Status status,
 			@RequestParam(value = "rank") FolderConstant.Rank rank,
 			ModelMap modelMap) {
@@ -143,7 +144,7 @@ public class AdminFolderAction extends AdminBaseAction{
 			@RequestParam(value = "folderName") String folderName,
 			@RequestParam(value = "folderEname") String folderEname,
 			@RequestParam(value = "sort",defaultValue="0") int sort,
-			@RequestParam(value = "type") FolderConstant.Type type,
+			@RequestParam(value = "type") SystemConstant.Type type,
 			@RequestParam(value = "status") FolderConstant.Status status,
 			@RequestParam(value = "rank") FolderConstant.Rank rank){
 		

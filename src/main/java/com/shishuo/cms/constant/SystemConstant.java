@@ -47,5 +47,13 @@ public class SystemConstant {
 	 */
 	public static final String FACE_URL = "http://faceurl.shishuo.com/face";
 	
-
+	/**
+	 * 文件跟目录的类型
+	 * 
+	 * @author Herbert
+	 * 
+	 */
+	public static enum Type {
+		article, photo, download, shop
+	};
 }

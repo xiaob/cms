@@ -12,6 +12,10 @@
 	<script src="${basePath}/system/js/bootstrap-switch.js"></script>
 	<script src="${basePath}/system/js/bootbox.min.js"></script>
 	<script src="${basePath}/system/js/jquery.json.js"></script>
+	<script src="${basePath}/system/assets/fancybox/source/jquery.fancybox.js"></script>
+	<script src="${basePath}/system/assets/dropzone/dropzone.js"></script>
+	<script src="${basePath}/system/js/modernizr.custom.js"></script>
+	<script src="${basePath}/system/js/toucheffects.js"></script>	
 	<!--common script for all pages-->
 	<script src="${basePath}/system/js/common-scripts.js"></script>
 
