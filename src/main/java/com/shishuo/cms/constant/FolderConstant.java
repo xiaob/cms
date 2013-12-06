@@ -24,15 +24,6 @@ package com.shishuo.cms.constant;
  */
 public class FolderConstant {
 
-	/**
-	 * 文件类型
-	 * 
-	 * @author Herbert
-	 * 
-	 */
-	public static enum Type {
-		article, photo, download, shop
-	};
 
 	public static enum Status {
 		hidden, display

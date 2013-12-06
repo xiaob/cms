@@ -130,7 +130,7 @@ public class UpdatePictureUtils {
 		        ImageIO.write(tag1, "JPEG", new File(webroot+"/upload/article/"+id+"_small.jpg"));
 	}
 	
-	public void updatePicture(long id,String image,String picture,FileConstant.Type type) throws FileNotFoundException, IOException{
+	public void updatePicture(long id,String image,String picture,SystemConstant.Type type) throws FileNotFoundException, IOException{
 		BufferedImage bi = ImageIO.read(new File(image));
         int srcWidth = bi.getWidth(); // 源图宽度
         int srcHeight = bi.getHeight(); // 源图高度
@@ -158,11 +158,31 @@ public class UpdatePictureUtils {
 			String[] se = picture.split("x");
 				height=Integer.parseInt(se[0]);
 				width=Integer.parseInt(se[1]);
+//				if(srcWidth>=srcHeight || srcWidth<=1600){
+//					if(height>=width){
+//					descImg=this.createThumbnail(image,height);
+//				}else{
+//					descImg=this.createThumbnail(image,width);
+//				}
+//				}else if(srcHeight>=srcWidth || srcHeight<=1600){
+//					if(height>=width){
+//						descImg=this.createThumbnail(image,height);
+//					}else{
+//						descImg=this.createThumbnail(image,width);
+//					}
+//				}else{
+//					if(height>=width){
+//						descImg=this.createThumbnail(image,height*num);
+//					}else{
+//						descImg=this.createThumbnail(image,width*num);
+//					}
+//				}
 				if(height>=width){
 					descImg=this.createThumbnail(image,height*num);
 				}else{
 					descImg=this.createThumbnail(image,width*num);
 				}
+				
 				descWidth=descImg.getWidth();
 				descHeight=descImg.getHeight();
 				finalImg=this.cut(descImg,(descWidth-width)/2,(descHeight-height)/2,width,height);
@@ -172,6 +192,12 @@ public class UpdatePictureUtils {
 				g.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
 				g.dispose();
 				// 输出为文件
+	//			ImageIO.write(tag, "JPEG", new File("E:/photo/"+id+".jpg"));
 				ImageIO.write(tag, "JPEG", new File(webroot+"/upload/"+type+"/"+id+"_picture.jpg"));
 	}
+	
+//	public static void main(String[] args) throws FileNotFoundException, IOException {
+//		UpdatePictureUtils y= new UpdatePictureUtils();
+//		y.updatePicture(9, "E:/notes/photo/999.jpg", "600x800", FileConstant.Type.photo);
+//	}
 }

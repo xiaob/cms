@@ -34,6 +34,7 @@ import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.JsonVo;
+import com.shishuo.cms.constant.SystemConstant;;
 
 /**
  * @author 文件action
@@ -63,7 +64,7 @@ public class AdminArticleAction extends AdminFileAction {
 			modelMap.put("folderName", folder.getName());
 		}
 		modelMap.put("file", file);
-		modelMap.put("folderAll", folderService.getAllFolderByType(FolderConstant.Type.article));
+		modelMap.put("folderAll", folderService.getAllFolderByType(SystemConstant.Type.article));
 		return "system/article/update";
 	}
 
@@ -74,7 +75,7 @@ public class AdminArticleAction extends AdminFileAction {
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addArticle(ModelMap modelMap) throws Exception {
-		modelMap.put("allFolderList", folderService.getAllFolderByType(FolderConstant.Type.article));
+		modelMap.put("allFolderList", folderService.getAllFolderByType(SystemConstant.Type.article));
 		modelMap.put("folderEname", "");
 		modelMap.put("articleId","");
 		return "system/article/add";
@@ -100,7 +101,7 @@ public class AdminArticleAction extends AdminFileAction {
 			validate(json);
 			File file = fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
 			FileConstant.Picture.no_exist, name, content,
-			FileConstant.Type.article, FileConstant.Status.display);
+			SystemConstant.Type.article, FileConstant.Status.display);
 			json.setT(file.getFileId()+"");
 			json.setResult(true);
 			
@@ -138,7 +139,7 @@ public class AdminArticleAction extends AdminFileAction {
 			// 检测校验结果
 			validate(json);
 			 fileService.updateFileByFileId(fileId, folderId, adminId,picture,fileName,
-			 content, FileConstant.Type.article,status);
+			 content, SystemConstant.Type.article,status);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

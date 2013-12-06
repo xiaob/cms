@@ -44,12 +44,12 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a class="article_update_status" fileId="${e.fileId}" title="还原${e.name}">
+                  							<a class="article_update_status" fileId="${e.fileId}" title="还原${e.name}文章">
                   								<button class="btn btn-success btn-xs">
                   									<i class="icon-ok"></i>
                   								</button>
                   							</a>
-                  							<a class="js_article_delete" fileId="${e.fileId}" title="彻底删除${e.name}">
+                  							<a class="js_article_delete" fileId="${e.fileId}" title="彻底删除${e.name}文章">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-remove"></i>
                   								</button>
@@ -76,7 +76,7 @@ $(function(){
 		var fileId = $(this).attr('fileId');
 		var status= "display";
 		bootbox.dialog({
-			message : "是否"+$(this).attr('title')+"文件",
+			message : "是否"+$(this).attr('title'),
 			title : "提示",
 				buttons : {
 				delete : {

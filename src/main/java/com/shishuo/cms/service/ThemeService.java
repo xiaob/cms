@@ -64,7 +64,7 @@ public class ThemeService {
 	 * @param type
 	 * @return
 	 */
-	public String getFolderTheme(String ename, FolderConstant.Type type) {
+	public String getFolderTheme(String ename, SystemConstant.Type type) {
 		for (String theme : folderDisplay) {
 			theme = theme.replace("{ename}", ename).replace("{type}",
 					type.name());
@@ -82,7 +82,7 @@ public class ThemeService {
 	 * @param type
 	 * @return
 	 */
-	public String getFileTheme(String ename, FileConstant.Type type) {
+	public String getFileTheme(String ename, SystemConstant.Type type) {
 		for (String theme : fileDisplay) {
 			theme = theme.replace("{ename}", ename).replace("{type}",
 					type.name());

@@ -21,6 +21,7 @@ package com.shishuo.cms.entity;
 import java.util.Date;
 
 import com.shishuo.cms.constant.FolderConstant;
+import com.shishuo.cms.constant.SystemConstant;
 
 /**
  * 目录实体
@@ -75,7 +76,7 @@ public class Folder {
 	/**
 	 * 类型
 	 */
-	private FolderConstant.Type type;
+	private SystemConstant.Type type;
 	/**
 	 * 状态
 	 */
@@ -151,7 +152,7 @@ public class Folder {
 		this.rank = rank;
 	}
 
-	public void setType(FolderConstant.Type type) {
+	public void setType(SystemConstant.Type type) {
 		this.type = type;
 	}
 
@@ -175,7 +176,7 @@ public class Folder {
 		this.level = level;
 	}
 
-	public FolderConstant.Type getType() {
+	public SystemConstant.Type getType() {
 		return type;
 	}
 
