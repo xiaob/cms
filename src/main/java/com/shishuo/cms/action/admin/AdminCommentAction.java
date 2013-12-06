@@ -42,7 +42,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	 */
 	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
 	public String allComment(ModelMap modelMap,
-			@RequestParam(value="pageNum",defaultValue="1") int pageNum){
+			@RequestParam(value="p",defaultValue="1") int pageNum){
 		modelMap.put("pageVo", commentService.getCommentListPage(pageNum));
 		return "system/comment/all";
 	}
@@ -53,7 +53,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	 */
 	@RequestMapping(value = "/auditing/list.htm", method = RequestMethod.GET)
 	public String auditingList(ModelMap modelMap,
-			@RequestParam(value="pageNum",defaultValue="1") int pageNum){
+			@RequestParam(value="p",defaultValue="1") int pageNum){
 		modelMap.put("pageVo", commentService.getCommentByStatusPage(pageNum, CommentConstant.Status.hidden));
 		return "system/comment/auditingList";
 	}

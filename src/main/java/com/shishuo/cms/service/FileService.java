@@ -93,6 +93,8 @@ public class FileService {
 		file.setStatus(status);
 		file.setCreateTime(new Date());
 		fileDao.addFile(file);
+		Folder folder = folderDao.getFolderById(folderId);
+		folderDao.updateCount(folderId, folder.getCount()+1);
 		return file;
 	}
 

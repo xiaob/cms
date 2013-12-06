@@ -1,33 +1,35 @@
 package com.shishuo.cms.util;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import com.shishuo.cms.constant.UploadConstant;
+import java.util.Arrays;
+import java.util.Iterator;
 
 public class UploadUtils {
 
-	public static boolean checkUploadFile(MultipartFile file,UploadConstant.Type type) {
-		if (file.isEmpty()) {
-			return false;
-		}
-		switch (type) {
-		case photo:
-			if (file.getContentType().equals("image/jpg")
-					|| file.getContentType().equals("image/png")
-					|| file.getContentType().equals("image/jpeg")
-					|| file.getContentType().equals("image/gif")) {
+	// 文件允许格式
+	private static String[] fileType = { ".rar", ".doc", ".docx", ".zip", ".pdf",".txt", 
+					".swf", ".wmv"};
+	private static String[] photoType = {".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp"};
+	
+	public static boolean checkPhotoType(String fileName) {
+		Iterator<String> type = Arrays.asList(UploadUtils.photoType).iterator();
+		while (type.hasNext()) {
+			String ext = type.next();
+			if (fileName.toLowerCase().endsWith(ext)) {
 				return true;
-			} else {
-				return false;
 			}
-		case file:
-			if (file.getContentType().equals("zip")) {
-				return true;
-			} else {
-				return false;
-			}
-		default:
-			return false;
 		}
+		return false;
 	}
+	
+	public static boolean checkFileType(String fileName) {
+		Iterator<String> type = Arrays.asList(UploadUtils.fileType).iterator();
+		while (type.hasNext()) {
+			String ext = type.next();
+			if (fileName.toLowerCase().endsWith(ext)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

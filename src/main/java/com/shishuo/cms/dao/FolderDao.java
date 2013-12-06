@@ -76,6 +76,8 @@ public interface FolderDao {
 	public int updateSort(@Param("folderId") long folderId,@Param("sort") int sort);
 
 	public int updatePath(@Param("folderId") long folderId,@Param("path") String path);
+	
+	public int updateCount(@Param("folderId") long folderId,@Param("count") int count);
 
 	// ///////////////////////////////
 	// /////       查询                         ////////

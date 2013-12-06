@@ -75,7 +75,7 @@
                                         	图片
                                   		</label>
                                   		<label class="checkbox-inline">
-                                    		<input type="radio" value="download" name="type">
+                                    		<input type="radio" value="file" name="type">
                                         	下载
                                   		</label>                                 			
                                   		<label class="checkbox-inline">

@@ -73,7 +73,7 @@ public class AdminPhotoAction extends AdminBaseAction {
 		try {
 			// 检测校验结果
 			validate(json);
-			if (UploadUtils.checkUploadFile(file, UploadConstant.Type.file)) {
+			if (UploadUtils.checkPhotoType(file.getName())) {
 				Admin admin = this.getAdmin(request);
 				File fi= fileService.addFile(folderId,admin.getAdminId(), FileConstant.Picture.exist, 
 						file.getOriginalFilename(),content, SystemConstant.Type.photo, FileConstant.Status.display);
