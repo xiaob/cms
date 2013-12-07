@@ -19,6 +19,7 @@
 	href="${basePath}/system/assets/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
 <link href="${basePath}/system/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />	
+<link href="${basePath}/system/assets/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" rel="stylesheet" />	
 <!-- Custom styles for this template -->
 <link href="${basePath}/system/css/style.css" rel="stylesheet">
 <link href="${basePath}/system/css/style-responsive.css"

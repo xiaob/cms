@@ -154,7 +154,7 @@ a, a:hover, a:focus {
 /*sidebar navigation*/
 
 #sidebar {
-    width: 210px;
+    width: 150px;
     height: 100%;
     position: fixed;
     background: #2a3542;
@@ -315,7 +315,7 @@ ul.sidebar-menu li a.active i {
 /*main content*/
 
 #main-content {
-    margin-left: 210px;
+    margin-left: 150px;
 }
 
 .header, .footer {
@@ -4477,7 +4477,7 @@ a, a:hover, a:focus {
 /*sidebar navigation*/
 
 #sidebar {
-    width: 210px;
+    width: 150px;
     height: 100%;
     position: fixed;
     background: #2a3542;

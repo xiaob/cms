@@ -22,7 +22,7 @@
 <mapper namespace="com.shishuo.cms.dao.FileDao">
 
 	<!-- ############################## -->
-	<!-- ######        增加                      ###### -->
+	<!-- ######        增加       ###### -->
 	<!-- ############################## -->
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
 		insert into
@@ -35,7 +35,7 @@
 	</insert>
 	
 	<!-- ############################## -->
-	<!-- ######       删除                         ###### -->
+	<!-- ######       删除        ###### -->
 	<!-- ############################## -->
 
 	<delete id="deleteFile" parameterType="com.shishuo.cms.entity.File">
@@ -44,7 +44,7 @@
 	</delete>
 
 	<!-- ############################## -->
-	<!-- ######       修改                         ###### -->
+	<!-- ######       修改        ###### -->
 	<!-- ############################## -->
 
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
@@ -70,7 +70,7 @@
 	</update>
 
 	<!-- ############################## -->
-	<!-- ######       查询                         ###### -->
+	<!-- ######       查询        ###### -->
 	<!-- ############################## -->
 
 	<select id="getFileById" parameterType="long"
@@ -80,7 +80,7 @@
 
 	<select id="getFileListByTypeAndFoderId" resultType="com.shishuo.cms.entity.vo.FileVo">
 		select * from file
-		where type = #{type} <if test="folderId!=0">and folderId=#{folderId}</if>and status=#{status} limit #{offset},#{rows}
+		where type = #{type} <if test="folderId!=0">and folderId=#{folderId}</if>and status=#{status}  order by createTime desc limit #{offset},#{rows}
 	</select>
 	
 	<select id="getFileCountByTypeAndFoderId" resultType="Integer">

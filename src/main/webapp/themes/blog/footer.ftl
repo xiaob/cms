@@ -17,6 +17,8 @@
     <script type="text/javascript" src="${TEMPLATE_PATH}/js/hover-dropdown.js"></script>
     <script defer src="${TEMPLATE_PATH}/js/jquery.flexslider.js"></script>
     <script type="text/javascript" src="${TEMPLATE_PATH}/assets/bxslider/jquery.bxslider.js"></script>
+    <script type="text/javascript" src="${TEMPLATE_PATH}/assets/SyntaxHighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="${TEMPLATE_PATH}/assets/SyntaxHighlighter/scripts/shAutoloader.js"></script>
 
     <script src="${TEMPLATE_PATH}/js/jquery.easing.min.js"></script>
     <script src="${TEMPLATE_PATH}/js/link-hover.js"></script>

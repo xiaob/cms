@@ -26,7 +26,6 @@ package com.shishuo.cms.constant;
  */
 public class FileConstant {
 
-
 	/**
 	 * 是否拥护配图
 	 * 
@@ -44,7 +43,7 @@ public class FileConstant {
 	 * 
 	 */
 	public static enum Status {
-		hidden, display
+		hidden,secret,draft, display
 	};
 
 }
