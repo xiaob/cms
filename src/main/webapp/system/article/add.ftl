@@ -112,7 +112,7 @@
 															label : "查看文件夹列表",
 															className : "btn-danger",
 															callback : function() {
-																window.location.href="${basePath}/admin/file/page?type=article";
+																window.location.href="${basePath}/admin/file/page.htm?type=article";
 															}
 														},
 							  						}

@@ -136,7 +136,7 @@ $(function(){
 					label : "删除",
 					className : "btn-success",
 					callback : function() {
-					$.post("${basePath}/admin/article/delete.json", { "fileId": fileId},
+					$.post("${basePath}/admin/file/delete.json", { "fileId": fileId},
 						function(data){
 							if(data.result){
 								bootbox.dialog({

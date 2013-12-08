@@ -25,13 +25,9 @@
                     </div>  
 					<div class="blog-post">
                         <h3>快捷方式</h3>
-                        <@cms_file_page type="article" folderId="${folderId}" pageNum="${pageNum}" rows="8">
-                        <#list pageVo.list as file>
                         <div class="media">
                             <div class="media-body">
                                 <a href="${basePath}/auth/admin/login.htm">管理员登录</a>
                             </div>
                         </div>
-                        </#list>
-                        </@cms_file_page>
                     </div>                                       

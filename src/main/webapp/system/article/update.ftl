@@ -116,7 +116,7 @@
 								label : "前往文件夹列表",
 								className : "btn-primary",
 								callback : function() {
-									window.location.href="${basePath}/admin/file/page?type=article";
+									window.location.href="${basePath}/admin/file/page.htm?type=article";
 								}
 							},
 						}

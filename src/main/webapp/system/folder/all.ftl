@@ -43,7 +43,7 @@
 										</#list>
                             			<input type="text" folderId="${e.folderId}" value="${e.sort}" name="sort" class="js_folder_sort" style="width:40px;">
                             			</td>
-										<td><a href="${basePath}/${e.ename}">${e.ename}</a></td>
+										<td><a href="${basePath}/${e.ename}.htm">${e.ename}</a></td>
                                     	<td>${e.name}</td>
                                     	<td>${e.count}</td>
                                     	<td><#if e.status="display" >显示<#else>隐藏</#if></td>

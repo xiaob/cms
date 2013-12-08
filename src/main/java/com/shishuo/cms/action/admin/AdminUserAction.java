@@ -76,7 +76,7 @@ public class AdminUserAction extends AdminBaseAction{
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/page",method = RequestMethod.GET)
+	@RequestMapping(value = "/page.htm",method = RequestMethod.GET)
 	public String allList(@RequestParam(value = "p",defaultValue="1") int pageNum,
 			ModelMap modelMap){
 		modelMap.put("pageVo", userService.getUserPage(pageNum));

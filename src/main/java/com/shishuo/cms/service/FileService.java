@@ -244,7 +244,6 @@ public class FileService {
 			Folder folder = folderService.getFolderById(file.getFolderId());
 			file.setAdmin(admin);
 			file.setFolder(folder);
-			;
 		}
 		return list;
 	}

@@ -22,6 +22,7 @@
 
     <link rel="stylesheet" href="${TEMPLATE_PATH}/assets/revolution_slider/css/rs-style.css" media="screen">
     <link rel="stylesheet" href="${TEMPLATE_PATH}/assets/revolution_slider/rs-plugin/css/settings.css" media="screen">
+    <link rel="stylesheet" href="${TEMPLATE_PATH}/assets/SyntaxHighlighter/styles/shCoreDefault.css" media="screen">
 
     <!-- Custom styles for this template -->
     <link href="${TEMPLATE_PATH}/css/style.css" rel="stylesheet">
@@ -33,9 +34,12 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
+      <script src="${TEMPLATE_PATH}/js/html5shiv.js"></script>
+      <script src="${TEMPLATE_PATH}/js/respond.min.js"></script>
     <![endif]-->
+	<script type="text/javascript">
+		window.TEMPLATE_PATH = "${TEMPLATE_PATH}";
+	</script>    
   </head>
 
   <body>

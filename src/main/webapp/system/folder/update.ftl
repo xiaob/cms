@@ -149,7 +149,7 @@
 								label : "前往文件夹列表",
 								className : "btn-primary",
 								callback : function() {
-									window.location.href="${basePath}/admin/folder/page";
+									window.location.href="${basePath}/admin/folder/page.htm";
 								}
 							},
 						}

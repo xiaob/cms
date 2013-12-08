@@ -44,8 +44,8 @@
         ,scrawlPath:URL+"jsp/"                            //图片修正地址，同imagePath
 
         //附件上传配置区
-        ,fileUrl:URL+"jsp/fileUp.jsp"               //附件上传提交地址
-        ,filePath:URL + "jsp/"                   //附件修正地址，同imagePath
+        ,fileUrl:window.BasePath + "/admin/ueditor/photo/upload.htm"               //附件上传提交地址
+        ,filePath:window.BasePath                   //附件修正地址，同imagePath
         //,fileFieldName:"upfile"                    //附件提交的表单名，若此处修改，需要在后台对应文件修改对应参数
 
         //远程抓取配置区
@@ -76,19 +76,20 @@
         ,getMovieUrl:URL+"jsp/getMovie.jsp"                   //视频数据获取地址
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
-        , toolbars:[
-            ['fullscreen', 'source', '|', 'undo', 'redo', '|',
-                'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-                'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-                'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-                'directionalityltr', 'directionalityrtl', 'indent', '|',
-                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-                'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe','insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
-                'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
-                'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-                'print', 'preview', 'searchreplace', 'help', 'drafts']
-        ]
+//        , toolbars:[
+//            ['fullscreen', 'source', '|', 'undo', 'redo', '|',
+//                'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+//                'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+//                'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+//                'directionalityltr', 'directionalityrtl', 'indent', '|',
+//                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+//                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+//                'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe','insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
+//                'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+//                'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+//                'print', 'preview', 'searchreplace', 'help', 'drafts']
+//        ]
+        , toolbars: [["source","undo","redo","fontfamily","fontsize","underline","justifyjustify","forecolor","pasteplain","wordimage","removeformat","spechars","indent","pagebreak","map","attachment","template","preview","fullscreen"],["bold","italic","strikethrough","fontborder","backcolor","insertunorderedlist","insertorderedlist","blockquote","justifyleft","justifycenter","justifyright","link","unlink","insertcode","emotion","music","insertimage","insertvideo","help"]]        
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
 //        ,labelMap:{
 //            'anchor':'', 'undo':''

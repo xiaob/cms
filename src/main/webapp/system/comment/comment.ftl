@@ -15,7 +15,7 @@
  					审核评论
 				</header>
 				<div class="panel-body">
-					<form method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/comment/auditing/${comment.commentId}">
+					<form method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/comment/auditing/${comment.commentId}.htm">
 					<fieldset>
 						<div class="form-group" id="comment_commentId">
 							<label class="col-sm-2 col-sm-2 control-label">评论Id</label>

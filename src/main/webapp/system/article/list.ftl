@@ -51,7 +51,7 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="${basePath}/admin/article/update?fileId=${e.fileId}" title="修改">
+                  							<a href="${basePath}/admin/article/update.htm?fileId=${e.fileId}" title="修改">
                   								<button class="btn btn-primary btn-xs">
                   									<i class="icon-pencil"></i>
                   								</button>
