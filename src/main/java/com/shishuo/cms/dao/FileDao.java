@@ -162,5 +162,4 @@ public interface FileDao {
 	
 	public int getFileCountByTypeAndStatus(@Param("type") SystemConstant.Type type,@Param("status") FileConstant.Status status);
 	
-
 }

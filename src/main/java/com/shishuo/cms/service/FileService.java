@@ -279,11 +279,21 @@ public class FileService {
 			FileConstant.Status status, int pageNum) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
 		pageVo.setRows(5);
-		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/file/page?status="+status+"&type="+type+"&");
+		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/file/page.htm?status="+status+"&type="+type+"&");
 		List<FileVo> list = this.getAllFileByType(type,
 				status, pageVo.getOffset(), pageVo.getRows());
+		Folder folder = new Folder();
+		folder.setName("weifenlei");
+		folder.setEname("weifenlei");
 		for(FileVo fileVo :list){
-			fileVo.setFolder(folderDao.getFolderById(fileVo.getFolderId()));
+			if(fileVo.getFolderId()==0){
+				fileVo.setFolder(folder);
+			}else{
+				fileVo.setFolder(folderDao.getFolderById(fileVo.getFolderId()));
+			}
+			if(fileVo.getUpdateTime()!=null){
+				fileVo.setCreateTime(fileVo.getUpdateTime());
+			}
 		}
 		pageVo.setList(list);
 		pageVo.setCount(this.getFileCountByTypeAndStatus(type,status));

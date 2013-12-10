@@ -1,6 +1,6 @@
 /*
  * 
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+、 *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
  *	长沙市师说网络科技有限公司 版权所有
  *	http://www.shishuo.com
  *
@@ -51,13 +51,52 @@ public class AdminFileAction extends AdminBaseAction {
 	 * 
 	 */
 	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
-	public String articlePage(
+	public String filePage(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "status", defaultValue = "display") FileConstant.Status status,
 			@RequestParam(value = "type", defaultValue = "article") SystemConstant.Type type,
-			ModelMap modelMap) {
+			HttpServletRequest request,ModelMap modelMap) {
 		PageVo<FileVo> pageVo = fileService.getAllFileByTypePage(type, status,
 				pageNum);
+		if(type.equals(SystemConstant.Type.article)){
+			int displayCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.display);
+			int privCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.priv);
+			int draftCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.draft);
+			int secretCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.secret);
+			modelMap.put("allCount", displayCount+privCount+secretCount);
+			modelMap.put("displayCount", displayCount);
+			modelMap.put("privCount", privCount);
+			modelMap.put("draftCount", draftCount);
+			modelMap.put("secretCount", secretCount);
+		}
+		modelMap.put("pageVo", pageVo);
+		
+		if (status.equals(FileConstant.Status.hidden)) {
+			return "system/" + type + "/recycle";
+		} else {
+			return "system/" + type + "/list";
+		}
+	}
+	
+	@RequestMapping(value = "/type/page.htm", method = RequestMethod.GET)
+	public String typePage(
+			@RequestParam(value = "p", defaultValue = "1") int pageNum,
+			@RequestParam(value = "status", defaultValue = "display") FileConstant.Status status,
+			@RequestParam(value = "type", defaultValue = "article") SystemConstant.Type type,
+			HttpServletRequest request,ModelMap modelMap) {
+		PageVo<FileVo> pageVo = fileService.getAllFileByTypePage(type, status,
+				pageNum);
+		if(type.equals(SystemConstant.Type.article)){
+			int displayCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.display);
+			int privCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.priv);
+			int draftCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.draft);
+			int secretCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.secret);
+			modelMap.put("allCount", displayCount+privCount+secretCount);
+			modelMap.put("displayCount", displayCount);
+			modelMap.put("privCount", privCount);
+			modelMap.put("draftCount", draftCount);
+			modelMap.put("secretCount", secretCount);
+		}
 		modelMap.put("pageVo", pageVo);
 		modelMap.put("folderList", folderService.getAllFolderByType(type));
 		if (status.equals(FileConstant.Status.hidden)) {

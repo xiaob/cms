@@ -52,14 +52,54 @@ public class File {
 	private FileConstant.Picture picture;
 
 	/**
-	 * 文件名称
+	 * 英文名称
 	 */
+	private String ename;
+	
+	/**
+	 * 文件名称
+	 */ 
 	private String name;
 
 	/**
 	 * 文件内容
 	 */
 	private String content;
+	
+	/**
+	 * 密码
+	 */ 
+	private String password;
+	
+	/**
+	 * 缩略图，多个缩略图使用,隔开
+	 */ 
+	private String thumbnail;
+	
+	/**
+	 * 内容类型，同HTTP协议中的Content_Type
+	 */ 
+	private String contentType;
+	
+	/**
+	 * 大小
+	 */
+	private int size;
+	
+	/**
+	 * 报价
+	 */
+	private double price;
+	
+	/**
+	 * 实际价格
+	 */
+	private double realprice;
+	
+	/**
+	 * 文件被copy的次数，相当于是商品的库存
+	 */
+	private int copyCount;
 	
 	/**
 	 * 浏览人数
@@ -82,9 +122,19 @@ public class File {
 	private FileConstant.Status status;
 
 	/**
-	 * 时间
+	 * 创建时间
 	 */
 	private Date createTime;
+	
+	/**
+	 * 更新时间
+	 */
+	private Date updateTime;
+	
+	/**
+	 * 过期时间
+	 */
+	private Date expireTime;
 
 	public long getFileId() {
 		return fileId;
@@ -172,6 +222,86 @@ public class File {
 
 	public void setType(SystemConstant.Type type) {
 		this.type = type;
+	}
+
+	public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public double getRealprice() {
+		return realprice;
+	}
+
+	public void setRealprice(double realprice) {
+		this.realprice = realprice;
+	}
+
+	public int getCopyCount() {
+		return copyCount;
+	}
+
+	public void setCopyCount(int copyCount) {
+		this.copyCount = copyCount;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Date getExpireTime() {
+		return expireTime;
+	}
+
+	public void setExpireTime(Date expireTime) {
+		this.expireTime = expireTime;
 	}
 
 }

@@ -43,7 +43,30 @@ public class FileConstant {
 	 * 
 	 */
 	public static enum Status {
-		hidden,secret,draft, display
+		/**
+		 * 隐藏，垃圾
+		 */
+		hidden,
+		
+		/**
+		 * 有密码的
+		 */
+		secret,
+		
+		/**
+		 * 私有的
+		 */
+		 priv,
+		
+		/**
+		 * 草稿
+		 */
+		draft, 
+		
+		/**
+		 * 公开的
+		 */
+		display
 	};
 
 }
