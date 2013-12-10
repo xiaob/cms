@@ -106,12 +106,12 @@ public class AdminFileAction extends AdminBaseAction {
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		SystemConstant.Type type = null;
-
+		String sr= file.getOriginalFilename();
 		try {
-			if (UploadUtils.isFileType(file.getName(), UploadUtils.FILE_TYPE)) {
+			if (UploadUtils.isFileType(UploadUtils.getFileExt(sr), UploadUtils.FILE_TYPE)) {
 				type = SystemConstant.Type.file;
 			} else {
-				if (UploadUtils.isFileType(file.getName(),
+				if (UploadUtils.isFileType(UploadUtils.getFileExt(sr),
 						UploadUtils.PHOTO_TYPE)) {
 					type = SystemConstant.Type.photo;
 				} else {
@@ -122,7 +122,7 @@ public class AdminFileAction extends AdminBaseAction {
 			// 检测校验结果
 			validate(json);
 			File fi = fileService.addFile(0, this.getAdmin(request)
-					.getAdminId(), FileConstant.Picture.exist, file.getName(),
+					.getAdminId(), FileConstant.Picture.exist, sr,
 					"", type, FileConstant.Status.display);
 			String webroot = System
 					.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
@@ -131,9 +131,10 @@ public class AdminFileAction extends AdminBaseAction {
 			java.io.File source = new java.io.File(path);
 			file.transferTo(source);
 			String picture = configSevice.getConfigByKey("picture_size", true);
-			updatePictureConstant.updateArticlePicture(fi.getFileId(), path,
-					picture);
+			updatePictureConstant.updatePicture(fi.getFileId(), path,
+					picture,type);
 			json.setResult(true);
+			json.setMsg(type.toString());
 
 		} catch (Exception e) {
 			json.setResult(false);

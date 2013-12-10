@@ -94,7 +94,9 @@ public class FileService {
 		file.setCreateTime(new Date());
 		fileDao.addFile(file);
 		Folder folder = folderDao.getFolderById(folderId);
-		folderDao.updateCount(folderId, folder.getCount()+1);
+		if(folderId != 0){
+			folderDao.updateCount(folderId, folder.getCount()+1);
+		}
 		return file;
 	}
 

@@ -14,7 +14,7 @@
                         	<fieldset>
                         		<div class="form-group">
                                 	<div class="col-sm-10">
-                                    	<input type="file" id="file" name= "file"/>
+                                    	<input type="file" name= "file"/>
                                 	</div>
                                 </div>
                                  <div class="form-group">
@@ -35,11 +35,38 @@
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-				
+					bootbox.dialog({
+  						message: '附件上传成功',
+  						title: "提示",
+						buttons: {
+							add : {
+								label : "继续添加附件",
+								className : "btn-primary",
+								callback : function() {
+									window.location.reload();
+								}
+							},
+							photoList : {
+								label : "查看图片列表",
+								className : "btn-danger",
+								callback : function() {
+									window.location.href="${basePath}/admin/file/page.htm?type=photo";
+								}
+							},
+							fileList : {
+								label : "查看附件列表",
+								className : "btn-success",
+								callback : function() {
+									window.location.href="${basePath}/admin/file/page.htm?type=file";
+								}
+							},
+						}
+					});
 				}else{
-				
+					showErrors($('#add_article_picture_form'),data.errors);
 				}
 			}
-		}
+		});
 	});
+</script>
 <#include "/system/foot.ftl">

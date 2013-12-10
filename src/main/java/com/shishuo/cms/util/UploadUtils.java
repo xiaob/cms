@@ -2,9 +2,7 @@ package com.shishuo.cms.util;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -79,7 +77,7 @@ public class UploadUtils {
 	 * 
 	 * @return string
 	 */
-	private String getFileExt(String fileName) {
+	public static String getFileExt(String fileName) {
 		return fileName.substring(fileName.lastIndexOf("."));
 	}
 

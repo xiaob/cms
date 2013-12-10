@@ -36,7 +36,7 @@
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
                             			<td class="articleId">${e.fileId}</td>
-               							<td><a href="${basePath}/${e.folder.ename}/${e.fileId}">${e.name}</a></td>
+               							<td><a href="${basePath}/${e.folder.ename}/${e.fileId}.htm">${e.name}</a></td>
                             			<td>${e.folder.name}</td>
                                     	<td>
                                     		<#if e.picture=="no_exist">无配图

@@ -24,8 +24,8 @@
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
+                                		<th>文章名称</th>
                 						<th>所属目录</th>
-                						<th>文章名称</th>
                 						<th>文章图片</th>
                 						<th>时间</th>
                 						<th>操作</th>
@@ -35,8 +35,8 @@
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
                							<td class="articleId">${e.fileId}</td>
+               							<td><a href="${basePath}/${e.folder.ename}/${e.fileId}.htm">${e.name}</a></td>
                             			<td>${e.folder.name}</td>
-                                    	<td>${e.name}</td>
                                     	<td>
                                     		<#if e.picture=="no_exist">无配图
                                     		<#else>有配图
