@@ -31,9 +31,19 @@ public class FileVo extends File {
 	private Admin admin;
 
 	private Folder folder;
+	
+	private String timeType;
 
 	public Admin getAdmin() {
 		return admin;
+	}
+
+	public String getTimeType() {
+		return timeType;
+	}
+
+	public void setTimeType(String timeType) {
+		this.timeType = timeType;
 	}
 
 	public void setAdmin(Admin admin) {

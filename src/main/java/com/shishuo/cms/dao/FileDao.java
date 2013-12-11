@@ -152,6 +152,11 @@ public interface FileDao {
 	 */
 	public int getFileCountByType(@Param("type") SystemConstant.Type type);
 	
+	public List<FileVo> getFileListByStatusNotinHidden(@Param("type") SystemConstant.Type type,
+			@Param("status") FileConstant.Status status,
+			@Param("offset") long offset, @Param("rows") long rows);
+	
+	public int getFileCountByStatusNotinHidden(@Param("type") SystemConstant.Type type,@Param("status") FileConstant.Status status);
 	/**
 	 * 得到某个目录下的文件的数量
 	 * 

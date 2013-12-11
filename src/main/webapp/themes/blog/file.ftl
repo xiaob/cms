@@ -1,4 +1,9 @@
 <#include "header.ftl">
+<style type="text/css">
+.article_picture{
+	width:80%;
+}
+</style>
     <!--container start-->
     <div class="container">
         <div class="row">
@@ -19,17 +24,14 @@
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-10">
-                        	<#if file.picture =="exist">
-                            <div class="blog-img">
-                                <img src="${basePath}/upload/${file.fileId}_big.jpg" alt=""/>
-                            </div>
-                            </#if>
                             <h1><b>${file.name}</b></h1>
                             <div class="author">
                                	作者：<a>${file.admin.name}</a> | 浏览数：${file.viewCount}
                             </div>
                             <hr>                            
-                            <p>${file.content}</p>
+                            <p>
+                            	${file.content}
+                            </p>
                             <@cms_comment_page fileId="${fileId}" pageNum="${pageNum}" rows="10">
                             <#list commentPage.list as comment>
                             <div class="media">

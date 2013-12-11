@@ -46,10 +46,6 @@ public class File {
 	 * 管理员Id
 	 */
 	private long adminId;
-	/**
-	 * 图片路径
-	 */
-	private FileConstant.Picture picture;
 
 	/**
 	 * 英文名称
@@ -94,7 +90,7 @@ public class File {
 	/**
 	 * 实际价格
 	 */
-	private double realprice;
+	private double realPrice;
 	
 	/**
 	 * 文件被copy的次数，相当于是商品的库存
@@ -208,14 +204,6 @@ public class File {
 		this.commentCount = commentCount;
 	}
 
-	public FileConstant.Picture getPicture() {
-		return picture;
-	}
-
-	public void setPicture(FileConstant.Picture picture) {
-		this.picture = picture;
-	}
-
 	public SystemConstant.Type getType() {
 		return type;
 	}
@@ -272,12 +260,12 @@ public class File {
 		this.price = price;
 	}
 
-	public double getRealprice() {
-		return realprice;
+	public double getRealPrice() {
+		return realPrice;
 	}
 
-	public void setRealprice(double realprice) {
-		this.realprice = realprice;
+	public void setRealPrice(double realPrice) {
+		this.realPrice = realPrice;
 	}
 
 	public int getCopyCount() {

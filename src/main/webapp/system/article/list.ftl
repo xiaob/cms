@@ -40,7 +40,7 @@
                 </header>
                 <div class="panel-body">
                 	<ul class="subsubsub">
-						<li class="arrticle_status"><a class="current" href="${basePath}/admin/file/page.htm?type=article">全部</a>（${allCount}）|</li>
+						<li class="arrticle_status"><a class="current" href="${basePath}/admin/file/type/page.htm?type=article">全部</a>（${allCount}）|</li>
 						<li class="arrticle_status"><a href="${basePath}/admin/file/page.htm?type=article&status=display">已发布</a>（${displayCount}） |</li>
 						<li class="arrticle_status"><a href="${basePath}/admin/file/page.htm?type=article&status=priv">私有</a>（${privCount}） |</li>
 						<li class="arrticle_status"><a href="${basePath}/admin/file/page.htm?type=article&status=secret">密码保护</a>（${secretCount}）|</li>
@@ -55,7 +55,6 @@
                                 	<tr>
 										<th>文章名称</th>
                 						<th>所属目录</th>
-                						<th>文章图片</th>
                 						<th>时间</th>
                 						<th>操作</th>
               						</tr>
@@ -72,12 +71,7 @@
                                     		</#if>
                							</td>
                             			<td>${e.folder.name}</td>
-                                    	<td>
-                                    		<#if e.picture=="no_exist">无配图
-                                    		<#else>有配图
-                                    		</#if>
-                                    	</td>
-                                    	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+                                    	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}${e.timeType}</td>
                                     	<td>
                   							<!-- Icons -->
                   							<a href="${basePath}/admin/article/update.htm?fileId=${e.fileId}" title="修改">
@@ -108,7 +102,6 @@
 		<!--main content end-->
 <script>
 $(function(){
-	$('.articleId').hide();
 	$('.js_article_update_status').click(function(){
 		var fileId = $(this).attr('fileId');
 		var status= "hidden";

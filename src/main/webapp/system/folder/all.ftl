@@ -108,7 +108,7 @@
 					$.post("${basePath}/admin/folder/sort.json", { "sortJson": $.toJSON(folderSort)},function(data){
 						if(data.result){
 							bootbox.alert("更新成功", function() {
-								window.location.href="${basePath}/admin/folder/page";
+								window.location.href="${basePath}/admin/folder/page.htm";
 							});
 						}else{
 							bootbox.alert(data.msg, function() {});

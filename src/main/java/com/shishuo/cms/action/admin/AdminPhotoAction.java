@@ -77,7 +77,7 @@ public class AdminPhotoAction extends AdminBaseAction {
 			if (UploadUtils.isFileType(file.getName(), UploadUtils.PHOTO_TYPE)) {
 				Admin admin = this.getAdmin(request);
 				File fi = fileService.addFile(folderId, admin.getAdminId(),
-						FileConstant.Picture.exist, file.getOriginalFilename(),
+						file.getOriginalFilename(),
 						content, SystemConstant.Type.photo,
 						FileConstant.Status.display);
 				String webroot = System
@@ -105,7 +105,7 @@ public class AdminPhotoAction extends AdminBaseAction {
 			@RequestParam(value = "p", required = false, defaultValue = "1") int p,
 			HttpServletRequest request, ModelMap modelMap) {
 		PageVo<com.shishuo.cms.entity.vo.FileVo> filePage = fileService
-				.getAllFileByTypePage(SystemConstant.Type.photo,
+				.getAllFileByTypeAndStatusPage(SystemConstant.Type.photo,
 						FileConstant.Status.display, p);
 		modelMap.addAttribute("filePage", filePage);
 		return "system/picturelist";

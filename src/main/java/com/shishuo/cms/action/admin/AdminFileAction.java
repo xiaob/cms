@@ -56,7 +56,7 @@ public class AdminFileAction extends AdminBaseAction {
 			@RequestParam(value = "status", defaultValue = "display") FileConstant.Status status,
 			@RequestParam(value = "type", defaultValue = "article") SystemConstant.Type type,
 			HttpServletRequest request,ModelMap modelMap) {
-		PageVo<FileVo> pageVo = fileService.getAllFileByTypePage(type, status,
+		PageVo<FileVo> pageVo = fileService.getAllFileByTypeAndStatusPage(type, status,
 				pageNum);
 		if(type.equals(SystemConstant.Type.article)){
 			int displayCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.display);
@@ -81,11 +81,10 @@ public class AdminFileAction extends AdminBaseAction {
 	@RequestMapping(value = "/type/page.htm", method = RequestMethod.GET)
 	public String typePage(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
-			@RequestParam(value = "status", defaultValue = "display") FileConstant.Status status,
 			@RequestParam(value = "type", defaultValue = "article") SystemConstant.Type type,
 			HttpServletRequest request,ModelMap modelMap) {
-		PageVo<FileVo> pageVo = fileService.getAllFileByTypePage(type, status,
-				pageNum);
+		PageVo<FileVo> pageVo=null;
+		pageVo = fileService.getFilePageByStatusNotinHidden(type, pageNum);
 		if(type.equals(SystemConstant.Type.article)){
 			int displayCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.display);
 			int privCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.priv);
@@ -99,11 +98,7 @@ public class AdminFileAction extends AdminBaseAction {
 		}
 		modelMap.put("pageVo", pageVo);
 		modelMap.put("folderList", folderService.getAllFolderByType(type));
-		if (status.equals(FileConstant.Status.hidden)) {
-			return "system/" + type + "/recycle";
-		} else {
-			return "system/" + type + "/list";
-		}
+		return "system/" + type + "/list";
 	}
 
 	/**
@@ -160,8 +155,7 @@ public class AdminFileAction extends AdminBaseAction {
 
 			// 检测校验结果
 			validate(json);
-			File fi = fileService.addFile(0, this.getAdmin(request)
-					.getAdminId(), FileConstant.Picture.exist, sr,
+			File fi = fileService.addFile(0, this.getAdmin(request).getAdminId(), sr,
 					"", type, FileConstant.Status.display);
 			String webroot = System
 					.getProperty(SystemConstant.SHISHUO_CMS_ROOT);

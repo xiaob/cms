@@ -79,12 +79,12 @@ public class FileService {
 	 * @return
 	 */
 	public File addFile(long folderId, long adminId,
-			FileConstant.Picture picture, String name, String content,
+			String name, String content,
 			SystemConstant.Type type, FileConstant.Status status) {
 		File file = new File();
 		file.setFolderId(folderId);
+		file.setEname("");
 		file.setAdminId(adminId);
-		file.setPicture(picture);
 		file.setName(name);
 		file.setContent(content);
 		file.setViewCount(0);
@@ -132,18 +132,19 @@ public class FileService {
 	 * @return
 	 */
 	public File updateFileByFileId(long fileId, long folderId, long adminId,
-			FileConstant.Picture picture, String name, String content,
+			String name, String content,String password,
 			SystemConstant.Type type, FileConstant.Status status) {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
 		file.setAdminId(adminId);
-		file.setPicture(picture);
 		file.setName(name);
 		file.setContent(content);
+		file.setPassword(password);
 		file.setViewCount(0);
 		file.setCommentCount(0);
 		file.setType(type);
 		file.setStatus(status);
+		file.setUpdateTime(new Date());
 		fileDao.updateFile(file);
 		return file;
 	}
@@ -275,12 +276,12 @@ public class FileService {
 	 * @return PageVo<File>
 	 * 
 	 */
-	public PageVo<FileVo> getAllFileByTypePage(SystemConstant.Type type,
+	public PageVo<FileVo> getAllFileByTypeAndStatusPage(SystemConstant.Type type,
 			FileConstant.Status status, int pageNum) {
 		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
 		pageVo.setRows(5);
 		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/file/page.htm?status="+status+"&type="+type+"&");
-		List<FileVo> list = this.getAllFileByType(type,
+		List<FileVo> list = this.getAllFileByTypeAndStatus(type,
 				status, pageVo.getOffset(), pageVo.getRows());
 		Folder folder = new Folder();
 		folder.setName("weifenlei");
@@ -293,6 +294,9 @@ public class FileService {
 			}
 			if(fileVo.getUpdateTime()!=null){
 				fileVo.setCreateTime(fileVo.getUpdateTime());
+				fileVo.setTimeType("最后更新");
+			}else{
+				fileVo.setTimeType("已发布");
 			}
 		}
 		pageVo.setList(list);
@@ -311,7 +315,7 @@ public class FileService {
 	 * @return List<File>
 	 * 
 	 */
-	public List<FileVo> getAllFileByType(SystemConstant.Type type,
+	public List<FileVo> getAllFileByTypeAndStatus(SystemConstant.Type type,
 			FileConstant.Status status, long offset, long rows) {
 		return fileDao.getFileListByType(type, status, offset, rows);
 	}
@@ -339,5 +343,40 @@ public class FileService {
 	public int getFileCountByTypeAndStatus(SystemConstant.Type type,FileConstant.Status status) {
 		return fileDao.getFileCountByTypeAndStatus(type,status);
 	}
-
+	
+	public List<FileVo> getFileListByStatusNotinHidden(SystemConstant.Type type,long offset,long rows){
+		return fileDao.getFileListByStatusNotinHidden(type,FileConstant.Status.hidden, offset, rows);
+	}
+	
+	public int getFileCountByStatusNotinHidden(SystemConstant.Type type){
+		return fileDao.getFileCountByStatusNotinHidden(type, FileConstant.Status.hidden);
+	}
+	
+	public PageVo<FileVo> getFilePageByStatusNotinHidden(SystemConstant.Type type,int pageNum){
+		PageVo<FileVo> pageVo = new PageVo<FileVo>(pageNum);
+		pageVo.setRows(5);
+		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/file/type/page.htm?&type="+type+"&");
+		List<FileVo> list = this.getFileListByStatusNotinHidden(type,
+				pageVo.getOffset(), pageVo.getRows());
+		Folder folder = new Folder();
+		folder.setName("weifenlei");
+		folder.setEname("weifenlei");
+		for(FileVo fileVo :list){
+			if(fileVo.getFolderId()==0){
+				fileVo.setFolder(folder);
+			}else{
+				fileVo.setFolder(folderDao.getFolderById(fileVo.getFolderId()));
+			}
+			if(fileVo.getUpdateTime()!=null){
+				fileVo.setCreateTime(fileVo.getUpdateTime());
+				fileVo.setTimeType("最后更新");
+			}else{
+				fileVo.setTimeType("已发布");
+			}
+		}
+		pageVo.setList(list);
+		pageVo.setCount(this.getFileCountByStatusNotinHidden(type));
+		return pageVo;
+	}
+	
 }

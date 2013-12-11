@@ -12,7 +12,7 @@
                   <div class="col-lg-12">
                       <section class="panel">
                           <header class="panel-heading">
-                            	 修改文章
+                            	 修改文章 <a href="${basePath}/admin/article/add.htm">写文章</a>
                           </header>
                           <div class="panel-body">
                               <form id="update_article_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/article/update.json">
@@ -64,21 +64,16 @@
                                     		<input type="radio" name="status" value="display" <#if file.status=="display">checked</#if>/>显示
                                   		</label>
                                   		<label class="checkbox-inline">
-                                    		<input type="radio" name="status" value="hidden"<#if file.status=="hidden">checked</#if>/>隐藏
+                                    		<input type="radio" name="status" value="draft" <#if file.status=="draft">checked</#if>/>草稿
+                                  		</label>
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" name="status" value="priv" <#if file.status=="priv">checked</#if>/>私有
+                                  		</label>
+                                  		<label class="checkbox-inline">
+                                    		<input type="radio" name="status" value="secret" <#if file.status=="secret">checked</#if>/>显示
                                   		</label>
                                       </div>
                                   </div>
-                                  <div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">文章图片</label>
-									<div class="col-sm-10">
-										<label class="checkbox-inline">
-										<input type="radio" name="picture" value="no_exist" <#if file.picture=="no_exist">checked</#if>/>没有配图
-										</label>
-										<label class="checkbox-inline">
-										<input type="radio" name="picture" value="exist" <#if file.picture=="exist">checked</#if>/>有配图
-										</label>
-									</div>
-								  </div>
                                   <div class="form-group">
                         			<label class="col-sm-2 col-sm-2 control-label"></label>
                             		<button class="btn btn-danger" type="submit">修改</button>
