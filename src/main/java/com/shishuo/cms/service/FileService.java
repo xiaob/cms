@@ -149,6 +149,23 @@ public class FileService {
 		return file;
 	}
 
+	public File updateFileByFileIdAndCreateTime(long fileId, long folderId, long adminId,
+			String name, String content,String password,
+			SystemConstant.Type type, FileConstant.Status status) {
+		File file = fileDao.getFileById(fileId);
+		file.setFolderId(folderId);
+		file.setAdminId(adminId);
+		file.setName(name);
+		file.setContent(content);
+		file.setPassword(password);
+		file.setViewCount(0);
+		file.setCommentCount(0);
+		file.setType(type);
+		file.setStatus(status);
+		file.setCreateTime(new Date());
+		fileDao.updateFile(file);
+		return file;
+	}
 	/**
 	 * 修改文件的状态
 	 * @param fileId

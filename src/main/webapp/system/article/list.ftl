@@ -12,6 +12,7 @@
 .howto, .nonessential, #edit-slug-box, .form-input-tip, .subsubsub {
     color: #666666;
 }
+
 .subsubsub {
     float: left;
     font-size: 12px;
@@ -19,13 +20,16 @@
     margin: 8px 0 5px;
     padding: 0;
 }
+
 .form-group{
 	width:100%;
 }
+
 .count{
 	position:absolute ;
 	right:0px;
 }
+
 .arrticle_status{
 	float:left;
 }
@@ -40,11 +44,11 @@
                 </header>
                 <div class="panel-body">
                 	<ul class="subsubsub">
-						<li class="arrticle_status"><a class="current" href="${basePath}/admin/file/type/page.htm?type=article">全部</a>（${allCount}）|</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/file/page.htm?type=article&status=display">已发布</a>（${displayCount}） |</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/file/page.htm?type=article&status=priv">私有</a>（${privCount}） |</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/file/page.htm?type=article&status=secret">密码保护</a>（${secretCount}）|</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/file/page.htm?type=article&status=draft">草稿</a>（${draftCount}） </li>
+						<li class="arrticle_status"><a class="current" href="${basePath}/admin/file/page.htm?type=article">全部</a>（${allCount}）|</li>
+						<li class="arrticle_status"><a href="${basePath}/admin/file/type/page.htm?type=article&status=display">已发布</a>（${displayCount}） |</li>
+						<li class="arrticle_status"><a href="${basePath}/admin/file/type/page.htm?type=article&status=priv">私有</a>（${privCount}） |</li>
+						<li class="arrticle_status"><a href="${basePath}/admin/file/type/page.htm?type=article&status=secret">密码保护</a>（${secretCount}）|</li>
+						<li class="arrticle_status"><a href="${basePath}/admin/file/type/page.htm?type=article&status=draft">草稿</a>（${draftCount}） </li>
 					</ul>
 				</div>
                 <div class="panel-body">
@@ -102,6 +106,7 @@
 		<!--main content end-->
 <script>
 $(function(){
+	$(".articleId").hide();
 	$('.js_article_update_status').click(function(){
 		var fileId = $(this).attr('fileId');
 		var status= "hidden";

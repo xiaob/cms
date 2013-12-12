@@ -42,7 +42,7 @@
                             	 修改文章 <a href="${basePath}/admin/article/add.htm">写文章</a>
                           </header>
                           <div class="panel-body">
-                              <form role="form" id="add_article_form" method="post" autocomplete="off">
+                              <form role="form" id="update_article_form" method="post" autocomplete="off">
                                   <input  type="hidden" class="form-control" name="status" id="status" value="">
                                   <input  type="hidden" class="form-control" name="folderId" id="folderId" value="">
                                   <input type="hidden" class="form-control" name="fileId" value="${file.fileId}">
@@ -50,9 +50,11 @@
                                   <div class="form-group">
                                   	<input type="text" class="form-control" name="name" placeholder="在此填写标题" id="name" value="${file.name}">
                                   </div>
-                                  <br><br>
+                                  <br>
                                   <div class="form-group">
-                                  	<script id="content" name="content" type="text/plain" style="width:100%;height:400px;">${file.content}</script>
+                                  	<script id="content" name="content" type="text/plain" style="width:100%;height:400px;">
+                                  	<p class="help-block" for="content">${file.content}</p>
+                                  	</script>
                                   	<script type="text/javascript">
                                      	$(function() {
 											var editor = UE.getEditor('content')
@@ -67,7 +69,7 @@
                   <div class="col-lg-3">
 					<section class="panel">
                         <header class="panel-heading">
-							发布
+							更新
                         </header>
                         <div class="panel-body">
                         	<div class="form-group">
@@ -83,7 +85,7 @@
                             	<button id="js_article_password" class="btn btn-white" data-toggle="button">确定</button>
                             </div>
                         	<div class="form-group">
-                            	<button id="article_status_display" class="btn btn-white" data-toggle="button">发布</button>
+                            	<button id="js_update_article" class="btn btn-white" data-toggle="button">更新</button>
                         	</div>
                         </div>
                    </section>
@@ -117,23 +119,23 @@
     	}else{
     		$("#article_password").hide();
     	}
+    	
 		$("select[name='article_status']").change(function(){
 			$('#article_password').hide();
 			if($("select[name='article_status'] option:selected").val()=="secret"){
 				$('#article_password').show();
 			}
 		});
+		
 		$("#js_article_password").click(function(){
-			$("#add_article_form input[name='password']").val($("#article_password input[name='password']").val());
+			$("#update_article_form input[name='password']").val($("#article_password input[name='password']").val());
 			$('#article_password').hide();
 		});
 		
-	$('#article_status_display').click(function(){
-		$("#add_article_form input[name='status']").val($("select option:selected").val());
-		$("#add_article_form input[name='folderId']").val($("select[name='folderId'] option:selected").val());
-		$('#update_article_form').ajaxForm({
-			dataType : 'json',
-			success : function(data) {
+		$('#js_update_article').click(function(){
+			$("#update_article_form input[name='status']").val($("select option:selected").val());
+			$("#update_article_form input[name='folderId']").val($("select[name='folderId'] option:selected").val());
+			$.post("${basePath}/admin/article/update.json",$('#update_article_form').serialize(),function(data){
 				if (data.result) {
 					bootbox.dialog({
 						message : "更新成功",
@@ -147,7 +149,7 @@
 								}
 							},
 							list : {
-								label : "前往文件夹列表",
+								label : "前往文件列表",
 								className : "btn-primary",
 								callback : function() {
 									window.location.href="${basePath}/admin/file/page.htm?type=article";
@@ -158,9 +160,9 @@
 				}else{
 					showErrors($('#update_article_form'),data.errors);
 				}
-			}
+			});
 		});
-		});
+		
 	});	
 </script>
 <#include "/system/foot.ftl">

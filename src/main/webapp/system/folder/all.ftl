@@ -71,12 +71,12 @@
                                     	</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="${basePath}/admin/folder/${e.folderId}" title="修改">
+                							<a href="${basePath}/admin/folder/${e.folderId}.htm" title="修改">
                 								<button class="btn btn-primary btn-xs">
                 									<i class="icon-pencil"></i>
                 								</button>
                 							</a>
-                							<a class="js_folder_delete" folderId="${e.folderId}" href="javascript:void(0);" title="删除${e.name}">
+                							<a class="js_folder_delete" folderId="${e.folderId}.htm" href="javascript:void(0);" title="删除${e.name}">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>

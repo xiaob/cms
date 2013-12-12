@@ -39,7 +39,7 @@
                   <div class="col-lg-9">                
                       <section class="panel">
                           <header class="panel-heading">
-                            	添加文章
+                          	添加文章
                           </header>
                           <div class="panel-body">
                               <form role="form" id="add_article_form" method="post" autocomplete="off">
@@ -50,14 +50,16 @@
                                   <div class="form-group">
                                   	<input type="text" class="form-control" name="name" placeholder="在此填写标题" id="name">${name}
                                   </div>
-                                  <br><br>
+                                  <br>
                                   <div class="form-group">
-                                        <script id="content" name="content" type="text/plain" style="width:100%;height:400px;" value="${content}"></script>
-                                      	<script type="text/javascript">
-                                      	 	$(function() {
-											   var editor = UE.getEditor('content')
-											});
-										</script>
+                                  	<script id="content" name="content" type="text/plain" placeholder="在此填写内容" style="width:100%;height:400px;" value="${content}">
+                                        <p class="help-block" for="content">${content}</p>
+                                   	</script>
+                                    <script type="text/javascript">
+                                    	$(function() {
+											var editor = UE.getEditor('content')
+										});
+									</script>
                                   </div>
                               </form>
                           </div>
@@ -99,9 +101,9 @@
                     		<option value="0" selected >weifenlei</option>
                          	<#list allFolderList as folder>
                             	<option value="${folder.folderId}">
-                        	<#list 1..folder.level as i>
-                            	 -
-                        	</#list>
+                        		<#list 1..folder.level as i>
+                            		-
+                        		</#list>
                             	${folder.name}</option>
                        		</#list>
                    		</select>
@@ -115,11 +117,12 @@
 		<!--main content end-->
 <script type="text/javascript">
 	$(function() {
+	var fileId=$("#add_article_form input[name='folderId']").val();
 		$('#article_password').hide();
 		$('#article_status_draft').click(function(){
 			$("#add_article_form input[name='status']").val("draft");
 			$("#add_article_form input[name='folderId']").val($("select[name='folderId'] option:selected").val());
-			$.post("${basePath}/admin/article/update.json",$('#add_article_form').serialize(),function(data){
+			$.post("${basePath}/admin/article/add.json",$('#add_article_form').serialize(),function(data){
 				if(data.result){
 					bootbox.dialog({
   						message: '文章已存入草稿',
@@ -150,11 +153,11 @@
 		$('#article_status_display').click(function(){
 			$("#add_article_form input[name='status']").val($("select option:selected").val());
 			$("#add_article_form input[name='folderId']").val($("select[name='folderId'] option:selected").val());
-			$.post("${basePath}/admin/article/update.json",$('#add_article_form').serialize(),function(data){
+			$.post("${basePath}/admin/article/add.json",$('#add_article_form').serialize(),function(data){
 				if(data.result){
 					bootbox.dialog({
-  						message: '提示',
-  						title: "文章已发布",
+  						message: '文章已发布',
+  						title: "提示",
   						buttons: {
   							add : {
 								label : "再次添加文章",
@@ -164,7 +167,7 @@
 								}
 							},
     						list : {
-								label : "查看文件夹列表",
+								label : "查看文件列表",
 								className : "btn-danger",
 								callback : function() {
 									window.location.href="${basePath}/admin/file/page.htm?type=article";

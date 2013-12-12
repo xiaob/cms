@@ -56,8 +56,12 @@ public class AdminFileAction extends AdminBaseAction {
 			@RequestParam(value = "status", defaultValue = "display") FileConstant.Status status,
 			@RequestParam(value = "type", defaultValue = "article") SystemConstant.Type type,
 			HttpServletRequest request,ModelMap modelMap) {
-		PageVo<FileVo> pageVo = fileService.getAllFileByTypeAndStatusPage(type, status,
-				pageNum);
+		PageVo<FileVo> pageVo=null;
+		if(status.equals(FileConstant.Status.hidden)){
+			pageVo = fileService.getAllFileByTypeAndStatusPage(type, status, pageNum);
+		}else{
+			pageVo = fileService.getFilePageByStatusNotinHidden(type,pageNum);
+		}
 		if(type.equals(SystemConstant.Type.article)){
 			int displayCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.display);
 			int privCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.priv);
@@ -82,9 +86,10 @@ public class AdminFileAction extends AdminBaseAction {
 	public String typePage(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "type", defaultValue = "article") SystemConstant.Type type,
+			@RequestParam(value = "status", defaultValue = "display") FileConstant.Status status,
 			HttpServletRequest request,ModelMap modelMap) {
 		PageVo<FileVo> pageVo=null;
-		pageVo = fileService.getFilePageByStatusNotinHidden(type, pageNum);
+		pageVo = fileService.getAllFileByTypeAndStatusPage(type, status, pageNum);
 		if(type.equals(SystemConstant.Type.article)){
 			int displayCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.display);
 			int privCount =fileService.getFileCountByTypeAndStatus(SystemConstant.Type.article,FileConstant.Status.priv);

@@ -121,20 +121,25 @@ public class AdminArticleAction extends AdminFileAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/add.json", method = RequestMethod.POST)
-	public JsonVo<String> add(
+	public JsonVo<String> addArticle(
+			@RequestParam(value = "name") String name,
+			@RequestParam(value = "fileId") long fileId,
+			@RequestParam(value = "folderId") long folderId,
+			@RequestParam(value = "content") String content,
+			@RequestParam(value = "password" ,defaultValue="") String password,
 			@RequestParam(value = "status") FileConstant.Status status,
-			@RequestParam(value = "jsonObj") String jsonObj,
 			HttpServletRequest request) {
+
 		JsonVo<String> json = new JsonVo<String>();
 		try {
+			if(name.equals("")){
+				json.getErrors().put("name","文章标题不能为空");
+			}
 			// 检测校验结果
 			validate(json);
-			File file = fileService.addFile(0, this.getAdmin(request).getAdminId(),
-			"", "",
-			SystemConstant.Type.article, FileConstant.Status.display);
-			json.setT(file.getFileId()+"");
+			fileService.updateFileByFileIdAndCreateTime(fileId,folderId, this.getAdmin(request).getAdminId(),name,
+			content,password, SystemConstant.Type.article,status);
 			json.setResult(true);
-			
 		} catch (Exception e) {
 			json.setResult(false);
 			json.setMsg(e.getMessage());
