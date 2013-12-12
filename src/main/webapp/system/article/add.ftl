@@ -35,18 +35,16 @@
 		<section id="main-content">
 			<section class="wrapper">
               <!-- page start-->
+              <form role="form" id="add_article_form" method="post" autocomplete="off">
               <div class="row">
+              	
                   <div class="col-lg-9">                
                       <section class="panel">
                           <header class="panel-heading">
                           	添加文章
                           </header>
                           <div class="panel-body">
-                              <form role="form" id="add_article_form" method="post" autocomplete="off">
-                                  <input  type="hidden" class="form-control" name="status" id="status" value="">
-                                  <input  type="hidden" class="form-control" name="folderId" id="folderId" value="">
-                                  <input  type="hidden" class="form-control" name="password" id="password" value="">
-                                  <input type="hidden" class="form-control" name="fileId" id="fileId" value="${article.fileId}">
+                          			<input type="hidden" name="fileId" value="${file.fileId}">
                                   <div class="form-group">
                                   	<input type="text" class="form-control" name="name" placeholder="在此填写标题" id="name">${name}
                                   </div>
@@ -68,24 +66,24 @@
                           <header class="panel-heading tab-bg-dark-navy-blue">
                               <ul class="nav nav-tabs">
                                   <li class="">
-                                      <a href="#home-2" data-toggle="tab">
+                                      <a href="#title-1" data-toggle="tab">
                                        	  小标题
                                       </a>
                                   </li>
                                   <li class="">
-                                      <a href="#about-2" data-toggle="tab">
+                                      <a href="#description-1" data-toggle="tab">
                                           <i class="icon-user"></i>
                                           	描述
                                       </a>
                                   </li>
                                   <li class="active">
-                                      <a href="#contact-2" data-toggle="tab">
+                                      <a href="#photo-1" data-toggle="tab">
                                           <i class="icon-envelope"></i>
                                           	图片
                                       </a>
                                   </li>
                                   <li class="">
-                                      <a href="#sdg-2" data-toggle="tab">
+                                      <a href="#sdg-1" data-toggle="tab">
                                           <i class="icon-envelope"></i>
                                           	资料
                                       </a>
@@ -94,23 +92,28 @@
                           </header>
                           <div class="panel-body">
                               <div class="tab-content">
-                                  <div class="tab-pane" id="home-2">
+                                  <div class="tab-pane" id="title-1">
                                       <div class="form-group">
                                       <input type="text" class="form-control" name="title" placeholder="在此填写小标题" id="title" style="width: 100%;">
                                   	  </div>
                                   </div>
-                                  <div class="tab-pane" id="about-2">
-                                  	<textarea class="form-control" name="title" placeholder="在此填写简介" id="title" style="width: 100%;">
+                                  <div class="tab-pane" id="description-1">
+                                  	<textarea class="form-control" name="description" placeholder="在此填写简介" id="description" style="width: 100%;">
                                   	  </textarea>
                                   </div>
-                                  <div class="tab-pane active" id="contact-2">
+                                  <div class="tab-pane active" id="photo-1">
                           			<div class="panel-body">
 										<p class="hide-if-no-js">添加图片</p>
-										<img title="c3039 (1).jpg" _src="http://localhost:8080/CMS/upload/photo/20131212/c3039 (1).jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 (1).jpg" style="width:33%;height:200px;">
-											<img title="c3039 .jpg" _src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" style="width:33%;height:200px;">
+										<input type="file" name="photo" id="photo">
+										<button id="upload_photo" class="btn btn-white" data-toggle="button" >上传图片</button>
+										<p id="file_photo">
+											<img title="c3039 (1).jpg" _src="http://localhost:8080/CMS/upload/photo/20131212/c3039 (1).jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 (1).jpg" style="width:33%;height:200px;">
+											<img title="c3039 .jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" style="width:33%;height:200px;">
+											<img src='${basePath}/upload/photo/246_picture.jpg'>
+										</p>
 										</div>
 								  </div>
-                                  <div class="tab-pane" id="sdg-2">
+                                  <div class="tab-pane" id="sdg-1">
                                   	<div class="panel-body">
 										<p class="hide-if-no-js">上传资料</p>
 										<img title="c3039 .jpg" _src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" style="width:33%;height:200px;">
@@ -128,10 +131,10 @@
                         </header>
                         <div class="panel-body">
                         	<div class="form-group">
-                            	<button id="article_status_draft" fileId="${article.fileId}" class="btn btn-white" data-toggle="button" >保存草稿</button>
+                            	<button id="article_status_draft" class="btn btn-white" data-toggle="button" >保存草稿</button>
                         	</div>
                         	<div class="form-group">
-                            	<select id="article_status" class="form-control input-lg m-bot15" name="article_status">
+                            	<select id="status" class="form-control input-lg m-bot15" name="status">
                                 	<option class="article_status_option" value="display">公开的</option>
                                 	<option class="article_status_option" value="priv">私有的</option>
                                 	<option id="secret" class="article_status_option" value="secret">密码保护</option>
@@ -152,31 +155,68 @@
 							所属目录
                         </header>
                         <div class="panel-body">
-                    <div class="form-group">
-                   		<#list allFolderList as folder>
-                        	<input type="radio" value="${folder.folderId}" name="folderId" checked>
-                        	<#list 1..folder.level as i>
+                    <div class="form-group" >
+                   		<#list allFolderList as fold>
+                        	<#list 1..fold.level as i>
                             	-
                         	</#list>
-                            ${folder.name}
+                        	<input type="radio" value="${fold.folderId}" name="folderId">
+                            ${fold.name}
                             <br>
                         </#list>
                    	</div>
                    	</div>
                    </section>
               	</div>
+              	
               </div>
+              </form>
               <!-- page end-->
           </section>
 		</section>
 		<!--main content end-->
 <script type="text/javascript">
 	$(function() {
-	var fileId=$("#add_article_form input[name='folderId']").val();
+		
+		$("select[name='status']").change(function(){
+			$('#article_password').hide();
+			if($("select[name='status'] option:selected").val()=="secret"){
+				$('#article_password').show();
+			}
+		});
+		$("#js_article_password").click(function(){
+			$('#article_password').hide();
+		});
+		var fileId=$("#add_article_form input[name='folderId']").val();
+		
+		$("#upload_photo").click(function(){
+			var fileId = $("#add_article_form input[name='fileId']").val();
+			bootbox.dialog({
+  						message: '<form role="form" id="add_article_photo" enctype="multipart/form-data" method="post" autocomplete="off" action="${basePath}/admin/file/upload.json"><fieldset><input type="hidden" name="fileId" value=""></fieldset><input type="file" name="photo"></form>',
+  						title: "提示",
+  						buttons: {
+  							add : {
+								label : "上传",
+								className : "btn-primary",
+								callback : function() {
+									$("#add_article_photo input[name='fileId']").val(fileId);
+									$("#add_article_photo").ajaxSubmit({
+										dataType : 'json',
+										success : function(data){
+											if(data.result){
+												$("#file_photo").append("<img src="+window.BasePath+data.t+" />");
+											}
+										}
+									});
+								}
+							},
+  						}
+					});
+		});
+		
+		
 		$('#article_password').hide();
 		$('#article_status_draft').click(function(){
-			$("#add_article_form input[name='status']").val("draft");
-			$("#add_article_form input[name='folderId']").val($("select[name='folderId'] option:selected").val());
 			$.post("${basePath}/admin/article/add.json",$('#add_article_form').serialize(),function(data){
 				if(data.result){
 					bootbox.dialog({
@@ -206,8 +246,6 @@
 		});
 		
 		$('#article_status_display').click(function(){
-			$("#add_article_form input[name='status']").val($("select option:selected").val());
-			$("#add_article_form input[name='folderId']").val($("select[name='folderId'] option:selected").val());
 			$.post("${basePath}/admin/article/add.json",$('#add_article_form').serialize(),function(data){
 				if(data.result){
 					bootbox.dialog({
@@ -234,16 +272,6 @@
 					showErrors($('#update_article_form'),data.errors);
 				}
 			});
-		});
-		$("select[name='article_status']").change(function(){
-			$('#article_password').hide();
-			if($("select[name='article_status'] option:selected").val()=="secret"){
-				$('#article_password').show();
-			}
-		});
-		$("#js_article_password").click(function(){
-			$("#add_article_form input[name='password']").val($("#article_password input[name='password']").val());
-			$('#article_password').hide();
 		});
 	});	
 </script>

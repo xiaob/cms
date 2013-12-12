@@ -78,14 +78,16 @@ public class FileService {
 	 * @param status
 	 * @return
 	 */
-	public File addFile(long folderId, long adminId,
-			String name, String content,
+	public File addFile(long folderId, long fatherId,long adminId,
+			String name,String title, String content,
 			SystemConstant.Type type, FileConstant.Status status) {
 		File file = new File();
 		file.setFolderId(folderId);
+		file.setFatherId(fatherId);
 		file.setEname("");
 		file.setAdminId(adminId);
 		file.setName(name);
+		file.setTitle(title);
 		file.setContent(content);
 		file.setViewCount(0);
 		file.setCommentCount(0);
@@ -131,14 +133,17 @@ public class FileService {
 	 * @param status
 	 * @return
 	 */
-	public File updateFileByFileId(long fileId, long folderId, long adminId,
-			String name, String content,String password,
+	public File updateFileByFileId(long fileId, long folderId,long fatherId, long adminId,
+			String name, String content,String password,String title, String description,
 			SystemConstant.Type type, FileConstant.Status status) {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
+		file.setFatherId(fatherId);
 		file.setAdminId(adminId);
 		file.setName(name);
 		file.setContent(content);
+		file.setTitle(title);
+		file.setDescription(description);
 		file.setPassword(password);
 		file.setViewCount(0);
 		file.setCommentCount(0);
@@ -149,14 +154,17 @@ public class FileService {
 		return file;
 	}
 
-	public File updateFileByFileIdAndCreateTime(long fileId, long folderId, long adminId,
-			String name, String content,String password,
+	public File updateFileByFileIdAndCreateTime(long fileId, long folderId, long fatherId,long adminId,
+			String name, String content,String title, String description, String password,
 			SystemConstant.Type type, FileConstant.Status status) {
 		File file = fileDao.getFileById(fileId);
 		file.setFolderId(folderId);
+		file.setFatherId(fatherId);
 		file.setAdminId(adminId);
 		file.setName(name);
 		file.setContent(content);
+		file.setTitle(title);
+		file.setDescription(description);
 		file.setPassword(password);
 		file.setViewCount(0);
 		file.setCommentCount(0);

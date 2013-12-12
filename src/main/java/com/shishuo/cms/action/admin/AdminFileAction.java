@@ -141,7 +141,8 @@ public class AdminFileAction extends AdminBaseAction {
 	@ResponseBody
 	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
 	public JsonVo<String> upload(
-			@RequestParam(value = "file") MultipartFile file,
+			@RequestParam(value = "fileId") long fatherId,
+			@RequestParam(value = "photo") MultipartFile file,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		SystemConstant.Type type = null;
@@ -161,16 +162,16 @@ public class AdminFileAction extends AdminBaseAction {
 			// 检测校验结果
 			validate(json);
 			if(type.equals(SystemConstant.Type.file)){
-				File fi = fileService.addFile(0, this.getAdmin(request).getAdminId(), "",
-						"", type, FileConstant.Status.display);
+				File fi = fileService.addFile(0,fatherId, this.getAdmin(request).getAdminId(), "",
+						"","", type, FileConstant.Status.display);
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
 				String path = webroot + "/upload/" + type + "/" + fi.getFileId()
 						+ UploadUtils.getFileExt(sr);
 				java.io.File source = new java.io.File(path);
 				file.transferTo(source);
 			}else{
-				File fi = fileService.addFile(0, this.getAdmin(request).getAdminId(), "",
-						"", type, FileConstant.Status.display);
+				File fi = fileService.addFile(0,fatherId, this.getAdmin(request).getAdminId(), "",
+						"","", type, FileConstant.Status.display);
 				String webroot = System
 						.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
 				String path = webroot + "/upload/" + type + "/" + fi.getFileId()+"_original"+
@@ -180,8 +181,9 @@ public class AdminFileAction extends AdminBaseAction {
 				String picture = configSevice.getConfigByKey("picture_size", true);
 				updatePictureConstant.updatePicture(fi.getFileId(), path,
 						picture,type);
-
+				json.setT("/upload/photo/"+fi.getFileId()+"_picture"+UploadUtils.getFileExt(sr));
 			}
+			
 			json.setResult(true);
 			json.setMsg(type.toString());
 
