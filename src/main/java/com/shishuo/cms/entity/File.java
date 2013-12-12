@@ -41,6 +41,11 @@ public class File {
 	 * 所属目录Id
 	 */
 	private long folderId;
+	
+	/**
+	 * 父类Id
+	 */
+	private long fatherId;
 
 	/**
 	 * 管理员Id
@@ -56,6 +61,11 @@ public class File {
 	 * 文件名称
 	 */ 
 	private String name;
+	
+	/**
+	 * 文件简介
+	 */ 
+	private String title;
 
 	/**
 	 * 文件内容
@@ -63,14 +73,14 @@ public class File {
 	private String content;
 	
 	/**
+	 * 文件描述
+	 */
+	private String description;
+	
+	/**
 	 * 密码
 	 */ 
 	private String password;
-	
-	/**
-	 * 缩略图，多个缩略图使用,隔开
-	 */ 
-	private String thumbnail;
 	
 	/**
 	 * 内容类型，同HTTP协议中的Content_Type
@@ -228,14 +238,6 @@ public class File {
 		this.password = password;
 	}
 
-	public String getThumbnail() {
-		return thumbnail;
-	}
-
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-	}
-
 	public String getContentType() {
 		return contentType;
 	}
@@ -291,5 +293,31 @@ public class File {
 	public void setExpireTime(Date expireTime) {
 		this.expireTime = expireTime;
 	}
+
+	public long getFatherId() {
+		return fatherId;
+	}
+
+	public void setFatherId(long fatherId) {
+		this.fatherId = fatherId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 
 }

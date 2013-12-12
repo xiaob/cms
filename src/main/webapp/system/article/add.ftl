@@ -52,9 +52,9 @@
                                   </div>
                                   <br>
                                   <div class="form-group">
-                                  	<script id="content" name="content" type="text/plain" placeholder="在此填写内容" style="width:100%;height:400px;" value="${content}">
-                                        <p class="help-block" for="content">${content}</p>
+                                  	<script id="content" name="content" type="text/plain" placeholder="在此填写内容" style="width:100%; height:260px;" value="${content}">
                                    	</script>
+                                   	<p class="help-block" for="content">${content}</p>
                                     <script type="text/javascript">
                                     	$(function() {
 											var editor = UE.getEditor('content')
@@ -62,6 +62,61 @@
 									</script>
                                   </div>
                               </form>
+                          </div>
+                      </section>
+                      <section class="panel">
+                          <header class="panel-heading tab-bg-dark-navy-blue">
+                              <ul class="nav nav-tabs">
+                                  <li class="">
+                                      <a href="#home-2" data-toggle="tab">
+                                       	  小标题
+                                      </a>
+                                  </li>
+                                  <li class="">
+                                      <a href="#about-2" data-toggle="tab">
+                                          <i class="icon-user"></i>
+                                          	描述
+                                      </a>
+                                  </li>
+                                  <li class="active">
+                                      <a href="#contact-2" data-toggle="tab">
+                                          <i class="icon-envelope"></i>
+                                          	图片
+                                      </a>
+                                  </li>
+                                  <li class="">
+                                      <a href="#sdg-2" data-toggle="tab">
+                                          <i class="icon-envelope"></i>
+                                          	资料
+                                      </a>
+                                  </li>
+                              </ul>
+                          </header>
+                          <div class="panel-body">
+                              <div class="tab-content">
+                                  <div class="tab-pane" id="home-2">
+                                      <div class="form-group">
+                                      <input type="text" class="form-control" name="title" placeholder="在此填写小标题" id="title" style="width: 100%;">
+                                  	  </div>
+                                  </div>
+                                  <div class="tab-pane" id="about-2">
+                                  	<textarea class="form-control" name="title" placeholder="在此填写简介" id="title" style="width: 100%;">
+                                  	  </textarea>
+                                  </div>
+                                  <div class="tab-pane active" id="contact-2">
+                          			<div class="panel-body">
+										<p class="hide-if-no-js">添加图片</p>
+										<img title="c3039 (1).jpg" _src="http://localhost:8080/CMS/upload/photo/20131212/c3039 (1).jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 (1).jpg" style="width:33%;height:200px;">
+											<img title="c3039 .jpg" _src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" style="width:33%;height:200px;">
+										</div>
+								  </div>
+                                  <div class="tab-pane" id="sdg-2">
+                                  	<div class="panel-body">
+										<p class="hide-if-no-js">上传资料</p>
+										<img title="c3039 .jpg" _src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" style="width:33%;height:200px;">
+									</div>
+                                  </div>
+                              </div>
                           </div>
                       </section>
                   </div>
@@ -96,17 +151,17 @@
                     	<header class="panel-heading">
 							所属目录
                         </header>
+                        <div class="panel-body">
                     <div class="form-group">
-                    	<select class="form-control input-lg m-bot15" name="folderId" style="margin-left: 15px;">
-                    		<option value="0" selected >weifenlei</option>
-                         	<#list allFolderList as folder>
-                            	<option value="${folder.folderId}">
-                        		<#list 1..folder.level as i>
-                            		-
-                        		</#list>
-                            	${folder.name}</option>
-                       		</#list>
-                   		</select>
+                   		<#list allFolderList as folder>
+                        	<input type="radio" value="${folder.folderId}" name="folderId" checked>
+                        	<#list 1..folder.level as i>
+                            	-
+                        	</#list>
+                            ${folder.name}
+                            <br>
+                        </#list>
+                   	</div>
                    	</div>
                    </section>
               	</div>

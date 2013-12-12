@@ -74,11 +74,13 @@ public class AdminArticleAction extends AdminFileAction {
 	 */
 	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
 	public String addArticle(ModelMap modelMap,HttpServletRequest request) throws Exception {
-		File file = fileService.addFile(0, this.getAdmin(request).getAdminId(),"自动草稿", "", SystemConstant.Type.article, FileConstant.Status.hidden);
+//		File file = fileService.addFile(0, this.getAdmin(request).getAdminId(),"自动草稿", "", SystemConstant.Type.article, FileConstant.Status.hidden);
+		File file = fileService.getFileByFileId(83);
 		modelMap.put("article", file);
 		modelMap.put("allFolderList", folderService.getAllFolderByType(SystemConstant.Type.article));
 		modelMap.put("name", "");
 		modelMap.put("content","");
+		modelMap.put("title","");
 		return "system/article/add";
 	}
 	

@@ -136,7 +136,7 @@ public class AdminFileAction extends AdminBaseAction {
 	}
 
 	/**
-	 * 图片上传
+	 * 附件上传
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
@@ -149,6 +149,7 @@ public class AdminFileAction extends AdminBaseAction {
 		try {
 			if (UploadUtils.isFileType(UploadUtils.getFileExt(sr), UploadUtils.FILE_TYPE)) {
 				type = SystemConstant.Type.file;
+				
 			} else {
 				if (UploadUtils.isFileType(UploadUtils.getFileExt(sr),
 						UploadUtils.PHOTO_TYPE)) {
@@ -157,20 +158,30 @@ public class AdminFileAction extends AdminBaseAction {
 					json.getErrors().put("fileType", "无法识别的文件类型");
 				}
 			}
-
 			// 检测校验结果
 			validate(json);
-			File fi = fileService.addFile(0, this.getAdmin(request).getAdminId(), sr,
-					"", type, FileConstant.Status.display);
-			String webroot = System
-					.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-			String path = webroot + "/upload/" + type + "/" + fi.getFileId()
-					+ ".jpg";
-			java.io.File source = new java.io.File(path);
-			file.transferTo(source);
-			String picture = configSevice.getConfigByKey("picture_size", true);
-			updatePictureConstant.updatePicture(fi.getFileId(), path,
-					picture,type);
+			if(type.equals(SystemConstant.Type.file)){
+				File fi = fileService.addFile(0, this.getAdmin(request).getAdminId(), "",
+						"", type, FileConstant.Status.display);
+				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
+				String path = webroot + "/upload/" + type + "/" + fi.getFileId()
+						+ UploadUtils.getFileExt(sr);
+				java.io.File source = new java.io.File(path);
+				file.transferTo(source);
+			}else{
+				File fi = fileService.addFile(0, this.getAdmin(request).getAdminId(), "",
+						"", type, FileConstant.Status.display);
+				String webroot = System
+						.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
+				String path = webroot + "/upload/" + type + "/" + fi.getFileId()+"_original"+
+						UploadUtils.getFileExt(sr);
+				java.io.File source = new java.io.File(path);
+				file.transferTo(source);
+				String picture = configSevice.getConfigByKey("picture_size", true);
+				updatePictureConstant.updatePicture(fi.getFileId(), path,
+						picture,type);
+
+			}
 			json.setResult(true);
 			json.setMsg(type.toString());
 

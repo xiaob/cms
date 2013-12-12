@@ -44,6 +44,9 @@ public class AdminPhotoAction extends AdminBaseAction {
 
 	@RequestMapping(value = "/upload.htm", method = RequestMethod.GET)
 	public String upload(ModelMap modelMap) {
+		modelMap.put("photoList", folderService.getAllFolderByType(SystemConstant.Type.photo));
+		modelMap.put("fileList", folderService.getAllFolderByType(SystemConstant.Type.file));
+		modelMap.put("shopList", folderService.getAllFolderByType(SystemConstant.Type.shop));
 		return "system/photo/upload";
 	}
 

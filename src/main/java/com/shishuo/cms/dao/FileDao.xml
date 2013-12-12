@@ -26,10 +26,10 @@
 	<!-- ############################## -->
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
 		insert into
-		file(folderId,adminId,ename,name,password,thumbnail,
+		file(folderId,adminId,ename,name,password,
 			contentType,size,price,realPrice,copyCount,
 			content,viewCount,commentCount,type,status,createTime,updateTime,expireTime)
-		value(#{folderId},#{adminId},#{ename},#{name},#{password},#{thumbnail},
+		value(#{folderId},#{adminId},#{ename},#{name},#{password},
 			#{contentType},#{size},#{price},#{realPrice},#{copyCount},
 			#{content},#{viewCount},#{commentCount},#{type},#{status},#{createTime},#{updateTime},#{expireTime})
 		<selectKey resultType="long" keyProperty="fileId">

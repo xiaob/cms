@@ -69,4 +69,25 @@ public class FileConstant {
 		display
 	};
 
+	/**
+	 * 文件跟目录的类型
+	 * 
+	 * @author Herbert
+	 * 
+	 */
+	public static enum Type {
+		/**
+		 * 文章
+		 */
+		article, /**
+		 * 图片
+		 */
+		photo, /**
+		 * 文件
+		 */
+		file, /**
+		 * 商品
+		 */
+		shop
+	};
 }

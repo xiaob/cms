@@ -92,22 +92,6 @@
 							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/page.htm?status=hidden">回收站</a></li>
 						</ul>
 					</li>
-					<li class="sub-menu ">
-						<a href="javascript:;" <#if menu="photo">class="active"</#if>> <i class="icon-cloud-upload"></i> <span>附件</span></a>
-						<ul class="sub">
-							<li <#if submenu="add_appendix">class="active"</#if>><a href="${basePath}/admin/picture/upload.htm">上传附件</a></li>
-							<li <#if submenu="photo_list">class="active"</#if>><a href="${basePath}/admin/file/page.htm?type=photo">图片列表</a></li>
-							<li><a href="${basePath}/admin/file/page?type="download"">文件列表</a></li>
-						</ul>
-					</li>
-					<li class="sub-menu ">
-						<a href="javascript:;" > <i class="icon-gift"></i> <span>商品</span></a>
-						<ul class="sub">
-							<li><a href="general.html">增加商品</a></li>
-							<li><a href="${basePath}/admin/file/page.htm?type="shop"">商品列表</a></li>
-							<li><a href="widget.html">回收站</a></li>
-						</ul>
-					</li>											
 					<li class="sub-menu">
 						<a href="javascript:;" <#if menu="comment">class="active"</#if>> <i class="icon-comments"></i> <span>评论</span></a>
 						<ul class="sub">
@@ -127,12 +111,6 @@
 							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/page.htm">用户列表</a></li>
 						</ul>
 					</li>	
-					<li class="sub-menu ">
-						<a href="javascript:;"> <i class="icon-signin"></i> <span>招聘</span></a>
-						<ul class="sub">
-							<li><a href="general.html">General</a></li>
-						</ul>
-					</li>
 					<li class="sub-menu ">
 						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>设置</span></a>
 						<ul class="sub">
