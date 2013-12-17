@@ -22,6 +22,8 @@
 
     <script src="${TEMPLATE_PATH}/js/jquery.easing.min.js"></script>
     <script src="${TEMPLATE_PATH}/js/link-hover.js"></script>
+    <script src="${TEMPLATE_PATH}/assets/Slides-SlidesJS-3/source/jquery.slides.js"></script>
+  	<script src="${TEMPLATE_PATH}/assets/Slides-SlidesJS-3/source/jquery.slides.min.js"></script>
     
     <!--common script for all pages-->
     <script src="${TEMPLATE_PATH}/js/common-scripts.js"></script>

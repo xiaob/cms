@@ -90,7 +90,7 @@ public class File {
 	/**
 	 * 大小
 	 */
-	private int size;
+	private double size;
 	
 	/**
 	 * 报价
@@ -246,11 +246,11 @@ public class File {
 		this.contentType = contentType;
 	}
 
-	public int getSize() {
+	public double getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(double size) {
 		this.size = size;
 	}
 

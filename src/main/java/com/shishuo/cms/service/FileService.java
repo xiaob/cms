@@ -78,13 +78,14 @@ public class FileService {
 	 * @param status
 	 * @return
 	 */
-	public File addFile(long folderId, long fatherId,long adminId,
+	public File addFile(long folderId, long fatherId,long adminId,double size,
 			String name,String title, String content,
 			SystemConstant.Type type, FileConstant.Status status) {
 		File file = new File();
 		file.setFolderId(folderId);
 		file.setFatherId(fatherId);
 		file.setEname("");
+		file.setSize(size);
 		file.setAdminId(adminId);
 		file.setName(name);
 		file.setTitle(title);
@@ -226,7 +227,22 @@ public class FileService {
 			throw new FileNotFoundException(fileId  +" 文件，不存在");
 		} else {
 			Admin admin = adminService.getAdminById(file.getAdminId());
+			if(file.getFolderId()==0){
+				Folder folder = new Folder();
+				folder.setEname("weifenlei");
+				file.setFolder(folder);
+			}else{
+				file.setFolder(folderDao.getFolderById(file.getFolderId()));
+			}
+			if(file.getTitle()==null){
+				file.setTitle("无");
+			}
+			if(file.getDescription()==null){
+				file.setDescription("无");
+			}
 			file.setAdmin(admin);
+			file.setPhoto(this.getFileListByFatherIdAndType(fileId, SystemConstant.Type.photo));
+			file.setFile(this.getFileListByFatherIdAndType(fileId, SystemConstant.Type.file));
 			return file;
 		}
 	}
@@ -402,6 +418,10 @@ public class FileService {
 		pageVo.setList(list);
 		pageVo.setCount(this.getFileCountByStatusNotinHidden(type));
 		return pageVo;
+	}
+	
+	public List<File> getFileListByFatherIdAndType(long fatherId,SystemConstant.Type type){
+		return fileDao.getFileListByFatherIdAndType(type,fatherId);
 	}
 	
 }

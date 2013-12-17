@@ -53,7 +53,7 @@
 
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
 		update file set
-		folderId=#{folderId},fatherId=#{fatherId},ename=#{ename},name=#{name},
+		folderId=#{folderId},fatherId=#{fatherId},ename=#{ename},name=#{name},title=#{title},description=#{description},
 		content=#{content},status=#{status},password=#{password},updateTime=#{updateTime}
 		where fileId=#{fileId}
 	</update>
@@ -118,5 +118,9 @@
 	<select id="getFileCountByTypeAndStatus" resultType="Integer">
 		select count(*) from file where type=#{type} and status=#{status}
 	</select>
-
+	
+	<select id="getFileListByFatherIdAndType" resultType="com.shishuo.cms.entity.File">
+		select * from file where fatherId=#{fatherId} and type=#{type}
+	</select>
+	
 </mapper>  

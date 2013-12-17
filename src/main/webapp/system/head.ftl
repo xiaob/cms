@@ -40,7 +40,7 @@
 		<!--header start-->
 		<header class="header white-bg">
 			<!--logo start-->
-			<a href="${basePath}" class="logo" title="访问前台页面">
+			<a href="${basePath}/index.htm" class="logo" title="访问前台页面">
 				<img src="${basePath}/system/images/logo.png" style="height: 38px;" />
 			</a>
 			<!--logo end-->

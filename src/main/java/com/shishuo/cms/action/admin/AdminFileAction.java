@@ -142,7 +142,7 @@ public class AdminFileAction extends AdminBaseAction {
 	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
 	public JsonVo<String> upload(
 			@RequestParam(value = "fileId") long fatherId,
-			@RequestParam(value = "photo") MultipartFile file,
+			@RequestParam(value = "file") MultipartFile file,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		SystemConstant.Type type = null;
@@ -150,7 +150,7 @@ public class AdminFileAction extends AdminBaseAction {
 		try {
 			if (UploadUtils.isFileType(UploadUtils.getFileExt(sr), UploadUtils.FILE_TYPE)) {
 				type = SystemConstant.Type.file;
-				
+				System.out.println(file.getSize());
 			} else {
 				if (UploadUtils.isFileType(UploadUtils.getFileExt(sr),
 						UploadUtils.PHOTO_TYPE)) {
@@ -162,15 +162,17 @@ public class AdminFileAction extends AdminBaseAction {
 			// 检测校验结果
 			validate(json);
 			if(type.equals(SystemConstant.Type.file)){
-				File fi = fileService.addFile(0,fatherId, this.getAdmin(request).getAdminId(), "",
+				File fi = fileService.addFile(0,fatherId, this.getAdmin(request).getAdminId(),file.getSize(), sr,
 						"","", type, FileConstant.Status.display);
 				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
 				String path = webroot + "/upload/" + type + "/" + fi.getFileId()
 						+ UploadUtils.getFileExt(sr);
 				java.io.File source = new java.io.File(path);
 				file.transferTo(source);
+				json.setT("/upload/file/"+fi.getFileId()+UploadUtils.getFileExt(sr));
+				json.setMsg(sr);
 			}else{
-				File fi = fileService.addFile(0,fatherId, this.getAdmin(request).getAdminId(), "",
+				File fi = fileService.addFile(0,fatherId, this.getAdmin(request).getAdminId(), file.getSize(),sr,
 						"","", type, FileConstant.Status.display);
 				String webroot = System
 						.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
@@ -181,11 +183,10 @@ public class AdminFileAction extends AdminBaseAction {
 				String picture = configSevice.getConfigByKey("picture_size", true);
 				updatePictureConstant.updatePicture(fi.getFileId(), path,
 						picture,type);
-				json.setT("/upload/photo/"+fi.getFileId()+"_picture"+UploadUtils.getFileExt(sr));
+				json.setT("/upload/photo/"+fi.getFileId()+"_picture.jpg");
 			}
 			
 			json.setResult(true);
-			json.setMsg(type.toString());
 
 		} catch (Exception e) {
 			json.setResult(false);

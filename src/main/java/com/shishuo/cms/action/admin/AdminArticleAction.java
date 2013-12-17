@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.entity.File;
@@ -74,8 +73,8 @@ public class AdminArticleAction extends AdminFileAction {
 	 */
 	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
 	public String addArticle(ModelMap modelMap,HttpServletRequest request) throws Exception {
-//		File file = fileService.addFile(0, this.getAdmin(request).getAdminId(),"自动草稿", "", SystemConstant.Type.article, FileConstant.Status.hidden);
-		File file = fileService.getFileByFileId(83);
+		File file = fileService.addFile(0,0, this.getAdmin(request).getAdminId(),0,"自动草稿", "", "",SystemConstant.Type.article, FileConstant.Status.hidden);
+//		File file = fileService.getFileByFileId(83);
 		modelMap.put("file", file);
 		modelMap.put("allFolderList", folderService.getAllFolderByType(SystemConstant.Type.article));
 		modelMap.put("name", "");

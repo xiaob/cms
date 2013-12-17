@@ -167,4 +167,6 @@ public interface FileDao {
 	
 	public int getFileCountByTypeAndStatus(@Param("type") SystemConstant.Type type,@Param("status") FileConstant.Status status);
 	
+	public List<File> getFileListByFatherIdAndType(@Param("type") SystemConstant.Type type,@Param("fatherId") long fatherId);
+	
 }

@@ -20,11 +20,9 @@
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-10">
-                        	<#if file.picture =="exist">
                             <div class="blog-img">
                                 <img src="${basePath}/upload/${file.fileId}_big.jpg" alt=""/>
                             </div>
-                            </#if>
                             <h1><a href="${basePath}/${file.folder.ename}/${file.fileId}.htm"><b>${file.name}</b></a></h1>
                             <div class="author">
                             	分类：<a href="${basePath}/${file.folder.ename}.htm">${file.folder.name}</a> | 作者：<a>${file.admin.name}</a> | 浏览数：${file.viewCount}

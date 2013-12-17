@@ -104,19 +104,17 @@
                                   <div class="tab-pane active" id="photo-1">
                           			<div class="panel-body">
 										<p class="hide-if-no-js">添加图片</p>
-										<input type="file" name="photo" id="photo">
 										<button id="upload_photo" class="btn btn-white" data-toggle="button" >上传图片</button>
-										<p id="file_photo">
-											<img title="c3039 (1).jpg" _src="http://localhost:8080/CMS/upload/photo/20131212/c3039 (1).jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 (1).jpg" style="width:33%;height:200px;">
-											<img title="c3039 .jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" style="width:33%;height:200px;">
-											<img src='${basePath}/upload/photo/246_picture.jpg'>
+										<p id="js_photo_list">
 										</p>
 										</div>
 								  </div>
                                   <div class="tab-pane" id="sdg-1">
                                   	<div class="panel-body">
 										<p class="hide-if-no-js">上传资料</p>
-										<img title="c3039 .jpg" _src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" src="http://localhost:8080/CMS/upload/photo/20131212/c3039 .jpg" style="width:33%;height:200px;">
+										<button id="upload_file" class="btn btn-white" data-toggle="button" >上传资料</button>
+										<p id="js_file_list">
+										</p>
 									</div>
                                   </div>
                               </div>
@@ -168,7 +166,6 @@
                    	</div>
                    </section>
               	</div>
-              	
               </div>
               </form>
               <!-- page end-->
@@ -192,26 +189,51 @@
 		$("#upload_photo").click(function(){
 			var fileId = $("#add_article_form input[name='fileId']").val();
 			bootbox.dialog({
-  						message: '<form role="form" id="add_article_photo" enctype="multipart/form-data" method="post" autocomplete="off" action="${basePath}/admin/file/upload.json"><fieldset><input type="hidden" name="fileId" value=""></fieldset><input type="file" name="photo"></form>',
-  						title: "提示",
-  						buttons: {
-  							add : {
-								label : "上传",
-								className : "btn-primary",
-								callback : function() {
-									$("#add_article_photo input[name='fileId']").val(fileId);
-									$("#add_article_photo").ajaxSubmit({
-										dataType : 'json',
-										success : function(data){
-											if(data.result){
-												$("#file_photo").append("<img src="+window.BasePath+data.t+" />");
-											}
+  				message: '<form role="form" id="add_article_photo" enctype="multipart/form-data" method="post" autocomplete="off" action="${basePath}/admin/file/upload.json"><fieldset><input type="hidden" name="fileId" value=""></fieldset><input type="file" name="file"></form>',
+  				title: "提示",
+  				buttons: {
+  					add : {
+						label : "上传",
+						className : "btn-primary",
+						callback : function() {
+							$("#add_article_photo input[name='fileId']").val(fileId);
+								$("#add_article_photo").ajaxSubmit({
+									dataType : 'json',
+									success : function(data){
+										if(data.result){
+											$("#js_photo_list").append("<img src="+window.BasePath+data.t+" style='width:33%;'/>");
 										}
-									});
-								}
-							},
-  						}
-					});
+									}
+								});
+							}
+						},
+  					}
+				});
+		});
+		
+		$("#upload_file").click(function(){
+			var fileId = $("#add_article_form input[name='fileId']").val();
+			bootbox.dialog({
+  				message: '<form role="form" id="add_article_photo" enctype="multipart/form-data" method="post" autocomplete="off" action="${basePath}/admin/file/upload.json"><fieldset><input type="hidden" name="fileId" value=""></fieldset><input type="file" name="file"></form>',
+  				title: "提示",
+  				buttons: {
+  					add : {
+						label : "上传",
+						className : "btn-primary",
+						callback : function() {
+							$("#add_article_photo input[name='fileId']").val(fileId);
+								$("#add_article_photo").ajaxSubmit({
+									dataType : 'json',
+									success : function(data){
+										if(data.result){
+											$("#js_file_list").append("<a href="+window.BasePath+data.t+">"+data.msg+"</a><br>");
+										}
+									}
+								});
+							}
+						},
+  					}
+				});
 		});
 		
 		

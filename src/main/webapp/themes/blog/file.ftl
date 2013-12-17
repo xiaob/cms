@@ -3,6 +3,44 @@
 .article_picture{
 	width:80%;
 }
+ #slides {
+	display:none;
+ }
+ 
+.slidesjs-pagination {
+    float: right;
+    list-style: none outside none;
+    margin: 6px 0 0;
+}
+.slidesjs-pagination li {
+    float: left;
+    margin: 0 1px;
+}
+#slides a:link, #slides a:visited {
+    color: #333333;
+}
+p, ul, ol {
+    color: #777777;
+    font-weight: 400;
+}
+.slidesjs-pagination li a.active, .slidesjs-pagination li a.active:hover {
+    background-position: 0 -13px;
+}
+
+.slidesjs-pagination li a {
+    background-image: url("${TEMPLATE_PATH}/assets/Slides-SlidesJS-3/examples/multiple/img/pagination.png");
+    background-position: 0 0;
+    display: block;
+    float: left;
+    height: 0;
+    overflow: hidden;
+    padding-top: 13px;
+    width: 13px;
+}
+a:link, a:visited {
+    color: #D22929;
+    text-decoration: none;
+}
 </style>
     <!--container start-->
     <div class="container">
@@ -24,14 +62,30 @@
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-10">
+                        	<div id="slides">
+                           		<#list file.photo as photo>
+                            		<img src="${basePath}/upload/photo/${photo.fileId}_picture.jpg">
+                            	</#list>
+                            </div>
                             <h1><b>${file.name}</b></h1>
                             <div class="author">
                                	作者：<a>${file.admin.name}</a> | 浏览数：${file.viewCount}
                             </div>
-                            <hr>                            
+                            <p>
+                            	${file.title}
+                            </p>
+                            <p>
+                            	${file.description}
+                            </p>
+                            <hr>
                             <p>
                             	${file.content}
                             </p>
+                            <#list file.file as fi>
+                            <p>
+                            	<a href=""title="${fi.size}b">${fi.name}</a>
+                            </p>
+                            </#list>
                             <@cms_comment_page fileId="${fileId}" pageNum="${pageNum}" rows="10">
                             <#list commentPage.list as comment>
                             <div class="media">
@@ -116,6 +170,12 @@
  
    <script type="text/javascript">
 	$(function(){
+    	$("#slides").slidesjs({
+    		pagination: {
+          active: true,
+          effect: "slide"
+        }
+    	});
 		$("#comment_form").validate();
         $("#comment_form").ajaxForm({
 			dataType:  'json',
@@ -127,6 +187,7 @@
 				}
 			}
 	      });
+	  
     });
    </script>
    <#include "footer.ftl">

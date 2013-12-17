@@ -28,7 +28,7 @@ public class ThemeService {
 	/**
 	 * 首页（默认页）模板启用顺序
 	 */
-	private String[] defatulDisplay = { "default", "home" };
+	private String[] defatulDisplay = { "default"};
 
 	/**
 	 * 文件夹模板启用顺序
