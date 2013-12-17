@@ -24,27 +24,28 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.SystemConstant;
 
 /**
  * @author lqq
  * @author 进入网站后台首页
- *
+ * 
  */
 
 @Controller
 @RequestMapping("/admin")
-public class AdminAction extends AdminBaseAction{
+public class AdminAction extends AdminBaseAction {
 
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public String login(ModelMap modelMap){
-		modelMap.put("articleCount", fileService.getFileCountByType(SystemConstant.Type.article));
-		modelMap.put("downloadCount", fileService.getFileCountByType(SystemConstant.Type.download));
-		modelMap.put("commodityCount", fileService.getFileCountByType(SystemConstant.Type.shop));
+	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
+	public String login(ModelMap modelMap) {
+		modelMap.put("articleCount",
+				fileService.getFileCountByType(SystemConstant.Type.article));
+		modelMap.put("downloadCount",
+				fileService.getFileCountByType(SystemConstant.Type.file));
+		modelMap.put("commodityCount",
+				fileService.getFileCountByType(SystemConstant.Type.shop));
 		modelMap.put("userCount", userService.getUserListCount());
 		return "system/default";
-	}	
-	
+	}
+
 }

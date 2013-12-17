@@ -130,7 +130,7 @@ public class AdminService {
 			HttpServletRequest request) throws AuthException {
 		AdminVo admin = adminDao.getAdminByEmail(email);
 		if (admin == null) {
-			throw new AuthException("没有此用户");
+			throw new AuthException("邮箱或密码错误");
 		}
 		admin.setFaceUrl(AuthUtils.getFaceUrl(admin.getEmail()));
 		String loginPassword = AuthUtils.getPassword(password, email);
@@ -139,7 +139,7 @@ public class AdminService {
 			admin.setPassword("");
 			session.setAttribute(SystemConstant.SESSION_ADMIN, admin);
 		} else {
-			throw new AuthException("密码不正确");
+			throw new AuthException("邮箱或密码错误");
 		}
 	}
 

@@ -26,7 +26,6 @@ package com.shishuo.cms.constant;
  */
 public class FileConstant {
 
-
 	/**
 	 * 是否拥护配图
 	 * 
@@ -44,7 +43,51 @@ public class FileConstant {
 	 * 
 	 */
 	public static enum Status {
-		hidden, display
+		/**
+		 * 隐藏，垃圾
+		 */
+		hidden,
+		
+		/**
+		 * 有密码的
+		 */
+		secret,
+		
+		/**
+		 * 私有的
+		 */
+		 priv,
+		
+		/**
+		 * 草稿
+		 */
+		draft, 
+		
+		/**
+		 * 公开的
+		 */
+		display
 	};
 
+	/**
+	 * 文件跟目录的类型
+	 * 
+	 * @author Herbert
+	 * 
+	 */
+	public static enum Type {
+		/**
+		 * 文章
+		 */
+		article, /**
+		 * 图片
+		 */
+		photo, /**
+		 * 文件
+		 */
+		file, /**
+		 * 商品
+		 */
+		shop
+	};
 }

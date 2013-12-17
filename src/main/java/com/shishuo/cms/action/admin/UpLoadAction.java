@@ -39,13 +39,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class UpLoadAction {
 
 	
-	@RequestMapping(value = "upload", method = RequestMethod.GET)
+	@RequestMapping(value = "upload.htm", method = RequestMethod.GET)
 	public String upload() {
 		return "admin/upload";
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "photo", method = RequestMethod.POST)
+	@RequestMapping(value = "photo.htm", method = RequestMethod.POST)
 	public ModelAndView handleRequest(@RequestParam("file") MultipartFile file,
 			HttpServletRequest request) throws Exception {
 		if (this.checkPhotoFile(file)) {

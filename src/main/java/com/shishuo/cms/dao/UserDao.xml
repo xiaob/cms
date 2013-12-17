@@ -27,7 +27,7 @@
 	
 	<insert id="addUser" parameterType="com.shishuo.cms.entity.User">
 		insert into
-		user(openId,type,name,createTime)
+		cms.user(openId,type,name,createTime)
 		value(#{openId},#{type},#{name},#{createTime})
 		<selectKey resultType="long" keyProperty="userId">
 			SELECT LAST_INSERT_ID()
@@ -39,7 +39,7 @@
 	<!-- ############################## -->
 		
 	<delete id="deleteUserById" parameterType="long">
-		delete from user where userId=#{userId}
+		delete from cms.user where userId=#{userId}
 	</delete>
 	
 	<!-- ############################## -->
@@ -47,7 +47,7 @@
 	<!-- ############################## -->
 	
 	<update id="updateUser" parameterType="com.shishuo.cms.entity.User">
-		update user set openId=#{openId},type=#{type},name=#{name},createTime=#{createTime}
+		update cms.user set openId=#{openId},type=#{type},name=#{name},createTime=#{createTime}
 	</update>
 	
 	<!-- ############################## -->
@@ -56,20 +56,17 @@
 	
 	<select id="getUserById" 
 		resultType="com.shishuo.cms.entity.User">
-		select * from user where userId=#{userId}
+		select * from cms.user where userId=#{userId}
 	</select>
 	
 	<select id="getUserList"
 		resultType="com.shishuo.cms.entity.User">
-		select * from user limit #{offset}, #{rows}
+		select * from cms.user limit #{offset}, #{rows}
 	</select>
 	
 	<select id="getUserListCount"
 		resultType="Integer">
-		select count(*) from user
+		select count(*) from cms.user
 	</select>
-	
-	
-	
 	
 </mapper>  

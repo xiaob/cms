@@ -34,24 +34,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">是否开启图片展示模块</label>
-						<div class="col-lg-10">
-							<input type="checkbox" name="functionPhoto" <#if SYS_FUNCTION_PHOTO=="on">checked="checked"</#if> data-toggle="switch" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">是否开启下载模块</label>
-						<div class="col-lg-10">
-							<input type="checkbox" name="functionDownload" <#if SYS_FUNCTION_PHOTO=="on">checked="checked"</#if> data-toggle="switch" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">是否开启商品模块</label>
-						<div class="col-lg-10">
-							<input type="checkbox" name="functionShop" <#if SYS_FUNCTION_SHOP=="on">checked="checked"</#if> data-toggle="switch" />
-						</div>
-					</div>
-					<div class="form-group">
 						<div class="col-lg-offset-2 col-lg-10">
 							<button class="btn btn-danger" type="submit">保存</button>
 						</div>

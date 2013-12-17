@@ -2,6 +2,7 @@ package com.shishuo.cms.service;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,8 @@ import com.shishuo.cms.constant.SystemConstant;
  */
 @Component
 public class ThemeService {
+	
+	protected final Logger logger = Logger.getLogger(this.getClass());
 
 	@Autowired
 	private ConfigService configService;
@@ -25,7 +28,7 @@ public class ThemeService {
 	/**
 	 * 首页（默认页）模板启用顺序
 	 */
-	private String[] defatulDisplay = { "default", "home" };
+	private String[] defatulDisplay = { "default"};
 
 	/**
 	 * 文件夹模板启用顺序
@@ -117,6 +120,7 @@ public class ThemeService {
 		if (file.exists()) {
 			return true;
 		} else {
+			logger.info("模板存在："+themePath);
 			return false;
 		}
 	}

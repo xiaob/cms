@@ -20,7 +20,6 @@ package com.shishuo.cms.action.admin;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.FileConstant;
-import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.JsonVo;
@@ -52,7 +50,7 @@ public class AdminArticleAction extends AdminFileAction {
 	 * @throws Exception 
 	 * 
 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
 	public String update(
 			@RequestParam(value = "fileId", defaultValue = "1") long fileId,
 			ModelMap modelMap) throws Exception {
@@ -73,38 +71,78 @@ public class AdminArticleAction extends AdminFileAction {
 	 * @throws Exception 
 	 * 
 	 */
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addArticle(ModelMap modelMap) throws Exception {
+	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
+	public String addArticle(ModelMap modelMap,HttpServletRequest request) throws Exception {
+		File file = fileService.addFile(0,0, this.getAdmin(request).getAdminId(),0,"自动草稿", "", "",SystemConstant.Type.article, FileConstant.Status.hidden);
+//		File file = fileService.getFileByFileId(83);
+		modelMap.put("file", file);
 		modelMap.put("allFolderList", folderService.getAllFolderByType(SystemConstant.Type.article));
-		modelMap.put("folderEname", "");
-		modelMap.put("articleId","");
+		modelMap.put("name", "");
+		modelMap.put("content","");
+		modelMap.put("title","");
 		return "system/article/add";
 	}
+	
+//	/**
+//	 * 图片上传
+//	 */
+//	@ResponseBody
+//	@RequestMapping(value = "/upload/picture.json", method = RequestMethod.POST)
+//	public JsonVo<String> uploadPicture(
+//			@RequestParam(value ="file") MultipartFile file,
+//			@RequestParam(value ="type") SystemConstant.Type type,
+//			@RequestParam(value ="fileId") long fileId,
+//			HttpServletRequest request) {
+//		JsonVo<String> json = new JsonVo<String>();
+//		try {
+//			// 检测校验结果
+//			validate(json);
+//			File article = fileService.getFileByFileId(fileId);
+//				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
+//				fileService.updateFileByFileId(fileId,article.getFolderId(), 0,this.getAdmin(request).getAdminId(),
+//						article.getName(), article.getContent(),null,
+//						SystemConstant.Type.article, FileConstant.Status.display);
+//				String path = webroot+"/upload/"+type+"/"+fileId+".jpg";
+//				java.io.File source = new java.io.File(path);
+//				file.transferTo(source);
+//				String picture = configSevice.getConfigByKey("article_picture_size", true);
+//				updatePictureConstant.updateArticlePicture(article.getFileId(), path,picture);
+//			json.setResult(true);
+//			
+//		} catch (Exception e) {
+//			json.setResult(false);
+//			json.setMsg(e.getMessage());
+//		}
+//		return json;
+//	}
 
 	/**
-	 * @author 添加新文章
+	 * @author 发布新文章
 	 * 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/add.json", method = RequestMethod.POST)
-	public JsonVo<String> add(
+	public JsonVo<String> addArticle(
 			@RequestParam(value = "name") String name,
+			@RequestParam(value = "fileId") long fileId,
 			@RequestParam(value = "folderId") long folderId,
+			@RequestParam(value = "title",required=false) String title,
+			@RequestParam(value = "description",required=false) String description,
 			@RequestParam(value = "content") String content,
+			@RequestParam(value = "password" ,defaultValue="") String password,
+			@RequestParam(value = "status") FileConstant.Status status,
 			HttpServletRequest request) {
+
 		JsonVo<String> json = new JsonVo<String>();
 		try {
-			if (StringUtils.isBlank(name)) {
-				json.getErrors().put("name", "文章名称不能为空");
+			if(name.equals("")){
+				json.getErrors().put("name","文章标题不能为空");
 			}
 			// 检测校验结果
 			validate(json);
-			File file = fileService.addFile(folderId, this.getAdmin(request).getAdminId(),
-			FileConstant.Picture.no_exist, name, content,
-			SystemConstant.Type.article, FileConstant.Status.display);
-			json.setT(file.getFileId()+"");
+			fileService.updateFileByFileIdAndCreateTime(fileId,folderId, 0,this.getAdmin(request).getAdminId(),name,
+			content,title,description,password, SystemConstant.Type.article,status);
 			json.setResult(true);
-			
 		} catch (Exception e) {
 			json.setResult(false);
 			json.setMsg(e.getMessage());
@@ -119,27 +157,28 @@ public class AdminArticleAction extends AdminFileAction {
 	@ResponseBody
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
 	public JsonVo<String> updateArticle(
-			@RequestParam(value = "fileName") String fileName,
-			@RequestParam(value = "folderId") long folderId,
-			@RequestParam(value = "adminId") long adminId,
+			@RequestParam(value = "name") String name,
 			@RequestParam(value = "fileId") long fileId,
-			@RequestParam(value = "picture") FileConstant.Picture picture,
+			@RequestParam(value = "folderId") long folderId,
+			@RequestParam(value = "content") String content,
+			@RequestParam(value = "title",required=false) String title,
+			@RequestParam(value = "description",required=false) String description,
+			@RequestParam(value = "password" ,defaultValue="") String password,
 			@RequestParam(value = "status") FileConstant.Status status,
-			@RequestParam(value = "content") String content) {
+			HttpServletRequest request) {
 
 		JsonVo<String> json = new JsonVo<String>();
 		try {
-			if (fileName.equals("")) {
-				json.getErrors().put("fileName", "文章名称不能为空");
+			if(name.equals("")){
+				json.getErrors().put("name","文章标题不能为空");
 			}
-			if (content.equals("")) {
-				json.getErrors().put("content", "文章内容不能为空");
+			if(content.equals("")){
+				json.getErrors().put("content","文章内容不能为空");
 			}
-
 			// 检测校验结果
 			validate(json);
-			 fileService.updateFileByFileId(fileId, folderId, adminId,picture,fileName,
-			 content, SystemConstant.Type.article,status);
+			fileService.updateFileByFileId(fileId,folderId, 0,this.getAdmin(request).getAdminId(),name,
+			content,title,description,password, SystemConstant.Type.article,status);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

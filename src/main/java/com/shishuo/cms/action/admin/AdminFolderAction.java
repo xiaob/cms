@@ -54,7 +54,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @throws Exception 
 	 *
 	 */
-	@RequestMapping(value = "/add",method = RequestMethod.GET)
+	@RequestMapping(value = "/add.htm",method = RequestMethod.GET)
 	public String login(ModelMap modelMap) throws Exception{
 		modelMap.put("folderAll", folderService.getAllFolder());
 		modelMap.put("folderName", "");
@@ -107,7 +107,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @author 所有目录列表分页
 	 *
 	 */
-	@RequestMapping(value = "/page",method = RequestMethod.GET)
+	@RequestMapping(value = "/page.htm",method = RequestMethod.GET)
 	public String allFolder(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,ModelMap modelMap){
 		List<FolderVo> list = folderService.getAllFolder();
 		modelMap.put("list", list);
@@ -119,7 +119,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	 * @throws Exception 
 	 *
 	 */
-	@RequestMapping(value = "/{folderId}",method = RequestMethod.GET)
+	@RequestMapping(value = "/{folderId}.htm",method = RequestMethod.GET)
 	public String oneFolder(@PathVariable long folderId,ModelMap modelMap) throws Exception{
 		Folder folder = folderService.getFolderById(folderId);
 		if(folder.getFatherId()==0){
@@ -178,7 +178,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	}
 	
 	/**
-	 * @author 删除目录
+	 * @author 目录排序
 	 *
 	 */
 	@ResponseBody
@@ -186,7 +186,7 @@ public class AdminFolderAction extends AdminBaseAction{
 	public JsonVo<String> delete(@RequestParam(value = "sortJson") String sortJson){
 		JsonVo<String> json = new JsonVo<String>();
 		JSONArray array = JSONArray.fromObject(sortJson);
-		 for(int i=0;i<array.size();i++){
+		for(int i=0;i<array.size();i++){
 			JSONObject folder =  array.getJSONObject(i);
 			String folderId = folder.get("folderId").toString();
 			String sort = folder.get("sort").toString();

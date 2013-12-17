@@ -44,10 +44,16 @@ public class Folder {
 	 * 英文名称
 	 */
 	private String ename;
+	
 	/**
 	 * 目录名称
 	 */
 	private String name;
+	
+	/**
+	 * 内容
+	 */
+	private String content;
 
 	/**
 	 * 路径
@@ -83,9 +89,22 @@ public class Folder {
 	private FolderConstant.Status status;
 
 	/**
-	 * 时间
+	 * 创建时间
 	 */
 	private Date createTime;
+	
+	/**
+	 * 更新时间
+	 */
+	private Date updateTime;
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
 	public String getPath() {
 		return path;
@@ -184,5 +203,12 @@ public class Folder {
 		return status;
 	}
 
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 	
 }

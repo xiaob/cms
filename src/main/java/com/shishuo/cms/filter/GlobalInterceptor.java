@@ -41,9 +41,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		}
 
 		// 系统配置参数
-		String path = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName()
-				+ ":" + request.getServerPort() + path;
+		String basePath = HttpUtils.getBasePath(request);
 		modelAndView.addObject("basePath", basePath);
 		modelAndView.addObject("SYS_FUNCTION_DOWNLOAD", configService
 				.getConfigByKey(ConfigConstant.SYS_FUNCTION_DOWNLOAD, false));
@@ -51,15 +49,12 @@ public class GlobalInterceptor implements HandlerInterceptor {
 				.getConfigByKey(ConfigConstant.SYS_FUNCTION_PHOTO, false));
 		modelAndView.addObject("SYS_FUNCTION_SHOP", configService
 				.getConfigByKey(ConfigConstant.SYS_FUNCTION_SHOP, false));
-		modelAndView
-				.addObject("SYS_SITEDESC", configService.getConfigByKey(
-						ConfigConstant.SYS_SITEDESC, false));
-		modelAndView
-				.addObject("SYS_SITENAME", configService.getConfigByKey(
-						ConfigConstant.SYS_SITENAME, false));
-		modelAndView
-				.addObject("SYS_TEMPLATE", configService.getConfigByKey(
-						ConfigConstant.SYS_TEMPLATE, false));
+		modelAndView.addObject("SYS_SITEDESC", configService.getConfigByKey(
+				ConfigConstant.SYS_SITEDESC, false));
+		modelAndView.addObject("SYS_SITENAME", configService.getConfigByKey(
+				ConfigConstant.SYS_SITENAME, false));
+		modelAndView.addObject("SYS_TEMPLATE", configService.getConfigByKey(
+				ConfigConstant.SYS_TEMPLATE, false));
 		modelAndView.addObject(
 				"TEMPLATE_PATH",
 				basePath

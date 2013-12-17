@@ -34,7 +34,6 @@ import javax.imageio.ImageIO;
 import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.SystemConstant;
 
 @Service
@@ -108,7 +107,7 @@ public class UpdatePictureUtils {
 				g.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
 				g.dispose();
 				// 输出为文件
-				ImageIO.write(tag, "JPEG", new File(webroot+"/upload/article/"+id+"_big.jpg"));
+				ImageIO.write(tag, "JPEG", new File(webroot+"/upload/photo/"+id+"_big.jpg"));
 	        
 	        String[] se1 = str[1].split("x");
 				height=Integer.parseInt(se1[0]);
@@ -127,7 +126,7 @@ public class UpdatePictureUtils {
 		        g1.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
 		        g1.dispose();
 		        // 输出为文件
-		        ImageIO.write(tag1, "JPEG", new File(webroot+"/upload/article/"+id+"_small.jpg"));
+		        ImageIO.write(tag1, "JPEG", new File(webroot+"/upload/photo/"+id+"_small.jpg"));
 	}
 	
 	public void updatePicture(long id,String image,String picture,SystemConstant.Type type) throws FileNotFoundException, IOException{
@@ -192,12 +191,7 @@ public class UpdatePictureUtils {
 				g.drawImage(finalImg, 0, 0, null); // 绘制截取后的图
 				g.dispose();
 				// 输出为文件
-	//			ImageIO.write(tag, "JPEG", new File("E:/photo/"+id+".jpg"));
 				ImageIO.write(tag, "JPEG", new File(webroot+"/upload/"+type+"/"+id+"_picture.jpg"));
 	}
 	
-//	public static void main(String[] args) throws FileNotFoundException, IOException {
-//		UpdatePictureUtils y= new UpdatePictureUtils();
-//		y.updatePicture(9, "E:/notes/photo/999.jpg", "600x800", FileConstant.Type.photo);
-//	}
 }

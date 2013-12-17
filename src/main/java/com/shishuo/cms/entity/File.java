@@ -41,25 +41,71 @@ public class File {
 	 * 所属目录Id
 	 */
 	private long folderId;
+	
+	/**
+	 * 父类Id
+	 */
+	private long fatherId;
 
 	/**
 	 * 管理员Id
 	 */
 	private long adminId;
-	/**
-	 * 图片路径
-	 */
-	private FileConstant.Picture picture;
 
 	/**
-	 * 文件名称
+	 * 英文名称
 	 */
+	private String ename;
+	
+	/**
+	 * 文件名称
+	 */ 
 	private String name;
+	
+	/**
+	 * 文件简介
+	 */ 
+	private String title;
 
 	/**
 	 * 文件内容
 	 */
 	private String content;
+	
+	/**
+	 * 文件描述
+	 */
+	private String description;
+	
+	/**
+	 * 密码
+	 */ 
+	private String password;
+	
+	/**
+	 * 内容类型，同HTTP协议中的Content_Type
+	 */ 
+	private String contentType;
+	
+	/**
+	 * 大小
+	 */
+	private double size;
+	
+	/**
+	 * 报价
+	 */
+	private double price;
+	
+	/**
+	 * 实际价格
+	 */
+	private double realPrice;
+	
+	/**
+	 * 文件被copy的次数，相当于是商品的库存
+	 */
+	private int copyCount;
 	
 	/**
 	 * 浏览人数
@@ -82,9 +128,19 @@ public class File {
 	private FileConstant.Status status;
 
 	/**
-	 * 时间
+	 * 创建时间
 	 */
 	private Date createTime;
+	
+	/**
+	 * 更新时间
+	 */
+	private Date updateTime;
+	
+	/**
+	 * 过期时间
+	 */
+	private Date expireTime;
 
 	public long getFileId() {
 		return fileId;
@@ -158,14 +214,6 @@ public class File {
 		this.commentCount = commentCount;
 	}
 
-	public FileConstant.Picture getPicture() {
-		return picture;
-	}
-
-	public void setPicture(FileConstant.Picture picture) {
-		this.picture = picture;
-	}
-
 	public SystemConstant.Type getType() {
 		return type;
 	}
@@ -173,5 +221,103 @@ public class File {
 	public void setType(SystemConstant.Type type) {
 		this.type = type;
 	}
+
+	public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public double getSize() {
+		return size;
+	}
+
+	public void setSize(double size) {
+		this.size = size;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public double getRealPrice() {
+		return realPrice;
+	}
+
+	public void setRealPrice(double realPrice) {
+		this.realPrice = realPrice;
+	}
+
+	public int getCopyCount() {
+		return copyCount;
+	}
+
+	public void setCopyCount(int copyCount) {
+		this.copyCount = copyCount;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Date getExpireTime() {
+		return expireTime;
+	}
+
+	public void setExpireTime(Date expireTime) {
+		this.expireTime = expireTime;
+	}
+
+	public long getFatherId() {
+		return fatherId;
+	}
+
+	public void setFatherId(long fatherId) {
+		this.fatherId = fatherId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 
 }

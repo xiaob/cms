@@ -44,7 +44,7 @@
                                     	</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="${basePath}/admin/comment/${commentVo.commentId}" title="审核">
+                							<a href="${basePath}/admin/comment/${commentVo.commentId}.htm" title="审核">
                 								<button class="btn btn-success btn-xs">
                   									<i class="icon-ok"></i>
                   								</button>

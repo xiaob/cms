@@ -32,7 +32,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.constant.UploadConstant;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.vo.JsonVo;
@@ -42,64 +41,77 @@ import com.shishuo.cms.util.UploadUtils;
 @Controller
 @RequestMapping("/admin/picture")
 public class AdminPhotoAction extends AdminBaseAction {
-	
-//	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-//	public String upload(ModelMap modelMap) {
-//		return "system/photo/upload";
-//	}
-	
-	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/upload.htm", method = RequestMethod.GET)
 	public String upload(ModelMap modelMap) {
-		return "system/upload";
+		modelMap.put("photoList", folderService.getAllFolderByType(SystemConstant.Type.photo));
+		modelMap.put("fileList", folderService.getAllFolderByType(SystemConstant.Type.file));
+		modelMap.put("shopList", folderService.getAllFolderByType(SystemConstant.Type.shop));
+		return "system/photo/upload";
 	}
-	
+
+	// @RequestMapping(value = "/upload", method = RequestMethod.GET)
+	// public String upload(ModelMap modelMap) {
+	// return "system/upload";
+	// }
+
 	@ResponseBody
-	@RequestMapping(value = "/preview", method = RequestMethod.POST)
-	public JsonVo<String> preview(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException{
+	@RequestMapping(value = "/preview.htm", method = RequestMethod.POST)
+	public JsonVo<String> preview(@RequestParam("file") MultipartFile file)
+			throws IllegalStateException, IOException {
 		JsonVo<String> json = new JsonVo<String>();
-		String path="";
+		String path = "";
 		java.io.File source = new java.io.File(path);
 		file.transferTo(source);
 		return json;
 	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
-	public JsonVo<String> uploadPicture(@RequestParam("file") MultipartFile file,
-			@RequestParam("folderId") long folderId,
-			@RequestParam(value= "content") String content,
-			HttpServletRequest request) throws Exception {
-		JsonVo<String> json = new JsonVo<String>();
-		try {
-			// 检测校验结果
-			validate(json);
-			if (UploadUtils.checkUploadFile(file, UploadConstant.Type.file)) {
-				Admin admin = this.getAdmin(request);
-				File fi= fileService.addFile(folderId,admin.getAdminId(), FileConstant.Picture.exist, 
-						file.getOriginalFilename(),content, SystemConstant.Type.photo, FileConstant.Status.display);
-				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-				String path = webroot+"/upload/"+SystemConstant.Type.photo+fi.getFileId()+".jpg";
-				java.io.File source = new java.io.File(path);
-				file.transferTo(source);
-				String picture = configSevice.getConfigByKey("picture_size", true);
-				updatePictureConsTant.updatePicture(fi.getFileId(), path, picture, SystemConstant.Type.photo);
-			} else {
-				String errorMessage = "上传的文件只能是jpg,png,gif的图片格式";
-			}
-		} catch (Exception e) {
-			json.setResult(false);
-			json.setMsg(e.getMessage());
-		}
-		return json;
+
+//	@ResponseBody
+//	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
+//	public JsonVo<String> uploadPicture(
+//			@RequestParam("file") MultipartFile file,
+//			@RequestParam("folderId") long folderId,
+//			@RequestParam(value = "content") String content,
+//			HttpServletRequest request) throws Exception {
+//		JsonVo<String> json = new JsonVo<String>();
+//		try {
+//			// 检测校验结果
+//			validate(json);
+//			if (UploadUtils.isFileType(file.getName(), UploadUtils.PHOTO_TYPE)) {
+//				Admin admin = this.getAdmin(request);
+//				File fi = fileService.addFile(folderId, admin.getAdminId(),
+//						file.getOriginalFilename(),
+//						content, SystemConstant.Type.photo,
+//						FileConstant.Status.display);
+//				String webroot = System
+//						.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
+//				String path = webroot + "/upload/" + SystemConstant.Type.photo
+//						+ fi.getFileId() + ".jpg";
+//				java.io.File source = new java.io.File(path);
+//				file.transferTo(source);
+//				String picture = configSevice.getConfigByKey("picture_size",
+//						true);
+//				updatePictureConsTant.updatePicture(fi.getFileId(), path,
+//						picture, SystemConstant.Type.photo);
+//			} else {
+//				String errorMessage = "上传的文件只能是jpg,png,gif的图片格式";
+//			}
+//		} catch (Exception e) {
+//			json.setResult(false);
+//			json.setMsg(e.getMessage());
+//		}
+//		return json;
+//	}
+
+	@RequestMapping(value = "/list.htm", method = RequestMethod.GET)
+	public String list(
+			@RequestParam(value = "p", required = false, defaultValue = "1") int p,
+			HttpServletRequest request, ModelMap modelMap) {
+		PageVo<com.shishuo.cms.entity.vo.FileVo> filePage = fileService
+				.getAllFileByTypeAndStatusPage(SystemConstant.Type.photo,
+						FileConstant.Status.display, p);
+		modelMap.addAttribute("filePage", filePage);
+		return "system/picturelist";
 	}
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-	 public String list(@RequestParam(value="p",required=false,defaultValue="1") int p,
-			            HttpServletRequest request,ModelMap modelMap){
-          PageVo<com.shishuo.cms.entity.vo.FileVo> filePage = fileService.getAllFileByTypePage(SystemConstant.Type.photo,
-        		  FileConstant.Status.display, p);
-          modelMap.addAttribute("filePage", filePage);
-    	    return "system/picturelist";
-    }
-	
 }

@@ -22,12 +22,16 @@
 <mapper namespace="com.shishuo.cms.dao.FileDao">
 
 	<!-- ############################## -->
-	<!-- ######        增加                      ###### -->
+	<!-- ######        增加       ###### -->
 	<!-- ############################## -->
 	<insert id="addFile" parameterType="com.shishuo.cms.entity.File">
 		insert into
-		file(folderId,adminId,picture,name,content,viewCount,commentCount,type,status,createTime)
-		value(#{folderId},#{adminId},#{picture},#{name},#{content},#{viewCount},#{commentCount},#{type},#{status},#{createTime})
+		file(folderId,fatherId,adminId,ename,name,title,password,
+			contentType,size,price,realPrice,copyCount,
+			content,viewCount,commentCount,type,status,createTime,updateTime,expireTime)
+		value(#{folderId},#{fatherId},#{adminId},#{ename},#{name},#{title},#{password},
+			#{contentType},#{size},#{price},#{realPrice},#{copyCount},
+			#{content},#{viewCount},#{commentCount},#{type},#{status},#{createTime},#{updateTime},#{expireTime})
 		<selectKey resultType="long" keyProperty="fileId">
 			SELECT
 			LAST_INSERT_ID()	
@@ -35,7 +39,7 @@
 	</insert>
 	
 	<!-- ############################## -->
-	<!-- ######       删除                         ###### -->
+	<!-- ######       删除        ###### -->
 	<!-- ############################## -->
 
 	<delete id="deleteFile" parameterType="com.shishuo.cms.entity.File">
@@ -44,13 +48,13 @@
 	</delete>
 
 	<!-- ############################## -->
-	<!-- ######       修改                         ###### -->
+	<!-- ######       修改        ###### -->
 	<!-- ############################## -->
 
 	<update id="updateFile" parameterType="com.shishuo.cms.entity.File">
 		update file set
-		folderId=#{folderId},name=#{name},picture=#{picture},
-		content=#{content},status=#{status}
+		folderId=#{folderId},fatherId=#{fatherId},ename=#{ename},name=#{name},title=#{title},description=#{description},
+		content=#{content},status=#{status},password=#{password},updateTime=#{updateTime}
 		where fileId=#{fileId}
 	</update>
 
@@ -70,7 +74,7 @@
 	</update>
 
 	<!-- ############################## -->
-	<!-- ######       查询                         ###### -->
+	<!-- ######       查询        ###### -->
 	<!-- ############################## -->
 
 	<select id="getFileById" parameterType="long"
@@ -80,7 +84,7 @@
 
 	<select id="getFileListByTypeAndFoderId" resultType="com.shishuo.cms.entity.vo.FileVo">
 		select * from file
-		where type = #{type} <if test="folderId!=0">and folderId=#{folderId}</if>and status=#{status} limit #{offset},#{rows}
+		where type = #{type} <if test="folderId!=0">and folderId=#{folderId}</if>and status=#{status}  order by createTime desc limit #{offset},#{rows}
 	</select>
 	
 	<select id="getFileCountByTypeAndFoderId" resultType="Integer">
@@ -90,6 +94,15 @@
 	<select id="getFileListByType" resultType="com.shishuo.cms.entity.vo.FileVo">
 		select * from file
 		where type=#{type} and status=#{status} order by createTime desc limit #{offset},#{rows} 
+	</select>
+	
+	<select id="getFileListByStatusNotinHidden" resultType="com.shishuo.cms.entity.vo.FileVo">
+		select * from file
+		where type=#{type} and status not in (#{status}) order by createTime desc limit #{offset},#{rows} 
+	</select>
+	
+	<select id="getFileCountByStatusNotinHidden" resultType="Integer">
+		select count(*) from file where type=#{type} and status not in (#{status}) 
 	</select>
 
 	<select id="getFileCountByType" resultType="Integer">
@@ -101,5 +114,13 @@
 		select count(*) from 
 		file where folderId=#{folderId}
 	</select>
-
+	
+	<select id="getFileCountByTypeAndStatus" resultType="Integer">
+		select count(*) from file where type=#{type} and status=#{status}
+	</select>
+	
+	<select id="getFileListByFatherIdAndType" resultType="com.shishuo.cms.entity.File">
+		select * from file where fatherId=#{fatherId} and type=#{type}
+	</select>
+	
 </mapper>  

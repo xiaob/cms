@@ -43,7 +43,7 @@
 										</#list>
                             			<input type="text" folderId="${e.folderId}" value="${e.sort}" name="sort" class="js_folder_sort" style="width:40px;">
                             			</td>
-										<td>${e.ename}</td>
+										<td><a href="${basePath}/${e.ename}.htm">${e.ename}</a></td>
                                     	<td>${e.name}</td>
                                     	<td>${e.count}</td>
                                     	<td><#if e.status="display" >显示<#else>隐藏</#if></td>
@@ -52,7 +52,7 @@
                                     	文章
                                     	<#elseif e.type="photo">
                                     	相册
-                                    	<#elseif e.type="download">
+                                    	<#elseif e.type="file">
                                     	下载
                                     	<#elseif e.type="shop">
                                     	商城
@@ -71,12 +71,12 @@
                                     	</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="${basePath}/admin/folder/${e.folderId}" title="修改">
+                							<a href="${basePath}/admin/folder/${e.folderId}.htm" title="修改">
                 								<button class="btn btn-primary btn-xs">
                 									<i class="icon-pencil"></i>
                 								</button>
                 							</a>
-                							<a class="js_folder_delete" folderId="${e.folderId}" href="javascript:void(0);" title="删除${e.name}">
+                							<a class="js_folder_delete" folderId="${e.folderId}.htm" href="javascript:void(0);" title="删除${e.name}">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>
@@ -108,7 +108,7 @@
 					$.post("${basePath}/admin/folder/sort.json", { "sortJson": $.toJSON(folderSort)},function(data){
 						if(data.result){
 							bootbox.alert("更新成功", function() {
-								window.location.href="${basePath}/admin/folder/page";
+								window.location.href="${basePath}/admin/folder/page.htm";
 							});
 						}else{
 							bootbox.alert(data.msg, function() {});

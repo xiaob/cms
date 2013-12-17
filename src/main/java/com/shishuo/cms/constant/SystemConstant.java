@@ -25,28 +25,38 @@ package com.shishuo.cms.constant;
  * 
  */
 public class SystemConstant {
-	
+
 	/**
 	 * 应用部署路径的KEY
 	 */
 	public static final String SHISHUO_CMS_ROOT = "shishuo.cms.root";
+
+	/**
+	 * 应用网址
+	 */
+	public static String BASE_PATH = "";
+	
+
+	/**
+	 * 上传的图片地址
+	 */
+	public static String UPLOAD_PHOTO_PATH = "/upload/photo";
 	
 	/**
-	 * 网址
+	 * 上传的文件地址
 	 */
-	public static  String BASE_PATH = "";
-	
+	public static String UPLOAD_FILE_PATH = "/upload/file";
+
 	/**
 	 * Session中的管理员Key
 	 */
 	public static final String SESSION_ADMIN = "SESSION_ADMIN";
-	
-	
+
 	/**
 	 * 头像URL 180x180
 	 */
 	public static final String FACE_URL = "http://faceurl.shishuo.com/face";
-	
+
 	/**
 	 * 文件跟目录的类型
 	 * 
@@ -54,6 +64,18 @@ public class SystemConstant {
 	 * 
 	 */
 	public static enum Type {
-		article, photo, download, shop
+		/**
+		 * 文章
+		 */
+		article, /**
+		 * 图片
+		 */
+		photo, /**
+		 * 文件
+		 */
+		file, /**
+		 * 商品
+		 */
+		shop
 	};
 }

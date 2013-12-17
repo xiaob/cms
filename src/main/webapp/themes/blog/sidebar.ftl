@@ -6,7 +6,7 @@
                         <ul class="list-unstyled">
                         	<@cms_folder_list fatherId="0" >
 	                        	<#list folderList as folder>
-	                            <li><a href="${basePath}/${folder.ename}"><i class="  icon-angle-right"></i> ${folder.name}</a></li>
+	                            <li><a href="${basePath}/${folder.ename}.htm"><i class="  icon-angle-right"></i> ${folder.name}</a></li>
 	                            </#list>
                             </@cms_folder_list>
                         </ul>
@@ -17,9 +17,17 @@
                         <#list pageVo.list as file>
                         <div class="media">
                             <div class="media-body">
-                                <a href="${basePath}/${file.folder.ename}/${file.fileId}">${file.name}</a>（${file.createTime?string("yyyy-MM-dd")}）
+                                <a href="${basePath}/${file.folder.ename}/${file.fileId}.htm">${file.name}</a>（${file.createTime?string("yyyy-MM-dd")}）
                             </div>
                         </div>
                         </#list>
                         </@cms_file_page>
-                    </div>                    
+                    </div>  
+					<div class="blog-post">
+                        <h3>快捷方式</h3>
+                        <div class="media">
+                            <div class="media-body">
+                                <a href="${basePath}/auth/admin/login.htm">管理员登录</a>
+                            </div>
+                        </div>
+                    </div>                                       

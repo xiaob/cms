@@ -24,11 +24,8 @@
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
-                						<th>文件Id</th>
-                						<th>所属目录Id</th>
-                						<th>文章名称</th>
-                						<th>文字图片</th>
-                						<th>文章类型</th>
+                                		<th>文章名称</th>
+                						<th>所属目录</th>
                 						<th>时间</th>
                 						<th>操作</th>
               						</tr>
@@ -36,17 +33,15 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
-               							<td>${e.fileId}</td>
-                            			<td>${e.folderId}</td>
-                                    	<td>${e.name}</td>
-                                    	<td>${e.picture}</td>
-                                    	<td>${e.content}</td>
+               							<td class="articleId">${e.fileId}</td>
+               							<td><a href="${basePath}/${e.folder.ename}/${e.fileId}.htm">${e.name}</a></td>
+                            			<td>${e.folder.name}</td>
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
                   							<a class="article_update_status" fileId="${e.fileId}" title="还原${e.name}文章">
                   								<button class="btn btn-success btn-xs">
-                  									<i class="icon-ok"></i>
+                  									<i class="icon-share-sign"></i>
                   								</button>
                   							</a>
                   							<a class="js_article_delete" fileId="${e.fileId}" title="彻底删除${e.name}文章">
@@ -72,6 +67,7 @@
 		<!--main content end-->
 <script>
 $(function(){
+	$('.articleId').hide();
 	$('.article_update_status').click(function(){
 		var fileId = $(this).attr('fileId');
 		var status= "display";
@@ -96,14 +92,14 @@ $(function(){
 											label : "返回回收站",
 											className : "btn-success",
 											callback : function() {
-												window.location.href="${basePath}/admin/article/page?status=hidden"
+												window.location.href="${basePath}/admin/article/page.htm?status=hidden"
 											}
 										},
 										cancel : {
 											label : "返回文章列表",
 											className : "btn-primary",
 											callback : function() {
-												window.location.href="${basePath}/admin/file/page?type=article";
+												window.location.href="${basePath}/admin/file/page.htm?type=article";
 											}
 										}
 									}
@@ -134,7 +130,7 @@ $(function(){
 					label : "删除",
 					className : "btn-success",
 					callback : function() {
-					$.post("${basePath}/admin/article/delete.json", { "fileId": fileId},
+					$.post("${basePath}/admin/file/delete.json", { "fileId": fileId},
 						function(data){
 							if(data.result){
 								bootbox.dialog({
@@ -145,21 +141,14 @@ $(function(){
 											label : "继续清理",
 											className : "btn-success",
 											callback : function() {
-												$.post("${basePath}/admin/folder/delete.json", { "folderId": folderId},
-											   	function(data){
-											   		if(data.result){
-											   			window.location.reload();
-											   		}else{
-											   			bootbox.alert(data.msg, function() {});
-											   		}
-											   	}, "json");
+												window.location.reload();
 											}
 										},
 										cancel : {
 											label : "返回文章列表",
 											className : "btn-primary",
 											callback : function() {
-												window.location.href="${basePath}/admin/file/page?type=article";
+												window.location.href="${basePath}/admin/file/page.htm?type=article";
 											}
 										}
 									}

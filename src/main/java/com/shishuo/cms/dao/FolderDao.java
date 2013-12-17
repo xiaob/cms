@@ -23,7 +23,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
@@ -58,7 +57,6 @@ public interface FolderDao {
 	 * @param folder
 	 * @return boolean
 	 */
-	// FIXME 传入参数 folderId, status
 	public boolean deleteFolder(@Param("folderId") long folderId);
 
 	
@@ -76,6 +74,8 @@ public interface FolderDao {
 	public int updateSort(@Param("folderId") long folderId,@Param("sort") int sort);
 
 	public int updatePath(@Param("folderId") long folderId,@Param("path") String path);
+	
+	public int updateCount(@Param("folderId") long folderId,@Param("count") int count);
 
 	// ///////////////////////////////
 	// /////       查询                         ////////

@@ -18,6 +18,8 @@
  */
 package com.shishuo.cms.entity.vo;
 
+import java.util.List;
+
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.File;
 import com.shishuo.cms.entity.Folder;
@@ -31,9 +33,40 @@ public class FileVo extends File {
 	private Admin admin;
 
 	private Folder folder;
+	
+	private String timeType;
+	
+	private List<File> photo;
+	
+	private List<File> file;
+	
+
+	public List<File> getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(List<File> photo) {
+		this.photo = photo;
+	}
+
+	public List<File> getFile() {
+		return file;
+	}
+
+	public void setFile(List<File> file) {
+		this.file = file;
+	}
 
 	public Admin getAdmin() {
 		return admin;
+	}
+
+	public String getTimeType() {
+		return timeType;
+	}
+
+	public void setTimeType(String timeType) {
+		this.timeType = timeType;
 	}
 
 	public void setAdmin(Admin admin) {

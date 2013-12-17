@@ -33,8 +33,9 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">英文名称</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="folderEname" value="${folder.ename}"
-									placeholder="英文名称" id="folderEname">
+								<input onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"  
+									CLASS="form-control" NAME="folderEname" VALUE="${folder.ename}" PLACEHOLDER="英文名称">
+                                      <label>注意:英文名称只能是数字或者英文字母或者是下划线组成</label>
 							</div>
 						</div>
 						<div class="form-group">
@@ -71,7 +72,7 @@
                                         	图片
                                   		</label>
                                   		<label class="checkbox-inline">
-                                    		<input type="radio" value="download" name="type" <#if folder.type=="download">checked</#if>>
+                                    		<input type="radio" value="file" name="type" <#if folder.type=="file">checked</#if>>
                                         	下载
                                   		</label>                                 			
                                   		<label class="checkbox-inline">
@@ -148,7 +149,7 @@
 								label : "前往文件夹列表",
 								className : "btn-primary",
 								callback : function() {
-									window.location.href="${basePath}/admin/folder/page";
+									window.location.href="${basePath}/admin/folder/page.htm";
 								}
 							},
 						}

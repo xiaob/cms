@@ -40,9 +40,9 @@ public class AdminCommentAction extends AdminBaseAction{
 	 * @author 进入所有评论列表页面
 	 *
 	 */
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
 	public String allComment(ModelMap modelMap,
-			@RequestParam(value="pageNum",defaultValue="1") int pageNum){
+			@RequestParam(value="p",defaultValue="1") int pageNum){
 		modelMap.put("pageVo", commentService.getCommentListPage(pageNum));
 		return "system/comment/all";
 	}
@@ -51,9 +51,9 @@ public class AdminCommentAction extends AdminBaseAction{
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/auditing/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/auditing/list.htm", method = RequestMethod.GET)
 	public String auditingList(ModelMap modelMap,
-			@RequestParam(value="pageNum",defaultValue="1") int pageNum){
+			@RequestParam(value="p",defaultValue="1") int pageNum){
 		modelMap.put("pageVo", commentService.getCommentByStatusPage(pageNum, CommentConstant.Status.hidden));
 		return "system/comment/auditingList";
 	}
@@ -63,7 +63,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	 * @author Administrator
 	 *
 	 */
-	@RequestMapping(value = "/auditing/{commentId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/auditing/{commentId}.htm", method = RequestMethod.POST)
 	public String auditingComment(
 			@PathVariable long commentId){
 		commentService.updateCommentStatus(commentId, CommentConstant.Status.display);
@@ -74,7 +74,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	 * @author 进入指定的comment页面
 	 *
 	 */
-	@RequestMapping(value = "/{commentId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{commentId}.htm", method = RequestMethod.GET)
 	public String comment(@PathVariable long commentId,ModelMap modelMap){
 		modelMap.put("comment", commentService.getCommentById(commentId));
 		return "system/comment/comment";
@@ -84,7 +84,7 @@ public class AdminCommentAction extends AdminBaseAction{
 	 * @author 垃圾评论
 	 *
 	 */
-	@RequestMapping(value = "/cancel/{commentId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/cancel/{commentId}.htm", method = RequestMethod.GET)
 	public String cancelAuditing(@PathVariable long commentId){
 		commentService.updateCommentStatus(commentId, CommentConstant.Status.hidden);
 		return "redirect:/admin/comment/page";

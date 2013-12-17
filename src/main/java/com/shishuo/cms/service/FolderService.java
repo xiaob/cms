@@ -27,6 +27,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shishuo.cms.constant.FileConstant;
 import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.FolderDao;
@@ -158,6 +159,10 @@ public class FolderService {
 	 */
 	public int updatePath(long folderId,String path){
 		return folderDao.updatePath(folderId, path);
+	}
+	
+	public int updateCount(long folderId, int count){
+		return folderDao.updateCount(folderId, count);
 	}
 
 	// ///////////////////////////////

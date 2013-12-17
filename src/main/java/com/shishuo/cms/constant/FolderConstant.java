@@ -24,7 +24,6 @@ package com.shishuo.cms.constant;
  */
 public class FolderConstant {
 
-
 	public static enum Status {
 		hidden, display
 	};
@@ -35,5 +34,15 @@ public class FolderConstant {
 	 */
 	public static enum Rank {
 		everyone, login, vip, admin
+	};
+
+	/**
+	 * 文件跟目录的类型
+	 * 
+	 * @author Herbert
+	 * 
+	 */
+	public static enum Type {
+		category, tag
 	};
 }
