@@ -249,4 +249,19 @@ public class FolderService {
 		}
 	}
 	
+	public List<Folder> getFolderVoPathList(String path) {
+		String[] folderVoIds = path.split("#");
+		List<Folder> folderVoList = new ArrayList<Folder>();
+		for (String folderVoId : folderVoIds) {
+			try {
+				Folder folder = this.getFolderById(Long.parseLong(folderVoId));
+				folderVoList.add(folder);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return folderVoList;
+	}
+	
 }
