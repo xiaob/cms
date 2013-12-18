@@ -83,39 +83,6 @@ public class AdminArticleAction extends AdminFileAction {
 		return "system/article/add";
 	}
 	
-//	/**
-//	 * 图片上传
-//	 */
-//	@ResponseBody
-//	@RequestMapping(value = "/upload/picture.json", method = RequestMethod.POST)
-//	public JsonVo<String> uploadPicture(
-//			@RequestParam(value ="file") MultipartFile file,
-//			@RequestParam(value ="type") SystemConstant.Type type,
-//			@RequestParam(value ="fileId") long fileId,
-//			HttpServletRequest request) {
-//		JsonVo<String> json = new JsonVo<String>();
-//		try {
-//			// 检测校验结果
-//			validate(json);
-//			File article = fileService.getFileByFileId(fileId);
-//				String webroot = System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
-//				fileService.updateFileByFileId(fileId,article.getFolderId(), 0,this.getAdmin(request).getAdminId(),
-//						article.getName(), article.getContent(),null,
-//						SystemConstant.Type.article, FileConstant.Status.display);
-//				String path = webroot+"/upload/"+type+"/"+fileId+".jpg";
-//				java.io.File source = new java.io.File(path);
-//				file.transferTo(source);
-//				String picture = configSevice.getConfigByKey("article_picture_size", true);
-//				updatePictureConstant.updateArticlePicture(article.getFileId(), path,picture);
-//			json.setResult(true);
-//			
-//		} catch (Exception e) {
-//			json.setResult(false);
-//			json.setMsg(e.getMessage());
-//		}
-//		return json;
-//	}
-
 	/**
 	 * @author 发布新文章
 	 * 
@@ -129,7 +96,7 @@ public class AdminArticleAction extends AdminFileAction {
 			@RequestParam(value = "title",required=false) String title,
 			@RequestParam(value = "description",required=false) String description,
 			@RequestParam(value = "content") String content,
-			@RequestParam(value = "password" ,defaultValue="") String password,
+			@RequestParam(value = "password" ,required=false) String password,
 			@RequestParam(value = "status") FileConstant.Status status,
 			HttpServletRequest request) {
 
@@ -177,8 +144,14 @@ public class AdminArticleAction extends AdminFileAction {
 			}
 			// 检测校验结果
 			validate(json);
-			fileService.updateFileByFileId(fileId,folderId, 0,this.getAdmin(request).getAdminId(),name,
-			content,title,description,password, SystemConstant.Type.article,status);
+			File file = fileService.getFileByFileId(fileId);
+			if(file.getStatus().equals(FileConstant.Status.system)){
+				fileService.updateFileByFileId(fileId,folderId, 0,this.getAdmin(request).getAdminId(),name,
+						content,title,description,password, SystemConstant.Type.article,FileConstant.Status.system);
+			}else{
+				fileService.updateFileByFileId(fileId,folderId, 0,this.getAdmin(request).getAdminId(),name,
+						content,title,description,password, SystemConstant.Type.article,status);
+			}
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

@@ -41,6 +41,11 @@ a:link, a:visited {
     color: #D22929;
     text-decoration: none;
 }
+.lof-slidecontent {
+    border: 1px solid #F4F4F4;
+    overflow: hidden;
+    position: relative;
+}
 </style>
     <!--container start-->
     <div class="container">
@@ -62,7 +67,7 @@ a:link, a:visited {
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-10">
-                        	<div id="slides">
+                        	<div id="slides" class="lof-slidecontent">
                            		<#list file.photo as photo>
                             		<img src="${basePath}/upload/photo/${photo.fileId}_picture.jpg">
                             	</#list>

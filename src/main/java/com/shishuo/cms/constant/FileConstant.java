@@ -66,7 +66,12 @@ public class FileConstant {
 		/**
 		 * 公开的
 		 */
-		display
+		display,
+		
+		/**
+		 * 系统的
+		 */
+		system
 	};
 
 	/**

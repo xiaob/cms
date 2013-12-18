@@ -72,6 +72,7 @@
                                     		<#elseif e.status=="draft">草稿
                                     		<#elseif e.status=="priv">私有的
                                     		<#elseif e.status=="secret">密码保护
+                                    		<#elseif e.status=="system">系统文件
                                     		</#if>
                							</td>
                             			<td>${e.folder.name}</td>
@@ -131,14 +132,14 @@ $(function(){
 											label : "前往回收站",
 											className : "btn-success",
 											callback : function() {
-												window.location.href="${basePath}/admin/article/page?status=hidden"
+												window.location.href="${basePath}/admin/article/page.htm?status=hidden"
 											}
 										},
 										cancel : {
 											label : "返回文章列表",
 											className : "btn-primary",
 											callback : function() {
-												window.location.href="${basePath}/admin/file/page?type=article";
+												window.location.href="${basePath}/admin/file/page.htm?type=article";
 											}
 										}
 									}
