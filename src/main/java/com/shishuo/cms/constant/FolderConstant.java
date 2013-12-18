@@ -25,7 +25,7 @@ package com.shishuo.cms.constant;
 public class FolderConstant {
 
 	public static enum Status {
-		hidden, display
+		hidden, display,system
 	};
 
 	/**

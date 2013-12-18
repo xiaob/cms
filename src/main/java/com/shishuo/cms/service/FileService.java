@@ -81,8 +81,31 @@ public class FileService {
 	public File addFile(long folderId, long fatherId,long adminId,double size,
 			String name,String title, String content,
 			SystemConstant.Type type, FileConstant.Status status) {
+		
 		File file = new File();
-		file.setFolderId(folderId);
+		if(folderId==0){
+			file.setFirstFolderId(0);
+			file.setSecondFolderId(0);
+			file.setThirdFolderId(0);
+		}else{
+			Folder folder = folderDao.getFolderById(folderId);
+			if(folder.getLevel()==3){
+				String[] str = folder.getPath().split("#");
+				file.setFirstFolderId(Integer.parseInt(str[0]));
+				file.setSecondFolderId(Integer.parseInt(str[1]));
+				file.setSecondFolderId(Integer.parseInt(str[2]));
+			}else if(folder.getLevel()==2){
+				String[] str = folder.getPath().split("#");
+				file.setFirstFolderId(Integer.parseInt(str[0]));
+				file.setSecondFolderId(Integer.parseInt(str[1]));
+				file.setThirdFolderId(0);
+			}else{
+				file.setFirstFolderId(folderId);
+				file.setSecondFolderId(0);
+				file.setThirdFolderId(0);
+			}
+				file.setSecondFolderId(0);
+		}
 		file.setFatherId(fatherId);
 		file.setEname("");
 		file.setSize(size);
@@ -138,7 +161,30 @@ public class FileService {
 			String name, String content,String password,String title, String description,
 			SystemConstant.Type type, FileConstant.Status status) {
 		File file = fileDao.getFileById(fileId);
-		file.setFolderId(folderId);
+		if(folderId==0){
+			file.setFirstFolderId(0);
+			file.setSecondFolderId(0);
+			file.setThirdFolderId(0);
+			file.setFolderId(folderId);
+		}else{
+			Folder folder = folderDao.getFolderById(folderId);
+			file.setFolderId(folderId);
+			if(folder.getLevel()==3){
+				String[] str = folder.getPath().split("#");
+				file.setFirstFolderId(Integer.parseInt(str[0]));
+				file.setSecondFolderId(Integer.parseInt(str[1]));
+				file.setThirdFolderId(Integer.parseInt(str[2]));
+			}else if(folder.getLevel()==2){
+				String[] str = folder.getPath().split("#");
+				file.setFirstFolderId(Integer.parseInt(str[0]));
+				file.setSecondFolderId(Integer.parseInt(str[1]));
+				file.setThirdFolderId(0);
+			}else{
+				file.setFirstFolderId(folderId);
+				file.setSecondFolderId(0);
+				file.setThirdFolderId(0);
+			}
+		}
 		file.setFatherId(fatherId);
 		file.setAdminId(adminId);
 		file.setName(name);
@@ -159,7 +205,30 @@ public class FileService {
 			String name, String content,String title, String description, String password,
 			SystemConstant.Type type, FileConstant.Status status) {
 		File file = fileDao.getFileById(fileId);
-		file.setFolderId(folderId);
+		if(folderId==0){
+			file.setFolderId(0);
+			file.setFirstFolderId(0);
+			file.setSecondFolderId(0);
+			file.setThirdFolderId(0);
+		}else{
+			Folder folder = folderDao.getFolderById(folderId);
+			file.setFolderId(folderId);
+			if(folder.getLevel()==3){
+				String[] str = folder.getPath().split("#");
+				file.setFirstFolderId(Integer.parseInt(str[0]));
+				file.setSecondFolderId(Integer.parseInt(str[1]));
+				file.setThirdFolderId(Integer.parseInt(str[2]));
+			}else if(folder.getLevel()==2){
+				String[] str = folder.getPath().split("#");
+				file.setFirstFolderId(Integer.parseInt(str[0]));
+				file.setSecondFolderId(Integer.parseInt(str[1]));
+				file.setThirdFolderId(0);
+			}else{
+				file.setFirstFolderId(folderId);
+				file.setSecondFolderId(0);
+				file.setThirdFolderId(0);
+			}
+		}
 		file.setFatherId(fatherId);
 		file.setAdminId(adminId);
 		file.setName(name);
@@ -235,10 +304,10 @@ public class FileService {
 				file.setFolder(folderDao.getFolderById(file.getFolderId()));
 			}
 			if(file.getTitle()==null){
-				file.setTitle("无");
+				file.setTitle("");
 			}
 			if(file.getDescription()==null){
-				file.setDescription("无");
+				file.setDescription("");
 			}
 			file.setAdmin(admin);
 			file.setPhoto(this.getFileListByFatherIdAndType(fileId, SystemConstant.Type.photo));

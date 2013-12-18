@@ -176,7 +176,7 @@ public class CommentService {
 	 */
 	public PageVo<Comment> getCommentListPage(int pageNum) {
 		PageVo<Comment> pageVo = new PageVo<Comment>(pageNum);
-		pageVo.setUrl("/CMS/admin/comment/page?");
+		pageVo.setUrl("/CMS/admin/comment/page.htm?");
 		pageVo.setRows(5);
 		List<Comment> list = this.getCommentList(pageVo.getOffset(),
 				pageVo.getRows());

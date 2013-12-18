@@ -116,6 +116,10 @@ public class AdminFileAction extends AdminBaseAction {
 	public JsonVo<String> deleteFile(@RequestParam(value = "fileId") long fileId)
 			throws FileNotFoundException {
 		JsonVo<String> json = new JsonVo<String>();
+		File file = fileService.getFileByFileId(fileId);
+		if(file.getStatus().equals(FileConstant.Status.system)){
+			json.setMsg("这是系统文件无法被删除");
+		}
 		fileService.deleteFileByFileId(fileId);
 		json.setResult(true);
 		return json;
@@ -123,15 +127,22 @@ public class AdminFileAction extends AdminBaseAction {
 
 	/**
 	 * 放进回收站，还原
+	 * @throws FileNotFoundException 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/status/update.json", method = RequestMethod.POST)
 	public JsonVo<String> updateModify(
 			@RequestParam(value = "fileId") long fileId,
-			@RequestParam(value = "status") FileConstant.Status status) {
+			@RequestParam(value = "status") FileConstant.Status status) throws FileNotFoundException {
 		JsonVo<String> json = new JsonVo<String>();
-		fileService.updateStatusByFileId(fileId, status);
-		json.setResult(true);
+		File file = fileService.getFileByFileId(fileId);
+		if(file.getStatus().equals(FileConstant.Status.system)){
+			json.setResult(false);
+			json.setMsg("这是系统文件不能进行操作");
+		}else{
+			fileService.updateStatusByFileId(fileId, status);
+			json.setResult(true);
+		}
 		return json;
 	}
 

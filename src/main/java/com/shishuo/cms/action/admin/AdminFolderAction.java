@@ -168,7 +168,12 @@ public class AdminFolderAction extends AdminBaseAction{
 
 			// 检测校验结果
 			validate(json);
-			folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status,type, rank,sort);
+			Folder folder = folderService.getFolderById(folderId);
+			if(folder.getStatus().equals(FolderConstant.Status.system)){
+				folderService.updateFolderById(folderId, fatherId, folderEname, folderName,FolderConstant.Status.system,type, rank,sort);
+			}else{
+				folderService.updateFolderById(folderId, fatherId, folderEname, folderName,status,type, rank,sort);
+			}
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -205,18 +210,24 @@ public class AdminFolderAction extends AdminBaseAction{
 	public JsonVo<String> delete(@RequestParam(value = "folderId") long folderId){
 		JsonVo<String> json = new JsonVo<String>();
 		List<FolderVo> folderList = folderService.getFolderListByFatherId(folderId);
-		if(folderList.size()==0){
-			int count = fileService.getFileCountByFolderId(folderId);
-			if(count!=0){
-				json.setResult(false);
-				json.setMsg("此目录下还有文件,不能被删除。");
-			}else{
-				json.setResult(true);
-				folderService.deleteFolderById(folderId);
-			}
-		}else{
+		Folder folder = folderService.getFolderById(folderId);
+		if(folder.getStatus().equals(FolderConstant.Status.system)){
 			json.setResult(false);
-			json.setMsg("此目录下有子目录，不能删除。");
+			json.setMsg("此目录是系统目录，无法删除！");
+		}else{
+			if(folderList.size()==0){
+				int count = fileService.getFileCountByFolderId(folderId);
+				if(count!=0){
+					json.setResult(false);
+					json.setMsg("此目录下还有文件,不能被删除。");
+				}else{
+					json.setResult(true);
+					folderService.deleteFolderById(folderId);
+				}
+			}else{
+				json.setResult(false);
+				json.setMsg("此目录下有子目录，不能删除。");
+			}
 		}
 		return json;
 	}

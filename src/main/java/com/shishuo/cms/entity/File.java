@@ -36,11 +36,26 @@ public class File {
 	 * 文件Id
 	 */
 	private long fileId;
-
+	
 	/**
-	 * 所属目录Id
+	 * 所属目录的Id
 	 */
 	private long folderId;
+
+	/**
+	 * 所属目录的第一级Id
+	 */
+	private long firstFolderId;
+	
+	/**
+	 * 所属目录的第二级Id
+	 */
+	private long secondFolderId;
+	
+	/**
+	 * 所属目录的第三级Id
+	 */
+	private long thirdFolderId;
 	
 	/**
 	 * 父类Id
@@ -156,6 +171,30 @@ public class File {
 
 	public void setFolderId(long folderId) {
 		this.folderId = folderId;
+	}
+
+	public long getFirstFolderId() {
+		return firstFolderId;
+	}
+
+	public void setFirstFolderId(long firstFolderId) {
+		this.firstFolderId = firstFolderId;
+	}
+
+	public long getSecondFolderId() {
+		return secondFolderId;
+	}
+
+	public void setSecondFolderId(long secondFolderId) {
+		this.secondFolderId = secondFolderId;
+	}
+
+	public long getThirdFolderId() {
+		return thirdFolderId;
+	}
+
+	public void setThirdFolderId(long thirdFolderId) {
+		this.thirdFolderId = thirdFolderId;
 	}
 
 	public String getName() {
