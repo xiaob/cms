@@ -44,9 +44,13 @@ public class Comment {
 	 */
 	private long fatherId;
 	/**
-	 * 所属文件Id
+	 * 所属种类的Id
 	 */
-	private long fileId;
+	private long kindId;
+	/**
+	 * 所属种类
+	 */
+	private CommentConstant.kind kind;
 	/**
 	 * 评论名称
 	 */
@@ -68,6 +72,11 @@ public class Comment {
 	 */
 	private String ip;
 	/**
+	 * 所属phone
+	 */
+	private long phone;
+
+	/**
 	 * 审核状态
 	 */
 	private CommentConstant.Status status;
@@ -75,6 +84,14 @@ public class Comment {
 	 * 时间
 	 */
 	private Date createTime;
+
+	public long getPhone() {
+		return phone;
+	}
+
+	public void setPhone(long phone) {
+		this.phone = phone;
+	}
 
 	public long getCommentId() {
 		return commentId;
@@ -84,12 +101,20 @@ public class Comment {
 		this.commentId = commentId;
 	}
 
-	public long getFileId() {
-		return fileId;
+	public long getKindId() {
+		return kindId;
 	}
 
-	public void setFileId(long fileId) {
-		this.fileId = fileId;
+	public void setKindId(long kindId) {
+		this.kindId = kindId;
+	}
+
+	public CommentConstant.kind getKind() {
+		return kind;
+	}
+
+	public void setKind(CommentConstant.kind kind) {
+		this.kind = kind;
 	}
 
 	public String getEmail() {

@@ -24,69 +24,93 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.CommentConstant;
+import com.shishuo.cms.entity.Comment;
+import com.shishuo.cms.entity.vo.JsonVo;
 
 /**
  * 评论action
+ * 
  * @author Zhangjiale
- *
+ * 
  */
 @Controller
 @RequestMapping("/admin/comment")
-public class AdminCommentAction extends AdminBaseAction{
+public class AdminCommentAction extends AdminBaseAction {
 
 	/**
 	 * @author 进入所有评论列表页面
-	 *
+	 * 
 	 */
 	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
-	public String allComment(ModelMap modelMap,
-			@RequestParam(value="p",defaultValue="1") int pageNum){
-		modelMap.put("pageVo", commentService.getCommentListPage(pageNum));
+	public String allComment(
+			ModelMap modelMap,
+			@RequestParam(value = "p", defaultValue = "1") int pageNum,
+			@RequestParam(value = "status", required = false) CommentConstant.Status status) {
+		modelMap.put("pageVo",
+				commentService.getCommentListPage(pageNum, status));
+		String statusType = null;
+		int displayCount = commentService
+				.getCommentByStatusCount(CommentConstant.Status.display);
+		int hiddenCount = commentService
+				.getCommentByStatusCount(CommentConstant.Status.hidden);
+		int trashCount = commentService
+				.getCommentByStatusCount(CommentConstant.Status.trash);
+		int allCount = trashCount + hiddenCount + displayCount;
+		if (status == null) {
+			statusType = "all";
+		} else {
+			statusType = status.name();
+		}
+		modelMap.put("statusType", statusType);
+		modelMap.put("displayCount", displayCount);
+		modelMap.put("hiddenCount", hiddenCount);
+		modelMap.put("trashCount", trashCount);
+		modelMap.put("allCount", allCount);
 		return "system/comment/all";
 	}
-	/**
-	 * 进入审核列表页面
-	 * @author Administrator
-	 *
-	 */
-	@RequestMapping(value = "/auditing/list.htm", method = RequestMethod.GET)
-	public String auditingList(ModelMap modelMap,
-			@RequestParam(value="p",defaultValue="1") int pageNum){
-		modelMap.put("pageVo", commentService.getCommentByStatusPage(pageNum, CommentConstant.Status.hidden));
-		return "system/comment/auditingList";
-	}
-	
+
 	/**
 	 * 审核通过
+	 * 
 	 * @author Administrator
-	 *
+	 * 
 	 */
-	@RequestMapping(value = "/auditing/{commentId}.htm", method = RequestMethod.POST)
-	public String auditingComment(
-			@PathVariable long commentId){
-		commentService.updateCommentStatus(commentId, CommentConstant.Status.display);
-		return "redirect:/admin/comment/page";
+	@ResponseBody
+	@RequestMapping(value = "/auditing.json", method = RequestMethod.POST)
+	public JsonVo<Comment> auditingComment(
+			@RequestParam(value = "commentId") long commentId) {
+		JsonVo<Comment> json = new JsonVo<Comment>();
+		json.setResult(true);
+		commentService.updateCommentStatus(commentId,
+				CommentConstant.Status.display);
+		return json;
 	}
-	
+
 	/**
 	 * @author 进入指定的comment页面
-	 *
+	 * 
 	 */
 	@RequestMapping(value = "/{commentId}.htm", method = RequestMethod.GET)
-	public String comment(@PathVariable long commentId,ModelMap modelMap){
+	public String comment(@PathVariable long commentId, ModelMap modelMap) {
 		modelMap.put("comment", commentService.getCommentById(commentId));
 		return "system/comment/comment";
 	}
-	
+
 	/**
 	 * @author 垃圾评论
-	 *
+	 * 
 	 */
-	@RequestMapping(value = "/cancel/{commentId}.htm", method = RequestMethod.GET)
-	public String cancelAuditing(@PathVariable long commentId){
-		commentService.updateCommentStatus(commentId, CommentConstant.Status.hidden);
-		return "redirect:/admin/comment/page";
+	@ResponseBody
+	@RequestMapping(value = "/cancel.json", method = RequestMethod.POST)
+	public JsonVo<Comment> cancelAuditing(
+			@RequestParam(value = "commentId") long commentId) {
+		JsonVo<Comment> json = new JsonVo<Comment>();
+		json.setResult(true);
+		commentService.updateCommentStatus(commentId,
+				CommentConstant.Status.trash);
+		return json;
 	}
 }

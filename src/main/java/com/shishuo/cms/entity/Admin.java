@@ -85,7 +85,6 @@ public class Admin {
 		this.password = password;
 	}
 
-	
 	public AdminConstant.Status getStatus() {
 		return status;
 	}

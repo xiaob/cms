@@ -53,28 +53,50 @@ public class Install {
 	 * 
 	 */
 	private void welcome() {
-		System.out.println("                                                                                ");
-		System.out.println("          7                                                                     ");
-		System.out.println("          ,,       7,,,,,,,,,,,,,,,,,,    ,=,,,,,,,      ,, 7       ,,,         ");
-		System.out.println("    ,,   ,,,7  ,,,,,,,,,,,,,,,,,,,,,, 7  ,,,,,,,,,,,,  I,,,,,      ,,,,         ");
-		System.out.println("  ,,,,,  ,,,  ?,,,,,,,,=II?,,,,,,,,,    7,,,,,,,,,,, 7   ,,,,     ,,,,          ");
-		System.out.println("  ,,,,,   ,,   =+      7,,7                7,,,I         7,,,  7?,,+    7       ");
-		System.out.println("  :,,,,   ,,        7  ,,,,                             I ,,,,,,,,,,,,,,,       ");
-		System.out.println("  7,,,    ,,    77,,,,,,,,,,,,,,,,,,    7I,,,,,,,,7 7,,,,,,,,,,,,,,,,,,,,       ");
-		System.out.println("  7,,,    ,,   ,,,,,,,,,,,,,,,,,,,,,   ,,,,,,,,,,,   ,,,,,,+        ,,,, 7      ");
-		System.out.println("   =,,    ,,   ,,,,,,,,,,,,=   =,,,    ,,,,,,,,,,     ,,,?7        ,,,:         ");
-		System.out.println("   ,,,    ,,    ,,,     ,,=     ,,,7    ,,,7 ,,,=    7,,,,,,,,,,,,,,,,          ");
-		System.out.println("  7,,,    ,,    ,,,     ,,I     ,,,          ,,,     ,,,,,,,,,,,,,,,            ");
-		System.out.println("   ,,,   +,,    ,,,    7,,?     ,,,          ,,,     ,,, 7    ,,,7              ");
-		System.out.println("   ,,,   ,,,   ~,,?     ,,,     ,,,         ,,,,         ,,   ,,,               ");
-		System.out.println("    ,7   ,,    ,,,     ~,,,     7,,=       7,,,? 7,,    ,,7   ,,                ");
-		System.out.println("        ,,,    ,,,     ,,,,      ,,=       ,,,,,,,,7   ,,,   ,,,                ");
-		System.out.println("     7,,,,,    ,,,     ,,,,      ,,7      ,,,,,,,~    ,,,    ,,,=         7 ,,  ");
-		System.out.println("  ,,,,,,,,7      7     ,,,,             7,,,,,,,7   7,,,     ,,,,,,,~I I:,,,,=  ");
-		System.out.println(" ,,,,,,,,7             ,,,,             ,,,,,      +,,,     I,,,,,,,,,,,,,,,,   ");
-		System.out.println("  7?,,I                ,,,,             ,,,7       ,,,       ,,,,,,,,,,,,,,,,   ");
-		System.out.println("                       777                                       7 ,,,,,,,,,    ");
-		System.out.println("                                                                        7       ");
+		System.out
+				.println("                                                                                ");
+		System.out
+				.println("          7                                                                     ");
+		System.out
+				.println("          ,,       7,,,,,,,,,,,,,,,,,,    ,=,,,,,,,      ,, 7       ,,,         ");
+		System.out
+				.println("    ,,   ,,,7  ,,,,,,,,,,,,,,,,,,,,,, 7  ,,,,,,,,,,,,  I,,,,,      ,,,,         ");
+		System.out
+				.println("  ,,,,,  ,,,  ?,,,,,,,,=II?,,,,,,,,,    7,,,,,,,,,,, 7   ,,,,     ,,,,          ");
+		System.out
+				.println("  ,,,,,   ,,   =+      7,,7                7,,,I         7,,,  7?,,+    7       ");
+		System.out
+				.println("  :,,,,   ,,        7  ,,,,                             I ,,,,,,,,,,,,,,,       ");
+		System.out
+				.println("  7,,,    ,,    77,,,,,,,,,,,,,,,,,,    7I,,,,,,,,7 7,,,,,,,,,,,,,,,,,,,,       ");
+		System.out
+				.println("  7,,,    ,,   ,,,,,,,,,,,,,,,,,,,,,   ,,,,,,,,,,,   ,,,,,,+        ,,,, 7      ");
+		System.out
+				.println("   =,,    ,,   ,,,,,,,,,,,,=   =,,,    ,,,,,,,,,,     ,,,?7        ,,,:         ");
+		System.out
+				.println("   ,,,    ,,    ,,,     ,,=     ,,,7    ,,,7 ,,,=    7,,,,,,,,,,,,,,,,          ");
+		System.out
+				.println("  7,,,    ,,    ,,,     ,,I     ,,,          ,,,     ,,,,,,,,,,,,,,,            ");
+		System.out
+				.println("   ,,,   +,,    ,,,    7,,?     ,,,          ,,,     ,,, 7    ,,,7              ");
+		System.out
+				.println("   ,,,   ,,,   ~,,?     ,,,     ,,,         ,,,,         ,,   ,,,               ");
+		System.out
+				.println("    ,7   ,,    ,,,     ~,,,     7,,=       7,,,? 7,,    ,,7   ,,                ");
+		System.out
+				.println("        ,,,    ,,,     ,,,,      ,,=       ,,,,,,,,7   ,,,   ,,,                ");
+		System.out
+				.println("     7,,,,,    ,,,     ,,,,      ,,7      ,,,,,,,~    ,,,    ,,,=         7 ,,  ");
+		System.out
+				.println("  ,,,,,,,,7      7     ,,,,             7,,,,,,,7   7,,,     ,,,,,,,~I I:,,,,=  ");
+		System.out
+				.println(" ,,,,,,,,7             ,,,,             ,,,,,      +,,,     I,,,,,,,,,,,,,,,,   ");
+		System.out
+				.println("  7?,,I                ,,,,             ,,,7       ,,,       ,,,,,,,,,,,,,,,,   ");
+		System.out
+				.println("                       777                                       7 ,,,,,,,,,    ");
+		System.out
+				.println("                                                                        7       ");
 		Properties props = System.getProperties();
 		System.out.println("\n\n欢迎使用【师说CMS】\n\n");
 		System.out.println("Windows: set MAVEN_OPTS=-Dfile.encoding=UTF-8");

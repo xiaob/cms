@@ -34,7 +34,7 @@ import com.shishuo.cms.exception.PropertyIsNullException;
  * 属性工具类
  * 
  * @author Herbert
- *
+ * 
  */
 public class PropertyUtils extends PropertyPlaceholderConfigurer {
 

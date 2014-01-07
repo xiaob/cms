@@ -4,8 +4,8 @@
         <div class="row">
             <!--blog start-->
             <div class="col-lg-9 ">
-            <@cms_file_page type="article" folderId="${folderId}" pageNum="${pageNum}" rows="10">
-               <#list pageVo.list as file>
+            <@shishuocms_file_page type="article" folderId="${folderId}" pageNum="${pageNum}" rows="10">
+               <#list tag_file_page.list as file>
                 <div class="blog-item">
                     <div class="row">
                         <div class="col-lg-2 col-sm-2">
@@ -34,9 +34,9 @@
                 </div>
                 </#list>
 	             <div class="text-center">
-	                ${pageVo.pageNumHtml}
+	                ${tag_file_page.pageNumHtml}
 	              </div>
-                </@cms_file_page>
+                </@shishuocms_file_page>
             </div>
             <div class="col-lg-3">
               <div class="blog-side-item">

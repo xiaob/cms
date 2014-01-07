@@ -26,7 +26,8 @@ import org.springframework.stereotype.Repository;
 import com.shishuo.cms.entity.Log;
 
 /**
- * 日志服务 
+ * 日志服务
+ * 
  * @author Zhang jiale
  */
 
@@ -34,9 +35,9 @@ import com.shishuo.cms.entity.Log;
 public interface LogDao {
 
 	// ///////////////////////////////
-	// /////       增加                          ////////
+	// ///// 增加 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 增加日志
 	 * 
@@ -46,9 +47,9 @@ public interface LogDao {
 	public int addLog(Log log);
 
 	// ///////////////////////////////
-	// /////       查詢                          ////////
+	// ///// 查詢 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 日志的列表
 	 * 

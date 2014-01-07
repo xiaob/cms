@@ -18,6 +18,8 @@
  */
 package com.shishuo.cms.action.admin;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +31,11 @@ import com.shishuo.cms.constant.AdminConstant;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.vo.JsonVo;
 
-
 /**
  * 管理员action
+ * 
  * @author Zhangjiale
- *
+ * 
  */
 @Controller
 @RequestMapping("/admin/admin")
@@ -41,7 +43,7 @@ public class AdminAdminAction extends AdminBaseAction {
 
 	/**
 	 * 进入添加admin页面
-	 *
+	 * 
 	 */
 	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
 	public String addUser(ModelMap modelMap) {
@@ -52,7 +54,7 @@ public class AdminAdminAction extends AdminBaseAction {
 
 	/**
 	 * 添加Admin
-	 *
+	 * 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/addNew.json", method = RequestMethod.POST)
@@ -69,14 +71,15 @@ public class AdminAdminAction extends AdminBaseAction {
 			}
 			if (email.equals("")) {
 				json.getErrors().put("email", "管理员邮箱不能为空");
-			}else{
-				if(admin!=null){
+			} else {
+				if (admin != null) {
 					json.getErrors().put("email", "管理员邮箱不能重复");
 				}
 			}
 			// 检测校验结果
 			validate(json);
-			adminService.addAdmin(email, adminName, password,AdminConstant.Status.init);
+			adminService.addAdmin(email, adminName, password,
+					AdminConstant.Status.init);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -87,7 +90,7 @@ public class AdminAdminAction extends AdminBaseAction {
 
 	/**
 	 * 进入管理员列表页面
-	 *
+	 * 
 	 */
 	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
 	public String allList(
@@ -99,25 +102,32 @@ public class AdminAdminAction extends AdminBaseAction {
 
 	/**
 	 * 进入单个admmin页面
-	 *
+	 * 
 	 */
 	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
-	public String oneAdmin(@RequestParam(value = "adminId") long adminId,
-			ModelMap modelMap) {
-		modelMap.put("admin", adminService.getAdminById(adminId));
+	public String oneAdmin(
+			@RequestParam(value = "adminId", defaultValue = "0") long adminId,
+			ModelMap modelMap, HttpServletRequest request) {
+		Admin admin = new Admin();
+		if (adminId == 0) {
+			admin = this.getAdmin(request);
+		} else {
+			admin = adminService.getAdminById(adminId);
+		}
+		modelMap.put("admin", admin);
 		return "system/admin/update";
 	}
 
 	/**
 	 * 修改指定的admin资料
-	 *
+	 * 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
 	public JsonVo<String> updateAdmin(
 			@RequestParam(value = "adminName") String adminName,
 			@RequestParam(value = "email") String email,
-			@RequestParam(value = "password") String password,
+			@RequestParam(value = "password", defaultValue = "0") String password,
 			@RequestParam(value = "adminId") long adminId,
 			@RequestParam(value = "status") AdminConstant.Status status) {
 
@@ -127,20 +137,20 @@ public class AdminAdminAction extends AdminBaseAction {
 			if (adminName.equals("")) {
 				json.getErrors().put("adminName", "管理员名称不能为空");
 			}
-			if(email.equals("")){
+			if (email.equals("")) {
 				json.getErrors().put("email", "电子邮箱不能为空");
-			}else{
-				if(admin==null || admin.getAdminId()==adminId){
-					
-				}else{
+			} else {
+				if (admin == null || admin.getAdminId() == adminId) {
+
+				} else {
 					json.getErrors().put("email", "管理员邮箱不能重复");
 				}
 			}
 			// 检测校验结果
 			validate(json);
-			if(password.equals("-1")){
+			if (password.equals("0")) {
 				adminService.updateAdmin(adminId, adminName, "", status);
-			}else{
+			} else {
 				adminService.updateAdmin(adminId, adminName, password, status);
 			}
 			json.setResult(true);
@@ -153,7 +163,7 @@ public class AdminAdminAction extends AdminBaseAction {
 
 	/**
 	 * 删除管理员
-	 *
+	 * 
 	 */
 	@RequestMapping(value = "/delete.htm", method = RequestMethod.GET)
 	public String deleteAdmin(@RequestParam(value = "adminId") long adminId) {

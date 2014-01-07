@@ -35,6 +35,7 @@ import com.shishuo.cms.entity.vo.JsonVo;
 
 /**
  * 网站配置action
+ * 
  * @author Herbert
  * 
  */
@@ -44,8 +45,9 @@ public class AdminConfigAction extends AdminBaseAction {
 
 	/**
 	 * 网站配置
+	 * 
 	 * @author Administrator
-	 *
+	 * 
 	 */
 	@RequestMapping(value = "/basic.htm", method = RequestMethod.GET)
 	public String basic(ModelMap modelMap) {
@@ -56,8 +58,9 @@ public class AdminConfigAction extends AdminBaseAction {
 
 	/**
 	 * 修改网站配置
+	 * 
 	 * @author Administrator
-	 *
+	 * 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/basic.json", method = RequestMethod.POST)
@@ -97,14 +100,15 @@ public class AdminConfigAction extends AdminBaseAction {
 					&& functionShop.equalsIgnoreCase("on")) {
 				function_shop = "on";
 			}
-			
+
 			// 检测校验结果
 			validate(json);
-			
+
 			configSevice.updagteConfigByKey("sys_sitename", sitename);
 			configSevice.updagteConfigByKey("sys_sitedesc", sitedesc);
 			configSevice.updagteConfigByKey("sys_template", template);
-			configSevice.updagteConfigByKey("sys_function_photo", function_photo);
+			configSevice.updagteConfigByKey("sys_function_photo",
+					function_photo);
 			configSevice.updagteConfigByKey("sys_function_download",
 					function_download);
 			configSevice.updagteConfigByKey("sys_function_shop", function_shop);
@@ -117,17 +121,17 @@ public class AdminConfigAction extends AdminBaseAction {
 	}
 
 	@RequestMapping(value = "/picture.htm", method = RequestMethod.GET)
-	public String picture(){
+	public String picture() {
 		return "system/config/picture";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/update/picture.json", method = RequestMethod.GET)
 	public JsonVo<String> updatePicture(
 			@RequestParam(value = "bigWidth") String bigWidth,
 			@RequestParam(value = "bigheight") String bigheight,
 			@RequestParam(value = "smallWidth") String smallWidth,
-			@RequestParam(value = "smallHeight") String smallHeight){
+			@RequestParam(value = "smallHeight") String smallHeight) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
 			if (StringUtils.isBlank(bigWidth)) {
@@ -142,10 +146,11 @@ public class AdminConfigAction extends AdminBaseAction {
 			if (StringUtils.isBlank(smallHeight)) {
 				json.getErrors().put("smallHeight", "小图的高度不能为空");
 			}
-			
+
 			// 检测校验结果
 			validate(json);
-			String strb = bigWidth+"x"+bigheight+";"+smallWidth+"x"+smallHeight+";";
+			String strb = bigWidth + "x" + bigheight + ";" + smallWidth + "x"
+					+ smallHeight + ";";
 			configSevice.updagteConfigByKey("article_picture_size", strb);
 			json.setResult(true);
 		} catch (Exception e) {
@@ -154,7 +159,7 @@ public class AdminConfigAction extends AdminBaseAction {
 		}
 		return json;
 	}
-	
+
 	private List<String> getTemplate() {
 		List<String> templateList = new ArrayList<String>();
 		String templatePath = System
@@ -169,5 +174,5 @@ public class AdminConfigAction extends AdminBaseAction {
 		}
 		return templateList;
 	}
-		
+
 }

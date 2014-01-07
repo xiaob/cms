@@ -15,7 +15,7 @@
  					修改管理员资料
 				</header>
 				<div class="panel-body">
-					<form id="update_admin_form" method="post" class="form-horizontal" autocomplete="off" action="/CMS/admin/admin/update.json">
+					<form id="update_admin_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/admin/update.json">
 					<fieldset>
 						<div class="form-group" id="update_adminId">
 							<label class="col-sm-2 col-sm-2 control-label">管理员Id</label>
@@ -47,8 +47,8 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">状态</label>
 							<div class="col-sm-10">
-                                <input type="radio" name="status" value="NORMAL" <#if admin.status=="NORMAL">checked="checked"</#if>/>正常
-								<input type="radio" name="status" value="FREEZE" <#if admin.status=="FREEZE">checked="checked"</#if>/>冻结
+                                <input type="radio" name="status" value="normal" <#if admin.status=="normal">checked="checked"</#if>/>正常
+								<input type="radio" name="status" value="freeze" <#if admin.status=="freeze">checked="checked"</#if>/>冻结
 							</div>
 						</div>
 						<div class="form-group">

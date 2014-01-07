@@ -34,9 +34,9 @@ import com.shishuo.cms.entity.vo.CommentVo;
 public interface CommentDao {
 
 	// ///////////////////////////////
-	// /////       增加                          ////////
+	// ///// 增加 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 添加评论
 	 * 
@@ -46,9 +46,9 @@ public interface CommentDao {
 	public int addComment(Comment comment);
 
 	// ///////////////////////////////
-	// /////       修改                          ////////
+	// ///// 修改 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 评论审核
 	 * 
@@ -58,9 +58,9 @@ public interface CommentDao {
 	public int updateCommentStatus(Comment comment);
 
 	// ///////////////////////////////
-	// /////       查詢                          ////////
+	// ///// 查詢 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 获得所有评论
 	 * 
@@ -68,7 +68,7 @@ public interface CommentDao {
 	 * @param rows
 	 * @return List<CommentVo>
 	 */
-	public List<Comment> getAllList(@Param("offset") long offset,
+	public List<CommentVo> getAllList(@Param("offset") long offset,
 			@Param("rows") long rows);
 
 	/**
@@ -81,7 +81,7 @@ public interface CommentDao {
 	/**
 	 * 获得文件下的评论（分页）
 	 * 
-	 * @param fileId
+	 * @param kindId
 	 * @param fatherId
 	 * @param status
 	 * @param offset
@@ -89,19 +89,22 @@ public interface CommentDao {
 	 * @return
 	 */
 	public List<CommentVo> getCommentListByFatherId(
-			@Param("fileId") long fileId, @Param("fatherId") long fatherId,
+			@Param("kindId") long kindId,
+			@Param("kind") CommentConstant.kind kind,
+			@Param("fatherId") long fatherId,
 			@Param("status") CommentConstant.Status status,
 			@Param("offset") long offset, @Param("rows") long rows);
 
 	/**
 	 * 获得文件下的评论条数（分页）
 	 * 
-	 * @param fileId
+	 * @param articleId
 	 * @param fatherId
 	 * @param status
 	 * @return
 	 */
-	public int getCommentCountByFatherId(@Param("fileId") long fileId,
+	public int getCommentCountByFatherId(@Param("kindId") long kindId,
+			@Param("kind") CommentConstant.kind kind,
 			@Param("fatherId") long fatherId,
 			@Param("status") CommentConstant.Status status);
 

@@ -21,7 +21,6 @@ package com.shishuo.cms.entity;
 import java.util.Date;
 
 import com.shishuo.cms.constant.FolderConstant;
-import com.shishuo.cms.constant.SystemConstant;
 
 /**
  * 目录实体
@@ -44,12 +43,12 @@ public class Folder {
 	 * 英文名称
 	 */
 	private String ename;
-	
+
 	/**
 	 * 目录名称
 	 */
 	private String name;
-	
+
 	/**
 	 * 内容
 	 */
@@ -75,14 +74,23 @@ public class Folder {
 	private int count;
 
 	/**
+	 * 
+	 */
+	private FolderConstant.Owner owner;
+
+	public FolderConstant.Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(FolderConstant.Owner owner) {
+		this.owner = owner;
+	}
+
+	/**
 	 * 等级
 	 */
 	private FolderConstant.Rank rank;
 
-	/**
-	 * 类型
-	 */
-	private SystemConstant.Type type;
 	/**
 	 * 状态
 	 */
@@ -92,7 +100,7 @@ public class Folder {
 	 * 创建时间
 	 */
 	private Date createTime;
-	
+
 	/**
 	 * 更新时间
 	 */
@@ -162,17 +170,12 @@ public class Folder {
 		this.sort = sort;
 	}
 
-
 	public FolderConstant.Rank getRank() {
 		return rank;
 	}
 
 	public void setRank(FolderConstant.Rank rank) {
 		this.rank = rank;
-	}
-
-	public void setType(SystemConstant.Type type) {
-		this.type = type;
 	}
 
 	public void setStatus(FolderConstant.Status status) {
@@ -195,10 +198,6 @@ public class Folder {
 		this.level = level;
 	}
 
-	public SystemConstant.Type getType() {
-		return type;
-	}
-
 	public FolderConstant.Status getStatus() {
 		return status;
 	}
@@ -210,5 +209,5 @@ public class Folder {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 }

@@ -23,7 +23,6 @@
                             <table class="table table-striped table-advance table-hover">
                             	<thead>
                                 	<tr>
-                						<th>用户Id</th>
                 						<th>用户名称</th>
                 						<th>OpenId</th>
                 						<th>类型</th>
@@ -34,7 +33,7 @@
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
-                            			<td>${e.userId}</td>
+                            			<td class="js_userId">${e.userId}</td>
                                     	<td>${e.name}</td>
                                     	<td>${e.openId}</td>
                                     	<td>${e.type}</td>
@@ -67,4 +66,9 @@
           </section>
 		</section>
 		<!--main content end-->
+<script>
+$(function(){
+	$(".js_userId").hide();
+});
+</script>
 <#include "/system/foot.ftl">

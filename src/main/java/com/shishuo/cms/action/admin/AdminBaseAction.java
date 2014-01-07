@@ -29,9 +29,10 @@ import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.exception.ValidateException;
 import com.shishuo.cms.service.AdminService;
+import com.shishuo.cms.service.AttachmentService;
 import com.shishuo.cms.service.CommentService;
 import com.shishuo.cms.service.ConfigService;
-import com.shishuo.cms.service.FileService;
+import com.shishuo.cms.service.ArticleService;
 import com.shishuo.cms.service.FolderService;
 import com.shishuo.cms.service.LogService;
 import com.shishuo.cms.service.UserService;
@@ -53,10 +54,13 @@ public class AdminBaseAction {
 	protected FolderService folderService;
 
 	@Autowired
-	protected FileService fileService;
+	protected ArticleService articleService;
 
 	@Autowired
 	protected LogService logService;
+
+	@Autowired
+	protected AttachmentService attachmentService;
 
 	@Autowired
 	protected UserService userService;
@@ -66,7 +70,7 @@ public class AdminBaseAction {
 	protected CommentService commentService;
 	@Autowired
 	protected UpdatePictureUtils updatePictureConsTant;
-	
+
 	/**
 	 * 参数校验
 	 * 

@@ -72,7 +72,6 @@ public class User {
 		this.openId = openId;
 	}
 
-
 	public UserConstant.Type getType() {
 		return type;
 	}

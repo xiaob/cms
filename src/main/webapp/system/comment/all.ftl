@@ -1,5 +1,9 @@
 <#assign menu="comment">
+<#if statusType=="hidden">
+<#assign submenu="auditing_list_comment">
+<#else>
 <#assign submenu="comment_list">
+</#if>
 <#include "/system/head.ftl">
 <style type="text/css">
 .pagination {
@@ -8,14 +12,35 @@
     margin: 0;
     padding-left: 0;
 }
+.breadcrumb > li + li:before {
+    color: #CCCCCC;
+    content: "| ";
+    padding: 0 5px;
+}
 </style>
 	<!--main content start-->
 	<section id="main-content">
 		<section class="wrapper">
         	<!-- page start-->
+        	<div class="row">
+                  <div class="col-lg-12">
+                      <!--breadcrumbs start -->
+                      <ul class="breadcrumb">
+                          <li><a href="${basePath}/admin/comment/page.htm">所有评论(${allCount})</a></li>
+               		 	  <li><a href="${basePath}/admin/comment/page.htm?status=display">已通过审核评论(${displayCount})</a></li>
+               		 	  <li><a href="${basePath}/admin/comment/page.htm?status=hidden">审核中的评论(${hiddenCount})</a></li>
+               		 	  <li><a href="${basePath}/admin/comment/page.htm?status=trash">垃圾评论(${trashCount})</a></li>
+                      </ul>
+                      <!--breadcrumbs end -->
+                  </div>
+              </div>  
             <section class="panel">
             	<header class="panel-heading">
-               		 所有评论
+                <#if statusType=="hidden">正在审核评论列表
+                <#elseif statusType=="display">已通过审核评论列表
+                <#elseif statusType=="trash">垃圾评论列表
+                <#else>所有评论列表
+                </#if>
                 </header>
                 <div class="panel-body">
                 	<div class="adv-table">
@@ -34,21 +59,16 @@
                             		<tr class="gradeA odd">
                                     	<td>${commentVo.name}</td>
                                     	<td>${commentVo.content}</td>
-                                    	<td>${commentVo.status}</td>
                                     	<td>
-                                    		<#if commentVo.status=="hidden">
-                                    		<a href="/CMS/admin/comment/${commentVo.commentId}.htm" title="审核">
-                                    			<button class="btn btn-success btn-xs">
-                  									<i class="icon-ok"></i>
-                  								</button>
-                                    		</a>
-                                    		<#else>
-                                    		<a href="/CMS/admin/comment/cancel/${commentVo.commentId}.htm" title="撤销审核">
-                                    			<button class="btn btn-danger btn-xs">
-                  									<i class="icon-trash "></i>
-                  								</button>
-                                    		</a>
+                                    		<#if commentVo.status=="hidden">正在审核
+                                    		<#elseif commentVo.status=="display">已通过审核
+                                    		<#else>垃圾评论
                                     		</#if>
+                                    	</td>
+                                    	<td>
+                                    		<a href="/byvision/admin/comment/${commentVo.commentId}.htm" title="查看详情">
+                                    			编辑
+                  							</a>
                                     	</td>
                                 	</tr>
                                 	</#list>

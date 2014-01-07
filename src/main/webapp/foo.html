@@ -1,0 +1,179 @@
+<#assign menu="folder"> <#assign submenu="update_folder"> <#include
+"/system/head.ftl">
+<style type="text/css">
+</style>
+<!--main content start-->
+<section id="main-content">
+	<section class="wrapper">
+		<!-- page start-->
+		<div class="row">
+			<form id="update_folder_form" method="post"
+				class="form-horizontal tasi-form" autocomplete="off"
+				action="${basePath}/admin/folder/update.json">
+				<div class="col-lg-9">
+					<input type="hidden" class="form-control" name="folderId"
+						value="${folder.folderId}">
+					<section class="panel">
+						<header class="panel-heading">描述 </header>
+						<div class="panel-body">
+							<script id="content" name="content" type="text/plain"
+								style="width: 100%; height: 260px;">
+									${folder.content!}
+								</script>
+							<p class="help-block" for="content"></p>
+							<script type="text/javascript">
+									var contentEditor;
+									$(function() {
+										contentEditor = UE.getEditor('content');
+									});
+								</script>
+						</div>
+					</section>
+					<section class="panel">
+						<div class="panel-body">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>文件名</th>
+										<th>地址</th>
+										<th>链接</th>
+										<th>大小</th>
+										<th>操作</th>
+								</thead>
+								<tbody>
+									<#list attachmentPage as attachment>
+									<tr>
+										<td>${attachment.name}</td>
+										<td>${basePath}${attachment.path}</td>
+										<td>${attachment.link}</td>
+										<td>${attachment.size}</td>
+										<td><#if attachment.status=="display">
+											<button title="显示" name="${attachment.name}"
+												class="btn btn-success btn-xs js_status" status="hidden"
+												attachmentId="${attachment.attachmentId}" type="button">
+												<i class="icon-eye-open"></i>
+											</button> <#else>
+											<button title="显示" name="${attachment.name}"
+												class="btn btn-default btn-xs js_status" status="display"
+												attachmentId="${attachment.attachmentId}" type="button">
+												<i class="icon-eye-close"></i>
+											</button> </#if>
+											<button title="删除" name="${attachment.name}"
+												class="btn btn-danger btn-xs js_delete"
+												attachmentId="${attachment.attachmentId}" type="button">
+												<i class="icon-trash"></i>
+											</button>
+											<button title="链接" name="${attachment.name}"
+												class="btn btn-primary btn-xs js_link"
+												attachmentId="${attachment.attachmentId}"
+												link="'${attachment.link}" type="button">
+												<i class="icon-link"></i>
+											</button>
+										</td>
+									</tr>
+									</#list>
+								</tbody>
+							</table>
+						</div>
+					</section>
+				</div>
+				<div class="col-lg-3">
+					<section class="panel">
+						<header class="panel-heading">更新</header>
+						<div class="panel-body">
+							<div class="form-group">
+								<label for="exampleInputEmail1">所属目录</label> <select
+									class="form-control" id="folderId" autocomplete="off">
+									<option style="background-color: #DFF0D8; font-weight: bold;"
+										value="1"<#if folder.folderId==1>selected</#if>>默认</option>
+									<#list folderAll as firstFolder>
+									<option style="background-color: #DFF0D8; font-weight: bold;"
+										value="${firstFolder.folderId}"<#if
+										folder.folderId==firstFolder.folderId>selected</#if>>
+										├─┬─${firstFolder.name}</option> <#list firstFolder.folderList as
+									secondFolder>
+									<option style="background-color: #5BC0DE; color: #FFFFFF;"
+										value="${secondFolder.folderId}"<#if
+										folder.folderId==secondFolder.folderId>selected</#if>>
+										│&nbsp;&nbsp;&nbsp;└──${secondFolder.name}</option> <#list
+									secondFolder.folderList as thirdFolder>
+									<option style="background-color: #FCF8E3;"
+										value="${thirdFolder.folderId}"<#if
+										folder.folderId==thirdFolder.folderId>selected</#if>>
+										│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;└──${thirdFolder.name}</option> <#list
+									thirdFolder.folderList as fourthFolder>
+									<option style="background-color: #D9EDF7;"
+										value="${fourthFolder.folderId}"<#if
+										folder.folderId==fourthFolder.folderId>selected</#if>>
+										│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└──${fourthFolder.name}
+									</option> </#list> </#list> </#list> </#list>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">中文名</label> <input type="text"
+									class="form-control" name="folderName" value="${folder.name}"
+									placeholder="中文名">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">英文名</label> <input type="text"
+									class="form-control" name="folderName" value="${folder.ename}"
+									placeholder="英文名">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">状态</label>
+								<div>
+									<input type="radio" name="status" value="display"<#if
+									folder.status=="display">checked</#if>/> 显示 <input type="radio"
+										name="status" value="hidden"<#if
+									folder.status=="hidden">checked</#if>/> 隐藏
+								</div>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-shadow btn-primary" type="submit">更新</button>
+							</div>
+						</div>
+					</section>
+				</div>
+			</form>
+		</div>
+
+		<!-- page end-->
+	</section>
+</section>
+<!--main content end-->
+<script type="text/javascript">
+ 	var fatherId=${folder.fatherId};
+	$(function() {
+		$('#update_folder_form').ajaxForm({
+			dataType : 'json',
+			success : function(data) {
+				if (data.result) {
+					bootbox.alert("保存成功，将刷新页面", function() {
+						window.location.reload();
+					});
+				}else{
+					showErrors($('#update_folder_form'),data.errors);
+				}
+			}
+		});
+		$('#file_upload').uploadify({
+			'buttonText'  		: 	'请选择文件',
+	        'swf'         		: 	'${basePath}/system/assets/uploadify/uploadify.swf',
+	        'uploader'    		: 	'${basePath}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
+	        'formData'  		: 	{'articleId':0,folderId:${folder.folderId}},
+	        'fileObjName'		: 	'file',
+	        'fileTypeExts' 		: 	'*.gif;*.png;*.jpg;*.jpeg;*.bmp;*.rar;*.doc;*.docx;*.zip,*.pdf;*.txt;*.swf;*.wmv',
+	        'method'			:	'post',
+	        'onUploadSuccess' 	: 	function(file, data, response) {
+	        }
+		});
+		$('#folderId').change(function(){
+			window.location.href = "${basePath}/admin/attachment/page.htm?folderId="+$('#folderId').val();
+		});
+		$('#btn_reflash').click(function(){
+			window.location.reload();
+		});
+		jQuery(".fancybox").fancybox();
+	});	
+</script>
+<#include "/system/foot.ftl">

@@ -43,9 +43,9 @@ public class UserService {
 	private UserDao userDao;
 
 	// ///////////////////////////////
-	// /////       增加                          ////////
+	// ///// 增加 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 增加用户
 	 * 
@@ -63,9 +63,9 @@ public class UserService {
 	}
 
 	// ///////////////////////////////
-	// /////       刪除                         ////////
+	// ///// 刪除 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 删除用户
 	 * 
@@ -76,16 +76,17 @@ public class UserService {
 	}
 
 	// ///////////////////////////////
-	// /////       修改                          ////////
+	// ///// 修改 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 更新用户数据
 	 * 
 	 * @param userId
 	 * @return user
 	 */
-	public User updateUser(long userId, long openId,UserConstant.Type type, String name) {
+	public User updateUser(long userId, long openId, UserConstant.Type type,
+			String name) {
 		User user = this.getUserById(userId);
 		user.setType(type);
 		user.setOpenId(openId);
@@ -95,9 +96,9 @@ public class UserService {
 	}
 
 	// ///////////////////////////////
-	// /////       查詢                          ////////
+	// ///// 查詢 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 根据Id得到用户信息
 	 * 
@@ -116,8 +117,7 @@ public class UserService {
 	 */
 	public PageVo<User> getUserPage(int pageNum) {
 		PageVo<User> pageVo = new PageVo<User>(pageNum);
-		pageVo.setRows(5);
-		pageVo.setUrl(SystemConstant.BASE_PATH+"/admin/user/page?");
+		pageVo.setRows(20);
 		List<User> list = this
 				.getUserList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);

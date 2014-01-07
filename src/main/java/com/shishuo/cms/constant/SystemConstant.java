@@ -1,6 +1,7 @@
 /*
  * 
  *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+
  *	长沙市师说网络科技有限公司 版权所有
  *	http://www.shishuo.com
  *
@@ -35,17 +36,16 @@ public class SystemConstant {
 	 * 应用网址
 	 */
 	public static String BASE_PATH = "";
-	
 
 	/**
-	 * 上传的图片地址
+	 * 上传文件夹
 	 */
-	public static String UPLOAD_PHOTO_PATH = "/upload/photo";
-	
+	public static String UPLOAD_FOLDER = "/upload/photo";
+
 	/**
-	 * 上传的文件地址
+	 * 备份文件夹
 	 */
-	public static String UPLOAD_FILE_PATH = "/upload/file";
+	public static String BACKUP_FOLDER = "/WEB-INF/backup";
 
 	/**
 	 * Session中的管理员Key
@@ -57,25 +57,4 @@ public class SystemConstant {
 	 */
 	public static final String FACE_URL = "http://faceurl.shishuo.com/face";
 
-	/**
-	 * 文件跟目录的类型
-	 * 
-	 * @author Herbert
-	 * 
-	 */
-	public static enum Type {
-		/**
-		 * 文章
-		 */
-		article, /**
-		 * 图片
-		 */
-		photo, /**
-		 * 文件
-		 */
-		file, /**
-		 * 商品
-		 */
-		shop
-	};
 }

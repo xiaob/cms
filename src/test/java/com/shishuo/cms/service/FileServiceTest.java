@@ -13,35 +13,35 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class FileServiceTest {
 
 	@Autowired
-	private FileService fileService;
+	private ArticleService fileService;
 
-//	@Test
-//	public void testAddFile() {
-//		assertEquals(2, fileService.addFile(2, "bb", "sef", "", "yhdwe", 0)
-//				.getFolderId());
-//	}
+	// @Test
+	// public void testAddFile() {
+	// assertEquals(2, fileService.addFile(2, "bb", "sef", "", "yhdwe", 0)
+	// .getFolderId());
+	// }
 
-//	@Test
-//	public void testDeleteFileById() {
-//		assertEquals(true, fileService.deleteFileById(3));
-//	}
+	// @Test
+	// public void testDeleteFileById() {
+	// assertEquals(true, fileService.deleteFileById(3));
+	// }
 
-//	@Test
-//	public void testUpdateFileById() {
-//		assertEquals(
-//				2,
-//				fileService.updateFileById(1, 2, "ibk", "sdgr", "ibksdg",
-//						"hjjuy", 2).getFolderId());
-//	}
+	// @Test
+	// public void testUpdateFileById() {
+	// assertEquals(
+	// 2,
+	// fileService.updateFileById(1, 2, "ibk", "sdgr", "ibksdg",
+	// "hjjuy", 2).getFolderId());
+	// }
 
-//	@Test
-//	public void testGetFilePageByFoderId() {
-//		assertEquals(2, fileService.getFilePageByFoderId(1, 1).getPageCount());
-//	}
-//
-//	@Test
-//	public void testGetFileById() {
-//		assertEquals(2, fileService.getFileById(2).getFileId());
-//	}
+	// @Test
+	// public void testGetFilePageByFoderId() {
+	// assertEquals(2, fileService.getFilePageByFoderId(1, 1).getPageCount());
+	// }
+	//
+	// @Test
+	// public void testGetFileById() {
+	// assertEquals(2, fileService.getFileById(2).getFileId());
+	// }
 
 }

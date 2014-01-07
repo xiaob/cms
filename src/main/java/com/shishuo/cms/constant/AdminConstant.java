@@ -33,7 +33,7 @@ public class AdminConstant {
 		init, /**
 		 * 正常，可以使用
 		 */
-		normal, 
+		normal,
 		/**
 		 * 冻结，无法使用
 		 */

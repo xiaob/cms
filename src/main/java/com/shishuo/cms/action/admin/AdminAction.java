@@ -19,12 +19,16 @@
 
 package com.shishuo.cms.action.admin;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.shishuo.cms.constant.SystemConstant;
+import com.shishuo.cms.constant.ArticleConstant;
+import com.shishuo.cms.constant.FolderConstant;
+import com.shishuo.cms.entity.vo.ArticleVo;
 
 /**
  * @author lqq
@@ -38,14 +42,39 @@ public class AdminAction extends AdminBaseAction {
 
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String login(ModelMap modelMap) {
-		modelMap.put("articleCount",
-				fileService.getFileCountByType(SystemConstant.Type.article));
-		modelMap.put("downloadCount",
-				fileService.getFileCountByType(SystemConstant.Type.file));
-		modelMap.put("commodityCount",
-				fileService.getFileCountByType(SystemConstant.Type.shop));
-		modelMap.put("userCount", userService.getUserListCount());
-		return "system/default";
+		modelMap.put("articleCount", 0);
+		modelMap.put("downloadCount", 0);
+		modelMap.put("userCount", 0);
+		modelMap.put("folderAll", folderService.getAllFolderList(0,
+				FolderConstant.Status.display));
+		List<ArticleVo> articleList = articleService.getArticleListByStatus(
+				ArticleConstant.Status.display, 0, 10);
+		for (ArticleVo articleVo : articleList) {
+			articleVo.setFolder(folderService.getFolderById(articleVo
+					.getFolderId()));
+			if (articleVo.getFirstFolderId() != 0) {
+				articleVo.getFolderPathList().add(
+						folderService.getFolderById(articleVo
+								.getFirstFolderId()));
+			}
+			if (articleVo.getSecondFolderId() != 0) {
+				articleVo.getFolderPathList().add(
+						folderService.getFolderById(articleVo
+								.getSecondFolderId()));
+			}
+			if (articleVo.getThirdFolderId() != 0) {
+				articleVo.getFolderPathList().add(
+						folderService.getFolderById(articleVo
+								.getThirdFolderId()));
+			}
+			if (articleVo.getFourthFolderId() != 0) {
+				articleVo.getFolderPathList().add(
+						folderService.getFolderById(articleVo
+								.getFourthFolderId()));
+			}
+		}
+		modelMap.put("articleList", articleList);
+		return "system/index";
 	}
 
 }

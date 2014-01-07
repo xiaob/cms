@@ -18,19 +18,54 @@
  */
 package com.shishuo.cms.entity.vo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * 分页器
+ * 
+ * @author Herbert
+ * 
+ * @param <T>
+ */
 public class PageVo<T> {
+	/**
+	 * 页码
+	 */
 	private int pageNum;
-	private int count;
-	private int offset;
-	private int rows;
-	private List<T> list;
-	private String url;
-	private String pageNumHtml;
+	/**
+	 * 页码总数
+	 */
 	private int pageCount;
+	/**
+	 * 总数
+	 */
+	private int count;
+	/**
+	 * 偏移
+	 */
+	private int offset;
+	/**
+	 * 数量
+	 */
+	private int rows;
+	/**
+	 * 数据
+	 */
+	private List<T> list;
+	/**
+	 * 页码HTML
+	 */
+	private String pageNumHtml;
+	/**
+	 * 参数
+	 */
 	private Map<String, String> args = new HashMap<String, String>();
 
 	public PageVo(int pageNum) {
@@ -84,12 +119,18 @@ public class PageVo<T> {
 		this.list = list;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
+	public String getUrl(int num) {
+		Iterator<Entry<String, String>> iter = this.getArgs().entrySet()
+				.iterator();
+		List<String> values = new ArrayList<String>();
+		while (iter.hasNext()) {
+			Map.Entry<String, String> entry = iter.next();
+			Object key = entry.getKey();
+			Object val = entry.getValue();
+			values.add(key + "=" + val);
+		}
+		values.add("p=" + num);
+		return "?" + StringUtils.join(values.toArray(), "&");
 	}
 
 	public void setPageNumHtml(String pageNumHtml) {
@@ -101,11 +142,10 @@ public class PageVo<T> {
 		sb.append("<ul class=\"pagination\">");
 		// 首页，上一页
 		if (this.getPageNum() != 1) {
-			sb.append("<li><a href='" + this.getUrl()
-					+ "p=1' title='首页'>&laquo; 首页</a></li>");
-			sb.append("<li><a href='" + this.getUrl() + "p="
-					+ (this.getPageNum() - 1)
-					+ "' title='上一页'>&laquo; 上一页</a></li>");
+			sb.append("<li><a href='" + this.getUrl(1)
+					+ "' title='首页'>&lt;&lt;</a></li>");
+			sb.append("<li><a href='" + this.getUrl(this.getPageNum() - 1)
+					+ "' title='上一页'>&lt;</a></li>");
 		}
 		// 页码
 		if (this.getPageCount() != 1) {
@@ -118,14 +158,13 @@ public class PageVo<T> {
 			}
 			for (int i = startNum; i <= endNum; i++) {
 				if (i == pageNum) {
-					sb.append("<li class='active'><a   href='" + this.getUrl()
-							+ "p=" + i
+					sb.append("<li class='active'><a   href='" + this.getUrl(i)
 							+ "' class='number current' title='" + i + "'>" + i
 							+ "</a></li>");
 				} else {
-					sb.append("<li><a href='" + this.getUrl() + "p=" + i
-
-					+ "' class='number' title='" + i + "'>" + i + "</a></li>");
+					sb.append("<li><a href='" + this.getUrl(i)
+							+ "' class='number' title='" + i + "'>" + i
+							+ "</a></li>");
 				}
 			}
 			if (endNum < this.getPageCount()) {
@@ -134,11 +173,10 @@ public class PageVo<T> {
 		}
 		// 下一页，尾页
 		if (this.getPageNum() < this.getPageCount()) {
-			sb.append("<li><a href='" + this.getUrl() + "p="
-					+ (this.getPageNum() + 1)
-					+ "' title='下一页'>下一页&raquo;</a></li>");
-			sb.append("<li><a href='" + this.getUrl() + "p="
-					+ this.getPageCount() + "' title='末页'>末页 &raquo;</a></li>");
+			sb.append("<li><a href='" + this.getUrl(this.getPageNum() + 1)
+					+ "' title='下一页'>&gt;</a></li>");
+			sb.append("<li><a href='" + this.getUrl(this.getPageCount())
+					+ "' title='末页'>&gt;&gt;</a></li>");
 		}
 		sb.append("</ul>");
 		return sb.toString();

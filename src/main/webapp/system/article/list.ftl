@@ -1,5 +1,8 @@
 <#assign menu="article">
-<#assign submenu="article_list">
+<#if status=="trash">
+<#assign submenu="article_recycle">
+<#else><#assign submenu="article_list">
+</#if>
 <#include "/system/head.ftl">
 <style type="text/css">
 .pagination {
@@ -40,15 +43,18 @@
         	<!-- page start-->
             <section class="panel">
             	<header class="panel-heading">
-               		 所有文章列表
+               		 <#if status=="display">已发布文章列表
+               		 <#elseif status=="hidden">草稿列表
+               		 <#elseif status=="init">初始化文章列表
+               		 <#else>回收站
+               		 </#if>
                 </header>
                 <div class="panel-body">
                 	<ul class="subsubsub">
-						<li class="arrticle_status"><a class="current" href="${basePath}/admin/file/page.htm?type=article">全部</a>（${allCount}）|</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/file/type/page.htm?type=article&status=display">已发布</a>（${displayCount}） |</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/file/type/page.htm?type=article&status=priv">私有</a>（${privCount}） |</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/file/type/page.htm?type=article&status=secret">密码保护</a>（${secretCount}）|</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/file/type/page.htm?type=article&status=draft">草稿</a>（${draftCount}） </li>
+						<li class="arrticle_status"><a href="${basePath}/admin/article/page.htm?status=display">已发布</a>（${displayCount}）</li>
+						<li class="arrticle_status"><a href="${basePath}/admin/article/page.htm?status=hidden">隐藏</a>（${hiddenCount}）</li>
+						<li class="arrticle_status"><a href="${basePath}/admin/article/page.htm?status=trash">垃圾文章</a>（${trashCount}）</li>
+						<li class="arrticle_status"><a href="${basePath}/admin/article/page.htm?status=init">初始化文章列表</a>（${initCount}）</li>
 					</ul>
 				</div>
                 <div class="panel-body">
@@ -59,35 +65,29 @@
                                 	<tr>
 										<th>文章名称</th>
                 						<th>所属目录</th>
-                						<th>时间</th>
+                						<th>最后更新时间</th>
                 						<th>操作</th>
               						</tr>
                                 </thead>
                             	<tbody role="alert" aria-live="polite" aria-relevant="all">
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
-                            			<td class="articleId">${e.fileId}</td>
-               							<td><a href="${basePath}/${e.folder.ename}/${e.fileId}.htm">${e.name}</a>&nbsp;-
+                            			<td class="articleId">${e.articleId}</td>
+               							<td><a href="${basePath}/<#list e.folderPathList as folders>${folders.ename}/</#list>${e.articleId}.htm">${e.name}</a>&nbsp;-
                								<#if e.status=="display">公开
-                                    		<#elseif e.status=="draft">草稿
-                                    		<#elseif e.status=="priv">私有的
-                                    		<#elseif e.status=="secret">密码保护
-                                    		<#elseif e.status=="system">系统文件
+                                    		<#else>隐藏
                                     		</#if>
                							</td>
                             			<td>${e.folder.name}</td>
-                                    	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}${e.timeType}</td>
+                                    	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="${basePath}/admin/article/update.htm?fileId=${e.fileId}" title="修改">
-                  								<button class="btn btn-primary btn-xs">
-                  									<i class="icon-pencil"></i>
-                  								</button>
+                  							<a href="${basePath}/admin/article/update.htm?articleId=${e.articleId}" title="修改">
+                  								编辑
                   							</a>
-                  							<a class="js_article_update_status" fileid="${e.fileId}" title="把${e.name}放进回收站">
-                  								<button class="btn btn-danger btn-xs">
-                  									<i class="icon-trash "></i>
-                  								</button>
+                  							 | 
+                  							<a href="javascript:void(0);" class="js_article_update_status" fileid="${e.articleId}" title="把【${e.name}】放进回收站">
+                  								删除
                   							</a>
                 						</td>
                                 	</tr>
@@ -110,7 +110,7 @@ $(function(){
 	$(".articleId").hide();
 	$('.js_article_update_status').click(function(){
 		var fileId = $(this).attr('fileId');
-		var status= "hidden";
+		var status= "trash";
 		bootbox.dialog({
 			message : "是否"+$(this).attr('title'),
 			title : "提示",
@@ -119,34 +119,11 @@ $(function(){
 					label : "确定",
 					className : "btn-success",
 					callback : function() {
-					$.post("${basePath}/admin/file/status/update.json", { 
+					$.post("${basePath}/admin/article/status/update.json", { 
 						"fileId": fileId,
 						"status": status},
 						function(data){
-							if(data.result){
-								bootbox.dialog({
-									message : "操作成功",
-									title : "提示",
-									buttons : {
-										delete : {
-											label : "前往回收站",
-											className : "btn-success",
-											callback : function() {
-												window.location.href="${basePath}/admin/article/page.htm?status=hidden"
-											}
-										},
-										cancel : {
-											label : "返回文章列表",
-											className : "btn-primary",
-											callback : function() {
-												window.location.href="${basePath}/admin/file/page.htm?type=article";
-											}
-										}
-									}
-								});
-							}else{
-								bootbox.alert(data.msg, function() {});
-							}
+							window.location.reload();
 						}, "json");
 					}
 				},

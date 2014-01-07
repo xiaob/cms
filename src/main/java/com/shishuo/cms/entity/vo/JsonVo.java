@@ -22,6 +22,8 @@ import java.util.HashMap;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.shishuo.cms.exception.ValidateException;
+
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class JsonVo<T> {
 	/**
@@ -75,4 +77,12 @@ public class JsonVo<T> {
 		this.t = t;
 	}
 
+	public void check() throws ValidateException {
+		if (this.getErrors().size() > 0) {
+			this.setResult(false);
+			throw new ValidateException("有错误发生");
+		} else {
+			this.setResult(true);
+		}
+	}
 }

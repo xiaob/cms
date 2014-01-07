@@ -54,7 +54,7 @@ public class FtlFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		response.sendRedirect(HttpUtils.getBasePath(request) + "/");
+		response.sendRedirect(HttpUtils.getBasePath(request) + "/404.htm");
 	}
 
 	public void destroy() {

@@ -18,9 +18,12 @@
  */
 package com.shishuo.cms.action.admin;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +31,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shishuo.cms.constant.FileConstant;
-import com.shishuo.cms.entity.File;
-import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.constant.ArticleConstant;
+import com.shishuo.cms.constant.AttachmentConstant;
+import com.shishuo.cms.constant.FolderConstant;
+import com.shishuo.cms.constant.SystemConstant;
+import com.shishuo.cms.entity.Article;
+import com.shishuo.cms.entity.vo.ArticleVo;
+import com.shishuo.cms.entity.vo.AttachmentVo;
 import com.shishuo.cms.entity.vo.JsonVo;
-import com.shishuo.cms.constant.SystemConstant;;
+import com.shishuo.cms.entity.vo.PageVo;
+import com.shishuo.cms.exception.ArticleNotFoundException;
 
 /**
  * @author 文件action
@@ -40,122 +48,151 @@ import com.shishuo.cms.constant.SystemConstant;;
  */
 @Controller
 @RequestMapping("/admin/article")
-public class AdminArticleAction extends AdminFileAction {
+public class AdminArticleAction extends AdminBaseAction {
 
-	@Autowired
-	private AdminConfigAction adminConfigAction;
+	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
+	public String add(
+			@RequestParam(value = "folderId", defaultValue = "1") long folderId,
+			HttpServletResponse response) {
+		Article article = articleService.addArticle(folderId);
+		try {
+			response.sendRedirect(SystemConstant.BASE_PATH
+					+ "/admin/article/update.htm?articleId="
+					+ article.getArticleId());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "system/500";
+		}
+		return null;
+	}
+
+	/**
+	 * @author 进入某种文章的列表分页的首页
+	 * 
+	 */
+	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
+	public String filePage(
+			@RequestParam(value = "p", defaultValue = "1") int pageNum,
+			@RequestParam(value = "status", defaultValue = "display") ArticleConstant.Status status,
+			HttpServletRequest request, ModelMap modelMap) {
+		PageVo<ArticleVo> pageVo = articleService
+				.getArticlePageByTypeAndStatusPage(status, pageNum);
+		int displayCount = articleService
+				.getArticleCountByStatus(ArticleConstant.Status.display);
+		int hiddenCount = articleService
+				.getArticleCountByStatus(ArticleConstant.Status.hidden);
+		int trashCount = articleService
+				.getArticleCountByStatus(ArticleConstant.Status.trash);
+		int initCount = articleService
+				.getArticleCountByStatus(ArticleConstant.Status.init);
+		modelMap.put("displayCount", displayCount);
+		modelMap.put("hiddenCount", hiddenCount);
+		modelMap.put("trashCount", trashCount);
+		modelMap.put("initCount", initCount);
+		modelMap.put("status", status);
+		modelMap.put("pageVo", pageVo);
+
+		return "system/article/list";
+	}
 
 	/**
 	 * @author 进入修改文章页面
-	 * @throws Exception 
+	 * @throws Exception
 	 * 
 	 */
 	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
 	public String update(
-			@RequestParam(value = "fileId", defaultValue = "1") long fileId,
-			ModelMap modelMap) throws Exception {
-		File file = fileService.getFileByFileId(fileId);
-		if (file.getFolderId() == 0) {
-			modelMap.put("folderName", "未分类");
-		} else {
-			Folder folder = folderService.getFolderById(file.getFolderId());
-			modelMap.put("folderName", folder.getName());
-		}
-		modelMap.put("file", file);
-		modelMap.put("folderAll", folderService.getAllFolderByType(SystemConstant.Type.article));
+			@RequestParam(value = "articleId", defaultValue = "1") long articleId,
+			ModelMap modelMap, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ArticleVo article = articleService.getArticleByArticleId(articleId);
+		modelMap.put("article", article);
+		modelMap.put("folderAll", folderService.getAllFolderList(0,
+				FolderConstant.Status.display));
+		modelMap.put("JSESSIONID", request.getSession().getId());
 		return "system/article/update";
 	}
 
 	/**
-	 * @author 进入添加文章页面
-	 * @throws Exception 
-	 * 
-	 */
-	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
-	public String addArticle(ModelMap modelMap,HttpServletRequest request) throws Exception {
-		File file = fileService.addFile(0,0, this.getAdmin(request).getAdminId(),0,"自动草稿", "", "",SystemConstant.Type.article, FileConstant.Status.hidden);
-//		File file = fileService.getFileByFileId(83);
-		modelMap.put("file", file);
-		modelMap.put("allFolderList", folderService.getAllFolderByType(SystemConstant.Type.article));
-		modelMap.put("name", "");
-		modelMap.put("content","");
-		modelMap.put("title","");
-		return "system/article/add";
-	}
-	
-	/**
-	 * @author 发布新文章
-	 * 
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/add.json", method = RequestMethod.POST)
-	public JsonVo<String> addArticle(
-			@RequestParam(value = "name") String name,
-			@RequestParam(value = "fileId") long fileId,
-			@RequestParam(value = "folderId") long folderId,
-			@RequestParam(value = "title",required=false) String title,
-			@RequestParam(value = "description",required=false) String description,
-			@RequestParam(value = "content") String content,
-			@RequestParam(value = "password" ,required=false) String password,
-			@RequestParam(value = "status") FileConstant.Status status,
-			HttpServletRequest request) {
-
-		JsonVo<String> json = new JsonVo<String>();
-		try {
-			if(name.equals("")){
-				json.getErrors().put("name","文章标题不能为空");
-			}
-			// 检测校验结果
-			validate(json);
-			fileService.updateFileByFileIdAndCreateTime(fileId,folderId, 0,this.getAdmin(request).getAdminId(),name,
-			content,title,description,password, SystemConstant.Type.article,status);
-			json.setResult(true);
-		} catch (Exception e) {
-			json.setResult(false);
-			json.setMsg(e.getMessage());
-		}
-		return json;
-	}
-	
-	/**
 	 * @author 修改文章资料
-	 * 
+	 * @param fileId
+	 * @param folderId
+	 * @param name
+	 * @param titile
+	 * @param content
+	 * @param description
+	 * @param status
+	 * @param request
+	 * @param modelMap
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
-	public JsonVo<String> updateArticle(
-			@RequestParam(value = "name") String name,
-			@RequestParam(value = "fileId") long fileId,
-			@RequestParam(value = "folderId") long folderId,
-			@RequestParam(value = "content") String content,
-			@RequestParam(value = "title",required=false) String title,
-			@RequestParam(value = "description",required=false) String description,
-			@RequestParam(value = "password" ,defaultValue="") String password,
-			@RequestParam(value = "status") FileConstant.Status status,
-			HttpServletRequest request) {
+	public JsonVo<Article> update(@RequestParam("articleId") long articleId,
+			@RequestParam("folderId") long folderId,
+			@RequestParam("name") String name,
+			@RequestParam("title") String title,
+			@RequestParam("content") String content,
+			@RequestParam("description") String description,
+			@RequestParam("status") ArticleConstant.Status status,
+			HttpServletRequest request, ModelMap modelMap) {
+		JsonVo<Article> json = new JsonVo<Article>();
+		Article file = articleService.updateFileByFileId(articleId, folderId,
+				0, this.getAdmin(request).getAdminId(), name, content, title,
+				0, description, status);
+		json.setT(file);
+		json.setResult(true);
+		return json;
+	}
 
+	/**
+	 * @author 彻底删除文件
+	 * @throws ArticleNotFoundException
+	 * 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/delete.json", method = RequestMethod.POST)
+	public JsonVo<String> deleteFile(@RequestParam(value = "fileId") long fileId)
+			throws ArticleNotFoundException {
 		JsonVo<String> json = new JsonVo<String>();
-		try {
-			if(name.equals("")){
-				json.getErrors().put("name","文章标题不能为空");
-			}
-			if(content.equals("")){
-				json.getErrors().put("content","文章内容不能为空");
-			}
-			// 检测校验结果
-			validate(json);
-			File file = fileService.getFileByFileId(fileId);
-			if(file.getStatus().equals(FileConstant.Status.system)){
-				fileService.updateFileByFileId(fileId,folderId, 0,this.getAdmin(request).getAdminId(),name,
-						content,title,description,password, SystemConstant.Type.article,FileConstant.Status.system);
-			}else{
-				fileService.updateFileByFileId(fileId,folderId, 0,this.getAdmin(request).getAdminId(),name,
-						content,title,description,password, SystemConstant.Type.article,status);
-			}
-			json.setResult(true);
-		} catch (Exception e) {
+		Article file = articleService.getArticleByArticleId(fileId);
+		if (file.getOwner().equals(ArticleConstant.Owner.system)) {
 			json.setResult(false);
-			json.setMsg(e.getMessage());
+			json.setMsg("这是系统文件无法被删除");
+			return json;
+		}
+		// 删除文件系统
+		articleService.deleteFileByArticleId(fileId);
+		List<AttachmentVo> attachmentList = attachmentService
+				.getAttachmentPageByKindId(fileId,
+						AttachmentConstant.Kind.article, 1000, 1).getList();
+		for (AttachmentVo attachment : attachmentList) {
+			attachmentService.deleteAttachment(attachment.getAttachmentId(),
+					attachment.getPath());
+		}
+		json.setResult(true);
+		return json;
+	}
+
+	/**
+	 * 放进回收站，还原
+	 * 
+	 * @throws ArticleNotFoundException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/status/update.json", method = RequestMethod.POST)
+	public JsonVo<String> updateModify(
+			@RequestParam(value = "fileId") long fileId,
+			@RequestParam(value = "status") ArticleConstant.Status status)
+			throws ArticleNotFoundException {
+		JsonVo<String> json = new JsonVo<String>();
+		Article file = articleService.getArticleByArticleId(fileId);
+		if (file.getOwner().equals(ArticleConstant.Owner.system)) {
+			json.setResult(false);
+			json.setMsg("这是系统文件不能进行操作");
+		} else {
+			articleService.updateStatusByFileId(fileId, status);
+			json.setResult(true);
 		}
 		return json;
 	}

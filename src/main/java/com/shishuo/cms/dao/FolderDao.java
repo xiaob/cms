@@ -23,7 +23,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.shishuo.cms.constant.SystemConstant;
+import com.shishuo.cms.constant.FolderConstant;
+import com.shishuo.cms.constant.FolderConstant.Status;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
 
@@ -38,7 +39,7 @@ import com.shishuo.cms.entity.vo.FolderVo;
 public interface FolderDao {
 
 	// ///////////////////////////////
-	// /////       增加                          ////////
+	// ///// 增加 ////////
 	// ///////////////////////////////
 	/**
 	 * 增加目录
@@ -47,9 +48,8 @@ public interface FolderDao {
 	 */
 	public int addFolder(Folder folder);
 
-	
 	// ///////////////////////////////
-	// /////       刪除                         ////////
+	// ///// 刪除 ////////
 	// ///////////////////////////////
 	/**
 	 * 删除目录
@@ -59,9 +59,8 @@ public interface FolderDao {
 	 */
 	public boolean deleteFolder(@Param("folderId") long folderId);
 
-	
 	// ///////////////////////////////
-	// /////       修改                          ////////
+	// ///// 修改 ////////
 	// ///////////////////////////////
 	/**
 	 * 更新目录
@@ -71,14 +70,28 @@ public interface FolderDao {
 	 */
 	public int updateFolder(Folder folder);
 
-	public int updateSort(@Param("folderId") long folderId,@Param("sort") int sort);
+	/**
+	 * @param folderId
+	 * @param name
+	 * @param ename
+	 * @param content
+	 * @param status
+	 */
+	public void updateFolder(@Param("folderId") long folderId,
+			@Param("name") String name, @Param("ename") String ename,
+			@Param("content") String content, @Param("status") Status status);
 
-	public int updatePath(@Param("folderId") long folderId,@Param("path") String path);
-	
-	public int updateCount(@Param("folderId") long folderId,@Param("count") int count);
+	public int updateSort(@Param("folderId") long folderId,
+			@Param("sort") int sort);
+
+	public int updatePath(@Param("folderId") long folderId,
+			@Param("path") String path);
+
+	public int updateCount(@Param("folderId") long folderId,
+			@Param("count") int count);
 
 	// ///////////////////////////////
-	// /////       查询                         ////////
+	// ///// 查询 ////////
 	// ///////////////////////////////
 	/**
 	 * 得到目录
@@ -86,7 +99,7 @@ public interface FolderDao {
 	 * @param folderId
 	 * @return Folder
 	 */
-	public Folder getFolderById(@Param("folderId") long folderId);
+	public FolderVo getFolderById(@Param("folderId") long folderId);
 
 	/**
 	 * 得到所有子目录
@@ -94,21 +107,33 @@ public interface FolderDao {
 	 * @param fatherId
 	 * @return List<FolderVo>
 	 */
-	public List<FolderVo> getFolderListByFatherId(@Param("fatherId") long fatherId);
-	
+	public List<FolderVo> getFolderListByFatherId(
+			@Param("fatherId") long fatherId,
+			@Param("status") FolderConstant.Status status);
+
+	/**
+	 * 得到folder的所有path
+	 * 
+	 */
+	public List<String> getAllFolderPath();
 
 	/**
 	 * 通过ename获得指定目录
+	 * 
 	 * @param ename
 	 * @return Folder
 	 */
+	@Deprecated
 	public Folder getFolderByEname(String ename);
-	
+
 	/**
-	 * 得到某种类型的所有目录
-	 * @return Integer
-	 *
+	 * 通过ename和fatherId获得指定目录
+	 * 
+	 * @param ename
+	 * @param fatherId
+	 * @return
 	 */
-	public List<FolderVo> getAllFolderByType(@Param("type") SystemConstant.Type type);
-	
+	public FolderVo getFolderByEnameAndFatherId(@Param("ename") String ename,
+			@Param("fatherId") long fatherId);
+
 }

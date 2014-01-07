@@ -32,13 +32,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 文件上传
- *
+ * 
  */
 @Controller
 @RequestMapping("/admin")
 public class UpLoadAction {
 
-	
 	@RequestMapping(value = "upload.htm", method = RequestMethod.GET)
 	public String upload() {
 		return "admin/upload";

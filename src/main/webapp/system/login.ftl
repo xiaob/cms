@@ -26,6 +26,7 @@
     <![endif]-->
     <script src="${basePath}/system/js/jquery.js"></script>
     <script src="${basePath}/system/js/jquery.form.min.js"></script>
+    <script src="${basePath}/system/js/jquery.watermark.js"></script>
 	<style type="text/css">
 p.error {
 	color: #DE5959;

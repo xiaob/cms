@@ -40,9 +40,9 @@ public class LogService {
 	private LogDao logDao;
 
 	// ///////////////////////////////
-	// /////       增加                          ////////
+	// ///// 增加 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 增加日志
 	 * 
@@ -59,9 +59,9 @@ public class LogService {
 	}
 
 	// ///////////////////////////////
-	// /////       查詢                          ////////
+	// ///// 查詢 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 日志分页
 	 * 
@@ -69,7 +69,6 @@ public class LogService {
 	 */
 	public PageVo<Log> getLogPage(int pageNum) {
 		PageVo<Log> pageVo = new PageVo<Log>(pageNum);
-		pageVo.setUrl("");
 		List<Log> list = this.getLogList(pageVo.getOffset(), pageVo.getRows());
 		pageVo.setList(list);
 		pageVo.setCount(this.getLogListCount());

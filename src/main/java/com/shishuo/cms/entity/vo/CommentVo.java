@@ -23,17 +23,17 @@ import java.util.List;
 
 import com.shishuo.cms.entity.Comment;
 
-public class CommentVo extends Comment{
-	
+public class CommentVo extends Comment {
+
 	/**
 	 * 子评论
 	 */
-    private	List<CommentVo> childComment = new ArrayList<CommentVo>();
-    
-    /**
+	private List<CommentVo> childComment = new ArrayList<CommentVo>();
+
+	/**
      * 
      */
-    private String faceUrl;
+	private String faceUrl;
 
 	public String getFaceUrl() {
 		return faceUrl;
@@ -50,5 +50,5 @@ public class CommentVo extends Comment{
 	public void setChildComment(List<CommentVo> childComment) {
 		this.childComment = childComment;
 	}
-	
+
 }

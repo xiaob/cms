@@ -15,14 +15,7 @@
  					审核评论
 				</header>
 				<div class="panel-body">
-					<form method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/comment/auditing/${comment.commentId}.htm">
-					<fieldset>
-						<div class="form-group" id="comment_commentId">
-							<label class="col-sm-2 col-sm-2 control-label">评论Id</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="commentId" value="${comment.commentId}">
-							</div>
-						</div>
+						<input type="hidden" class="form-control" name="commentId" value="${comment.commentId}">
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">评论标题</label>
 							<div class="col-sm-10">
@@ -37,10 +30,15 @@
 						</div>
 						<div class="form-group">
                         	<label class="col-sm-2 col-sm-2 control-label"></label>
-                        	<button class="btn btn-danger" type="submit">审核</button>
+                        	<#if comment.status=="hidden">
+                        	<button class="btn btn-danger" type="submit" id="displayComment" commentId=${comment.commentId}>审核通过</button>
+                        	<button class="btn btn-success" type="submit" id="trashComment" commentId=${comment.commentId}>垃圾评论</button>
+                        	<#elseif comment.status=="display">
+                        	<button class="btn btn-success" type="submit" id="trashComment" commentId=${comment.commentId}>垃圾评论</button>
+                        	<#else>
+                        	<button class="btn btn-danger" type="submit" id="displayComment" commentId=${comment.commentId}>审核通过</button>
+                        	</#if>
                         </div>
-					</fieldset>
-				</form>
 				</div>
 			</section>
 		</div>
@@ -51,7 +49,26 @@
  <!--main content end-->
 <script type="text/javascript">
 	$(function() {
-		$("#comment_commentId").hide();
+		$('#displayComment').click(function(){
+			var commentId=$(this).attr("commentId");
+			$.post("${basePath}/admin/comment/auditing.json",{'commentId':commentId},function(data){
+				if(data.result){
+					bootbox.alert("更新成功，将前往列表页面", function() {
+						window.location.href="${basePath}/admin/comment/page.htm";
+					});
+				}
+			});
+		});
+		$('#trashComment').click(function(){
+			var commentId=$(this).attr("commentId");
+			$.post("${basePath}/admin/comment/cancel.json",{'commentId':commentId},function(data){
+				if(data.result){
+					bootbox.alert("更新成功，将前往列表页面", function() {
+						window.location.href="${basePath}/admin/comment/page.htm";
+					});
+				}
+			});
+		});
 	});
 </script>
 <#include "/system/foot.ftl">

@@ -21,12 +21,12 @@ package com.shishuo.cms.tag;
 import static freemarker.template.ObjectWrapper.BEANS_WRAPPER;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shishuo.cms.constant.CommentConstant;
 import com.shishuo.cms.entity.vo.CommentVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.CommentService;
@@ -57,8 +57,8 @@ public class CommentPageTag implements TemplateDirectiveModel {
 		Integer pageNum = Integer.parseInt(params.get("pageNum").toString());
 		Integer rows = Integer.parseInt(params.get("rows").toString());
 		PageVo<CommentVo> commentPage = commentService.getCommentPage(fileId,
-				pageNum,rows);
-		env.setVariable("commentPage", BEANS_WRAPPER.wrap(commentPage));
+				CommentConstant.kind.article, pageNum, rows);
+		env.setVariable("tag_comment_page", BEANS_WRAPPER.wrap(commentPage));
 		body.render(env.getOut());
 	}
 

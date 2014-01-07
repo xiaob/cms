@@ -17,7 +17,6 @@
     line-height: 1.33;
     padding: 9px 15px；
 }
-
 </style>
 		<!--main content start-->
 		<section id="main-content">
@@ -35,7 +34,7 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录名称</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="folderName"
+                                          <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="folderName"
                                           	placeholder="目录名称" id="folderName" >${folderName}
                                           </input>
                                       </div>
@@ -43,82 +42,49 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">英文名称</label>
                                       <div class="col-sm-10">
-                                      <input onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" 
-                                       CLASS="form-control" NAME="folderEname" PLACEHOLDER="英文名称">
-                                      <label>注意:英文名称只能是数字或者英文字母或者是下划线组成</label>
+	                                      <input style="font-size:15px;width: 300px;" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" 
+	                                       CLASS="form-control" NAME="folderEname" PLACEHOLDER="英文名称">
+	                                       <p class="help-block">注意:英文名称只能是数字或者英文字母或者是下划线组成</p>
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">父级标签</label>
                                       <div class="col-sm-10">
-                                        <select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="fatherId">
-                                        	<option value="0">未分类</option>
-                                        	<#list folderAll as folder>  	
-                                          		<option value="${folder.folderId}">
-                                          		<#list 1..folder.level as i>
-                                          		-
-                                          		</#list>
-                                          		${folder.name}</option>
-                                        	</#list>
-                                        </select>
+										<select class="form-control input-lg m-bot15" style="font-size:15px;width: 300px;" name="fatherId">
+					                   		<#list folderAll as firstFolder>
+					                        	<option style="background-color:#DFF0D8;font-weight:bold;" value="${firstFolder.folderId}">
+					                        	├─┬─${firstFolder.name}
+					                        	</option>
+						                        	<#list firstFolder.folderList as secondFolder>
+						                        	<option style="background-color:#5BC0DE;color:#FFFFFF;" value="${secondFolder.folderId}">
+						                        	│&nbsp;&nbsp;&nbsp;└──${secondFolder.name}
+						                        	</option>
+														<#list secondFolder.folderList as thirdFolder>
+							                        	<option style="background-color:#FCF8E3;" value="${thirdFolder.folderId}">
+							                        	│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;└──${thirdFolder.name}
+							                        	</option>
+							                        	</#list>			                        	
+						                        	</#list>
+					                        </#list>							
+			                            </select>                                        
                                       </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">目录类型</label>
-                                      <div class="col-sm-10">
-                                  		<label class="checkbox-inline">
-                                    		<input type="radio" value="article" name="type" checked>
-                                        	文章
-                                  		</label>
-                                  		<label class="checkbox-inline">
-                                    		<input type="radio" value="photo" name="type">
-                                        	图片
-                                  		</label>
-                                  		<label class="checkbox-inline">
-                                    		<input type="radio" value="file" name="type">
-                                        	下载
-                                  		</label>                                 			
-                                  		<label class="checkbox-inline">
-                                    		<input type="radio" value="shop" name="type">
-                                        	商品
-                                  		</label>
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label class="col-sm-2 col-sm-2 control-label">目录等级</label>
-                                      <div class="col-sm-10">
-                                  		<label class="checkbox-inline">
-                                    		<input type="radio" value="everyone" name="rank" checked>
-                                        	所有人
-                                  		</label>
-                                  		<label class="checkbox-inline">
-                                    		<input type="radio" value="login" name="rank">
-                                        	登录用户
-                                  		</label>
-                                  		<label class="checkbox-inline">
-                                    		<input type="radio" value="vip" name="rank">
-                                        	VIP
-                                  		</label>                                 			
-                                  		<label class="checkbox-inline">
-                                    		<input type="radio" value="admin" name="rank">
-                                        	管理员
-                                  		</label>
-                                      </div>
-                                  </div>
+                                  </div>   
+                                                                
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录状态</label>
                                       <div class="col-sm-10">
-                                      	<label class="checkbox-inline">
-                                    		<input type="radio" name="status" value="display" checked/>显示
+                                      	<label class="radio-inline">
+                                    		<input type="radio" name="status" value="display" checked/> 显示
                                   		</label>
-                                  		<label class="checkbox-inline">
-                                    		<input type="radio" name="status" value="hidden"/>隐藏
+                                  		<label class="radio-inline">
+                                    		<input type="radio" name="status" value="hidden"/> 隐藏
                                   		</label>
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                  	<label class="col-sm-2 col-sm-2 control-label"></label>
+                                  	  <div class="col-lg-offset-2 col-lg-10">
                                       <button class="btn btn-danger" type="submit">保存</button>
+                                      </div>
                                   </div>
                                  </fieldset>
                               </form>

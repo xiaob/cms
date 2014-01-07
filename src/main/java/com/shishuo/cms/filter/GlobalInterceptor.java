@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.constant.SystemConstant;
+import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.util.HttpUtils;
 
@@ -39,28 +40,24 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		if (null == modelAndView) {
 			return;
 		}
-
+		Admin admin = (Admin) request.getSession().getAttribute(
+				SystemConstant.SESSION_ADMIN);
+		if (admin == null) {
+			modelAndView.addObject("isAdmin", false);
+		} else {
+			modelAndView.addObject("isAdmin", true);
+		}
 		// 系统配置参数
 		String basePath = HttpUtils.getBasePath(request);
 		modelAndView.addObject("basePath", basePath);
-		modelAndView.addObject("SYS_FUNCTION_DOWNLOAD", configService
-				.getConfigByKey(ConfigConstant.SYS_FUNCTION_DOWNLOAD, false));
-		modelAndView.addObject("SYS_FUNCTION_PHOTO", configService
-				.getConfigByKey(ConfigConstant.SYS_FUNCTION_PHOTO, false));
-		modelAndView.addObject("SYS_FUNCTION_SHOP", configService
-				.getConfigByKey(ConfigConstant.SYS_FUNCTION_SHOP, false));
-		modelAndView.addObject("SYS_SITEDESC", configService.getConfigByKey(
-				ConfigConstant.SYS_SITEDESC, false));
-		modelAndView.addObject("SYS_SITENAME", configService.getConfigByKey(
-				ConfigConstant.SYS_SITENAME, false));
-		modelAndView.addObject("SYS_TEMPLATE", configService.getConfigByKey(
-				ConfigConstant.SYS_TEMPLATE, false));
-		modelAndView.addObject(
-				"TEMPLATE_PATH",
-				basePath
-						+ "/themes/"
-						+ configService.getConfigByKey(
-								ConfigConstant.SYS_TEMPLATE, false));
+		modelAndView.addObject("SYS_SITEDESC",
+				configService.getConfigByKey(ConfigConstant.SYS_SITEDESC));
+		modelAndView.addObject("SYS_SITENAME",
+				configService.getConfigByKey(ConfigConstant.SYS_SITENAME));
+		modelAndView.addObject("SYS_TEMPLATE",
+				configService.getConfigByKey(ConfigConstant.SYS_THEME));
+		modelAndView.addObject("TEMPLATE_PATH", basePath + "/themes/"
+				+ configService.getConfigByKey(ConfigConstant.SYS_THEME));
 		MDC.put("ip", HttpUtils.getIp(request));
 
 		if (StringUtils.isBlank(SystemConstant.BASE_PATH)) {

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>  
+<?xml version="1.0" encoding="UTF-8"?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--
   
@@ -27,10 +27,10 @@
 	
 	<insert id="addComment" parameterType="com.shishuo.cms.entity.Comment">
 		insert into `comment`
-		(fileId,email,name,content,ip,fatherId,status,createTime,userId)
+		(kind,email,name,content,ip,fatherId,status,createTime,userId,kindId,phone)
 		values
-		(#{fileId},#{email},#{name},#{content},#{ip},#{fatherId},#{status},#{createTime},#{userId})
-		<selectKey resultType="long" keyProperty="fileId">
+		(#{kind},#{email},#{name},#{content},#{ip},#{fatherId},#{status},#{createTime},#{userId},#{kindId},#{phone})
+		<selectKey resultType="long" keyProperty="commentId">
 			SELECT
 			LAST_INSERT_ID()
 		</selectKey>
@@ -51,19 +51,17 @@
 		
 	<select id="getCommentListByFatherId" parameterType="long"
 		resultType="com.shishuo.cms.entity.vo.CommentVo">
-		select * from `comment` where fileId = #{fileId} and
-		fatherId = #{fatherId} and status=#{status} order by createTime desc
+		select * from `comment` where kindId = #{kindId} and
+		fatherId = #{fatherId} and status=#{status} and kind=#{kind} order by createTime desc
 	</select>
 
 	<select id="getCommentCountByFatherId" resultType="Integer">
 		select
 		count(*) from
-		`comment` where fileId = #{fileId} and
+		`comment` where kindId = #{kindId} and kind=#{kind} and
 		fatherId =
 		#{fatherId} and status=#{status}
 	</select>
-
-	
 
 	<select id="getCommentById" parameterType="long"
 		resultType="com.shishuo.cms.entity.Comment">
@@ -71,7 +69,7 @@
 	</select>
 
 	<select id="getAllList" parameterType="long"
-		resultType="com.shishuo.cms.entity.Comment">
+		resultType="com.shishuo.cms.entity.vo.CommentVo">
 		select * from `comment` limit #{offset},#{rows}
 	</select>
 

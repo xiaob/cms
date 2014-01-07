@@ -66,7 +66,6 @@ public class Log {
 		this.content = content;
 	}
 
-
 	public LogConstant.Level getLevel() {
 		return level;
 	}

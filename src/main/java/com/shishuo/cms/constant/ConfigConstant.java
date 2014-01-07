@@ -27,19 +27,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ConfigConstant {
-	
+
 	/**
 	 * 默认的模板
 	 */
 	public static String DEFAUTL_TEMPLATE = "default";
 
-	public static String SYS_FUNCTION_DOWNLOAD = "sys_function_download";
-	public static String SYS_FUNCTION_PHOTO = "sys_function_photo";
-	public static String SYS_FUNCTION_SHOP = "sys_function_shop";
 	public static String SYS_SITEDESC = "sys_sitedesc";
 	public static String SYS_SITENAME = "sys_sitename";
-	public static String SYS_TEMPLATE = "sys_template";
-	
-	public static String ARTICLE_PICTURE_SIZE = "article_picture_size";
-	public static String PICTURE_SIZE="picture_size";
+	public static String SYS_THEME = "sys_theme";
 }

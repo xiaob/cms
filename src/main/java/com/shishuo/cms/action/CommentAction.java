@@ -29,10 +29,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
+import com.shishuo.cms.constant.CommentConstant;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.service.CommentService;
-import com.shishuo.cms.service.FileService;
+import com.shishuo.cms.service.ArticleService;
 import com.shishuo.cms.util.HttpUtils;
+import com.shishuo.cms.exception.ValidateException;
 
 /**
  * @author Herbert
@@ -45,7 +47,7 @@ public class CommentAction {
 	private CommentService commentService;
 
 	@Autowired
-	private FileService fileService;
+	private ArticleService fileService;
 
 	/**
 	 * @param name
@@ -58,23 +60,46 @@ public class CommentAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/add.json", method = RequestMethod.POST)
-	public JsonVo<String> add(@RequestParam("name") String name,
+	public JsonVo<String> add(
+			@RequestParam("name") String name,
 			@RequestParam("email") String email,
-			@RequestParam("fileId") long fileId,
+			@RequestParam(value = "fileId", defaultValue = "0") long fileId,
+			@RequestParam(value = "folderId", defaultValue = "0") long folderId,
+			@RequestParam(value = "phone", defaultValue = "0") long phone,
 			@RequestParam("content") String content,
 			HttpServletRequest request, ModelMap modelMap) {
-		commentService.addComment(fileId, email, name,
-				HttpUtils.getIp(request), HtmlUtils.htmlEscape(content));
-		fileService.updateCommentCount(fileId);
 		JsonVo<String> json = new JsonVo<String>();
-		json.setResult(true);
-		return json;
+		try {
+			if (name.equals("")) {
+				json.getErrors().put("name", "名称不能为空");
+			}
+			if (content.equals("")) {
+				json.getErrors().put("content", "内容不能为空");
+			}
+			json.check();
+			if (fileId == 0) {
+				commentService
+						.addComment(folderId, CommentConstant.kind.folder,
+								phone, email, name, HttpUtils.getIp(request),
+								HtmlUtils.htmlEscape(content));
+			} else {
+				commentService.addComment(fileId, CommentConstant.kind.article,
+						phone, email, name, HttpUtils.getIp(request),
+						HtmlUtils.htmlEscape(content));
+			}
+			fileService.updateCommentCount(fileId);
+			return json;
+		} catch (ValidateException e) {
+			json.setResult(false);
+			return json;
+		}
 	}
-	
+
 	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
-	public String commentPage(@RequestParam(value="p",defaultValue="1") int p,
-			ModelMap modelMap){
-		modelMap.put("pageVo", commentService.getCommentListPage(p));
+	public String commentPage(
+			@RequestParam(value = "p", defaultValue = "1") int p,
+			ModelMap modelMap) {
+		modelMap.put("pageVo", commentService.getCommentListPage(p, null));
 		return "system/comment/list";
 	}
 }

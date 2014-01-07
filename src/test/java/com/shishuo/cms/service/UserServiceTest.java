@@ -15,11 +15,11 @@ public class UserServiceTest {
 	@Autowired
 	private UserService userService;
 
-//	@Test
-//	public void testAddUser() {
-//		assertEquals(1, userService.addUser(6, 32, 113, "sdg").getOpenId());
-//		;
-//	}
+	// @Test
+	// public void testAddUser() {
+	// assertEquals(1, userService.addUser(6, 32, 113, "sdg").getOpenId());
+	// ;
+	// }
 
 	@Test
 	public void testGetUserById() {

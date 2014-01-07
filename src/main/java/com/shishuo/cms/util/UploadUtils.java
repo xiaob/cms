@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.shishuo.cms.constant.SystemConstant;
+
 /**
  * @author Herbert
  * 
@@ -40,8 +42,8 @@ public class UploadUtils {
 	 * @param fileType
 	 * @return
 	 */
-	public static List<File> getFiles(String realpath, List<File> files,
-			String[] fileType) {
+	public static List<java.io.File> getFiles(String realpath,
+			List<File> files, String[] fileType) {
 		File realFile = new File(realpath);
 		if (realFile.isDirectory()) {
 			File[] subfiles = realFile.listFiles();
@@ -58,18 +60,28 @@ public class UploadUtils {
 		return files;
 	}
 
-	public static String getFolder(String realpath) {
-		SimpleDateFormat formater = new SimpleDateFormat("yyyyMMdd");
-		realpath += "/" + formater.format(new Date());
-		File dir = new File(realpath);
+	/**
+	 * 得到文件上传的相对路径
+	 * 
+	 * @param fileName
+	 *            文件名
+	 * @return
+	 */
+	public static String getUploadPath(String fileName, long time) {
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
+		String uploadPath = "/upload/" + formater.format(new Date()) + "/"
+				+ time + getFileExt(fileName);
+		File dir = new File(System.getProperty(SystemConstant.SHISHUO_CMS_ROOT)
+				+ uploadPath);
 		if (!dir.exists()) {
 			try {
 				dir.mkdirs();
 			} catch (Exception e) {
+				e.printStackTrace();
 				return "";
 			}
 		}
-		return realpath;
+		return uploadPath;
 	}
 
 	/**
@@ -79,6 +91,17 @@ public class UploadUtils {
 	 */
 	public static String getFileExt(String fileName) {
 		return fileName.substring(fileName.lastIndexOf("."));
+	}
+
+	/**
+	 * 删除物理文件
+	 * 
+	 * @param path
+	 */
+	public static void deleteFile(String path) {
+		File file = new File(
+				System.getProperty(SystemConstant.SHISHUO_CMS_ROOT) + path);
+		file.delete();
 	}
 
 }

@@ -19,11 +19,11 @@
 	href="${basePath}/system/assets/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
 <link href="${basePath}/system/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />	
-<link href="${basePath}/system/assets/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" rel="stylesheet" />	
+<link href="${basePath}/system/assets/ueditor1/third-party/SyntaxHighlighter/shCoreDefault.css" rel="stylesheet" />	
 <!-- Custom styles for this template -->
 <link href="${basePath}/system/css/style.css" rel="stylesheet">
-<link href="${basePath}/system/css/style-responsive.css"
-	rel="stylesheet" />
+<link href="${basePath}/system/css/style-responsive.css" rel="stylesheet" />
+<link href="${basePath}/system/assets/uploadify/uploadify.css" rel="stylesheet" />
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
 <!--[if lt IE 9]>
@@ -32,6 +32,8 @@
     <![endif]-->
 	<script type="text/javascript">
 		window.BasePath = "${basePath}";
+		kindId = 0;
+		kind = "article";
 	</script>
 <script src="${basePath}/system/js/jquery.js"></script>
 </head>
@@ -53,14 +55,13 @@
                   <!-- user login dropdown start-->
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                          <img src="${SESSION_ADMIN.faceUrl}" style="width:29;height:29px;" alt="">
-                          <span class="username">${SESSION_ADMIN.name}</span>
+                          <span class="username">${SESSION_ADMIN.email}</span>
                           <b class="caret"></b>
                       </a>
                       <ul class="dropdown-menu extended logout">
                           <div class="log-arrow-up"></div>
-                          <li><a href="#"><i class="icon-cog"></i> 设置</a></li>
-                          <li><a href="${basePath}/auth/admin/logout"><i class="icon-key"></i> 安全退出</a></li>
+                          <li><a href="${basePath}/admin/admin/update.htm"><i class="icon-cog"></i> 设置</a></li>
+                          <li><a href="${basePath}/auth/admin/logout.htm"><i class="icon-key"></i> 安全退出</a></li>
                       </ul>
                   </li>
                   <!-- user login dropdown end -->
@@ -78,25 +79,20 @@
 						<a <#if menu="default">class="active"</#if> href="${basePath}/admin/index.htm"> <i class="icon-home"></i> <span>首页</span></a>
 					</li>
 					<li class="sub-menu">
-						<a href="javascript:;" <#if menu="folder">class="active"</#if>> <i class="icon-folder-open"></i> <span>目录</span></a>
-						<ul class="sub">
-							<li <#if submenu="add_folder">class="active"</#if>><a href="${basePath}/admin/folder/add.htm">增加目录</a></li>
-							<li <#if submenu="folder_list">class="active"</#if>><a href="${basePath}/admin/folder/page.htm">目录列表</a></li>
-						</ul>						
+						<a href="${basePath}/admin/folder/page.htm" <#if menu="folder">class="active"</#if>> <i class="icon-folder-open"></i> <span>目录</span></a>						
 					</li>
 					<li class="sub-menu">
 						<a href="javascript:;" <#if menu="article">class="active"</#if>> <i class="icon-book"></i> <span>文章</span></a>
 						<ul class="sub">
 							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/article/add.htm">增加文章</a></li>
-							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/file/page.htm?type=article">文章列表</a></li>
-							<li <#if submenu="article_recycle">class="active"</#if>><a href="${basePath}/admin/article/page.htm?status=hidden">回收站</a></li>
+							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/article/page.htm">文章列表</a></li>
 						</ul>
-					</li>
+					</li>				
 					<li class="sub-menu">
 						<a href="javascript:;" <#if menu="comment">class="active"</#if>> <i class="icon-comments"></i> <span>评论</span></a>
 						<ul class="sub">
 							<li <#if submenu="comment_list">class="active"</#if>><a href="${basePath}/admin/comment/page.htm">所有评论</a></li>
-							<li <#if submenu="auditing_list_comment">class="active"</#if>><a href="${basePath}/admin/comment/auditing/list.htm">审核评论列表</a></li>
+							<li <#if submenu="auditing_list_comment">class="active"</#if>><a href="${basePath}/admin/comment/page.htm?status=hidden">审核评论列表</a></li>
 						</ul>
 					</li>
 					<li class="sub-menu">
@@ -115,9 +111,9 @@
 						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>设置</span></a>
 						<ul class="sub">
 							<li <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic.htm">基本设置</a></li>
-							<li <#if submenu="system_picture">class="active"</#if>><a href="${basePath}/admin/config/picture.htm">图片设置</a></li>
 							<li <#if submenu="add_admin">class="active"</#if>><a href="${basePath}/admin/admin/add.htm">添加管理员</a></li>
 							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/page.htm">管理员列表</a></li>
+							<li <#if submenu="update_admin">class="active"</#if>><a href="${basePath}/admin/admin/update.htm">修改个人信息</a></li>
 						</ul>
 					</li>
 				</ul>

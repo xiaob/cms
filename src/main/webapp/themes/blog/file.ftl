@@ -52,47 +52,47 @@ a:link, a:visited {
         <div class="row">
             <!--blog start-->
             <div class="col-lg-9 ">
-            <@cms_file fileId="${fileId}">
+            <@shishuo_cms_file fileId="${fileId}">
                 <div class="blog-item">
                     <div class="row">
                         <div class="col-lg-2 col-sm-2">
                             <div class="date-wrap">
-                                <span class="date">${file.createTime?string("dd")}</span>
-                                <span class="month">${file.createTime?string("MM")}月</div>
+                                <span class="date">${tag_file.createTime?string("dd")}</span>
+                                <span class="month">${tag_file.createTime?string("MM")}月</div>
                             <div class="comnt-wrap">
                                 <span class="comnt-ico">
                                     <i class="icon-comments"></i>
                                 </span>
-                                <span class="value">${file.commentCount}</span>
+                                <span class="value">${tag_file.commentCount}</span>
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-10">
                         	<div id="slides" class="lof-slidecontent">
-                           		<#list file.photo as photo>
+                           		<#list tag_file.photo as photo>
                             		<img src="${basePath}/upload/photo/${photo.fileId}_picture.jpg">
                             	</#list>
                             </div>
-                            <h1><b>${file.name}</b></h1>
+                            <h1><b>${tag_file.name}</b></h1>
                             <div class="author">
-                               	作者：<a>${file.admin.name}</a> | 浏览数：${file.viewCount}
+                               	作者：<a>${tag_file.admin.name}</a> | 浏览数：${tag_file.viewCount}
                             </div>
                             <p>
-                            	${file.title}
+                            	${tag_file.title}
                             </p>
                             <p>
-                            	${file.description}
+                            	${tag_file.description}
                             </p>
                             <hr>
                             <p>
-                            	${file.content}
+                            	${tag_file.content}
                             </p>
-                            <#list file.file as fi>
+                            <#list tag_file.file as fi>
                             <p>
                             	<a href=""title="${fi.size}b">${fi.name}</a>
                             </p>
                             </#list>
-                            <@cms_comment_page fileId="${fileId}" pageNum="${pageNum}" rows="10">
-                            <#list commentPage.list as comment>
+                            <@shishuo_cms_comment_page fileId="${fileId}" pageNum="${pageNum}" rows="10">
+                            <#list tag_comment_page.list as comment>
                             <div class="media">
                              <#if  comment_index ==0>
                                 <h3>评论</h3>
@@ -134,7 +134,7 @@ a:link, a:visited {
                                 </div>
                             </div>
                             </#list>
-                            </@cms_comment_page>
+                            </@shishuo_cms_comment_page>
                                 <div class="post-comment">
 	                                <h3 class="skills">发布评论</h3>
 	                                <form role="form" class="form-horizontal" id="comment_form" action="${basePath}/comment/add.json" method="post">
@@ -160,7 +160,7 @@ a:link, a:visited {
                         </div>
                     </div>
                 </div>
-                </@cms_file>
+                </@shishuo_cms_file>
             </div>
             <div class="col-lg-3">
               <div class="blog-side-item">

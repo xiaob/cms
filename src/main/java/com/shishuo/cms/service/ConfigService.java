@@ -20,14 +20,14 @@ package com.shishuo.cms.service;
 
 import java.util.Date;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.dao.ConfigDao;
 import com.shishuo.cms.entity.Config;
-import com.shishuo.cms.util.MemcacheMapUtil;
 
 /**
  * 网站配置
@@ -42,9 +42,9 @@ public class ConfigService {
 	private ConfigDao configDao;
 
 	// ///////////////////////////////
-	// /////       增加                          ////////
+	// ///// 增加 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 增加配置
 	 * 
@@ -62,71 +62,50 @@ public class ConfigService {
 	}
 
 	// ///////////////////////////////
-	// /////       刪除                         ////////
+	// ///// 刪除 ////////
 	// ///////////////////////////////
-	
+
 	/**
 	 * 删除配置
 	 * 
 	 * @param key
 	 * @return Integer
 	 */
-	
+	@CacheEvict(value = "config", key = "#key")
 	public int deleteConfigByKey(String key) {
 		return configDao.deleteConfig(key);
 	}
 
 	// ///////////////////////////////
-	// /////       修改                          ////////
+	// ///// 修改 ////////
 	// ///////////////////////////////
-		
+
 	/**
 	 * 更新配置
 	 * 
 	 * @param key
 	 * @param value
-	 * @return Config
 	 */
+	@CacheEvict(value = "config", key = "#key")
 	public Config updagteConfigByKey(String key, String value) {
 		Config config = configDao.getConfigByKey(key);
 		config.setValue(value);
 		configDao.updateConfig(config);
-		this.getConfigByKey(key, true);
+		this.getConfigByKey(key);
 		return config;
-	}
-
-	// ///////////////////////////////
-	// /////       查詢                          ////////
-	// ///////////////////////////////
-	/**
-	 * 得到当前模板路径
-	 * 
-	 * @return
-	 */
-	public String getTemplatePath() {
-		String template = this.getConfigByKey(ConfigConstant.SYS_TEMPLATE,
-				false);
-		return "/themes/" + template;
 	}
 
 	/**
 	 * @param key
 	 * @return
 	 */
-	public String getConfigByKey(String key, boolean refresh) {
-		String value = (String) MemcacheMapUtil.get(MemcacheMapUtil.createKey(
-				"config_", key));
-		if (StringUtils.isBlank(value) || refresh) {
-			Config config = configDao.getConfigByKey(key);
-			if (config == null) {
-				value = "";
-			} else {
-				value = config.getValue();
-				MemcacheMapUtil.set(key, config);
-			}
+	@Cacheable(value = "config", key = "#key")
+	public String getConfigByKey(String key) {
+		Config config = configDao.getConfigByKey(key);
+		if (config == null) {
+			return "";
+		} else {
+			return config.getValue();
 		}
-		return value;
-
 	}
-
 }
