@@ -24,7 +24,7 @@ import com.mysql.jdbc.Connection;
 public class Install {
 	private static String CMS_PROPERTIES = "shishuocms.properties";
 	private static String CMS_INSTALL_SQL = "sql/install.sql";
-	private static String CMS_DATA_SQL = "sql/DATA.sql";
+	private static String CMS_DATA_SQL = "sql/data.sql";
 
 	Console console = System.console();
 
