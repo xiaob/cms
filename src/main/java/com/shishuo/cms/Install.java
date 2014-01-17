@@ -6,17 +6,11 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.util.Date;
 import java.util.Properties;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import com.mysql.jdbc.Connection;
-import com.shishuo.cms.constant.AdminConstant;
-import com.shishuo.cms.exception.InstallException;
-import com.shishuo.cms.util.AuthUtils;
 
 /**
  * 
@@ -30,7 +24,7 @@ import com.shishuo.cms.util.AuthUtils;
 public class Install {
 	private static String CMS_PROPERTIES = "shishuocms.properties";
 	private static String CMS_INSTALL_SQL = "sql/install.sql";
-	private static String ADMIN_PASSWORD = "shishuocms";
+	private static String CMS_DATA_SQL = "sql/DATA.sql";
 
 	Console console = System.console();
 
@@ -133,11 +127,6 @@ public class Install {
 			String driver = props.getProperty("jdbc.driverClass");
 			String username = props.getProperty("jdbc.user");
 			String password = props.getProperty("jdbc.password");
-			String email = props.getProperty("cms.admin.email");
-			if (StringUtils.isBlank(email)
-					|| !EmailValidator.getInstance().isValid(email)) {
-				throw new InstallException(email + " 邮件格式不正确");
-			}
 			Class.forName(driver).newInstance();
 			conn = (Connection) DriverManager.getConnection(url, username,
 					password);
@@ -147,17 +136,8 @@ public class Install {
 			runner.runScript(new InputStreamReader(new FileInputStream(
 					CMS_INSTALL_SQL), "UTF-8"));
 			// 增加超级管理员帐号
-			String pwd = AuthUtils.getPassword(ADMIN_PASSWORD, email);
-			String sql = "INSERT INTO `admin`(`adminId`,`email`,`password`,`name`,`status`,`createTime`) VALUES (?,?,?,?,?,?)";
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, 1);
-			stmt.setString(2, email);
-			stmt.setString(3, pwd);
-			stmt.setString(4, "超级管理员");
-			stmt.setString(5, AdminConstant.Status.normal.name());
-			stmt.setDate(6, new java.sql.Date(new Date().getTime()));
-			stmt.executeUpdate();
-			conn.commit();
+			runner.runScript(new InputStreamReader(new FileInputStream(
+					CMS_DATA_SQL), "UTF-8"));
 			return true;
 		} catch (Exception e) {
 			System.out.println("ERROR: " + e.getMessage());
