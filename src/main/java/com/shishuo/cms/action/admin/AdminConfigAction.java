@@ -67,38 +67,14 @@ public class AdminConfigAction extends AdminBaseAction {
 	public JsonVo<String> basicSubmit(
 			@RequestParam(value = "sitename") String sitename,
 			@RequestParam(value = "sitedesc") String sitedesc,
-			@RequestParam(value = "template") String template,
-			@RequestParam(value = "functionPhoto", required = false) String functionPhoto,
-			@RequestParam(value = "functionDownload", required = false) String functionDownload,
-			@RequestParam(value = "functionShop", required = false) String functionShop,
 			ModelMap modelMap) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
-			String function_photo = "off";
-			String function_download = "off";
-			String function_shop = "off";
-
 			if (StringUtils.isBlank(sitename)) {
 				json.getErrors().put("sitename", "网站名称不能为空");
 			}
 			if (StringUtils.isBlank(sitedesc)) {
 				json.getErrors().put("sitedesc", "网站描述不能为空");
-			}
-			if (StringUtils.isBlank(template)) {
-				json.getErrors().put("template", "网站模板不能为空");
-			}
-
-			if (StringUtils.isNotBlank(functionPhoto)
-					&& functionPhoto.equalsIgnoreCase("on")) {
-				function_photo = "on";
-			}
-			if (StringUtils.isNotBlank(functionDownload)
-					&& functionDownload.equalsIgnoreCase("on")) {
-				function_download = "on";
-			}
-			if (StringUtils.isNotBlank(functionShop)
-					&& functionShop.equalsIgnoreCase("on")) {
-				function_shop = "on";
 			}
 
 			// 检测校验结果
@@ -106,18 +82,13 @@ public class AdminConfigAction extends AdminBaseAction {
 
 			configSevice.updagteConfigByKey("sys_sitename", sitename);
 			configSevice.updagteConfigByKey("sys_sitedesc", sitedesc);
-			configSevice.updagteConfigByKey("sys_template", template);
-			configSevice.updagteConfigByKey("sys_function_photo",
-					function_photo);
-			configSevice.updagteConfigByKey("sys_function_download",
-					function_download);
-			configSevice.updagteConfigByKey("sys_function_shop", function_shop);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
 			json.setMsg(e.getMessage());
 		}
 		return json;
+
 	}
 
 	@RequestMapping(value = "/picture.htm", method = RequestMethod.GET)

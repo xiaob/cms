@@ -49,7 +49,9 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		}
 		// 系统配置参数
 		String basePath = HttpUtils.getBasePath(request);
+		String contextPath = HttpUtils.getContextPath(request);
 		modelAndView.addObject("basePath", basePath);
+		modelAndView.addObject("contextPath", contextPath);
 		modelAndView.addObject("SYS_SITEDESC",
 				configService.getConfigByKey(ConfigConstant.SYS_SITEDESC));
 		modelAndView.addObject("SYS_SITENAME",

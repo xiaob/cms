@@ -7,7 +7,7 @@ CREATE TABLE `admin` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`adminId`),
   UNIQUE KEY `idx_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='管理员';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='管理员';
 
 CREATE TABLE `article` (
   `articleId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '文件ID',
@@ -31,8 +31,9 @@ CREATE TABLE `article` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   `expireTime` datetime DEFAULT NULL COMMENT '过期时间',
-  PRIMARY KEY (`articleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='文件';
+  PRIMARY KEY (`articleId`),
+  KEY `idx_folder` (`status`,`firstFolderId`,`secondFolderId`,`thirdFolderId`,`fourthFolderId`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='文件';
 
 CREATE TABLE `attachment` (
   `attachmentId` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -46,8 +47,9 @@ CREATE TABLE `attachment` (
   `kind` varchar(20) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
-  PRIMARY KEY (`attachmentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=ucs2;
+  PRIMARY KEY (`attachmentId`),
+  KEY `idx_kind` (`kind`,`kindId`,`status`)
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=ucs2;
 
 CREATE TABLE `comment` (
   `commentId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
@@ -58,13 +60,14 @@ CREATE TABLE `comment` (
   `name` varchar(45) DEFAULT NULL COMMENT '评论者',
   `email` varchar(45) DEFAULT NULL COMMENT '评论者邮件地址',
   `url` varchar(200) DEFAULT NULL COMMENT '评论者网址',
-  `phone` bigint(20) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
   `content` text COMMENT '内容',
   `ip` varchar(45) DEFAULT NULL COMMENT 'Ip',
   `status` varchar(20) DEFAULT NULL COMMENT '状态',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='评论';
+  PRIMARY KEY (`commentId`),
+  KEY `idx_status` (`status`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='评论';
 
 CREATE TABLE `config` (
   `key` varchar(45) NOT NULL COMMENT 'Key',
@@ -85,13 +88,15 @@ CREATE TABLE `folder` (
   `sort` tinyint(4) DEFAULT '0' COMMENT '排序',
   `count` int(11) DEFAULT '0' COMMENT '文件数',
   `rank` varchar(20) DEFAULT 'everyone' COMMENT '等级',
+  `type` varchar(45) DEFAULT NULL,
   `status` varchar(20) DEFAULT 'hidden' COMMENT '状态：0 隐藏 1 现实',
   `owner` varchar(45) DEFAULT 'app',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL,
   PRIMARY KEY (`folderId`),
-  UNIQUE KEY `ename_UNIQUE` (`ename`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='目录';
+  UNIQUE KEY `idx_ename` (`ename`),
+  KEY `idx_status` (`fatherId`,`status`)
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8 COMMENT='目录';
 
 CREATE TABLE `order` (
   `orderId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志ID',

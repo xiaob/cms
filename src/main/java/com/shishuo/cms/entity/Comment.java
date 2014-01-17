@@ -74,7 +74,7 @@ public class Comment {
 	/**
 	 * 所属phone
 	 */
-	private long phone;
+	private String phone;
 
 	/**
 	 * 审核状态
@@ -85,11 +85,12 @@ public class Comment {
 	 */
 	private Date createTime;
 
-	public long getPhone() {
+
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(long phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

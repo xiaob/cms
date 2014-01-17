@@ -29,7 +29,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +41,7 @@ import com.shishuo.cms.entity.vo.AttachmentVo;
 import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
+import com.shishuo.cms.exception.FolderNotFoundException;
 import com.shishuo.cms.util.RegexUtils;
 
 /**
@@ -101,9 +101,11 @@ public class AdminFolderAction extends AdminBaseAction {
 			// 检测校验结果
 			validate(json);
 			folderService.addFolder(fatherId, folderName, status,
-					folderEname.toLowerCase(), FolderConstant.Rank.everyone);
+					folderEname.toLowerCase(), FolderConstant.Rank.everyone,
+					FolderConstant.Type.list);
 			json.setResult(true);
 		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 			json.setResult(false);
 			json.setMsg(e.getMessage());
 		}
@@ -112,12 +114,13 @@ public class AdminFolderAction extends AdminBaseAction {
 
 	/**
 	 * @author 进入目录列表
+	 * @throws FolderNotFoundException
 	 * 
 	 */
 	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
 	public String page(
 			@RequestParam(value = "folderId", defaultValue = "0") long folderId,
-			ModelMap modelMap) {
+			ModelMap modelMap) throws FolderNotFoundException {
 		List<FolderVo> list = folderService.getFolderListByFatherId(folderId,
 				null);
 		List<Folder> pathList = folderService
@@ -203,7 +206,7 @@ public class AdminFolderAction extends AdminBaseAction {
 			validate(json);
 			String newEname = ename.toLowerCase();
 			folderService.updateFolderById(folderId, newEname, name, status,
-					content);
+					content, FolderConstant.Type.list);
 
 			json.setResult(true);
 		} catch (Exception e) {
@@ -236,11 +239,13 @@ public class AdminFolderAction extends AdminBaseAction {
 
 	/**
 	 * @author 删除目录
+	 * @throws FolderNotFoundException
 	 * 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/delete.json", method = RequestMethod.POST)
-	public JsonVo<String> delete(@RequestParam(value = "folderId") long folderId) {
+	public JsonVo<String> delete(@RequestParam(value = "folderId") long folderId)
+			throws FolderNotFoundException {
 		JsonVo<String> json = new JsonVo<String>();
 		List<FolderVo> folderList = folderService.getFolderListByFatherId(
 				folderId, null);

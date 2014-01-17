@@ -18,6 +18,8 @@
  */
 package com.shishuo.cms.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,16 +31,15 @@ import org.springframework.stereotype.Service;
 import com.shishuo.cms.constant.ArticleConstant;
 import com.shishuo.cms.constant.AttachmentConstant;
 import com.shishuo.cms.constant.CommentConstant;
-import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.ArticleDao;
 import com.shishuo.cms.dao.FolderDao;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.Article;
-import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.ArticleVo;
 import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.ArticleNotFoundException;
+import com.shishuo.cms.exception.FolderNotFoundException;
 
 /**
  * 
@@ -85,9 +86,10 @@ public class ArticleService {
 	 * @param status
 	 * @param createTime
 	 * @return
+	 * @throws FolderNotFoundException
 	 */
 	@CacheEvict(value = "article", allEntries = true)
-	public Article addArticle(long folderId) {
+	public Article addArticle(long folderId) throws FolderNotFoundException {
 		FolderVo folder = folderService.getFolderById(folderId);
 		Article article = new Article();
 		Date now = new Date();
@@ -115,6 +117,10 @@ public class ArticleService {
 	@CacheEvict(value = "article", allEntries = true)
 	public boolean deleteFileByArticleId(long articleId) {
 		return articleDao.deleteArticle(articleId);
+	}
+
+	public int deleteArticleListByStatus(ArticleConstant.Status status) {
+		return articleDao.deleteArticleListByStatus(status);
 	}
 
 	// ///////////////////////////////
@@ -232,10 +238,11 @@ public class ArticleService {
 	 * 
 	 * @param folderId
 	 * @return pageVo
+	 * @throws FolderNotFoundException
 	 */
-	@Cacheable(value = "article", key = "'getArticlePageByFolderId_'+#folderId+'_'+#pageNum")
+	@Cacheable(value = "article", key = "'getArticlePageByFolderId_'+#folderId+'_'+#pageNum+'_'+#rows")
 	public PageVo<ArticleVo> getArticlePageByFolderId(long folderId,
-			int pageNum, int rows) {
+			int pageNum, int rows) throws FolderNotFoundException {
 		PageVo<ArticleVo> pageVo = new PageVo<ArticleVo>(pageNum);
 		FolderVo folder = folderService.getFolderById(folderId);
 		pageVo.setRows(rows);
@@ -257,15 +264,34 @@ public class ArticleService {
 		return pageVo;
 	}
 
+	public PageVo<ArticleVo> getArticlePageByFoderIdPath(long folderId,
+			int pageNum) throws FolderNotFoundException {
+		PageVo<ArticleVo> pageVo = new PageVo<ArticleVo>(pageNum);
+		pageVo.setRows(10);
+		FolderVo folder = folderService.getFolderById(folderId);
+		List<ArticleVo> list = this.getArticleListByFoderIdPath(
+				folder.getFirstFolderId(), folder.getSecondFolderId(),
+				folder.getThirdFolderId(), folder.getFourthFolderId(), null,
+				pageVo.getOffset(), pageVo.getRows());
+		Collections.reverse(list);
+		pageVo.setList(list);
+		pageVo.setCount(this.getArticleCountByFoderIdPath(
+				folder.getFirstFolderId(), folder.getSecondFolderId(),
+				folder.getThirdFolderId(), folder.getFourthFolderId(), null));
+		return pageVo;
+	}
+
 	/**
 	 * 得到目录下的文件
 	 * 
 	 * @param foderId
 	 * @return
+	 * @throws FolderNotFoundException
 	 */
 	public List<ArticleVo> getArticleListByFoderIdPath(long firstFolderId,
 			long secondFolderId, long thirdFolderId, long fourthFolderId,
-			ArticleConstant.Status status, long offset, long rows) {
+			ArticleConstant.Status status, long offset, long rows)
+			throws FolderNotFoundException {
 		List<ArticleVo> articlelist = articleDao.getArticleListByFoderIdPath(
 				firstFolderId, secondFolderId, thirdFolderId, fourthFolderId,
 				status, offset, rows);
@@ -316,38 +342,40 @@ public class ArticleService {
 	 * @param status
 	 * @param pageNum
 	 * @return PageVo<File>
+	 * @throws FolderNotFoundException
 	 * 
 	 */
-	public PageVo<ArticleVo> getArticlePageByTypeAndStatusPage(
-			ArticleConstant.Status status, int pageNum) {
+	public PageVo<ArticleVo> getArticlePageByTypeAndStatusPage(long folderId,
+			ArticleConstant.Status status, int pageNum)
+			throws FolderNotFoundException {
 		PageVo<ArticleVo> pageVo = new PageVo<ArticleVo>(pageNum);
 		pageVo.setRows(20);
 		pageVo.getArgs().put("status", status.name());
-		List<ArticleVo> list = this.getArticleListByStatus(status,
-				pageVo.getOffset(), pageVo.getRows());
+		List<ArticleVo> list = new ArrayList<ArticleVo>();
+		int count = 0;
+		if (folderId == 0) {
+			list = this.getArticleListByStatus(0, 0, 0, 0, status,
+					pageVo.getOffset(), pageVo.getRows());
+			count = this.getArticleCountByStatus(0, 0, 0, 0, status);
+		} else {
+			FolderVo folder = folderService.getFolderById(folderId);
+			list = this.getArticleListByStatus(folder.getFirstFolderId(),
+					folder.getSecondFolderId(), folder.getThirdFolderId(),
+					folder.getFourthFolderId(), status, pageVo.getOffset(),
+					pageVo.getRows());
+			count = this.getArticleCountByStatus(folder.getFirstFolderId(),
+					folder.getSecondFolderId(), folder.getThirdFolderId(),
+					folder.getFourthFolderId(), status);
+		}
 		for (ArticleVo articleVo : list) {
 			articleVo
 					.setFolder(folderDao.getFolderById(articleVo.getFolderId()));
-			if (articleVo.getFirstFolderId() != 0) {
-				articleVo.getFolderPathList().add(
-						folderDao.getFolderById(articleVo.getFirstFolderId()));
-			}
-			if (articleVo.getSecondFolderId() != 0) {
-				articleVo.getFolderPathList().add(
-						folderDao.getFolderById(articleVo.getSecondFolderId()));
-			}
-			if (articleVo.getThirdFolderId() != 0) {
-				articleVo.getFolderPathList().add(
-						folderDao.getFolderById(articleVo.getThirdFolderId()));
-			}
-			if (articleVo.getFourthFolderId() != 0) {
-				articleVo.getFolderPathList().add(
-						folderDao.getFolderById(articleVo.getFourthFolderId()));
-			}
+
+			articleVo.setFolderPathList(folderService
+					.getFolderPathListByFolderId(articleVo.getFolderId()));
 		}
 		pageVo.setList(list);
-		pageVo.setCount(this.getArticleCountByStatus(status));
-
+		pageVo.setCount(count);
 		return pageVo;
 	}
 
@@ -361,9 +389,11 @@ public class ArticleService {
 	 * @return List<File>
 	 * 
 	 */
-	public List<ArticleVo> getArticleListByStatus(
+	public List<ArticleVo> getArticleListByStatus(long firstFolderId,
+			long secondFolderId, long thirdFolderId, long fourthFolderId,
 			ArticleConstant.Status status, long offset, long rows) {
-		return articleDao.getArticleListByStatus(status, offset, rows);
+		return articleDao.getArticleListByStatus(firstFolderId, secondFolderId,
+				thirdFolderId, fourthFolderId, status, offset, rows);
 	}
 
 	/**
@@ -374,8 +404,11 @@ public class ArticleService {
 	 * @param Integer
 	 * 
 	 */
-	public int getArticleCountByStatus(ArticleConstant.Status status) {
-		return articleDao.getArticleCountByStatus(status);
+	public int getArticleCountByStatus(long firstFolderId, long secondFolderId,
+			long thirdFolderId, long fourthFolderId,
+			ArticleConstant.Status status) {
+		return articleDao.getArticleCountByStatus(firstFolderId,
+				secondFolderId, thirdFolderId, fourthFolderId, status);
 	}
 
 }

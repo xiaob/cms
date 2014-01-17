@@ -61,4 +61,19 @@ public class FolderConstant {
 		 */
 		app
 	};
+
+	public static enum Type {
+		/**
+		 * 页面
+		 */
+		page,
+		/**
+		 * 列表
+		 */
+		list,
+		/**
+		 * 所有
+		 */
+		all
+	};
 }

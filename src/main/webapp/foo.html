@@ -1,179 +1,213 @@
-<#assign menu="folder"> <#assign submenu="update_folder"> <#include
-"/system/head.ftl">
-<style type="text/css">
-</style>
-<!--main content start-->
-<section id="main-content">
-	<section class="wrapper">
-		<!-- page start-->
-		<div class="row">
-			<form id="update_folder_form" method="post"
-				class="form-horizontal tasi-form" autocomplete="off"
-				action="${basePath}/admin/folder/update.json">
-				<div class="col-lg-9">
-					<input type="hidden" class="form-control" name="folderId"
-						value="${folder.folderId}">
-					<section class="panel">
-						<header class="panel-heading">描述 </header>
-						<div class="panel-body">
-							<script id="content" name="content" type="text/plain"
-								style="width: 100%; height: 260px;">
-									${folder.content!}
-								</script>
-							<p class="help-block" for="content"></p>
-							<script type="text/javascript">
-									var contentEditor;
-									$(function() {
-										contentEditor = UE.getEditor('content');
-									});
-								</script>
-						</div>
-					</section>
-					<section class="panel">
-						<div class="panel-body">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>文件名</th>
-										<th>地址</th>
-										<th>链接</th>
-										<th>大小</th>
-										<th>操作</th>
-								</thead>
-								<tbody>
-									<#list attachmentPage as attachment>
-									<tr>
-										<td>${attachment.name}</td>
-										<td>${basePath}${attachment.path}</td>
-										<td>${attachment.link}</td>
-										<td>${attachment.size}</td>
-										<td><#if attachment.status=="display">
-											<button title="显示" name="${attachment.name}"
-												class="btn btn-success btn-xs js_status" status="hidden"
-												attachmentId="${attachment.attachmentId}" type="button">
-												<i class="icon-eye-open"></i>
-											</button> <#else>
-											<button title="显示" name="${attachment.name}"
-												class="btn btn-default btn-xs js_status" status="display"
-												attachmentId="${attachment.attachmentId}" type="button">
-												<i class="icon-eye-close"></i>
-											</button> </#if>
-											<button title="删除" name="${attachment.name}"
-												class="btn btn-danger btn-xs js_delete"
-												attachmentId="${attachment.attachmentId}" type="button">
-												<i class="icon-trash"></i>
-											</button>
-											<button title="链接" name="${attachment.name}"
-												class="btn btn-primary btn-xs js_link"
-												attachmentId="${attachment.attachmentId}"
-												link="'${attachment.link}" type="button">
-												<i class="icon-link"></i>
-											</button>
-										</td>
-									</tr>
-									</#list>
-								</tbody>
-							</table>
-						</div>
-					</section>
-				</div>
-				<div class="col-lg-3">
-					<section class="panel">
-						<header class="panel-heading">更新</header>
-						<div class="panel-body">
-							<div class="form-group">
-								<label for="exampleInputEmail1">所属目录</label> <select
-									class="form-control" id="folderId" autocomplete="off">
-									<option style="background-color: #DFF0D8; font-weight: bold;"
-										value="1"<#if folder.folderId==1>selected</#if>>默认</option>
-									<#list folderAll as firstFolder>
-									<option style="background-color: #DFF0D8; font-weight: bold;"
-										value="${firstFolder.folderId}"<#if
-										folder.folderId==firstFolder.folderId>selected</#if>>
-										├─┬─${firstFolder.name}</option> <#list firstFolder.folderList as
-									secondFolder>
-									<option style="background-color: #5BC0DE; color: #FFFFFF;"
-										value="${secondFolder.folderId}"<#if
-										folder.folderId==secondFolder.folderId>selected</#if>>
-										│&nbsp;&nbsp;&nbsp;└──${secondFolder.name}</option> <#list
-									secondFolder.folderList as thirdFolder>
-									<option style="background-color: #FCF8E3;"
-										value="${thirdFolder.folderId}"<#if
-										folder.folderId==thirdFolder.folderId>selected</#if>>
-										│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;└──${thirdFolder.name}</option> <#list
-									thirdFolder.folderList as fourthFolder>
-									<option style="background-color: #D9EDF7;"
-										value="${fourthFolder.folderId}"<#if
-										folder.folderId==fourthFolder.folderId>selected</#if>>
-										│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└──${fourthFolder.name}
-									</option> </#list> </#list> </#list> </#list>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="exampleInputEmail1">中文名</label> <input type="text"
-									class="form-control" name="folderName" value="${folder.name}"
-									placeholder="中文名">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputEmail1">英文名</label> <input type="text"
-									class="form-control" name="folderName" value="${folder.ename}"
-									placeholder="英文名">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputEmail1">状态</label>
-								<div>
-									<input type="radio" name="status" value="display"<#if
-									folder.status=="display">checked</#if>/> 显示 <input type="radio"
-										name="status" value="hidden"<#if
-									folder.status=="hidden">checked</#if>/> 隐藏
-								</div>
-							</div>
-							<div class="form-group">
-								<button class="btn btn-shadow btn-primary" type="submit">更新</button>
-							</div>
-						</div>
-					</section>
-				</div>
-			</form>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<title>${SYS_SITENAME}</title>
+	<meta name="description" content="">
+	<meta name="author" content="Mosaddek">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<link href="${TEMPLATE_PATH}/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="${TEMPLATE_PATH}/assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	
+	<!-- BEGIN PAGE LEVEL PLUGIN STYLES --> 
+   	<link href="${TEMPLATE_PATH}/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" />              
+   	<link href="${TEMPLATE_PATH}/assets/css/pages/gallery.css" rel="stylesheet" />              
+   	<link rel="stylesheet" href="${TEMPLATE_PATH}/assets/plugins/revolution_slider/css/rs-style.css" media="screen">
+  	<link rel="stylesheet" href="${TEMPLATE_PATH}/assets/plugins/revolution_slider/rs-plugin/css/settings.css" media="screen"> 
+  	<link href="${TEMPLATE_PATH}/assets/plugins/bxslider/jquery.bxslider.css" rel="stylesheet" />     
+  	<link href="${TEMPLATE_PATH}/assets/plugins/news-ticker/styles/ticker-style.css" rel="stylesheet" />     
+  	<script src="${TEMPLATE_PATH}/assets/js/jquery.js"></script>           
+  	<!-- END PAGE LEVEL PLUGIN STYLES -->
+   
+	<link href="${TEMPLATE_PATH}/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+  	<link href="${TEMPLATE_PATH}/assets/css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="${TEMPLATE_PATH}/assets/css/themes/blue.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="${TEMPLATE_PATH}/assets/css/custom.css" rel="stylesheet" type="text/css"/>
+	
+	<link rel="stylesheet" type="text/css" href="${TEMPLATE_PATH}/assets/plugins/lofslidernews/css/style1.css" />
+	<script type="text/javascript">
+		window.TEMPLATE_PATH = "${TEMPLATE_PATH}";
+	</script> 
+	
+   <!--[if lt IE 9]>
+      <script src="${TEMPLATE_PATH}/assets/plugins/html5shiv.js"></script>
+      <script src="${TEMPLATE_PATH}/assets/plugins/respond.min.js"></script>
+    <![endif]-->
+    	 	
+</head>
+<body>
+	<!-- BEGIN STYLE CUSTOMIZER -->
+	<div class="color-panel hidden-sm">
+		<div class="color-mode-icons icon-color"></div>
+		<div class="color-mode-icons icon-color-close"></div>
+		<script type="text/javascript" src="http://skype.tom.com/script/skypeCheck40.js"></script>
+		<div class="color-mode">
+			<p style="margin-bottom:5px;color:#000;"><i class="fa fa-check"></i> QQ</p>
+			<div style="margin-left:17px;">
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=740794596&site=qq&menu=yes">
+					<img border="0" src="http://wpa.qq.com/pa?p=2:740794596:52" alt="点击这里给我发消息" title="点击这里给我发消息"/> 邹先生
+				</a>				
+			</div>			
+			<div style="margin-left:17px;">
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2682335051&site=qq&menu=yes">
+					<img border="0" src="http://wpa.qq.com/pa?p=2:2682335051:52" alt="点击这里给我发消息" title="点击这里给我发消息"/> 丁先生
+				</a>
+			</div>
+			<hr>
+			<p style="margin-bottom:5px;color:#000;"><i class="fa fa-check"></i> SKYPE</p>
+			<div style="margin-left:17px;">
+				<a href="skype:roger%2Ecctv?call" onclick="return skypeCheck();">
+					<img src="http://mystatus.skype.com/smallicon/roger%2Ecctv" style="border: none;" width="16" height="16" alt="My status" />
+				</a> <a href="skype:roger%2Ecctv?call" onclick="return skypeCheck();">Roger</a>
+			</div>		
+			<div style="margin-left:17px;">
+				<a href="skype:byvision4u?call" onclick="return skypeCheck();">
+					<img src="http://mystatus.skype.com/smallicon/byvision4u" style="border: none;" width="16" height="16" alt="My status" />
+				</a> <a href="skype:byvision4u?call" onclick="return skypeCheck();">John</a>
+			</div>		
 		</div>
+	</div>
+	<!-- END BEGIN STYLE CUSTOMIZER -->  
+	
+	<div class="header navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="col-xs-4 navbar-header">
+				<!-- BEGIN LOGO (you can use logo image instead of text)-->
+				<a class="navbar-brand logo-v1" href="${basePath}/index.htm">
+					<img style="height:45px;" src="${TEMPLATE_PATH}/images/logo.png" id="logoimg" alt="">
+				</a>
+				<!-- END LOGO -->
+			</div>
+			
+			<!-- BEGIN TOP NAVIGATION MENU -->
+			<div class="col-xs-8 navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+                        <a href="${basePath}/index.htm">HOME</a>
+					</li>
+					
+					<@shishuocms_folder folderId="57">
+					<li class="dropdown mega-menu-item">
+                    	<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="${basePath}/${tag_folder.ename}/index.htm">
+                        	${tag_folder.name?upper_case}
+                        	<i class="fa fa-angle-down"></i>
+                        </a>
+                        
+                        <ul class="dropdown-menu" style="left: -300px; width: 850px; padding-top: 20px;">
+							<li>
+								<div class="mega-menu-content">
+									<div class="row">
+                        			<#list tag_folder.folderList as secondFolder>
+                        				<div class="col-xs-3">
+											<ul class="sub-menu">
+												<li>
+													<span class="mega-menu-sub-title"><a  style="color:#0da3e2;" href="${basePath}/${tag_folder.ename}/${secondFolder.ename}/index.htm">${secondFolder.name}</a></span>
+													<ul class="sub-menu">
+														<#list secondFolder.folderList as thirdFolder>
+														<li><a style="" href="${basePath}/${tag_folder.ename}/${secondFolder.ename}/${thirdFolder.ename}/index.htm">${thirdFolder.name}</a></li>
+														</#list>
+													</ul>
+												</li>
+											</ul>
+										</div>
+										<#if (secondFolder_index+1)%4==0>
+										<div class="clearfix"></div>
+										</#if>
+                        			</#list>
+                        			</div>
+                        		</div>
+                        	</li>
+                        </ul>
+					</li>
+					</@shishuocms_folder>
+					
+					<@shishuocms_folder folderId="103">
+					<li class="dropdown mega-menu-item">
+                    	<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="${basePath}/${tag_folder.ename}/after_service_procedure/index.htm">
+                        	${tag_folder.name?upper_case}
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" style="width: 550px; left: -350px;">
+                        	<li>
+                        	
+                       			<div class="mega-menu-content">
+									<div style="width: 500px;">
+										<div class="col-xs-5" style="width: 230px;">
+											<ul class="sub-menu">
+											<#list tag_folder.folderList as secondFolder>
+											<li>
+												<a href="${basePath}/${tag_folder.ename}/${secondFolder.ename}/index.htm">${secondFolder.name}</a>
+											</li>
+											</#list>
+											</ul>
+										</div>
+										<div class="col-xs-5" style="width: 270px;">
+											<img style="width: 260px; margin: 5px;" src="${TEMPLATE_PATH}/images/icon_service.jpg"/>
+										</div>
+                        			</div>
+                        		</div>
+                        	</li>
+                        </ul>
+                    </li>
+					</@shishuocms_folder>
+					
+					<@shishuocms_folder folderId="108">
+					<li class="dropdown mega-menu-item">
+                    	<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="${basePath}/${tag_folder.ename}/index.htm">
+                        	${tag_folder.name?upper_case}
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                        	<#list tag_folder.folderList as secondFolder>
+                        	<li><a href="${basePath}/${tag_folder.ename}/${secondFolder.ename}/index.htm">${secondFolder.name}</a></li>
+                        	</#list>
+                        	
+                        </ul>
+                    </li>
+					</@shishuocms_folder>
+					
+					<@shishuocms_folder folderId="2">
+					<li class="dropdown mega-menu-item">
+                    	<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="${basePath}/${tag_folder.ename}/about_us/index.htm">
+                        	${tag_folder.name?upper_case}
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" style="width: 550px; left:-380px;">
+                        	<li>
+                       			<div class="mega-menu-content">
+									<div style="width: 500px;">
+										<div class="col-xs-5" style="width: 230px;">
+											<ul class="sub-menu">
+											<#list tag_folder.folderList as secondFolder>
+											<li>
+												<a href="${basePath}/${tag_folder.ename}/${secondFolder.ename}/index.htm">${secondFolder.name}</a>
+											</li>
+											</#list>
+											</ul>
+										</div>
+										<div class="col-xs-5" style="width: 270px;">
+											<img style="width: 260px; margin: 5px;" src="${TEMPLATE_PATH}/images/icon_about.jpg"/>
+										</div>
+                        			</div>
+                        		</div>
+                        	</li>
+                        </ul>
+                    </li>
+					</@shishuocms_folder>
 
-		<!-- page end-->
-	</section>
-</section>
-<!--main content end-->
-<script type="text/javascript">
- 	var fatherId=${folder.fatherId};
-	$(function() {
-		$('#update_folder_form').ajaxForm({
-			dataType : 'json',
-			success : function(data) {
-				if (data.result) {
-					bootbox.alert("保存成功，将刷新页面", function() {
-						window.location.reload();
-					});
-				}else{
-					showErrors($('#update_folder_form'),data.errors);
-				}
-			}
-		});
-		$('#file_upload').uploadify({
-			'buttonText'  		: 	'请选择文件',
-	        'swf'         		: 	'${basePath}/system/assets/uploadify/uploadify.swf',
-	        'uploader'    		: 	'${basePath}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
-	        'formData'  		: 	{'articleId':0,folderId:${folder.folderId}},
-	        'fileObjName'		: 	'file',
-	        'fileTypeExts' 		: 	'*.gif;*.png;*.jpg;*.jpeg;*.bmp;*.rar;*.doc;*.docx;*.zip,*.pdf;*.txt;*.swf;*.wmv',
-	        'method'			:	'post',
-	        'onUploadSuccess' 	: 	function(file, data, response) {
-	        }
-		});
-		$('#folderId').change(function(){
-			window.location.href = "${basePath}/admin/attachment/page.htm?folderId="+$('#folderId').val();
-		});
-		$('#btn_reflash').click(function(){
-			window.location.reload();
-		});
-		jQuery(".fancybox").fancybox();
-	});	
-</script>
-<#include "/system/foot.ftl">
+					<li class="dropdown mega-menu-item">
+                    	<a style="color:red;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="javascript:void(0);">
+                        	LANGUAGE <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                        	<li><a href="#">中文</a></li>
+                        	<li><a href="#">English</a></li>
+                        </ul>
+                    </li>
+					
+				</ul>                           
+			</div>
+			<!-- BEGIN TOP NAVIGATION MENU -->
+		</div>
+    </div>

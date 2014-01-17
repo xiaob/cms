@@ -133,6 +133,10 @@
 												<a class="js_folder_delete" folderId="${e.folderId}" href="javascript:void(0);" title="删除${e.name}">
 													删除
 												</a>
+												 | 
+												<a href="${basePath}/admin/article/add.htm?folderId=${e.folderId}"  folderId="${e.folderId}" href="javascript:void(0);">
+													增加
+												</a>
 											</td>
 										</tr>
 										</#list>
@@ -179,7 +183,7 @@
 						message : "是否"+$(this).attr('title')+"文件夹",
 						title : "提示",
 						buttons : {
-							delete : {
+							"delete" : {
 								label : "删除",
 								className : "btn-success",
 								callback : function() {
@@ -195,7 +199,7 @@
 								   	}, "json");
 								}
 							},
-							cancel : {
+							"cancel" : {
 								label : "取消",
 								className : "btn-primary",
 								callback : function() {

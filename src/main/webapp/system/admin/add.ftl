@@ -50,7 +50,7 @@
                                       <label class="col-sm-2 col-sm-2 control-label">密码</label>
                                       <div class="col-sm-10">
                                           <input type="password" class="form-control" name="password"
-                                          	placeholder="管理员密码" value="111111">
+                                          	placeholder="管理员密码">
                                       </div>
                                   </div>
                                   <div class="form-group">

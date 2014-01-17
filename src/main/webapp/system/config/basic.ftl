@@ -24,16 +24,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">模板</label>
-						<div class="col-lg-10">
-							<select class="form-control m-bot15" name="template">
-								 <#list templateList as template>
-                                 <option value="${template}">${template}</option>
-                                 </#list>
-                            </select>
-						</div>
-					</div>
-					<div class="form-group">
 						<div class="col-lg-offset-2 col-lg-10">
 							<button class="btn btn-danger" type="submit">保存</button>
 						</div>

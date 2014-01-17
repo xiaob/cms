@@ -110,7 +110,7 @@ var kindId = ${article.articleId};
 var kind = "article";
 $.extend({
 	getAttachment:function(){
-		$.getJSON("${basePath}/admin/attachment/list.json?kindId="+kindId,function(data){
+		$.getJSON("${basePath}/admin/attachment/list.json?kindId="+kindId+"&v="+Math.random(),function(data){
 			$('#attachment').html("");
 			$.addAttachment(data.attachmentList);
 		});
@@ -118,7 +118,7 @@ $.extend({
 	addAttachment:function(list){
 		var html = '<table class="table"><thead><tr><th>文件名</th><th>链接</th><th>大小</th><th>操作</th></tr></thead><tbody>';
 		for(i=0;i<list.length;i++){
-			attachment = list[i];
+			var attachment = list[i];
 			html += '<tr>';
 			if(attachment.type=="photo"){
 				html += '<td><img src="${basePath}'+attachment.path+'" width="200"/></td>';
@@ -163,7 +163,6 @@ $.extend({
 				} 
 			});			
 		});
-
 	}
 });
 $(function(){
@@ -184,7 +183,7 @@ $(function(){
         'uploader'    		: 	'${basePath}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
         'formData'  		: 	{'kindId':kindId,'kind':kind},
         'fileObjName'		: 	'file',
-        'fileTypeExts' 		: 	'*.gif;*.png;*.jpg;*.jpeg;*.bmp;*.rar;*.doc;*.docx;*.zip,*.pdf;*.txt;*.swf;*.wmv',
+        'fileTypeExts' 		: 	'*.*',
         'method'			:	'post',
         'onUploadSuccess' 	: 	function(file, data, response) {
         	$.getAttachment();

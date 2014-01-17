@@ -28,6 +28,11 @@
 		delete from article
 		where articleId=#{articleId}
 	</delete>
+	
+	<delete id="deleteArticleListByStatus">
+		delete from article
+		where status=#{status}
+	</delete>
 
 	<!-- ############################## -->
 	<!-- ###### 修改 ###### -->
@@ -78,11 +83,11 @@
 		select *
 		from article
 		where
-		<if test="firstFolderId!=0">firstFolderId=#{firstFolderId} and </if>
-		<if test="secondFolderId!=0">secondFolderId=#{secondFolderId} and </if>
-		<if test="thirdFolderId!=0">thirdFolderId=#{thirdFolderId} and </if>
-		<if test="fourthFolderId!=0">fourthFolderId=#{fourthFolderId} and </if>
-		status = #{status}
+		<if test="firstFolderId!=0">firstFolderId=#{firstFolderId}</if>
+		<if test="secondFolderId!=0"> and secondFolderId=#{secondFolderId}</if>
+		<if test="thirdFolderId!=0">and thirdFolderId=#{thirdFolderId}</if>
+		<if test="fourthFolderId!=0">and fourthFolderId=#{fourthFolderId}</if>
+		and status = #{status}
 		order by
 		createTime desc limit #{offset},#{rows}
 	</select>
@@ -92,11 +97,11 @@
 		count(*)
 		from article
 		where
-		<if test="firstFolderId!=0">firstFolderId=#{firstFolderId} and </if>
-		<if test="secondFolderId!=0">secondFolderId=#{secondFolderId} and </if>
-		<if test="thirdFolderId!=0">thirdFolderId=#{thirdFolderId} and </if>
-		<if test="fourthFolderId!=0">fourthFolderId=#{fourthFolderId} and </if>
-		status = #{status}
+		<if test="firstFolderId!=0">firstFolderId=#{firstFolderId}</if>
+		<if test="secondFolderId!=0">and secondFolderId=#{secondFolderId}</if>
+		<if test="thirdFolderId!=0">and thirdFolderId=#{thirdFolderId}</if>
+		<if test="fourthFolderId!=0">and fourthFolderId=#{fourthFolderId}</if>
+		and status = #{status}
 	</select>
 
 	<select id="getArticleCountByFoderId" resultType="Integer">
@@ -113,7 +118,12 @@
 	<select id="getArticleListByStatus" resultType="com.shishuo.cms.entity.vo.ArticleVo">
 		select * from
 		article
-		where status=#{status} order by createTime
+		where status=#{status}
+		<if test="firstFolderId!=0">and firstFolderId=#{firstFolderId}</if>
+		<if test="secondFolderId!=0">and secondFolderId=#{secondFolderId}</if>
+		<if test="thirdFolderId!=0">and thirdFolderId=#{thirdFolderId}</if>
+		<if test="fourthFolderId!=0"> and fourthFolderId=#{fourthFolderId}</if>
+		order by createTime
 		desc limit
 		#{offset},#{rows}
 	</select>
@@ -122,5 +132,9 @@
 		select
 		count(*)
 		from article where status=#{status}
+		<if test="firstFolderId!=0">and firstFolderId=#{firstFolderId}</if>
+		<if test="secondFolderId!=0">and secondFolderId=#{secondFolderId}</if>
+		<if test="thirdFolderId!=0">and thirdFolderId=#{thirdFolderId}</if>
+		<if test="fourthFolderId!=0"> and fourthFolderId=#{fourthFolderId}</if>
 	</select>
 </mapper>  

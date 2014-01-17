@@ -100,6 +100,8 @@
 				<entry key="shishuocms_article" value-ref="articleTag" />
 				<!-- 评论分页标签 -->
 				<entry key="shishuocms_comment_page" value-ref="commentPageTag" />
+				
+				<entry key="shishuocms_attachment_list" value-ref="attachmentListTag" />
 			</map>
 		</property>
 		<property name="freemarkerSettings">

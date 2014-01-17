@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.dao.FolderDao;
@@ -61,16 +62,20 @@ public class FolderService {
 	 * @param status
 	 * @param type
 	 * @return Folder
+	 * @throws FolderNotFoundException
 	 */
 	@CacheEvict(value = "folder", allEntries = true)
+	@Transactional
 	public Folder addFolder(long fatherId, String name,
-			FolderConstant.Status status, String ename, FolderConstant.Rank rank) {
+			FolderConstant.Status status, String ename,
+			FolderConstant.Rank rank, FolderConstant.Type type)
+			throws FolderNotFoundException {
 		Folder folder = new Folder();
-		Folder fatherFolder = this.getFolderById(fatherId);
 		folder.setFatherId(fatherId);
 		if (fatherId == 0) {
 			folder.setLevel(1);
 		} else {
+			Folder fatherFolder = this.getFolderById(fatherId);
 			folder.setLevel(fatherFolder.getLevel() + 1);
 		}
 		folder.setEname(ename.trim());
@@ -80,6 +85,7 @@ public class FolderService {
 		folder.setStatus(status);
 		folder.setSort(1);
 		folder.setRank(rank);
+		folder.setType(type);
 		folder.setContent("");
 		folder.setCreateTime(new Date());
 		folder.setOwner(FolderConstant.Owner.app);
@@ -87,6 +93,7 @@ public class FolderService {
 		if (fatherId == 0) {
 			this.updatePath(folder.getFolderId(), folder.getFolderId() + "");
 		} else {
+			Folder fatherFolder = this.getFolderById(fatherId);
 			this.updatePath(folder.getFolderId(), fatherFolder.getPath() + "#"
 					+ folder.getFolderId());
 		}
@@ -126,8 +133,9 @@ public class FolderService {
 	 */
 	@CacheEvict(value = "folder", allEntries = true)
 	public void updateFolderById(long folderId, String ename, String name,
-			FolderConstant.Status status, String content) {
-		folderDao.updateFolder(folderId,name,ename,content,status);
+			FolderConstant.Status status, String content,
+			FolderConstant.Type type) {
+		folderDao.updateFolder(folderId, name, ename, content, status, type);
 	}
 
 	/**
@@ -171,11 +179,16 @@ public class FolderService {
 	 * 
 	 * @param folderId
 	 * @return Folder
+	 * @throws FolderNotFoundException
 	 */
 	@Cacheable(value = "folder", key = "'getFolderById_'+#folderId")
-	public FolderVo getFolderById(long folderId) {
+	public FolderVo getFolderById(long folderId) throws FolderNotFoundException {
 		FolderVo folder = folderDao.getFolderById(folderId);
-		return folder;
+		if (folder == null) {
+			throw new FolderNotFoundException("");
+		} else {
+			return folder;
+		}
 	}
 
 	/**
@@ -246,9 +259,11 @@ public class FolderService {
 	 * 
 	 * @param folderId
 	 * @return
+	 * @throws FolderNotFoundException
 	 */
 	@Cacheable(value = "folder", key = "'getFolderPathListByFolderId_'+#folderId")
-	public List<Folder> getFolderPathListByFolderId(long folderId) {
+	public List<Folder> getFolderPathListByFolderId(long folderId)
+			throws FolderNotFoundException {
 		List<Folder> list = new ArrayList<Folder>();
 		if (folderId == 0) {
 			return list;

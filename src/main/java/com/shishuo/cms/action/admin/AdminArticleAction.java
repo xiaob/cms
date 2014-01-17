@@ -19,6 +19,7 @@
 package com.shishuo.cms.action.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,11 +37,13 @@ import com.shishuo.cms.constant.AttachmentConstant;
 import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.Article;
+import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.ArticleVo;
 import com.shishuo.cms.entity.vo.AttachmentVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.ArticleNotFoundException;
+import com.shishuo.cms.exception.FolderNotFoundException;
 
 /**
  * @author 文件action
@@ -53,7 +56,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
 	public String add(
 			@RequestParam(value = "folderId", defaultValue = "1") long folderId,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws FolderNotFoundException {
 		Article article = articleService.addArticle(folderId);
 		try {
 			response.sendRedirect(SystemConstant.BASE_PATH
@@ -66,25 +69,43 @@ public class AdminArticleAction extends AdminBaseAction {
 		return null;
 	}
 
+	@RequestMapping(value = "toadd.htm")
+	public String toAdd(
+			@RequestParam(value = "folderId", defaultValue = "1") long folderId,
+			HttpServletResponse response) {
+		return "system/article/add";
+
+	}
+
 	/**
 	 * @author 进入某种文章的列表分页的首页
+	 * @throws FolderNotFoundException
 	 * 
 	 */
 	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
 	public String filePage(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "status", defaultValue = "display") ArticleConstant.Status status,
-			HttpServletRequest request, ModelMap modelMap) {
+			@RequestParam(value = "folderId", defaultValue = "0") long folderId,
+			HttpServletRequest request, ModelMap modelMap)
+			throws FolderNotFoundException {
+		List<Folder> pathList = new ArrayList<Folder>();
+		if (folderId != 0) {
+			pathList = folderService.getFolderPathListByFolderId(folderId);
+		}
+
+		modelMap.put("pathList", pathList);
+		modelMap.put("folderId", folderId);
 		PageVo<ArticleVo> pageVo = articleService
-				.getArticlePageByTypeAndStatusPage(status, pageNum);
-		int displayCount = articleService
-				.getArticleCountByStatus(ArticleConstant.Status.display);
-		int hiddenCount = articleService
-				.getArticleCountByStatus(ArticleConstant.Status.hidden);
-		int trashCount = articleService
-				.getArticleCountByStatus(ArticleConstant.Status.trash);
-		int initCount = articleService
-				.getArticleCountByStatus(ArticleConstant.Status.init);
+				.getArticlePageByTypeAndStatusPage(folderId, status, pageNum);
+		int displayCount = articleService.getArticleCountByStatus(0, 0, 0, 0,
+				ArticleConstant.Status.display);
+		int hiddenCount = articleService.getArticleCountByStatus(0, 0, 0, 0,
+				ArticleConstant.Status.hidden);
+		int trashCount = articleService.getArticleCountByStatus(0, 0, 0, 0,
+				ArticleConstant.Status.trash);
+		int initCount = articleService.getArticleCountByStatus(0, 0, 0, 0,
+				ArticleConstant.Status.init);
 		modelMap.put("displayCount", displayCount);
 		modelMap.put("hiddenCount", hiddenCount);
 		modelMap.put("trashCount", trashCount);
@@ -193,6 +214,26 @@ public class AdminArticleAction extends AdminBaseAction {
 		} else {
 			articleService.updateStatusByFileId(fileId, status);
 			json.setResult(true);
+		}
+		return json;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/status/delete.json", method = RequestMethod.POST)
+	public JsonVo<String> deleteList() throws ArticleNotFoundException {
+		JsonVo<String> json = new JsonVo<String>();
+		int count = articleService.getArticleCountByStatus(0, 0, 0, 0,
+				ArticleConstant.Status.trash);
+		if (count == 0) {
+			json.setResult(true);
+		} else {
+			int i = articleService
+					.deleteArticleListByStatus(ArticleConstant.Status.trash);
+			if (i == 1) {
+				json.setResult(true);
+			} else {
+				json.setResult(false);
+			}
 		}
 		return json;
 	}

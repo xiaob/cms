@@ -27,9 +27,9 @@
 	
 	<insert id="addComment" parameterType="com.shishuo.cms.entity.Comment">
 		insert into `comment`
-		(kind,email,name,content,ip,fatherId,status,createTime,userId,kindId,phone)
+		(kind,email,name,content,ip,fatherId,status,createTime,userId,kindId,phone,url)
 		values
-		(#{kind},#{email},#{name},#{content},#{ip},#{fatherId},#{status},#{createTime},#{userId},#{kindId},#{phone})
+		(#{kind},#{email},#{name},#{content},#{ip},#{fatherId},#{status},#{createTime},#{userId},#{kindId},#{phone},#{url})
 		<selectKey resultType="long" keyProperty="commentId">
 			SELECT
 			LAST_INSERT_ID()
@@ -70,7 +70,7 @@
 
 	<select id="getAllList" parameterType="long"
 		resultType="com.shishuo.cms.entity.vo.CommentVo">
-		select * from `comment` limit #{offset},#{rows}
+		select * from `comment` order by createTime desc limit #{offset},#{rows} 
 	</select>
 
 	<select id="getAllListCount" resultType="Integer">

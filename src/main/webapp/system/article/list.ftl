@@ -39,24 +39,45 @@
 </style>
 	<!--main content start-->
 	<section id="main-content">
+		
 		<section class="wrapper">
         	<!-- page start-->
+        	<div class="row">
+                  <div class="col-lg-12">
+                      <!--breadcrumbs start -->
+                      <ul class="breadcrumb" >
+                          <li ><a href="${basePath}/admin/article/page.htm?status=display">已发布</a>（${displayCount}）</li>
+						<li ><a href="${basePath}/admin/article/page.htm?status=hidden">隐藏</a>（${hiddenCount}）</li>
+						<li ><a href="${basePath}/admin/article/page.htm?status=trash">垃圾文章</a>（${trashCount}）</li>
+						<li ><a href="${basePath}/admin/article/page.htm?status=init">初始化文章列表</a>（${initCount}）</li>
+                      </ul>
+                      <!--breadcrumbs end -->
+                  </div>
+             </div>  
             <section class="panel">
-            	<header class="panel-heading">
+            	<#if folderId == 0>
+				<header class="panel-heading">
                		 <#if status=="display">已发布文章列表
                		 <#elseif status=="hidden">草稿列表
                		 <#elseif status=="init">初始化文章列表
                		 <#else>回收站
                		 </#if>
+               		 <#if status=="trash">
+						<button id="js_delete_trashArticle" class="btn btn-shadow btn-primary" type="submit" style="float:right;margin-right: -10px;
+    						margin-top: -7px;">一键清理垃圾文章</button>
+						</#if>
                 </header>
-                <div class="panel-body">
-                	<ul class="subsubsub">
-						<li class="arrticle_status"><a href="${basePath}/admin/article/page.htm?status=display">已发布</a>（${displayCount}）</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/article/page.htm?status=hidden">隐藏</a>（${hiddenCount}）</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/article/page.htm?status=trash">垃圾文章</a>（${trashCount}）</li>
-						<li class="arrticle_status"><a href="${basePath}/admin/article/page.htm?status=init">初始化文章列表</a>（${initCount}）</li>
-					</ul>
-				</div>
+                <#else>
+                <header class="panel-heading">
+				<ul class="breadcrumb">
+					<li><a href="${basePath}/admin/article/page.htm"><i
+							class="icon-home"></i> Home</a></li> <#list pathList as pathFolder>
+					<li><a
+						href="${basePath}/admin/article/page.htm?folderId=${pathFolder.folderId}&status=${status}">${pathFolder.name}</a></li>
+					</#list>目录下的文章列表
+				</ul>
+				</header>
+				</#if>
                 <div class="panel-body">
                 	<div class="adv-table">
                     	<div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
@@ -78,7 +99,12 @@
                                     		<#else>隐藏
                                     		</#if>
                							</td>
-                            			<td>${e.folder.name}</td>
+                            			<td><a href="${basePath}/admin/article/page.htm?folderId=${e.folder.folderId}&status=${e.status}">
+                            				<#list e.folderPathList as folders>
+                            					<#if folders.name == e.folder.name>
+                            					<#else>${folders.name}&nbsp;-
+                            					</#if>
+                            				</#list>${e.folder.name}<a></td>
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
@@ -108,29 +134,55 @@
 <script>
 $(function(){
 	$(".articleId").hide();
+	
+	$('#js_delete_trashArticle').click(function(){
+		bootbox.dialog({
+			message : "是否清理所有垃圾文章",
+			title : "提示",
+			buttons : {
+				"delete" : {
+					label : "确定",
+					className : "btn-success",
+					callback : function() {
+						$.post("${basePath}/admin/article/status/delete.json", {},function(data){
+									bootbox.alert("清理成功,即将刷新页面", function() {
+										window.location.reload();
+									});
+						}, "json");
+					}
+				},
+				"cancel" : {
+					label : "取消",
+					className : "btn-primary",
+					callback : function() {
+					
+					}
+				}
+			}
+		});
+	});
+	
 	$('.js_article_update_status').click(function(){
 		var fileId = $(this).attr('fileId');
 		var status= "trash";
 		bootbox.dialog({
 			message : "是否"+$(this).attr('title'),
 			title : "提示",
-				buttons : {
-				delete : {
+			buttons : {
+				"delete" : {
 					label : "确定",
 					className : "btn-success",
 					callback : function() {
-					$.post("${basePath}/admin/article/status/update.json", { 
-						"fileId": fileId,
-						"status": status},
-						function(data){
-							window.location.reload();
+						$.post("${basePath}/admin/article/status/update.json", { "fileId": fileId,"status": status},function(data){
+								window.location.reload();
 						}, "json");
 					}
 				},
-			cancel : {
-				label : "取消",
-				className : "btn-primary",
-				callback : function() {
+				"cancel" : {
+					label : "取消",
+					className : "btn-primary",
+					callback : function() {
+					
 					}
 				}
 			}

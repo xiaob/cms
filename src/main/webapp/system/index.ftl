@@ -83,33 +83,42 @@
                           	<span class="tools pull-right">
                             </span>
                           </header>
-                          <li class="list-group-item" style="background-color:#DFF0D8;font-weight:bold;">默认</li>
+                          <li class="list-group-item" style="background-color:#DFF0D8;">默认</li>
                           <ul class="list-group">
                           <#list folderAll as firstFolder>
-                          	<li class="list-group-item" style="background-color:#DFF0D8;font-weight:bold;">
+                          	<li class="list-group-item" style="background-color:#DFF0D8;">
                           		<div style="width:50% float:left">
                           			├─┬─${firstFolder.name}
-                          			<a href="${basePath}/admin/folder/${firstFolder.folderId}.htm" title="修改" style="float:right;">
+                          			<a href="${basePath}/admin/folder/update.htm?folderId=${firstFolder.folderId}" title="修改" style="float:right;">
                 						[修改]
                 					</a>
+									<a href="${basePath}/admin/article/add.htm?folderId=${firstFolder.folderId}"  folderId="${firstFolder.folderId}" style="float:right;">
+													[增加文章]
+									</a>
                   				</div>
                   			</li>
                           	<#list firstFolder.folderList as secondFolder>
                           	<li class="list-group-item" style="background-color:#FCF8E3;">
                           		<div style="width:50% float:left">
                           			│&nbsp;&nbsp;&nbsp;└──${secondFolder.name}
-                          			<a href="${basePath}/admin/folder/${secondFolder.folderId}.htm" title="修改" style="float:right;">
+                          			<a href="${basePath}/admin/folder/update.htm?folderId=${secondFolder.folderId}" title="修改" style="float:right;">
                 						[修改]
                 					</a>
+                					<a href="${basePath}/admin/article/add.htm?folderId=${secondFolder.folderId}"  folderId="${secondFolder.folderId}"style="float:right;">
+													[增加文章]
+									</a>
                   				</div>
                   			</li>
                   			<#list secondFolder.folderList as thirdFolder>
 							<li class="list-group-item" style="background-color:#FCF8E3;">
                           		<div style="width:50% float:left">
                           			│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└──${thirdFolder.name}
-                          			<a href="${basePath}/admin/folder/${thirdFolder.folderId}.htm" title="修改" style="float:right;">
+                          			<a href="${basePath}/admin/folder/update.htm?folderId=${thirdFolder.folderId}" title="修改" style="float:right;">
                 						[修改]
                 					</a>
+                					<a href="${basePath}/admin/article/add.htm?folderId=${thirdFolder.folderId}"  folderId="${thirdFolder.folderId}" style="float:right;">
+													[增加文章]
+									</a>
                   				</div>
                   			</li> 
 						    </#list>
@@ -125,7 +134,7 @@
                               <span class="tools pull-right">
                             </span>
                           </header>
-                          <li class="list-group-item" style="background-color:#DFF0D8;font-weight:bold;"><a href="${basePath}/admin/article/add.htm">添加文章</a></li>
+                          <li class="list-group-item" style="background-color:#DFF0D8;"><a href="${basePath}/admin/article/add.htm">添加文章</a></li>
                           <ul class="list-group">
                           	<#list articleList as article>
                           		<li class="list-group-item" style="background-color:#FCF8E3;">

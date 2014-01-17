@@ -47,6 +47,9 @@ public interface ArticleDao {
 	 */
 	public int addArticle(Article article);
 
+	public int deleteArticleListByStatus(
+			@Param("status") ArticleConstant.Status status);
+
 	// ///////////////////////////////
 	// ///// 刪除 ////////
 	// ///////////////////////////////
@@ -146,10 +149,18 @@ public interface ArticleDao {
 	 * @return List<FileVo>
 	 */
 	public List<ArticleVo> getArticleListByStatus(
+			@Param("firstFolderId") long firstFolderId,
+			@Param("secondFolderId") long secondFolderId,
+			@Param("thirdFolderId") long thirdFolderId,
+			@Param("fourthFolderId") long fourthFolderId,
 			@Param("status") ArticleConstant.Status status,
 			@Param("offset") long offset, @Param("rows") long rows);
 
 	public int getArticleCountByStatus(
+			@Param("firstFolderId") long firstFolderId,
+			@Param("secondFolderId") long secondFolderId,
+			@Param("thirdFolderId") long thirdFolderId,
+			@Param("fourthFolderId") long fourthFolderId,
 			@Param("status") ArticleConstant.Status status);
 
 	/**

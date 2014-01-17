@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="Mosaddek">
@@ -32,6 +33,7 @@
     <![endif]-->
 	<script type="text/javascript">
 		window.BasePath = "${basePath}";
+		window.ContextPath = "${contextPath}";
 		kindId = 0;
 		kind = "article";
 	</script>
@@ -87,32 +89,31 @@
 							<li <#if submenu="add_article">class="active"</#if>><a href="${basePath}/admin/article/add.htm">增加文章</a></li>
 							<li <#if submenu="article_list">class="active"</#if>><a href="${basePath}/admin/article/page.htm">文章列表</a></li>
 						</ul>
-					</li>				
-					<li class="sub-menu">
-						<a href="javascript:;" <#if menu="comment">class="active"</#if>> <i class="icon-comments"></i> <span>评论</span></a>
-						<ul class="sub">
-							<li <#if submenu="comment_list">class="active"</#if>><a href="${basePath}/admin/comment/page.htm">所有评论</a></li>
-							<li <#if submenu="auditing_list_comment">class="active"</#if>><a href="${basePath}/admin/comment/page.htm?status=hidden">审核评论列表</a></li>
-						</ul>
 					</li>
+					<li class="sub-menu">
+						<a href="${basePath}/admin/comment/page.htm?status=hidden" <#if menu="comment">class="active"</#if>> <i class="icon-comments"></i> <span>评论</span></a>
+					</li>									
 					<li class="sub-menu">
 						<a href="javascript:;" <#if menu="sdgb">class="active"</#if>> <i class="icon-desktop"></i> <span>主题</span></a>
 						<ul class="sub">
 						</ul>
 					</li>
-					<li class="sub-menu ">
+<!--					<li class="sub-menu ">
 						<a href="javascript:;" <#if menu="user">class="active"</#if>> <i class=" icon-group"></i> <span>用户</span></a>
 						<ul class="sub">
 							<li <#if submenu="add_user">class="active"</#if>><a href="${basePath}/admin/user/add.htm">添加用户</a></li>
 							<li <#if submenu="user_list">class="active"</#if>><a href="${basePath}/admin/user/page.htm">用户列表</a></li>
 						</ul>
-					</li>	
+					</li>	-->
 					<li class="sub-menu ">
 						<a href="javascript:;" <#if menu="system">class="active"</#if>> <i class="icon-cogs"></i> <span>设置</span></a>
 						<ul class="sub">
 							<li <#if submenu="system_basic">class="active"</#if>><a href="${basePath}/admin/config/basic.htm">基本设置</a></li>
+							<li><a href="${basePath}/admin/admin/manage.htm">管理员管理</a></li>
+							<!---
 							<li <#if submenu="add_admin">class="active"</#if>><a href="${basePath}/admin/admin/add.htm">添加管理员</a></li>
 							<li <#if submenu="admin_list">class="active"</#if>><a href="${basePath}/admin/admin/page.htm">管理员列表</a></li>
+							-->
 							<li <#if submenu="update_admin">class="active"</#if>><a href="${basePath}/admin/admin/update.htm">修改个人信息</a></li>
 						</ul>
 					</li>

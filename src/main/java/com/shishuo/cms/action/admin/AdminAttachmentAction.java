@@ -37,16 +37,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.AttachmentConstant;
 import com.shishuo.cms.constant.FolderConstant;
-import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.constant.CommentConstant.kind;
 import com.shishuo.cms.entity.Attachment;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.AttachmentVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.ArticleNotFoundException;
+import com.shishuo.cms.exception.FolderNotFoundException;
 import com.shishuo.cms.exception.UploadException;
-import com.shishuo.cms.util.HttpUtils;
 import com.shishuo.cms.util.UploadUtils;
 
 @Controller
@@ -55,13 +53,14 @@ public class AdminAttachmentAction extends AdminBaseAction {
 
 	/**
 	 * @author 进入某种文件的列表分页的首页
+	 * @throws FolderNotFoundException 
 	 * 
 	 */
 	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
 	public String filePage(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "folderId", defaultValue = "1") long folderId,
-			HttpServletRequest request, ModelMap modelMap) {
+			HttpServletRequest request, ModelMap modelMap) throws FolderNotFoundException {
 		Folder folder = folderService.getFolderById(folderId);
 		PageVo<AttachmentVo> attachmentPage = attachmentService
 				.getAttachmentPageByKindId(folderId,
@@ -195,7 +194,7 @@ public class AdminAttachmentAction extends AdminBaseAction {
 			Attachment attachment = attachmentService.addUploadFile(upfile,
 					fileName, kindId, kind, AttachmentConstant.Status.hidden);
 			json.put("original", fileName);
-			json.put("url", SystemConstant.BASE_PATH + attachment.getPath());
+			json.put("url", attachment.getPath());
 			json.put("title", pictitle);
 			json.put("state", "SUCCESS");
 			return json.toString();

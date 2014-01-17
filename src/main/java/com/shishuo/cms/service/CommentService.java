@@ -26,7 +26,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.CommentConstant;
-import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.CommentDao;
 import com.shishuo.cms.entity.Comment;
 import com.shishuo.cms.entity.vo.CommentVo;
@@ -65,18 +64,20 @@ public class CommentService {
 	 * 
 	 */
 	public Comment addComment(long kindId, CommentConstant.kind kind,
-			long phone, String email, String name, String ip, String content) {
+			String phone, String email, String name, String ip, String content,
+			String company) {
 		Comment comment = new Comment();
 		comment.setKindId(kindId);
 		comment.setFatherId(0);
 		comment.setEmail(email);
-		comment.setStatus(CommentConstant.Status.display);
+		comment.setStatus(CommentConstant.Status.hidden);
 		comment.setContent(content);
 		comment.setCreateTime(new Date());
 		comment.setIp(ip);
 		comment.setName(name);
 		comment.setKind(kind);
-		comment.setPhone(phone);
+		comment.setPhone("");
+		comment.setUrl(company);
 		commentDao.addComment(comment);
 		return comment;
 
@@ -186,7 +187,7 @@ public class CommentService {
 			CommentConstant.Status status) {
 		PageVo<CommentVo> pageVo = new PageVo<CommentVo>(pageNum);
 		List<CommentVo> list = new ArrayList<CommentVo>();
-		pageVo.setRows(5);
+		pageVo.setRows(20);
 		if (status == null) {
 			list = this.getCommentList(pageVo.getOffset(), pageVo.getRows());
 			pageVo.setCount(this.getCommentListCount());
@@ -194,6 +195,12 @@ public class CommentService {
 			list = this.getCommentByStatus(pageVo.getOffset(),
 					pageVo.getRows(), status);
 			pageVo.setCount(this.getCommentByStatusCount(status));
+		}
+		for (CommentVo comment : list) {
+			if (comment.getContent().length() > 20) {
+				comment.setContent(comment.getContent().substring(0, 20)
+						+ "...");
+			}
 		}
 		pageVo.setList(list);
 		return pageVo;

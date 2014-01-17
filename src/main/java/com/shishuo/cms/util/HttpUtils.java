@@ -59,6 +59,20 @@ public class HttpUtils {
 		return basePath;
 	}
 
+	/**
+	 * 得到结构目录
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public static String getContextPath(HttpServletRequest request) {
+		String path = request.getContextPath();
+		return path;
+	}
+
+	/**
+	 * @return
+	 */
 	public static String getRealPath() {
 		return System.getProperty(SystemConstant.SHISHUO_CMS_ROOT);
 	}

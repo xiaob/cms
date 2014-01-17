@@ -20,6 +20,7 @@ package com.shishuo.cms.action.admin;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +54,18 @@ public class AdminAdminAction extends AdminBaseAction {
 	}
 
 	/**
+	 * 
+	 * 进入管理员管理页面
+	 */
+	@RequestMapping(value = "/manage.htm", method = RequestMethod.GET)
+	public String manage(
+			@RequestParam(value = "p", defaultValue = "1") int pageNum,
+			ModelMap modelMap) {
+		modelMap.put("pageVo", adminService.getAllListPage(pageNum));
+		return "system/admin/manage";
+	}
+
+	/**
 	 * 添加Admin
 	 * 
 	 */
@@ -75,6 +88,13 @@ public class AdminAdminAction extends AdminBaseAction {
 				if (admin != null) {
 					json.getErrors().put("email", "管理员邮箱不能重复");
 				}
+			}
+			if (StringUtils.isBlank(password)) {
+				json.getErrors().put("password", "管理员密码不能为空");
+			} else if (password.length() < 6) {
+				json.getErrors().put("password", "密码不能小于6位");
+			} else if (password.length() > 16) {
+				json.getErrors().put("password", "密码不能大于16位");
 			}
 			// 检测校验结果
 			validate(json);
@@ -168,6 +188,6 @@ public class AdminAdminAction extends AdminBaseAction {
 	@RequestMapping(value = "/delete.htm", method = RequestMethod.GET)
 	public String deleteAdmin(@RequestParam(value = "adminId") long adminId) {
 		adminService.deleteAdmin(adminId);
-		return "redirect:/admin/admin/page";
+		return "redirect:/admin/admin/manage.htm";
 	}
 }

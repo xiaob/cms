@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.shishuo.cms.exception.FolderNotFoundException;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/applicationContext.xml" })
 public class FolderServiceTest {
@@ -17,7 +19,12 @@ public class FolderServiceTest {
 
 	@Test
 	public void testGetFolderById() {
-		assertEquals(2, folderService.getFolderById(2).getFolderId());
+		try {
+			assertEquals(2, folderService.getFolderById(2).getFolderId());
+		} catch (FolderNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// @Test

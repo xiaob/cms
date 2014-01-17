@@ -27,8 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shishuo.cms.constant.ArticleConstant;
-import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.vo.ArticleVo;
+import com.shishuo.cms.exception.FolderNotFoundException;
 
 /**
  * @author lqq
@@ -41,38 +41,13 @@ import com.shishuo.cms.entity.vo.ArticleVo;
 public class AdminAction extends AdminBaseAction {
 
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
-	public String login(ModelMap modelMap) {
+	public String login(ModelMap modelMap) throws FolderNotFoundException {
 		modelMap.put("articleCount", 0);
 		modelMap.put("downloadCount", 0);
 		modelMap.put("userCount", 0);
-		modelMap.put("folderAll", folderService.getAllFolderList(0,
-				FolderConstant.Status.display));
-		List<ArticleVo> articleList = articleService.getArticleListByStatus(
-				ArticleConstant.Status.display, 0, 10);
-		for (ArticleVo articleVo : articleList) {
-			articleVo.setFolder(folderService.getFolderById(articleVo
-					.getFolderId()));
-			if (articleVo.getFirstFolderId() != 0) {
-				articleVo.getFolderPathList().add(
-						folderService.getFolderById(articleVo
-								.getFirstFolderId()));
-			}
-			if (articleVo.getSecondFolderId() != 0) {
-				articleVo.getFolderPathList().add(
-						folderService.getFolderById(articleVo
-								.getSecondFolderId()));
-			}
-			if (articleVo.getThirdFolderId() != 0) {
-				articleVo.getFolderPathList().add(
-						folderService.getFolderById(articleVo
-								.getThirdFolderId()));
-			}
-			if (articleVo.getFourthFolderId() != 0) {
-				articleVo.getFolderPathList().add(
-						folderService.getFolderById(articleVo
-								.getFourthFolderId()));
-			}
-		}
+		modelMap.put("folderAll", folderService.getAllFolderList(0, null));
+		List<ArticleVo> articleList = articleService.getArticleListByStatus(0,
+				0, 0, 0, ArticleConstant.Status.display, 0, 10);
 		modelMap.put("articleList", articleList);
 		return "system/index";
 	}

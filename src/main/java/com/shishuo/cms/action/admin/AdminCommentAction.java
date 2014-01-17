@@ -20,7 +20,6 @@ package com.shishuo.cms.action.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,10 +47,9 @@ public class AdminCommentAction extends AdminBaseAction {
 	public String allComment(
 			ModelMap modelMap,
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
-			@RequestParam(value = "status", required = false) CommentConstant.Status status) {
+			@RequestParam(value = "status", required = false, defaultValue = "hidden") CommentConstant.Status status) {
 		modelMap.put("pageVo",
 				commentService.getCommentListPage(pageNum, status));
-		String statusType = null;
 		int displayCount = commentService
 				.getCommentByStatusCount(CommentConstant.Status.display);
 		int hiddenCount = commentService
@@ -59,12 +57,7 @@ public class AdminCommentAction extends AdminBaseAction {
 		int trashCount = commentService
 				.getCommentByStatusCount(CommentConstant.Status.trash);
 		int allCount = trashCount + hiddenCount + displayCount;
-		if (status == null) {
-			statusType = "all";
-		} else {
-			statusType = status.name();
-		}
-		modelMap.put("statusType", statusType);
+		modelMap.put("statusType", status);
 		modelMap.put("displayCount", displayCount);
 		modelMap.put("hiddenCount", hiddenCount);
 		modelMap.put("trashCount", trashCount);
@@ -73,30 +66,14 @@ public class AdminCommentAction extends AdminBaseAction {
 	}
 
 	/**
-	 * 审核通过
-	 * 
-	 * @author Administrator
-	 * 
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/auditing.json", method = RequestMethod.POST)
-	public JsonVo<Comment> auditingComment(
-			@RequestParam(value = "commentId") long commentId) {
-		JsonVo<Comment> json = new JsonVo<Comment>();
-		json.setResult(true);
-		commentService.updateCommentStatus(commentId,
-				CommentConstant.Status.display);
-		return json;
-	}
-
-	/**
 	 * @author 进入指定的comment页面
 	 * 
 	 */
-	@RequestMapping(value = "/{commentId}.htm", method = RequestMethod.GET)
-	public String comment(@PathVariable long commentId, ModelMap modelMap) {
+	@RequestMapping(value = "/detail.htm", method = RequestMethod.GET)
+	public String comment(@RequestParam(value = "commentId") long commentId,
+			ModelMap modelMap) {
 		modelMap.put("comment", commentService.getCommentById(commentId));
-		return "system/comment/comment";
+		return "system/comment/detail";
 	}
 
 	/**
@@ -104,13 +81,13 @@ public class AdminCommentAction extends AdminBaseAction {
 	 * 
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/cancel.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/update/status.json", method = RequestMethod.POST)
 	public JsonVo<Comment> cancelAuditing(
-			@RequestParam(value = "commentId") long commentId) {
+			@RequestParam(value = "commentId") long commentId,
+			CommentConstant.Status status) {
 		JsonVo<Comment> json = new JsonVo<Comment>();
 		json.setResult(true);
-		commentService.updateCommentStatus(commentId,
-				CommentConstant.Status.trash);
+		commentService.updateCommentStatus(commentId,status);
 		return json;
 	}
 }

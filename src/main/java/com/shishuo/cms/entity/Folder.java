@@ -74,6 +74,19 @@ public class Folder {
 	private int count;
 
 	/**
+	 * 类型
+	 */
+	private FolderConstant.Type type;
+
+	public FolderConstant.Type getType() {
+		return type;
+	}
+
+	public void setType(FolderConstant.Type type) {
+		this.type = type;
+	}
+
+	/**
 	 * 
 	 */
 	private FolderConstant.Owner owner;

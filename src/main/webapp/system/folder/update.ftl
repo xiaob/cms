@@ -28,7 +28,7 @@
 					</section>
 					<section class="panel">
 						<div class="panel-body">
-							<table class="table">
+							<table class="table" id="attachment">
 								<thead>
 									<tr>
 										<th>文件名</th>
@@ -132,7 +132,7 @@
 	        'uploader'    		: 	'${basePath}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
 	        'formData'  		: 	{'kindId':kindId,'kind':kind},
 	        'fileObjName'		: 	'file',
-	        'fileTypeExts' 		: 	'*.gif;*.png;*.jpg;*.jpeg;*.bmp;*.rar;*.doc;*.docx;*.zip,*.pdf;*.txt;*.swf;*.wmv',
+	        'fileTypeExts' 		: 	'*.*',
 	        'method'			:	'post',
 	        'onUploadSuccess' 	: 	function(file, data, response) {
 	        }
@@ -144,6 +144,30 @@
 			window.location.reload();
 		});
 		jQuery(".fancybox").fancybox();
+		$('#attachment .js_link').click(function(){
+			var attachmentId = $(this).attr("attachmentId");
+			bootbox.prompt("为此附件增加链接", function(result) {
+				if (result !="") {
+					$.post("${basePath}/admin/attachment/update_link.json",{'attachmentId':attachmentId,'link':result},function(data){
+						if(data.result){
+							window.location.reload();
+						}
+					},"json");					
+				} 
+			});			
+		});
+		$('#attachment .js_delete').click(function(){
+			var file = $(this);
+			bootbox.confirm("是否要删除【"+$(this).attr("name")+"】文件？", function(result) {
+				if (result) {
+					$.post("${basePath}/admin/attachment/delete.json",{'attachmentId':file.attr("attachmentId")},function(data){
+						if(data.result){
+							window.location.reload();
+						}
+					},"json");
+				}
+			});		
+		});				
 	});	
 </script>
 <#include "/system/foot.ftl">
