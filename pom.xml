@@ -276,8 +276,7 @@
 							<value>UTF-8</value>
 						</systemProperty>
 					</systemProperties>
-					<jvmArgs>-Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=512m
-						-Dfile.encoding=UTF-8</jvmArgs>
+					<jvmArgs>-Xmx512m -XX:PermSize=128m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8</jvmArgs>
 				</configuration>
 				<executions>
 					<execution>
