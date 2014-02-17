@@ -1,3 +1,14 @@
+/*
+Template Name: Flat Lab frontend build with Bootstrap v3.0.0
+Template Version: 1.0
+Author: Mosaddek Hossain
+Website: http://thevectorlab.net/
+*/
+
+/* Import fonts */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
+@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
+
 body {
     color: #797979;
     font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
@@ -22,7 +33,7 @@ a, a:hover, a:focus {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 a {
@@ -198,7 +209,7 @@ p {line-height: 22px}
     font-weight: 300;
     text-transform: uppercase;
     margin-top: 0;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 .feature-head p{
@@ -262,7 +273,7 @@ p {line-height: 22px}
     font-size: 20px;
     text-transform: uppercase;
     font-weight: 400;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 .f-text {
@@ -292,7 +303,7 @@ p {line-height: 22px}
     font-size: 20px;
     margin: 0 0 5px 0;
     text-transform: uppercase;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 .quote-info p {
     color: #9eb3c4;
@@ -306,7 +317,7 @@ p {line-height: 22px}
     font-size: 20px;
     font-weight: 400;
     text-transform: uppercase;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 .accordion {
@@ -760,7 +771,7 @@ ul.about-flex-slides {
     font-size: 24px;
     font-weight: 400;
     margin-bottom: 20px;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 .bx-wrapper {
@@ -925,7 +936,7 @@ ul.about-flex-slides {
     font-weight: 600;
     margin: 3px 0 0;
     text-transform: uppercase;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 /*contact*/
@@ -943,7 +954,7 @@ ul.about-flex-slides {
     color: #475168;
     text-transform: uppercase;
     margin-bottom: 20px;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 /*about us*/
@@ -1000,7 +1011,7 @@ ul.about-flex-slides {
 .about h3 {
     /*text-transform: uppercase;*/
     color: #475168;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     margin-top: 0;
 }
 
@@ -1029,7 +1040,7 @@ ul.about-flex-slides {
     margin-top: 0;
     color: #475168;
     font-size: 20px;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 .media h3 {
@@ -1090,7 +1101,7 @@ ul.about-flex-slides {
     margin-bottom: 25px;
     color: #47506a;
     font-size: 20px;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 /*team*/
@@ -1241,7 +1252,7 @@ ul.about-flex-slides {
     font-size:25px;
     color: #F77B6F;
     font-weight: 300;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 .blog-item h1 {
@@ -1274,7 +1285,7 @@ ul.about-flex-slides {
     margin-top: 30px;
     color: #475268;
     font-size: 18px;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 .blog-side-item ul li {
@@ -1335,13 +1346,84 @@ ul.tag li a {
     font-weight: 400;
     margin-top: 0;
     margin-bottom: 20px;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 
-.footer a {
-    color: #00adef;
+.footer address a {
+    color: #f37c6b;
 }
+
+.tweet-box {
+    background: #505b71;
+    padding: 20px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.tweet-box:before {
+    background-color: #505b71;
+    border-color: #505b71;
+    border-image: none;
+    border-right: 1px none #505b71;
+    border-style: none;
+    content: "";
+    display: block;
+    height: 22px;
+    left: 60px;
+    position: absolute;
+    top: 32px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width: 22px;
+}
+
+.tweet-box  a, .tweet-box i{
+    color: #00adef ;
+}
+
+.tweet-box  a:hover{
+    color: #F77B6F ;
+}
+
+.tweet-box i {
+    font-size: 40px;
+    float: left;
+    margin-right: 15px;
+}
+
+.social-link-footer li {
+    float: left;
+    margin: 0 10px 10px 0px;
+
+}
+
+.social-link-footer li a {
+    color: #fff;
+    background:#505b71;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    float: left;
+    text-align: center;
+    font-size: 20px;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.social-link-footer li a:hover {
+    background: #F77B6F;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+
 
 
 /*slider css*/
@@ -1367,11 +1449,11 @@ ul.tag li a {
     color:#F77B6F;
     text-transform: uppercase;
     font-size:35px;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 .slide_subtitle {
-    font-family: 'Open Sans';
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     font-weight: 400;
     padding: 5px;
     color:#fff;
@@ -1380,7 +1462,7 @@ ul.tag li a {
 }
 
 .slide_list_item {
-    font-family: 'Open Sans';
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     font-weight: 400;
     padding: 5px;
     color:#fff;
@@ -1401,7 +1483,7 @@ ul.tag li a {
 }
 
 .slide_btn {
-    font-family: 'Open Sans';
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     font-weight: 300;
     background:#F77B6F;
     padding:15px 20px;
@@ -1412,7 +1494,7 @@ ul.tag li a {
 }
 
 .slide_btn:hover, .slide_btn:focus {
-    font-family: 'Open Sans';
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     font-weight: 300;
     background: #e77368;
     padding:15px 20px;
@@ -1481,7 +1563,7 @@ ul.tag li a {
     color: #475168;
     font-size: 24px;
     text-transform: uppercase;
-    font-family: 'Fjalla One',sans-serif;
+    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     font-weight: 400;
     margin-bottom: 30px;
 }

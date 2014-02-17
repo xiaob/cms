@@ -102,6 +102,8 @@
 				<entry key="shishuocms_comment_page" value-ref="commentPageTag" />
 				
 				<entry key="shishuocms_attachment_list" value-ref="attachmentListTag" />
+				
+				<entry key="shishuocms_attachment_page" value-ref="attachmentPageTag" />
 			</map>
 		</property>
 		<property name="freemarkerSettings">

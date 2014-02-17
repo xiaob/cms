@@ -139,7 +139,7 @@
 }
 
 .cs-style-3 figcaption {
-	height: 70px;
+	height: 50px;
 	width: 100%;
 	top: auto;
 	bottom: 0;
@@ -166,9 +166,6 @@
 }
 
 .cs-style-3 figcaption a {
-	position: absolute;
-	bottom: 20px;
-	right: 20px;
 }
 
 /* Caption Style 4 */

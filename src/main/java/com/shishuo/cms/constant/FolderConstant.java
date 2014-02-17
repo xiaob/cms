@@ -70,7 +70,10 @@ public class FolderConstant {
 		/**
 		 * 列表
 		 */
-		list,
+		list, /**
+		 * 目录
+		 */
+		folder,
 		/**
 		 * 所有
 		 */

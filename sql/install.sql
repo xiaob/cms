@@ -7,7 +7,7 @@ CREATE TABLE `admin` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`adminId`),
   UNIQUE KEY `idx_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='管理员';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='管理员';
 
 CREATE TABLE `article` (
   `articleId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '文件ID',
@@ -33,7 +33,7 @@ CREATE TABLE `article` (
   `expireTime` datetime DEFAULT NULL COMMENT '过期时间',
   PRIMARY KEY (`articleId`),
   KEY `idx_folder` (`status`,`firstFolderId`,`secondFolderId`,`thirdFolderId`,`fourthFolderId`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='文件';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='文件';
 
 CREATE TABLE `attachment` (
   `attachmentId` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -49,7 +49,7 @@ CREATE TABLE `attachment` (
   `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`attachmentId`),
   KEY `idx_kind` (`kind`,`kindId`,`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=ucs2;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=ucs2;
 
 CREATE TABLE `comment` (
   `commentId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
@@ -67,7 +67,7 @@ CREATE TABLE `comment` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`commentId`),
   KEY `idx_status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='评论';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论';
 
 CREATE TABLE `config` (
   `key` varchar(45) NOT NULL COMMENT 'Key',
@@ -96,13 +96,7 @@ CREATE TABLE `folder` (
   PRIMARY KEY (`folderId`),
   UNIQUE KEY `idx_ename` (`ename`),
   KEY `idx_status` (`fatherId`,`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8 COMMENT='目录';
-
-CREATE TABLE `order` (
-  `orderId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志ID',
-  `createTime` datetime DEFAULT NULL COMMENT '时间',
-  PRIMARY KEY (`orderId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日志';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='目录';
 
 CREATE TABLE `user` (
   `userId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
@@ -111,4 +105,4 @@ CREATE TABLE `user` (
   `name` varchar(45) DEFAULT NULL COMMENT '用户名',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户';

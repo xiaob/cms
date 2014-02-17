@@ -1,213 +1,56 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-	<meta charset="utf-8">
-	<title>${SYS_SITENAME}</title>
-	<meta name="description" content="">
-	<meta name="author" content="Mosaddek">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<link href="${TEMPLATE_PATH}/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="${TEMPLATE_PATH}/assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-	
-	<!-- BEGIN PAGE LEVEL PLUGIN STYLES --> 
-   	<link href="${TEMPLATE_PATH}/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" />              
-   	<link href="${TEMPLATE_PATH}/assets/css/pages/gallery.css" rel="stylesheet" />              
-   	<link rel="stylesheet" href="${TEMPLATE_PATH}/assets/plugins/revolution_slider/css/rs-style.css" media="screen">
-  	<link rel="stylesheet" href="${TEMPLATE_PATH}/assets/plugins/revolution_slider/rs-plugin/css/settings.css" media="screen"> 
-  	<link href="${TEMPLATE_PATH}/assets/plugins/bxslider/jquery.bxslider.css" rel="stylesheet" />     
-  	<link href="${TEMPLATE_PATH}/assets/plugins/news-ticker/styles/ticker-style.css" rel="stylesheet" />     
-  	<script src="${TEMPLATE_PATH}/assets/js/jquery.js"></script>           
-  	<!-- END PAGE LEVEL PLUGIN STYLES -->
-   
-	<link href="${TEMPLATE_PATH}/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
-  	<link href="${TEMPLATE_PATH}/assets/css/style.css" rel="stylesheet" type="text/css"/>
-	<link href="${TEMPLATE_PATH}/assets/css/themes/blue.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="${TEMPLATE_PATH}/assets/css/custom.css" rel="stylesheet" type="text/css"/>
-	
-	<link rel="stylesheet" type="text/css" href="${TEMPLATE_PATH}/assets/plugins/lofslidernews/css/style1.css" />
-	<script type="text/javascript">
-		window.TEMPLATE_PATH = "${TEMPLATE_PATH}";
-	</script> 
-	
-   <!--[if lt IE 9]>
-      <script src="${TEMPLATE_PATH}/assets/plugins/html5shiv.js"></script>
-      <script src="${TEMPLATE_PATH}/assets/plugins/respond.min.js"></script>
-    <![endif]-->
-    	 	
-</head>
-<body>
-	<!-- BEGIN STYLE CUSTOMIZER -->
-	<div class="color-panel hidden-sm">
-		<div class="color-mode-icons icon-color"></div>
-		<div class="color-mode-icons icon-color-close"></div>
-		<script type="text/javascript" src="http://skype.tom.com/script/skypeCheck40.js"></script>
-		<div class="color-mode">
-			<p style="margin-bottom:5px;color:#000;"><i class="fa fa-check"></i> QQ</p>
-			<div style="margin-left:17px;">
-				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=740794596&site=qq&menu=yes">
-					<img border="0" src="http://wpa.qq.com/pa?p=2:740794596:52" alt="点击这里给我发消息" title="点击这里给我发消息"/> 邹先生
-				</a>				
-			</div>			
-			<div style="margin-left:17px;">
-				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2682335051&site=qq&menu=yes">
-					<img border="0" src="http://wpa.qq.com/pa?p=2:2682335051:52" alt="点击这里给我发消息" title="点击这里给我发消息"/> 丁先生
-				</a>
+<#include "head.ftl">
+<style type="text/css">
+.tab-style-1 .tab-content {
+	background: none repeat scroll 0 0 #FFFFFF;
+	padding: 20px 15px;
+}
+
+#bx-pager a.active img {
+	border: 2px solid #0DA3E2;
+}
+</style>
+<div class="page-container">
+	<!-- BEGIN BREADCRUMBS -->
+	<#include "topbar.ftl">
+	<!-- END BREADCRUMBS -->
+	<div class="container min-hight">
+		<!-- BEGIN BLOG -->
+		<div class="row">
+			<#include "sidebar.ftl">
+			<!-- BEGIN LEFT SIDEBAR -->
+			<div class="col-xs-9">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							${folder.name}<#if isAdmin><a target="_blank" style="color: red;"
+								href="${basePath}/admin/article/update.htm?articleId=${article.articleId}">[编辑]</a></#if>
+						</h3>
+					</div>
+				</div>
 			</div>
-			<hr>
-			<p style="margin-bottom:5px;color:#000;"><i class="fa fa-check"></i> SKYPE</p>
-			<div style="margin-left:17px;">
-				<a href="skype:roger%2Ecctv?call" onclick="return skypeCheck();">
-					<img src="http://mystatus.skype.com/smallicon/roger%2Ecctv" style="border: none;" width="16" height="16" alt="My status" />
-				</a> <a href="skype:roger%2Ecctv?call" onclick="return skypeCheck();">Roger</a>
-			</div>		
-			<div style="margin-left:17px;">
-				<a href="skype:byvision4u?call" onclick="return skypeCheck();">
-					<img src="http://mystatus.skype.com/smallicon/byvision4u" style="border: none;" width="16" height="16" alt="My status" />
-				</a> <a href="skype:byvision4u?call" onclick="return skypeCheck();">John</a>
-			</div>		
+			<!-- END LEFT SIDEBAR -->
 		</div>
 	</div>
-	<!-- END BEGIN STYLE CUSTOMIZER -->  
-	
-	<div class="header navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="col-xs-4 navbar-header">
-				<!-- BEGIN LOGO (you can use logo image instead of text)-->
-				<a class="navbar-brand logo-v1" href="${basePath}/index.htm">
-					<img style="height:45px;" src="${TEMPLATE_PATH}/images/logo.png" id="logoimg" alt="">
-				</a>
-				<!-- END LOGO -->
-			</div>
-			
-			<!-- BEGIN TOP NAVIGATION MENU -->
-			<div class="col-xs-8 navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li class="dropdown">
-                        <a href="${basePath}/index.htm">HOME</a>
-					</li>
-					
-					<@shishuocms_folder folderId="57">
-					<li class="dropdown mega-menu-item">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="${basePath}/${tag_folder.ename}/index.htm">
-                        	${tag_folder.name?upper_case}
-                        	<i class="fa fa-angle-down"></i>
-                        </a>
-                        
-                        <ul class="dropdown-menu" style="left: -300px; width: 850px; padding-top: 20px;">
-							<li>
-								<div class="mega-menu-content">
-									<div class="row">
-                        			<#list tag_folder.folderList as secondFolder>
-                        				<div class="col-xs-3">
-											<ul class="sub-menu">
-												<li>
-													<span class="mega-menu-sub-title"><a  style="color:#0da3e2;" href="${basePath}/${tag_folder.ename}/${secondFolder.ename}/index.htm">${secondFolder.name}</a></span>
-													<ul class="sub-menu">
-														<#list secondFolder.folderList as thirdFolder>
-														<li><a style="" href="${basePath}/${tag_folder.ename}/${secondFolder.ename}/${thirdFolder.ename}/index.htm">${thirdFolder.name}</a></li>
-														</#list>
-													</ul>
-												</li>
-											</ul>
-										</div>
-										<#if (secondFolder_index+1)%4==0>
-										<div class="clearfix"></div>
-										</#if>
-                        			</#list>
-                        			</div>
-                        		</div>
-                        	</li>
-                        </ul>
-					</li>
-					</@shishuocms_folder>
-					
-					<@shishuocms_folder folderId="103">
-					<li class="dropdown mega-menu-item">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="${basePath}/${tag_folder.ename}/after_service_procedure/index.htm">
-                        	${tag_folder.name?upper_case}
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu" style="width: 550px; left: -350px;">
-                        	<li>
-                        	
-                       			<div class="mega-menu-content">
-									<div style="width: 500px;">
-										<div class="col-xs-5" style="width: 230px;">
-											<ul class="sub-menu">
-											<#list tag_folder.folderList as secondFolder>
-											<li>
-												<a href="${basePath}/${tag_folder.ename}/${secondFolder.ename}/index.htm">${secondFolder.name}</a>
-											</li>
-											</#list>
-											</ul>
-										</div>
-										<div class="col-xs-5" style="width: 270px;">
-											<img style="width: 260px; margin: 5px;" src="${TEMPLATE_PATH}/images/icon_service.jpg"/>
-										</div>
-                        			</div>
-                        		</div>
-                        	</li>
-                        </ul>
-                    </li>
-					</@shishuocms_folder>
-					
-					<@shishuocms_folder folderId="108">
-					<li class="dropdown mega-menu-item">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="${basePath}/${tag_folder.ename}/index.htm">
-                        	${tag_folder.name?upper_case}
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                        	<#list tag_folder.folderList as secondFolder>
-                        	<li><a href="${basePath}/${tag_folder.ename}/${secondFolder.ename}/index.htm">${secondFolder.name}</a></li>
-                        	</#list>
-                        	
-                        </ul>
-                    </li>
-					</@shishuocms_folder>
-					
-					<@shishuocms_folder folderId="2">
-					<li class="dropdown mega-menu-item">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="${basePath}/${tag_folder.ename}/about_us/index.htm">
-                        	${tag_folder.name?upper_case}
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu" style="width: 550px; left:-380px;">
-                        	<li>
-                       			<div class="mega-menu-content">
-									<div style="width: 500px;">
-										<div class="col-xs-5" style="width: 230px;">
-											<ul class="sub-menu">
-											<#list tag_folder.folderList as secondFolder>
-											<li>
-												<a href="${basePath}/${tag_folder.ename}/${secondFolder.ename}/index.htm">${secondFolder.name}</a>
-											</li>
-											</#list>
-											</ul>
-										</div>
-										<div class="col-xs-5" style="width: 270px;">
-											<img style="width: 260px; margin: 5px;" src="${TEMPLATE_PATH}/images/icon_about.jpg"/>
-										</div>
-                        			</div>
-                        		</div>
-                        	</li>
-                        </ul>
-                    </li>
-					</@shishuocms_folder>
-
-					<li class="dropdown mega-menu-item">
-                    	<a style="color:red;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="javascript:void(0);">
-                        	LANGUAGE <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                        	<li><a href="#">中文</a></li>
-                        	<li><a href="#">English</a></li>
-                        </ul>
-                    </li>
-					
-				</ul>                           
-			</div>
-			<!-- BEGIN TOP NAVIGATION MENU -->
-		</div>
-    </div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$('.products-photo').bxSlider({
+			moveSlides : 1,
+			responsive : true,
+			controls : false,
+			auto : true,
+			pagerCustom : '#bx-pager'
+		});
+		$('.folder-products').bxSlider({
+			minSlides : 6,
+			maxSlides : 6,
+			slideWidth : 1100,
+			slideMargin : 2,
+			moveSlides : 1,
+			responsive : true,
+			auto : true,
+			pager : false
+		});
+	});
+</script>
+<#include "foot.ftl">

@@ -30,7 +30,7 @@
                   <!-- user login dropdown start-->
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                          <span class="username">herbertyang@163.com</span>
+                          <span class="username"></span>
                           <b class="caret"></b>
                       </a>
                       <ul class="dropdown-menu extended logout">
