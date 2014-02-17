@@ -1,33 +1,30 @@
-                    <div class="search-row">
-                        <input type="text" placeholder="Search here" class="form-control">
-                    </div>
-                    <div class="category">
-                        <h3>分类</h3>
-                        <ul class="list-unstyled">
-                        	<@shishuocms_folder_list fatherId="0" >
-	                        	<#list tag_folder_list as folder>
-	                            <li><a href="${basePath}/${folder.ename}.htm"><i class="  icon-angle-right"></i> ${folder.name}</a></li>
-	                            </#list>
-                            </@shishuocms_folder_list>
-                        </ul>
-                    </div>
-					<div class="blog-post">
-                        <h3>最新文章</h3>
-                        <@shishuocms_file_page type="article" folderId="${folderId}" pageNum="${pageNum}" rows="8">
-                        <#list tag_file_page.list as file>
-                        <div class="media">
-                            <div class="media-body">
-                                <a href="${basePath}/${file.folder.ename}/${file.fileId}.htm">${file.name}</a>（${file.createTime?string("yyyy-MM-dd")}）
-                            </div>
-                        </div>
-                        </#list>
-                        </@shishuocms_file_page>
-                    </div>  
-					<div class="blog-post">
-                        <h3>快捷方式</h3>
-                        <div class="media">
-                            <div class="media-body">
-                                <a href="${basePath}/auth/admin/login.htm">管理员登录</a>
-                            </div>
-                        </div>
-                    </div>                                       
+				<!-- BEGIN RIGHT SIDEBAR -->            
+				<div class="col-xs-3 blog-sidebar bv-border">
+					<@shishuocms_folder_list fatherId="${firstFolder.folderId}">
+					<!-- CATEGORIES START -->
+					<h2>${firstFolder.name}</h2>
+					<ul class="nav sidebar-categories margin-bottom-40" style="padding-left:20px;">
+						<#list tag_folder_list as secondLevelFolder>
+						<li <#if secondLevelFolder.folderId == folder.folderId>class="active"</#if>><a href="${basePath}/${firstFolder.ename}/${secondLevelFolder.ename}/index.htm"><i class="fa fa-chevron-right"></i> ${secondLevelFolder.name}</a>
+							<#if secondLevelFolder.folderList?size gt 0><#if secondLevelFolder.folderId == folder.folderId>class="active"</#if>
+							<#if secondFolder?? && secondLevelFolder.folderId == secondFolder.folderId>
+							<div class="folderList">
+								<ul class="nav sidebar-categories">
+								<#list secondLevelFolder.folderList as thirdLevelFolder>
+									<#if thirdLevelFolder.folderId == folder.folderId>
+										<li class="active"><p style="margin-left: 20px;"><i class="fa fa-caret-right"></i> ${thirdLevelFolder.name}</p></li>
+									<#else>
+										<li><a style="margin-left: 20px;" href="${basePath}/${firstFolder.ename}/${secondLevelFolder.ename}/${thirdLevelFolder.ename}/index.htm"><i class="fa fa-caret-right"></i> ${thirdLevelFolder.name}</a></li>
+									</#if>
+								</#list>
+								</ul>
+							</div>
+							</#if>
+							</#if>
+						</li>
+						</#list>
+					</ul>
+					<!-- CATEGORIES END -->
+					</@shishuocms_folder_list>
+				</div>
+				<!-- END RIGHT SIDEBAR --> 

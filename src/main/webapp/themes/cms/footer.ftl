@@ -1,32 +1,47 @@
-	<footer class="footer">
-         <div class="container">
-             <div class="row">
-                 <div class="col-lg-5 col-sm-5">
-                     Powered by <a href="http://cms.shishuo.com">师说CMS</a> | UI Designed by <a href="http://www.shishuo.com">师说</a>
-                 </div>
-                 <div class="col-lg-7 col-sm-7 pull-right" style="text-align: right;">
-                 	
-                 </div>
-             </div>
-         </div>
+<footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-3">
+                    <h1>联系方式</h1>
+                    <address>
+                        <p>地址:湖南省长沙市建湘路479号曼哈顿大夏</p>
+                        <p>传真 : 0731-89601598</p>
+                        <p>邮箱 : <a href="javascript:;">support@shishuo.com</a></p>
+                    </address>
+                </div>
+                <div class="col-lg-5 col-sm-5">
+                    <h1>最近的动态</h1>
+                    <div class="tweet-box">
+                        <i class="icon-twitter"></i>
+                        <em>请关注<a href="javascript:;">http://www.shishuo.com</a> 了解我们最新的动态</em>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-3 col-lg-offset-1">
+                    <h1>友情链接</h1>
+                    <ul class="social-link-footer list-unstyled">
+                        <li><a href="#"><i class="icon-renren"></i></a></li>
+                        <li><a href="#"><i class="icon-weibo"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </footer>
-     
-  	<!-- js placed at the end of the document so the pages load faster -->
-  	
+       <!-- js placed at the end of the document so the pages load faster -->
+    <script src="${TEMPLATE_PATH}/js/jquery.js"></script>
+    <script src="${TEMPLATE_PATH}/js/jquery-1.8.3.min.js"></script>
     <script src="${TEMPLATE_PATH}/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${TEMPLATE_PATH}/js/hover-dropdown.js"></script>
     <script defer src="${TEMPLATE_PATH}/js/jquery.flexslider.js"></script>
     <script type="text/javascript" src="${TEMPLATE_PATH}/assets/bxslider/jquery.bxslider.js"></script>
-    <script type="text/javascript" src="${TEMPLATE_PATH}/assets/SyntaxHighlighter/scripts/shCore.js"></script>
-    <script type="text/javascript" src="${TEMPLATE_PATH}/assets/SyntaxHighlighter/scripts/shAutoloader.js"></script>
-
+    <script type="text/javascript" src="${TEMPLATE_PATH}/js/jquery.parallax-1.1.3.js"></script>
     <script src="${TEMPLATE_PATH}/js/jquery.easing.min.js"></script>
     <script src="${TEMPLATE_PATH}/js/link-hover.js"></script>
-    <script src="${TEMPLATE_PATH}/assets/Slides-SlidesJS-3/source/jquery.slides.js"></script>
-  	<script src="${TEMPLATE_PATH}/assets/Slides-SlidesJS-3/source/jquery.slides.min.js"></script>
-    
+    <script src="${TEMPLATE_PATH}/assets/fancybox/source/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="${TEMPLATE_PATH}/assets/revolution_slider/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="${TEMPLATE_PATH}/assets/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     <!--common script for all pages-->
     <script src="${TEMPLATE_PATH}/js/common-scripts.js"></script>
 
+    <script src="${TEMPLATE_PATH}/js/revulation-slide.js"></script>
   </body>
 </html>

@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shishuo.cms.constant.ArticleConstant;
 import com.shishuo.cms.constant.AttachmentConstant;
 import com.shishuo.cms.constant.FolderConstant;
-import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.ArticleVo;
@@ -44,6 +43,7 @@ import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.ArticleNotFoundException;
 import com.shishuo.cms.exception.FolderNotFoundException;
+import com.shishuo.cms.util.HttpUtils;
 
 /**
  * @author 文件action
@@ -56,10 +56,11 @@ public class AdminArticleAction extends AdminBaseAction {
 	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
 	public String add(
 			@RequestParam(value = "folderId", defaultValue = "1") long folderId,
-			HttpServletResponse response) throws FolderNotFoundException {
+			HttpServletRequest request, HttpServletResponse response)
+			throws FolderNotFoundException {
 		Article article = articleService.addArticle(folderId);
 		try {
-			response.sendRedirect(SystemConstant.BASE_PATH
+			response.sendRedirect(HttpUtils.getBasePath(request)
 					+ "/admin/article/update.htm?articleId="
 					+ article.getArticleId());
 		} catch (IOException e) {

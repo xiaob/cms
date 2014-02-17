@@ -33,11 +33,6 @@ public class SystemConstant {
 	public static final String SHISHUO_CMS_ROOT = "shishuo.cms.root";
 
 	/**
-	 * 应用网址
-	 */
-	public static String BASE_PATH = "";
-
-	/**
 	 * 上传文件夹
 	 */
 	public static String UPLOAD_FOLDER = "/upload/photo";

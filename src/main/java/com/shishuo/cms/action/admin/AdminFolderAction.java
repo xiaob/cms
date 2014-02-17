@@ -161,7 +161,7 @@ public class AdminFolderAction extends AdminBaseAction {
 		}
 		PageVo<AttachmentVo> pageVo = attachmentService
 				.getAttachmentPageByKindId(folderId,
-						AttachmentConstant.Kind.folder, 20, p);
+						AttachmentConstant.Kind.folder, 12, p);
 		pageVo.getArgs().put("folderId", folderId + "");
 		modelMap.put("folder", folder);
 		modelMap.put("folderAll", folderService.getAllFolderList(0, null));
@@ -181,7 +181,8 @@ public class AdminFolderAction extends AdminBaseAction {
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "ename") String ename,
 			@RequestParam(value = "content", required = false) String content,
-			@RequestParam(value = "status") FolderConstant.Status status) {
+			@RequestParam(value = "status") FolderConstant.Status status,
+			@RequestParam(value = "type", defaultValue = "all") FolderConstant.Type type) {
 
 		JsonVo<String> json = new JsonVo<String>();
 		// FIXME 检查目录的ename不能用循环遍历检查
@@ -206,7 +207,7 @@ public class AdminFolderAction extends AdminBaseAction {
 			validate(json);
 			String newEname = ename.toLowerCase();
 			folderService.updateFolderById(folderId, newEname, name, status,
-					content, FolderConstant.Type.list);
+					content, type);
 
 			json.setResult(true);
 		} catch (Exception e) {

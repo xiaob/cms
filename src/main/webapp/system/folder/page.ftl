@@ -1,5 +1,6 @@
-<#assign menu="folder"> <#assign submenu="folder_list"> <#include
-"/system/head.ftl">
+<#assign menu="folder">
+<#assign submenu="folder_list">
+<#include "/system/head.ftl">
 <style type="text/css">
 .pagination {
 	border-radius: 4px;
@@ -133,10 +134,12 @@
 												<a class="js_folder_delete" folderId="${e.folderId}" href="javascript:void(0);" title="删除${e.name}">
 													删除
 												</a>
+												<#if e.type="list" >
 												 | 
 												<a href="${basePath}/admin/article/add.htm?folderId=${e.folderId}"  folderId="${e.folderId}" href="javascript:void(0);">
-													增加
+													增加文章
 												</a>
+												</#if>
 											</td>
 										</tr>
 										</#list>

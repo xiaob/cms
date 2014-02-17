@@ -3,7 +3,6 @@ package com.shishuo.cms.filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -61,10 +60,6 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		modelAndView.addObject("TEMPLATE_PATH", basePath + "/themes/"
 				+ configService.getConfigByKey(ConfigConstant.SYS_THEME));
 		MDC.put("ip", HttpUtils.getIp(request));
-
-		if (StringUtils.isBlank(SystemConstant.BASE_PATH)) {
-			SystemConstant.BASE_PATH = basePath;
-		}
 	}
 
 	@Override
