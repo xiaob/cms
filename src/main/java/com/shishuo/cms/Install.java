@@ -115,7 +115,7 @@ public class Install {
 	 * 
 	 */
 	private boolean importData() {
-		console.readLine("\n按control+c推出，按其它键继续安装。。。\n");
+		console.readLine("\n按control+c退出，按其它键继续安装。。。\n");
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
