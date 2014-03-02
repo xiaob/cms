@@ -1,8 +1,10 @@
-package com.shishuo.cms.service;
+/*
+ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
+ */
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.Date;
+package com.shishuo.cms.service;
 
 //import org.apache.lucene.analysis.TokenStream;
 //import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
@@ -33,8 +35,6 @@ import java.util.Date;
 //import org.apache.lucene.util.Version;
 import org.springframework.stereotype.Service;
 //import com.chenlb.mmseg4j.analysis.SimpleAnalyzer;
-
-import com.shishuo.cms.constant.SystemConstant;
 
 /**
  * Lucene 搜索

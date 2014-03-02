@@ -4,11 +4,6 @@ Template Version: 1.0
 Author: Mosaddek Hossain
 Website: http://thevectorlab.net/
 */
-
-/* Import fonts */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
-@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
-
 body {
     color: #797979;
     font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
@@ -66,7 +61,9 @@ p {line-height: 22px}
 }
 
 .navbar-brand span{
-    color: #f25f5b;
+   color: #F25F5B;
+   font-size: 14px;
+   margin-left: 15px;
 }
 
 .header-frontend .navbar-collapse  ul.navbar-nav {
@@ -200,7 +197,7 @@ p {line-height: 22px}
 /*homepage features*/
 
 .feature-head {
-    padding: 50px 0;
+    padding: 30px 0 50px;
 }
 
 .feature-head h1{
@@ -774,11 +771,6 @@ ul.about-flex-slides {
     font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
-.bx-wrapper {
-    margin-bottom: 120px;
-}
-
-
 /*pricing table*/
 
 .pricing-table {
@@ -1063,7 +1055,6 @@ ul.about-flex-slides {
 }
 
 .gray-box {
-    background: #f2f2f2;
     padding: 60px 0;
 }
 
@@ -1258,6 +1249,7 @@ ul.about-flex-slides {
 .blog-item h1 {
     margin-bottom: 20px;
     line-height: 35px;
+    margin-top: 0;
 }
 
 .blog-item h1 a:hover {
@@ -1282,7 +1274,7 @@ ul.about-flex-slides {
 }
 
 .blog-side-item h3 {
-    margin-top: 30px;
+    margin-top: 0px;
     color: #475268;
     font-size: 18px;
     font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
@@ -1449,11 +1441,9 @@ ul.tag li a {
     color:#F77B6F;
     text-transform: uppercase;
     font-size:35px;
-    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
 }
 
 .slide_subtitle {
-    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     font-weight: 400;
     padding: 5px;
     color:#fff;
@@ -1462,7 +1452,6 @@ ul.tag li a {
 }
 
 .slide_list_item {
-    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     font-weight: 400;
     padding: 5px;
     color:#fff;
@@ -1483,7 +1472,6 @@ ul.tag li a {
 }
 
 .slide_btn {
-    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     font-weight: 300;
     background:#F77B6F;
     padding:15px 20px;
@@ -1494,7 +1482,6 @@ ul.tag li a {
 }
 
 .slide_btn:hover, .slide_btn:focus {
-    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     font-weight: 300;
     background: #e77368;
     padding:15px 20px;
@@ -1512,42 +1499,6 @@ ul.tag li a {
     color: #ffe582;
 }
 
-
-/*recent work*/
-
-.bx-controls-direction a {
-    background-color: #eee !important;
-    padding: 20px 35px;
-    border-radius: 5px !important;
-    margin-left: 5px !important;
-
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -ms-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.bx-controls-direction a:hover {
-    background-color:#F77B6F !important;
-
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -ms-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.bx-wrapper .bx-prev, .bx-wrapper .bx-prev:hover {
-    left: 43%;
-    background-position: 25px 8px ;
-}
-
- .bx-wrapper .bx-next, .bx-wrapper .bx-next:hover {
-    background-position: 22px 8px;
- }
-
-
 /*property*/
 
 .property {
@@ -1563,7 +1514,6 @@ ul.tag li a {
     color: #475168;
     font-size: 24px;
     text-transform: uppercase;
-    font-family: "Microsoft YaHei",微软雅黑,arial,宋体;
     font-weight: 400;
     margin-bottom: 30px;
 }

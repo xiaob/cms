@@ -1,3 +1,8 @@
+/*
+ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
+ */
 package com.shishuo.cms.action;
 
 import java.util.List;
@@ -86,13 +91,10 @@ public class FolderAction extends BaseAction {
 			@RequestParam(value = "p", defaultValue = "1") long p,
 			ModelMap modelMap) {
 		try {
-			modelMap.addAttribute("folder", "rfdgre");
 			List<Folder> folderPathList = packageFolderByEname(
 					firstFolderEname, secondFolderEname, thirdFolderEname,
 					fourthFolderEname, modelMap);
 			modelMap.addAttribute("p", p);
-			modelMap.addAttribute("name", "");
-			modelMap.addAttribute("content", "");
 			return themeService.getFolderTemplate(folderPathList);
 		} catch (FolderNotFoundException e) {
 			logger.fatal(e.getMessage());

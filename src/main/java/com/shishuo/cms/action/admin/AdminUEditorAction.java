@@ -1,23 +1,21 @@
+/*
+ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
+ */
 package com.shishuo.cms.action.admin;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONObject;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.entity.Article;
-import com.shishuo.cms.exception.UploadException;
 import com.shishuo.cms.util.HttpUtils;
 import com.shishuo.cms.util.UploadUtils;
 

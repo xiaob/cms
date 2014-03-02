@@ -74,7 +74,7 @@
 
 	<!-- 在XML配置文件中加入外部属性文件，当然也可以指定外部文件的编码 -->
 	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		class="com.shishuo.cms.util.PropertyUtils">
 		<property name="locations">
 			<list>
 				<value>classpath:shishuocms.properties</value> <!-- 指定外部文件的编码 -->

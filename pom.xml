@@ -1,22 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<licenses>
-		<license>
-			<name>Apache 2 </name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-			<comments>A business-friendly OSS license</comments>
-		</license>
-	</licenses>
 	<organization>
 		<name>shishuo</name>
 		<url>http://www.shishuo.com</url>
 	</organization>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.shishuo</groupId>
-	<artifactId>byvision</artifactId>
+	<artifactId>cms</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>SHISHUO CMS Maven Webapp</name>
 	<url>http://cms.shishuo.com</url>
 	<dependencies>
@@ -157,13 +149,6 @@
 			<artifactId>kaptcha</artifactId>
 			<version>0.0.8</version>
 		</dependency>
-		<dependency>
-			<groupId>org.imgscalr</groupId>
-			<artifactId>imgscalr-lib</artifactId>
-			<version>4.2</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -276,7 +261,8 @@
 							<value>UTF-8</value>
 						</systemProperty>
 					</systemProperties>
-					<jvmArgs>-Xmx512m -XX:PermSize=128m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8</jvmArgs>
+					<jvmArgs>-Xmx512m -XX:PermSize=128m -XX:MaxPermSize=256m
+						-Dfile.encoding=UTF-8</jvmArgs>
 				</configuration>
 				<executions>
 					<execution>
@@ -295,6 +281,32 @@
 						<phase>post-integration-test</phase>
 						<goals>
 							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<target>
+								<tstamp prefix="shishuo.">
+									<format property="time" pattern="yyyyMMddHHmmss" />
+								</tstamp>
+								<copy todir="${basedir}/dist" overwrite="true">
+									<fileset
+										dir="${basedir}/target/${project.artifactId}-${project.version}" />
+								</copy>
+								<replace file="${basedir}/dist/WEB-INF/web.xml" token="shishuo.cms.root"
+									value="shishuo.cms.root.${shishuo.time}" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>

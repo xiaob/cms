@@ -52,17 +52,17 @@
 									<label class="col-xs-3 control-label">父级标签</label>
 									<div class="col-xs-9">
 										<select class="form-control input-lg m-bot15" style="font-size: 15px; width: 255px;" name="fatherId">
-											<option style="background-color: #DFF0D8; font-weight: bold;" value="0" <#if folder.folderId==0>selected</#if>>├─顶级目录</option> 
+											<option value="0" <#if folder.folderId==0>selected</#if>>├─顶级目录</option> 
 											<#list folderAll as firstFolder>
-											<option style="background-color: #DFF0D8; font-weight: bold;" value="${firstFolder.folderId}" <#if folder.folderId==firstFolder.folderId>selected</#if>>
+											<option value="${firstFolder.folderId}" <#if folder.folderId==firstFolder.folderId>selected</#if>>
 												├─┬─${firstFolder.name}
 											</option> 
 												<#list firstFolder.folderList as secondFolder>
-												<option style="background-color: #5BC0DE; color: #FFFFFF;" value="${secondFolder.folderId}" <#if folder.folderId==secondFolder.folderId>selected</#if>>
+												<option value="${secondFolder.folderId}" <#if folder.folderId==secondFolder.folderId>selected</#if>>
 													│&nbsp;&nbsp;&nbsp;└──${secondFolder.name}
 												</option>
 													<#list secondFolder.folderList as thirdFolder>
-													<option style="background-color: #FCF8E3;" value="${thirdFolder.folderId}" <#if folder.folderId==thirdFolder.folderId>selected</#if>>
+													<option  value="${thirdFolder.folderId}" <#if folder.folderId==thirdFolder.folderId>selected</#if>>
 														│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;└──${thirdFolder.name}
 													</option>
 													</#list>
@@ -106,6 +106,7 @@
 											<th>名称</th>
 											<th>英文名称</th>
 											<th>状态</th>
+											<th>类型</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -119,22 +120,34 @@
 												href="${basePath}/admin/folder/page.htm?folderId=${e.folderId}">${e.name}</a></td>
 											<td>${e.ename}</td>
 											<td>
-												<#if e.status="display" >
-													显示
-												<#else>
-													隐藏
-												</#if>
+												<select class="js_folder_status" folderId="${e.folderId}">
+													<option value="display" <#if e.type=="display">selected</#if>>显示</option>
+													<option value="hidden" <#if e.type=="hidden">selected</#if>>隐藏</option>
+												</select>
+											</td>
+											<td>
+												<select class="js_folder_type" folderId="${e.folderId}">
+													<option value="folder" <#if e.type=="folder">selected</#if>>目录</option>
+													<option value="photo" <#if e.type=="photo">selected</#if>>相册</option>
+													<option value="article" <#if e.type=="article">selected</#if>>文章</option>
+												</select>											
 											</td>
 											<td>
 												<!-- Icons -->
-												<a href="${basePath}/admin/folder/update.htm?folderId=${e.folderId}" title="修改">
-													修改
-												</a>
-												 | 
 												<a class="js_folder_delete" folderId="${e.folderId}" href="javascript:void(0);" title="删除${e.name}">
 													删除
 												</a>
-												<#if e.type="list" >
+												 | 
+												<a href="${basePath}/admin/folder/update.htm?folderId=${e.folderId}" title="修改">
+													修改描述
+												</a>
+												<#if e.type="photo" >
+												 | 
+												<a href="${basePath}/admin/folder/photo.htm?folderId=${e.folderId}" title="修改">
+													上传图片
+												</a>
+												</#if>
+												<#if e.type="article" >
 												 | 
 												<a href="${basePath}/admin/article/add.htm?folderId=${e.folderId}"  folderId="${e.folderId}" href="javascript:void(0);">
 													增加文章
@@ -160,79 +173,100 @@
 </section>
 <!--main content end-->
 <script type="text/javascript">
-		var pageFolderId = ${folder.folderId};
-			$(function(){
-				$('.js_update_sort').click(function(){
-					var folderSort=new Array();
-					$('.js_folder_sort').each(function(i, element){
-						var folder= {};
-						folder.folderId=$(element).attr('folderId');
-						folder.sort=$(element).val();
-						folderSort.push(folder);				
-					});
-					$.post("${basePath}/admin/folder/sort.json", { "sortJson": $.toJSON(folderSort)},function(data){
-						if(data.result){
-							bootbox.alert("更新成功", function() {
-								window.location.href="${basePath}/admin/folder/page.htm?folderId="+pageFolderId;
-							});
-						}else{
-							bootbox.alert(data.msg, function() {});
-						}
-					}, "json");
-				});
-				$('.js_folder_delete').click(function(){
-					var folderId = $(this).attr('folderId')
-					bootbox.dialog({
-						message : "是否"+$(this).attr('title')+"文件夹",
-						title : "提示",
-						buttons : {
-							"delete" : {
-								label : "删除",
-								className : "btn-success",
-								callback : function() {
-									$.post("${basePath}/admin/folder/delete.json", { "folderId": folderId},
-								   	function(data){
-								   		if(data.result){
-								   			bootbox.alert("删除成功", function() {
-												window.location.href="${basePath}/admin/folder/page.htm?folderId="+pageFolderId;
-											});
-								   		}else{
-								   			bootbox.alert(data.msg, function() {});
-								   		}
-								   	}, "json");
-								}
-							},
-							"cancel" : {
-								label : "取消",
-								className : "btn-primary",
-								callback : function() {
-								}
-							}
-						}
-					});					
-				});	
-		$('#addFolder_form').ajaxForm({
-			dataType : 'json',
-			success : function(data) {
-				if (data.result) {
-					bootbox.dialog({
-						message : "保存成功",
-						title : "提示",
-						buttons : {
-							ok : {
-								label : "确定",
-								className : "btn-success",
-								callback : function() {
-									window.location.reload();
-								}
-							}
-						}
-					});
-				}else{
-					showErrors($('#addFolder_form'),data.errors);
-				}
-			}
-		});				
-		});
-		</script>
+var pageFolderId = ${folder.folderId};
+$(function() {
+    $('.js_update_sort').click(function() {
+        var folderSort = new Array();
+        $('.js_folder_sort').each(function(i, element) {
+            var folder = {};
+            folder.folderId = $(element).attr('folderId');
+            folder.sort = $(element).val();
+            folderSort.push(folder);
+        });
+        $.post("${basePath}/admin/folder/sort.json", {
+            "sortJson": $.toJSON(folderSort)
+        },
+        function(data) {
+            if (data.result) {
+                bootbox.alert("更新成功",
+                function() {
+                    window.location.href = "${basePath}/admin/folder/page.htm?folderId=" + pageFolderId;
+                });
+            } else {
+                bootbox.alert(data.msg,
+                function() {
+          		});
+            }
+        },
+        "json");
+    });
+    $('.js_folder_delete').click(function() {
+        var folderId = $(this).attr('folderId');
+        bootbox.dialog({
+            message: "是否" + $(this).attr('title') + "文件夹",
+            title: "提示",
+            buttons: {
+                "delete": {
+                    label: "删除",
+                    className: "btn-success",
+                    callback: function() {
+                        $.post("${basePath}/admin/folder/delete.json", {
+                            "folderId": folderId
+                        },
+                        function(data) {
+                            if (data.result) {
+                                bootbox.alert("删除成功",
+                                function() {
+                                    window.location.href = "${basePath}/admin/folder/page.htm?folderId=" + pageFolderId;
+                                });
+                            } else {
+                                bootbox.alert(data.msg,
+                                function() {});
+                            }
+                        },
+                        "json");
+                    }
+                },
+                "cancel": {
+                    label: "取消",
+                    className: "btn-primary",
+                    callback: function() {}
+                }
+            }
+        });
+    });
+    $('#addFolder_form').ajaxForm({
+        dataType: 'json',
+        success: function(data) {
+            if (data.result) {
+                bootbox.dialog({
+                    message: "保存成功",
+                    title: "提示",
+                    buttons: {
+                        ok: {
+                            label: "确定",
+                            className: "btn-success",
+                            callback: function() {
+                                window.location.reload();
+                            }
+                        }
+                    }
+                });
+            } else {
+                showErrors($('#addFolder_form'), data.errors);
+            }
+        }
+    });
+    $(".js_folder_type").change(function(){
+		$.post("${basePath}/admin/folder/type.json", {"folderId": $(this).attr("folderId"),type:$(this).val()},function(){
+			window.location.reload();
+        },"json");  	
+    });
+    $(".js_folder_status").change(function(){
+		$.post("${basePath}/admin/folder/status.json", {"folderId": $(this).attr("folderId"),status:$(this).val()},function(){
+			window.location.reload();
+        },"json");  	
+    });
+});
+</script>
 <#include "/system/foot.ftl">

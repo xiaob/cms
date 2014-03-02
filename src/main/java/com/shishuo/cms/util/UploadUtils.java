@@ -1,3 +1,9 @@
+/*
+ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
+ */
+
 package com.shishuo.cms.util;
 
 import java.io.File;
@@ -69,10 +75,9 @@ public class UploadUtils {
 	 */
 	public static String getUploadPath(String fileName, long time) {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
-		String uploadPath = "/upload/" + formater.format(new Date()) + "/"
+		String uploadPath = "upload/" + formater.format(new Date()) + "/"
 				+ time + getFileExt(fileName);
-		File dir = new File(System.getProperty(SystemConstant.SHISHUO_CMS_ROOT)
-				+ uploadPath);
+		File dir = new File(SystemConstant.SHISHUO_CMS_ROOT + uploadPath);
 		if (!dir.exists()) {
 			try {
 				dir.mkdirs();
@@ -99,8 +104,7 @@ public class UploadUtils {
 	 * @param path
 	 */
 	public static void deleteFile(String path) {
-		File file = new File(
-				System.getProperty(SystemConstant.SHISHUO_CMS_ROOT) + path);
+		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + path);
 		file.delete();
 	}
 

@@ -94,7 +94,7 @@
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
                             			<td class="articleId">${e.articleId}</td>
-               							<td><a href="${basePath}/<#list e.folderPathList as folders>${folders.ename}/</#list>${e.articleId}.htm">${e.name}</a>&nbsp;-
+               							<td><a href="${basePath}/admin/article/update.htm?articleId=${e.articleId}">${e.name}</a>&nbsp;-
                								<#if e.status=="display">公开
                                     		<#else>隐藏
                                     		</#if>

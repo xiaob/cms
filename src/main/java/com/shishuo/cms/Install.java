@@ -1,3 +1,8 @@
+/*
+ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
+ */
 package com.shishuo.cms;
 
 import java.io.BufferedInputStream;
@@ -24,7 +29,6 @@ import com.mysql.jdbc.Connection;
 public class Install {
 	private static String CMS_PROPERTIES = "shishuocms.properties";
 	private static String CMS_INSTALL_SQL = "sql/install.sql";
-	private static String CMS_DATA_SQL = "sql/data.sql";
 
 	Console console = System.console();
 
@@ -115,7 +119,7 @@ public class Install {
 	 * 
 	 */
 	private boolean importData() {
-		console.readLine("\n按control+c退出，按其它键继续安装。。。\n");
+		console.readLine("\n按control+c推出，按其它键继续安装。。。\n");
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -135,9 +139,6 @@ public class Install {
 			runner.setLogWriter(null);
 			runner.runScript(new InputStreamReader(new FileInputStream(
 					CMS_INSTALL_SQL), "UTF-8"));
-			// 增加超级管理员帐号
-			runner.runScript(new InputStreamReader(new FileInputStream(
-					CMS_DATA_SQL), "UTF-8"));
 			return true;
 		} catch (Exception e) {
 			System.out.println("ERROR: " + e.getMessage());

@@ -1,66 +1,44 @@
 <#include "header.ftl">
-<div class="page-container">
-	<!-- BEGIN BREADCRUMBS -->
 	<#include "topbar.ftl">
-	<!-- END BREADCRUMBS -->
-	<!-- BEGIN CONTAINER -->
-	<div class="container min-hight">
-		<!-- BEGIN BLOG -->
-		<div class="row">
-			<#include "sidebar.ftl">
-			<!-- BEGIN LEFT SIDEBAR -->
-			<div class="col-md-9 col-sm-9 blog-posts margin-bottom-40">
-					<div class="panel panel-default">   
-	                  	<div class="panel-heading"><h4 class="panel-title">${folder.name}<#if isAdmin><a target="_blank" style="color:red;" href="${basePath}/admin/article/add.htm?folderId=${folder.folderId}">[增加文章]</a></#if></h4></div>
-	                    <div class="panel-body">
-	                    <ul>
-							<li>
-	                    <div class="col-lg-12">
-                        <div class="full-width-media-text">
-                            <h4><a href="http://localhost:8080/byvision/news/shishuo_news/3.htm">师说CMS安装指南</a><span>(2014-02-13) </span></h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, <a href="javascript:;">This is text link</a> Curabitur bibendum ornare dolor quis ullamcorper ligula sodales at....
-                            </p>
-                            <p>
-                                ---------------------------------------------------------------------------------------------------------------------------------------------
-                            </p>
-                        </div>
-                    </div>
-                    </li>
-                    <li>
-	                    <div class="col-lg-12">
-                        <div class="full-width-media-text">
-                            <h4><a href="http://localhost:8080/byvision/news/shishuo_news/3.htm">师说CMS安装指南</a><span>(2014-02-13) </span></h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, <a href="javascript:;">This is text link</a> Curabitur bibendum ornare dolor quis ullamcorper ligula sodales at....
-                            </p>
-                            <p>
-                                ---------------------------------------------------------------------------------------------------------------------------------------------
-                            </p>
-                        </div>
-                    </div>
-                    </li>
-                    <li>
-	                    <div class="col-lg-12">
-                        <div class="full-width-media-text">
-                            <h4><a href="http://localhost:8080/byvision/news/shishuo_news/3.htm">师说CMS安装指南</a><span>(2014-02-13) </span></h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, <a href="javascript:;">This is text link</a> Curabitur bibendum ornare dolor quis ullamcorper ligula sodales at....
-                            </p>
-                            <p>
-                                ---------------------------------------------------------------------------------------------------------------------------------------------
-                            </p>
-                        </div>
-                    </div>
-                    </li>
-                    </ul>
-						</div>
-					</div>
+    <!--container start-->
+    <div class="container">
+        <div class="row">
+            <!--blog start-->
+            <div class="col-xs-9 ">
+			<div class="panel panel-default">
+				  <div class="panel-heading">${folder.name}</div>
+				  <div class="panel-body">            
+	            	<table class="table table-striped">
+				      <thead>
+				        <tr>
+				          <th width="8"></th>
+				          <th></th>
+				          <th width="200"></th>
+				        </tr>
+				      </thead>
+				      <tbody>
+	            	<@shishuocms_article_page folderId="${folder.folderId}" p="${p}" rows="12">
+					<#list tag_article_page.list as article>
+				        <tr>
+				          <td><i class="icon-star"></i></td>
+				          <td><a href="${basePath}/<#list article.folderPathList as folder>${folder.ename}/</#list>${article.articleId}.htm">${article.name}</a></td>
+				          <td>${article.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+				        </tr>
+	                </#list>
+	                </tbody> 
+	                </table>
+                  </div>
 				</div>
-			<!-- END LEFT SIDEBAR -->
-		</div>
-		<!-- END BEGIN BLOG -->
-	</div>
-	<!-- END CONTAINER -->
-</div>
+                <div class="text-center">
+					${tag_article_page.pageNumHtml}
+                </div>
+				</@shishuocms_article_page>
+            </div>
+
+			<#include "sidebar.ftl">
+            <!--blog end-->
+        </div>
+
+    </div>
+    <!--container end-->
 <#include "footer.ftl">

@@ -12,43 +12,24 @@
 			<div class="col-lg-12">
 			<section class="panel">
 				<header class="panel-heading">
- 					修改管理员资料
+ 					修改管理员资料(${admin.email})
 				</header>
 				<div class="panel-body">
 					<form id="update_admin_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/admin/update.json">
 					<fieldset>
-						<div class="form-group" id="update_adminId">
-							<label class="col-sm-2 col-sm-2 control-label">管理员Id</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="adminId" value="${admin.adminId}">
-							</div>
-						</div>
+						
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">管理员名称</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="adminName" value="${admin.name}"
+								<input type="text" class="form-control" name="name" value="${admin.name}"
 									placeholder="管理员名称" id="adminName">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 col-sm-2 control-label">电子邮箱</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="email" value="${admin.email}"
-									placeholder="电子邮箱" id="email">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">密码</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="password" value=""
+								<input type="password" class="form-control" name="password" value=""
 									placeholder="密码" id="password">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 col-sm-2 control-label">状态</label>
-							<div class="col-sm-10">
-                                <input type="radio" name="status" value="normal" <#if admin.status=="normal">checked="checked"</#if>/>正常
-								<input type="radio" name="status" value="freeze" <#if admin.status=="freeze">checked="checked"</#if>/>冻结
 							</div>
 						</div>
 						<div class="form-group">
@@ -67,7 +48,6 @@
  <!--main content end-->
 <script type="text/javascript">
 	$(function() {
-		$("#update_adminId").hide();
 		$('#update_admin_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {

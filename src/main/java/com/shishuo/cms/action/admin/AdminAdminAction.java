@@ -1,21 +1,9 @@
 /*
- * 
  *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
  *	长沙市师说网络科技有限公司 版权所有
- *
- *	Licensed under the Apache License, Version 2.0 (the "License");
- *	you may not use this file except in compliance with the License.
- *	You may obtain a copy of the License at
- *	 
- *		http://www.shishuo.com/jiawacms/licenses
- *		http://www.apache.org/licenses/LICENSE-2.0
- *
- *	Unless required by applicable law or agreed to in writing, software
- *	distributed under the License is distributed on an "AS IS" BASIS,
- *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *	See the License for the specific language governing permissions and
- *	limitations under the License.
+ *	http://www.shishuo.com
  */
+
 package com.shishuo.cms.action.admin;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.AdminConstant;
+import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.vo.JsonVo;
 
@@ -125,15 +114,10 @@ public class AdminAdminAction extends AdminBaseAction {
 	 * 
 	 */
 	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
-	public String oneAdmin(
+	public String update(
 			@RequestParam(value = "adminId", defaultValue = "0") long adminId,
 			ModelMap modelMap, HttpServletRequest request) {
-		Admin admin = new Admin();
-		if (adminId == 0) {
-			admin = this.getAdmin(request);
-		} else {
-			admin = adminService.getAdminById(adminId);
-		}
+		Admin  admin = adminService.getAdminById(adminId);
 		modelMap.put("admin", admin);
 		return "system/admin/update";
 	}
@@ -145,34 +129,34 @@ public class AdminAdminAction extends AdminBaseAction {
 	@ResponseBody
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
 	public JsonVo<String> updateAdmin(
-			@RequestParam(value = "adminName") String adminName,
-			@RequestParam(value = "email") String email,
-			@RequestParam(value = "password", defaultValue = "0") String password,
-			@RequestParam(value = "adminId") long adminId,
-			@RequestParam(value = "status") AdminConstant.Status status) {
+			@RequestParam(value = "name") String name,
+			@RequestParam(value = "password") String password,
+			HttpServletRequest request) {
 
 		JsonVo<String> json = new JsonVo<String>();
-		Admin admin = adminService.getAdminByEmail(email);
 		try {
-			if (adminName.equals("")) {
-				json.getErrors().put("adminName", "管理员名称不能为空");
-			}
-			if (email.equals("")) {
-				json.getErrors().put("email", "电子邮箱不能为空");
-			} else {
-				if (admin == null || admin.getAdminId() == adminId) {
 
-				} else {
-					json.getErrors().put("email", "管理员邮箱不能重复");
-				}
+			if (StringUtils.isBlank(name)) {
+				json.getErrors().put("name", "管理员名称不能为空");
+			}
+			if (name.length() > 15) {
+				json.getErrors().put("name", "管理员名称不能大于15位");
+			}
+			if (StringUtils.isBlank(password)) {
+				json.getErrors().put("password", "密码不能为空");
+			}
+			if (password.length() < 6) {
+				json.getErrors().put("password", "密码不能小于6位数");
+			}
+			if (password.length() > 18) {
+				json.getErrors().put("password", "密码不能大于18位数");
 			}
 			// 检测校验结果
 			validate(json);
-			if (password.equals("0")) {
-				adminService.updateAdmin(adminId, adminName, "", status);
-			} else {
-				adminService.updateAdmin(adminId, adminName, password, status);
-			}
+			Admin admin = (Admin) request.getSession().getAttribute(
+					SystemConstant.SESSION_ADMIN);
+			adminService.updateAdminByAmdinId(admin.getAdminId(), name,
+					password);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

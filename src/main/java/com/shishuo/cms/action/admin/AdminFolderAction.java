@@ -1,20 +1,7 @@
 /*
- * 
-\ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
  *	长沙市师说网络科技有限公司 版权所有
  *	http://www.shishuo.com
- *
- *	Licensed under the Apache License, Version 2.0 (the "License");
- *	you may not use this file except in compliance with the License.
- *	You may obtain a copy of the License at
- *	 
- *		http://www.apache.org/licenses/LICENSE-2.0
- *
- *	Unless required by applicable law or agreed to in writing, software
- *	distributed under the License is distributed on an "AS IS" BASIS,
- *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *	See the License for the specific language governing permissions and
- *	limitations under the License.
  */
 package com.shishuo.cms.action.admin;
 
@@ -102,7 +89,7 @@ public class AdminFolderAction extends AdminBaseAction {
 			validate(json);
 			folderService.addFolder(fatherId, folderName, status,
 					folderEname.toLowerCase(), FolderConstant.Rank.everyone,
-					FolderConstant.Type.list);
+					FolderConstant.Type.folder);
 			json.setResult(true);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -169,6 +156,37 @@ public class AdminFolderAction extends AdminBaseAction {
 		modelMap.put("attachmentPage", pageVo);
 		return "system/folder/update";
 	}
+	
+	/**
+	 * @author 进入修改目录资料页面
+	 * @throws Exception
+	 * 
+	 */
+	@RequestMapping(value = "/photo.htm", method = RequestMethod.GET)
+	public String photo(@RequestParam("folderId") long folderId,
+			@RequestParam(value = "p", defaultValue = "1") int p,
+			ModelMap modelMap, HttpServletRequest request) throws Exception {
+		Folder folder = folderService.getFolderById(folderId);
+		if (folder.getContent() == null) {
+			folder.setContent("");
+		}
+		if (folder.getFatherId() == 0) {
+			modelMap.put("fatherFolderName", "未分类");
+		} else {
+			Folder fatherFolder = folderService.getFolderById(folder
+					.getFatherId());
+			modelMap.put("fatherFolderName", fatherFolder.getName());
+		}
+		PageVo<AttachmentVo> pageVo = attachmentService
+				.getAttachmentPageByKindId(folderId,
+						AttachmentConstant.Kind.folder, 12, p);
+		pageVo.getArgs().put("folderId", folderId + "");
+		modelMap.put("folder", folder);
+		modelMap.put("folderAll", folderService.getAllFolderList(0, null));
+		modelMap.put("JSESSIONID", request.getSession().getId());
+		modelMap.put("attachmentPage", pageVo);
+		return "system/folder/photo";
+	}
 
 	/**
 	 * @author 修改目录资料
@@ -180,9 +198,7 @@ public class AdminFolderAction extends AdminBaseAction {
 			@RequestParam(value = "folderId") long folderId,
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "ename") String ename,
-			@RequestParam(value = "content", required = false) String content,
-			@RequestParam(value = "status") FolderConstant.Status status,
-			@RequestParam(value = "type", defaultValue = "all") FolderConstant.Type type) {
+			@RequestParam(value = "content", required = false) String content) {
 
 		JsonVo<String> json = new JsonVo<String>();
 		// FIXME 检查目录的ename不能用循环遍历检查
@@ -206,8 +222,7 @@ public class AdminFolderAction extends AdminBaseAction {
 			// 检测校验结果
 			validate(json);
 			String newEname = ename.toLowerCase();
-			folderService.updateFolderById(folderId, newEname, name, status,
-					content, type);
+			folderService.updateFolderById(folderId, newEname, name, content);
 
 			json.setResult(true);
 		} catch (Exception e) {
@@ -271,6 +286,37 @@ public class AdminFolderAction extends AdminBaseAction {
 				json.setMsg("此目录下有子目录，不能删除。");
 			}
 		}
+		return json;
+	}
+
+	/**
+	 * @author 更新目录类型
+	 * @throws FolderNotFoundException
+	 * 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/type.json", method = RequestMethod.POST)
+	public JsonVo<String> type(@RequestParam(value = "folderId") long folderId,
+			@RequestParam(value = "type") FolderConstant.Type type)
+			throws FolderNotFoundException {
+		JsonVo<String> json = new JsonVo<String>();
+		folderService.updateType(folderId, type);
+		return json;
+	}
+
+	/**
+	 * @author 更新目录状态
+	 * @throws FolderNotFoundException
+	 * 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/status.json", method = RequestMethod.POST)
+	public JsonVo<String> status(
+			@RequestParam(value = "folderId") long folderId,
+			@RequestParam(value = "status") FolderConstant.Status status)
+			throws FolderNotFoundException {
+		JsonVo<String> json = new JsonVo<String>();
+		folderService.updateStatus(folderId, status);
 		return json;
 	}
 

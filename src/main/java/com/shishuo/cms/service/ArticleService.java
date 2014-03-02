@@ -1,21 +1,9 @@
 /*
- * 
  *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
  *	长沙市师说网络科技有限公司 版权所有
  *	http://www.shishuo.com
- *
- *	Licensed under the Apache License, Version 2.0 (the "License");
- *	you may not use this file except in compliance with the License.
- *	You may obtain a copy of the License at
- *	 
- *		http://www.apache.org/licenses/LICENSE-2.0
- *
- *	Unless required by applicable law or agreed to in writing, software
- *	distributed under the License is distributed on an "AS IS" BASIS,
- *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *	See the License for the specific language governing permissions and
- *	limitations under the License.
  */
+
 package com.shishuo.cms.service;
 
 import java.util.ArrayList;
@@ -141,27 +129,25 @@ public class ArticleService {
 	 * @return
 	 */
 	@CacheEvict(value = "article", allEntries = true)
-	public Article updateFileByFileId(long fileId, long folderId,
-			long fatherId, long adminId, String name, String content,
-			String title, long size, String description,
-			ArticleConstant.Status status) {
-		Article file = articleDao.getArticleById(fileId);
+	public Article updateFileByFileId(long fileId, long folderId,long adminId, String name, String content,
+			String title, String description,ArticleConstant.Status status) {
+		Article article = articleDao.getArticleById(fileId);
 		FolderVo folder = folderDao.getFolderById(folderId);
-		file.setFirstFolderId(folder.getFirstFolderId());
-		file.setSecondFolderId(folder.getSecondFolderId());
-		file.setThirdFolderId(folder.getThirdFolderId());
-		file.setFourthFolderId(folder.getFourthFolderId());
-		file.setAdminId(adminId);
-		file.setName(name);
-		file.setContent(content);
-		file.setTitle(title);
-		file.setDescription(description);
-		file.setViewCount(0);
-		file.setCommentCount(0);
-		file.setStatus(status);
-		file.setUpdateTime(new Date());
-		articleDao.updateArticle(file);
-		return file;
+		article.setFirstFolderId(folder.getFirstFolderId());
+		article.setSecondFolderId(folder.getSecondFolderId());
+		article.setThirdFolderId(folder.getThirdFolderId());
+		article.setFourthFolderId(folder.getFourthFolderId());
+		article.setAdminId(adminId);
+		article.setName(name);
+		article.setContent(content);
+		article.setTitle(title);
+		article.setDescription(description);
+		article.setViewCount(0);
+		article.setCommentCount(0);
+		article.setStatus(status);
+		article.setUpdateTime(new Date());
+		articleDao.updateArticle(article);
+		return article;
 	}
 
 	/**

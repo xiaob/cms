@@ -12,30 +12,7 @@
 				action="${basePath}/admin/folder/update.json">
 				<div class="col-lg-9">
 					<input type="hidden" class="form-control" name="folderId"
-						value="${folder.folderId}">
-					<section class="panel">
-	                  <header class="panel-heading">
-	                      上传图片
-	                  </header>
-	                  <div class="panel-body" id="attachment">
-	                      <ul class="grid cs-style-3">
-	                      	  <#list attachmentPage.list as attachment>
-	                          <li>
-	                              <figure>
-	                                  <img src="${basePath}${attachment.path}" alt="img04">
-	                                  <figcaption>
-	                                      <a class="js_link" href="javascript:void(0);" link="${attachment.link}"  title="链接为：${attachment.link}"  attachmentId="${attachment.attachmentId}">修改链接</a>
-	                                      <a class="fancybox" rel="group" href="${basePath}${attachment.path}">查看大图</a>
-	                                      <a class="js_delete" href="javascript:void(0);" name="${attachment.name}" attachmentId="${attachment.attachmentId}">删除</a>
-	                                  </figcaption>
-	                              </figure>
-	                          </li>
-	                          </#list>
-	                      </ul>
-	                      ${attachmentPage.pageNumHtml}
-	                      <button id="file_upload"  class="btn btn-shadow btn-info" type="button"><i class="icon-cloud-upload"></i> 添加附件</button>
-	                  </div>
-	              </section>						
+						value="${folder.folderId}">						
 					<section class="panel">
 						<header class="panel-heading">【${folder.name}】目录的描述 </header>
 						<div class="panel-body">
@@ -63,21 +40,6 @@
 								<label for="exampleInputEmail1">英文名</label> <input type="text"
 									class="form-control" name="ename" value="${folder.ename}"
 									placeholder="英文名">
-							</div>
-							<div style="margin: 5px 0px;">
-								<label for="exampleInputEmail1">状态</label>
-								<div>
-									<input type="radio" name="status" value="display" <#if folder.status=="display">checked</#if>/> 显示
-									<input type="radio" name="status" value="hidden" <#if folder.status=="hidden">checked</#if>/> 隐藏
-								</div>
-							</div>
-							<div style="margin: 5px 0px;">
-								<label for="exampleInputEmail1">类型</label>
-								<div>
-									<input type="radio" name="type" value="folder" <#if folder.type=="folder">checked</#if>/> 目录
-									<input type="radio" name="type" value="page" <#if folder.type=="page">checked</#if>/> 单页
-									<input type="radio" name="type" value="list" <#if folder.type=="list">checked</#if>/> 列表
-								</div>
 							</div>
 							<div style="margin: 5px 0px;">
 								<button class="btn btn-shadow btn-primary" type="submit">更新【${folder.name}】目录</button>

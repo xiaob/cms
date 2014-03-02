@@ -85,49 +85,84 @@
                           </header>
                           <ul class="list-group">
                           <#list folderAll as firstFolder>
-                          	<li class="list-group-item" style="background-color:#DFF0D8;">
+                          	<li class="list-group-item">
                           		<div style="width:50% float:left">
                           			├─┬─${firstFolder.name}
                           			<a href="${basePath}/admin/folder/update.htm?folderId=${firstFolder.folderId}" title="修改" style="float:right;">
                 						[修改]
                 					</a>
-                					<#if firstFolder.type="list" >
+                					<#if firstFolder.type="article" >
 									<a href="${basePath}/admin/article/add.htm?folderId=${firstFolder.folderId}"  folderId="${firstFolder.folderId}" style="float:right;">
 													[增加文章]
 									</a>
 									</#if>
-                  				</div>
-                  			</li>
-                          	<#list firstFolder.folderList as secondFolder>
-                          	<li class="list-group-item" style="background-color:#FCF8E3;">
-                          		<div style="width:50% float:left">
-                          			│&nbsp;&nbsp;&nbsp;└──${secondFolder.name}
-                          			<a href="${basePath}/admin/folder/update.htm?folderId=${secondFolder.folderId}" title="修改" style="float:right;">
-                						[修改]
-                					</a>
-                					<#if secondFolder.type="list" >
-                					<a href="${basePath}/admin/article/add.htm?folderId=${secondFolder.folderId}"  folderId="${secondFolder.folderId}"style="float:right;">
-													[增加文章]
+                					<#if firstFolder.type="photo" >
+									<a href="${basePath}/admin/folder/photo.htm?folderId=${firstFolder.folderId}"  folderId="${firstFolder.folderId}" style="float:right;">
+													[上传照片]
 									</a>
 									</#if>
                   				</div>
                   			</li>
-                  			<#list secondFolder.folderList as thirdFolder>
-							<li class="list-group-item" style="background-color:#FCF8E3;">
-                          		<div style="width:50% float:left">
-                          			│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└──${thirdFolder.name}
-                          			<a href="${basePath}/admin/folder/update.htm?folderId=${thirdFolder.folderId}" title="修改" style="float:right;">
-                						[修改]
-                					</a>
-                					<#if thirdFolder.type="list" >
-                					<a href="${basePath}/admin/article/add.htm?folderId=${thirdFolder.folderId}"  folderId="${thirdFolder.folderId}" style="float:right;">
-													[增加文章]
-									</a>
-									</#if>
-                  				</div>
-                  			</li> 
-						    </#list>
-                          	</#list>
+	                          	<#list firstFolder.folderList as secondFolder>
+	                          	<li class="list-group-item" >
+	                          		<div style="width:50% float:left">
+	                          			│&nbsp;&nbsp;&nbsp;└──${secondFolder.name}
+	                          			<a href="${basePath}/admin/folder/update.htm?folderId=${secondFolder.folderId}" title="修改" style="float:right;">
+	                						[修改]
+	                					</a>
+	                					<#if secondFolder.type="article" >
+	                					<a href="${basePath}/admin/article/add.htm?folderId=${secondFolder.folderId}"  folderId="${secondFolder.folderId}"style="float:right;">
+														[增加文章]
+										</a>
+										</#if>
+	                					<#if secondFolder.type="photo" >
+	                					<a href="${basePath}/admin/folder/photo.htm?folderId=${secondFolder.folderId}"  folderId="${secondFolder.folderId}"style="float:right;">
+														[上传照片]
+										</a>
+										</#if>
+	                  				</div>
+	                  			</li>
+		                  			<#list secondFolder.folderList as thirdFolder>
+									<li class="list-group-item" >
+		                          		<div style="width:50% float:left">
+		                          			│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└──${thirdFolder.name}
+		                          			<a href="${basePath}/admin/folder/update.htm?folderId=${thirdFolder.folderId}" title="修改" style="float:right;">
+		                						[修改]
+		                					</a>
+		                					<#if thirdFolder.type="article" >
+		                					<a href="${basePath}/admin/article/add.htm?folderId=${thirdFolder.folderId}"  folderId="${thirdFolder.folderId}" style="float:right;">
+															[增加文章]
+											</a>
+											</#if>
+		                					<#if thirdFolder.type="photo" >
+		                					<a href="${basePath}/admin/folder/photo.htm?folderId=${thirdFolder.folderId}"  folderId="${thirdFolder.folderId}" style="float:right;">
+															[上传照片]
+											</a>
+											</#if>
+		                  				</div>
+		                  			</li>
+										<#list thirdFolder.folderList as fourthFolder>
+										<li class="list-group-item" >
+			                          		<div style="width:50% float:left">
+			                          			│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└──${fourthFolder.name}
+			                          			<a href="${basePath}/admin/folder/update.htm?folderId=${fourthFolder.folderId}" title="修改" style="float:right;">
+			                						[修改]
+			                					</a>
+			                					<#if fourthFolder.type="article" >
+			                					<a href="${basePath}/admin/article/add.htm?folderId=${fourthFolder.folderId}"  folderId="${fourthFolder.folderId}" style="float:right;">
+																[增加文章]
+												</a>
+												</#if>
+			                					<#if fourthFolder.type="photo" >
+			                					<a href="${basePath}/admin/folder/photo.htm?folderId=${fourthFolder.folderId}"  folderId="${fourthFolder.folderId}" style="float:right;">
+																[上传照片]
+												</a>
+												</#if>
+			                  				</div>
+			                  			</li> 
+									    </#list>		                  			 
+								    </#list>
+                          		</#list>
                           </#list>
                           </ul>
                       </section>

@@ -1,21 +1,9 @@
 /*
- * 
-、 *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
  *	长沙市师说网络科技有限公司 版权所有
  *	http://www.shishuo.com
- *
- *	Licensed under the Apache License, Version 2.0 (the "License");
- *	you may not use this file except in compliance with the License.
- *	You may obtain a copy of the License at
- *	 
- *		http://www.apache.org/licenses/LICENSE-2.0
- *
- *	Unless required by applicable law or agreed to in writing, software
- *	distributed under the License is distributed on an "AS IS" BASIS,
- *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *	See the License for the specific language governing permissions and
- *	limitations under the License.
  */
+
 package com.shishuo.cms.action.admin;
 
 import java.io.IOException;
@@ -53,14 +41,15 @@ public class AdminAttachmentAction extends AdminBaseAction {
 
 	/**
 	 * @author 进入某种文件的列表分页的首页
-	 * @throws FolderNotFoundException 
+	 * @throws FolderNotFoundException
 	 * 
 	 */
 	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
 	public String filePage(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "folderId", defaultValue = "1") long folderId,
-			HttpServletRequest request, ModelMap modelMap) throws FolderNotFoundException {
+			HttpServletRequest request, ModelMap modelMap)
+			throws FolderNotFoundException {
 		Folder folder = folderService.getFolderById(folderId);
 		PageVo<AttachmentVo> attachmentPage = attachmentService
 				.getAttachmentPageByKindId(folderId,
@@ -159,8 +148,7 @@ public class AdminAttachmentAction extends AdminBaseAction {
 			@RequestParam(value = "kind") AttachmentConstant.Kind kind,
 			HttpServletRequest request) {
 		List<AttachmentVo> attachmentList = attachmentService
-				.getAttachmentListByKindId(kindId,
-						kind,
+				.getAttachmentListByKindId(kindId, kind,
 						AttachmentConstant.Status.hidden);
 		List<String> picturePathList = new ArrayList<String>();
 		for (AttachmentVo attachment : attachmentList) {

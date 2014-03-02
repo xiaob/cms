@@ -57,22 +57,21 @@
 						<div class="form-group">
 							<label for="exampleInputEmail1">所属目录</label>
 								<select class="form-control" name="folderId">
-									<option style="background-color:#DFF0D8;font-weight:bold;" value="1" <#if article.folderId==1>selected</#if>>默认</option>
 			                   		<#list folderAll as firstFolder>
-			                        	<option style="background-color:#DFF0D8;font-weight:bold;" value="${firstFolder.folderId}"  <#if article.folderId==firstFolder.folderId>selected</#if>>
-			                        	├─┬─${firstFolder.name}
+			                        	<option value="${firstFolder.folderId}"  <#if article.folderId==firstFolder.folderId>selected</#if> <#if firstFolder.type!="list">disabled style="background-color:#ccc;"</#if> >
+			                        	├─┬─${firstFolder.name}<#if firstFolder.type!="list">（不可选）</#if>
 			                        	</option>
 				                        	<#list firstFolder.folderList as secondFolder>
-				                        	<option style="background-color:#5BC0DE;color:#FFFFFF;" value="${secondFolder.folderId}"  <#if article.folderId==secondFolder.folderId>selected</#if>>
-				                        	│&nbsp;&nbsp;&nbsp;└──${secondFolder.name}
+				                        	<option  value="${secondFolder.folderId}"  <#if article.folderId==secondFolder.folderId>selected</#if> <#if secondFolder.type!="list">disabled style="background-color:#ccc;"</#if>>
+				                        	│&nbsp;&nbsp;&nbsp;└──${secondFolder.name}<#if secondFolder.type!="list">（不可选）</#if>
 				                        	</option>
 												<#list secondFolder.folderList as thirdFolder>
-					                        	<option style="background-color:#FCF8E3;" value="${thirdFolder.folderId}"  <#if article.folderId==thirdFolder.folderId>selected</#if>>
-					                        	│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;└──${thirdFolder.name}
+					                        	<option  value="${thirdFolder.folderId}"  <#if article.folderId==thirdFolder.folderId>selected</#if> <#if thirdFolder.type!="list">disabled style="background-color:#ccc;"</#if>>
+					                        	│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;└──${thirdFolder.name}<#if thirdFolder.type!="list">（不可选）</#if>
 					                        	</option>
 						                        	<#list thirdFolder.folderList as fourthFolder>
-						                        	<option style="background-color:#D9EDF7;" value="${fourthFolder.folderId}"  <#if article.folderId==fourthFolder.folderId>selected</#if>>
-						                        	│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└──${fourthFolder.name}
+						                        	<option  value="${fourthFolder.folderId}"  <#if article.folderId==fourthFolder.folderId>selected</#if> <#if fourthFolder.type!="list">disabled style="background-color:#ccc;"</#if>>
+						                        	│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└──${fourthFolder.name}<#if fourthFolder.type!="list">（不可选）</#if>
 						                        	</option>
 						                        	</#list>
 					                        	</#list>			                        	
@@ -121,7 +120,7 @@ $.extend({
 			var attachment = list[i];
 			html += '<tr>';
 			if(attachment.type=="photo"){
-				html += '<td><img src="${basePath}'+attachment.path+'" width="200"/></td>';
+				html += '<td><img src="${basePath}/'+attachment.path+'" width="200"/></td>';
 			}else{
 				html += '<td>'+attachment.name+'</td>';
 			}

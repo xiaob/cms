@@ -1,3 +1,9 @@
+/*
+ *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
+ *	长沙市师说网络科技有限公司 版权所有
+ *	http://www.shishuo.com
+ */
+
 package com.shishuo.cms.action;
 
 import java.util.List;
@@ -30,16 +36,15 @@ public class ArticleAction extends BaseAction {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(value = "/{firstFolderEname}/{fileId}.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/{firstFolderEname}/{articleId}.htm", method = RequestMethod.GET)
 	public String firstFolder(@PathVariable String firstFolderEname,
-			@PathVariable long fileId,
+			@PathVariable long articleId,
 			@RequestParam(value = "p", defaultValue = "1") long p,
 			ModelMap modelMap) {
-		return fourthFolder(firstFolderEname, null, null, null, fileId, p,
+		return fourthFolder(firstFolderEname, null, null, null, articleId, p,
 				modelMap);
 	}
 
-	
 	/**
 	 * 二级目录页
 	 * 
@@ -48,13 +53,13 @@ public class ArticleAction extends BaseAction {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(value = "/{firstFolderEname}/{secondFolderEname}/{fileId}.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/{firstFolderEname}/{secondFolderEname}/{articleId}.htm", method = RequestMethod.GET)
 	public String secondFolder(@PathVariable String firstFolderEname,
-			@PathVariable String secondFolderEname, @PathVariable long fileId,
+			@PathVariable String secondFolderEname, @PathVariable long articleId,
 			@RequestParam(value = "p", defaultValue = "1") long p,
 			ModelMap modelMap) {
 		return fourthFolder(firstFolderEname, secondFolderEname, null, null,
-				fileId, p, modelMap);
+				articleId, p, modelMap);
 	}
 
 	/**
@@ -65,14 +70,14 @@ public class ArticleAction extends BaseAction {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(value = "/{firstFolderEname}/{secondFolderEname}/{thirdFolderEname}/{fileId}.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/{firstFolderEname}/{secondFolderEname}/{thirdFolderEname}/{articleId}.htm", method = RequestMethod.GET)
 	public String thirdFolder(@PathVariable String firstFolderEname,
 			@PathVariable String secondFolderEname,
-			@PathVariable String thirdFolderEname, @PathVariable long fileId,
+			@PathVariable String thirdFolderEname, @PathVariable long articleId,
 			@RequestParam(value = "p", defaultValue = "1") long p,
 			ModelMap modelMap) {
 		return fourthFolder(firstFolderEname, secondFolderEname,
-				thirdFolderEname, null, fileId, p, modelMap);
+				thirdFolderEname, null, articleId, p, modelMap);
 	}
 
 	/**
@@ -83,21 +88,21 @@ public class ArticleAction extends BaseAction {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(value = "/{firstFolderEname}/{secondFolderEname}/{thirdFolderEname}/{fourthFolderEname}/{fileId}.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/{firstFolderEname}/{secondFolderEname}/{thirdFolderEname}/{fourthFolderEname}/{articleId}.htm", method = RequestMethod.GET)
 	public String fourthFolder(@PathVariable String firstFolderEname,
 			@PathVariable String secondFolderEname,
 			@PathVariable String thirdFolderEname,
-			@PathVariable String fourthFolderEname, @PathVariable long fileId,
-			@RequestParam(value = "p/../o8i", defaultValue = "1") long p,
+			@PathVariable String fourthFolderEname, @PathVariable long articleId,
+			@RequestParam(value = "p", defaultValue = "1") long p,
 			ModelMap modelMap) {
 		try {
 			List<Folder> folderPathList = packageFolderByEname(
 					firstFolderEname, secondFolderEname, thirdFolderEname,
 					fourthFolderEname, modelMap);
-			Article article = fileService.getArticleByArticleId(fileId);
+			Article article = fileService.getArticleByArticleId(articleId);
 			modelMap.addAttribute("p", p);
 			modelMap.addAttribute("article", article);
-			return themeService.getArticleTemplate(folderPathList, fileId);
+			return themeService.getArticleTemplate(folderPathList, articleId);
 		} catch (FolderNotFoundException e) {
 			logger.fatal(e.getMessage());
 			return themeService.getTemplatePath("404");
