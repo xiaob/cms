@@ -7,6 +7,7 @@
 package com.shishuo.cms.util;
 
 import java.io.File;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -58,15 +59,15 @@ public class PropertyUtils extends PropertyPlaceholderConfigurer {
 	public static String getRoot() {
 		String rootKey = "shishuo.cms.root";
 		String cmsRoot = System.getProperty(rootKey);
-		for (Map.Entry<String, String> entry : propertyMap.entrySet()) {
-			String key = entry.getKey();
-			String value = entry.getValue();
-			if(key.startsWith(rootKey)){
-				cmsRoot = value;
+		Enumeration<?> enu = System.getProperties().propertyNames();
+		while (enu.hasMoreElements()) {
+			Object key = enu.nextElement();
+			if (key.toString().startsWith(rootKey)) {
+				cmsRoot = System.getProperty(key.toString());
 				break;
 			}
 		}
-		if(!cmsRoot.endsWith(File.separator)){
+		if (!cmsRoot.endsWith(File.separator)) {
 			cmsRoot += File.separator;
 		}
 		logger.info(cmsRoot);
