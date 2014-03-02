@@ -42,7 +42,7 @@
         <div class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
- 					<a href="index.html" class="navbar-brand">${SYS_SITENAME}<span>${SYS_SITEDESC}</span></a>               
+ 					<a href="${basePath}/index.htm" class="navbar-brand">${SYS_SITENAME}<span>${SYS_SITEDESC}</span></a>               
                 </div>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
