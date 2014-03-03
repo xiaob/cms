@@ -66,7 +66,7 @@ PS：明年（过年以后）才会对系统统进行开源友好支持，敬请
 	# 后台地址
 	http://127.0.0.1:8080/auth/admin/login.htm
 	登录邮箱：cmstest@shishuo.com
-	登录密码：shishuocmstest
+	登录密码：cmstest
 
 
 ## 目标
