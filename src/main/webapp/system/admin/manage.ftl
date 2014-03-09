@@ -1,53 +1,6 @@
 <#assign menu="system">
 <#assign submenu="admin_list">
-<#include "/system/head.ftl">
-<style type="text/css">
-.pagination {
-    border-radius: 4px;
-    display: inline-block;
-    margin: 0;
-    padding-left: 0;
-}
-.col-sm-10{
-
-}
-</style>
-	<!--main content start-->
-	<section id="container" class="">
-		<!--header start-->
-		<header class="header white-bg">
-			<!--logo start-->
-			<a href="http://localhost:8080/byvision/index.htm" class="logo" title="访问前台页面">
-				<img src="http://localhost:8080/byvision/system/images/logo.png" style="height: 38px;" />
-			</a>
-			<!--logo end-->
-			<div class="nav notify-row" id="top_menu">
-				<!--  notification goes here -->
-			</div>
-			<div class="top-nav ">
-
-				<ul class="nav pull-right top-menu">
-                  <!-- user login dropdown start-->
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                          <span class="username"></span>
-                          <b class="caret"></b>
-                      </a>
-                      <ul class="dropdown-menu extended logout">
-                          <div class="log-arrow-up"></div>
-                          <li><a href="http://localhost:8080/byvision/admin/admin/update.htm"><i class="icon-cog"></i> 设置</a></li>
-                          <li><a href="http://localhost:8080/byvision/auth/admin/logout.htm"><i class="icon-key"></i> 安全退出</a></li>
-                      </ul>
-                  </li>
-                  <!-- user login dropdown end -->
-              </ul>
-          
-			</div>
-		</header>
-		<!--header end-->
-		<!--sidebar start-->
-
-		<!--sidebar end-->		
+<#include "/system/head.ftl">		
 <style type="text/css">
 .pagination {
 	border-radius: 4px;
