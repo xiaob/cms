@@ -36,7 +36,6 @@ CREATE TABLE `admin` (
 
 --
 -- Dumping data for table `admin`
---
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
