@@ -6,7 +6,6 @@
 
 package com.shishuo.cms.util;
 
-import java.io.File;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,9 +66,9 @@ public class PropertyUtils extends PropertyPlaceholderConfigurer {
 				break;
 			}
 		}
-		if (!cmsRoot.endsWith(File.separator)) {
-			cmsRoot += File.separator;
-		}
+//		if (!cmsRoot.endsWith(File.separator)) {
+//			cmsRoot += File.separator;
+//		}
 		logger.info(cmsRoot);
 		return cmsRoot;
 	}

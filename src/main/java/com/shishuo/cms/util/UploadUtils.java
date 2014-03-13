@@ -75,7 +75,7 @@ public class UploadUtils {
 	 */
 	public static String getUploadPath(String fileName, long time) {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
-		String uploadPath = "upload/" + formater.format(new Date()) + "/"
+		String uploadPath = "/upload/" + formater.format(new Date()) + "/"
 				+ time + getFileExt(fileName);
 		File dir = new File(SystemConstant.SHISHUO_CMS_ROOT + uploadPath);
 		if (!dir.exists()) {

@@ -131,7 +131,7 @@ public class TemplateService {
 	 * @return
 	 */
 	public Boolean isExist(String theme) {
-		String themePath = SystemConstant.SHISHUO_CMS_ROOT + "themes/"
+		String themePath = SystemConstant.SHISHUO_CMS_ROOT + "/themes/"
 				+ configService.getConfigByKey(ConfigConstant.SYS_THEME) + "/"
 				+ theme + ".ftl";
 		File file = new File(themePath);

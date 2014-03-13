@@ -120,7 +120,7 @@ public class AdminConfigAction extends AdminBaseAction {
 
 	private List<String> getTemplate() {
 		List<String> templateList = new ArrayList<String>();
-		String templatePath = SystemConstant.SHISHUO_CMS_ROOT + "WEB-INF/";
+		String templatePath = SystemConstant.SHISHUO_CMS_ROOT + "/WEB-INF/";
 		File dir = new File(templatePath);
 		File[] files = dir.listFiles();
 		for (File file : files) {
