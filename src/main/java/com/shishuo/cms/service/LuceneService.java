@@ -34,6 +34,7 @@ package com.shishuo.cms.service;
 //import org.apache.lucene.store.RAMDirectory;
 //import org.apache.lucene.util.Version;
 import org.springframework.stereotype.Service;
+
 //import com.chenlb.mmseg4j.analysis.SimpleAnalyzer;
 
 /**

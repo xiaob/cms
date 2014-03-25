@@ -75,8 +75,8 @@ public class UploadUtils {
 	 */
 	public static String getUploadPath(String fileName, long time) {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
-		String uploadPath = formater.format(new Date()) + "/"
-				+ time + getFileExt(fileName);
+		String uploadPath = formater.format(new Date()) + "/" + time
+				+ getFileExt(fileName);
 		return uploadPath;
 	}
 

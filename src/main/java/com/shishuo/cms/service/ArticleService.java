@@ -123,8 +123,9 @@ public class ArticleService {
 	 * @return
 	 */
 	@CacheEvict(value = "article", allEntries = true)
-	public Article updateFileByFileId(long fileId, long folderId,long adminId, String name, String content,
-			String title, String description,ArticleConstant.Status status) {
+	public Article updateFileByFileId(long fileId, long folderId, long adminId,
+			String name, String content, String title, String description,
+			ArticleConstant.Status status) {
 		Article article = articleDao.getArticleById(fileId);
 		FolderVo folder = folderDao.getFolderById(folderId);
 		article.setFirstFolderId(folder.getFirstFolderId());
@@ -198,8 +199,8 @@ public class ArticleService {
 	 * @throws FolderNotFoundException
 	 */
 	@Cacheable(value = "article", key = "'getArticlePageByFolderId_'+#folderId+'_'+#pageNum+'_'+#rows")
-	public PageVo<Article> getArticlePageByFolderId(long folderId,
-			int pageNum, int rows) throws FolderNotFoundException {
+	public PageVo<Article> getArticlePageByFolderId(long folderId, int pageNum,
+			int rows) throws FolderNotFoundException {
 		PageVo<Article> pageVo = new PageVo<Article>(pageNum);
 		FolderVo folder = folderService.getFolderById(folderId);
 		pageVo.setRows(rows);

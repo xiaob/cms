@@ -34,7 +34,8 @@ public class ArticleAction extends BaseAction {
 			modelMap.addAttribute("p", p);
 			modelMap.addAttribute("folder", folder);
 			modelMap.addAttribute("article", article);
-			return themeService.getArticleTemplate(article.getFolderId(), articleId);
+			return themeService.getArticleTemplate(article.getFolderId(),
+					articleId);
 		} catch (Exception e) {
 			return themeService.get404();
 		}

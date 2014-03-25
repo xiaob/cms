@@ -46,7 +46,6 @@ public class AdminBaseAction {
 	@Autowired
 	protected AdminService adminService;
 
-
 	/**
 	 * 参数校验
 	 * 

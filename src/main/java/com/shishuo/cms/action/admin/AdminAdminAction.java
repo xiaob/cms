@@ -118,7 +118,7 @@ public class AdminAdminAction extends AdminBaseAction {
 			@RequestParam(value = "adminId", defaultValue = "0") long adminId,
 			ModelMap modelMap, HttpServletRequest request) {
 		Admin sessionAdmin = this.getAdmin(request);
-		Admin  admin = adminService.getAdminById(sessionAdmin.getAdminId());
+		Admin admin = adminService.getAdminById(sessionAdmin.getAdminId());
 		modelMap.put("admin", admin);
 		return "system/admin/update";
 	}

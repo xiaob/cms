@@ -48,7 +48,7 @@ public class TemplateService {
 	public String get404() {
 		return this.getTemplatePath("404");
 	}
-	
+
 	/**
 	 * @return
 	 */

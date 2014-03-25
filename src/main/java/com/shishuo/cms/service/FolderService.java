@@ -120,7 +120,8 @@ public class FolderService {
 	 * @return folder
 	 */
 	@CacheEvict(value = "folder", allEntries = true)
-	public void updateFolderById(long folderId, String ename, String name,String content) {
+	public void updateFolderById(long folderId, String ename, String name,
+			String content) {
 		folderDao.updateFolder(folderId, name, ename, content);
 	}
 
@@ -199,8 +200,7 @@ public class FolderService {
 	@Cacheable(value = "folder", key = "'getFolderByEnameAndFatherId_'+#ename+'_'+#fatherId")
 	public Folder getFolderByEnameAndFatherId(String ename, long fatherId)
 			throws FolderNotFoundException {
-		Folder folder = folderDao
-				.getFolderByEnameAndFatherId(ename, fatherId);
+		Folder folder = folderDao.getFolderByEnameAndFatherId(ename, fatherId);
 		if (folder == null) {
 			throw new FolderNotFoundException(ename + " 目录，不存在");
 		} else {

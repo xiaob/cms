@@ -17,7 +17,6 @@ public class InitService {
 	public void init() {
 	}
 
-
 	public static void main(String[] args) {
 		InitService init = new InitService();
 		init.init();

@@ -44,13 +44,14 @@ public class FolderPathTag implements TemplateDirectiveModel {
 
 		try {
 			// 获得目录列表
-			List<Folder> list = folderService.getFolderPathListByFolderId(folderId);
+			List<Folder> list = folderService
+					.getFolderPathListByFolderId(folderId);
 			env.setVariable("tag_folder_list", DEFAULT_WRAPPER.wrap(list));
 		} catch (FolderNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		body.render(env.getOut());
 	}
 

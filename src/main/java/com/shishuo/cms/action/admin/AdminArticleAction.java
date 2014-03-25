@@ -146,7 +146,9 @@ public class AdminArticleAction extends AdminBaseAction {
 			@RequestParam("status") ArticleConstant.Status status,
 			HttpServletRequest request, ModelMap modelMap) {
 		JsonVo<Article> json = new JsonVo<Article>();
-		Article file = articleService.updateFileByFileId(articleId, folderId, this.getAdmin(request).getAdminId(), name, content, title, description, status);
+		Article file = articleService.updateFileByFileId(articleId, folderId,
+				this.getAdmin(request).getAdminId(), name, content, title,
+				description, status);
 		json.setT(file);
 		json.setResult(true);
 		return json;

@@ -43,7 +43,8 @@ public class FolderListTag implements TemplateDirectiveModel {
 		Integer fatherId = Integer.parseInt(params.get("fatherId").toString());
 
 		// 获得目录列表
-		List<Folder> list = folderService.getFolderListByFatherId(fatherId, FolderConstant.Status.display);
+		List<Folder> list = folderService.getFolderListByFatherId(fatherId,
+				FolderConstant.Status.display);
 		env.setVariable("tag_folder_list", DEFAULT_WRAPPER.wrap(list));
 		body.render(env.getOut());
 	}

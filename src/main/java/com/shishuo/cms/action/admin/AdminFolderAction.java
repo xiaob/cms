@@ -156,7 +156,7 @@ public class AdminFolderAction extends AdminBaseAction {
 		modelMap.put("attachmentPage", pageVo);
 		return "system/folder/update";
 	}
-	
+
 	/**
 	 * @author 进入修改目录资料页面
 	 * @throws Exception

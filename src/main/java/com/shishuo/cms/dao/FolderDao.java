@@ -128,12 +128,14 @@ public interface FolderDao {
 	 * @param folderId
 	 * @param type
 	 */
-	public void updateType(@Param("folderId")  long folderId, @Param("type")  FolderConstant.Type type);
+	public void updateType(@Param("folderId") long folderId,
+			@Param("type") FolderConstant.Type type);
 
 	/**
 	 * @param folderId
 	 * @param status
 	 */
-	public void updateStatus(@Param("folderId")   long folderId, @Param("status")  Status status);
+	public void updateStatus(@Param("folderId") long folderId,
+			@Param("status") Status status);
 
 }
