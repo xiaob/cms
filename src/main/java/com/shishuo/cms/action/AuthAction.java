@@ -49,7 +49,7 @@ public class AuthAction extends BaseAction {
 
 	@RequestMapping(value = "admin/login.htm", method = RequestMethod.GET)
 	public String adminLogin(HttpServletRequest request, ModelMap modelMap) {
-		return "system/login";
+		return "/system/login";
 	}
 
 	@RequestMapping(value = "admin/logout.htm", method = RequestMethod.GET)

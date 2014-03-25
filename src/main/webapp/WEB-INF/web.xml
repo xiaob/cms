@@ -20,12 +20,7 @@
 	<!-- 所有以.html和.json的请求都由dispatcherServlet来处理的配置 -->
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
-		<url-pattern>*.htm</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>spring</servlet-name>
-		<url-pattern>*.json</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
 	<filter>
@@ -84,7 +79,7 @@
 	<listener>
 		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
 	</listener>
-	
+
 	<session-config>
 		<session-timeout>20</session-timeout>
 	</session-config>

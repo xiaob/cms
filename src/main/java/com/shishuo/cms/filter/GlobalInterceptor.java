@@ -63,7 +63,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
 				configService.getConfigByKey(ConfigConstant.SYS_SITENAME));
 		modelAndView.addObject("SYS_TEMPLATE",
 				configService.getConfigByKey(ConfigConstant.SYS_THEME));
-		modelAndView.addObject("TEMPLATE_PATH", basePath + "/themes/"
+		modelAndView.addObject("TEMPLATE_PATH", basePath + "/static/themes/"
 				+ configService.getConfigByKey(ConfigConstant.SYS_THEME));
 		MDC.put("ip", HttpUtils.getIp(request));
 	}
