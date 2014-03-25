@@ -1,4 +1,7 @@
-*.class
-.DS_Store
-/target
 /shishuocms.properties
+/target
+*.class
+*.jar
+*.war
+*.ear
+.DS_Store

@@ -183,7 +183,7 @@ public class FolderService {
 	 * @param fatherId
 	 * @return List<Folder>
 	 */
-	public List<FolderVo> getFolderListByFatherId(long fatherId,
+	public List<Folder> getFolderListByFatherId(long fatherId,
 			FolderConstant.Status status) {
 		return folderDao.getFolderListByFatherId(fatherId, status);
 	}
@@ -197,47 +197,15 @@ public class FolderService {
 	 * @throws FolderNotFoundException
 	 */
 	@Cacheable(value = "folder", key = "'getFolderByEnameAndFatherId_'+#ename+'_'+#fatherId")
-	public FolderVo getFolderByEnameAndFatherId(String ename, long fatherId)
+	public Folder getFolderByEnameAndFatherId(String ename, long fatherId)
 			throws FolderNotFoundException {
-		FolderVo folder = folderDao
+		Folder folder = folderDao
 				.getFolderByEnameAndFatherId(ename, fatherId);
 		if (folder == null) {
 			throw new FolderNotFoundException(ename + " 目录，不存在");
 		} else {
-			List<FolderVo> folderList = getFolderListByFatherId(
-					folder.getFolderId(), FolderConstant.Status.display);
-			folder.setFolderList(folderList);
 			return folder;
 		}
-	}
-
-	/**
-	 * 得到所有的四层目录
-	 * 
-	 * @return
-	 */
-	@Cacheable(value = "folder", key = "'getAllFolderList_'+#fatherId+'_'+#status")
-	public List<FolderVo> getAllFolderList(long fatherId,
-			FolderConstant.Status status) {
-		List<FolderVo> firstFolderList = this.getFolderListByFatherId(fatherId,
-				status);
-		for (FolderVo firstFolder : firstFolderList) {
-			List<FolderVo> secondFolderList = this.getFolderListByFatherId(
-					firstFolder.getFolderId(), status);
-			for (FolderVo secondFolder : secondFolderList) {
-				List<FolderVo> thirdFolderList = this.getFolderListByFatherId(
-						secondFolder.getFolderId(), status);
-				for (FolderVo thirdFolder : thirdFolderList) {
-					List<FolderVo> fourthFolderList = this
-							.getFolderListByFatherId(thirdFolder.getFolderId(),
-									status);
-					thirdFolder.setFolderList(fourthFolderList);
-				}
-				secondFolder.setFolderList(thirdFolderList);
-			}
-			firstFolder.setFolderList(secondFolderList);
-		}
-		return firstFolderList;
 	}
 
 	/**

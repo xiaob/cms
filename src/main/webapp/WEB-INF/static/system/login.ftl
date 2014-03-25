@@ -11,22 +11,22 @@
     <title>师说CMS 后台</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="${basePath}/system/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${basePath}/system/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="${STATIC_SYSTEM_PATH}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${STATIC_SYSTEM_PATH}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="${basePath}/system/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${STATIC_SYSTEM_PATH}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="${basePath}/system/css/style.css" rel="stylesheet">
-    <link href="${basePath}/system/css/style-responsive.css" rel="stylesheet" />
+    <link href="${STATIC_SYSTEM_PATH}/css/style.css" rel="stylesheet">
+    <link href="${STATIC_SYSTEM_PATH}/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-    <script src="${basePath}/system/js/html5shiv.js"></script>
-    <script src="${basePath}/system/js/respond.min.js"></script>
+    <script src="${STATIC_SYSTEM_PATH}/js/html5shiv.js"></script>
+    <script src="${STATIC_SYSTEM_PATH}/js/respond.min.js"></script>
     <![endif]-->
-    <script src="${basePath}/system/js/jquery.js"></script>
-    <script src="${basePath}/system/js/jquery.form.min.js"></script>
-    <script src="${basePath}/system/js/jquery.watermark.js"></script>
+    <script src="${STATIC_SYSTEM_PATH}/js/jquery.js"></script>
+    <script src="${STATIC_SYSTEM_PATH}/js/jquery.form.min.js"></script>
+    <script src="${STATIC_SYSTEM_PATH}/js/jquery.watermark.js"></script>
 	<style type="text/css">
 p.error {
 	color: #DE5959;
@@ -54,7 +54,7 @@ input.error:focus {
     <div class="container">
 
       <form class="form-signin" id="adminForm" action="${basePath}/auth/admin/login.json"  autocomplete="off" method="post">
-        <h2 class="form-signin-heading"><img src="${basePath}/system/images/logo.png" style="height:38px;"/></h2>
+        <h2 class="form-signin-heading"><img src="${STATIC_SYSTEM_PATH}/images/logo.png" style="height:38px;"/></h2>
         <div class="login-wrap">
             <input type="text" name="email" class="form-control" placeholder="邮箱" value="" autofocus>
             <input type="password" name="password" class="form-control" placeholder="密码" value="">

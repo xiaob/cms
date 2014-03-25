@@ -14,7 +14,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.entity.vo.ArticleVo;
+import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.FolderNotFoundException;
 import com.shishuo.cms.service.ArticleService;
@@ -47,7 +47,7 @@ public class ArticlePageTag implements TemplateDirectiveModel {
 		Integer rows = Integer.parseInt(params.get("rows").toString());
 		// 获取文件的分页
 		try {
-			PageVo<ArticleVo> pageVo = articleService.getArticlePageByFolderId(
+			PageVo<Article> pageVo = articleService.getArticlePageByFolderId(
 					folderId, p, rows);
 			env.setVariable("tag_article_page", BEANS_WRAPPER.wrap(pageVo));
 		} catch (FolderNotFoundException e) {

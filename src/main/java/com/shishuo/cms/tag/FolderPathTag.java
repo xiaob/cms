@@ -6,18 +6,18 @@
 
 package com.shishuo.cms.tag;
 
-import static freemarker.template.ObjectWrapper.BEANS_WRAPPER;
+import static freemarker.template.ObjectWrapper.DEFAULT_WRAPPER;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.constant.CommentConstant;
-import com.shishuo.cms.entity.vo.CommentVo;
-import com.shishuo.cms.entity.vo.PageVo;
-import com.shishuo.cms.service.CommentService;
+import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.exception.FolderNotFoundException;
+import com.shishuo.cms.service.FolderService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
@@ -26,27 +26,31 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 
 /**
- * 
- * 评论标签
+ * folder标签
  * 
  * @author lqq
  * 
  */
 @Service
-public class CommentPageTag implements TemplateDirectiveModel {
-
+public class FolderPathTag implements TemplateDirectiveModel {
 	@Autowired
-	private CommentService commentService;
+	private FolderService folderService;
 
-	@Override
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
-		Integer fileId = Integer.parseInt(params.get("fileId").toString());
-		Integer pageNum = Integer.parseInt(params.get("pageNum").toString());
-		Integer rows = Integer.parseInt(params.get("rows").toString());
-		PageVo<CommentVo> commentPage = commentService.getCommentPage(fileId,
-				CommentConstant.kind.article, pageNum, rows);
-		env.setVariable("tag_comment_page", BEANS_WRAPPER.wrap(commentPage));
+
+		// 获取页面的参数
+		Integer folderId = Integer.parseInt(params.get("folderId").toString());
+
+		try {
+			// 获得目录列表
+			List<Folder> list = folderService.getFolderPathListByFolderId(folderId);
+			env.setVariable("tag_folder_list", DEFAULT_WRAPPER.wrap(list));
+		} catch (FolderNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		body.render(env.getOut());
 	}
 

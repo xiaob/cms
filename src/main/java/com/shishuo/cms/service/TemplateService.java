@@ -19,6 +19,7 @@ import org.springframework.util.ResourceUtils;
 
 import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.exception.FolderNotFoundException;
 import com.shishuo.cms.exception.TemplateNotFoundException;
 
 /**
@@ -37,6 +38,23 @@ public class TemplateService {
 
 	@Autowired
 	private ConfigService configService;
+
+	@Autowired
+	private FolderService folderService;
+
+	/**
+	 * @return
+	 */
+	public String get404() {
+		return this.getTemplatePath("404");
+	}
+	
+	/**
+	 * @return
+	 */
+	public String get500() {
+		return this.getTemplatePath("500");
+	}
 
 	/**
 	 * 得到首页（默认页）模板
@@ -60,12 +78,15 @@ public class TemplateService {
 	/**
 	 * 得到文件夹模板
 	 * 
-	 * @param folderPathList
+	 * @param folderId
 	 * @return
 	 * @throws TemplateNotFoundException
+	 * @throws FolderNotFoundException
 	 */
-	public String getFolderTemplate(List<Folder> folderPathList)
-			throws TemplateNotFoundException {
+	public String getFolderTemplate(long folderId)
+			throws TemplateNotFoundException, FolderNotFoundException {
+		List<Folder> folderPathList = folderService
+				.getFolderPathListByFolderId(folderId);
 		List<String> themeOrderList = new ArrayList<String>();
 		themeOrderList.add(FOLDER_TEMPLATE_PREFIX);
 		String themeString = FOLDER_TEMPLATE_PREFIX;
@@ -91,9 +112,12 @@ public class TemplateService {
 	 * @param articleId
 	 * @return
 	 * @throws TemplateNotFoundException
+	 * @throws FolderNotFoundException
 	 */
-	public String getArticleTemplate(List<Folder> folderPathList, long articleId)
-			throws TemplateNotFoundException {
+	public String getArticleTemplate(long folderId, long articleId)
+			throws TemplateNotFoundException, FolderNotFoundException {
+		List<Folder> folderPathList = folderService
+				.getFolderPathListByFolderId(folderId);
 		List<String> themeOrderList = new ArrayList<String>();
 		themeOrderList.add(FILE_TEMPLATE_PREFIX);
 		String themeString = FILE_TEMPLATE_PREFIX;
@@ -119,7 +143,7 @@ public class TemplateService {
 	 * @param theme
 	 * @return
 	 */
-	public String getTemplatePath(String template) {
+	private String getTemplatePath(String template) {
 		return "/themes/"
 				+ configService.getConfigByKey(ConfigConstant.SYS_THEME) + "/"
 				+ template;

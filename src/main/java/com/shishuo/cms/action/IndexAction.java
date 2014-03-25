@@ -37,7 +37,7 @@ public class IndexAction extends BaseAction {
 			return themeService.getDefaultTemplate();
 		} catch (TemplateNotFoundException e) {
 			logger.fatal(e.getMessage());
-			return themeService.getTemplatePath("404");
+			return themeService.get404();
 		}
 	}
 
@@ -48,7 +48,7 @@ public class IndexAction extends BaseAction {
 	 */
 	@RequestMapping(value = "/404.htm", method = RequestMethod.GET)
 	public String pageNotFound() {
-		return themeService.getTemplatePath("404");
+		return themeService.get404();
 	}
 
 	/**
@@ -58,6 +58,6 @@ public class IndexAction extends BaseAction {
 	 */
 	@RequestMapping(value = "/500.htm", method = RequestMethod.GET)
 	public String error() {
-		return themeService.getTemplatePath("500");
+		return themeService.get500();
 	}
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shishuo.cms.constant.ArticleConstant;
-import com.shishuo.cms.entity.vo.ArticleVo;
+import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.exception.FolderNotFoundException;
 
 /**
@@ -33,7 +33,7 @@ public class AdminAction extends AdminBaseAction {
 		modelMap.put("downloadCount", 0);
 		modelMap.put("userCount", 0);
 		modelMap.put("folderAll", folderService.getAllFolderList(0, null));
-		List<ArticleVo> articleList = articleService.getArticleListByStatus(0,
+		List<Article> articleList = articleService.getArticleListByStatus(0,
 				0, 0, 0, ArticleConstant.Status.display, 0, 10);
 		modelMap.put("articleList", articleList);
 		return "system/index";

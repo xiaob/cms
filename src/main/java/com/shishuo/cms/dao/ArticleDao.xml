@@ -79,7 +79,7 @@
 		select * from article where articleId=#{articleId}
 	</select>
 
-	<select id="getArticleListByFoderIdPath" resultType="com.shishuo.cms.entity.vo.ArticleVo">
+	<select id="getArticleListByFoderIdPath" resultType="com.shishuo.cms.entity.Article">
 		select *
 		from article
 		where
@@ -115,7 +115,7 @@
 		<if test="fourthFolderId!=0"> and fourthFolderId=#{fourthFolderId}</if>
 	</select>
 
-	<select id="getArticleListByStatus" resultType="com.shishuo.cms.entity.vo.ArticleVo">
+	<select id="getArticleListByStatus" resultType="com.shishuo.cms.entity.Article">
 		select * from
 		article
 		where status=#{status}

@@ -19,10 +19,8 @@ import com.shishuo.cms.exception.ValidateException;
 import com.shishuo.cms.service.AdminService;
 import com.shishuo.cms.service.ArticleService;
 import com.shishuo.cms.service.AttachmentService;
-import com.shishuo.cms.service.CommentService;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.FolderService;
-import com.shishuo.cms.service.UserService;
 
 /**
  * @author 所有action的父类
@@ -46,11 +44,8 @@ public class AdminBaseAction {
 	protected AttachmentService attachmentService;
 
 	@Autowired
-	protected UserService userService;
-	@Autowired
 	protected AdminService adminService;
-	@Autowired
-	protected CommentService commentService;
+
 
 	/**
 	 * 参数校验

@@ -10,12 +10,12 @@
         </div>
     </footer>
        <!-- js placed at the end of the document so the pages load faster -->
-    <script src="${TEMPLATE_PATH}/js/jquery.js"></script>
-    <script src="${TEMPLATE_PATH}/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${TEMPLATE_PATH}/assets/bxslider/jquery.bxslider.js"></script>
+    <script src="${STATIC_THEME_PATH}/js/jquery.js"></script>
+    <script src="${STATIC_THEME_PATH}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${STATIC_THEME_PATH}/assets/bxslider/jquery.bxslider.js"></script>
     <!--common script for all pages-->
-    <script src="${TEMPLATE_PATH}/js/common-scripts.js"></script>
-    <script src="${TEMPLATE_PATH}/js/jquery.form.min.js"></script> 
-    <script src="${TEMPLATE_PATH}/js/bootbox.min.js"></script> 
+    <script src="${STATIC_THEME_PATH}/js/common-scripts.js"></script>
+    <script src="${STATIC_THEME_PATH}/js/jquery.form.min.js"></script> 
+    <script src="${STATIC_THEME_PATH}/js/bootbox.min.js"></script> 
   </body>
 </html>

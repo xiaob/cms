@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.AttachmentConstant;
-import com.shishuo.cms.entity.vo.AttachmentVo;
+import com.shishuo.cms.entity.Attachment;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.AttachmentService;
 
@@ -47,7 +47,7 @@ public class AttachmentPageTag implements TemplateDirectiveModel {
 		Integer pageNum = Integer.parseInt(params.get("p").toString());
 		Integer rows = Integer.parseInt(params.get("rows").toString());
 		// 获得目录列表
-		PageVo<AttachmentVo> pageVo = attachmentService
+		PageVo<Attachment> pageVo = attachmentService
 				.getAttachmentPageByKindId(kindId, kind, rows, pageNum);
 		env.setVariable("tag_attachment_page", DEFAULT_WRAPPER.wrap(pageVo));
 		body.render(env.getOut());

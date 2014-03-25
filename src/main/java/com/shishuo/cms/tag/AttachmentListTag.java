@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.AttachmentConstant;
-import com.shishuo.cms.entity.vo.AttachmentVo;
+import com.shishuo.cms.entity.Attachment;
 import com.shishuo.cms.service.AttachmentService;
 
 import freemarker.core.Environment;
@@ -46,7 +46,7 @@ public class AttachmentListTag implements TemplateDirectiveModel {
 				.get("kind").toString());
 
 		// 获得目录列表
-		List<AttachmentVo> list = attachmentService.getAttachmentListByKindId(
+		List<Attachment> list = attachmentService.getAttachmentListByKindId(
 				kindId, kind, AttachmentConstant.Status.display);
 		env.setVariable("tag_attachment_list", DEFAULT_WRAPPER.wrap(list));
 		body.render(env.getOut());

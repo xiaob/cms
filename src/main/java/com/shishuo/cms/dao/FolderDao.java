@@ -95,7 +95,7 @@ public interface FolderDao {
 	 * @param fatherId
 	 * @return List<FolderVo>
 	 */
-	public List<FolderVo> getFolderListByFatherId(
+	public List<Folder> getFolderListByFatherId(
 			@Param("fatherId") long fatherId,
 			@Param("status") FolderConstant.Status status);
 
@@ -121,7 +121,7 @@ public interface FolderDao {
 	 * @param fatherId
 	 * @return
 	 */
-	public FolderVo getFolderByEnameAndFatherId(@Param("ename") String ename,
+	public Folder getFolderByEnameAndFatherId(@Param("ename") String ename,
 			@Param("fatherId") long fatherId);
 
 	/**

@@ -1,64 +1,9 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
-
 package com.shishuo.cms.entity.vo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.Article;
-import com.shishuo.cms.entity.Folder;
 
-/**
- * @author Herbert
- * 
- */
 public class ArticleVo extends Article {
-
-	private Admin admin;
-
-	private FolderVo folder;
-
-	private List<AttachmentVo> attachmentList = new ArrayList<AttachmentVo>();
-
-	private List<Folder> folderPathList = new ArrayList<Folder>();
-
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
-	public FolderVo getFolder() {
-		return folder;
-	}
-
-	public void setFolder(FolderVo folder) {
-		this.folder = folder;
-	}
-
-	public List<AttachmentVo> getAttachmentList() {
-		return attachmentList;
-	}
-
-	public void setAttachmentList(List<AttachmentVo> attachmentList) {
-		this.attachmentList = attachmentList;
-	}
-
-	public List<Folder> getFolderPathList() {
-		return folderPathList;
-	}
-
-	public void setFolderPathList(List<Folder> folderPathList) {
-		this.folderPathList = folderPathList;
-	}
-
+	
 	public long getFolderId() {
 		if (this.getFourthFolderId() != 0) {
 			return this.getFourthFolderId();
@@ -70,5 +15,4 @@ public class ArticleVo extends Article {
 			return this.getFirstFolderId();
 		}
 	}
-
 }

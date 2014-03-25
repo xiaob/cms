@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import com.shishuo.cms.constant.AttachmentConstant;
 import com.shishuo.cms.constant.AttachmentConstant.Status;
 import com.shishuo.cms.entity.Attachment;
-import com.shishuo.cms.entity.vo.AttachmentVo;
 
 @Repository
 public interface AttachmentDao {
@@ -78,7 +77,7 @@ public interface AttachmentDao {
 	 * @param rows
 	 * @return
 	 */
-	public List<AttachmentVo> getAttachmentListByKindId(
+	public List<Attachment> getAttachmentListByKindId(
 			@Param("kindId") long kindId,
 			@Param("kind") AttachmentConstant.Kind kind,
 			@Param("status") AttachmentConstant.Status status,

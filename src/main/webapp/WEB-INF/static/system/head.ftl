@@ -11,25 +11,25 @@
 <link rel="shortcut icon" href="img/favicon.png">
 <title>${SYS_SITENAME} - 后台</title>
 <!-- Bootstrap core CSS -->
-<link href="${basePath}/system/css/bootstrap.min.css" rel="stylesheet">
-<link href="${basePath}/system/css/bootstrap-reset.css"
+<link href="${STATIC_SYSTEM_PATH}/css/bootstrap.min.css" rel="stylesheet">
+<link href="${STATIC_SYSTEM_PATH}/css/bootstrap-reset.css"
 	rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="${basePath}/system/css/gallery.css" />	
+<link rel="stylesheet" type="text/css" href="${STATIC_SYSTEM_PATH}/css/gallery.css" />	
 <!--external css-->
 <link
-	href="${basePath}/system/assets/font-awesome/css/font-awesome.css"
+	href="${STATIC_SYSTEM_PATH}/assets/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
-<link href="${basePath}/system/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />	
-<link href="${basePath}/system/assets/ueditor1/third-party/SyntaxHighlighter/shCoreDefault.css" rel="stylesheet" />	
+<link href="${STATIC_SYSTEM_PATH}/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />	
+<link href="${STATIC_SYSTEM_PATH}/assets/ueditor1/third-party/SyntaxHighlighter/shCoreDefault.css" rel="stylesheet" />	
 <!-- Custom styles for this template -->
-<link href="${basePath}/system/css/style.css" rel="stylesheet">
-<link href="${basePath}/system/css/style-responsive.css" rel="stylesheet" />
-<link href="${basePath}/system/assets/uploadify/uploadify.css" rel="stylesheet" />
+<link href="${STATIC_SYSTEM_PATH}/css/style.css" rel="stylesheet">
+<link href="${STATIC_SYSTEM_PATH}/css/style-responsive.css" rel="stylesheet" />
+<link href="${STATIC_SYSTEM_PATH}/assets/uploadify/uploadify.css" rel="stylesheet" />
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
 <!--[if lt IE 9]>
-      <script src="${basePath}/system/js/html5shiv.js"></script>
-      <script src="${basePath}/system/js/respond.min.js"></script>
+      <script src="${STATIC_SYSTEM_PATH}/js/html5shiv.js"></script>
+      <script src="${STATIC_SYSTEM_PATH}/js/respond.min.js"></script>
     <![endif]-->
 	<script type="text/javascript">
 		window.BasePath = "${basePath}";
@@ -37,7 +37,7 @@
 		kindId = 0;
 		kind = "article";
 	</script>
-<script src="${basePath}/system/js/jquery.js"></script>
+<script src="${STATIC_SYSTEM_PATH}/js/jquery.js"></script>
 </head>
 <body>
 	<section id="container" class="">
@@ -45,7 +45,7 @@
 		<header class="header white-bg">
 			<!--logo start-->
 			<a href="${basePath}/index.htm" class="logo" title="访问前台页面">
-				<img src="${basePath}/system/images/logo.png" style="height: 38px;" />
+				<img src="${STATIC_SYSTEM_PATH}/images/logo.png" style="height: 38px;" />
 			</a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">

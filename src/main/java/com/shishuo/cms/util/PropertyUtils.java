@@ -66,9 +66,6 @@ public class PropertyUtils extends PropertyPlaceholderConfigurer {
 				break;
 			}
 		}
-//		if (!cmsRoot.endsWith(File.separator)) {
-//			cmsRoot += File.separator;
-//		}
 		logger.info(cmsRoot);
 		return cmsRoot;
 	}

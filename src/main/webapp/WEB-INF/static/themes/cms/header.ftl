@@ -6,28 +6,28 @@
     <meta name="description" content="${SYS_SITEDESC}">
     <meta name="author" content="shishuo.com">
     <meta name="keyword" content="Java, CMS, Spring, MyBatis, MySQL">
-    <link rel="shortcut icon" href="${TEMPLATE_PATH}/img/favicon.png">
+    <link rel="shortcut icon" href="${STATIC_THEME_PATH}/img/favicon.png">
 
     <title>${SYS_SITENAME}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="${TEMPLATE_PATH}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${TEMPLATE_PATH}/css/theme.css" rel="stylesheet">
-    <link href="${TEMPLATE_PATH}/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="${STATIC_THEME_PATH}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${STATIC_THEME_PATH}/css/theme.css" rel="stylesheet">
+    <link href="${STATIC_THEME_PATH}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="${TEMPLATE_PATH}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" href="${TEMPLATE_PATH}/css/flexslider.css"/>
-    <link href="${TEMPLATE_PATH}/assets/bxslider/jquery.bxslider.css" rel="stylesheet" />
-    <link href="${TEMPLATE_PATH}/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
-    <script src="${TEMPLATE_PATH}/js/jquery.js"></script>  
+    <link href="${STATIC_THEME_PATH}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="${STATIC_THEME_PATH}/css/flexslider.css"/>
+    <link href="${STATIC_THEME_PATH}/assets/bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="${STATIC_THEME_PATH}/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+    <script src="${STATIC_THEME_PATH}/js/jquery.js"></script>  
     <!-- Custom styles for this template -->
-    <link href="${TEMPLATE_PATH}/css/style.css" rel="stylesheet">
-    <link href="${TEMPLATE_PATH}/css/style-responsive.css" rel="stylesheet" />
+    <link href="${STATIC_THEME_PATH}/css/style.css" rel="stylesheet">
+    <link href="${STATIC_THEME_PATH}/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-      <script src="${TEMPLATE_PATH}/js/html5shiv.js"></script>
-      <script src="${TEMPLATE_PATH}/js/respond.min.js"></script>
+      <script src="${STATIC_THEME_PATH}/js/html5shiv.js"></script>
+      <script src="${STATIC_THEME_PATH}/js/respond.min.js"></script>
     <![endif]-->
     <style>
     .breadcrumb > li + li:before {

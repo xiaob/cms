@@ -20,9 +20,9 @@ import com.shishuo.cms.constant.AttachmentConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.AttachmentDao;
 import com.shishuo.cms.entity.Attachment;
-import com.shishuo.cms.entity.vo.AttachmentVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.UploadException;
+import com.shishuo.cms.plugin.PluginService;
 import com.shishuo.cms.util.UploadUtils;
 
 @Service
@@ -30,6 +30,9 @@ public class AttachmentService {
 
 	@Autowired
 	private AttachmentDao attachmentDao;
+	
+	@Autowired
+	private PluginService pluginService;
 
 	/*
 	 * 上传附件
@@ -61,6 +64,7 @@ public class AttachmentService {
 		attachment.setStatus(status);
 		attachment.setCreateTime(now);
 		attachmentDao.addAttachment(attachment);
+		pluginService.getStoragePlugin().save(multipartFile, uploadPath);
 		multipartFile.transferTo(new java.io.File(
 				SystemConstant.SHISHUO_CMS_ROOT + uploadPath));
 		return attachment;
@@ -117,9 +121,9 @@ public class AttachmentService {
 	 * @return
 	 */
 	@Cacheable(value = "article", key = "'getAttachmentPageByFolderId_'+#kindId+'_'+#kind+'_'+#status+'_'+#pageNum")
-	public PageVo<AttachmentVo> getAttachmentPageByKindId(long kindId,
+	public PageVo<Attachment> getAttachmentPageByKindId(long kindId,
 			AttachmentConstant.Kind kind, int rows, int pageNum) {
-		PageVo<AttachmentVo> pageVo = new PageVo<AttachmentVo>(pageNum);
+		PageVo<Attachment> pageVo = new PageVo<Attachment>(pageNum);
 		pageVo.setRows(rows);
 		pageVo.setCount(attachmentDao.getAttachmentCountByKindId(kindId, kind,
 				AttachmentConstant.Status.display));
@@ -136,7 +140,7 @@ public class AttachmentService {
 	 * @return
 	 */
 	@Cacheable(value = "article", key = "'getAttachmentListByKindId_'+#kindId+'_'+#kind+'_'+#status")
-	public List<AttachmentVo> getAttachmentListByKindId(long kindId,
+	public List<Attachment> getAttachmentListByKindId(long kindId,
 			AttachmentConstant.Kind kind, AttachmentConstant.Status status) {
 		return attachmentDao.getAttachmentListByKindId(kindId, kind, status, 0,
 				1000);

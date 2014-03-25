@@ -27,7 +27,6 @@ import com.shishuo.cms.constant.AttachmentConstant;
 import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.Attachment;
 import com.shishuo.cms.entity.Folder;
-import com.shishuo.cms.entity.vo.AttachmentVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.ArticleNotFoundException;
@@ -51,7 +50,7 @@ public class AdminAttachmentAction extends AdminBaseAction {
 			HttpServletRequest request, ModelMap modelMap)
 			throws FolderNotFoundException {
 		Folder folder = folderService.getFolderById(folderId);
-		PageVo<AttachmentVo> attachmentPage = attachmentService
+		PageVo<Attachment> attachmentPage = attachmentService
 				.getAttachmentPageByKindId(folderId,
 						AttachmentConstant.Kind.folder, 12, pageNum);
 		modelMap.put("folderAll", folderService.getAllFolderList(0,
@@ -70,7 +69,7 @@ public class AdminAttachmentAction extends AdminBaseAction {
 	@ResponseBody
 	@RequestMapping(value = "/list.json", method = RequestMethod.GET)
 	public String attachment(@RequestParam("kindId") long kindId) {
-		List<AttachmentVo> attachmentList = attachmentService
+		List<Attachment> attachmentList = attachmentService
 				.getAttachmentListByKindId(kindId,
 						AttachmentConstant.Kind.article,
 						AttachmentConstant.Status.display);
@@ -147,11 +146,11 @@ public class AdminAttachmentAction extends AdminBaseAction {
 	public String photoManager(@RequestParam(value = "kindId") long kindId,
 			@RequestParam(value = "kind") AttachmentConstant.Kind kind,
 			HttpServletRequest request) {
-		List<AttachmentVo> attachmentList = attachmentService
+		List<Attachment> attachmentList = attachmentService
 				.getAttachmentListByKindId(kindId, kind,
 						AttachmentConstant.Status.hidden);
 		List<String> picturePathList = new ArrayList<String>();
-		for (AttachmentVo attachment : attachmentList) {
+		for (Attachment attachment : attachmentList) {
 			if (attachment.getType().equals(AttachmentConstant.Type.photo)
 					&& attachment.getStatus().equals(
 							AttachmentConstant.Status.hidden)) {

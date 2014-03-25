@@ -75,18 +75,18 @@
 		folderId=#{folderId}
 	</select>
 
-	<select id="getFolderListByFatherId" resultType="com.shishuo.cms.entity.vo.FolderVo">
+	<select id="getFolderListByFatherId" resultType="com.shishuo.cms.entity.Folder">
 		select * from folder where fatherId=#{fatherId}
 		<if test="status !=null">and status = #{status}</if>
 		order by sort
 	</select>
 	<!-- 得到所有目录的path -->
-	<select id="getAllFolderPath" resultType="com.shishuo.cms.entity.vo.FolderVo">
+	<select id="getAllFolderPath" resultType="com.shishuo.cms.entity.Folder">
 		select folder.path from
 		folder
 	</select>
 
-	<select id="getFolderByEnameAndFatherId" resultType="com.shishuo.cms.entity.vo.FolderVo">
+	<select id="getFolderByEnameAndFatherId" resultType="com.shishuo.cms.entity.Folder">
 		select *
 		from folder where ename=#{ename} and fatherId = #{fatherId}
 	</select>

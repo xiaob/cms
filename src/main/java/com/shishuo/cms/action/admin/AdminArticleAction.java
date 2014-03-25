@@ -26,7 +26,6 @@ import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.ArticleVo;
-import com.shishuo.cms.entity.vo.AttachmentVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.ArticleNotFoundException;
@@ -85,7 +84,7 @@ public class AdminArticleAction extends AdminBaseAction {
 
 		modelMap.put("pathList", pathList);
 		modelMap.put("folderId", folderId);
-		PageVo<ArticleVo> pageVo = articleService
+		PageVo<Article> pageVo = articleService
 				.getArticlePageByTypeAndStatusPage(folderId, status, pageNum);
 		int displayCount = articleService.getArticleCountByStatus(0, 0, 0, 0,
 				ArticleConstant.Status.display);
@@ -115,7 +114,7 @@ public class AdminArticleAction extends AdminBaseAction {
 			@RequestParam(value = "articleId", defaultValue = "1") long articleId,
 			ModelMap modelMap, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		ArticleVo article = articleService.getArticleByArticleId(articleId);
+		ArticleVo article = articleService.getArticleById(articleId);
 		modelMap.put("article", article);
 		modelMap.put("folderAll", folderService.getAllFolderList(0,
 				FolderConstant.Status.display));

@@ -85,7 +85,7 @@ public class AuthAction extends BaseAction {
 			} else {
 				json.getErrors().put("captcha", "验证码错误");
 			}
-			this.validate(json);
+			json.check();
 
 			adminService.adminLogin(email, password, request);
 

@@ -14,7 +14,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.entity.vo.ArticleVo;
+import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.exception.ArticleNotFoundException;
 import com.shishuo.cms.service.ArticleService;
 
@@ -40,7 +40,7 @@ public class ArticleTag implements TemplateDirectiveModel {
 				.parseInt(params.get("articleId").toString());
 		// 获取指定的文件
 		try {
-			ArticleVo article = articleService.getArticleByArticleId(articleId);
+			Article article = articleService.getArticleById(articleId);
 			env.setVariable("tag_article", BEANS_WRAPPER.wrap(article));
 		} catch (ArticleNotFoundException e) {
 			// TODO Auto-generated catch block

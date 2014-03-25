@@ -55,7 +55,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		// 系统配置参数
 		String basePath = HttpUtils.getBasePath(request);
 		String contextPath = HttpUtils.getContextPath(request);
-		modelAndView.addObject("basePath", basePath);
+		modelAndView.addObject("BASE_PATH", basePath);
 		modelAndView.addObject("contextPath", contextPath);
 		modelAndView.addObject("SYS_SITEDESC",
 				configService.getConfigByKey(ConfigConstant.SYS_SITEDESC));
@@ -63,8 +63,9 @@ public class GlobalInterceptor implements HandlerInterceptor {
 				configService.getConfigByKey(ConfigConstant.SYS_SITENAME));
 		modelAndView.addObject("SYS_TEMPLATE",
 				configService.getConfigByKey(ConfigConstant.SYS_THEME));
-		modelAndView.addObject("TEMPLATE_PATH", basePath + "/static/themes/"
+		modelAndView.addObject("STATIC_THEME_PATH", basePath + "/static/themes/"
 				+ configService.getConfigByKey(ConfigConstant.SYS_THEME));
+		modelAndView.addObject("STATIC_SYSTEM_PATH",basePath +  "/static/system/");
 		MDC.put("ip", HttpUtils.getIp(request));
 	}
 

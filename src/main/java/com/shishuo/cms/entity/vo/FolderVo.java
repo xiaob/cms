@@ -1,38 +1,8 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
-
 package com.shishuo.cms.entity.vo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.shishuo.cms.entity.Folder;
 
 public class FolderVo extends Folder {
-
-	private List<FolderVo> folderList = new ArrayList<FolderVo>();
-
-	private List<String> folderPathList = new ArrayList<String>();
-
-	public List<String> getFolderPathList() {
-		return folderPathList;
-	}
-
-	public void setFolderPathList(List<String> folderPathList) {
-		this.folderPathList = folderPathList;
-	}
-
-	public List<FolderVo> getFolderList() {
-		return folderList;
-	}
-
-	public void setFolderList(List<FolderVo> folderList) {
-		this.folderList = folderList;
-	}
-
 	public long getFirstFolderId() {
 		return Long.parseLong(this.getFolderId(1));
 	}

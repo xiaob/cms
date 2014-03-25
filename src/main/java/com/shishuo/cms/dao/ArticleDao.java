@@ -109,7 +109,7 @@ public interface ArticleDao {
 	 * @param foderId
 	 * @return List<FileVo>
 	 */
-	public List<ArticleVo> getArticleListByFoderIdPath(
+	public List<Article> getArticleListByFoderIdPath(
 			@Param("firstFolderId") long firstFolderId,
 			@Param("secondFolderId") long secondFolderId,
 			@Param("thirdFolderId") long thirdFolderId,
@@ -136,7 +136,7 @@ public interface ArticleDao {
 	 * @param foderId
 	 * @return List<FileVo>
 	 */
-	public List<ArticleVo> getArticleListByStatus(
+	public List<Article> getArticleListByStatus(
 			@Param("firstFolderId") long firstFolderId,
 			@Param("secondFolderId") long secondFolderId,
 			@Param("thirdFolderId") long thirdFolderId,
