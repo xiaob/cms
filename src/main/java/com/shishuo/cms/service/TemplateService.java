@@ -6,7 +6,7 @@
 
 package com.shishuo.cms.service;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,9 +14,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import com.shishuo.cms.constant.ConfigConstant;
-import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.exception.TemplateNotFoundException;
 
@@ -131,13 +131,14 @@ public class TemplateService {
 	 * @return
 	 */
 	public Boolean isExist(String theme) {
-		String themePath = SystemConstant.SHISHUO_CMS_ROOT + "/themes/"
+
+		String themePath = "static/themes/"
 				+ configService.getConfigByKey(ConfigConstant.SYS_THEME) + "/"
 				+ theme + ".ftl";
-		File file = new File(themePath);
-		if (file.exists()) {
+		try {
+			ResourceUtils.getFile(themePath);
 			return true;
-		} else {
+		} catch (FileNotFoundException e) {
 			logger.info("模板不存在：" + themePath);
 			return false;
 		}
