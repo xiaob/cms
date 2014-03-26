@@ -75,7 +75,7 @@
 		folderId=#{folderId}
 	</select>
 
-	<select id="getFolderListByFatherId" resultType="com.shishuo.cms.entity.Folder">
+	<select id="getFolderListByFatherId" resultType="com.shishuo.cms.entity.vo.FolderVo">
 		select * from folder where fatherId=#{fatherId}
 		<if test="status !=null">and status = #{status}</if>
 		order by sort

@@ -8,7 +8,7 @@
 		<section class="panel">
 			<header class="panel-heading"> 基本设置</header>
 			<div class="panel-body">
-				<form id="basicForm" action="${basePath}/admin/config/basic.json" role="form" class="form-horizontal" autocomplete="off" method="post" >
+				<form id="basicForm" action="${BASE_PATH}/admin/config/basic.json" role="form" class="form-horizontal" autocomplete="off" method="post" >
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">网站名称</label>
 						<div class="col-lg-10">

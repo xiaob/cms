@@ -17,16 +17,16 @@ import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.exception.FolderNotFoundException;
+import com.shishuo.cms.plugin.TagPlugin;
 import com.shishuo.cms.service.FolderService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
-import freemarker.template.TemplateDirectiveModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 
 @Service
-public class FolderTag implements TemplateDirectiveModel {
+public class FolderTag  extends TagPlugin {
 
 	@Autowired
 	private FolderService folderService;

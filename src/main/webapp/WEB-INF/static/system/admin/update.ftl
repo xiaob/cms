@@ -15,7 +15,7 @@
  					修改管理员资料(${admin.email})
 				</header>
 				<div class="panel-body">
-					<form id="update_admin_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/admin/update.json">
+					<form id="update_admin_form" method="post" class="form-horizontal" autocomplete="off" action="${BASE_PATH}/admin/admin/update.json">
 					<fieldset>
 						
 						<div class="form-group">

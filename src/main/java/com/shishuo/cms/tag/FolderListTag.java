@@ -16,12 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.FolderConstant;
-import com.shishuo.cms.entity.Folder;
+import com.shishuo.cms.entity.vo.FolderVo;
+import com.shishuo.cms.plugin.TagPlugin;
 import com.shishuo.cms.service.FolderService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
-import freemarker.template.TemplateDirectiveModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 
@@ -32,7 +32,7 @@ import freemarker.template.TemplateModel;
  * 
  */
 @Service
-public class FolderListTag implements TemplateDirectiveModel {
+public class FolderListTag extends  TagPlugin {
 	@Autowired
 	private FolderService folderService;
 
@@ -43,10 +43,10 @@ public class FolderListTag implements TemplateDirectiveModel {
 		Integer fatherId = Integer.parseInt(params.get("fatherId").toString());
 
 		// 获得目录列表
-		List<Folder> list = folderService.getFolderListByFatherId(fatherId,
-				FolderConstant.Status.display);
+		List<FolderVo> list = folderService.getFolderListByFatherId(fatherId, FolderConstant.status.display);
 		env.setVariable("tag_folder_list", DEFAULT_WRAPPER.wrap(list));
 		body.render(env.getOut());
 	}
+
 
 }

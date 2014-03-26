@@ -8,14 +8,14 @@
 				<div class="col-lg-8 col-sm-8">
 					<ol class="breadcrumb pull-right">
 						<#assign folderPath = "">
-						<li><a href="${basePath}/index.htm">首页</a>
+						<li><a href="${BASE_PATH}/index.htm">首页</a>
 						</li>
 						<#list folderPathList as fold> 
 							<#assign folderPath = folderPath + fold.ename+"/">
 							<#if fold.folderId ==folder.folderId>
 							<li class="active">${fold.name}</li>
 							<#else>
-							<li><a href="${basePath}/${folderPath}index.htm">${fold.name}</a></li>
+							<li><a href="${BASE_PATH}/${folderPath}index.htm">${fold.name}</a></li>
 							</#if>
 						</#list>
 					</ol>

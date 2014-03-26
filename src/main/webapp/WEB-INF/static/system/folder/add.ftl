@@ -29,7 +29,7 @@
                             	 添加目录
                           </header>
                           <div class="panel-body">
-                              <form id="addFolder_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/folder/addNew.json">
+                              <form id="addFolder_form" method="post" class="form-horizontal" autocomplete="off" action="${BASE_PATH}/admin/folder/addNew.json">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">目录名称</label>
@@ -117,7 +117,7 @@
 								label : "查看文件夹列表",
 								className : "btn-primary",
 								callback : function() {
-									window.location.href="${basePath}/admin/folder/page.htm";
+									window.location.href="${BASE_PATH}/admin/folder/page.htm";
 								}
 							},
 						}

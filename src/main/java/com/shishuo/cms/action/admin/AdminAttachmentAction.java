@@ -32,7 +32,7 @@ import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.ArticleNotFoundException;
 import com.shishuo.cms.exception.FolderNotFoundException;
 import com.shishuo.cms.exception.UploadException;
-import com.shishuo.cms.util.UploadUtils;
+import com.shishuo.cms.util.AttachmentUtils;
 
 @Controller
 @RequestMapping("/admin/attachment")
@@ -53,8 +53,8 @@ public class AdminAttachmentAction extends AdminBaseAction {
 		PageVo<Attachment> attachmentPage = attachmentService
 				.getAttachmentPageByKindId(folderId,
 						AttachmentConstant.Kind.folder, 12, pageNum);
-		modelMap.put("folderAll", folderService.getAllFolderList(0,
-				FolderConstant.Status.display));
+		modelMap.put("folderAll", folderService.getAllFolderList(
+				FolderConstant.status.display));
 		modelMap.put("JSESSIONID", request.getSession().getId());
 		modelMap.put("folder", folder);
 		modelMap.put("attachmentPage", attachmentPage);
@@ -72,7 +72,7 @@ public class AdminAttachmentAction extends AdminBaseAction {
 		List<Attachment> attachmentList = attachmentService
 				.getAttachmentListByKindId(kindId,
 						AttachmentConstant.Kind.article,
-						AttachmentConstant.Status.display);
+						AttachmentConstant.Status.display,100);
 		JSONObject json = new JSONObject();
 		json.put("attachmentList", attachmentList);
 		return json.toString();
@@ -148,7 +148,7 @@ public class AdminAttachmentAction extends AdminBaseAction {
 			HttpServletRequest request) {
 		List<Attachment> attachmentList = attachmentService
 				.getAttachmentListByKindId(kindId, kind,
-						AttachmentConstant.Status.hidden);
+						AttachmentConstant.Status.hidden,100);
 		List<String> picturePathList = new ArrayList<String>();
 		for (Attachment attachment : attachmentList) {
 			if (attachment.getType().equals(AttachmentConstant.Type.photo)
@@ -173,7 +173,7 @@ public class AdminAttachmentAction extends AdminBaseAction {
 			@RequestParam("upfile") MultipartFile upfile,
 			HttpServletRequest request) {
 		JSONObject json = new JSONObject();
-		if (!UploadUtils.isFileType(fileName, UploadUtils.PHOTO_TYPE)) {
+		if (!AttachmentUtils.isFileType(fileName, AttachmentUtils.PHOTO_TYPE)) {
 			json.put("state", "不允许的文件格式");
 			return json.toString();
 		}

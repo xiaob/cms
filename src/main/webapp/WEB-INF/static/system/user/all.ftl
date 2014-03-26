@@ -40,12 +40,12 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="${basePath}/admin/user/user.htm?userId=${e.userId}" title="修改">
+                							<a href="${BASE_PATH}/admin/user/user.htm?userId=${e.userId}" title="修改">
                 								<button class="btn btn-primary btn-xs">
                 									<i class="icon-pencil"></i>
                 								</button>
                 							</a>
-                							<a href="${basePath}/admin/user/delete.htm?userId=${e.userId}" title="删除">
+                							<a href="${BASE_PATH}/admin/user/delete.htm?userId=${e.userId}" title="删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>

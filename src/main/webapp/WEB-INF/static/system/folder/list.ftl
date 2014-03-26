@@ -17,10 +17,10 @@
 			<div class="col-lg-12">
 				<!--breadcrumbs start -->
 				<ul class="breadcrumb">
-					<li><a href="${basePath}/admin/folder/page.htm?folderId=0"><i
-							class="icon-home"></i> Home</a></li> <#list pathList as pathFolder>
+					<li><a href="${BASE_PATH}/admin/folder/list.htm?folderId=0"><i
+							class="icon-home"></i> 根目录</a></li> <#list pathList as pathFolder>
 					<li><a
-						href="${basePath}/admin/folder/page.htm?folderId=${pathFolder.folderId}">${pathFolder.name}</a></li>
+						href="${BASE_PATH}/admin/folder/list.htm?folderId=${pathFolder.folderId}">${pathFolder.name}</a></li>
 					</#list>
 				</ul>
 				<!--breadcrumbs end -->
@@ -32,7 +32,7 @@
 					<header class="panel-heading"> 添加目录 </header>
 					<div class="panel-body">
 						<form id="addFolder_form" method="post" class="form-horizontal"
-							autocomplete="off" action="${basePath}/admin/folder/add.json">
+							autocomplete="off" action="${BASE_PATH}/admin/folder/add.json">
 							<fieldset>
 								<div class="form-group">
 									<label class="col-xs-3 control-label">目录名称</label>
@@ -94,7 +94,7 @@
 			</div>
 			<div class="col-lg-8">
 				<section class="panel">
-					<header class="panel-heading"> ${folder.name}的子目录 </header>
+					<header class="panel-heading"> ${folder.name} 的子目录 </header>
 					<div class="panel-body">
 						<div class="adv-table">
 							<div role="grid" class="dataTables_wrapper"
@@ -111,45 +111,45 @@
 										</tr>
 									</thead>
 									<tbody role="alert" aria-live="polite" aria-relevant="all">
-										<#list list as e>
+										<#list folderList as folder>
 										<tr class="gradeA_firstFolder">
 											<td class="folderSort"><input type="text"
-												folderId="${e.folderId}" value="${e.sort}" name="sort"
+												folderId="${folder.folderId}" value="${folder.sort}" name="sort"
 												class="js_folder_sort" style="width: 40px;"></td>
 											<td><a
-												href="${basePath}/admin/folder/page.htm?folderId=${e.folderId}">${e.name}</a></td>
-											<td>${e.ename}</td>
+												href="${BASE_PATH}/admin/folder/list.htm?folderId=${folder.folderId}">${folder.name}</a></td>
+											<td>${folder.ename}</td>
 											<td>
-												<select class="js_folder_status" folderId="${e.folderId}">
-													<option value="display" <#if e.type=="display">selected</#if>>显示</option>
-													<option value="hidden" <#if e.type=="hidden">selected</#if>>隐藏</option>
+												<select class="js_folder_status" folderId="${folder.folderId}">
+													<option value="display" <#if folder.type=="display">selected</#if>>显示</option>
+													<option value="hidden" <#if folder.type=="hidden">selected</#if>>隐藏</option>
 												</select>
 											</td>
 											<td>
-												<select class="js_folder_type" folderId="${e.folderId}">
-													<option value="folder" <#if e.type=="folder">selected</#if>>目录</option>
-													<option value="photo" <#if e.type=="photo">selected</#if>>相册</option>
-													<option value="article" <#if e.type=="article">selected</#if>>文章</option>
+												<select class="js_folder_type" folderId="${folder.folderId}">
+													<option value="folder" <#if folder.type=="folder">selected</#if>>目录</option>
+													<option value="photo" <#if folder.type=="photo">selected</#if>>相册</option>
+													<option value="article" <#if folder.type=="article">selected</#if>>文章</option>
 												</select>											
 											</td>
 											<td>
 												<!-- Icons -->
-												<a class="js_folder_delete" folderId="${e.folderId}" href="javascript:void(0);" title="删除${e.name}">
+												<a class="js_folder_delete" folderId="${folder.folderId}" href="javascript:void(0);" title="删除${folder.name}">
 													删除
 												</a>
 												 | 
-												<a href="${basePath}/admin/folder/update.htm?folderId=${e.folderId}" title="修改">
+												<a href="${BASE_PATH}/admin/folder/update.htm?folderId=${folder.folderId}" title="修改">
 													修改描述
 												</a>
-												<#if e.type="photo" >
+												<#if folder.type="photo" >
 												 | 
-												<a href="${basePath}/admin/folder/photo.htm?folderId=${e.folderId}" title="修改">
+												<a href="${BASE_PATH}/admin/folder/photo.htm?folderId=${folder.folderId}" title="修改">
 													上传图片
 												</a>
 												</#if>
-												<#if e.type="article" >
+												<#if folder.type="article" >
 												 | 
-												<a href="${basePath}/admin/article/add.htm?folderId=${e.folderId}"  folderId="${e.folderId}" href="javascript:void(0);">
+												<a href="${BASE_PATH}/admin/article/add.htm?folderId=${folder.folderId}"  folderId="${folder.folderId}" href="javascript:void(0);">
 													增加文章
 												</a>
 												</#if>
@@ -183,14 +183,14 @@ $(function() {
             folder.sort = $(element).val();
             folderSort.push(folder);
         });
-        $.post("${basePath}/admin/folder/sort.json", {
+        $.post("${BASE_PATH}/admin/folder/sort.json", {
             "sortJson": $.toJSON(folderSort)
         },
         function(data) {
             if (data.result) {
                 bootbox.alert("更新成功",
                 function() {
-                    window.location.href = "${basePath}/admin/folder/page.htm?folderId=" + pageFolderId;
+                    window.location.href = "${BASE_PATH}/admin/folder/list.htm?folderId=" + pageFolderId;
                 });
             } else {
                 bootbox.alert(data.msg,
@@ -210,14 +210,14 @@ $(function() {
                     label: "删除",
                     className: "btn-success",
                     callback: function() {
-                        $.post("${basePath}/admin/folder/delete.json", {
+                        $.post("${BASE_PATH}/admin/folder/delete.json", {
                             "folderId": folderId
                         },
                         function(data) {
                             if (data.result) {
                                 bootbox.alert("删除成功",
                                 function() {
-                                    window.location.href = "${basePath}/admin/folder/page.htm?folderId=" + pageFolderId;
+                                    window.location.href = "${BASE_PATH}/admin/folder/list.htm?folderId=" + pageFolderId;
                                 });
                             } else {
                                 bootbox.alert(data.msg,
@@ -258,12 +258,12 @@ $(function() {
         }
     });
     $(".js_folder_type").change(function(){
-		$.post("${basePath}/admin/folder/type.json", {"folderId": $(this).attr("folderId"),type:$(this).val()},function(){
+		$.post("${BASE_PATH}/admin/folder/type.json", {"folderId": $(this).attr("folderId"),type:$(this).val()},function(){
 			window.location.reload();
         },"json");  	
     });
     $(".js_folder_status").change(function(){
-		$.post("${basePath}/admin/folder/status.json", {"folderId": $(this).attr("folderId"),status:$(this).val()},function(){
+		$.post("${BASE_PATH}/admin/folder/status.json", {"folderId": $(this).attr("folderId"),status:$(this).val()},function(){
 			window.location.reload();
         },"json");  	
     });

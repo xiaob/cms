@@ -30,7 +30,7 @@
                             	 添加用户
                           </header>
                           <div class="panel-body">
-                              <form id="add_user_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/user/addNew.json">
+                              <form id="add_user_form" method="post" class="form-horizontal" autocomplete="off" action="${BASE_PATH}/admin/user/addNew.json">
                               	<fieldset>
                                   <div class="form-group">
                                       <label class="col-sm-2 col-sm-2 control-label">用户名称</label>

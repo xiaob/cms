@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.util.HttpUtils;
-import com.shishuo.cms.util.UploadUtils;
+import com.shishuo.cms.util.AttachmentUtils;
 
 @Controller
 @RequestMapping("/admin/ueditor")
@@ -32,8 +32,8 @@ public class AdminUEditorAction extends AdminBaseAction {
 	public String photoManager(HttpServletRequest request) {
 		String photoUploadPath = HttpUtils.getRealPath()
 				+ SystemConstant.UPLOAD_FOLDER;
-		List<java.io.File> fileList = UploadUtils.getFiles(photoUploadPath,
-				new ArrayList<java.io.File>(), UploadUtils.PHOTO_TYPE);
+		List<java.io.File> fileList = AttachmentUtils.getFiles(photoUploadPath,
+				new ArrayList<java.io.File>(), AttachmentUtils.PHOTO_TYPE);
 		String imgStr = "";
 		for (java.io.File file : fileList) {
 			imgStr += file.getPath().replace(HttpUtils.getRealPath(), "")

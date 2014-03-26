@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shishuo.cms.constant.AttachmentConstant;
 import com.shishuo.cms.constant.FolderConstant;
+import com.shishuo.cms.entity.Attachment;
 import com.shishuo.cms.entity.Folder;
-import com.shishuo.cms.entity.vo.AttachmentVo;
 import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
@@ -49,7 +49,7 @@ public class AdminFolderAction extends AdminBaseAction {
 	 */
 	@RequestMapping(value = "/add.htm", method = RequestMethod.GET)
 	public String login(ModelMap modelMap) throws Exception {
-		modelMap.put("folderAll", folderService.getAllFolderList(0, null));
+		modelMap.put("folderAll", folderService.getAllFolderList(null));
 		modelMap.put("folderName", "");
 		modelMap.put("folderEname", "");
 		return "system/folder/add";
@@ -65,11 +65,11 @@ public class AdminFolderAction extends AdminBaseAction {
 			@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
 			@RequestParam(value = "folderName") String folderName,
 			@RequestParam(value = "folderEname") String folderEname,
-			@RequestParam(value = "status") FolderConstant.Status status,
+			@RequestParam(value = "status") FolderConstant.status status,
 			ModelMap modelMap) {
 		JsonVo<String> json = new JsonVo<String>();
 		// FIXME 检查目录的ename不能用循环遍历检查
-		List<FolderVo> list = folderService.getAllFolderList(0, null);
+		List<FolderVo> list = folderService.getAllFolderList(null);
 		try {
 			if (StringUtils.isBlank(folderName)) {
 				json.getErrors().put("folderName", "目录名称不能为空");
@@ -104,26 +104,25 @@ public class AdminFolderAction extends AdminBaseAction {
 	 * @throws FolderNotFoundException
 	 * 
 	 */
-	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
-	public String page(
+	@RequestMapping(value = "/list.htm", method = RequestMethod.GET)
+	public String list(
 			@RequestParam(value = "folderId", defaultValue = "0") long folderId,
 			ModelMap modelMap) throws FolderNotFoundException {
-		List<FolderVo> list = folderService.getFolderListByFatherId(folderId,
-				null);
 		List<Folder> pathList = folderService
 				.getFolderPathListByFolderId(folderId);
 		Folder folder = new Folder();
 		if (folderId == 0) {
 			folder.setFolderId(0);
-			folder.setName("Home");
+			folder.setName("首页");
 		} else {
 			folder = folderService.getFolderById(folderId);
 		}
+		List<FolderVo>  folderList = folderService.getFolderListByFatherId(folderId, null);
 		modelMap.put("folder", folder);
-		modelMap.put("list", list);
+		modelMap.put("folderList", folderList);
 		modelMap.put("pathList", pathList);
-		modelMap.put("folderAll", folderService.getAllFolderList(0, null));
-		return "system/folder/page";
+		modelMap.put("folderAll", folderService.getAllFolderList(null));
+		return "system/folder/list";
 	}
 
 	/**
@@ -146,12 +145,12 @@ public class AdminFolderAction extends AdminBaseAction {
 					.getFatherId());
 			modelMap.put("fatherFolderName", fatherFolder.getName());
 		}
-		PageVo<AttachmentVo> pageVo = attachmentService
+		PageVo<Attachment> pageVo = attachmentService
 				.getAttachmentPageByKindId(folderId,
 						AttachmentConstant.Kind.folder, 12, p);
 		pageVo.getArgs().put("folderId", folderId + "");
 		modelMap.put("folder", folder);
-		modelMap.put("folderAll", folderService.getAllFolderList(0, null));
+		modelMap.put("folderAll", folderService.getAllFolderList( null));
 		modelMap.put("JSESSIONID", request.getSession().getId());
 		modelMap.put("attachmentPage", pageVo);
 		return "system/folder/update";
@@ -177,12 +176,12 @@ public class AdminFolderAction extends AdminBaseAction {
 					.getFatherId());
 			modelMap.put("fatherFolderName", fatherFolder.getName());
 		}
-		PageVo<AttachmentVo> pageVo = attachmentService
+		PageVo<Attachment> pageVo = attachmentService
 				.getAttachmentPageByKindId(folderId,
 						AttachmentConstant.Kind.folder, 12, p);
 		pageVo.getArgs().put("folderId", folderId + "");
 		modelMap.put("folder", folder);
-		modelMap.put("folderAll", folderService.getAllFolderList(0, null));
+		modelMap.put("folderAll", folderService.getAllFolderList(null));
 		modelMap.put("JSESSIONID", request.getSession().getId());
 		modelMap.put("attachmentPage", pageVo);
 		return "system/folder/photo";
@@ -202,7 +201,7 @@ public class AdminFolderAction extends AdminBaseAction {
 
 		JsonVo<String> json = new JsonVo<String>();
 		// FIXME 检查目录的ename不能用循环遍历检查
-		List<FolderVo> list = folderService.getAllFolderList(0, null);
+		List<FolderVo> list = folderService.getAllFolderList( null);
 		try {
 			if (name.equals("")) {
 				json.getErrors().put("name", "目录名称不能为空");
@@ -313,7 +312,7 @@ public class AdminFolderAction extends AdminBaseAction {
 	@RequestMapping(value = "/status.json", method = RequestMethod.POST)
 	public JsonVo<String> status(
 			@RequestParam(value = "folderId") long folderId,
-			@RequestParam(value = "status") FolderConstant.Status status)
+			@RequestParam(value = "status") FolderConstant.status status)
 			throws FolderNotFoundException {
 		JsonVo<String> json = new JsonVo<String>();
 		folderService.updateStatus(folderId, status);

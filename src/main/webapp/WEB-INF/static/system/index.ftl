@@ -33,7 +33,7 @@
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
                           <div class="symbol terques">
-                              <a href="${basePath}/admin/user/page.htm"><i class="icon-user" title="前往用户列表"></i></a>
+                              <a href="${BASE_PATH}/admin/user/page.htm"><i class="icon-user" title="前往用户列表"></i></a>
                           </div>
                           <div class="value">
                               <h1>${userCount}</h1>
@@ -44,7 +44,7 @@
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
                           <div class="symbol red">
-                              <a href="${basePath}/admin/article/page.htm" title="前往文章列表"><i class="icon-tags"></i></a>
+                              <a href="${BASE_PATH}/admin/article/page.htm" title="前往文章列表"><i class="icon-tags"></i></a>
                           </div>
                           <div class="value">
                               <h1>${articleCount}</h1>
@@ -55,7 +55,7 @@
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
                           <div class="symbol yellow">
-                              <a href="${basePath}/admin/folder/page.htm" title="前往目录列表"><i class="icon-folder-open"></i></a>
+                              <a href="${BASE_PATH}/admin/folder/page.htm" title="前往目录列表"><i class="icon-folder-open"></i></a>
                           </div>
                           <div class="value">
                               <h1>0</h1>
@@ -66,7 +66,7 @@
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
                           <div class="symbol blue">
-                              <a href="${basePath}/admin/attachment/page.htm" title="上传附件"><i class="icon-download-alt"></i></a>
+                              <a href="${BASE_PATH}/admin/attachment/page.htm" title="上传附件"><i class="icon-download-alt"></i></a>
                           </div>
                           <div class="value">
                               <h1>0</h1>
@@ -88,16 +88,16 @@
                           	<li class="list-group-item">
                           		<div style="width:50% float:left">
                           			├─┬─${firstFolder.name}
-                          			<a href="${basePath}/admin/folder/update.htm?folderId=${firstFolder.folderId}" title="修改" style="float:right;">
+                          			<a href="${BASE_PATH}/admin/folder/update.htm?folderId=${firstFolder.folderId}" title="修改" style="float:right;">
                 						[修改]
                 					</a>
                 					<#if firstFolder.type="article" >
-									<a href="${basePath}/admin/article/add.htm?folderId=${firstFolder.folderId}"  folderId="${firstFolder.folderId}" style="float:right;">
+									<a href="${BASE_PATH}/admin/article/add.htm?folderId=${firstFolder.folderId}"  folderId="${firstFolder.folderId}" style="float:right;">
 													[增加文章]
 									</a>
 									</#if>
                 					<#if firstFolder.type="photo" >
-									<a href="${basePath}/admin/folder/photo.htm?folderId=${firstFolder.folderId}"  folderId="${firstFolder.folderId}" style="float:right;">
+									<a href="${BASE_PATH}/admin/folder/photo.htm?folderId=${firstFolder.folderId}"  folderId="${firstFolder.folderId}" style="float:right;">
 													[上传照片]
 									</a>
 									</#if>
@@ -107,16 +107,16 @@
 	                          	<li class="list-group-item" >
 	                          		<div style="width:50% float:left">
 	                          			│&nbsp;&nbsp;&nbsp;└──${secondFolder.name}
-	                          			<a href="${basePath}/admin/folder/update.htm?folderId=${secondFolder.folderId}" title="修改" style="float:right;">
+	                          			<a href="${BASE_PATH}/admin/folder/update.htm?folderId=${secondFolder.folderId}" title="修改" style="float:right;">
 	                						[修改]
 	                					</a>
 	                					<#if secondFolder.type="article" >
-	                					<a href="${basePath}/admin/article/add.htm?folderId=${secondFolder.folderId}"  folderId="${secondFolder.folderId}"style="float:right;">
+	                					<a href="${BASE_PATH}/admin/article/add.htm?folderId=${secondFolder.folderId}"  folderId="${secondFolder.folderId}"style="float:right;">
 														[增加文章]
 										</a>
 										</#if>
 	                					<#if secondFolder.type="photo" >
-	                					<a href="${basePath}/admin/folder/photo.htm?folderId=${secondFolder.folderId}"  folderId="${secondFolder.folderId}"style="float:right;">
+	                					<a href="${BASE_PATH}/admin/folder/photo.htm?folderId=${secondFolder.folderId}"  folderId="${secondFolder.folderId}"style="float:right;">
 														[上传照片]
 										</a>
 										</#if>
@@ -126,16 +126,16 @@
 									<li class="list-group-item" >
 		                          		<div style="width:50% float:left">
 		                          			│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└──${thirdFolder.name}
-		                          			<a href="${basePath}/admin/folder/update.htm?folderId=${thirdFolder.folderId}" title="修改" style="float:right;">
+		                          			<a href="${BASE_PATH}/admin/folder/update.htm?folderId=${thirdFolder.folderId}" title="修改" style="float:right;">
 		                						[修改]
 		                					</a>
 		                					<#if thirdFolder.type="article" >
-		                					<a href="${basePath}/admin/article/add.htm?folderId=${thirdFolder.folderId}"  folderId="${thirdFolder.folderId}" style="float:right;">
+		                					<a href="${BASE_PATH}/admin/article/add.htm?folderId=${thirdFolder.folderId}"  folderId="${thirdFolder.folderId}" style="float:right;">
 															[增加文章]
 											</a>
 											</#if>
 		                					<#if thirdFolder.type="photo" >
-		                					<a href="${basePath}/admin/folder/photo.htm?folderId=${thirdFolder.folderId}"  folderId="${thirdFolder.folderId}" style="float:right;">
+		                					<a href="${BASE_PATH}/admin/folder/photo.htm?folderId=${thirdFolder.folderId}"  folderId="${thirdFolder.folderId}" style="float:right;">
 															[上传照片]
 											</a>
 											</#if>
@@ -145,16 +145,16 @@
 										<li class="list-group-item" >
 			                          		<div style="width:50% float:left">
 			                          			│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└──${fourthFolder.name}
-			                          			<a href="${basePath}/admin/folder/update.htm?folderId=${fourthFolder.folderId}" title="修改" style="float:right;">
+			                          			<a href="${BASE_PATH}/admin/folder/update.htm?folderId=${fourthFolder.folderId}" title="修改" style="float:right;">
 			                						[修改]
 			                					</a>
 			                					<#if fourthFolder.type="article" >
-			                					<a href="${basePath}/admin/article/add.htm?folderId=${fourthFolder.folderId}"  folderId="${fourthFolder.folderId}" style="float:right;">
+			                					<a href="${BASE_PATH}/admin/article/add.htm?folderId=${fourthFolder.folderId}"  folderId="${fourthFolder.folderId}" style="float:right;">
 																[增加文章]
 												</a>
 												</#if>
 			                					<#if fourthFolder.type="photo" >
-			                					<a href="${basePath}/admin/folder/photo.htm?folderId=${fourthFolder.folderId}"  folderId="${fourthFolder.folderId}" style="float:right;">
+			                					<a href="${BASE_PATH}/admin/folder/photo.htm?folderId=${fourthFolder.folderId}"  folderId="${fourthFolder.folderId}" style="float:right;">
 																[上传照片]
 												</a>
 												</#if>
@@ -174,12 +174,12 @@
                               <span class="tools pull-right">
                             </span>
                           </header>
-                          <li class="list-group-item" style="background-color:#DFF0D8;"><a href="${basePath}/admin/article/add.htm">添加文章</a></li>
+                          <li class="list-group-item" style="background-color:#DFF0D8;"><a href="${BASE_PATH}/admin/article/add.htm">添加文章</a></li>
                           <ul class="list-group">
                           	<#list articleList as article>
                           		<li class="list-group-item" style="background-color:#FCF8E3;height:33px;">
-                          			<a href="${basePath}/admin/article/update.htm?articleId=${article.articleId}">${article.name}</a>
-                          			<a href="${basePath}/admin/article/update.htm?articleId=${article.articleId}" title="修改" style="float:right;">
+                          			<a href="${BASE_PATH}/admin/article/update.htm?articleId=${article.articleId}">${article.name}</a>
+                          			<a href="${BASE_PATH}/admin/article/update.htm?articleId=${article.articleId}" title="修改" style="float:right;">
                   						[修改]
                   					</a>
                           		</li>

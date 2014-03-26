@@ -6,20 +6,19 @@
 
 package com.shishuo.cms.tag;
 
-import static freemarker.template.ObjectWrapper.BEANS_WRAPPER;
+import static freemarker.template.ObjectWrapper.DEFAULT_WRAPPER;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.entity.Article;
-import com.shishuo.cms.entity.vo.PageVo;
-import com.shishuo.cms.exception.FolderNotFoundException;
+import com.shishuo.cms.constant.AttachmentConstant;
+import com.shishuo.cms.entity.Attachment;
 import com.shishuo.cms.plugin.TagPlugin;
-import com.shishuo.cms.service.ArticleService;
-import com.shishuo.cms.service.FolderService;
+import com.shishuo.cms.service.AttachmentService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
@@ -27,34 +26,27 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 
 /**
- * @author Herbert
+ * folder标签
+ * 
+ * @author lqq
  * 
  */
 @Service
-public class ArticlePageTag extends TagPlugin {
+public class AttachmentFolderPhotoListTag extends TagPlugin {
 
 	@Autowired
-	private ArticleService articleService;
-
-	@Autowired
-	private FolderService folderService;
-	
+	private AttachmentService attachmentService;
 
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
 		// 获取页面的参数
-		Integer folderId = Integer.parseInt(params.get("folderId").toString());
-		Integer p = Integer.parseInt(params.get("p").toString());
+		long kindId = Long.parseLong(params.get("kindId").toString());
 		Integer rows = Integer.parseInt(params.get("rows").toString());
-		// 获取文件的分页
-		try {
-			PageVo<Article> pageVo = articleService.getArticlePageByFolderId(
-					folderId, p, rows);
-			env.setVariable("tag_article_page", BEANS_WRAPPER.wrap(pageVo));
-		} catch (FolderNotFoundException e) {
-			env.setVariable("tag_article_page", BEANS_WRAPPER.wrap(null));
-		}
 
+		// 获得目录列表
+		List<Attachment> list = attachmentService.getAttachmentListByKindAndType(
+				kindId, AttachmentConstant.Kind.folder, AttachmentConstant.Type.photo, rows);
+		env.setVariable("tag_attachment_list", DEFAULT_WRAPPER.wrap(list));
 		body.render(env.getOut());
 	}
 

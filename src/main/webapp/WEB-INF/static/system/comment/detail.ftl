@@ -78,7 +78,7 @@
 		var commentId = ${comment.commentId};
 		$('.js_status').click(function(){
 			var status = $(this).attr("status");
-			$.post("${basePath}/admin/comment/update/status.json",{'commentId':commentId,'status':status},function(data){
+			$.post("${BASE_PATH}/admin/comment/update/status.json",{'commentId':commentId,'status':status},function(data){
 				if(data.result){
 					window.location.reload();
 				}

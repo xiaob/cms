@@ -28,7 +28,7 @@
 				<section class="panel">
 					<header class="panel-heading"> 添加管理员 </header>
 					<div class="panel-body">
-						 <form id="add_admin_form" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/admin/addNew.json">
+						 <form id="add_admin_form" method="post" class="form-horizontal" autocomplete="off" action="${BASE_PATH}/admin/admin/addNew.json">
 							<fieldset>
 								
 								<div class="form-group">
@@ -87,7 +87,7 @@
                                       <td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                       <td>
                                 <!-- Icons -->
-                               <a href="${basePath}/admin/admin/delete.htm?adminId=${e.adminId}" title="删除">
+                               <a href="${BASE_PATH}/admin/admin/delete.htm?adminId=${e.adminId}" title="删除">
                                   
                                                                                                       删除
                                 </a>

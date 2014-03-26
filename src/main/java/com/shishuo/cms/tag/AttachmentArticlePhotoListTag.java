@@ -17,11 +17,11 @@ import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.constant.AttachmentConstant;
 import com.shishuo.cms.entity.Attachment;
+import com.shishuo.cms.plugin.TagPlugin;
 import com.shishuo.cms.service.AttachmentService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
-import freemarker.template.TemplateDirectiveModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 
@@ -32,22 +32,20 @@ import freemarker.template.TemplateModel;
  * 
  */
 @Service
-public class AttachmentListTag implements TemplateDirectiveModel {
+public class AttachmentArticlePhotoListTag extends TagPlugin {
 
 	@Autowired
 	private AttachmentService attachmentService;
 
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
-
 		// 获取页面的参数
-		Integer kindId = Integer.parseInt(params.get("kindId").toString());
-		AttachmentConstant.Kind kind = AttachmentConstant.Kind.valueOf(params
-				.get("kind").toString());
+		long kindId = Long.parseLong(params.get("kindId").toString());
+		Integer rows = Integer.parseInt(params.get("rows").toString());
 
 		// 获得目录列表
-		List<Attachment> list = attachmentService.getAttachmentListByKindId(
-				kindId, kind, AttachmentConstant.Status.display);
+		List<Attachment> list = attachmentService.getAttachmentListByKindAndType(
+				kindId, AttachmentConstant.Kind.article, AttachmentConstant.Type.photo, rows);
 		env.setVariable("tag_attachment_list", DEFAULT_WRAPPER.wrap(list));
 		body.render(env.getOut());
 	}

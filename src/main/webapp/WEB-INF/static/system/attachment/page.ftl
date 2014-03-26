@@ -17,16 +17,16 @@
                           <li>
                           	  <#if attachment.type = "photo">
                               <figure>
-                                  <img src="${basePath}/${attachment.path}" alt="${attachment.name}">
+                                  <img src="${BASE_PATH}/${attachment.path}" alt="${attachment.name}">
                                   <figcaption>
                                       <h3>名称：${attachment.name}</h3>
                                       <h5>大小：${attachment.size/1024}k</h5>
-                                      <a class="fancybox" rel="group" href="${basePath}/${attachment.path}">查看大图</a>
+                                      <a class="fancybox" rel="group" href="${BASE_PATH}/${attachment.path}">查看大图</a>
                                   </figcaption>
                               </figure>
                               <#else>
                               <figure>
-                                  <img src="${basePath}/system/images/folder-data.png" alt="${attachment.name}">
+                                  <img src="${BASE_PATH}/system/images/folder-data.png" alt="${attachment.name}">
                                   <figcaption>
                                       <h3>名称：${attachment.name}</h3>
                                       <h5>大小：${attachment.size/1024}k</h5>
@@ -86,8 +86,8 @@
 $(function(){
 	$('#file_upload').uploadify({
 		'buttonText'  		: 	'请选择文件',
-        'swf'         		: 	'${basePath}/system/assets/uploadify/uploadify.swf',
-        'uploader'    		: 	'${basePath}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
+        'swf'         		: 	'${BASE_PATH}/system/assets/uploadify/uploadify.swf',
+        'uploader'    		: 	'${BASE_PATH}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
         'formData'  		: 	{'articleId':0,folderId:${folder.folderId}},
         'fileObjName'		: 	'file',
         'fileTypeExts' 		: 	'*.gif;*.png;*.jpg;*.jpeg;*.bmp;*.rar;*.doc;*.docx;*.zip,*.pdf;*.txt;*.swf;*.wmv',
@@ -96,7 +96,7 @@ $(function(){
         }
 	});
 	$('#folderId').change(function(){
-		window.location.href = "${basePath}/admin/attachment/page.htm?folderId="+$('#folderId').val();
+		window.location.href = "${BASE_PATH}/admin/attachment/page.htm?folderId="+$('#folderId').val();
 	});
 	$('#btn_reflash').click(function(){
 		window.location.reload();

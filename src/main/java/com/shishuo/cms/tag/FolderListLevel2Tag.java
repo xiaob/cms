@@ -9,16 +9,16 @@ package com.shishuo.cms.tag;
 import static freemarker.template.ObjectWrapper.DEFAULT_WRAPPER;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.constant.AttachmentConstant;
-import com.shishuo.cms.entity.Attachment;
-import com.shishuo.cms.entity.vo.PageVo;
+import com.shishuo.cms.constant.FolderConstant;
+import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.plugin.TagPlugin;
-import com.shishuo.cms.service.AttachmentService;
+import com.shishuo.cms.service.FolderService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
@@ -32,25 +32,28 @@ import freemarker.template.TemplateModel;
  * 
  */
 @Service
-public class AttachmentPageTag  extends TagPlugin {
-
+public class FolderListLevel2Tag extends TagPlugin {
 	@Autowired
-	private AttachmentService attachmentService;
+	private FolderService folderService;
 
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
 
-		// 获取页面的参数
-		Integer kindId = Integer.parseInt(params.get("kindId").toString());
-		AttachmentConstant.Kind kind = AttachmentConstant.Kind.valueOf(params
-				.get("kind").toString());
-		Integer pageNum = Integer.parseInt(params.get("p").toString());
-		Integer rows = Integer.parseInt(params.get("rows").toString());
-		// 获得目录列表
-		PageVo<Attachment> pageVo = attachmentService
-				.getAttachmentPageByKindId(kindId, kind, rows, pageNum);
-		env.setVariable("tag_attachment_page", DEFAULT_WRAPPER.wrap(pageVo));
-		body.render(env.getOut());
+		try {
+			// 获取页面的参数
+			Integer fatherId = Integer.parseInt(params.get("fatherId")
+					.toString());
+			FolderVo folder = folderService.getFolderById(fatherId);
+			FolderVo firstFolder = folderService.getFolderById(folder.getFirstFolderId());
+			// 获得目录列表
+			List<FolderVo> list = folderService.getFolderListByFatherId(
+					folder.getFirstFolderId(), FolderConstant.status.display);
+			env.setVariable("tag_folder_list", DEFAULT_WRAPPER.wrap(list));
+			env.setVariable("tag_folder", DEFAULT_WRAPPER.wrap(firstFolder));
+			body.render(env.getOut());
+		} catch (Exception e) {
+
+		}
 	}
 
 }

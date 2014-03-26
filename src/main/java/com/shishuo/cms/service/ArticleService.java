@@ -20,6 +20,7 @@ import com.shishuo.cms.constant.ArticleConstant;
 import com.shishuo.cms.dao.ArticleDao;
 import com.shishuo.cms.dao.FolderDao;
 import com.shishuo.cms.entity.Article;
+import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.ArticleVo;
 import com.shishuo.cms.entity.vo.FolderVo;
 import com.shishuo.cms.entity.vo.PageVo;
@@ -289,18 +290,18 @@ public class ArticleService {
 	 * @throws FolderNotFoundException
 	 * 
 	 */
-	public PageVo<Article> getArticlePageByTypeAndStatusPage(long folderId,
+	public PageVo<ArticleVo> getArticlePageByTypeAndStatusPage(long folderId,
 			ArticleConstant.Status status, int pageNum)
 			throws FolderNotFoundException {
-		PageVo<Article> pageVo = new PageVo<Article>(pageNum);
+		PageVo<ArticleVo> pageVo = new PageVo<ArticleVo>(pageNum);
 		pageVo.setRows(20);
 		pageVo.getArgs().put("status", status.name());
-		List<Article> list = new ArrayList<Article>();
+		List<ArticleVo> list = new ArrayList<ArticleVo>();
 		int count = 0;
 		if (folderId == 0) {
+			count = this.getArticleCountByStatus(0, 0, 0, 0, status);
 			list = this.getArticleListByStatus(0, 0, 0, 0, status,
 					pageVo.getOffset(), pageVo.getRows());
-			count = this.getArticleCountByStatus(0, 0, 0, 0, status);
 		} else {
 			FolderVo folder = folderService.getFolderById(folderId);
 			list = this.getArticleListByStatus(folder.getFirstFolderId(),
@@ -310,6 +311,14 @@ public class ArticleService {
 			count = this.getArticleCountByStatus(folder.getFirstFolderId(),
 					folder.getSecondFolderId(), folder.getThirdFolderId(),
 					folder.getFourthFolderId(), status);
+		}
+		for (ArticleVo article : list) {
+			try {
+				article.setFolder(folderService.getFolderById(article.getFolderId()));
+				article.setFolderPathList(folderService.getFolderPathListByFolderId(article.getFolderId()));
+			} catch (FolderNotFoundException e) {
+				article.setFolder(new Folder());
+			}
 		}
 		pageVo.setList(list);
 		pageVo.setCount(count);
@@ -326,11 +335,13 @@ public class ArticleService {
 	 * @return List<File>
 	 * 
 	 */
-	public List<Article> getArticleListByStatus(long firstFolderId,
+	public List<ArticleVo> getArticleListByStatus(long firstFolderId,
 			long secondFolderId, long thirdFolderId, long fourthFolderId,
 			ArticleConstant.Status status, long offset, long rows) {
-		return articleDao.getArticleListByStatus(firstFolderId, secondFolderId,
-				thirdFolderId, fourthFolderId, status, offset, rows);
+		List<ArticleVo> articleList = articleDao.getArticleListByStatus(
+				firstFolderId, secondFolderId, thirdFolderId, fourthFolderId,
+				status, offset, rows);
+		return articleList;
 	}
 
 	/**

@@ -10,6 +10,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import com.shishuo.cms.constant.SystemConstant;
 
@@ -17,7 +18,7 @@ import com.shishuo.cms.constant.SystemConstant;
  * @author Herbert
  * 
  */
-public class UploadUtils {
+public class AttachmentUtils {
 
 	/**
 	 * 文件允许格式
@@ -73,9 +74,10 @@ public class UploadUtils {
 	 *            文件名
 	 * @return
 	 */
-	public static String getUploadPath(String fileName, long time) {
+	public static String getPath(String fileName) {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
-		String uploadPath = formater.format(new Date()) + "/" + time
+		String uploadPath = "upload/"+formater.format(new Date()) + "/"
+				+ UUID.randomUUID().toString().replaceAll("-", "")
 				+ getFileExt(fileName);
 		return uploadPath;
 	}

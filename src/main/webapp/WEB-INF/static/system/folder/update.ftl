@@ -9,7 +9,7 @@
 		<div class="row">
 			<form id="update_folder_form" method="post"
 				class="form-horizontal tasi-form" autocomplete="off"
-				action="${basePath}/admin/folder/update.json">
+				action="${BASE_PATH}/admin/folder/update.json">
 				<div class="col-lg-9">
 					<input type="hidden" class="form-control" name="folderId"
 						value="${folder.folderId}">						
@@ -76,8 +76,8 @@
 		});
 		$('#file_upload').uploadify({
 			'buttonText'  		: 	'请选择文件',
-	        'swf'         		: 	'${basePath}/system/assets/uploadify/uploadify.swf',
-	        'uploader'    		: 	'${basePath}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
+	        'swf'         		: 	'${BASE_PATH}/system/assets/uploadify/uploadify.swf',
+	        'uploader'    		: 	'${BASE_PATH}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
 	        'formData'  		: 	{'kindId':kindId,'kind':kind},
 	        'fileObjName'		: 	'file',
 	        'fileTypeExts' 		: 	'*.jpg; *.png; *.gif',
@@ -86,7 +86,7 @@
 	        }
 		});
 		$('#folderId').change(function(){
-			window.location.href = "${basePath}/admin/attachment/page.htm?folderId="+$('#folderId').val();
+			window.location.href = "${BASE_PATH}/admin/attachment/page.htm?folderId="+$('#folderId').val();
 		});
 		$('#btn_reflash').click(function(){
 			window.location.reload();
@@ -97,7 +97,7 @@
 			var link = $(this).attr("link");
 			bootbox.prompt("修改链接，当前链接为："+link, function(result) {
 				if (result != null && result != "") {
-					$.post("${basePath}/admin/attachment/update_link.json",{'attachmentId':attachmentId,'link':result},function(data){
+					$.post("${BASE_PATH}/admin/attachment/update_link.json",{'attachmentId':attachmentId,'link':result},function(data){
 						if(data.result){
 							window.location.reload();
 						}
@@ -109,7 +109,7 @@
 			var file = $(this);
 			bootbox.confirm("是否要删除【"+$(this).attr("name")+"】文件？", function(result) {
 				if (result) {
-					$.post("${basePath}/admin/attachment/delete.json",{'attachmentId':file.attr("attachmentId")},function(data){
+					$.post("${BASE_PATH}/admin/attachment/delete.json",{'attachmentId':file.attr("attachmentId")},function(data){
 						if(data.result){
 							window.location.reload();
 						}

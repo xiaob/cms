@@ -31,8 +31,8 @@
                 </div>
                 <div class="col-md-8 col-sm-8">
                     <ul class="pull-right breadcrumb">
-                        <li><a href="${basePath}/index.htm">Home</a></li>
-                        <li class="active"><a href="${basePath}/505.htm">500</a></li>
+                        <li><a href="${BASE_PATH}/index.htm">Home</a></li>
+                        <li class="active"><a href="${BASE_PATH}/505.htm">500</a></li>
                     </ul>
                 </div>
             </div>

@@ -46,10 +46,10 @@
                   <div class="col-lg-12">
                       <!--breadcrumbs start -->
                       <ul class="breadcrumb" >
-                          <li ><a href="${basePath}/admin/article/page.htm?status=display">已发布</a>（${displayCount}）</li>
-						<li ><a href="${basePath}/admin/article/page.htm?status=hidden">隐藏</a>（${hiddenCount}）</li>
-						<li ><a href="${basePath}/admin/article/page.htm?status=trash">垃圾文章</a>（${trashCount}）</li>
-						<li ><a href="${basePath}/admin/article/page.htm?status=init">初始化文章列表</a>（${initCount}）</li>
+                          <li ><a href="${BASE_PATH}/admin/article/list.htm?status=display">已发布</a>（${displayCount}）</li>
+						<li ><a href="${BASE_PATH}/admin/article/list.htm?status=hidden">隐藏</a>（${hiddenCount}）</li>
+						<li ><a href="${BASE_PATH}/admin/article/list.htm?status=trash">垃圾文章</a>（${trashCount}）</li>
+						<li ><a href="${BASE_PATH}/admin/article/list.htm?status=init">初始化文章列表</a>（${initCount}）</li>
                       </ul>
                       <!--breadcrumbs end -->
                   </div>
@@ -70,10 +70,10 @@
                 <#else>
                 <header class="panel-heading">
 				<ul class="breadcrumb">
-					<li><a href="${basePath}/admin/article/page.htm"><i
+					<li><a href="${BASE_PATH}/admin/article/list.htm"><i
 							class="icon-home"></i> Home</a></li> <#list pathList as pathFolder>
 					<li><a
-						href="${basePath}/admin/article/page.htm?folderId=${pathFolder.folderId}&status=${status}">${pathFolder.name}</a></li>
+						href="${BASE_PATH}/admin/article/list.htm?folderId=${pathFolder.folderId}&status=${status}">${pathFolder.name}</a></li>
 					</#list>目录下的文章列表
 				</ul>
 				</header>
@@ -94,12 +94,12 @@
                             		<#list pageVo.list as e>
                             		<tr class="gradeA odd">
                             			<td class="articleId">${e.articleId}</td>
-               							<td><a href="${basePath}/admin/article/update.htm?articleId=${e.articleId}">${e.name}</a>&nbsp;-
+               							<td><a href="${BASE_PATH}/admin/article/update.htm?articleId=${e.articleId}">${e.name}</a>&nbsp;-
                								<#if e.status=="display">公开
                                     		<#else>隐藏
                                     		</#if>
                							</td>
-                            			<td><a href="${basePath}/admin/article/page.htm?folderId=${e.folder.folderId}&status=${e.status}">
+                            			<td><a href="${BASE_PATH}/admin/article/list.htm?folderId=${e.folder.folderId}&status=${e.status}">
                             				<#list e.folderPathList as folders>
                             					<#if folders.name == e.folder.name>
                             					<#else>${folders.name}&nbsp;-
@@ -108,7 +108,7 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                  							<a href="${basePath}/admin/article/update.htm?articleId=${e.articleId}" title="修改">
+                  							<a href="${BASE_PATH}/admin/article/update.htm?articleId=${e.articleId}" title="修改">
                   								编辑
                   							</a>
                   							 | 
@@ -144,7 +144,7 @@ $(function(){
 					label : "确定",
 					className : "btn-success",
 					callback : function() {
-						$.post("${basePath}/admin/article/status/delete.json", {},function(data){
+						$.post("${BASE_PATH}/admin/article/status/delete.json", {},function(data){
 									bootbox.alert("清理成功,即将刷新页面", function() {
 										window.location.reload();
 									});
@@ -173,7 +173,7 @@ $(function(){
 					label : "确定",
 					className : "btn-success",
 					callback : function() {
-						$.post("${basePath}/admin/article/status/update.json", { "fileId": fileId,"status": status},function(data){
+						$.post("${BASE_PATH}/admin/article/status/update.json", { "fileId": fileId,"status": status},function(data){
 								window.location.reload();
 						}, "json");
 					}

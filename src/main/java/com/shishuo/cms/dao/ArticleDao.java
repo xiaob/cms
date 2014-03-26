@@ -136,7 +136,7 @@ public interface ArticleDao {
 	 * @param foderId
 	 * @return List<FileVo>
 	 */
-	public List<Article> getArticleListByStatus(
+	public List<ArticleVo> getArticleListByStatus(
 			@Param("firstFolderId") long firstFolderId,
 			@Param("secondFolderId") long secondFolderId,
 			@Param("thirdFolderId") long thirdFolderId,

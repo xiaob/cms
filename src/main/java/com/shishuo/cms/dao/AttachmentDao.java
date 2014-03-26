@@ -12,7 +12,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.cms.constant.AttachmentConstant;
+import com.shishuo.cms.constant.AttachmentConstant.Kind;
 import com.shishuo.cms.constant.AttachmentConstant.Status;
+import com.shishuo.cms.constant.AttachmentConstant.Type;
 import com.shishuo.cms.entity.Attachment;
 
 @Repository
@@ -82,5 +84,18 @@ public interface AttachmentDao {
 			@Param("kind") AttachmentConstant.Kind kind,
 			@Param("status") AttachmentConstant.Status status,
 			@Param("offset") int offset, @Param("rows") int rows);
+
+	/**
+	 * @param kindId
+	 * @param kind
+	 * @param type
+	 * @param i
+	 * @param rows
+	 * @return
+	 */
+	public List<Attachment> getAttachmentListByKindAndType(
+			@Param("kindId") long kindId, @Param("kind") Kind kind,
+			@Param("type") Type type, @Param("offset") int offset,
+			@Param("rows") int rows);
 
 }

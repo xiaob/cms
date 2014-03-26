@@ -73,4 +73,8 @@
 		#{status} order by
 		createTime desc limit #{offset},#{rows}
 	</select>
+	
+	<select id="getAttachmentListByKindAndType" resultType="com.shishuo.cms.entity.Attachment">
+		select * from attachment where kindId=#{kindId} and kind = #{kind} and type = #{type} and status = "display" order by createTime desc limit #{offset},#{rows}
+	</select>
 </mapper>  

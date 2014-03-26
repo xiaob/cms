@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.cms.constant.FolderConstant;
-import com.shishuo.cms.constant.FolderConstant.Status;
+import com.shishuo.cms.constant.FolderConstant.status;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.FolderVo;
 
@@ -95,9 +95,9 @@ public interface FolderDao {
 	 * @param fatherId
 	 * @return List<FolderVo>
 	 */
-	public List<Folder> getFolderListByFatherId(
+	public List<FolderVo> getFolderListByFatherId(
 			@Param("fatherId") long fatherId,
-			@Param("status") FolderConstant.Status status);
+			@Param("status") FolderConstant.status status);
 
 	/**
 	 * 得到folder的所有path
@@ -136,6 +136,6 @@ public interface FolderDao {
 	 * @param status
 	 */
 	public void updateStatus(@Param("folderId") long folderId,
-			@Param("status") Status status);
+			@Param("status") status status);
 
 }

@@ -8,7 +8,7 @@
 				          	<@shishuocms_attachment_page  kindId="${folder.folderId}" kind="folder" p="${p}" rows="9">
 				          	<#list tag_attachment_page.list as attachment>
 				            <div class="col-xs-4 gallery-item">
-				                <img class="img-responsive" src="${basePath}/${attachment.path}" alt="">
+				                <img class="img-responsive" src="${BASE_PATH}/${attachment.path}" alt="">
 				            </div>
 				            
 				            <#if (attachment_index+1)%3==0><hr><div class="clearfix"></div></#if>

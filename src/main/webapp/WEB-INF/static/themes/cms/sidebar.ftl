@@ -6,7 +6,7 @@
                         <@shishuocms_folder_list fatherId="${firstFolder.folderId}">
                         <ul class="list-unstyled">
                         	<#list tag_folder_list as secondLevelFolder>
-                            <li><a href="${basePath}/${firstFolder.ename}/${secondLevelFolder.ename}/index.htm"><i class="  icon-angle-right"></i> ${secondLevelFolder.name}</a></li>
+                            <li><a href="${BASE_PATH}/${firstFolder.ename}/${secondLevelFolder.ename}/index.htm"><i class="  icon-angle-right"></i> ${secondLevelFolder.name}</a></li>
                             </#list>
                         </ul>
                         </@shishuocms_folder_list>

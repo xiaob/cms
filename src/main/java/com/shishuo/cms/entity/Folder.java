@@ -95,7 +95,7 @@ public class Folder {
 	/**
 	 * 状态
 	 */
-	private FolderConstant.Status status;
+	private FolderConstant.status status;
 
 	/**
 	 * 创建时间
@@ -179,7 +179,7 @@ public class Folder {
 		this.rank = rank;
 	}
 
-	public void setStatus(FolderConstant.Status status) {
+	public void setStatus(FolderConstant.status status) {
 		this.status = status;
 	}
 
@@ -199,7 +199,7 @@ public class Folder {
 		this.level = level;
 	}
 
-	public FolderConstant.Status getStatus() {
+	public FolderConstant.status getStatus() {
 		return status;
 	}
 

@@ -21,10 +21,10 @@
 	                      	  <#list attachmentPage.list as attachment>
 	                          <li>
 	                              <figure>
-	                                  <img src="${basePath}/${attachment.path}" alt="img04">
+	                                  <img src="${BASE_PATH}/${attachment.path}" alt="img04">
 	                                  <figcaption>
 	                                      <a class="js_link" href="javascript:void(0);" link="${attachment.link}"  title="链接为：${attachment.link}"  attachmentId="${attachment.attachmentId}">修改链接</a>
-	                                      <a class="fancybox" rel="group" href="${basePath}/${attachment.path}">查看大图</a>
+	                                      <a class="fancybox" rel="group" href="${BASE_PATH}/${attachment.path}">查看大图</a>
 	                                      <a class="js_delete" href="javascript:void(0);" name="${attachment.name}" attachmentId="${attachment.attachmentId}">删除</a>
 	                                  </figcaption>
 	                              </figure>
@@ -48,8 +48,8 @@
 	$(function() {
 		$('#file_upload').uploadify({
 			'buttonText'  		: 	'请选择文件',
-	        'swf'         		: 	'${basePath}/system/assets/uploadify/uploadify.swf',
-	        'uploader'    		: 	'${basePath}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
+	        'swf'         		: 	'${BASE_PATH}/system/assets/uploadify/uploadify.swf',
+	        'uploader'    		: 	'${BASE_PATH}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
 	        'formData'  		: 	{'kindId':kindId,'kind':kind},
 	        'fileObjName'		: 	'file',
 	        'fileTypeExts' 		: 	'*.jpg; *.png; *.gif',
@@ -59,7 +59,7 @@
 	        }
 		});
 		$('#folderId').change(function(){
-			window.location.href = "${basePath}/admin/attachment/page.htm?folderId="+$('#folderId').val();
+			window.location.href = "${BASE_PATH}/admin/attachment/page.htm?folderId="+$('#folderId').val();
 		});
 		$('#btn_reflash').click(function(){
 			window.location.reload();
@@ -71,7 +71,7 @@
 			bootbox.prompt({title:"修改链接，当前链接为："+link, value:link,callback:function(result) {
 				if (result === null) {
 				}else{
-					$.post("${basePath}/admin/attachment/update_link.json",{'attachmentId':attachmentId,'link':result},function(data){
+					$.post("${BASE_PATH}/admin/attachment/update_link.json",{'attachmentId':attachmentId,'link':result},function(data){
 						if(data.result){
 							window.location.reload();
 						}
@@ -83,7 +83,7 @@
 			var file = $(this);
 			bootbox.confirm("是否要删除【"+$(this).attr("name")+"】文件？", function(result) {
 				if (result) {
-					$.post("${basePath}/admin/attachment/delete.json",{'attachmentId':file.attr("attachmentId")},function(data){
+					$.post("${BASE_PATH}/admin/attachment/delete.json",{'attachmentId':file.attr("attachmentId")},function(data){
 						if(data.result){
 							window.location.reload();
 						}

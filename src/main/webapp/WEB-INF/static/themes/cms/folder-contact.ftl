@@ -22,7 +22,7 @@
             <div class="col-lg-7 col-sm-7 address">
                 <h4>留言</h4>
                 <div class="contact-form">
-                    <form role="form" id="addFeedBack" action="${basePath}/comment/add.json" method="post" autocomplete="off">
+                    <form role="form" id="addFeedBack" action="${BASE_PATH}/comment/add.json" method="post" autocomplete="off">
                     	<input type="hidden" name="kindId" value="${folder.folderId}">
 						<input type="hidden" name="kind" value="folder">
                         <div class="form-group">

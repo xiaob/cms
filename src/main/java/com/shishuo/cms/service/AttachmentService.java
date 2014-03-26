@@ -17,13 +17,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shishuo.cms.constant.AttachmentConstant;
-import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.AttachmentDao;
 import com.shishuo.cms.entity.Attachment;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.UploadException;
-import com.shishuo.cms.plugin.PluginService;
-import com.shishuo.cms.util.UploadUtils;
+import com.shishuo.cms.plugin.StoragePlugin;
+import com.shishuo.cms.util.AttachmentUtils;
 
 @Service
 public class AttachmentService {
@@ -32,7 +31,7 @@ public class AttachmentService {
 	private AttachmentDao attachmentDao;
 
 	@Autowired
-	private PluginService pluginService;
+	private StoragePlugin storagePlugin;
 
 	/*
 	 * 上传附件
@@ -43,20 +42,20 @@ public class AttachmentService {
 			AttachmentConstant.Status status) throws IllegalStateException,
 			IOException, UploadException {
 		AttachmentConstant.Type type = AttachmentConstant.Type.photo;
-		if (UploadUtils.isFileType(fileName, UploadUtils.PHOTO_TYPE)) {
+		if (AttachmentUtils.isFileType(fileName, AttachmentUtils.PHOTO_TYPE)) {
 			type = AttachmentConstant.Type.photo;
-		} else if (UploadUtils.isFileType(fileName, UploadUtils.FILE_TYPE)) {
+		} else if (AttachmentUtils.isFileType(fileName, AttachmentUtils.FILE_TYPE)) {
 			type = AttachmentConstant.Type.file;
 		} else {
 			throw new UploadException("文件类型有误");
 		}
 		Date now = new Date();
-		String uploadPath = UploadUtils.getUploadPath(fileName, now.getTime());
+		String path = storagePlugin.getStoragePlugin().save(multipartFile);
 		Attachment attachment = new Attachment();
 		attachment.setKindId(kindId);
 		attachment.setDescription("");
 		attachment.setName(fileName);
-		attachment.setPath(uploadPath);
+		attachment.setPath(path);
 		attachment.setType(type);
 		attachment.setLink("javascript:void(0);");
 		attachment.setSize(multipartFile.getSize());
@@ -64,9 +63,6 @@ public class AttachmentService {
 		attachment.setStatus(status);
 		attachment.setCreateTime(now);
 		attachmentDao.addAttachment(attachment);
-		pluginService.getStoragePlugin().save(multipartFile, uploadPath);
-		multipartFile.transferTo(new java.io.File(
-				SystemConstant.SHISHUO_CMS_ROOT + uploadPath));
 		return attachment;
 	}
 
@@ -77,7 +73,7 @@ public class AttachmentService {
 	@CacheEvict(value = "article", allEntries = true)
 	public void deleteAttachment(long attachmentId, String path) {
 		attachmentDao.deleteAttachment(attachmentId);
-		UploadUtils.deleteFile(path);
+		AttachmentUtils.deleteFile(path);
 	}
 
 	/**
@@ -102,6 +98,7 @@ public class AttachmentService {
 	 * @param attachmentId
 	 * @return
 	 */
+	@Cacheable("article")
 	public Attachment getAttachmentById(long attachmentId) {
 		return attachmentDao.getAttachmentById(attachmentId);
 	}
@@ -120,7 +117,7 @@ public class AttachmentService {
 	 * @param folderId
 	 * @return
 	 */
-	@Cacheable(value = "article", key = "'getAttachmentPageByFolderId_'+#kindId+'_'+#kind+'_'+#status+'_'+#pageNum")
+	@Cacheable("article")
 	public PageVo<Attachment> getAttachmentPageByKindId(long kindId,
 			AttachmentConstant.Kind kind, int rows, int pageNum) {
 		PageVo<Attachment> pageVo = new PageVo<Attachment>(pageNum);
@@ -139,11 +136,25 @@ public class AttachmentService {
 	 * @param stauts
 	 * @return
 	 */
-	@Cacheable(value = "article", key = "'getAttachmentListByKindId_'+#kindId+'_'+#kind+'_'+#status")
+	@Cacheable("article")
 	public List<Attachment> getAttachmentListByKindId(long kindId,
-			AttachmentConstant.Kind kind, AttachmentConstant.Status status) {
+			AttachmentConstant.Kind kind, AttachmentConstant.Status status,
+			int rows) {
 		return attachmentDao.getAttachmentListByKindId(kindId, kind, status, 0,
-				1000);
+				rows);
+
+	}
+
+	/**
+	 * @param kindId
+	 * @param kind
+	 * @param stauts
+	 * @return
+	 */
+	@Cacheable("article")
+	public List<Attachment> getAttachmentListByKindAndType(long kindId,
+			AttachmentConstant.Kind kind, AttachmentConstant.Type type, int rows) {
+		return attachmentDao.getAttachmentListByKindAndType(kindId, kind, type, 0, rows);
 
 	}
 }

@@ -53,13 +53,13 @@ input.error:focus {
 
     <div class="container">
 
-      <form class="form-signin" id="adminForm" action="${basePath}/auth/admin/login.json"  autocomplete="off" method="post">
+      <form class="form-signin" id="adminForm" action="${BASE_PATH}/auth/admin/login.json"  autocomplete="off" method="post">
         <h2 class="form-signin-heading"><img src="${STATIC_SYSTEM_PATH}/images/logo.png" style="height:38px;"/></h2>
         <div class="login-wrap">
             <input type="text" name="email" class="form-control" placeholder="邮箱" value="" autofocus>
             <input type="password" name="password" class="form-control" placeholder="密码" value="">
             <div>
-                <input type="text" name="captcha" class="form-control" placeholder="验证码" style="width:100px;float:left;"> <img id="captcha" style="cursor:pointer;cursor:hand;margin-top: -13px;" onclick="this.src='${basePath}/auth/captcha.htm?'+Math.random();" src="${basePath}/auth/captcha.htm" >
+                <input type="text" name="captcha" class="form-control" placeholder="验证码" style="width:100px;float:left;"> <img id="captcha" style="cursor:pointer;cursor:hand;margin-top: -13px;" onclick="this.src='${BASE_PATH}/auth/captcha.htm?'+Math.random();" src="${BASE_PATH}/auth/captcha.htm" >
             </div>
             <div class="clearfix"></div>
             <div>
@@ -97,11 +97,11 @@ function showErrors(id,errors){
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
-					location.href="${basePath}/admin/index.htm";			
+					location.href="${BASE_PATH}/admin/index.htm";			
 				}else{
 					showErrors($('#adminForm'),data.errors);
 					if(data.msg=="change_captcha"){
-						$('#captcha').attr("src","${basePath}/auth/captcha.htm?"+Math.random());
+						$('#captcha').attr("src","${BASE_PATH}/auth/captcha.htm?"+Math.random());
 						$('#adminForm input[name="captcha"]').val('');
 					}
 				}

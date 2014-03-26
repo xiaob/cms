@@ -19,7 +19,7 @@
                             <div class="blog-img">
 								<#list article.attachmentList as attachment>
 									<#if attachment.type == "photo" && attachment.status="display">
-										<img src="${basePath}/${attachment.path}">
+										<img src="${BASE_PATH}/${attachment.path}">
 									<#break> 
 									</#if> 
 								</#list>

@@ -115,7 +115,7 @@
 		<if test="fourthFolderId!=0"> and fourthFolderId=#{fourthFolderId}</if>
 	</select>
 
-	<select id="getArticleListByStatus" resultType="com.shishuo.cms.entity.Article">
+	<select id="getArticleListByStatus" resultType="com.shishuo.cms.entity.vo.ArticleVo">
 		select * from
 		article
 		where status=#{status}

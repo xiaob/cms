@@ -42,15 +42,15 @@
         <div class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
- 					<a href="${basePath}/index.htm" class="navbar-brand">${SYS_SITENAME}<span>${SYS_SITEDESC}</span></a>               
+ 					<a href="${BASE_PATH}/index.htm" class="navbar-brand">${SYS_SITENAME}<span>${SYS_SITEDESC}</span></a>               
                 </div>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
-                    	<li class="<#if !firstFolder?exists>active</#if>"><a href="${basePath}/index.htm">首页</a></li>
+                    	<li class="<#if !firstFolder?exists>active</#if>"><a href="${BASE_PATH}/index.htm">首页</a></li>
 	                    <@shishuocms_folder_list fatherId="0" >
 						<#list tag_folder_list as f>
 						<li class="<#if firstFolder?exists&&f.folderId == firstFolder.folderId>active</#if>">
-							<a href="${basePath}/${f.ename}/index.htm">${f.name}</a>
+							<a href="${BASE_PATH}/${f.ename}/index.htm">${f.name}</a>
 	                    </li>
 						</#list>
 	                    </@shishuocms_folder_list>

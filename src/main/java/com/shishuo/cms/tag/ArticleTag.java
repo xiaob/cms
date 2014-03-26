@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.exception.ArticleNotFoundException;
+import com.shishuo.cms.plugin.TagPlugin;
 import com.shishuo.cms.service.ArticleService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
-import freemarker.template.TemplateDirectiveModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 
@@ -28,7 +28,7 @@ import freemarker.template.TemplateModel;
  * @author Administrator file标签
  */
 @Service
-public class ArticleTag implements TemplateDirectiveModel {
+public class ArticleTag  extends TagPlugin {
 
 	@Autowired
 	private ArticleService articleService;

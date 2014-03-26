@@ -7,7 +7,6 @@
 package com.shishuo.cms.action.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +23,7 @@ import com.shishuo.cms.constant.ArticleConstant;
 import com.shishuo.cms.constant.AttachmentConstant;
 import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.Article;
+import com.shishuo.cms.entity.Attachment;
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.entity.vo.ArticleVo;
 import com.shishuo.cms.entity.vo.JsonVo;
@@ -57,34 +57,21 @@ public class AdminArticleAction extends AdminBaseAction {
 		return null;
 	}
 
-	@RequestMapping(value = "toadd.htm")
-	public String toAdd(
-			@RequestParam(value = "folderId", defaultValue = "1") long folderId,
-			HttpServletResponse response) {
-		return "system/article/add";
-
-	}
-
 	/**
 	 * @author 进入某种文章的列表分页的首页
 	 * @throws FolderNotFoundException
 	 * 
 	 */
-	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
-	public String filePage(
+	@RequestMapping(value = "/list.htm", method = RequestMethod.GET)
+	public String list(
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "status", defaultValue = "display") ArticleConstant.Status status,
 			@RequestParam(value = "folderId", defaultValue = "0") long folderId,
 			HttpServletRequest request, ModelMap modelMap)
 			throws FolderNotFoundException {
-		List<Folder> pathList = new ArrayList<Folder>();
-		if (folderId != 0) {
-			pathList = folderService.getFolderPathListByFolderId(folderId);
-		}
-
-		modelMap.put("pathList", pathList);
-		modelMap.put("folderId", folderId);
-		PageVo<Article> pageVo = articleService
+		List<Folder> pathList = folderService
+				.getFolderPathListByFolderId(folderId);
+		PageVo<ArticleVo> pageVo = articleService
 				.getArticlePageByTypeAndStatusPage(folderId, status, pageNum);
 		int displayCount = articleService.getArticleCountByStatus(0, 0, 0, 0,
 				ArticleConstant.Status.display);
@@ -94,6 +81,9 @@ public class AdminArticleAction extends AdminBaseAction {
 				ArticleConstant.Status.trash);
 		int initCount = articleService.getArticleCountByStatus(0, 0, 0, 0,
 				ArticleConstant.Status.init);
+
+		modelMap.put("pathList", pathList);
+		modelMap.put("folderId", folderId);
 		modelMap.put("displayCount", displayCount);
 		modelMap.put("hiddenCount", hiddenCount);
 		modelMap.put("trashCount", trashCount);
@@ -116,8 +106,8 @@ public class AdminArticleAction extends AdminBaseAction {
 			HttpServletResponse response) throws Exception {
 		ArticleVo article = articleService.getArticleById(articleId);
 		modelMap.put("article", article);
-		modelMap.put("folderAll", folderService.getAllFolderList(0,
-				FolderConstant.Status.display));
+		modelMap.put("folderAll",
+				folderService.getAllFolderList(FolderConstant.status.display));
 		modelMap.put("JSESSIONID", request.getSession().getId());
 		return "system/article/update";
 	}
@@ -164,7 +154,7 @@ public class AdminArticleAction extends AdminBaseAction {
 	public JsonVo<String> deleteFile(@RequestParam(value = "fileId") long fileId)
 			throws ArticleNotFoundException {
 		JsonVo<String> json = new JsonVo<String>();
-		Article file = articleService.getArticleByArticleId(fileId);
+		Article file = articleService.getArticleById(fileId);
 		if (file.getOwner().equals(ArticleConstant.Owner.system)) {
 			json.setResult(false);
 			json.setMsg("这是系统文件无法被删除");
@@ -172,10 +162,10 @@ public class AdminArticleAction extends AdminBaseAction {
 		}
 		// 删除文件系统
 		articleService.deleteFileByArticleId(fileId);
-		List<AttachmentVo> attachmentList = attachmentService
+		List<Attachment> attachmentList = attachmentService
 				.getAttachmentPageByKindId(fileId,
 						AttachmentConstant.Kind.article, 1000, 1).getList();
-		for (AttachmentVo attachment : attachmentList) {
+		for (Attachment attachment : attachmentList) {
 			attachmentService.deleteAttachment(attachment.getAttachmentId(),
 					attachment.getPath());
 		}
@@ -195,8 +185,8 @@ public class AdminArticleAction extends AdminBaseAction {
 			@RequestParam(value = "status") ArticleConstant.Status status)
 			throws ArticleNotFoundException {
 		JsonVo<String> json = new JsonVo<String>();
-		Article file = articleService.getArticleByArticleId(fileId);
-		if (file.getOwner().equals(ArticleConstant.Owner.system)) {
+		Article article = articleService.getArticleById(fileId);
+		if (article.getOwner().equals(ArticleConstant.Owner.system)) {
 			json.setResult(false);
 			json.setMsg("这是系统文件不能进行操作");
 		} else {

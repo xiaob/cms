@@ -22,9 +22,9 @@
                   <div class="col-lg-12">
                       <!--breadcrumbs start -->
                       <ul class="breadcrumb">
-                          <li><a href="${basePath}/admin/comment/page.htm?status=hidden">未审核评论(${hiddenCount})</a></li>
-               		 	  <li><a href="${basePath}/admin/comment/page.htm?status=display">审核通过的评论(${displayCount})</a></li>
-               		 	  <li><a href="${basePath}/admin/comment/page.htm?status=trash">垃圾评论(${trashCount})</a></li>
+                          <li><a href="${BASE_PATH}/admin/comment/page.htm?status=hidden">未审核评论(${hiddenCount})</a></li>
+               		 	  <li><a href="${BASE_PATH}/admin/comment/page.htm?status=display">审核通过的评论(${displayCount})</a></li>
+               		 	  <li><a href="${BASE_PATH}/admin/comment/page.htm?status=trash">垃圾评论(${trashCount})</a></li>
                       </ul>
                       <!--breadcrumbs end -->
                   </div>
@@ -62,7 +62,7 @@
                                     		</#if>
                                     	</td>
                                     	<td>
-                                    		<a href="${basePath}/admin/comment/detail.htm?commentId=${commentVo.commentId}" title="查看详情">
+                                    		<a href="${BASE_PATH}/admin/comment/detail.htm?commentId=${commentVo.commentId}" title="查看详情">
                                     			查看
                   							</a>
                                     	</td>

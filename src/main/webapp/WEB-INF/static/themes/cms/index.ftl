@@ -17,9 +17,9 @@
 			<#list tag_attachment_list as attachment>
 				<li>
 					<#if attachment.link=="">
-					<a href="javascript:void(0);"><img style="width:1440px;height:420px;" src="${basePath}/${attachment.path}"></a>
+					<a href="javascript:void(0);"><img style="width:1440px;height:420px;" src="${BASE_PATH}/${attachment.path}"></a>
 					<#else>
-					<a href="${attachment.link}"><img style="width:1440px;height:420px;" src="${basePath}/${attachment.path}"></a>
+					<a href="${attachment.link}"><img style="width:1440px;height:420px;" src="${BASE_PATH}/${attachment.path}"></a>
 					</#if>
 				</li>
 			</#list>

@@ -17,11 +17,11 @@ import org.springframework.stereotype.Service;
 
 import com.shishuo.cms.entity.Folder;
 import com.shishuo.cms.exception.FolderNotFoundException;
+import com.shishuo.cms.plugin.TagPlugin;
 import com.shishuo.cms.service.FolderService;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
-import freemarker.template.TemplateDirectiveModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
 
@@ -32,7 +32,7 @@ import freemarker.template.TemplateModel;
  * 
  */
 @Service
-public class FolderPathTag implements TemplateDirectiveModel {
+public class FolderPathTag  extends TagPlugin {
 	@Autowired
 	private FolderService folderService;
 
@@ -46,7 +46,7 @@ public class FolderPathTag implements TemplateDirectiveModel {
 			// 获得目录列表
 			List<Folder> list = folderService
 					.getFolderPathListByFolderId(folderId);
-			env.setVariable("tag_folder_list", DEFAULT_WRAPPER.wrap(list));
+			env.setVariable("tag_folder_path", DEFAULT_WRAPPER.wrap(list));
 		} catch (FolderNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

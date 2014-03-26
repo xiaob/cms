@@ -55,7 +55,7 @@ public class FolderService {
 	@CacheEvict(value = "folder", allEntries = true)
 	@Transactional
 	public Folder addFolder(long fatherId, String name,
-			FolderConstant.Status status, String ename,
+			FolderConstant.status status, String ename,
 			FolderConstant.Rank rank, FolderConstant.Type type)
 			throws FolderNotFoundException {
 		Folder folder = new Folder();
@@ -177,6 +177,35 @@ public class FolderService {
 			return folder;
 		}
 	}
+	
+	/**
+	 * 得到所有的四层目录
+	 * 
+	 * @return
+	 */
+	@Cacheable(value = "folder", key = "'getAllFolderList_'+#status")
+	public List<FolderVo> getAllFolderList(
+			FolderConstant.status status) {
+		List<FolderVo> firstFolderList = this.getFolderListByFatherId(0,
+				status);
+		for (FolderVo firstFolder : firstFolderList) {
+			List<FolderVo> secondFolderList = this.getFolderListByFatherId(
+					firstFolder.getFolderId(), status);
+			for (FolderVo secondFolder : secondFolderList) {
+				List<FolderVo> thirdFolderList = this.getFolderListByFatherId(
+						secondFolder.getFolderId(), status);
+				for (FolderVo thirdFolder : thirdFolderList) {
+					List<FolderVo> fourthFolderList = this
+							.getFolderListByFatherId(thirdFolder.getFolderId(),
+									status);
+					thirdFolder.setFolderList(fourthFolderList);
+				}
+				secondFolder.setFolderList(thirdFolderList);
+			}
+			firstFolder.setFolderList(secondFolderList);
+		}
+		return firstFolderList;
+	}
 
 	/**
 	 * 得到所有子目录
@@ -184,8 +213,8 @@ public class FolderService {
 	 * @param fatherId
 	 * @return List<Folder>
 	 */
-	public List<Folder> getFolderListByFatherId(long fatherId,
-			FolderConstant.Status status) {
+	public List<FolderVo> getFolderListByFatherId(long fatherId,
+			FolderConstant.status status) {
 		return folderDao.getFolderListByFatherId(fatherId, status);
 	}
 
@@ -238,7 +267,7 @@ public class FolderService {
 	}
 
 	@CacheEvict(value = "folder", allEntries = true)
-	public void updateStatus(long folderId, FolderConstant.Status status) {
+	public void updateStatus(long folderId, FolderConstant.status status) {
 		folderDao.updateStatus(folderId, status);
 	}
 

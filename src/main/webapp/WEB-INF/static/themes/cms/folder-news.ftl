@@ -21,7 +21,7 @@
 					<#list tag_article_page.list as article>
 				        <tr>
 				          <td><i class="icon-star"></i></td>
-				          <td><a href="${basePath}/<#list article.folderPathList as folder>${folder.ename}/</#list>${article.articleId}.htm">${article.name}</a></td>
+				          <td><a href="${BASE_PATH}/<#list article.folderPathList as folder>${folder.ename}/</#list>${article.articleId}.htm">${article.name}</a></td>
 				          <td>${article.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
 				        </tr>
 	                </#list>

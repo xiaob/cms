@@ -10,7 +10,7 @@
                                                                               上传文件
                   </header>
                   <div class="panel-body">
-                  	<form id="my-awesome-dropzone" class="dropzone clickable" style="min-height:520px;" action="${basePath}/admin/photo">
+                  	<form id="my-awesome-dropzone" class="dropzone clickable" style="min-height:520px;" action="${BASE_PATH}/admin/photo">
                   		<div class="default message" >
                   			<span>Drop files here to upload</span>
                   			<span>从这里选择附件上传</span>

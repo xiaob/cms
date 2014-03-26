@@ -5,7 +5,7 @@
 <section id="main-content">
 	<section class="wrapper">
 		<!-- page start-->
-		<form id="fileForm" action="${basePath}/admin/article/update.json"  autocomplete="off"  method="post">
+		<form id="fileForm" action="${BASE_PATH}/admin/article/update.json"  autocomplete="off"  method="post">
 		<div class="row">
 			<input type="hidden" name="articleId" value="${article.articleId}">
 			<div class="col-lg-9">
@@ -109,7 +109,7 @@ var kindId = ${article.articleId};
 var kind = "article";
 $.extend({
 	getAttachment:function(){
-		$.getJSON("${basePath}/admin/attachment/list.json?kindId="+kindId+"&v="+Math.random(),function(data){
+		$.getJSON("${BASE_PATH}/admin/attachment/list.json?kindId="+kindId+"&v="+Math.random(),function(data){
 			$('#attachment').html("");
 			$.addAttachment(data.attachmentList);
 		});
@@ -120,7 +120,7 @@ $.extend({
 			var attachment = list[i];
 			html += '<tr>';
 			if(attachment.type=="photo"){
-				html += '<td><img src="${basePath}/'+attachment.path+'" width="200"/></td>';
+				html += '<td><img src="${BASE_PATH}/'+attachment.path+'" width="200"/></td>';
 			}else{
 				html += '<td>'+attachment.name+'</td>';
 			}
@@ -135,7 +135,7 @@ $.extend({
 			var file = $(this);
 			bootbox.confirm("是否要删除【"+$(this).attr("name")+"】文件？", function(result) {
 				if (result) {
-					$.post("${basePath}/admin/attachment/delete.json",{'attachmentId':file.attr("attachmentId")},function(data){
+					$.post("${BASE_PATH}/admin/attachment/delete.json",{'attachmentId':file.attr("attachmentId")},function(data){
 						if(data.result){
 							$.getAttachment();
 						}
@@ -144,7 +144,7 @@ $.extend({
 			});		
 		});
 		$('#attachment .js_status').click(function(){
-			$.post("${basePath}/admin/attachment/update_status.json",{'attachmentId':$(this).attr("attachmentId"),'status':$(this).attr("status")},function(data){
+			$.post("${BASE_PATH}/admin/attachment/update_status.json",{'attachmentId':$(this).attr("attachmentId"),'status':$(this).attr("status")},function(data){
 				if(data.result){
 					$.getAttachment();
 				}
@@ -154,7 +154,7 @@ $.extend({
 			var attachmentId = $(this).attr("attachmentId");
 			bootbox.prompt("为此附件增加链接", function(result) {
 				if (result !="") {
-					$.post("${basePath}/admin/attachment/update_link.json",{'attachmentId':attachmentId,'link':result},function(data){
+					$.post("${BASE_PATH}/admin/attachment/update_link.json",{'attachmentId':attachmentId,'link':result},function(data){
 						if(data.result){
 							$.getAttachment();
 						}
@@ -178,8 +178,8 @@ $(function(){
 	});
 	$('#file_upload').uploadify({
 		'buttonText'  		: 	'请选择文件',
-        'swf'         		: 	'${basePath}/system/assets/uploadify/uploadify.swf',
-        'uploader'    		: 	'${basePath}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
+        'swf'         		: 	'${BASE_PATH}/static/system/assets/uploadify/uploadify.swf',
+        'uploader'    		: 	'${BASE_PATH}/admin/attachment/upload.json;jsessionid=${JSESSIONID}',
         'formData'  		: 	{'kindId':kindId,'kind':kind},
         'fileObjName'		: 	'file',
         'fileTypeExts' 		: 	'*.*',

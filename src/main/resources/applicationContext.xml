@@ -34,6 +34,7 @@
 	<cache:annotation-driven/>
 	
 	<mvc:resources mapping="/static/**"  location="/WEB-INF/static/,classpath:/WEB-INF/static/" cache-period="31556926"/>
+	<mvc:resources mapping="/upload/**"  location="/WEB-INF/upload/" cache-period="31556926"/>
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -77,30 +78,10 @@
 
 
 	<!-- FreeMarker的配置 -->
-	<bean id="freemarkerConfig"
+	<bean id="freeMarkerConfigurer"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPaths" value="/WEB-INF/static/,classpath:/WEB-INF/static/" /><!-- 指定路径 -->
-		<property name="defaultEncoding" value="UTF-8" /><!-- 指定编码格式 -->
-		<property name="freemarkerVariables">
-			<map>
-				<!-- 所有目录标签 -->
-				<entry key="shishuocms_folder_list" value-ref="folderListTag" />
-				<!-- 单个目录标签 -->
-				<entry key="shishuocms_folder" value-ref="folderTag" />
-				<!-- 文件分页标签 -->
-				<entry key="shishuocms_article_page" value-ref="articlePageTag" />
-				<!-- 单个文件标签 -->
-				<entry key="shishuocms_article" value-ref="articleTag" />
-				<!-- 评论分页标签 -->
-				<entry key="shishuocms_comment_page" value-ref="commentPageTag" />
-				<!-- 附件列表标签 -->
-				<entry key="shishuocms_attachment_list" value-ref="attachmentListTag" />
-				<!-- 附件分页标签 -->
-				<entry key="shishuocms_attachment_page" value-ref="attachmentPageTag" />
-				<!-- 内容截取标签 -->
-				<entry key="shishuocms_content_cut" value-ref="contentCutTag" />
-			</map>
-		</property>
+		<property name="templateLoaderPaths" value="/WEB-INF/static/,classpath:/WEB-INF/static/" />
+		<property name="defaultEncoding" value="UTF-8" />
 		<property name="freemarkerSettings">
 			<props>
 				<prop key="template_update_delay">10</prop>
